@@ -1,4 +1,5 @@
 $08.07.2011$
 separating sidebar and content page in to different pages html
+reading how to creat multi-languages by creating cookies with JavaScript
 find a mechanism for working with different file (ajax)
 
