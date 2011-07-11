@@ -1,0 +1,61 @@
+
+/*  === global styles ==== */
+
+#content h1, h2, h3 {
+	margin: 0;
+	padding: 0;
+	font-weight: normal;
+	color: #F0E9E9;
+}
+
+#content h1 {
+	font-size: 3em;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	text-transform: lowercase;
+	font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+#content h2 {
+	font-size: 2.5em;
+	text-align: right;
+}
+
+#content table, th, td{
+	border: 1px solid black;
+}
+
+
+/*  ===  compentences styles  ====  */
+#competences .skilllabel{
+	font-weight:bold;
+	color:red;
+}
+
+
+
+#competences table {
+	border: 1px solid black;
+	margin-left:auto; 
+	margin-right:auto;
+}
+
+/*  ====   education styles   =====  */
+#education table {
+	border: 1px solid black;
+	margin-left:auto; 
+	margin-right:auto;
+}
+
+
+/*  ===  experiences styles  ====  */
+
+#experiences .date{
+	float: left;	
+} 
+
+#experiences .enterprise{
+	float: right;
+}
+
