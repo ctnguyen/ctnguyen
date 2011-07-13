@@ -1,0 +1,27 @@
+
+/*  === global styles ==== */
+body {
+	margin: 0;
+	padding: 0;
+	background: #F0F8FF;
+}
+
+#top-page {
+	margin: 0 ;
+	padding: 0;
+	height: 140px;
+	background: #00FFFF;
+}
+
+#botton-page {
+	margin: 0 ;
+	padding: 0;
+	height: 140px;
+	background: #0000FF;
+}
+
+#page {
+	margin: 0 ;
+	padding: 0;
+	background: #A9A9A9;
+}
