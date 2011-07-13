@@ -1,33 +1,27 @@
-function write_h1()
-{
-	document.write("<h1>This h1 is written by JavaScript</h1>");	
-}
+$(document).ready(function() {
+	/* 		_cv_html = $.parseXML( 'html_fr/_cv_fr.html' );
+	 _cv_content = _cv_html.find("content");
+	 $( "div#content" ).append( $_cv_content.text() ); */
 
-function _load_content()
-{
-	var xmlhttp;
-	if (window.XMLHttpRequest)
-	{// code for IE7+, Firefox, Chrome, Opera, Safari
-		xmlhttp=new XMLHttpRequest();
-		document.write("<h1>This h1 is written by JavaScript</h1>");	
-	}
-	else
-	{// code for IE6, IE5
-		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-		//document.write("<h1>This h1 is written by JavaScript</h1>");	
-	}
+/*	$("div#content").load('html_fr/_cv_fr.html');
+	$("#contentstyle").attr("href", "styles/_cv_style_1.css");*/
+});
+
+$(document).ready(function() {
+	$("div#content").load("html_fr/_cv_fr.html  #content  div");
+	$("#contentstyle").attr("href", "styles/_cv_style_1.css");
+
+
+	$("div#sidebar").load("html_fr/_sidebar_fr.html  #sidebar  div");
+	$("#sidebarstyle").attr("href", "styles/_sidebar_style_1.css");
 	
-	xmlhttp.onreadystatechange = function()
-	{
-		document.write("<h1>This h1 is written by JavaScript onreadystatechange</h1>");	
-		document.getElementByTagName("body").innerHTML=xmlhttp.responseText;
-		if (xmlhttp.readyState==4 && xmlhttp.status==200)
-		{
-			//document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
-			
-		}
-	};
+
+	$("div#footer").html("<h1>" +"TOTO XML" +"</h1>");
 	
-	xmlhttp.open("GET","html_fr/_cv_fr.html",true);
-	xmlhttp.send();
-}
+	var xml = $.load("toto.xml");
+	
+/*	 		_cv_html = $.parseXML( 'toto.xml' );
+	 _cv_content = _cv_html.find("content");
+	 $( "div#sidebar" ).append( $_cv_content.text() ); */
+
+});

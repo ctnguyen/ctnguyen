@@ -12,24 +12,15 @@
 <meta name="robots" content="follow" />
 
 <script type="text/javascript" src="jquery-1.6.2.js"></script>
+<script type="text/javascript" src="scripts/_blocloading.js"></script>
 
 <link id="contentstyle" href="#" rel="stylesheet" type="text/css"	media="screen" />
 <link id="sidebarstyle" href="#" rel="stylesheet" type="text/css"	media="screen" />
-
-<script type="text/javascript">
-	$(document).ready(function() {
-		/* 		_cv_html = $.parseXML( 'html_fr/_cv_fr.html' );
-		 _cv_content = _cv_html.find("content");
-		 $( "div#content" ).append( $_cv_content.text() ); */
-
-		$("div#content").load('html_fr/_cv_fr.html');
-		$("#contentstyle").attr("href", "styles/_cv_style_1.css");
-	});
-</script>
 
 </head>
 <body>
 	<div id="content"></div>
 	<div id="sidebar"></div>
+	<div id="footer"></div>
 </body>
 </html>
