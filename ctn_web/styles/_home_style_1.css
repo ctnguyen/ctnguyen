@@ -1,0 +1,25 @@
+
+/*  === global styles ==== */
+
+#content {
+	margin:  0;
+	padding: 0;
+	border : 0;
+	width: 60%;
+	height: inherit;
+	float:right;
+	background: #D2691E;
+}
+
+#content img{
+	width: inherit;
+	height: inherit;
+}
+
+#content ul #motivations{
+list-style-type:square;
+}
+
+#content ul #webtechnologies{
+list-style-type:none;
+}

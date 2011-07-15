@@ -1,27 +1,33 @@
 
 /*  === global styles ==== */
 body {
-	margin: 0;
-	padding: 0;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
 	background: #F0F8FF;
 }
 
-#top-page {
-	margin: 0 ;
+#page-header {
+	margin: 0;
 	padding: 0;
 	height: 140px;
 	background: #00FFFF;
 }
 
 #botton-page {
-	margin: 0 ;
-	padding: 0;
-	height: 140px;
-	background: #0000FF;
+	clear:both;
 }
 
+
 #page {
-	margin: 0 ;
-	padding: 0;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
 	background: #A9A9A9;
+}
+
+
+#page-footer {
+	margin: 0;
+	padding: 0;
+	height: 140px;
+	background: #00FFFF;
 }
