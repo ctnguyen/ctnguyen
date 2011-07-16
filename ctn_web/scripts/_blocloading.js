@@ -9,8 +9,8 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 	$("div#content").load("html_fr/_home_fr.html  #content  div");
+	
 	$("#contentstyle").attr("href", "styles/_home_style_1.css");
-
 
 	$("div#sidebar").load("html_fr/_sidebar_fr.html  #sidebar  div");
 	$("#sidebarstyle").attr("href", "styles/_sidebar_style_1.css");
