@@ -1,13 +1,4 @@
 
-/*  === global styles ==== */
-
-#content {
-	margin: 20px;
-	width: 60%;
-	height: inherit;
-	float:right;
-	background: #D2691E;
-}
 
 #content h1, h2, h3 {
 	margin: 0;

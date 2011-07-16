@@ -1,19 +1,10 @@
 
 /*  === global styles ==== */
 
-#content {
-	margin:  0;
-	padding: 0;
-	border : 0;
-	width: 60%;
-	height: inherit;
-	float:right;
-	background: #D2691E;
-}
 
 #content img{
-	width: inherit;
-	height: inherit;
+	width: 100px;
+	height: 100px;
 }
 
 #content ul #motivations{

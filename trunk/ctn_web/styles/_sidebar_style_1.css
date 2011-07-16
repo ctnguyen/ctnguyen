@@ -1,13 +1,14 @@
 
-/* Logo */
 
-#sidebar {
-	float: left;
-	margin: 40px;
-	width: 30%;
-	padding: 0;
-	background: #800000;
+#sidebar #menu table {
+	border: 1px solid black;
+	float : right;
 }
+
+#sidebar #separator {
+	clear:both;
+}
+
 
 /*
 #sidebar #logo {
