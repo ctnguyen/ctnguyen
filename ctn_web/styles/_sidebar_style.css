@@ -1,8 +1,9 @@
 
 
-#sidebar #menu table {
+#sidebar #menu ul{
 	border: 1px solid black;
 	float : right;
+	list-style-type:none;
 }
 
 #sidebar #separator {
