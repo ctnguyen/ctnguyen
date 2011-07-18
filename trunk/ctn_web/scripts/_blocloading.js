@@ -14,6 +14,9 @@ $(document).ready(function() {
 	
 	$("div#page-footer").html("<h1>" +"Here putting footer of page" +"</h1>");
 
+	$("#page-footer").animateHighlight();
+
+	//$("div#page-footer").gradienter({color_start: 'FE3627', color_end: '590512'});
 });
 
 
@@ -55,7 +58,7 @@ function setting_blocsize()
 	
 	$('#page-header').css("margin","0");
 	$('#page-header').css("padding","0");
-	$('#page-header').css("height","140px");
+	$('#page-header').css("height","8em");
 	$('#page-header').css("border-style","solid");////////
 	$('#page-header').css("border-color","#D2691E");//////
 	
@@ -100,7 +103,7 @@ function setting_blocsize()
 
 	$('#page-footer').css("margin"," 0");
 	$('#page-footer').css("padding"," 0");
-	$('#page-footer').css("height"," 140px");
+	$('#page-footer').css("height","8em");
 	$('#page-footer').css("border-style","solid");/////////
 	$('#page-footer').css("border-color"," #D2691E");////////
 }
