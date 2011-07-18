@@ -14,9 +14,9 @@ $(document).ready(function() {
 	
 	$("div#page-footer").html("<h1>" +"Here putting footer of page" +"</h1>");
 
-	$("#page-footer").animateHighlight();
+	createGradient();
 
-	//$("div#page-footer").gradienter({color_start: 'FE3627', color_end: '590512'});
+
 });
 
 
