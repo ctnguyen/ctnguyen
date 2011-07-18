@@ -1,5 +1,123 @@
+
+
+$(document).ready(function() {
+
+	setting_blocsize();
+	_load_sidebar("fr" , "_sidebar.html" , "_sidebar_style.css" );
+	_load_content("fr" ,      "_cv.html" ,      "_cv_style.css" );	
+	
+	$("#page-footer").html("<h1>" +"Here putting footer of page" +"</h1>");
+	
+	//$("div").ctn_background_gradient({color1: "hello1", color2:"hello2", direction:"hello3",steps:5});
+	//createGradient();
+
+
+});
+
+
+function _load_content(lang, htmlfilepath, stylefilepath )
+{
+	
+	//$("div#content").load("html_fr/_cv.html  #content  div");
+	//$("#contentstyle").attr("href", "styles/_cv_style_1.css");
+	
+	var htmlfolder = "html_" + lang + "/";// html_fr/, html_en/, html_vn/
+	var divId      = " #content div";
+	$("div#content").load(htmlfolder + htmlfilepath + divId);
+	
+	var stylepath  = "styles/" + stylefilepath;
+	$("#contentstyle").attr("href", stylepath);
+}
+
+function _load_sidebar(lang, htmlfilepath, stylefilepath )
+{
+//	$("div#sidebar").load("html_fr/_sidebar.html  #sidebar  div");
+//	$("#sidebarstyle").attr("href", "styles/_sidebar_style.css");
+	
+	var htmlfolder = "html_" + lang + "/";// html_fr/, html_en/, html_vn/
+	var divId      = " #sidebar div";
+	$("div#sidebar").load(htmlfolder + htmlfilepath + divId);
+	
+	var stylepath  = "styles/" + stylefilepath;
+	$("#sidebarstyle").attr("href", stylepath);
+}
+
+
+
+function setting_blocsize()
+{
+	$('body').css("margin","0 0 0 0");
+	$('body').css("padding","0 0 0 0");
+	$('body').css("background","#FFFFFF");
+	$('body').css("border","1px solid");;////////
+	$('body').css("border-color","#F0F8FF");//////
+	
+	
+	$('#page-header').css("margin","0 0 0 0");
+	$('#page-header').css("padding","0 0 0 0");
+	$('#page-header').css("height","150px");
+	$('#page-header').css("height","150px");
+	$('#page-header').css("background", "#ffffff url(images/top_wraper.jpg) repeat-x");
+	//$('#page-header').css("border","1px solid");////////
+	//$('#page-header').css("border-color","#D2691E");//////
+	
+	
+	$('#top-page').css("margin","0");
+	$('#top-page').css("padding","0");
+	$('#top-page').css("clear","both");
+	$('#top-page').css("border","1px solid");;////////
+	$('#top-page').css("border-color","#808080");//////
+	
+	$('#page').css("margin-top","0");
+	$('#page').css("margin-bottom","0");
+	$('#page').css("margin-right","auto");
+	$('#page').css("margin-left","auto");
+	$('#page').css("padding"," 0 0 0 0");
+	$('#page').css("width"," 70em");
+	$('#page').css("border","1px solid");;///////////
+	$('#page').css("border-color"," #008000");///////
+
+
+	$('#content').css("margin"," 0 0 0 0");
+	$('#content').css("padding"," 0 0 0 0");
+	$('#content').css("width"," 60%");
+	$('#content').css("float","right");
+	$('#content').css("border","1px solid");;////////
+	$('#content').css("border-color"," #00BFFF");/////////
+	
+
+	$('#sidebar').css("margin"," 0 0 0 0");
+	$('#sidebar').css("padding"," 0 0 0 0");
+	$('#sidebar').css("width"," 30%");
+	$('#sidebar').css("float","left");
+	$('#sidebar').css("border","1px solid");;////////////////
+	$('#sidebar').css("border-color"," #0000FF");////////////////
+	
+	
+	$('#botton-page').css("margin"," 0");
+	$('#botton-page').css("padding"," 0");
+	$('#botton-page').css("clear","both");
+	$('#botton-page').css("border","1px solid");;//////////
+	$('#botton-page').css("border-color"," #808080");//////
+
+	$('#page-footer').css("margin"," 0");
+	$('#page-footer').css("padding"," 0");
+	$('#page-footer').css("height","8em");
+	$('#page-footer').css("height","150px");
+	$('#page-footer').css("background", "#ffffff url(images/bottom_wraper.jpg) repeat-x");
+	//$('#page-footer').css("border","1px solid");;/////////
+	//$('#page-footer').css("border-color"," #D2691E");////////
+}
+
+
+
+
+
+
+
+///////////////////////////   CTN TEST PLUGIN JQUERY    ///////////////////////
 (function($){
- 
+	 
     $.fn.extend({
          
         //pass the options variable to the function
@@ -71,108 +189,4 @@
     });
      
 })(jQuery);
-
-$(document).ready(function() {
-
-	_load_sidebar("fr" , "_sidebar.html" , "_sidebar_style.css" );
-	_load_content("fr" ,      "_cv.html" ,      "_cv_style.css" );	
-	setting_blocsize();
-	
-	$("#page-footer").html("<h1>" +"Here putting footer of page" +"</h1>");
-	$("#page-footer").ctn_background_gradient({color1: "hello1", color2:"hello2", direction:"hello3",steps:2});
-	$("#page-header").ctn_background_gradient({color1: "hello1", color2:"hello2", direction:"hello3",steps:3});
-	
-	//$("div").ctn_background_gradient({color1: "hello1", color2:"hello2", direction:"hello3",steps:5});
-	//createGradient();
-
-
-});
-
-
-function _load_content(lang, htmlfilepath, stylefilepath )
-{
-	
-	//$("div#content").load("html_fr/_cv.html  #content  div");
-	//$("#contentstyle").attr("href", "styles/_cv_style_1.css");
-	
-	var htmlfolder = "html_" + lang + "/";// html_fr/, html_en/, html_vn/
-	var divId      = " #content div";
-	$("div#content").load(htmlfolder + htmlfilepath + divId);
-	
-	var stylepath  = "styles/" + stylefilepath;
-	$("#contentstyle").attr("href", stylepath);
-}
-
-function _load_sidebar(lang, htmlfilepath, stylefilepath )
-{
-//	$("div#sidebar").load("html_fr/_sidebar.html  #sidebar  div");
-//	$("#sidebarstyle").attr("href", "styles/_sidebar_style.css");
-	
-	var htmlfolder = "html_" + lang + "/";// html_fr/, html_en/, html_vn/
-	var divId      = " #sidebar div";
-	$("div#sidebar").load(htmlfolder + htmlfilepath + divId);
-	
-	var stylepath  = "styles/" + stylefilepath;
-	$("#sidebarstyle").attr("href", stylepath);
-}
-
-
-
-function setting_blocsize()
-{
-	$('body').css("background","#F0F8FF");
-	$('body').css("border","1px solid");;////////
-	$('body').css("border-color","#F0F8FF");//////
-	
-	
-	$('#page-header').css("margin","0 0 0 0");
-	$('#page-header').css("padding","0 0 0 0");
-	$('#page-header').css("height","8em");
-	$('#page-header').css("border","1px solid");////////
-	$('#page-header').css("border-color","#D2691E");//////
-	
-	
-	$('#top-page').css("margin","0");
-	$('#top-page').css("padding","0");
-	$('#top-page').css("clear","both");
-	$('#top-page').css("border","1px solid");;////////
-	$('#top-page').css("border-color","#808080");//////
-	
-	$('#page').css("margin-top","0");
-	$('#page').css("margin-bottom","0");
-	$('#page').css("margin-right","auto");
-	$('#page').css("margin-left","auto");
-	$('#page').css("padding"," 0 0 0 0");
-	$('#page').css("width"," 70em");
-	$('#page').css("border","1px solid");;///////////
-	$('#page').css("border-color"," #008000");///////
-
-
-	$('#content').css("margin"," 0 0 0 0");
-	$('#content').css("padding"," 0 0 0 0");
-	$('#content').css("width"," 60%");
-	$('#content').css("float","right");
-	$('#content').css("border","1px solid");;////////
-	$('#content').css("border-color"," #00BFFF");/////////
-	
-
-	$('#sidebar').css("margin"," 0 0 0 0");
-	$('#sidebar').css("padding"," 0 0 0 0");
-	$('#sidebar').css("width"," 30%");
-	$('#sidebar').css("float","left");
-	$('#sidebar').css("border","1px solid");;////////////////
-	$('#sidebar').css("border-color"," #0000FF");////////////////
-	
-	
-	$('#botton-page').css("margin"," 0");
-	$('#botton-page').css("padding"," 0");
-	$('#botton-page').css("clear","both");
-	$('#botton-page').css("border","1px solid");;//////////
-	$('#botton-page').css("border-color"," #808080");//////
-
-	$('#page-footer').css("margin"," 0");
-	$('#page-footer').css("padding"," 0");
-	$('#page-footer').css("height","8em");
-	$('#page-footer').css("border","1px solid");;/////////
-	$('#page-footer').css("border-color"," #D2691E");////////
-}
+///////////////////////////   CTN TEST PLUGIN JQUERY    ///////////////////////
