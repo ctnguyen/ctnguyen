@@ -1,10 +1,76 @@
-$(document).ready(function() {
-	/* 		_cv_html = $.parseXML( 'html_fr/_cv_fr.html' );
-	 _cv_content = _cv_html.find("content");
-	 $( "div#content" ).append( $_cv_content.text() ); */
+(function($){
+ 
+    $.fn.extend({
+         
+        //pass the options variable to the function
+        ctn_background_gradient: function(options) {
+ 
+ 
+            //Set the default values, use comma to separate the settings, example:
+            var defaults = {
+                color1    :'#000000' ,
+                color2    :'#ffffff' ,
+                direction :'vertical',
+                steps     : 1,
+            };
+                 
+            var options =  $.extend({},defaults, options);
+ 
+            return this.each(function() {
+                var o = options;
+                var obj = $(this); 
+                //code to be inserted here
+                //you can access the value like this
+                //var m_div = $( document.createElement('div') );
+                //m_div.html("<h1>" + "color1 :" + o.color1 + "    color2 :" + o.color2 + "   direction :" + o.direction + "    steps :"+o.steps + "</h1>");
+//                m_div.css("margin","0 0 0 0");
+//                m_div.css("padding","0 0 0 0");
+//                m_div.css("border","1px solid");;////////
+//                m_div.css("border-color","#FF0000");//////
+//                
+//                var m_div2 = $( document.createElement('div') );
+//                //m_div.html("<h1>" + "color1 :" + o.color1 + "    color2 :" + o.color2 + "   direction :" + o.direction + "    steps :"+o.steps + "</h1>");
+//                m_div2.css("margin","0 0 0 0");
+//                m_div2.css("padding","0 0 0 0");
+//                m_div2.css("border","1px solid");;////////
+//                m_div2.css("border-color","#FF0000");//////
+//                
+//                obj.append(m_div);
+//                obj.append(m_div2);
+                var parentHeight   = obj.innerHeight();
+                var parentWidth    = obj.innerWidth();
+                var parentPosition = obj.offset();
 
+                var stepLenght   = parentHeight / o.steps ;
+                obj.html("<h1>" + "parentHeight :" + parentHeight + "    parentWidth :" + parentWidth + "    stepLenght :" + stepLenght  
+                		        + "   parentPosition.top :" + parentPosition.top + "    parentPosition.left :"+parentPosition.left+ "</h1>");
+                
+                for(var i=0;i<o.steps;i++) 
+            	{
+            		var m_div = $( document.createElement('div') );
+                    m_div.css("margin","0 0 0 0");
+                    m_div.css("padding","0 0 0 0");
+                    m_div.css("height", stepLenght);
+                    m_div.css("width", parentWidth);
+                    m_div.css("position","absolute"); m_div.css("z-index","0"); 
+                    var mdivtop = Math.round(parentPosition.top+i*stepLenght);
+                    m_div.css("top",mdivtop + "px"); 
+                    m_div.css("left","0");
+                    m_div.css("border","1px solid");////////
+                    m_div.css("border-color","#FF0000");//////
+                    obj.append(m_div);
+            	}
+                
+                
+                
 
-});
+                //obj.html("<h1>" + "color1 :" + o.color1 + "    color2 :" + o.color2 + "   direction :" + o.direction + "    steps :"+o.steps + "</h1>");
+             
+            });
+        }
+    });
+     
+})(jQuery);
 
 $(document).ready(function() {
 
@@ -12,9 +78,12 @@ $(document).ready(function() {
 	_load_content("fr" ,      "_cv.html" ,      "_cv_style.css" );	
 	setting_blocsize();
 	
-	$("div#page-footer").html("<h1>" +"Here putting footer of page" +"</h1>");
-
-	createGradient();
+	$("#page-footer").html("<h1>" +"Here putting footer of page" +"</h1>");
+	$("#page-footer").ctn_background_gradient({color1: "hello1", color2:"hello2", direction:"hello3",steps:2});
+	$("#page-header").ctn_background_gradient({color1: "hello1", color2:"hello2", direction:"hello3",steps:3});
+	
+	//$("div").ctn_background_gradient({color1: "hello1", color2:"hello2", direction:"hello3",steps:5});
+	//createGradient();
 
 
 });
@@ -52,21 +121,21 @@ function _load_sidebar(lang, htmlfilepath, stylefilepath )
 function setting_blocsize()
 {
 	$('body').css("background","#F0F8FF");
-	$('body').css("border-style","solid");////////
+	$('body').css("border","1px solid");;////////
 	$('body').css("border-color","#F0F8FF");//////
 	
 	
-	$('#page-header').css("margin","0");
-	$('#page-header').css("padding","0");
+	$('#page-header').css("margin","0 0 0 0");
+	$('#page-header').css("padding","0 0 0 0");
 	$('#page-header').css("height","8em");
-	$('#page-header').css("border-style","solid");////////
+	$('#page-header').css("border","1px solid");////////
 	$('#page-header').css("border-color","#D2691E");//////
 	
 	
 	$('#top-page').css("margin","0");
 	$('#top-page').css("padding","0");
 	$('#top-page').css("clear","both");
-	$('#top-page').css("border-style","solid");////////
+	$('#top-page').css("border","1px solid");;////////
 	$('#top-page').css("border-color","#808080");//////
 	
 	$('#page').css("margin-top","0");
@@ -75,7 +144,7 @@ function setting_blocsize()
 	$('#page').css("margin-left","auto");
 	$('#page').css("padding"," 0 0 0 0");
 	$('#page').css("width"," 70em");
-	$('#page').css("border-style","solid");///////////
+	$('#page').css("border","1px solid");;///////////
 	$('#page').css("border-color"," #008000");///////
 
 
@@ -83,7 +152,7 @@ function setting_blocsize()
 	$('#content').css("padding"," 0 0 0 0");
 	$('#content').css("width"," 60%");
 	$('#content').css("float","right");
-	$('#content').css("border-style","solid");////////
+	$('#content').css("border","1px solid");;////////
 	$('#content').css("border-color"," #00BFFF");/////////
 	
 
@@ -91,19 +160,19 @@ function setting_blocsize()
 	$('#sidebar').css("padding"," 0 0 0 0");
 	$('#sidebar').css("width"," 30%");
 	$('#sidebar').css("float","left");
-	$('#sidebar').css("border-style","solid");////////////////
+	$('#sidebar').css("border","1px solid");;////////////////
 	$('#sidebar').css("border-color"," #0000FF");////////////////
 	
 	
 	$('#botton-page').css("margin"," 0");
 	$('#botton-page').css("padding"," 0");
 	$('#botton-page').css("clear","both");
-	$('#botton-page').css("border-style","solid");//////////
+	$('#botton-page').css("border","1px solid");;//////////
 	$('#botton-page').css("border-color"," #808080");//////
 
 	$('#page-footer').css("margin"," 0");
 	$('#page-footer').css("padding"," 0");
 	$('#page-footer').css("height","8em");
-	$('#page-footer').css("border-style","solid");/////////
+	$('#page-footer').css("border","1px solid");;/////////
 	$('#page-footer').css("border-color"," #D2691E");////////
 }

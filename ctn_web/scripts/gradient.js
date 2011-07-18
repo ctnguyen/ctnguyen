@@ -21,37 +21,44 @@ class="gradient 000000 ffffff horizontal"
 See http://slayeroffice.com/code/gradient/ for more examples.
 
 
-*************************/
+ *************************/
 
 //window.addEventListener?window.addEventListener("load",createGradient,false):window.attachEvent("onload",createGradient);
 
 function createGradient() {
 	if(!document.getElementById)return;
-	
+
 	objArray = getGradientObjects();
 	if(!objArray.length) return;
-	
-	for(i=0;i<objArray.length;i++) {
+
+	for(i=0;i<objArray.length;i++) 
+	{
 		params = objArray[i].className.split(" ");
-		if(document.all && !window.opera) {
+		if(document.all && !window.opera)
+		{
 			objArray[i].style.width = objArray[i].offsetWidth + "px";
 			params[3] == "horizontal"?gType = 1:gType = 0;
 			objArray[i].style.filter = "progid:DXImageTransform.Microsoft.Gradient(GradientType="+gType+",StartColorStr=\"#" + params[1] + "\",EndColorStr=\"#" + params[2] + "\")";
-	} else {
+		} 
+		else 
+		{
 			colorArray = createColorPath(params[1],params[2]);
 			x=0;y=0;
 			if(params[3] == "horizontal") {
 				w=Math.round(objArray[i].offsetWidth/colorArray.length);
 				if(!w)w=1;
 				h = objArray[i].offsetHeight;
-			} else {
+			} 
+			else
+			{
 				h = Math.round(objArray[i].offsetHeight/colorArray.length);
 				if(!h) h =1;
 				w = objArray[i].offsetWidth;
 			}
 			makeGrandParent(objArray[i]);
 			tmpDOM = document.createDocumentFragment();
-			for(p=0;p<colorArray.length;p++) {
+			for(p=0;p<colorArray.length;p++)
+			{
 				g = document.createElement("div");
 				g.setAttribute("style","position:absolute;z-index:0;top:" + y + "px;left:" + x + "px;height:" + h + "px;width:" + w + "px;background-color:rgb(" + colorArray[p][0] + "," + colorArray[p][1] + "," + colorArray[p][2] + ");");
 				params[3] == "horizontal"?x+=w:y+=h;
@@ -73,7 +80,7 @@ function getGradientObjects() {
 	} 
 	return objs;
 }
-	
+
 function createColorPath(color1,color2) {
 	colorPath = new Array();
 	colorPercent = 1.0;
@@ -83,7 +90,7 @@ function createColorPath(color1,color2) {
 	} while(colorPercent>0);
 	return colorPath;
 }
-		
+
 function setColorHue(originColor,opacityPercent,maskRGB) {
 	returnColor=new Array();
 	for(w=0;w<originColor.length;w++) returnColor[w] = Math.round(originColor[w]*opacityPercent) + Math.round(maskRGB[w]*(1.0-opacityPercent));
@@ -97,7 +104,7 @@ function longHexToDec(longHex) {
 function toDec(hex) {	
 	return parseInt(hex,16);
 }
-	
+
 function makeGrandParent(obj) {
 	disp = document.defaultView.getComputedStyle(obj,'').display;
 	disp == "block"?nSpan = document.createElement("div"):	nSpan = document.createElement("span");
