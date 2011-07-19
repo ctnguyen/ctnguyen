@@ -4,7 +4,7 @@ $(document).ready(function() {
 
 	setting_blocsize();
 	_load_sidebar("fr" , "_sidebar.html" , "_sidebar_style.css" );
-	_load_content("fr" ,      "_home.html" ,      "_home_style.css" );	
+	_load_content("fr" ,      "_cv.html" ,      "_cv_style.css" );	
 	
 	
 
