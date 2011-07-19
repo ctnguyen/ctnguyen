@@ -4,14 +4,15 @@ $(document).ready(function() {
 
 	setting_blocsize();
 	_load_sidebar("fr" , "_sidebar.html" , "_sidebar_style.css" );
-	_load_content("fr" ,      "_cv.html" ,      "_cv_style.css" );	
+	_load_content("fr" ,      "_home.html" ,      "_home_style.css" );	
 	
-	$("#page-footer").html("<h1>" +"Here putting footer of page" +"</h1>");
 	
-	//$("div").ctn_background_gradient({color1: "hello1", color2:"hello2", direction:"hello3",steps:5});
-	//createGradient();
 
-
+	var _date = new Date();
+	var _year = _date .getFullYear();
+	
+	var _footertext = "<a href='mailto:chithanhnguyen.math@gmail.com'>Chi-Thanh NGUYEN</a> &copy; " + _year;	
+	$("#page-footer").html("<h1>" +_footertext +"</h1>");
 });
 
 
@@ -52,12 +53,22 @@ function setting_blocsize()
 	$('body').css("border","1px solid");;////////
 	$('body').css("border-color","#F0F8FF");//////
 	
+	$('#whole-page').css("margin","0 0 0 0");
+	$('#whole-page').css("padding","0 0 0 0");
 	
-	$('#page-header').css("margin","0 0 0 0");
+	
+	$('#page-header').css({
+		"margin":"0 0 0 0"
+		,"padding":"0 0 0 0"
+		,"height":"100px"
+		,"background": "#ffffff url(images/top_wraper.jpg) repeat-x"
+		,"border":"1px solid #D2691E"
+			});
+	
+/*	$('#page-header').css("margin","0 0 0 0");
 	$('#page-header').css("padding","0 0 0 0");
-	$('#page-header').css("height","150px");
-	$('#page-header').css("height","150px");
-	$('#page-header').css("background", "#ffffff url(images/top_wraper.jpg) repeat-x");
+	$('#page-header').css("height","100px");
+	$('#page-header').css("background", "#ffffff url(images/top_wraper.jpg) repeat-x");*/
 	//$('#page-header').css("border","1px solid");////////
 	//$('#page-header').css("border-color","#D2691E");//////
 	
@@ -102,9 +113,9 @@ function setting_blocsize()
 
 	$('#page-footer').css("margin"," 0");
 	$('#page-footer').css("padding"," 0");
-	$('#page-footer').css("height","8em");
-	$('#page-footer').css("height","150px");
+	$('#page-footer').css("height","100px");
 	$('#page-footer').css("background", "#ffffff url(images/bottom_wraper.jpg) repeat-x");
+	$('#page-footer').css("text-align","center");
 	//$('#page-footer').css("border","1px solid");;/////////
 	//$('#page-footer').css("border-color"," #D2691E");////////
 }
