@@ -1,16 +1,16 @@
-
 /*  === global styles ==== */
-
-
-#content img{
-	width: 100px;
-	height: 100px;
+.home img {
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+	width: 400px;
+	height: 400px;
 }
 
-#content ul #motivations{
-list-style-type:square;
+.home ul #motivations {
+	list-style-type: square;
 }
 
-#content ul #webtechnologies{
-list-style-type:none;
+.home ul #webtechnologies{
+	list-style-type: none;
 }

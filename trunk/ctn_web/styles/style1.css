@@ -1,10 +1,8 @@
-
 /*
 Design by Free CSS Templates
 http://www.freecsstemplates.org
 Released for free under a Creative Commons Attribution 2.5 License
 */
-
 body {
 	margin: 30px 0px 0px 0px;
 	padding: 0;
@@ -14,7 +12,7 @@ body {
 	color: #3E3B36;
 }
 
-h1, h2, h3 {
+h1,h2,h3 {
 	margin: 0;
 	padding: 0;
 	font-weight: normal;
@@ -33,12 +31,13 @@ h3 {
 	font-size: 1.6em;
 }
 
-p, ul, ol {
+p,ul,ol {
 	margin-top: 0;
 	line-height: 180%;
 }
 
-ul, ol {
+ul,ol {
+	
 }
 
 a {
@@ -47,6 +46,7 @@ a {
 }
 
 a:hover {
+	
 }
 
 #wrapper {
@@ -55,7 +55,6 @@ a:hover {
 }
 
 /* Header */
-
 #header-wrapper {
 	height: 100px;
 	background: #3C3230;
@@ -69,7 +68,6 @@ a:hover {
 }
 
 /* Logo */
-
 #logo {
 	width: 280px;
 	height: 140px;
@@ -79,7 +77,7 @@ a:hover {
 	color: #34312C;
 }
 
-#logo h1, #logo p {
+#logo h1,#logo p {
 	margin: 0;
 	padding: 0;
 	letter-spacing: -2px;
@@ -103,7 +101,7 @@ a:hover {
 	margin: 0px;
 	padding: 0px;
 	font-size: 26px;
-} 
+}
 
 #logo a {
 	border: none;
@@ -113,7 +111,6 @@ a:hover {
 }
 
 /* Search */
-
 #search {
 	width: 280px;
 	height: 50px;
@@ -153,7 +150,6 @@ a:hover {
 }
 
 /* Menu */
-
 #menu {
 	width: 280px;
 	margin: 20px auto 20px auto;
@@ -185,16 +181,16 @@ a:hover {
 	color: #FFF;
 }
 
-#menu a:hover, #menu .current_page_item a {
-	background: url(../images/_style1_img06.jpg) no-repeat left top; 
+#menu a:hover,#menu .current_page_item a {
+	background: url(../images/_style1_img06.jpg) no-repeat left top;
 	text-decoration: none;
 }
 
 #menu .current_page_item a {
+	
 }
 
 /* Page */
-
 #page {
 	width: 1000px;
 	margin: 0 auto;
@@ -212,27 +208,26 @@ a:hover {
 	background: url(../images/_style1_img03.jpg) no-repeat left bottom;
 }
 /* Content */
-
 #content {
 	float: right;
 	width: 520px;
 	padding: 70px 30px 0px 60px;
 }
 
-#content h1{
+#content h1 {
 	margin: 0;
 	padding: 0;
 	text-align: center;
 	text-transform: lowercase;
 	font-family: Georgia, "Times New Roman", Times, serif;
 }
+
 #content h1 a {
 	margin: 0px 0px -20px 0px;
 	padding: 20px 0px 0px 0px;
 	font-size: 30px;
 	color: #4D8D99;
 }
-
 
 .post {
 	margin-bottom: 40px;
@@ -269,6 +264,7 @@ a:hover {
 }
 
 .post .meta a {
+	
 }
 
 .post .entry {
@@ -284,7 +280,6 @@ a:hover {
 }
 
 /* Sidebar */
-
 #sidebar {
 	float: left;
 	width: 200px;
@@ -347,11 +342,12 @@ a:hover {
 }
 
 #sidebar a:hover {
+	
 }
 
 /* Calendar */
-
 #calendar {
+	
 }
 
 #calendar_wrap {
@@ -371,7 +367,6 @@ a:hover {
 }
 
 /* Footer */
-
 #footer {
 	width: 920px;
 	height: 80px;

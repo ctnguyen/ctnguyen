@@ -1,13 +1,12 @@
 
-
-#sidebar #menu ul{
+#sidebar #menu ul {
 	border: 1px solid black;
-	float : right;
-	list-style-type:none;
+	float: right;
+	list-style-type: none;
 }
 
 #sidebar #separator {
-	clear:both;
+	clear: both;
 }
 
 
