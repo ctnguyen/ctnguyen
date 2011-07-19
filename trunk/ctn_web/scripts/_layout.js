@@ -2,17 +2,15 @@
 
 $(document).ready(function() {
 
-	setting_blocsize();
+	set_layout();
 	_load_sidebar("fr" , "_sidebar.html" , "_sidebar_style.css" );
 	_load_content("fr" ,      "_cv.html" ,      "_cv_style.css" );	
 	
-	
-
 	var _date = new Date();
 	var _year = _date .getFullYear();
 	
 	var _footertext = "<a href='mailto:chithanhnguyen.math@gmail.com'>Chi-Thanh NGUYEN</a> &copy; " + _year;	
-	$("#page-footer").html("<h1>" +_footertext +"</h1>");
+	$("#page-footer").html("<h1>" +_footertext +"</h1>");	
 });
 
 
@@ -45,79 +43,87 @@ function _load_sidebar(lang, htmlfilepath, stylefilepath )
 
 
 
-function setting_blocsize()
+function set_layout()
 {
-	$('body').css("margin","0 0 0 0");
-	$('body').css("padding","0 0 0 0");
-	$('body').css("background","#FFFFFF");
-	$('body').css("border","1px solid");;////////
-	$('body').css("border-color","#F0F8FF");//////
-	
-	$('#whole-page').css("margin","0 0 0 0");
-	$('#whole-page').css("padding","0 0 0 0");
-	
-	
-	$('#page-header').css({
+	$('body').css(
+	{
+		"margin":"0 0 0 0"
+		,"padding":"0 0 0 0"
+		,"background":"#FFFFFF"
+		,"border":"1px solid #F0F8FF"////////
+	});
+
+
+	$('#whole-page').css(
+	{
+		"margin":"0 0 0 0"
+		,"padding":"0 0 0 0"
+	});
+
+	$('#page-header').css(
+	{
 		"margin":"0 0 0 0"
 		,"padding":"0 0 0 0"
 		,"height":"100px"
 		,"background": "#ffffff url(images/top_wraper.jpg) repeat-x"
 		,"border":"1px solid #D2691E"
-			});
-	
-/*	$('#page-header').css("margin","0 0 0 0");
-	$('#page-header').css("padding","0 0 0 0");
-	$('#page-header').css("height","100px");
-	$('#page-header').css("background", "#ffffff url(images/top_wraper.jpg) repeat-x");*/
-	//$('#page-header').css("border","1px solid");////////
-	//$('#page-header').css("border-color","#D2691E");//////
-	
-	
-	$('#top-page').css("margin","0");
-	$('#top-page').css("padding","0");
-	$('#top-page').css("clear","both");
-	$('#top-page').css("border","1px solid");;////////
-	$('#top-page').css("border-color","#808080");//////
-	
-	$('#page').css("margin-top","0");
-	$('#page').css("margin-bottom","0");
-	$('#page').css("margin-right","auto");
-	$('#page').css("margin-left","auto");
-	$('#page').css("padding"," 0 0 0 0");
-	$('#page').css("width"," 70em");
-	$('#page').css("border","1px solid");;///////////
-	$('#page').css("border-color"," #008000");///////
+	});
 
 
-	$('#content').css("margin"," 0 0 0 0");
-	$('#content').css("padding"," 0 0 0 0");
-	$('#content').css("width"," 60%");
-	$('#content').css("float","right");
-	$('#content').css("border","1px solid");;////////
-	$('#content').css("border-color"," #00BFFF");/////////
-	
+	$('#top-page').css(
+	{
+		"margin":"0"
+		,"padding":"0"
+		,"clear":"both"
+		,"border":"1px solid #808080"////////
+	});
 
-	$('#sidebar').css("margin"," 0 0 0 0");
-	$('#sidebar').css("padding"," 0 0 0 0");
-	$('#sidebar').css("width"," 30%");
-	$('#sidebar').css("float","left");
-	$('#sidebar').css("border","1px solid");;////////////////
-	$('#sidebar').css("border-color"," #0000FF");////////////////
-	
-	
-	$('#botton-page').css("margin"," 0");
-	$('#botton-page').css("padding"," 0");
-	$('#botton-page').css("clear","both");
-	$('#botton-page').css("border","1px solid");;//////////
-	$('#botton-page').css("border-color"," #808080");//////
+	$('#page').css(
+	{
+		"margin-top":"0"
+		,"margin-bottom":"0"
+		,"margin-right":"auto"
+		,"margin-left":"auto"
+		,"padding":" 0 0 0 0"
+		,"width":" 70em"
+		,"border":"1px solid #008000"///////////
+	});
 
-	$('#page-footer').css("margin"," 0");
-	$('#page-footer').css("padding"," 0");
-	$('#page-footer').css("height","100px");
-	$('#page-footer').css("background", "#ffffff url(images/bottom_wraper.jpg) repeat-x");
-	$('#page-footer').css("text-align","center");
-	//$('#page-footer').css("border","1px solid");;/////////
-	//$('#page-footer').css("border-color"," #D2691E");////////
+	$('#content').css(
+	{
+		"margin":" 0 0 0 0"
+		,"padding":" 0 0 0 0"
+		,"width":" 63%"
+		,"float":"right"
+		,"border":"1px solid #00BFFF"////////
+	});
+
+	$('#sidebar').css(
+	{
+		"margin":" 0 0 0 0"
+		,"padding":" 0 0 0 0"
+		,"width":" 33%"
+		,"float":"left"
+		,"border":"1px solid #0000FF"////////////////
+	});
+
+	$('#botton-page').css(
+	{
+		"margin":" 0"
+		,"padding":" 0"
+		,"clear":"both"
+		,"border":"1px solid #808080"//////////
+	});
+
+	$('#page-footer').css(
+	{
+		"margin":" 0"
+		,"padding":" 0"
+		,"height":"100px"
+		,"background":"#ffffff url(images/bottom_wraper.jpg) repeat-x"
+		,"text-align":"center"
+		//,"border":"1px solid #D2691E",/////////
+	});
 }
 
 
