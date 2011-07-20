@@ -1,46 +1,47 @@
 
 
-$(document).ready(function() {
-
+/*$(document).ready(function() {
 	ctn_reload("fr");
+});*/
 
-});
-
-
+/* reload all page when language(fr en vi) changed */
 function ctn_reload(lang)
 {	
 	set_layout();
-	_load_sidebar("fr", "_sidebar.html" , "_sidebar_style.css" );
-	_load_content("fr",      "_cv.html" ,      "_cv_style.css" );	
-	
+	_load_sidebar("fr");
+	_load_content("fr", "cv");		
 	_load_footer("fr");
 }
 
-
-function _load_content(lang, htmlfilepath, stylefilepath )
+// lang allow to determine the html folder in form             html_'lang'
+// content label allow to determine 
+//            the html filename               _'Label'.html
+//   path = html_'lang'  +   _'Label'.html
+//
+//  TODO : by using ajax that parse uself the html file, i can get the .css link of the corespondant .html file,
+//         then there are not need to explicitly compute the .css path file
+function _load_content(lang, contentLabel)
 {	
-	//$("div#content").load("html_fr/_cv.html  #content  div");
+	//$("div#content").load("html_fr/_cv.html  #content");
 	//$("#contentstyle").attr("href", "styles/_cv_style_1.css");
 	
-	var htmlfolder = "html_" + lang + "/";// html_fr/, html_en/, html_vn/
-	var divId      = " #content div";
-	$("div#content").load(htmlfolder + htmlfilepath + divId);
+	var htmlfolder = "html_" + lang + "/";// html_fr/, html_en/, html_vi/
+	var htmlFileName      = "_"+contentLabel+".html"+  " #content";
+	$("div#content").load(htmlfolder + htmlFileName);
 	
-	var stylepath  = "styles/" + stylefilepath;
-	$("#contentstyle").attr("href", stylepath);
+	var styleFileName      = "_"+contentLabel+".css";
+	$("#contentstyle").attr("href", "styles/" + styleFileName);
 }
 
-function _load_sidebar(lang, htmlfilepath, stylefilepath )
+function _load_sidebar(lang)
 {	
-	//$("div#sidebar").load("html_fr/_sidebar.html  #sidebar  div");
+	//$("div#sidebar").load("html_fr/_sidebar.html  #sidebar");
 	//$("#sidebarstyle").attr("href", "styles/_sidebar_style.css");
 	
 	var htmlfolder = "html_" + lang + "/";// html_fr/, html_en/, html_vn/
-	var divId      = " #sidebar div";
-	$("div#sidebar").load(htmlfolder + htmlfilepath + divId);
-	
-	var stylepath  = "styles/" + stylefilepath;
-	$("#sidebarstyle").attr("href", stylepath);
+	var htmlFileName      = "_sidebar.html"+  " #sidebar";
+	$("div#sidebar").load(htmlfolder +htmlFileName);	
+	$("#sidebarstyle").attr("href", "styles/_sidebar.css");
 }
 
 
@@ -90,7 +91,7 @@ function set_layout()
 		,"padding":"0 0 0 0"
 		,"height":"100px"
 		,"background": "#ffffff url(images/top_wraper.jpg) repeat-x"
-		,"border":"1px solid #D2691E"
+		,"border":"1px solid #D2691E"//////////
 	});
 
 
@@ -149,11 +150,6 @@ function set_layout()
 		//,"border":"1px solid #D2691E",/////////
 	});
 }
-
-
-
-
-
 
 
 ///////////////////////////   CTN TEST PLUGIN JQUERY    ///////////////////////
