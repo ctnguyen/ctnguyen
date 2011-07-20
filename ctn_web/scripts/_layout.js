@@ -2,21 +2,23 @@
 
 $(document).ready(function() {
 
-	set_layout();
-	_load_sidebar("fr" , "_sidebar.html" , "_sidebar_style.css" );
-	_load_content("fr" ,      "_cv.html" ,      "_cv_style.css" );	
-	
-	var _date = new Date();
-	var _year = _date .getFullYear();
-	
-	var _footertext = "<a href='mailto:chithanhnguyen.math@gmail.com'>Chi-Thanh NGUYEN</a> &copy; " + _year;	
-	$("#page-footer").html("<h1>" +_footertext +"</h1>");	
+	ctn_reload("fr");
+
 });
 
 
-function _load_content(lang, htmlfilepath, stylefilepath )
-{
+function ctn_reload(lang)
+{	
+	set_layout();
+	_load_sidebar("fr", "_sidebar.html" , "_sidebar_style.css" );
+	_load_content("fr",      "_cv.html" ,      "_cv_style.css" );	
 	
+	_load_footer("fr");
+}
+
+
+function _load_content(lang, htmlfilepath, stylefilepath )
+{	
 	//$("div#content").load("html_fr/_cv.html  #content  div");
 	//$("#contentstyle").attr("href", "styles/_cv_style_1.css");
 	
@@ -29,9 +31,9 @@ function _load_content(lang, htmlfilepath, stylefilepath )
 }
 
 function _load_sidebar(lang, htmlfilepath, stylefilepath )
-{
-//	$("div#sidebar").load("html_fr/_sidebar.html  #sidebar  div");
-//	$("#sidebarstyle").attr("href", "styles/_sidebar_style.css");
+{	
+	//$("div#sidebar").load("html_fr/_sidebar.html  #sidebar  div");
+	//$("#sidebarstyle").attr("href", "styles/_sidebar_style.css");
 	
 	var htmlfolder = "html_" + lang + "/";// html_fr/, html_en/, html_vn/
 	var divId      = " #sidebar div";
@@ -41,6 +43,28 @@ function _load_sidebar(lang, htmlfilepath, stylefilepath )
 	$("#sidebarstyle").attr("href", stylepath);
 }
 
+
+function _load_footer(lang)
+{
+	var _date = new Date();
+	var _year = _date .getFullYear();
+	var _footertext = "<a href='mailto:chithanhnguyen.math@gmail.com'>Chi-Thanh NGUYEN</a> &copy; " + _year;	
+
+	if (lang=="fr")
+	{
+		_footertext +=" Français";
+	}
+	if (lang=="en")
+	{
+		_footertext +=" English";
+	}
+	if (lang=="vi")
+	{
+		_footertext +=" Tiếng Việt";
+	}
+	
+	$("#page-footer").html("<h1 class='footer'>" +_footertext +"</h1>");	
+}
 
 
 function set_layout()

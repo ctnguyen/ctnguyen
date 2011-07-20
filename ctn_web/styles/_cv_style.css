@@ -1,12 +1,12 @@
-#content h1,h2,h3 {
+h1.cv,h2.cv,h3.cv {
 	margin: 0;
 	padding: 0;
 	font-weight: normal;
 	color: #FF0000;
 }
 
-#content h1 {
-	font-size: 3em;
+h1.cv {
+	font-size: 2em;
 	margin: 0;
 	padding: 0;
 	text-align: center;
@@ -14,45 +14,41 @@
 	font-family: Georgia, "Times New Roman", Times, serif;
 }
 
-#content h2 {
+h2.cv {
 	font-size: 2.5em;
 	text-align: right;
 }
 
-#content table,th,td {
+table.cv,th.cv,td.cv {
 	border: 1px solid black;
 }
 
+table.cv {
+	border: 1px solid black;
+	width:90%;
+	margin-left:auto;
+	margin-right:auto;
+}
+
 /*  ===  compentences styles  ====  */
-#content #competences .skilllabel {
+#competences.skilllabel.cv {
 	font-weight: bold;
 	color: red;
 }
 
-#content #competences table {
-	border: 1px solid black;
-	width:90%;
-	margin-left:auto;
-	margin-right:auto;
-}
 
 /*  ====   education styles   =====  */
-#content #education table {
-	border: 1px solid black;
-	width:90%;
-	margin-left:auto;
-	margin-right:auto;
-}
+
 
 /*  ===  experiences styles  ====  */
-#content #experiences .date {
+.cv.date {
 	float: left;
 }
 
-#content #experiences .enterprise {
+.cv.enterprise {
 	float: right;
 }
 
-#content .clearfloatting{
+.clearfloatting{
 	clear:both;
 }
