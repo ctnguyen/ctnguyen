@@ -1,18 +1,22 @@
 
-#sidebar #menu ul {
+ul.sidebar.menu {
 	border: 1px solid black;
 	float: right;
 	list-style-type: none;
 }
 
-#sidebar #clearfloatting {
+ul.sidebar.news {
+	list-style-type: square;
+}
+
+div.clearfloatting {
 	clear: both;
 }
 
-#sidebar h1,h2,h3 {
+
+h1.sidebar,h2.sidebar,h3.sidebar {
 	margin: 0;
 	padding: 0;
 	font-weight: normal;
 	color: #0000FF;
 }
-

@@ -3,3 +3,6 @@ separating sidebar and content page in to different pages html
 reading how to creat multi-languages by creating cookies with JavaScript
 find a mechanism for working with different file (ajax)
 
+$20.07.2011$
+- adapting the layout setting with the user WebBrowser, knowing his em/px, his windows size, see layout figure
+- think about the data structure for ease loading of page knowing that we want to load, in function of lang, what what what
