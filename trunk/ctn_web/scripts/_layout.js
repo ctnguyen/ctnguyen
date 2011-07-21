@@ -4,8 +4,25 @@ function ctn_reload(lang)
 {	
 	set_layout();
 	_load_sidebar("fr");
-	_load_content("fr", "home");		
+	_load_content("fr", "cv");		
 	_load_footer("fr");
+	
+	_debug_windows_size();
+	//_debug_browser_fontsize();
+}
+
+
+function _debug_browser_fontsize()
+{
+	$('#page-header').html("M" );
+}
+
+function _debug_windows_size()
+{
+	$(window).resize(function(){
+		$('#page-header').html("windows width:"+$(window).width() + "     windows height:" + $(window).height() );
+		});
+	
 }
 
 /* loading the content block in function of language and the content label
