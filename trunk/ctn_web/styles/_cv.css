@@ -6,7 +6,7 @@ h1._cv,h2._cv,h3._cv {
 }
 
 h1._cv {
-	font-size: 2em;
+	/*font-size: 2em;*/
 	margin: 0;
 	padding: 0;
 	text-align: center;
@@ -15,7 +15,7 @@ h1._cv {
 }
 
 h2._cv {
-	font-size: 2.5em;
+	/*font-size: 2.5em;*/
 	text-align: right;
 }
 
