@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>Chi-Thanh NGUYEN</title>
-<base href="file:///home/ctn/workspace/ctn_project/trunk/ctn_web/" />
+<base href="file:///D:/2011/workspace/ctn_project/trunk/ctn_web/" />
 <!-- To change -->
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="author"             content="Chi-Thanh NGUYEN" />
@@ -12,6 +12,7 @@
 <meta name="robots"             content="follow" />
 
 <script type="text/javascript" src="jquery/jquery-1.6.2.js"></script>
+<script type="text/javascript" src="scripts/common.js"></script>
 <script type="text/javascript" src="scripts/_layout.js"></script>
 
 <link id="sidebarstyle" href="#" rel="stylesheet" type="text/css" media="screen"/>
@@ -29,8 +30,25 @@
 		</div>
 		<div id="page-footer"></div>
 	</div>
-<script type="text/javascript">
-ctn_reload("fr");
-</script>
+	<script type="text/javascript">
+		ctn_reload('fr');
+		
+ 		jQuery(function($) {  
+		    $('a').click(function() {
+		    	//http://stackoverflow.com/questions/5068718/jquery-onclick-event
+		    	// this mechanic works well, but the problem comes in
+		    	// when onclick event make here, the content of sidebar is not already loaded
+		    	// then if we want to get its id, its undifined
+		    	var contentLabel = $(this).attr('id');//bug here
+		    	//_load_content('fr','cv');
+		    	//_load_content('fr',contentLabel);
+		        //$("#page-header").html(contentLabel);
+		        $("#page-header").html('<h1>TEST ONCLLICK</h1>');
+		        return false;
+		    }); 
+
+		});
+
+	</script>
 </body>
 </html>
