@@ -1,11 +1,11 @@
-h1.cv,h2.cv,h3.cv {
+h1._cv,h2._cv,h3._cv {
 	margin: 0;
 	padding: 0;
 	font-weight: normal;
 	color: #FF0000;
 }
 
-h1.cv {
+h1._cv {
 	font-size: 2em;
 	margin: 0;
 	padding: 0;
@@ -14,16 +14,16 @@ h1.cv {
 	font-family: Georgia, "Times New Roman", Times, serif;
 }
 
-h2.cv {
+h2._cv {
 	font-size: 2.5em;
 	text-align: right;
 }
 
-table.cv,th.cv,td.cv {
+table._cv,th._cv,td._cv {
 	border: 1px solid black;
 }
 
-table.cv {
+table._cv {
 	border: 1px solid black;
 	width:90%;
 	margin-left:auto;
@@ -31,7 +31,7 @@ table.cv {
 }
 
 /*  ===  compentences styles  ====  */
-#competences.skilllabel.cv {
+#competences.skilllabel._cv {
 	font-weight: bold;
 	color: red;
 }
@@ -41,11 +41,11 @@ table.cv {
 
 
 /*  ===  experiences styles  ====  */
-.cv.date {
+._cv.date {
 	float: left;
 }
 
-.cv.enterprise {
+._cv.enterprise {
 	float: right;
 }
 

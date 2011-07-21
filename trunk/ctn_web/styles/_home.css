@@ -1,5 +1,5 @@
 /*  === global styles ==== */
-img.home {
+img._home {
 	display: block;
     margin-left: auto;
     margin-right: auto;
@@ -7,10 +7,10 @@ img.home {
 	height: 400px;
 }
 
-ul#motivations.home {
+ul#motivations._home {
 	list-style-type: square;
 }
 
-ul#webtechnologies.home{
+ul#webtechnologies._home{
 	list-style-type: none;
 }

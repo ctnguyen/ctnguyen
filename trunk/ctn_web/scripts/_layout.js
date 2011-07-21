@@ -1,68 +1,55 @@
 
-
-/*$(document).ready(function() {
-	ctn_reload("fr");
-});*/
-
 /* reload all page when language(fr en vi) changed */
 function ctn_reload(lang)
 {	
 	set_layout();
 	_load_sidebar("fr");
-	_load_content("fr", "cv");		
+	_load_content("fr", "home");		
 	_load_footer("fr");
 }
+
+/* loading the content block in function of language and the content label
+ * 
+ * */
+function _load_content(lang, contentLabel)
+{	
 
 // lang allow to determine the html folder in form             html_'lang'
 // content label allow to determine 
 //            the html filename               _'Label'.html
 //   path = html_'lang'  +   _'Label'.html
-//
-//  TODO : by using ajax that parse uself the html file, i can get the .css link of the corespondant .html file,
-//         then there are not need to explicitly compute the .css path file
-function _load_content(lang, contentLabel)
-{	
-	//$("div#content").load("html_fr/_cv.html  #content");
-	//$("#contentstyle").attr("href", "styles/_cv_style_1.css");
-	
-	var htmlfolder = "html_" + lang + "/";// html_fr/, html_en/, html_vi/
-	var htmlFileName      = "_"+contentLabel+".html"+  " #content";
-	$("div#content").load(htmlfolder + htmlFileName);
-	
-	var styleFileName      = "_"+contentLabel+".css";
-	$("#contentstyle").attr("href", "styles/" + styleFileName);
+
+	var htmlfolder = "html_" + lang + "/";
+	var uriContent = htmlfolder + "_"+contentLabel+".html";
+    $.get(uriContent
+		  ,function(loadedXHTML){
+    		
+    		//Replacing the div#sidebar of index page  by the one newly loaded in the uriSideBar page
+			$('#content').html( $(loadedXHTML).contents().find('div#content').html() );
+			$('#content').attr('class', contentLabel);
+			
+			//Replacing the local style of index page by the one newly loaded in the uriSideBar page
+			$('#contentstyle').attr('href', $(loadedXHTML).contents().find('link#contentstyle').attr('href'));			
+		  }
+		  ,"xml"
+         );	
 }
 
+/* loading the sidebar block in function of language
+ * 
+ * */
 function _load_sidebar(lang)
 {	
-	//$("div#sidebar").load("html_fr/_sidebar.html  #sidebar");
-	//$("#sidebarstyle").attr("href", "styles/_sidebar_style.css");
-	
-	//var htmlfolder = "html_" + lang + "/";// html_fr/, html_en/, html_vn/
-	//var htmlFileName      = "_sidebar.html"+  " #sidebar";	
-	//$("div#sidebar").load(htmlfolder +htmlFileName);	
-	
 	var htmlfolder = "html_" + lang + "/";
 	var uriSideBar = htmlfolder + "_sidebar.html";
     $.get(uriSideBar
-		  ,function(xmlReponse){
+		  ,function(loadedXHTML){
     		
     		//Replacing the div#sidebar of index page  by the one newly loaded in the uriSideBar page
-			$(xmlReponse).find('div').each(function(){
-				var _idcontent      = $(this).attr('id');
-				var _classcontent   = $(this).attr('class');
-				if(_idcontent == 'sidebar')
-				{
-					$('#sidebar').html($(this).html());
-					$(this).attr('class',_classcontent);
-				}
-			});  
+			$('#sidebar').html( $(loadedXHTML).contents().find('div#sidebar').html() );
 			
 			//Replacing the local style of index page by the one newly loaded in the uriSideBar page
-			$(xmlReponse).find('link').each(function(){
-				var _hreflink = $(this).attr('href');
-				$('#sidebarstyle').attr('href',_hreflink);
-			});  		
+			$('#sidebarstyle').attr('href', $(loadedXHTML).contents().find('link#sidebarstyle').attr('href'));			
 		  }
 		  ,"xml"
          );
@@ -86,8 +73,7 @@ function _load_footer(lang)
 	if (lang=="vi")
 	{
 		_footertext +=" Tiếng Việt";
-	}
-	
+	}	
 	$("#page-footer").html("<h1 class='footer'>" +_footertext +"</h1>");	
 }
 
