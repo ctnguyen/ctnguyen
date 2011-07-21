@@ -1,11 +1,11 @@
 
-ul.sidebar.menu {
+ul._sidebar.menu {
 	border: 1px solid black;
 	float: right;
 	list-style-type: none;
 }
 
-ul.sidebar.news {
+ul._sidebar.news {
 	list-style-type: square;
 }
 
@@ -14,7 +14,7 @@ div.clearfloatting {
 }
 
 
-h1.sidebar,h2.sidebar,h3.sidebar {
+h1._sidebar,h2._sidebar,h3._sidebar {
 	margin: 0;
 	padding: 0;
 	font-weight: normal;
