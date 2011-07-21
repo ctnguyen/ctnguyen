@@ -38,10 +38,34 @@ function _load_sidebar(lang)
 	//$("div#sidebar").load("html_fr/_sidebar.html  #sidebar");
 	//$("#sidebarstyle").attr("href", "styles/_sidebar_style.css");
 	
-	var htmlfolder = "html_" + lang + "/";// html_fr/, html_en/, html_vn/
-	var htmlFileName      = "_sidebar.html"+  " #sidebar";
-	$("div#sidebar").load(htmlfolder +htmlFileName);	
-	$("#sidebarstyle").attr("href", "styles/_sidebar.css");
+	//var htmlfolder = "html_" + lang + "/";// html_fr/, html_en/, html_vn/
+	//var htmlFileName      = "_sidebar.html"+  " #sidebar";	
+	//$("div#sidebar").load(htmlfolder +htmlFileName);	
+	
+	var htmlfolder = "html_" + lang + "/";
+	var uriSideBar = htmlfolder + "_sidebar.html";
+    $.get(uriSideBar
+		  ,function(xmlReponse){
+    		
+    		//Replacing the div#sidebar of index page  by the one newly loaded in the uriSideBar page
+			$(xmlReponse).find('div').each(function(){
+				var _idcontent      = $(this).attr('id');
+				var _classcontent   = $(this).attr('class');
+				if(_idcontent == 'sidebar')
+				{
+					$('#sidebar').html($(this).html());
+					$(this).attr('class',_classcontent);
+				}
+			});  
+			
+			//Replacing the local style of index page by the one newly loaded in the uriSideBar page
+			$(xmlReponse).find('link').each(function(){
+				var _hreflink = $(this).attr('href');
+				$('#sidebarstyle').attr('href',_hreflink);
+			});  		
+		  }
+		  ,"xml"
+         );
 }
 
 
