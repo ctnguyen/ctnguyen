@@ -17,9 +17,7 @@ function ctn_reload(lang)
 	}	
 	
 	_load_footer(lang);	
-
 	
-	_debug_layout();
 	//_debug_windows_size();
 	//_debug_browser_fontsize();
 	_debug_lang();	
@@ -167,9 +165,10 @@ function _debug_windows_size()
 
 function _debug_lang()
 {
+	$('p#actuallang').css({'display':'inherit'});
 	//plot lang
-	var m_lang = get_lang();
-	$('#page-header').html('<h1>'+m_lang+'</h1>');
+	//var m_lang = get_lang();
+	//$('#page-header').html('<h1>'+m_lang+'</h1>');
 }
 
 function _debug_content_label()
