@@ -19,16 +19,19 @@ h2._cv {
 	text-align: right;
 }
 
+table#download {
+	float: right;
+}
 table._cv,th._cv,td._cv {
 	border: 1px solid black;
 }
-
 table._cv {
 	border: 1px solid black;
 	width:90%;
 	margin-left:auto;
 	margin-right:auto;
 }
+
 
 /*  ===  compentences styles  ====  */
 #competences.skilllabel._cv {

@@ -8,35 +8,48 @@
          botton-page
           page-footer
 */
+function _get_page_width(){return '80em';}
+function _get_sidebar_width(){return '22%';}
+function _get_content_width(){return '75%';}
 
-
+/* setting up bloc size and several style like border, backround..
+ * contribute with styles/layout.css
+ * */
 function resetLayout()
 {
 	$('#page-header').css({
-		"height":"50px"
+		"height":"100px"
 		,"background" : "#FFFFFF url(images/top_wrapper.jpg) repeat-x"
 			});
 	
 	$('#page').css({
-		"width":"71em"
-		,"margin-left":"10em"
+		"width":_get_page_width()
+		,"margin-left":"2em"
 	    ,"margin-right":"auto"
 	});
 	$('#sidebar').css({
-		"width":"20em"
+		"width":_get_sidebar_width()
 		,"margin":"0 0 0 0"
+		//,"border-right-style":"groove"
+		//,"border-right-width":"5px"
+		//,"border-right-color":"red"
 	});
 	$('#content').css({
-		"width":"50em"
-		,"margin":"0 0 0 0"		
+		"width":_get_content_width()
+		,"margin-left":"0"
+		,"padding-left":"2em"
+		,"border-left-style":"groove"
+		,"border-left-width":"1px"
+		,"border-left-color":"#000000"
 	});
 	
 	$('#page-footer').css({
-		"height":"50px"
+		"height":"100px"
 		,"background" : "#FFFFFF url(images/bottom_wrapper.jpg) repeat-x"
 	});
 	//_debug_layout();
 }
+
 
 
 function _debug_layout()
@@ -47,7 +60,7 @@ function _debug_layout()
 	$('#page-header').css({"border":"1px solid #D2691E"});
 	$('#top-page').css({"border":"1px solid #808080"});
 	$('#page').css({"border":"1px solid #008000"});
-	$('#content').css({"border":"1px solid #00BFFF"});
+	//$('#content').css({"border":"1px solid #00BFFF"});
 	$('#sidebar').css({"border":"1px solid #0000FF"});
 	$('#botton-page').css({"border":"1px solid #808080"});
 	$('#page-footer').css({"border":"1px solid #D2691E"});
