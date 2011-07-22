@@ -13,17 +13,29 @@
 function resetLayout()
 {
 	$('#page-header').css({
-		"height":"100px"
+		"height":"50px"
 		,"background" : "#FFFFFF url(images/top_wrapper.jpg) repeat-x"
 			});
-	$('#page').css({"width":" 70em"});
-	$('#sidebar').css({"width":" 33%"});
-	$('#content').css({"width":" 63%"});
+	
+	$('#page').css({
+		"width":"71em"
+		,"margin-left":"10em"
+	    ,"margin-right":"auto"
+	});
+	$('#sidebar').css({
+		"width":"20em"
+		,"margin":"0 0 0 0"
+	});
+	$('#content').css({
+		"width":"50em"
+		,"margin":"0 0 0 0"		
+	});
+	
 	$('#page-footer').css({
-		"height":"100px"
+		"height":"50px"
 		,"background" : "#FFFFFF url(images/bottom_wrapper.jpg) repeat-x"
-			});
-	_debug_layout();
+	});
+	//_debug_layout();
 }
 
 
@@ -39,4 +51,5 @@ function _debug_layout()
 	$('#sidebar').css({"border":"1px solid #0000FF"});
 	$('#botton-page').css({"border":"1px solid #808080"});
 	$('#page-footer').css({"border":"1px solid #D2691E"});
+	$('ul._sidebar.menu').css({"border":"1px solid black"});
 }

@@ -16,8 +16,7 @@ body{
 }
 
 #page{
-	margin : auto;
-	padding: auto;
+	padding: 0 0 0 0;
 }
 
 #actuallang{
@@ -31,13 +30,11 @@ body{
 }
 
 #sidebar{
-	margin: 0 0 0 0;
 	padding: 0 0 0 0;
 	float:left;
 }
 
 #content{
-	margin : 0 0 0 0;
 	padding: 0 0 0 0;
 	float:right;
 }
