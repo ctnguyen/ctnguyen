@@ -1,0 +1,56 @@
+
+body{
+	background : #FFFFFF;
+}
+
+#whole-page{
+	margin : 0 0 0 0;
+	padding: 0 0 0 0;
+}
+#page-header
+{
+	margin : 0 0 0 0;
+	padding: 0 0 0 0;	
+	background : #FFFFFF url(images/top_wrapper.jpg) repeat-x;
+}
+#page
+{
+	margin : auto;
+	padding: auto;
+}
+#actuallang
+{
+	display:none;	
+}
+
+#top-page
+{
+	margin : 0 0 0 0;
+	padding: 0 0 0 0;
+	clear:both;
+}
+#sidebar
+{
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	float:left;
+} 
+#content
+{
+	margin : 0 0 0 0;
+	padding: 0 0 0 0;
+	float:right;
+}
+#botton-page
+{
+	margin : 0 0 0 0;
+	padding: 0 0 0 0;
+	clear:both;
+}
+#page-footer
+{
+	margin : 0 0 0 0;
+	padding: 0 0 0 0;
+	text-align:center;
+	background:#ffffff url(images/bottom_wrapper.jpg) repeat-x;
+}

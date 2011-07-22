@@ -1,4 +1,107 @@
 
+/* reload all page when language(fr en vi) changed */
+function ctn_reload(lang)
+{	
+	resetLayout();
+	_load_sidebar(lang);
+	
+	var actualcontent = '';//defining the actual Label as string
+	actualcontent +=$('#content').attr('class');
+	if(actualcontent === 'undefined' || actualcontent ==='' )
+	{
+		_load_content(lang, 'home');
+	}
+	else
+	{
+		_load_content(lang, actualcontent);
+	}	
+	
+	_load_footer(lang);	
+
+	
+	_debug_layout();
+	//_debug_windows_size();
+	//_debug_browser_fontsize();
+	_debug_lang();	
+}
+
+
+
+/* loading the content block in function of language and the content label
+ * 
+ * */
+function _load_content(lang, contentLabel)
+{	
+
+// lang allow to determine the html folder in form             html_'lang'
+// content label allow to determine 
+//            the html filename               _'Label'.html
+//   path = html_'lang'  +   _'Label'.html
+
+	var htmlfolder = "html_" + lang + "/";
+	var uriContent = htmlfolder + "_"+contentLabel+".html";
+    $.get(uriContent
+		  ,function(loadedXHTML){
+    		
+    		//Replacing the div#sidebar of index page  by the one newly loaded in the uriSideBar page
+			$('#content').html( $(loadedXHTML).contents().find('div#content').html() );
+			
+			//Replacing the local style of index page by the one newly loaded in the uriSideBar page
+			$('#contentstyle').attr('href', $(loadedXHTML).contents().find('link#contentstyle').attr('href'));			
+		  }
+		  ,"xml"
+         );	
+
+    $('#content').removeClass($('#content').attr('class') );
+    $('#content').addClass(contentLabel);  
+    //_debug_content_label();
+}
+
+/* loading the sidebar block in function of language
+ * 
+ * */
+function _load_sidebar(lang)
+{	
+	var htmlfolder = "html_" + lang + "/";
+	var uriSideBar = htmlfolder + "_sidebar.html";
+    $.get(uriSideBar
+		  ,function(loadedXHTML){
+    		
+    		//Replacing the div#sidebar of index page  by the one newly loaded in the uriSideBar page
+			$('#sidebar').html( $(loadedXHTML).contents().find('div#sidebar').html() );
+			
+			//Replacing the local style of index page by the one newly loaded in the uriSideBar page
+			$('#sidebarstyle').attr('href', $(loadedXHTML).contents().find('link#sidebarstyle').attr('href'));			
+		  }
+		  ,"xml"
+         );
+}
+
+
+function _load_footer(lang)
+{
+	var _date = new Date();
+	var _year = _date .getFullYear();
+	var _footertext = "<a href='mailto:chithanhnguyen.math@gmail.com'>Chi-Thanh NGUYEN</a> &copy; " + _year;	
+
+	if (lang=="fr")
+	{
+		_footertext +=" Français";
+	}
+	if (lang=="en")
+	{
+		_footertext +=" English";
+	}
+	if (lang=="vn")
+	{
+		_footertext +=" Tiếng Việt";
+	}	
+	$("#page-footer").html("<h1 class='footer'>" +_footertext +"</h1>");	
+}
+
+
+
+
 function convertToEm(value_px)
 {
 	//the defautl font-size of body is in pixel and is 1 em
@@ -15,10 +118,61 @@ function convertToPx(value_em)
 
 function get_lang()
 {
-	return 'fr';//for instant
+	return $("p#actuallang").text();
 }
 
 function set_lang(_lang)
 {
-	//setting the user lang  : cookie or somthing in a register 
+	$("p#actuallang").html(_lang);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function _debug_browser_fontsize()
+{
+	var sizeinPx = parseFloat($("body").css("font-size"));
+	$('#page-header').html("<h1>font-size : "+sizeinPx+"px = " 
+			               +convertToEm(sizeinPx)+"em = "+convertToPx(convertToEm(sizeinPx))+ "px</h1>");
+}
+
+function _debug_windows_size()
+{
+	$(window).resize(function(){
+		$('#page-header').html("<h1>windows width:"+$(window).width() + "     windows height:" + $(window).height()+"</h1>" );
+		});	
+}
+
+
+function _debug_lang()
+{
+	//plot lang
+	var m_lang = get_lang();
+	$('#page-header').html('<h1>'+m_lang+'</h1>');
+}
+
+function _debug_content_label()
+{
+	 $('#page-header').html('<h1>' + $('#content').attr('class') + '</h1>');
 }

@@ -13,7 +13,7 @@
 </head>
 <body>
 	<div id="sidebar">
-		<div id="menu">
+		<div id="menu" class="_sidebar">
 					<ul class="_sidebar menu">
 						<li><a id="home" class="_sidebar itemNavigate" href="html_fr/_home.html" target="_blank">Home</a></li>
 						<li><a id="cv" class="_sidebar itemNavigate" href="html_fr/_cv.html" target="_blank">CV</a></li>
@@ -32,9 +32,9 @@
 		</div>		
 		<script type="text/javascript">	
 			jQuery(function($) {
-				$('a').click(function() {
+				$('a.itemNavigate').click(function() {
 						var contentLabel = $(this).attr('id');
-						_load_content('fr', contentLabel);
+						_load_content(get_lang(), contentLabel);
 						return false;
 				});
 			});
