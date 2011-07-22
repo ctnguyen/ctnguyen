@@ -33,3 +33,11 @@ $20.07.2011$
   content label = new3     --> _new3.html       _new3.css
 
   This Content Label is indicated on the _sidebar.html file by the id tag, this structure relie the id of and element in the sidebar to its content
+  
+  $22.07.2011$
+  -bug $.get of jquery with IE8
+  -write content for students projects [see older years data documents to get pdf reports]
+  -reconceptioning the layout (width page, coef sw1, sw2...)
+  -style all pages
+  -translate all .html to en, vn
+  -public web 

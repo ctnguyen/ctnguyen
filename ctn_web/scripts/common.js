@@ -2,7 +2,6 @@
 /* reload all page when language(fr en vi) changed */
 function ctn_reload(lang)
 {	
-	resetLayout();
 	_load_sidebar(lang);
 	
 	var actualcontent = '';//defining the actual Label as string
@@ -17,6 +16,9 @@ function ctn_reload(lang)
 	}	
 	
 	_load_footer(lang);	
+
+	
+	resetLayout();
 	
 	//_debug_windows_size();
 	//_debug_browser_fontsize();
@@ -80,7 +82,7 @@ function _load_footer(lang)
 {
 	var _date = new Date();
 	var _year = _date .getFullYear();
-	var _footertext = "<a href='mailto:chithanhnguyen.math@gmail.com'>Chi-Thanh NGUYEN</a> &copy; " + _year;	
+	var _footertext = "Chi-Thanh NGUYEN &copy; " + _year;	
 
 	if (lang=="fr")
 	{
