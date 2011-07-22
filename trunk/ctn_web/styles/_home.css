@@ -1,10 +1,10 @@
 /*  === global styles ==== */
 img._home {
 	display: block;
+	width: 50%;
+	height: 50%;
     margin-left: auto;
     margin-right: auto;
-	width: 400px;
-	height: 400px;
 }
 
 ul#motivations._home {
