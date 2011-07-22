@@ -1,56 +1,55 @@
 
 body{
-	background : #FFFFFF;
+	margin : 0 0 0 0;
+	padding: 0 0 0 0;
+	background-color:#FFFFFF;
 }
 
 #whole-page{
 	margin : 0 0 0 0;
 	padding: 0 0 0 0;
 }
-#page-header
-{
+
+#page-header{
 	margin : 0 0 0 0;
 	padding: 0 0 0 0;	
-	background : #FFFFFF url(images/top_wrapper.jpg) repeat-x;
 }
-#page
-{
+
+#page{
 	margin : auto;
 	padding: auto;
 }
-#actuallang
-{
+
+#actuallang{
 	display:none;	
 }
 
-#top-page
-{
+#top-page{
 	margin : 0 0 0 0;
 	padding: 0 0 0 0;
 	clear:both;
 }
-#sidebar
-{
+
+#sidebar{
 	margin: 0 0 0 0;
 	padding: 0 0 0 0;
 	float:left;
-} 
-#content
-{
+}
+
+#content{
 	margin : 0 0 0 0;
 	padding: 0 0 0 0;
 	float:right;
 }
-#botton-page
-{
+
+#botton-page{
 	margin : 0 0 0 0;
 	padding: 0 0 0 0;
 	clear:both;
 }
-#page-footer
-{
+
+#page-footer{
 	margin : 0 0 0 0;
 	padding: 0 0 0 0;
 	text-align:center;
-	background:#ffffff url(images/bottom_wrapper.jpg) repeat-x;
 }
