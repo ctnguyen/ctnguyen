@@ -2,7 +2,7 @@
 <html  xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>Chi-Thanh NGUYEN CV</title>
-<base href="file:///D:/2011/workspace/ctn_project/trunk/ctn_web/" />
+<base href="file:///home/ctn/workspace/ctn_project/trunk/ctn_web/" />
 <!-- To change -->
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
@@ -15,8 +15,8 @@
 	<div id="sidebar">
 		<div id="menu">
 					<ul class="_sidebar menu">
-						<li><a id="cv" class="_sidebar itemNavigate" href="html_fr/_home.html" target="_blank">Home</a></li>
-						<li><a id="home" class="_sidebar itemNavigate" href="html_fr/_cv.html" target="_blank">CV</a></li>
+						<li><a id="home" class="_sidebar itemNavigate" href="html_fr/_home.html" target="_blank">Home</a></li>
+						<li><a id="cv" class="_sidebar itemNavigate" href="html_fr/_cv.html" target="_blank">CV</a></li>
 						<li><a id="contact" class="_sidebar itemNavigate" href="html_fr/_contact.html" target="_blank">Contact</a></li>
 					</ul>
 		</div>
@@ -29,7 +29,16 @@
 				<li><a id="news3" class="_sidebar itemNavigate" href="#" target="_blank">news3</a></li>
 				<li><a id="news4" class="_sidebar itemNavigate" href="#" target="_blank">news4</a></li>
 			</ul>
-		</div>
+		</div>		
+		<script type="text/javascript">	
+			jQuery(function($) {
+				$('a').click(function() {
+						var contentLabel = $(this).attr('id');
+						_load_content('fr', contentLabel);
+						return false;
+				});
+			});
+		</script>
 	</div>
 </body>
 </html>

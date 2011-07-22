@@ -3,14 +3,27 @@
 function ctn_reload(lang)
 {	
 	resetLayout();
-	_load_sidebar("fr");
-	_load_content("fr", "home");		
-	_load_footer("fr");
+	_load_sidebar(lang);
 	
+	var actualcontent = '';//defining the actual Label as string
+	actualcontent +=$('#content').attr('class');
+	if(actualcontent === 'undefined' || actualcontent ==='' )
+	{
+		_load_content(lang, 'home');
+	}
+	else
+	{
+		_load_content(lang, actualcontent);
+	}	
+	
+	_load_footer(lang);	
 
+	
 	_debug_layout();
 	//_debug_windows_size();
-	_debug_browser_fontsize();
+	//_debug_browser_fontsize();
+	//_debug_lang();
+    _debug_content_class();
 	
 }
 
@@ -34,13 +47,15 @@ function _load_content(lang, contentLabel)
     		
     		//Replacing the div#sidebar of index page  by the one newly loaded in the uriSideBar page
 			$('#content').html( $(loadedXHTML).contents().find('div#content').html() );
-			$('#content').attr('class', contentLabel);
 			
 			//Replacing the local style of index page by the one newly loaded in the uriSideBar page
 			$('#contentstyle').attr('href', $(loadedXHTML).contents().find('link#contentstyle').attr('href'));			
 		  }
 		  ,"xml"
          );	
+
+    $('#content').removeClass($('#content').attr('class') );
+    $('#content').addClass(contentLabel);   
 }
 
 /* loading the sidebar block in function of language
@@ -189,5 +204,15 @@ function _debug_layout()
 	$('#page-footer').css({"border":"1px solid #D2691E"});
 }
 
+function _debug_lang()
+{
+	//plot lang
+	var m_lang = get_lang();
+	$('#page-header').html('<h1>'+m_lang+'</h1>');
+}
 
+function _debug_content_class()
+{
+	 $('#page-header').html('<h1>' + $('#content').attr('class') + '</h1>');
+}
 ///////////////////////////   CTN TEST PLUGIN JQUERY    ///////////////////////
