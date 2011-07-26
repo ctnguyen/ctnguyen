@@ -47,7 +47,7 @@ function resetLayout()
 		"height":"100px"
 		,"background" : "#FFFFFF url(images/bottom_wrapper.jpg) repeat-x"
 	});
-	//_debug_layout();
+	_debug_layout();
 }
 
 
