@@ -6938,7 +6938,7 @@ jQuery.extend({
 		*/
 
 		accepts: {
-			xml: "application/xml, text/xml",
+			xml: "application/xhtml+xml, text/xml",
 			html: "text/html",
 			text: "text/plain",
 			json: "application/json, text/javascript",

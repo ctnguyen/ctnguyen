@@ -1,7 +1,13 @@
+$(document).ready(function() {
+	ctn_reload(get_lang());			
+});
+
 
 /* reload all page when language(fr en vi) changed */
 function ctn_reload(lang)
 {	
+
+	
 	_load_sidebar(lang);
 	
 	var actualcontent = '';//defining the actual Label as string
@@ -17,6 +23,23 @@ function ctn_reload(lang)
 	
 	_load_footer(lang);	
 
+	
+//	$('img').bind('load', function() {
+//		alert('loaded image : ' + $(this).attr('src'));
+//	});
+	
+    $('img').each(function() {
+		alert('loaded image : ' + $(this).attr('src'));
+		$(this).show();
+	}
+	);
+    
+
+    
+//    $('img').each(function() {
+//		alert('loaded image : ' + $(this).attr('src'));
+//	}
+//	);
 	
 	resetLayout();
 	
@@ -40,18 +63,24 @@ function _load_content(lang, contentLabel)
 
 	var htmlfolder = "html_" + lang + "/";
 	var uriContent = htmlfolder + "_"+contentLabel+".html";
-    $.get(uriContent
-		  ,function(loadedXHTML){
-    		
+    
+    $.ajax({
+        type: "GET",
+        url: uriContent,
+        cache: true,    // or set to false
+        dataType: "xml",
+        async: false,
+        success: function(loadedXHTML) {
+        	
     		//Replacing the div#sidebar of index page  by the one newly loaded in the uriSideBar page
-			$('#content').html( $(loadedXHTML).contents().find('div#content').html() );
+			$('#content').empty().html( $(loadedXHTML).contents().find('div#content').html() );
 			
 			//Replacing the local style of index page by the one newly loaded in the uriSideBar page
-			$('#contentstyle').attr('href', $(loadedXHTML).contents().find('link#contentstyle').attr('href'));			
-		  }
-		  ,"xml"
-         );	
+			$('#contentstyle').attr('href', $(loadedXHTML).contents().find('link#contentstyle').attr('href'));
+        }
+    });
 
+    
     $('#content').removeClass($('#content').attr('class') );
     $('#content').addClass(contentLabel);  
     //_debug_content_label();
@@ -64,17 +93,22 @@ function _load_sidebar(lang)
 {	
 	var htmlfolder = "html_" + lang + "/";
 	var uriSideBar = htmlfolder + "_sidebar.html";
-    $.get(uriSideBar
-		  ,function(loadedXHTML){
-    		
+    
+    $.ajax({
+        type: "GET",
+        url: uriSideBar,
+        cache: true,    // or set to false
+        dataType: "xml",
+        async: false,
+        success: function(loadedXHTML) {
+        	
     		//Replacing the div#sidebar of index page  by the one newly loaded in the uriSideBar page
 			$('#sidebar').html( $(loadedXHTML).contents().find('div#sidebar').html() );
 			
 			//Replacing the local style of index page by the one newly loaded in the uriSideBar page
 			$('#sidebarstyle').attr('href', $(loadedXHTML).contents().find('link#sidebarstyle').attr('href'));			
-		  }
-		  ,"xml"
-         );
+		  }        
+    });    
 }
 
 
