@@ -39,22 +39,11 @@
 		</div>
 		<div id="page-footer"></div>
 	</div>
-	<script type="text/javascript">
-	
+	<script type="text/javascript">	
 		$('img.flag').click(function() {
 			set_lang($(this).attr('alt'));
 			ctn_reload($(this).attr('alt'));
-		});
-
-		jQuery(function($) {
-			$('a.itemNavigate').click(function() {
-					var contentLabel = $(this).attr('id');
-					_load_content(get_lang(), contentLabel);
-					return false;
-			});
-		});	
-
-				
+		});				
 	</script>
 </body>
 </html>

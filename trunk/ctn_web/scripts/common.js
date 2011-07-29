@@ -1,5 +1,11 @@
 $(document).ready(function() {
-	ctn_reload(get_lang());			
+	ctn_reload(get_lang());		
+	
+	$('a.itemNavigate').click(function(event) {
+		  event.preventDefault();
+			var contentLabel = $(this).attr('id');
+			_load_content(get_lang(), contentLabel);
+	});
 });
 
 
