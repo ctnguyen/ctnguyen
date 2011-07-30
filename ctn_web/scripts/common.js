@@ -35,7 +35,7 @@ function ctn_reload(lang)
 //	});
 	
     $('img').each(function() {
-		alert('loaded image : ' + $(this).attr('src'));
+		alert('loaded image : ' + $(this).css('dispay','inline'));
 		$(this).show();
 	}
 	);
