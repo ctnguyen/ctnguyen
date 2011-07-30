@@ -1,11 +1,6 @@
 $(document).ready(function() {
 	ctn_reload(get_lang());		
 	
-	$('a.itemNavigate').click(function(event) {
-		  event.preventDefault();
-			var contentLabel = $(this).attr('id');
-			_load_content(get_lang(), contentLabel);
-	});
 });
 
 
@@ -34,11 +29,11 @@ function ctn_reload(lang)
 //		alert('loaded image : ' + $(this).attr('src'));
 //	});
 	
-    $('img').each(function() {
-		alert('loaded image : ' + $(this).css('dispay','inline'));
-		$(this).show();
-	}
-	);
+//    $('img').each(function() {
+//		alert('loaded image : ' +  $(this).attr('src'));
+//		//$(this).show();
+//	}
+//	);
     
 
     
@@ -73,7 +68,7 @@ function _load_content(lang, contentLabel)
     $.ajax({
         type: "GET",
         url: uriContent,
-        cache: true,    // or set to false
+        cache: false,    // or set to false
         dataType: "xml",
         async: false,
         success: function(loadedXHTML) {
@@ -103,7 +98,7 @@ function _load_sidebar(lang)
     $.ajax({
         type: "GET",
         url: uriSideBar,
-        cache: true,    // or set to false
+        cache: false,    // or set to false
         dataType: "xml",
         async: false,
         success: function(loadedXHTML) {
@@ -114,7 +109,13 @@ function _load_sidebar(lang)
 			//Replacing the local style of index page by the one newly loaded in the uriSideBar page
 			$('#sidebarstyle').attr('href', $(loadedXHTML).contents().find('link#sidebarstyle').attr('href'));			
 		  }        
-    });    
+    }); 
+    
+	$('a.itemNavigate').click(function(event) {
+		  event.preventDefault();
+			var contentLabel = $(this).attr('id');
+			_load_content(get_lang(), contentLabel);
+	});
 }
 
 
@@ -128,7 +129,7 @@ function _load_footer(lang)
 	{
 		_footertext +=" Français";
 	}
-	if (lang=="en")
+	if (lang=="us")
 	{
 		_footertext +=" English";
 	}
