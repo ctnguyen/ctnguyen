@@ -8,3 +8,10 @@ h1._project {
 	font-family: Georgia, "Times New Roman", Times, serif;
 	color: #FF0000;
 }
+
+img._equation{
+	display: block;
+	width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}

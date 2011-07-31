@@ -127,15 +127,15 @@ function _load_footer(lang)
 
 	if (lang=="fr")
 	{
-		_footertext +=" Français";
+		_footertext +=" Web en construction";
 	}
 	if (lang=="us")
 	{
-		_footertext +=" English";
+		_footertext +=" Web in construction";
 	}
 	if (lang=="vn")
 	{
-		_footertext +=" Tiếng Việt";
+		_footertext +=" Web Đang xây dựng";
 	}	
 	$("#page-footer").html("<h1 class='footer'>" +_footertext +"</h1>");	
 }
