@@ -24,12 +24,12 @@ function resetLayout()
 	
 	$('#page').css({
 		"width":_get_page_width()
-		,"margin-left":"2em"
-	    ,"margin-right":"auto"
+		,"margin-left":"10em"
+	    //,"margin-right":"auto"
 	});
 	$('#sidebar').css({
 		"width":_get_sidebar_width()
-		,"margin":"0 0 0 0"
+		,"margin-right":"0"
 		//,"border-right-style":"groove"
 		//,"border-right-width":"5px"
 		//,"border-right-color":"red"
@@ -47,7 +47,7 @@ function resetLayout()
 		"height":"100px"
 		,"background" : "#FFFFFF url(images/bottom_wrapper.jpg) repeat-x"
 	});
-	_debug_layout();
+	//_debug_layout();
 }
 
 
