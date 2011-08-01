@@ -1,12 +1,4 @@
 /*  === global styles ==== */
-img._home {
-	display: block;
-	width: 50%;
-	height: 50%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 ul#motivations._home {
 	list-style-type: square;
 }

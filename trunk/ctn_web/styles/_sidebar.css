@@ -1,4 +1,11 @@
 
+img._sidebar {
+	display: block;
+	width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 #menu._sidebar{
 	width:30%;
     margin-left: auto;
