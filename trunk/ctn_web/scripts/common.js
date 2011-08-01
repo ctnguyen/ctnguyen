@@ -46,7 +46,7 @@ function ctn_reload(lang)
 	
 	//_debug_windows_size();
 	//_debug_browser_fontsize();
-	_debug_lang();	
+	//_debug_lang();	
 }
 
 
@@ -83,7 +83,13 @@ function _load_content(lang, contentLabel)
 
     
     $('#content').removeClass($('#content').attr('class') );
-    $('#content').addClass(contentLabel);  
+    $('#content').addClass(contentLabel);       
+    
+    //if the content is too short, its need to creat a white vertical space
+    // equal to the sidebar height
+    var sh=''; sh =  $('#sidebar').height() + 'px';
+    $('.verticalspacetoend').css({"height":sh});
+    
     //_debug_content_label();
 }
 
