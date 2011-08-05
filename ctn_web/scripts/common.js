@@ -135,11 +135,11 @@ function _load_footer(lang)
 	{
 		_footertext +=" Web en construction";
 	}
-	if (lang=="us")
+	if (lang=="en")
 	{
 		_footertext +=" Web in construction";
 	}
-	if (lang=="vn")
+	if (lang=="vi")
 	{
 		_footertext +=" Web Đang xây dựng";
 	}	
