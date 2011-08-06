@@ -1,12 +1,8 @@
 /*  === global styles ==== */
 h1._project {
-	/*font-size: 2em;*/
-	margin: 0;
-	padding: 0;
 	text-align: center;
-	text-transform: lowercase;
+	font-variant:small-caps;
 	font-family: Georgia, "Times New Roman", Times, serif;
-	color: #FF0000;
 }
 
 img._equation{

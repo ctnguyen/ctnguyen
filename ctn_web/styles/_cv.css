@@ -1,42 +1,35 @@
-h1._cv,h2._cv,h3._cv {
-	margin: 0;
-	padding: 0;
-	font-weight: normal;
-	color: #FF0000;
+#content{
+font-family: helvetica, arial,sans-serif; 	
 }
-
 h1._cv {
-	/*font-size: 2em;*/
-	margin: 0;
-	padding: 0;
 	text-align: center;
-	text-transform: lowercase;
+	font-variant:small-caps;
 	font-family: Georgia, "Times New Roman", Times, serif;
 }
-
-h2._cv {
-	/*font-size: 2.5em;*/
-	text-align: right;
-}
-
 table#download {
 	float: right;
 }
-table._cv,th._cv,td._cv {
-	border: 1px solid black;
+h2._cv {
+	background-color:#BFBFBF;
+	text-align: left;
 }
+
 table._cv {
-	border: 1px solid black;
 	width:90%;
 	margin-left:auto;
 	margin-right:auto;
+	border-collapse:collapse;
+}
+table._cv, th._cv, td._cv
+{
+	border : 1px solid black;
 }
 
 
 /*  ===  compentences styles  ====  */
-#competences.skilllabel._cv {
-	font-weight: bold;
-	color: red;
+._cv.skilllabel {
+	font-weight: bolder;
+	font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
 }
 
 
@@ -45,12 +38,20 @@ table._cv {
 
 /*  ===  experiences styles  ====  */
 ._cv.date {
-	float: left;
+	/*float: left;*/
+	background-color:#BFBFBF;
 }
 
 ._cv.enterprise {
-	float: right;
+	/*float: right;*/
+	background-color:#BFBFBF;
 }
+
+.xpTechno {
+	font-weight:bold;
+	font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+}
+
 
 .clearfloatting{
 	clear:both;
