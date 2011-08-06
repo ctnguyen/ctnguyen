@@ -10,7 +10,7 @@
 */
 function _get_page_width(){return '80em';}
 function _get_sidebar_width(){return '22%';}
-function _get_content_width(){return '75%';}
+function _get_content_width(){return '70%';}
 
 /* setting up bloc size and several style like border, backround..
  * contribute with styles/layout.css
@@ -45,7 +45,12 @@ function resetLayout()
 	
 	$('#page-footer').css({
 		"height":"100px"
+		,"font-size":"1em" 
 		,"background" : "#FFFFFF url(images/bottom_wrapper.jpg) repeat-x"
+	});
+	$('h1.footer').css({		
+		"font-size":"1em" 
+		,"padding-top":"40px"
 	});
 	//_debug_layout();
 }
