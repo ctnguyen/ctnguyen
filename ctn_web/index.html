@@ -7,7 +7,8 @@
 	content="application/xhtml+xml; charset=utf-8" />
 
 <meta name="author" content="Chi-Thanh NGUYEN" />
-<meta name="keywords" content="SOFA, INRIA, Chi, Thanh, NGUYEN," />
+<meta name="keywords"
+	content="NGUYEN Chi-Thanh, SOFA, INRIA, CEMEF, nanoindentation, UPMC, ANEDP, Paris 6, Paris VI" />
 <meta name="description" content="" />
 <meta name="robots" content="follow" />
 
@@ -36,11 +37,19 @@
 						</td>
 						<td><img class="flag" src="images/_icon_vn.png" alt="vi" />
 						</td>
-						<td><p id="actuallang">fr</p></td>
+						<td><p id="actuallang">fr</p>
+						</td>
 					</tr>
 				</table>
 			</div>
 			<div id="content">
+				<div class="referencing">
+					<h1>
+						NGUYEN Chi-Thanh, SOFA, INRIA, CEMEF, nanoindentation, UPMC,
+						ANEDP, Paris 6, Paris VI
+						<a href="http://nguyenchithanh.free.fr" target="_blank">http://nguyenchithanh.free.fr</a>
+						<h1 />
+				</div>
 				<div id="presentation" class="_home">
 					<p class="_home">Je crée mon siteweb pour deux principales
 						raisons :</p>
@@ -51,8 +60,7 @@
 							<ul id="webtechnologies" class="_home">
 								<li class="_home">De base : xhtml, css, javascript, jquery</li>
 								<li class="_home">Future : WebGL, jquery UI, php</li>
-							</ul>
-						</li>
+							</ul></li>
 					</ul>
 				</div>
 				<div class="verticalspacetoend"></div>
@@ -64,14 +72,11 @@
 				<div id="menu" class="_sidebar">
 					<ul class="_sidebar menu">
 						<li><a id="home" class="_sidebar itemNavigate"
-							href="html_fr/_home.html" target="_blank">Accueil</a>
-						</li>
+							href="html_fr/_home.html" target="_blank">Accueil</a></li>
 						<li><a id="cv" class="_sidebar itemNavigate"
-							href="html_fr/_cv.html" target="_blank">CV</a>
-						</li>
+							href="html_fr/_cv.html" target="_blank">CV</a></li>
 						<li><a id="contact" class="_sidebar itemNavigate"
-							href="html_fr/_contact.html" target="_blank">Contact</a>
-						</li>
+							href="html_fr/_contact.html" target="_blank">Contact</a></li>
 					</ul>
 				</div>
 				<div class="_sidebar clearfloatting"></div>
@@ -82,12 +87,18 @@
 				<li><a id="nanoindentation" class="_sidebar itemNavigate" href="#" target="_blank">Nanoindentation</a></li>				
  -->
 						<li><a id="Navier_Stokes" class="_sidebar itemNavigate"
-							href="#" target="_blank">Navier-Stokes</a>
-						</li>
+							href="#" target="_blank">Navier-Stokes</a></li>
 						<li><a id="Black_Scholes" class="_sidebar itemNavigate"
-							href="#" target="_blank">Black &amp; Scholes</a>
-						</li>
+							href="#" target="_blank">Black &amp; Scholes</a></li>
 					</ul>
+				</div>
+				<div class="_sidebar clearfloatting"></div>
+				<div class="referencing">
+					<h1>
+						NGUYEN Chi-Thanh, SOFA, INRIA, CEMEF, nanoindentation, UPMC,
+						ANEDP, Paris 6, Paris VI
+						<a href="http://nguyenchithanh.free.fr" target="_blank">http://nguyenchithanh.free.fr</a>
+					<h1 />
 				</div>
 			</div>
 			<div id="botton-page">&nbsp;&nbsp;</div>
@@ -95,6 +106,7 @@
 		<div id="page-footer"></div>
 	</div>
 	<script type="text/javascript">
+		$('.referencing').remove();
 		$('img.flag').click(function() {
 			set_lang($(this).attr('alt'));
 			ctn_reload($(this).attr('alt'));
