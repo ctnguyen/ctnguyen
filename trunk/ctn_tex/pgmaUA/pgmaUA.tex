@@ -1,0 +1,136 @@
+%Texlive-full Version 3.141592-1.40.3 (Web2C 7.5.6)
+%Kile Version 2.0.83
+
+%File associated : Mas_Logo.ps , uncertainty.bib
+
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8x]{inputenc}
+
+\usepackage{lmodern}
+\usepackage[a4paper]{geometry}
+%\usepackage[frenchb]{babel}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\usepackage{pstricks}
+\usepackage{pst-node}
+%\usepackage{wrapfig}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{listings}
+\lstset{language=C++,basicstyle=\scriptsize \color{green},identifierstyle=\color{orange},keywordstyle=[1]\color{blue},columns=fullflexible}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%   LOGO  %%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\rput(6,1.5){\href{http://www.mas.ecp.fr/}{\includegraphics[scale=1.0]{Mas_Logo}}}
+\rput(-4,1.5){\href{http://www.mas.ecp.fr/}{
+		\begin{tabular}{l}
+		\resizebox{3cm}{0.6cm}{PyGMalion} \\ 
+		\resizebox{6cm}{0.3cm}{Digiplant Tech.Doc}
+		\end{tabular}
+		}
+	    }
+\end{center}
+%%%%%%%%%%%%%%%%%%   LOGO  %%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% DOCUMENT TITLE %%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{1.5cm}
+\begin{center}\resizebox{5cm}{0.6cm}{Uncertainty Analysis}\end{center}
+%%%%%%%%%%%%%%%%%% DOCUMENT TITLE %%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Functionalities }
+\subsection{Uncertainty Analisis } 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%=======================================================================================%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Unscented Sampler: } 
+\paragraph{Abstract : } The Unscented Sampler work by associating to a function linear or not $f$.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%============================           FIGURE        ==================================%
+\[
+f: 
+\left\{ 
+\begin{array}{lll}
+     \textbf{R}^{N} &\rightarrow&  \textbf{R}^{M}   \\
+     \textbf{X}     &\mapsto&      \textbf{Y} 
+\end{array}\right.
+\]
+\begin{figure}[h]
+\begin{center}
+\begin{pspicture}(-5,-2)(5,2)
+%\psline(-5,-2)(5,2)
+\rput(-4, 1){\Rnode{mX}{$\{\bar{\textbf{X}},\textbf{P}_{xx}\}$}}
+\rput(-4,-1){\Rnode{Xi}{$\textbf{\Large{X}}_i$}}
+\rput( 0, 0){\Rnode{F}{$\textbf{\Large{f}}$}}
+\rput( 4,-1){\Rnode{Yi}{$\textbf{\Large{Y}}_i$}}
+\rput( 4, 1){\Rnode{mY}{$\{\bar{\textbf{Y}},\textbf{P}_{yy}\}$}}
+\psellipticarc{<-}(0,0)(0.5,1){60}{320}\rput(0.5,1){\Large{i}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ncline{->}{mX}{Xi}\aput{:U}{unscented}
+\ncline{->}{Yi}{mY}\aput{:U}{unscented}
+\ncline[linestyle=dotted]{->}{Xi}{F}
+\ncline[linestyle=dotted]{->}{F}{Yi}
+\end{pspicture}
+\end{center}
+\end{figure}
+%============================           FIGURE        ==================================%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The general senarios is steps follows : 
+\begin{enumerate}
+ \item given mean and covariance of a random vector$\{\bar{\textbf{X}},\textbf{P}_{xx}\}$(dimension \textbf{N})
+ \item generate \textbf{2.N+1} point $\textbf{X}_{i,0\leq i< (2N+1)}$
+ \item get the image of the transformation $f$ by $\textbf{Y}_{i} = f(\textbf{X}_{i}), _{(i,0\leq i< (2N+1))}$
+ \item compute the mean and the covariance of transformed points $\{\bar{\textbf{Y}},\textbf{P}_{yy}\}$
+\end{enumerate}
+Several variants of step 2 and step 4 are publied by Julier et al. The first one basical is on 1996~\cite{Julier1996}, the advanced one introduced a scaling factor at 2000~\cite{Julier2002} allowing when there a large angular uncertainty (non-diagonal term of cov matrix?).   
+\paragraph{Implementation : } An UnscentedSampler is simply a set of weights. These weights allows computation of step 2 and steps 4 above. By Julier, all weight values can be computed by giving tree factor $\kappa$ ,$\alpha$ , $\beta$. These weights are not much different, and not need to be computed for all in the mathematical point of view. But in the programming point of view, when step 2 and steps 4 need to be done repeatly, it may evoke a hight cost of time if weights are recompute every time. Therefor weights are hiddenly all precomputed and stored in the components Unscented Sampler. When user call for step 2 or step 4, it apply these weights to points and compute :
+\begin{itemize}
+ \item  step 1 : \textbf{compSigmas}:
+      \[
+      \left\| 
+      \begin{array}{l}
+	    \text{for : } 0\leq j < \textbf{N} \textbf{ : } \sigma_j = \textbf{sqrt}(\textbf{P}_{xx}).\text{col}_{(j)}\\
+	    \textbf{X}_0 = \bar{\textbf{X}} \\
+	    \text{for : } 1\leq i < \textbf{2N+1} \textbf{ : } \textbf{X}_i = \bar{\textbf{X}}+ \textbf{w}^{x}_{i}*\sigma_i
+      \end{array}\right.
+      \]
+ \item  step 2a : \textbf{compMean}:
+      \[
+      \left\| 
+      \begin{array}{l}
+	    \text{for : } 0\leq i < \textbf{2N+1} \textbf{ : } \bar{\textbf{Y}} += \textbf{w}^{y}_{i}*\textbf{Y}_i
+      \end{array}\right.
+      \]
+ \item  step 2b : \textbf{compCov}:
+      \[
+      \left\| 
+      \begin{array}{l}
+	    \text{for : } 0\leq i < \textbf{2N+1} \textbf{ : } \textbf{P}^{lm}_{yy} += \textbf{w}^{yy}_{i}*\left[\textbf{Y}_i - \bar{\textbf{Y}} \right]^{l}  * \left[\textbf{Y}_i - \bar{\textbf{Y}} \right]^{m}
+      \end{array}\right.
+      \]
+\end{itemize}
+\subsubsection{Test : }
+\paragraph{For linear case : }
+When $f$ is an linear transform, there are an exact uncertainty transform through $f$. That mean after the unscented linear transform, we must have :
+\[
+\left\{ 
+\begin{array}{ccl}
+     \textbf{P}_{yy}  &=& \left[f\right]\textbf{P}_{xx}\left[f\right]^t  \\
+     \bar{\textbf{Y}} &=& \left[f\right]\bar{\textbf{X}} 
+\end{array}\right.
+\]
+\paragraph{Tolerance error : }
+The error can provided from Cholesky factorization, making that result computed are not absolutely equal to the mathematical result~\cite{ErrorTest1}. Test tools is used of boost library~\cite{BoostCheck}. For instance BOOST\_CHECK\_SMALL (diff, tolerance) seems good. 
+\paragraph{Keyword: } Covariance Matrix, Gaussian Distribution, Unscented Kalman Filter. 
+
+						      %%%%%%%%%%%%%%%%%%%%%%%%%%  Writer %%%%%%%%%%%%%%%%%%%%%%%%
+						      \begin{flushright}
+						      Document written by \\
+						      \href{mailto:chi-thanh.nguyen@inria.fr}{{\textbf {Chi Thanh NGUYEN}}} \\
+						      MAS Central Paris  
+						      \end{flushright}
+						      %%%%%%%%%%%%%%%%%%%%%%%%%%  Writer %%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{siam}
+\bibliography{uncertainty}
+\end{document}
