@@ -1,0 +1,18 @@
+Convention layout of my web :
+
+As seen, each bloc in my page have its own html content and style sheet. These informations 
+are in two separated files .html and .css, stored respectively in /html_lang/ and /styles/. 
+
+1. The path of the style(.css) file must be informed in the .html file, this help that the .html
+file can be visualized independently. 
+concretly in a _*.html file must have a unique link tag in form
+<link id="contentstyle" href="url_to_style_file.css" .../> 
+Seence, loading and .html page of content bloc can also secondly load its style href and modified in the index page
+
+2. The content Label :
+example : cv, home, contact, ....
+from content label, we can deal with many informations in the local html file: 
+- file name that contain the content blocs       _mLabel.html  
+- classes in this file for using style without conflict class="_mLabel"
+- the id of the navigation item in the sidebar bloc id="mLabel"
+-+ the class of the actual $(div#content) class="mLabel"
