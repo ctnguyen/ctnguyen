@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Chi-Thanh NGUYEN</title>
+<meta http-equiv="content-type"
+	content="application/xhtml+xml; charset=utf-8" />
+
+<meta name="author" content="Chi-Thanh NGUYEN" />
+<meta name="keywords"
+	content="NGUYEN Chi-Thanh, SOFA, INRIA, CEMEF, nanoindentation, UPMC, ANEDP, Paris 6, Paris VI" />
+<meta name="description" content="" />
+<meta name="robots" content="follow" />
+
+<script type="text/javascript" src="jquery/jquery-1.6.2.js"></script>
+<script type="text/javascript" src="scripts/_layout.js"></script>
+<script type="text/javascript" src="scripts/common.js"></script>
+
+<link id="sidebarstyle" href="#" rel="stylesheet" type="text/css"
+	media="screen" />
+<link id="contentstyle" href="#" rel="stylesheet" type="text/css"
+	media="screen" />
+<link id="layoutstyle" href="styles/layout.css" rel="stylesheet"
+	type="text/css" media="screen" />
+
+</head>
+<body>
+	<div id="whole-page">
+		<div id="page-header"></div>
+		<div id="page">
+			<div id="top-page">
+				<table>
+					<tr>
+						<td><img class="flag" src="images/_icon_us.png" alt="en" />
+						</td>
+						<td><img class="flag" src="images/_icon_fr.png" alt="fr" />
+						</td>
+						<td><img class="flag" src="images/_icon_vn.png" alt="vi" />
+						</td>
+						<td><p id="actuallang">fr</p>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div id="content">
+				<div class="referencing">
+					<h1>
+						NGUYEN Chi-Thanh, SOFA, INRIA, CEMEF, nanoindentation, UPMC,
+						ANEDP, Paris 6, Paris VI
+						<a href="http://nguyenchithanh.free.fr" target="_blank">http://nguyenchithanh.free.fr</a>
+						<h1 />
+				</div>
+				<div id="presentation" class="_home">
+					<p class="_home">Je crée mon siteweb pour deux principales
+						raisons :</p>
+					<ul id="motivations" class="_home">
+						<li class="_home">Mettre en public mes compétences
+							professionnelles</li>
+						<li class="_home">Apprendre quelques web technologies :
+							<ul id="webtechnologies" class="_home">
+								<li class="_home">De base : xhtml, css, javascript, jquery</li>
+								<li class="_home">Future : WebGL, jquery UI, php</li>
+							</ul></li>
+					</ul>
+				</div>
+				<div class="verticalspacetoend"></div>
+			</div>
+			<div id="sidebar">
+				<div id="photo_menu">
+					<img class="_sidebar" src="images/_ctn.jpg" />
+				</div>
+				<div id="menu" class="_sidebar">
+					<ul class="_sidebar menu">
+						<li><a id="home" class="_sidebar itemNavigate"
+							href="html_fr/_home.html" target="_blank">Accueil</a></li>
+						<li><a id="cv" class="_sidebar itemNavigate"
+							href="html_fr/_cv.html" target="_blank">CV</a></li>
+						<li><a id="contact" class="_sidebar itemNavigate"
+							href="html_fr/_contact.html" target="_blank">Contact</a></li>
+					</ul>
+				</div>
+				<div class="_sidebar clearfloatting"></div>
+				<div id="news">
+					<h2 class="_sidebar">EDP</h2>
+					<ul class="_sidebar news">
+						<!-- 			
+				<li><a id="nanoindentation" class="_sidebar itemNavigate" href="#" target="_blank">Nanoindentation</a></li>				
+ -->
+						<li><a id="Navier_Stokes" class="_sidebar itemNavigate"
+							href="#" target="_blank">Navier-Stokes</a></li>
+						<li><a id="Black_Scholes" class="_sidebar itemNavigate"
+							href="#" target="_blank">Black &amp; Scholes</a></li>
+					</ul>
+				</div>
+				<div class="_sidebar clearfloatting"></div>
+				<div class="referencing">
+					<h1>
+						NGUYEN Chi-Thanh, SOFA, INRIA, CEMEF, nanoindentation, UPMC,
+						ANEDP, Paris 6, Paris VI
+						<a href="http://nguyenchithanh.free.fr" target="_blank">http://nguyenchithanh.free.fr</a>
+					<h1 />
+				</div>
+			</div>
+			<div id="botton-page">&nbsp;&nbsp;</div>
+		</div>
+		<div id="page-footer"></div>
+	</div>
+	<script type="text/javascript">
+		$('.referencing').remove();
+		$('img.flag').click(function() {
+			set_lang($(this).attr('alt'));
+			ctn_reload($(this).attr('alt'));
+		});
+	</script>
+</body>
+</html>

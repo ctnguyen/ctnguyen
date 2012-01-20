@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<base href="http://localhost/" />
+<!-- To change -->
+<meta http-equiv="content-type"
+	content="application/xhtml+xml; charset=utf-8" />
+<link id="contentstyle" href="styles/_projectstyles.css"
+	rel="stylesheet" type="text/css" media="screen" />
+
+<style type="text/css">
+body {
+	width: 60em;
+	margin: auto;
+}
+</style>
+
+</head>
+<body>
+	<div id="content" class="_Black_Scholes">
+		<div id="titre">
+			<h1 class="_project">Priçing d'option panier (2 sous-jacents)</h1>
+			<h1 class="_project">par la méthode EDP</h1>
+		</div>
+		<div id="abstract">
+			<p>L'option panier à deux sous-jacents peut être modélisée par le
+				système d'équation différentielle stochastique :</p>
+			<div id="_equa1">
+				<img class="_equation" src="images/_system_sde.png"
+					alt="Stochastic Differential Equation" />
+			</div>
+			<p>Après d'application de la formule d'Itô, le problème revient à la résolution d'une équation au dérivées partielle</p>
+			<div id="_equa1">
+				<img class="_equation" src="images/_sde_pde.png"
+					alt="Partial Differential Equation" />
+			</div>
+		</div>
+		<div id="keywords">
+			<p>Ce projet très compressive en temps permet d'étudier et de pratiquer plusieurs aspects : </p>
+			<ul>
+				<li>Introduction à la modélisation financière</li>
+				<li>Les étapes fondamentales pour la résolution numérique d'une EDP</li>
+				<li>La programmation C++</li>
+				<li>Introduction à openGL</li>
+				<li>Quelques technique de calcul numérique en théorie et ses implémentation : la méthode des éléments finis, la différenciation automatique, le calcul de iso-surface.</li>
+				<li>Quelques méthodes pour la résolution numérique d'un grand système matriciel (LU, GC, GMRES)</li>
+			</ul>
+		</div>
+		<div id="_pdf"><a href="documents/_projetM1.pdf" target="_blank">plus(pdf)</a></div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+
+img._sidebar {
+	display: block;
+	width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#menu._sidebar{
+	/*width:30%;*/
+    margin-left: auto;
+    margin-right: auto;
+}
+
+ul._sidebar.menu {
+	list-style-type: none;
+}
+
+ul._sidebar.news {
+	list-style-type: square;
+}
+
+div.clearfloatting {
+	clear: both;
+}
+
+
+h1._sidebar,h2._sidebar,h3._sidebar {
+	margin: 0;
+	padding: 0;
+	font-weight: normal;
+	color: #0000FF;
+}

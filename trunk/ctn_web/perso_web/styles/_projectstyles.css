@@ -1,0 +1,13 @@
+/*  === global styles ==== */
+h1._project {
+	text-align: center;
+	font-variant:small-caps;
+	font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+img._equation{
+	display: block;
+	width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
