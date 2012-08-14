@@ -1,0 +1,183 @@
+\documentclass[]{beamer}
+% Class options include: notes, notesonly, handout, trans,
+%                        hidesubsections, shadesubsections,
+%                        inrow, blue, red, grey, brown
+
+% Theme for beamer presentation.
+\usepackage{beamerthemesplit} 
+\usepackage{pstricks}
+\usepackage{pst-node}
+
+\title{Pygmalion Uncertainty Analysis}
+\author{NGUYEN Chi-Thanh} 
+\institute{MAS Central SA}
+\date{\today}             
+
+\begin{document}
+
+% Creates title page of slide show using above information
+\begin{frame}
+  \titlepage 
+\end{frame}
+
+
+% Creates table of contents slide incorporating
+% all \section and \subsection commands
+\begin{frame}
+  \tableofcontents[hideallsubsections]
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Pygmalion in 10s}
+\begin{frame}
+  \frametitle{Pygmalion - Global Design}
+  \begin{columns}[c]
+  \column{2in}  % slides are 3in high by 5in wide
+    \begin{itemize} 
+    \item Models
+    \item Functionalities
+    \end{itemize}
+  \column{3in}
+    \framebox{UML Image}
+  \end{columns} 
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{pgmaUA - Uncertainty Analisis}
+%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{pgma::UA - global idea}
+  \begin{itemize}
+  \item<1-> Global idea of Uncertainty Analysis
+  \item<2-> Inputs
+  \item<3-> Outputs
+  \end{itemize}
+\only<2>{
+  \begin{center}
+  \begin{pspicture}(-4,-1.5)(4,1.5)
+    \psline(-3,-1.5)(3,1.5)
+  \end{pspicture}
+  \end{center}
+}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{pgma::UA}
+  \begin{itemize}
+  \item MonteCarlos
+  \item Unscented Transform
+  \end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{pgmaUA::MonteCarlos}
+%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{MonteCarlos MC}
+  \begin{itemize}
+  \item Input
+  \item Output
+  \end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Example results}
+  \begin{itemize}
+  \item Example with Loka-Volterra
+  \end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{pgmaUA::UnscentedTransform}
+%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Unscented Transform}
+  \begin{itemize}
+  \item Input
+  \item Output
+  \end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Example results UT}
+  \begin{itemize}
+  \item Example with Loka-Volterra
+  \end{itemize}
+\end{frame}
+\subsection{pgmaUA comparison MC-UT}
+%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{MonteCarlos vs UnscentedTransform}
+  \begin{itemize}
+  \item speed
+  \item nonlinearities
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Unscented Kalman Filter}
+%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Global Idea of Filter}
+  \begin{itemize}
+  \item Inputs (Experimental Observations)
+  \item Output (Estimated Parameters)
+  \item Desired output Estimated Input
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{PStrick test}
+  \begin{figure}[h]
+  \begin{center}
+  \begin{pspicture}(-5,-2)(5,2)
+\psline(-5,-2)(5,2)
+\rput(-4, 1){\Rnode{mX}{$\{\bar{\textbf{X}},\textbf{P}_{xx}\}$}}
+\rput(-4,-1){\Rnode{Xi}{$\textbf{\Large{X}}_i$}}
+\rput( 0, 0){\Rnode{F}{$\textbf{\Large{f}}$}}
+\rput( 4,-1){\Rnode{Yi}{$\textbf{\Large{Y}}_i$}}
+\rput( 4, 1){\Rnode{mY}{$\{\bar{\textbf{Y}},\textbf{P}_{yy}\}$}}
+\psellipticarc{<-}(0,0)(0.5,1){60}{320}\rput(0.5,1){\Large{i}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ncline{->}{mX}{Xi}\aput{:U}{unscented}
+\ncline{->}{Yi}{mY}\aput{:U}{unscented}
+\ncline[linestyle=dotted]{->}{Xi}{F}
+\ncline[linestyle=dotted]{->}{F}{Yi}
+\end{pspicture}
+\end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Simple slide with three points shown all at once}   % Insert frame title between curly braces
+  \begin{itemize}
+  \item Point 1
+  \item Point 2
+  \item Point 3
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Simple slide with three points shown in succession}   % Insert frame title between curly braces
+
+  \begin{itemize}
+  \item<1-> Point 1 (Click ``Next Page'' to see Point 2) % Use Next Page to go to Point 2
+  \item<2-> Point 2  % Use Next Page to go to Point 3
+  \item<3-> Point 3
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Slide with two columns: items and a graphic}   % Insert frame title between curly braces
+  \begin{columns}[c]
+  \column{2in}  % slides are 3in high by 5in wide
+  \begin{itemize}
+  \item colum1 item1
+  \item colum1 item2
+  \end{itemize}
+  \column{2in}
+  \framebox{Insert graphic here}
+  \end{columns}
+\end{frame}
+
+\end{document}
