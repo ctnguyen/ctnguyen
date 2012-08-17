@@ -1,8 +1,3 @@
-%Texlive-full Version 3.141592-1.40.3 (Web2C 7.5.6)
-%Kile Version 2.0.83
-
-%File associated : Mas_Logo.ps , uncertainty.bib
-
 \documentclass[a4paper]{article}
 
 \usepackage[utf8x]{inputenc}
@@ -12,12 +7,37 @@
 \usepackage{tipa}
 
 \begin{document}
-\begin{tabular}{cc}
- 1234567890@\ae & ABCDEFGHIJKLMNOPQRSTUVWXYZ \\
-\textipa{[1234567890@\ae]}  & \textipa{[ABCDEFGHIJKLMNOPQRSTUVWXYZ]} 
+\section{package TIPA}
+The package TIPA\footnote{TIPA stands for TEX IPA} used for processing IPA (International Phonetic Alphabet) symbols in LATEX. Text symbols put between the \\textipa{} 
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+ 1&2&3&4&5&6&7&8&9&0&@&$\backslash$ae \\
+\textipa{1}&\textipa{2}&\textipa{3}&\textipa{4}&\textipa{5}&\textipa{6}&
+\textipa{7}&\textipa{8}&\textipa{9}&\textipa{0}&\textipa{@}&\textipa{\ae}  
 \end{tabular}
+\end{center}
+%%%%%%%%%%%%%%
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+A&B&C&D&E&F&G&H&I&J&K&L&M&N \\
+\textipa{A}&\textipa{B}&\textipa{C}&\textipa{D}&\textipa{E}&\textipa{F}&\textipa{G}&
+\textipa{H}&\textipa{I}&\textipa{J}&\textipa{K}&\textipa{L}&\textipa{M}&\textipa{N}  
+\end{tabular}
+%%%%%%
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+O&P&Q&R&S&T&U&V&W&X&Y&Z \\
+\textipa{O}&\textipa{P}&\textipa{Q}&\textipa{R}&\textipa{S}&\textipa{T}&\textipa{U}&
+\textipa{V}&\textipa{W}&\textipa{X}&\textipa{Y}&\textipa{Z}
+\end{tabular}
+\end{center}
+Normal texts 
+%\begin{center}
+%\begin{tabular}{c}
+%abcdefghijklmnopqrstuvwxyz \\
+%\textipa{[abcdefghijklmnopqrstuvwxyz]}
+%\end{tabular}
+%\end{center}
 
-text normal \textipa{[abcdefghijklmnopqrstuvwxyz]}abcdefghijklmnopqrstuvwxyz
 \section{vowels}
 \subsection{short vowels}
 \paragraph{ \textipa{[i]} }
@@ -74,7 +94,7 @@ text normal \textipa{[abcdefghijklmnopqrstuvwxyz]}abcdefghijklmnopqrstuvwxyz
  \end{tabular}
  \end{center}
 \begin{center}
- \begin{tabular}{ccccccccc}
+ \begin{tabular}{cccccccc}
  schwa  &  accuse  & banana & father & camera & a cup of tea & cuppa & a piece of cake\\
 \textipa{[Swa:]}  &  \textipa{[@"kju:z]} & \textipa{[b@"na:n@]} & \textipa{["fa:D@]} & \textipa{["k\ae mr@]}
 & \textipa{[@ "k2p@ ti:]} &\textipa{["k2p@]}& \textipa{[@ "pi:s@ keik]} 
@@ -143,19 +163,19 @@ text normal \textipa{[abcdefghijklmnopqrstuvwxyz]}abcdefghijklmnopqrstuvwxyz
  \end{tabular}
  \end{center}
 
-\paragraph{ \textipa{[ai]} }
+\paragraph{ \textipa{[aI]} }
 \begin{center}
  \begin{tabular}{ccc}
  price & high & try \\
-\textipa{[prais]} & \textipa{[hai]}  &  \textipa{[trai]}
+\textipa{[praIs]} & \textipa{[haI]}  &  \textipa{[traI]}
  \end{tabular}
  \end{center}
 
-\paragraph{ \textipa{[Oi]} }
+\paragraph{ \textipa{[OI]} }
 \begin{center}
  \begin{tabular}{ccc}
 choice & noise & boy  \\
-\textipa{[tSOis]} & \textipa{[nOiz]}  &  \textipa{[bOi]}
+\textipa{[tSOIs]} & \textipa{[nOIz]}  &  \textipa{[bOI]}
  \end{tabular}
  \end{center}
 
@@ -204,16 +224,16 @@ square &fair &pair  \\
  \end{tabular}
  \end{center}
 
-\paragraph{ \textipa{[ei]} }
+\paragraph{ \textipa{[eI]} }
 \begin{center}
  \begin{tabular}{ccc}
 face & day & break  \\
-\textipa{[feis]} & \textipa{[dei]}  &  \textipa{[breik]}
+\textipa{[feIs]} & \textipa{[deI]}  &  \textipa{[breIk]}
  \end{tabular}
 %%%%%%%%%
  \begin{tabular}{cccccc}
               &  ate  & faced & great  & mate \\
-\textipa{[ei]} & \textipa{[eit]} & \textipa{[feist]} & \textipa{[greit]} & \textipa{[meit]}  \\
+\textipa{[eI]} & \textipa{[eIt]} & \textipa{[feIst]} & \textipa{[greIt]} & \textipa{[meIt]}  \\
               & eat  & feast & greet  & meet \\
 \textipa{[i:]} & \textipa{[i:t]} & \textipa{[fi:st]} & \textipa{[gri:t]} & \textipa{[mi:t]} 
  \end{tabular}
