@@ -7,6 +7,8 @@ endif()
 
 project(test_GZIP)
 
+configure_file("${CMAKE_SOURCE_DIR}/CaptureEcran.png" "${CMAKE_CURRENT_BINARY_DIR}/CaptureEcran.png" @ONLY)
+
 add_executable(
 	test_gzip
 	adler32.c

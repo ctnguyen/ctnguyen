@@ -32,7 +32,7 @@ int main()
 	//*********************************************************************
 
 	// Remplacer CaptureEcran.bmp et CaptureEcran.bmp.gz par les noms de fichiers d�sir� sachant que CaptureEcran.bmp est le fichier � compresser
-	FILE * ain = fopen("CaptureEcran.bmp","rb");
+	FILE * ain = fopen("CaptureEcran.png","rb");
 
 	fseek (ain, 0, SEEK_END);
 	long size = ftell (ain);
