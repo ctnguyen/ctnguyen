@@ -5,7 +5,9 @@ build instructions (out-of-sources)
 
 cmake ../GZIP/ -G "Eclipse CDT4 - Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug
 
-3.open Eclipse CDT and import the project from the folder buildGZIP
+3.open Eclipse CDT and import the project from the folder buildGZIP, modify, compile
+
+4.go to the build folder then execute ./test_gzip
 
 
 
