@@ -1,30 +1,29 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <io.h>
 #include <string.h>
 
-// Nécéssaire !!!
+// Nï¿½cï¿½ssaire !!!
 #include "GZipHelper.h"
 
-void main()
+int main()
 {
 	//*********************************************************************
-	// Compression d'une chaîne de caractères en mémoire
+	// Compression d'une chaï¿½ne de caractï¿½res en mï¿½moire
 	//*********************************************************************
 
-	char plainText [] = "L'organisation de cooperation et de developpement economique (OCDE) a rendu publique, lundi 12  janvier, une version revisee des principes de gouvernance d'entreprise qu'elle avait elabores en 1999, afin de les soumettre a une consultation publique.  La premiere mouture de ces principes avait ete conçue a l'intention des pays emergents, en Asie du Sud-Est ou en Europe de l'Est. \"Nous n'avions jamais envisage de devoir discuter de ceci aux Etats-Unis et en Europe, a declare le directeur general de l'OCDE, Donald Johnston, dans un entretien au Wall Street Journal Europe lundi. Mais il y a a present une receptivite beaucoup plus grande a ce sujet dans les pays occidentaux.\"";
+	char plainText [] = "L'organisation de cooperation et de developpement economique (OCDE) a rendu publique, lundi 12  janvier, une version revisee des principes de gouvernance d'entreprise qu'elle avait elabores en 1999, afin de les soumettre a une consultation publique.  La premiere mouture de ces principes avait ete conï¿½ue a l'intention des pays emergents, en Asie du Sud-Est ou en Europe de l'Est. \"Nous n'avions jamais envisage de devoir discuter de ceci aux Etats-Unis et en Europe, a declare le directeur general de l'OCDE, Donald Johnston, dans un entretien au Wall Street Journal Europe lundi. Mais il y a a present une receptivite beaucoup plus grande a ce sujet dans les pays occidentaux.\"";
 
 	printf("Chaine avant compression : %d\n", strlen(plainText));
 
 	CA2GZIP gzip (plainText, strlen(plainText));	// Compression
-	LPGZIP pgzip = gzip.pgzip;						// pgzip est le pointeur vers les données compressées, nous pouvons directement l'utiliser
-	int len = gzip.Length;							// Longueur des données compressées
+	LPGZIP pgzip = gzip.pgzip;						// pgzip est le pointeur vers les donnï¿½es compressï¿½es, nous pouvons directement l'utiliser
+	int len = gzip.Length;							// Longueur des donnï¿½es compressï¿½es
 
 	printf("Chaine apres compression : %d\n", len);
 
-	CGZIP2A plain (pgzip,len);						// Décompression
-	char * pplain = plain.psz;						// psz est un pointeur vers les données décompressées
-	int aLen = plain.Length;						// Longueur des données décompressées
+	CGZIP2A plain (pgzip,len);						// Dï¿½compression
+	char * pplain = plain.psz;						// psz est un pointeur vers les donnï¿½es dï¿½compressï¿½es
+	int aLen = plain.Length;						// Longueur des donnï¿½es dï¿½compressï¿½es
 
 	printf("Chaine apres decompression : %d\n\n", aLen);
 
@@ -32,7 +31,7 @@ void main()
 	// Compression d'un fichier BMP
 	//*********************************************************************
 
-	// Remplacer CaptureEcran.bmp et CaptureEcran.bmp.gz par les noms de fichiers désiré sachant que CaptureEcran.bmp est le fichier à compresser
+	// Remplacer CaptureEcran.bmp et CaptureEcran.bmp.gz par les noms de fichiers dï¿½sirï¿½ sachant que CaptureEcran.bmp est le fichier ï¿½ compresser
 	FILE * ain = fopen("CaptureEcran.bmp","rb");
 
 	fseek (ain, 0, SEEK_END);
@@ -42,7 +41,7 @@ void main()
 	char * buffer = (char*) malloc (size);
 	size_t count0 = fread (buffer, 1, size, ain);
 
-	CA2GZIP gzip2 (buffer, size);					// Compression du buffer mémoire contenant les données du fichier BMP
+	CA2GZIP gzip2 (buffer, size);					// Compression du buffer mï¿½moire contenant les donnï¿½es du fichier BMP
 
 	FILE * aout = fopen ("CaptureEcran.bmp.gz", "wb");
 	size_t count1 = fwrite (gzip2.pgzip, 1, gzip2.Length, aout);
