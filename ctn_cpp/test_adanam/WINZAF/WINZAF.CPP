@@ -1,26 +1,17 @@
 
 #include <stdio.h>
-//#ifdef WIN32
-#include "conio.h"
-//#ifdef __linux
-#include <ncurses.h>
 #include <fcntl.h>
 #include <ctype.h>
 #include <string.h>
 #include <stdlib.h>
-
+#include <iostream>
 
 #define ASCI_C   255
 #define LENGTH  1024
 #define FIN_FICHIER    0x1A
 #define NBR_C        65
 #define LEN_C       6
-char NomSource[60];
-char NomCible[60] = "";
-char Nom[60];
 char newname[60];
-int argc =0;
-char *argv[2];
 char *rang,*ranj,*EXT;
 char temp[60];
 //typedef enum { false, true} bool;
@@ -81,10 +72,10 @@ void MAJ_TB( Tab_ASCII * Ptr_Ascii)
 void Change(Tab_ASCII *a,Tab_ASCII *b)
 //Tab_ASCII *a, *b;
 {
-	Tab_ASCII temp;
-	temp = *a;
+	Tab_ASCII _buffer;
+	_buffer = *a;
 	*a = *b;
-	*b = temp;
+	*b = _buffer;
 }
 /*********************************************************************/
 /* TriTab : Trie la table ASCII des frequences par  ordre decroissant*/
@@ -359,7 +350,9 @@ void Cop_Data(FILE *FSource,FILE *FCible, Tab_ASCII *Ptr_Ascii)
 
 	/* Stokage de l'extension du fichier a compresser*/
 	fseek(FCible, 0L, SEEK_END);
+	std::cout<<"here 1"<<std::endl;
 	fwrite(rang,sizeof(char [10]),1,FCible);
+	std::cout<<"here 2"<<std::endl;
 }
 
 /*************************************************************************/
@@ -605,326 +598,51 @@ void Decompression(FILE *FSource, FILE *FCible)
 	Dec_Data(FSource, FCible);
 }
 
-/********************************************************/
-/* error : Affichage de la syntaxe d'appel du programme.*/
-/********************************************************/
-
-void error(int ero)
-{
-	//<ctn_> textattr(132+(0 << 4));
-	switch (ero)
-	{
-	case 1:
-		cprintf(" \r\nErreur d'ouverture!\r\n");
-		//<ctn_> textattr(2+0);
-		cprintf("       le fichier '%s' que vous avez saisie soit:\r\n\n", NomSource);
-		cprintf("               * N'existe pas\r\n");
-		cprintf("               * Ou le chemin d'acc�s est faux\r\n");
-		break;
-	case 2:
-		cprintf(" \r\nERREUR:");
-		cprintf("\r\n        Vous avez depasser l'espace memoire\r\n");
-		break;
-	case 3:
-		cprintf(" \r\nERREUR:");
-		cprintf("\r\n        Vous devez choisir une operation a effectuer\r\n");
-		break;
-	case 4:
-		cprintf(" \r\nERREUR:");
-		cprintf("\r\n        Vous devez saisir le fichier a traiter\r\n");
-		break;
-	}
-	printf(" \nPOUR CONTINUER FRAPPER UNE TOUCHE...");
-	getch();
-}
-
-/*********************************************************/
-/* compres : Affichage de la syntaxe d'appel du programme*/
-/*********************************************************/
-
-int compres(char *t)
-{
-	int i=0,cancel=0,j=0,x=0;
-	FILE *fSource;
-	//<ctn_> textattr(15+(0 << 4));
-	cprintf("ENTRER LE FICHIER A %sCOMPRESSER : \r\n", t);
-	for(i=0;i<60;i++)
-	{
-		cancel=getch();
-		switch(cancel)
-		{
-		case 27:return(cancel);
-		case 8:
-			if (i==0)
-				i--;
-			else
-			{
-				NomSource[i-1]='\0';
-				(i-=2);
-				printf("%c",cancel);
-				printf("%c",32);
-				gotoxy(wherex()-1,wherey());
-			}
-			break;
-		case 0: (i-=2);
-		break;
-		case 13:
-			i=60;
-			break;
-		default:
-			if ( ((isalnum((char)cancel)) || (ispunct((char)cancel))) && (x==0) )
-			{
-				printf("%c",cancel);
-				NomSource[i]=(char)cancel;
-			}
-		}
-		if (cancel==0) x=1;
-		else x=0;
-		if(i==59)
-		{
-			error(2);
-			return(27);
-		}
-	}
-	for (i=0;i<60; i++)
-		if (NomSource[i]!= '\0') j=1;
-	if (j==0)
-	{
-		error(4);
-		return(27);
-	}
-	fSource = fopen(NomSource, "rb");       /* ouverture en lecture */
-
-	if (fSource == NULL)
-	{
-		error(1);
-		return(27);
-	}
-	fclose(fSource);
-	//<ctn_> textattr(15+0);
-	x=0;
-	cprintf("\r\nENTRER LE NOM DU FICHIER CIBLE (facultatif) : \r\n");
-	argc=0;
-	for(i=0;i<60;i++)
-	{
-		cancel=getch();
-		switch(cancel)
-		{
-		case 27: return(cancel);
-		case 8:
-			if (i==0)
-				i--;
-			else
-			{
-				NomCible[i-1]='\0';
-				(i-=2);
-				printf("%c",cancel);
-				printf("%c",32);
-				gotoxy(wherex()-1,wherey());
-			}
-			break;
-		case 0: (i-=2);
-		break;
-		case 13:
-			i=60;
-			break;
-		default:
-			if ( ((isalnum((char)cancel)) || (ispunct((char)cancel))) && (x==0) )
-			{
-				printf("%c",cancel);
-				NomCible[i]=(char)cancel;
-			}
-		}
-		if (cancel==0) x=1;
-		else x=0;
-		if(i==59)
-		{
-			error(2);
-			return(27);
-		}
-	}
-	for (i=0;i<60; i++)
-		if (NomCible[i]!= '\0')
-			argc=1;
-	printf("\n");
-	return(0);
-}
-
 /* --------------------------------------------------- */
 /*         P R O G R A M M E   P R I N C I P A L       */
 /*---------------------------------------------------- */
-int main(void)
+int main(int argc, char* argv[])
 {
+	std::cout<<"initialization global variables "<<std::endl;
+	rang = (char *)malloc(10);
+	ranj = (char *)malloc(10);
+	EXT  = (char *)malloc(10);
+
+	{
+		std::cout<<"ARGC = "<<argc<<std::endl;
+		for(int i=0;i<argc;++i)
+		{
+			std::cout<<" argv["<<i<<"] = "<<argv[i]<<std::endl;
+		}
+	}
+
+
+	if((argc != 4) || (*(argv[1]) !='c' && *(argv[1]) !='d' ))
+	{
+		std::cout<<"ERROR command, try "<<std::endl;
+		std::cout<<"./test_winsaf c sourcefile.txt destfile  #For compression "<<std::endl;
+		std::cout<<"./test_winsaf d sourcefile destfile.txt  #For dcompression "<<std::endl;
+		return 0;
+	}
 
 	FILE *fSource, *fCible;
-	const char *ExtensionC = ".ZAF";
-	const char *ExtensionD = ".$$$";
-	const char *dec = "DE";
-	char choix,x,choi,r;
-	char ty[3];
-	int nb=0,i=0;
-	rang=(char *)malloc(10);
-	ranj=(char *)malloc(10);
-	EXT=(char *)malloc(10);
-	prog:
+	bool _isCompression=false;
+	if(*(argv[1]) =='c') _isCompression = true;
 
-	do
+	fSource = fopen(argv[2], "rb");
+	fCible = fopen(argv[3], "wb");
+
+	if(_isCompression)
 	{
-		textcolor(WHITE);
-		textbackground(BLACK);
-		ranj=NULL;
-		rang=NULL;
-
-		strcpy(NomCible,"");
-		strcpy(NomSource,"");
-		strcpy(newname,"");
-		strcpy(Nom,"");
-		strcpy(temp,"");
-
-		clrscr();
-		//<ctn_> textattr(2+(2 << 4));
-		cprintf("--------------------------------------------------------------------------------\r\n");
-		//<ctn_> textattr(3+0);
-		cprintf("                           |COMPRESSION DE FICHIER|\r\n");
-		//<ctn_> textattr(131+0);
-		cprintf("                           |======================|                             \r\n\n");
-		//<ctn_> textattr(14+0);
-		cprintf("*  POUR COMPRESSER TAPER        --> 'C'\r\n");
-		cprintf("*  POUR DECOMPRESSER TAPER      --> 'D'\r\n");
-		cprintf("*  POUR QUITTER TAPER           --> 'Q'\r\n\n");
-		//<ctn_> textattr(4+0);
-		cprintf("                                            *  POUR ANNULER TAPER --> 'Esc' *\r\n");
-		//<ctn_> textattr(2+(2 << 4));
-		cprintf("--------------------------------------------------------------------------------\r\n");
-		textcolor(WHITE);
-		textbackground(BLACK);
-		printf("\nVEUILLEZ DONNER VOTRE CHOIX:");
-		choix=(char)getche();
-		printf("\n");
-		x=toupper(choix);
-		//<ctn_> flushall();
-		switch(x)
-		{
-		case 'C' :
-			ty[0]= '\0';
-			if (compres(ty)==27)
-				goto prog;
-			break;
-		case 'D' :
-			strcpy(ty, dec);
-			if (compres(ty)==27)
-				goto prog;
-			break;
-		case 'Q':
-			break;
-		default :
-			error(3);
-			goto prog;
-			break;
-
-		}
-		if (x!='Q')
-		{
-
-			/* ouverture du fichier source */
-			fSource = fopen(NomSource, "rb");       /* ouverture en lecture */
-
-			/* ouverture du fichier cible */
-			if (argc == 0)
-			{
-				rang = strchr(NomSource, '.');
-				if ( rang == NULL)                /* recuperation sans extension */
-					strcpy(NomCible, NomSource);
-				else
-					nb=(int)(rang-NomSource);
-				strncpy(NomCible, NomSource, nb);
-				if (x == 'D')
-				{
-					strcpy(newname,NomCible);
-					strcat(NomCible, ExtensionD);
-				}
-				else
-					strcat(NomCible, ExtensionC);
-			}
-			else
-			{
-				ranj = strchr(NomCible, '.');
-				rang = strchr(NomSource, '.');
-
-				if (x == 'C')
-				{
-					if  (ranj == NULL) strcat(NomCible, ExtensionC);
-					if ((ranj != ExtensionC) && (ranj != NULL))
-					{
-						nb=(int)(ranj-NomCible);
-						strncpy(Nom,NomCible,nb);
-						strcpy(NomCible, Nom);
-						strcat(NomCible, ExtensionC);
-					}
-				}
-				else
-				{
-					if  (ranj == NULL)
-					{
-						strcpy(newname,NomCible);
-						strcat(NomCible, ExtensionD);
-					}
-					if ((ranj != ExtensionD) && (ranj != NULL))
-					{
-						nb=(int)(ranj-NomCible);
-						strncpy(Nom,NomCible,nb);
-						strcpy(NomCible, Nom);
-						strcpy(newname,NomCible);
-						strcat(NomCible, ExtensionD);
-					}
-				}
-			}
-
-			fCible = fopen(NomCible, "wb");  /* ouverture en ecriture */
-			if (fCible == NULL)
-			{
-				//<ctn_> textattr(132+0);
-				cprintf("Erreur d'ouverture pour le fichier cible: %s\r\n", NomCible);
-				fclose(fSource);
-				goto prog;
-			}
-
-			textcolor(15+128);
-			cprintf("\r\nVeuillez patientez...\r\n");
-			switch (x)
-			{
-			case 'C' : Compression(fSource, fCible);
-			break;
-			case 'D' : Decompression(fSource, fCible);
-			break;
-			}
-			fclose(fSource);
-			fclose(fCible);
-			/*renomer le fichier par sa vraix extension*/
-			if (x == 'D')
-			{
-				remove(temp);
-				strcat(newname,EXT);
-				rename(NomCible, newname);
-			}
-		}
+		Compression(fSource, fCible);
+		fclose(fSource);fclose(fCible);
 	}
-	while((choix!='Q')&&(choix!='q'));
-	//<ctn_> textattr(9+0);
-	cprintf("\nEtes vous sure de vouloir quitter?  (O/N):");
-	choi=(char)getche();
-	r= toupper(choi);
-	cprintf("\n");
-	//<ctn_> flushall();
-	if (r=='O')
+	else//decompression
 	{
-		//<ctn_> textattr(140+0);
-		cprintf("\r\n\n\n                             \t\tMERCI ET AU REVOIR\t\t                             \r");
-		cprintf("                             \t\t==================\t\t                             ");
-		exit(0);
+		Decompression(fSource, fCible);
+		fclose(fSource);fclose(fCible);
 	}
-	else
-		goto prog;
 
+	return 0;
 }
 
