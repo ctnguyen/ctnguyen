@@ -7,7 +7,14 @@ endif()
 
 project(test_WINZAF)
 
+configure_file("${CMAKE_SOURCE_DIR}/samples.txt" "${CMAKE_CURRENT_BINARY_DIR}/source.txt" @ONLY)
+
 add_executable(
 	test_winzaf
 	WINZAF.CPP
+)
+
+add_executable(
+    sample_binair
+    sample_binair.cpp
 )
