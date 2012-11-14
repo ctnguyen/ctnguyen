@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <HtmlList>
 	<en>
-		<buttonname>hello1 en</buttonname>
-		<buttonname>hello2 en</buttonname>
-		<buttonname>hello3 en</buttonname>
+		<htmlbutton>&lt;ul&gt;</htmlbutton>
+		<htmlbutton>&#009;&lt;li&gt;hello1 en&lt;/li&gt;</htmlbutton>
+		<htmlbutton>&#009;&lt;li&gt;hello2 en&lt;/li&gt;</htmlbutton>
+		<htmlbutton>&#009;&lt;hr/&gt;</htmlbutton>
+		<htmlbutton>&#009;&lt;li&gt;hello3 en&lt;/li&gt;</htmlbutton>
+		<htmlbutton>&lt;/ul&gt;</htmlbutton>
 	</en>
 	<fr>
-		<buttonname>hello1 fr</buttonname>
-		<buttonname>hello2 fr</buttonname>
-		<buttonname>hello3 fr</buttonname>
+		<htmlbutton>&lt;ul&gt;</htmlbutton>
+		<htmlbutton>&#009;&lt;li&gt;hello1 fr&lt;/li&gt;</htmlbutton>
+		<htmlbutton>&#009;&lt;hr/&gt;</htmlbutton>
+		<htmlbutton>&#009;&lt;li&gt;hello2 fr&lt;/li&gt;</htmlbutton>
+		<htmlbutton>&#009;&lt;li&gt;hello3 fr&lt;/li&gt;</htmlbutton>
+		<htmlbutton>&lt;/ul&gt;</htmlbutton>
 	</fr>
 	<vn>
-		<buttonname>hello1 vn</buttonname>
-		<buttonname>hello2 vn</buttonname>
-		<buttonname>hello3 vn</buttonname>
+		<htmlbutton>&lt;ul&gt;</htmlbutton>
+		<htmlbutton>&#009;&lt;li&gt;hello1 vn&lt;/li&gt;</htmlbutton>
+		<htmlbutton>&#009;&lt;hr/&gt;</htmlbutton>
+		<htmlbutton>&#009;&lt;li&gt;hello2 vn&lt;/li&gt;</htmlbutton>
+		<htmlbutton>&#009;&lt;li&gt;hello3 vn&lt;/li&gt;</htmlbutton>
+		<htmlbutton>&lt;/ul&gt;</htmlbutton>
 	</vn>
 </HtmlList>
