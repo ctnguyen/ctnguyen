@@ -8,6 +8,21 @@ echo $headercommonpart;
 ?>
 </head>
 <body>
-<h1>type ctr + u to see the header </h1>
+	<h1>type ctr + u to see the header</h1>
+	<br/>
+	<?php 
+	$footer_en = getFooter('en');
+	echo $footer_en.PHP_EOL;
+	?>
+	<br/>
+	<?php 
+	$footer_fr = getFooter('fr');
+	echo $footer_fr.PHP_EOL;
+	?>
+	<br/>
+	<?php 
+	$footer_vn = getFooter('vn');
+	echo $footer_vn.PHP_EOL;
+	?>
 </body>
 </html>
