@@ -3,7 +3,7 @@
 include 'global-config.php';
 include 'controller/request_state.php';
 
-GlobalConfig::init(5);//TODO set to big number
+GlobalConfig::init_cookie_lang(5);//TODO set to big number
 
 $requeststate = new RequestState('','');
 
