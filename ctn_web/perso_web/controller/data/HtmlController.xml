@@ -2,26 +2,32 @@
 <HtmlList>
 	<en>
 		<htmlbutton>&lt;ul&gt;</htmlbutton>
-		<htmlbutton>&#009;&lt;li&gt;hello1 en&lt;/li&gt;</htmlbutton>
-		<htmlbutton>&#009;&lt;li&gt;hello2 en&lt;/li&gt;</htmlbutton>
+		<htmlbutton>&#009;&lt;li&gt;Home&lt;/li&gt;</htmlbutton>
+		<htmlbutton>&#009;&lt;li&gt;CV&lt;/li&gt;</htmlbutton>
+		<htmlbutton>&#009;&lt;li&gt;Contact&lt;/li&gt;</htmlbutton>
 		<htmlbutton>&#009;&lt;hr/&gt;</htmlbutton>
-		<htmlbutton>&#009;&lt;li&gt;hello3 en&lt;/li&gt;</htmlbutton>
+		<htmlbutton>&#009;&lt;li&gt;Navier-Stokes&lt;/li&gt;</htmlbutton>
+		<htmlbutton>&#009;&lt;li&gt;Black &amp;amp; Scholes&lt;/li&gt;</htmlbutton>
 		<htmlbutton>&lt;/ul&gt;</htmlbutton>
 	</en>
 	<fr>
 		<htmlbutton>&lt;ul&gt;</htmlbutton>
-		<htmlbutton>&#009;&lt;li&gt;hello1 fr&lt;/li&gt;</htmlbutton>
+		<htmlbutton>&#009;&lt;li&gt;Accueil&lt;/li&gt;</htmlbutton>
+		<htmlbutton>&#009;&lt;li&gt;CV&lt;/li&gt;</htmlbutton>
+		<htmlbutton>&#009;&lt;li&gt;Contact&lt;/li&gt;</htmlbutton>
 		<htmlbutton>&#009;&lt;hr/&gt;</htmlbutton>
-		<htmlbutton>&#009;&lt;li&gt;hello2 fr&lt;/li&gt;</htmlbutton>
-		<htmlbutton>&#009;&lt;li&gt;hello3 fr&lt;/li&gt;</htmlbutton>
+		<htmlbutton>&#009;&lt;li&gt;Navier-Stokes&lt;/li&gt;</htmlbutton>
+		<htmlbutton>&#009;&lt;li&gt;Black &amp;amp; Scholes&lt;/li&gt;</htmlbutton>
 		<htmlbutton>&lt;/ul&gt;</htmlbutton>
 	</fr>
 	<vn>
 		<htmlbutton>&lt;ul&gt;</htmlbutton>
-		<htmlbutton>&#009;&lt;li&gt;hello1 vn&lt;/li&gt;</htmlbutton>
+		<htmlbutton>&#009;&lt;li&gt;Trang chủ&lt;/li&gt;</htmlbutton>
+		<htmlbutton>&#009;&lt;li&gt;CV&lt;/li&gt;</htmlbutton>
+		<htmlbutton>&#009;&lt;li&gt;Liên lạc&lt;/li&gt;</htmlbutton>
 		<htmlbutton>&#009;&lt;hr/&gt;</htmlbutton>
-		<htmlbutton>&#009;&lt;li&gt;hello2 vn&lt;/li&gt;</htmlbutton>
-		<htmlbutton>&#009;&lt;li&gt;hello3 vn&lt;/li&gt;</htmlbutton>
+		<htmlbutton>&#009;&lt;li&gt;Navier-Stokes&lt;/li&gt;</htmlbutton>
+		<htmlbutton>&#009;&lt;li&gt;Black &amp;amp; Scholes&lt;/li&gt;</htmlbutton>
 		<htmlbutton>&lt;/ul&gt;</htmlbutton>
 	</vn>
 </HtmlList>
