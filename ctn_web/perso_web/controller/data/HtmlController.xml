@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HtmlList>
+	<en>
+		<buttonname>hello1 en</buttonname>
+		<buttonname>hello2 en</buttonname>
+		<buttonname>hello3 en</buttonname>
+	</en>
+	<fr>
+		<buttonname>hello1 fr</buttonname>
+		<buttonname>hello2 fr</buttonname>
+		<buttonname>hello3 fr</buttonname>
+	</fr>
+	<vn>
+		<buttonname>hello1 vn</buttonname>
+		<buttonname>hello2 vn</buttonname>
+		<buttonname>hello3 vn</buttonname>
+	</vn>
+<HtmlList>
