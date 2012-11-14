@@ -20,11 +20,11 @@ class HtmlController
 		$buttonlist = $langnode->getElementsByTagName("htmlbutton");
 		
 		$this->htmlcontent = '';
-		$this->htmlcontent .= '<div id="navigatorlist">'.PHP_EOL;
+		$this->htmlcontent .= '	<div id="navigatorlist">'.PHP_EOL;
 		foreach($buttonlist as $htmlbutton){
-			$this->htmlcontent .= '	'.$htmlbutton->nodeValue.PHP_EOL;
+			$this->htmlcontent .= '		'.$htmlbutton->nodeValue.PHP_EOL;
 		}
-		$this->htmlcontent .= '</div>'.PHP_EOL;
+		$this->htmlcontent .= '	</div>'.PHP_EOL;
 	}	
 }
 
