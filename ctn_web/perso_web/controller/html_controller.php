@@ -16,8 +16,9 @@ class HtmlController
 		$xmlDoc = new DOMDocument;
 		$xmlDoc->load($datafilename);
 
-		$languenode     = $xmlDoc->getElementsByTagName($_lang)->item(0);
-		$buttonnamelist = $languenode->getElementsByTagName('buttonname');
+		$langnode   = $xmlDoc->getElementsByTagName($_lang)->item(0);
+		//$langnode       = $langnodelist->item(0);
+		$buttonnamelist = $langnode->getElementsByTagName("buttonname");
 		
 		$this->htmlcontent = '';
 		$this->htmlcontent .= '<div id="navigatorlist">'.PHP_EOL;
