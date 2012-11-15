@@ -1,4 +1,6 @@
 <?php
+require_once realpath( dirname(__FILE__ ) . '/../global-config.php');
+
 /** model helpers 
  */
 
@@ -27,6 +29,6 @@ class ModelHelper
 		$footerDiv .= '</div>';
 		return $footerDiv;
 	}
-
+	
 }
 ?>
