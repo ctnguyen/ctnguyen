@@ -1,11 +1,11 @@
 <?php
 
 include 'global-config.php';
-include 'controller/request_state.php';
+include 'controller/general_request_state.php';
 
 GlobalConfig::init_cookie_lang(5);//TODO set to big number
 
-$requeststate = new RequestState('','');
+$requeststate = new GeneralRequestState('','');
 
 //default content is 'home'
 if(empty($_GET['maincontent']) )
