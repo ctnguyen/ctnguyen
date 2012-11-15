@@ -1,33 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<HtmlList>
+<!-- 
+	This file contain data helping for binding the navigate mechanism
+	A button in the navigate bar has its ID and its NAME
+
+	- The IDNAME field has to be unique, and help to determine the action when user click
+	- the HTMLNAME field is to be print out to the html page
+ --> 
+<ContentNavigator>
 	<en>
-		<htmlbutton>&lt;ul&gt;</htmlbutton>
-		<htmlbutton>&#009;&lt;li&gt;Home&lt;/li&gt;</htmlbutton>
-		<htmlbutton>&#009;&lt;li&gt;CV&lt;/li&gt;</htmlbutton>
-		<htmlbutton>&#009;&lt;li&gt;Contact&lt;/li&gt;</htmlbutton>
-		<htmlbutton>&#009;&lt;hr/&gt;</htmlbutton>
-		<htmlbutton>&#009;&lt;li&gt;Navier-Stokes&lt;/li&gt;</htmlbutton>
-		<htmlbutton>&#009;&lt;li&gt;Black &amp;amp; Scholes&lt;/li&gt;</htmlbutton>
-		<htmlbutton>&lt;/ul&gt;</htmlbutton>
+		<navigatebutton>
+			<idNAME>home</idNAME>
+			<htmlNAME>Home</htmlNAME>
+		</navigatebutton>
+		<navigatebutton>
+			<idNAME>cv</idNAME>
+			<htmlNAME>CV</htmlNAME>
+		</navigatebutton>
+		<navigatebutton>
+			<idNAME>contact</idNAME>
+			<htmlNAME>Contact</htmlNAME>
+		</navigatebutton>
+		<navigatebutton>
+			<htmlNAME>&lt;hr/&gt;</htmlNAME>
+		</navigatebutton>
+		<navigatebutton>
+			<idNAME>NS</idNAME>
+			<htmlNAME>Navier-Stokes</htmlNAME>
+		</navigatebutton>
+		<navigatebutton>
+			<idNAME>BS</idNAME>
+			<htmlNAME>Black &amp;amp; Scholes</htmlNAME>
+		</navigatebutton>
 	</en>
 	<fr>
-		<htmlbutton>&lt;ul&gt;</htmlbutton>
-		<htmlbutton>&#009;&lt;li&gt;Accueil&lt;/li&gt;</htmlbutton>
-		<htmlbutton>&#009;&lt;li&gt;CV&lt;/li&gt;</htmlbutton>
-		<htmlbutton>&#009;&lt;li&gt;Contact&lt;/li&gt;</htmlbutton>
-		<htmlbutton>&#009;&lt;hr/&gt;</htmlbutton>
-		<htmlbutton>&#009;&lt;li&gt;Navier-Stokes&lt;/li&gt;</htmlbutton>
-		<htmlbutton>&#009;&lt;li&gt;Black &amp;amp; Scholes&lt;/li&gt;</htmlbutton>
-		<htmlbutton>&lt;/ul&gt;</htmlbutton>
+		<navigatebutton>
+			<idNAME>home</idNAME>
+			<htmlNAME>Accueil</htmlNAME>
+		</navigatebutton>
+		<navigatebutton>
+			<idNAME>cv</idNAME>
+			<htmlNAME>CV</htmlNAME>
+		</navigatebutton>
+		<navigatebutton>
+			<idNAME>contact</idNAME>
+			<htmlNAME>Contact</htmlNAME>
+		</navigatebutton>
+		<navigatebutton>
+			<htmlNAME>&lt;hr/&gt;</htmlNAME>
+		</navigatebutton>
+		<navigatebutton>
+			<idNAME>NS</idNAME>
+			<htmlNAME>Navier-Stokes</htmlNAME>
+		</navigatebutton>
+		<navigatebutton>
+			<idNAME>BS</idNAME>
+			<htmlNAME>Black &amp;amp; Scholes</htmlNAME>
+		</navigatebutton>
 	</fr>
 	<vn>
-		<htmlbutton>&lt;ul&gt;</htmlbutton>
-		<htmlbutton>&#009;&lt;li&gt;Trang chủ&lt;/li&gt;</htmlbutton>
-		<htmlbutton>&#009;&lt;li&gt;CV&lt;/li&gt;</htmlbutton>
-		<htmlbutton>&#009;&lt;li&gt;Liên lạc&lt;/li&gt;</htmlbutton>
-		<htmlbutton>&#009;&lt;hr/&gt;</htmlbutton>
-		<htmlbutton>&#009;&lt;li&gt;Navier-Stokes&lt;/li&gt;</htmlbutton>
-		<htmlbutton>&#009;&lt;li&gt;Black &amp;amp; Scholes&lt;/li&gt;</htmlbutton>
-		<htmlbutton>&lt;/ul&gt;</htmlbutton>
+		<navigatebutton>
+			<idNAME>home</idNAME>
+			<htmlNAME>Trang chủ</htmlNAME>
+		</navigatebutton>
+		<navigatebutton>
+			<idNAME>cv</idNAME>
+			<htmlNAME>CV</htmlNAME>
+		</navigatebutton>
+		<navigatebutton>
+			<idNAME>contact</idNAME>
+			<htmlNAME>Liên lạc</htmlNAME>
+		</navigatebutton>
+		<navigatebutton>
+			<htmlNAME>&lt;hr/&gt;</htmlNAME>
+		</navigatebutton>
+		<navigatebutton>
+			<idNAME>NS</idNAME>
+			<htmlNAME>Navier-Stokes</htmlNAME>
+		</navigatebutton>
+		<navigatebutton>
+			<idNAME>BS</idNAME>
+			<htmlNAME>Black &amp;amp; Scholes</htmlNAME>
+		</navigatebutton>
 	</vn>
-</HtmlList>
+</ContentNavigator>
