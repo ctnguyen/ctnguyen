@@ -4,14 +4,14 @@ require_once realpath( dirname(__FILE__ ) . '/../global-config.php');
 /* class returning the content html of all controllers
  * concretly this is the sidebar in the web
  */
-class HtmlController
+class ContentNavigator
 {
 	public $htmlcontent;
 	
 	public function __construct($_lang)
 	{
 		$datafilename = '';
-		$datafilename .= GlobalConfig::SERVER_ROOT_DIR.'controller/data/HtmlController.xml';
+		$datafilename .= GlobalConfig::SERVER_ROOT_DIR.'model/htmldata/ContentNavigator.xml';
 		
 		$xmlDoc = new DOMDocument;
 		$xmlDoc->load($datafilename);
