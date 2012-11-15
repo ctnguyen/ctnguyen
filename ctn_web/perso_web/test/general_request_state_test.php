@@ -1,5 +1,5 @@
 <?php 
-	include '../controller/request_state.php';
+	include '../controller/general_request_state.php';
 	include '../global-config.php';
 ?>
 
@@ -17,10 +17,13 @@
 			content: <input type="text" name='fcontent'/>
 		</p>
 		<p>
+		<input type="checkbox" name='fismobile'>isMobile<br>
+		</p>
+		<p>
 			<input type="submit" value="BuildRequestState">
 		</p>
 		<?php 
-		$rstate = new RequestState('','');
+		$rstate = new GeneralRequestState('','',false);
 		if (!empty($_GET['flang']))
 		{
 			$rstate->resetLang($_GET['flang']);
@@ -29,7 +32,22 @@
 		{
 			$rstate->resetContent($_GET['fcontent']);
 		}
-		echo '<h1>lang state=[' . $rstate->_lang_state .']</h1>  <h1>content state=['. $rstate->_content_state .']</h1>';
+		if (isset($_GET['fismobile']))
+		{
+			$rstate->resetIsMobil(TRUE);
+		}
+		else
+		{
+			$rstate->resetIsMobil(FALSE);
+		}
+		echo '<h1>lang state=[' . $rstate->_lang_state .']</h1><h1>content state=['. $rstate->_content_state .']</h1>';
+		if($rstate->_isMobile)
+		{
+			echo '<h1>Is Mobile=[true]';
+		}else
+		{
+			echo '<h1>Is Mobile=[false]';
+		}
 		?>
 	</form>
 </body>
