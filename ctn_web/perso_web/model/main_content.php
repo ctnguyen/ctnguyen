@@ -1,6 +1,6 @@
 <?php
-include '../global-config.php';
-include '../controller/general_request_state.php';
+require_once realpath( dirname(__FILE__ ) . '/../global-config.php');
+require_once GlobalConfig::SERVER_ROOT_DIR.'controller/general_request_state.php';
 
 /* \class MainContent
  * This class in handle the main content of the web. The content is stored in a .html file
@@ -18,7 +18,7 @@ class MainContent
 		//get path to the html file.
 		$filepath  = GlobalConfig::SERVER_ROOT_DIR.'model/htmldata/';
 		$filepath .= $_general_request->_lang_state . '/';
-		$filepath .= $_general_request->_content_state . 'html';
+		$filepath .= $_general_request->_content_state . '.html';
 		
 		if( file_exists($filepath) )
 		{

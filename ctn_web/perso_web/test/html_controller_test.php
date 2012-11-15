@@ -1,5 +1,6 @@
 <?php
-include '../controller/html_controller.php';
+require_once realpath( dirname(__FILE__ ) . '/../global-config.php');
+require_once GlobalConfig::SERVER_ROOT_DIR.'controller/html_controller.php';
 
 $time_start = microtime(true);
 
