@@ -22,11 +22,15 @@ class MainContent
 		
 		if( file_exists($filepath) )
 		{
-			$this->htmlcontent = 'file path=['.$filepath.']';
+			//$this->htmlcontent = 'file path=['.$filepath.']';
+			$filename = "/usr/local/something.txt";
+			$handle = fopen($filepath, 'r');
+			$this->htmlcontent = fread($handle, filesize($filepath));
+			fclose($handle);
 		}
 		else
 		{
-			$this->htmlcontent = '<h1>ERROR file path=['.$filepath.'] does not exists<h1>';
+			$this->htmlcontent = '<p style="color:red"><b>ERROR file path=['.$filepath.'] does not exists</b></p>';
 		}
 	}
 }

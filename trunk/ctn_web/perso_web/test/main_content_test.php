@@ -20,7 +20,12 @@
 		<p>
 			<input type="submit" value="RequestContent">
 		</p>
+	</form>
+	<hr/>
+	<h1>Main Content in the div content, type ctr+u to see sources</h1>
 	<?php 
+	$time_start = microtime(true);
+	
 	$rstate = new GeneralRequestState('','',false);
 	if (!empty($_GET['flang']))
 	{
@@ -41,10 +46,12 @@
 	
 	$rcontent = new MainContent($rstate);
 	
-	echo '<div id="content">'. $rcontent->htmlcontent .'</div>';
+	echo '<div id="content">'. $rcontent->htmlcontent .'</div>'.PHP_EOL;
+	
+	$time_end = microtime(true);
+	$elapsed_time = ($time_end - $time_start);
+	echo '<hr/>';
+	echo '<div><b>Total Execution Time: '.$elapsed_time.' seconds</b></div>';
 	?>
-	</form>
-	<hr/>
-	<h1>Main Content in the div content, type ctr+u to see sources</h1>
-</body>
+	</body>
 </html>
