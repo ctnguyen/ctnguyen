@@ -8,7 +8,7 @@ class GlobalConfig
 
 	// define here all global constants
 	const SERVER_ROOT_DIR   = '/home/ctnguyen/localserver/ctn_web/';
-	const DOMAINE_NAME      = 'localhost/';
+	const DOMAINE_NAME      = 'http://localhost/';
 	const DEFAULT_LANG      = 'en';
 	
 	/** initialize the lang cookie.
