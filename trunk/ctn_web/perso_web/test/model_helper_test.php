@@ -1,5 +1,6 @@
 <?php 
-include '../model/helper.php'; 
+require_once realpath( dirname(__FILE__ ) . '/../global-config.php');
+require_once GlobalConfig::SERVER_ROOT_DIR.'model/helper.php'; 
 
 $footer_en = ModelHelper::getFooter('fr');
 echo $footer_en.PHP_EOL;

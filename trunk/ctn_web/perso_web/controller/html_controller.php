@@ -1,5 +1,5 @@
 <?php
-include '../global-config.php';
+require_once realpath( dirname(__FILE__ ) . '/../global-config.php');
 
 /* class returning the content html of all controllers
  * concretly this is the sidebar in the web
