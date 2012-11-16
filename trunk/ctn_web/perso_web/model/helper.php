@@ -1,8 +1,9 @@
 <?php
 require_once realpath( dirname(__FILE__ ) . '/../global-config.php');
-require_once GlobalConfig::SERVER_ROOT_DIR.'controller/general_request_state.php';
+require_once GlobalConfig::SERVER_ROOT_DIR.'controller/GeneralRequestState.php';
 require_once dirname(__FILE__ ) . '/LangNavigator.php';
 require_once dirname(__FILE__ ) . '/ContentNavigator.php';
+require_once dirname(__FILE__ ) . '/main_content.php';
 
 /** model helpers 
  */
@@ -10,11 +11,10 @@ require_once dirname(__FILE__ ) . '/ContentNavigator.php';
 class ModelHelper
 {
 	
-	public static function getFooter($_lang)
+	public static function getHtmlFooter($_lang)
 	{
-		$footerDiv = '	<div id="footer">';
-
-		$footerDiv .= 'Chi-Thanh NGUYEN &copy;';
+		$footerDiv .= '	<div id="footer">'.PHP_EOL;
+		$footerDiv .= '		Chi-Thanh NGUYEN &copy;';
 		$footerDiv .= date('Y').' ';
 		if($lang=='vn')
 		{
@@ -28,8 +28,9 @@ class ModelHelper
 		{
 			$footerDiv .= 'Web in construction';
 		}
-
-		$footerDiv .= '</div>';
+		$footerDiv .= PHP_EOL;
+		$footerDiv .= '	</div>'.PHP_EOL;
+		
 		return $footerDiv;
 	}
 	
@@ -48,6 +49,19 @@ class ModelHelper
 		$html_navigator .= '	</div>'.PHP_EOL;
 		
 		return $html_navigator;
+	}
+	
+	public static function getHtmlMainContent($_request)
+	{
+		$html_maincontent = '';
+
+		$maincontent_part = new MainContent($_request);
+
+		$html_maincontent .= '	<div id="maincontent">'.PHP_EOL;
+		$html_maincontent .= $maincontent_part->htmlcontent;
+		$html_maincontent .= '	</div>'.PHP_EOL;
+
+		return $html_maincontent;
 	}
 	
 }
