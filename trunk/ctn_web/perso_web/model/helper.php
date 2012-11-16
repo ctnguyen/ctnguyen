@@ -10,11 +10,16 @@ require_once dirname(__FILE__ ) . '/MainContent.php';
 
 class ModelHelper
 {
+	public static function getDocType()
+	{
+		$doctype = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
+		return $doctype;
+	}
 	
 	public static function getHtmlFooter($_lang)
 	{
 		$footerDiv .= '	<div id="footer">'.PHP_EOL;
-		$footerDiv .= '		Chi-Thanh NGUYEN &copy;';
+		$footerDiv .= '		Chi-Thanh NGUYEN &copy; ';
 		$footerDiv .= date('Y').' ';
 		if($lang=='vn')
 		{
