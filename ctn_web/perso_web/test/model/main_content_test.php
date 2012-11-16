@@ -1,6 +1,6 @@
 <?php 
 	require_once realpath( dirname(__FILE__ ) . '/../../global-config.php');
-	require_once GlobalConfig::SERVER_ROOT_DIR.'controller/general_request_state.php';
+	require_once GlobalConfig::SERVER_ROOT_DIR.'controller/GeneralRequestState.php';
 	require_once GlobalConfig::SERVER_ROOT_DIR.'model/main_content.php';
 ?>
 
@@ -46,11 +46,13 @@
 	
 	$rcontent = new MainContent($rstate);
 	
-	echo '<div id="content">'. $rcontent->htmlcontent .'</div>'.PHP_EOL;
+	echo '	<div id="maincontent">'.PHP_EOL;
+	echo 		$rcontent->htmlcontent;
+	echo '	</div>'.PHP_EOL;
 	
 	$time_end = microtime(true);
 	$elapsed_time = ($time_end - $time_start);
-	echo '<hr/>';
+	echo '<hr/>'.PHP_EOL;
 	echo '<div><b>Total Execution Time: '.$elapsed_time.' seconds</b></div>';
 	?>
 	</body>

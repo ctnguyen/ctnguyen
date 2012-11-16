@@ -1,6 +1,6 @@
 <?php
 require_once realpath( dirname(__FILE__ ) . '/../global-config.php');
-require_once GlobalConfig::SERVER_ROOT_DIR.'controller/general_request_state.php';
+require_once GlobalConfig::SERVER_ROOT_DIR.'controller/GeneralRequestState.php';
 
 /* \class MainContent
  * This class in handle the main content of the web. The content is stored in a .html file

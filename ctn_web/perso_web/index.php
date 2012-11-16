@@ -1,7 +1,7 @@
 <?php
 
 require_once realpath( dirname(__FILE__ ) . '/global-config.php');
-require_once GlobalConfig::SERVER_ROOT_DIR.'controller/general_request_state.php';
+require_once GlobalConfig::SERVER_ROOT_DIR.'controller/GeneralRequestState.php';
 
 GlobalConfig::init_cookie_lang(5);//TODO set to big number
 
