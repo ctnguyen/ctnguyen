@@ -12,9 +12,9 @@ class LangNavigator
 		$this->htmlcontent .= '			<table>'.PHP_EOL;
 		$this->htmlcontent .= '				<tr>'.PHP_EOL;
 
-		$this->htmlcontent .= '					<td><img src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/icon_en.png" alt="en"/></td>'.PHP_EOL;
-		$this->htmlcontent .= '					<td><img src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/icon_fr.png" alt="fr"/></td>'.PHP_EOL;
-		$this->htmlcontent .= '					<td><img src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/icon_vn.png" alt="vn"/></td>'.PHP_EOL;
+		$this->htmlcontent .= '					<td><img id="en" class="langbutton" src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/icon_en.png"/></td>'.PHP_EOL;
+		$this->htmlcontent .= '					<td><img id="fr" class="langbutton" src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/icon_fr.png"/></td>'.PHP_EOL;
+		$this->htmlcontent .= '					<td><img id="vn" class="langbutton" src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/icon_vn.png"/></td>'.PHP_EOL;
 		
 		$this->htmlcontent .= '				</tr>'.PHP_EOL;
 		$this->htmlcontent .= '			</table>'.PHP_EOL;
@@ -24,7 +24,7 @@ class LangNavigator
 		$this->htmlcontent .= '			<center>'.PHP_EOL;
 		$this->htmlcontent .= '				<img src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/ctn.jpg"/>'.PHP_EOL;
 		$this->htmlcontent .= '			</center>'.PHP_EOL;
-		$this->htmlcontent .= '		<div id="logo">'.PHP_EOL;
+		$this->htmlcontent .= '		</div>'.PHP_EOL;
 	}
 }
 

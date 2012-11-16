@@ -32,8 +32,8 @@ require_once GlobalConfig::SERVER_ROOT_DIR.'model/LangNavigator.php';
 	*/
 	$time_end = microtime(true);
 	$elapsed_time = ($time_end - $time_start);
-	echo '	<hr/>';
-	echo '<div><b>Total Execution Time: '.$elapsed_time.' seconds</b></div>';
+	echo '	<hr/>'.PHP_EOL;
+	echo '<div><b>Total Execution Time: '.$elapsed_time.' seconds</b></div>'.PHP_EOL;
 	?>
 </body>
 </html>
