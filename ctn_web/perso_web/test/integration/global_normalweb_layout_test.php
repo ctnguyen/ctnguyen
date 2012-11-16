@@ -3,6 +3,9 @@ require_once realpath( dirname(__FILE__ ) . '/../../global-config.php');
 require_once GlobalConfig::SERVER_ROOT_DIR.'controller/GeneralRequestState.php';
 require_once GlobalConfig::SERVER_ROOT_DIR.'view/html_header.php';
 require_once GlobalConfig::SERVER_ROOT_DIR.'model/helper.php';
+
+$doctype = ModelHelper::getDocType();
+echo $doctype.PHP_EOL;
 ?>
 <html>
 <head>
