@@ -13,6 +13,9 @@ class ViewHelper
 		$commonheader.= '	<meta name="keywords" content="NGUYEN Chi-Thanh, SOFA, INRIA, CEMEF, nanoindentation, UPMC, ANEDP, Paris 6, Paris VI"/>'.PHP_EOL;
 		$commonheader.= '	<meta name="description" content=""/>'.PHP_EOL;
 		$commonheader.= '	<meta name="robots" content="follow"/>'.PHP_EOL;
+		
+		// jquery is a common use
+		$commonheader.= '	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>'.PHP_EOL;
 
 		return $commonheader;
 	}
