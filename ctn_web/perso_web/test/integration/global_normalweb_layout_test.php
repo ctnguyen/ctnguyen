@@ -41,6 +41,7 @@ if (isset($_GET['fismobile']))
 }
 
 echo '	<div id="whole-page">'.PHP_EOL;
+echo '		<div id="top-page">&nbsp;&nbsp;</div>'.PHP_EOL;
 
 
 $htmlNavigator = ModelHelper::getHtmlNavigator($rstate);
@@ -49,7 +50,8 @@ echo $htmlNavigator;
 $maincontent = ModelHelper::getHtmlMainContent($rstate);
 echo $maincontent;
 
-// Print out footer
+echo '		<div id="botton-page">&nbsp;&nbsp;</div>'.PHP_EOL;
+
 $footercontent = ModelHelper::getHtmlFooter($rstate->_lang_state);
 echo $footercontent;
 

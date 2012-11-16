@@ -20,8 +20,8 @@ class LangNavigator
 		$this->htmlcontent .= '			</table>'.PHP_EOL;
 		$this->htmlcontent .= '		</div>'.PHP_EOL;
 		
-		$this->htmlcontent .= '		<div id="logo" align="center">'.PHP_EOL;
-		$this->htmlcontent .= '				<img src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/ctn.jpg"/>'.PHP_EOL;
+		$this->htmlcontent .= '		<div align="center">'.PHP_EOL;
+		$this->htmlcontent .= '				<img id="logo" src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/ctn.jpg"/>'.PHP_EOL;
 		$this->htmlcontent .= '		</div>'.PHP_EOL;
 	}
 }
