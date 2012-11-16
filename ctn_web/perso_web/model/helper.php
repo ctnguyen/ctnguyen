@@ -3,7 +3,7 @@ require_once realpath( dirname(__FILE__ ) . '/../global-config.php');
 require_once GlobalConfig::SERVER_ROOT_DIR.'controller/GeneralRequestState.php';
 require_once dirname(__FILE__ ) . '/LangNavigator.php';
 require_once dirname(__FILE__ ) . '/ContentNavigator.php';
-require_once dirname(__FILE__ ) . '/main_content.php';
+require_once dirname(__FILE__ ) . '/MainContent.php';
 
 /** model helpers 
  */
