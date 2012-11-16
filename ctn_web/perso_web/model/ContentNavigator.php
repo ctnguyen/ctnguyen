@@ -11,7 +11,7 @@ class ContentNavigator
 	public function __construct($_lang)
 	{
 		$datafilename = '';
-		$datafilename .= GlobalConfig::SERVER_ROOT_DIR.'model/htmldata/ContentNavigator.xml';
+		$datafilename .= GlobalConfig::SERVER_ROOT_DIR.'controller/data/NavigatorList.xml';
 		
 		$xmlDoc = new DOMDocument;
 		$xmlDoc->load($datafilename);

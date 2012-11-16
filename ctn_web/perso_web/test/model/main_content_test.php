@@ -21,8 +21,8 @@
 			<input type="submit" value="RequestContent">
 		</p>
 	</form>
-	<hr/>
 	<h1>Main Content in the div content, type ctr+u to see sources</h1>
+	<hr/>
 	<?php 
 	$time_start = microtime(true);
 	
