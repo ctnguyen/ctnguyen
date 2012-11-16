@@ -27,7 +27,6 @@ class HtmlHeader
 		if($_general_request->_isMobile)
 		{
 			$this->htmlcontent .= '	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />'.PHP_EOL;
-			$this->htmlcontent .= '	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>'.PHP_EOL;
 			$this->htmlcontent .= '	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>'.PHP_EOL;
 			
 			$this->htmlcontent .= '	<script src="'.GlobalConfig::DOMAINE_NAME .'view/style/mobibrowser_globallayout.js"></script>'.PHP_EOL;
@@ -44,7 +43,8 @@ class HtmlHeader
 		$this->htmlcontent .= ' Each time user change content, this part will also be updated'.PHP_EOL;
 		$this->htmlcontent .= ' The file name rule is view/[<mobile?>_][contentID].js'.PHP_EOL;
 		$this->htmlcontent .= '-->'.PHP_EOL;
-		$this->htmlcontent .= '	<script class="auxiliarstyle" src="'. GlobalConfig::DOMAINE_NAME . $auxStyleBindRelativePath .'"></script>'.PHP_EOL;
+		//$this->htmlcontent .= '	<script class="auxiliarstyle" src="'. GlobalConfig::DOMAINE_NAME . $auxStyleBindRelativePath .'"></script>'.PHP_EOL;
+		$this->htmlcontent .= '	<script type="text/javascript" src="'. GlobalConfig::DOMAINE_NAME . $auxStyleBindRelativePath .'"></script>'.PHP_EOL;
 	}
 }
 
