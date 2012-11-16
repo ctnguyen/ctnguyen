@@ -1,7 +1,7 @@
 <?php
 require_once realpath( dirname(__FILE__ ) . '/../global-config.php');
 
-/* class returning the content html of all controllers
+/* class returning the content html of all content
  * concretly this is the sidebar in the web
  */
 class ContentNavigator
