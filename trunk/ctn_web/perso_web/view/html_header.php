@@ -17,31 +17,34 @@ class HtmlHeader
 {
 	public $htmlcontent;
 
-	public function __constructor($_general_request)
+	public function __construct($_general_request)
 	{
 		$this->htmlcontent = ViewHelper::getCommonHeader();
-
+		
+		$this->htmlcontent .= PHP_EOL.'<!-- common global style (mobile or normal browser)-->'.PHP_EOL;
+		
 		$auxStyleBindRelativePath = '';
-
 		if($_general_request->_isMobile)
 		{
-			$this->htmlcontent .= '<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />'.PHP_EOL;
-			$this->htmlcontent .= '<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>'.PHP_EOL;
-			$this->htmlcontent .= '<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>'.PHP_EOL;
+			$this->htmlcontent .= '	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />'.PHP_EOL;
+			$this->htmlcontent .= '	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>'.PHP_EOL;
+			$this->htmlcontent .= '	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>'.PHP_EOL;
 		
-			$auxStyleBindRelativePath = 'view/mobi_'.$_general_request.'.js';
+			$auxStyleBindRelativePath .= 'view/mobi_'.$_general_request->_content_state . '.js';
 		}
 		else
 		{
-			$this->htmlcontent .= '<script src="'.GlobalConfig::DOMAINE_NAME .'view/normalbrowser_globallayout.js"></script>'.PHP_EOL;
+			$this->htmlcontent .= '	<script src="'.GlobalConfig::DOMAINE_NAME .'view/normalbrowser_globallayout.js"></script>'.PHP_EOL;
 		
-			$auxStyleBindRelativePath = 'view/'.$_general_request.'.js';
+			$auxStyleBindRelativePath .= 'view/'.$_general_request->_content_state . '.js';
 		}
 		
-		$this->htmlcontent .= '<script src="'. GlobalConfig::DOMAINE_NAME . $auxStyleBindRelativePath .' "></script>'.PHP_EOL;
-
-		
-		
+		$this->htmlcontent .= '<!--'.PHP_EOL;
+		$this->htmlcontent .= ' Auxiliar style specific to a content (might be pluriel)'.PHP_EOL;
+		$this->htmlcontent .= ' Each time user change content, this part will also be updated'.PHP_EOL;
+		$this->htmlcontent .= ' The file name rule is view/[<mobile?>_][contentID].js'.PHP_EOL;
+		$this->htmlcontent .= '-->'.PHP_EOL;
+		$this->htmlcontent .= '	<script class="auxiliarstyle" src="'. GlobalConfig::DOMAINE_NAME . $auxStyleBindRelativePath .' "></script>'.PHP_EOL;
 	}
 }
 
