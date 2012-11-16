@@ -29,7 +29,7 @@ class ContentNavigator
 			if($buttonID)
 			{
 				$this->htmlcontent .= '				<li><a ';
-				$this->htmlcontent .= 'id="'.$buttonID->nodeValue.'"';
+				$this->htmlcontent .= 'id="'.$buttonID->nodeValue.'" class="navigatebutton"';
 				$this->htmlcontent .= '>'.$button->getElementsByTagName("htmlNAME")->item(0)->nodeValue;
 				$this->htmlcontent .= '</a></li>'.PHP_EOL;
 			}
