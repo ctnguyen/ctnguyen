@@ -22,8 +22,6 @@ class MainContent
 		
 		if( file_exists($filepath) )
 		{
-			//$this->htmlcontent = 'file path=['.$filepath.']';
-			$filename = "/usr/local/something.txt";
 			$handle = fopen($filepath, 'r');
 			$this->htmlcontent = fread($handle, filesize($filepath));
 			fclose($handle);
