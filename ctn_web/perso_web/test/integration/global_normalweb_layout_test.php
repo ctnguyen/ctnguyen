@@ -40,9 +40,13 @@ if (isset($_GET['fismobile']))
 	$rstate->resetIsMobil(TRUE);
 }
 
-echo '	<div id="whole-page">'.PHP_EOL;
-echo '		<div id="top-page">&nbsp;&nbsp;</div>'.PHP_EOL;
+echo '	<div id="page-wrapper">'.PHP_EOL;
 
+$headercontent = ModelHelper::getHtmlHeader();
+echo $headercontent;
+
+echo '		<div id="whole-page">'.PHP_EOL;
+echo '			<div id="top-page">&nbsp;&nbsp;</div>'.PHP_EOL;
 
 $htmlNavigator = ModelHelper::getHtmlNavigator($rstate);
 echo $htmlNavigator;
@@ -50,11 +54,11 @@ echo $htmlNavigator;
 $maincontent = ModelHelper::getHtmlMainContent($rstate);
 echo $maincontent;
 
-echo '		<div id="botton-page">&nbsp;&nbsp;</div>'.PHP_EOL;
+echo '			<div id="botton-page">&nbsp;&nbsp;</div>'.PHP_EOL;
 
+echo '		</div>'.PHP_EOL;
 $footercontent = ModelHelper::getHtmlFooter($rstate->_lang_state);
 echo $footercontent;
-
 echo '	</div>'.PHP_EOL;
 ?>
 </body>

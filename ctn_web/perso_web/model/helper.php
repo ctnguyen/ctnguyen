@@ -16,10 +16,21 @@ class ModelHelper
 		return $doctype;
 	}
 	
+	public static function getHtmlHeader()
+	{
+		$headerwrapimagepath = '\''. GlobalConfig::DOMAINE_NAME .'model/htmldata/image/top_wrapper.jpg\'';
+		$headerDiv = '';
+		$headerDiv .= '		<div id="page-header"  style="background-image:url('.$headerwrapimagepath.');background-repeat:repeat-x">&nbsp;&nbsp;</div>'.PHP_EOL;
+		return $headerDiv;
+	}
+	
 	public static function getHtmlFooter($_lang)
 	{
-		$footerDiv .= '	<div id="footer">'.PHP_EOL;
-		$footerDiv .= '		Chi-Thanh NGUYEN &copy; ';
+		$footerwrapimagepath = '\''. GlobalConfig::DOMAINE_NAME .'model/htmldata/image/bottom_wrapper.jpg\'';
+		
+		$footerDiv  = '';
+		$footerDiv .= '		<div id="page-footer" style="background-image:url('.$footerwrapimagepath.');background-repeat:repeat-x">'.PHP_EOL;
+		$footerDiv .= '			<h1 class="page-footer"> Chi-Thanh NGUYEN &copy; ';
 		$footerDiv .= date('Y').' ';
 		if($lang=='vn')
 		{
@@ -33,8 +44,10 @@ class ModelHelper
 		{
 			$footerDiv .= 'Web in construction';
 		}
-		$footerDiv .= PHP_EOL;
-		$footerDiv .= '	</div>'.PHP_EOL;
+		$footerDiv .= '</h1>'.PHP_EOL;
+		$footerDiv .= '		</div>'.PHP_EOL;
+		
+		//$footerDiv .= '		<script type="text/javascript">	$(document).ready(function(){$(\'#page-footer\').css({	"background" :"#FFFFFF url(http://localhost/view/image/bottom_wrapper.jpg) repeat-x"});});</script>'.PHP_EOL;
 		
 		return $footerDiv;
 	}
@@ -48,10 +61,10 @@ class ModelHelper
 		
 		$content_part = new ContentNavigator($_request->_lang_state);
 		
-		$html_navigator .= '	<div id="navigator">'.PHP_EOL;
-		$html_navigator .= 			$flag_part->htmlcontent;
-		$html_navigator .= 			$content_part->htmlcontent;
-		$html_navigator .= '	</div>'.PHP_EOL;
+		$html_navigator .= '			<div id="navigator">'.PHP_EOL;
+		$html_navigator .= 					$flag_part->htmlcontent;
+		$html_navigator .= 					$content_part->htmlcontent;
+		$html_navigator .= '			</div>'.PHP_EOL;
 		
 		return $html_navigator;
 	}
@@ -62,9 +75,9 @@ class ModelHelper
 
 		$maincontent_part = new MainContent($_request);
 
-		$html_maincontent .= '	<div id="maincontent">'.PHP_EOL;
-		$html_maincontent .= $maincontent_part->htmlcontent;
-		$html_maincontent .= '	</div>'.PHP_EOL;
+		$html_maincontent .= '			<div id="maincontent">'.PHP_EOL;
+		$html_maincontent .= 				$maincontent_part->htmlcontent;
+		$html_maincontent .= '			</div>'.PHP_EOL;
 
 		return $html_maincontent;
 	}
