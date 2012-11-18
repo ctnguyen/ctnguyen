@@ -1,8 +1,9 @@
 function bindmobilecvstyle() 
 {
-	$('#content').attr('data-role', 'page');
-	$('#title').attr('data-role', 'header');
-	$('h2').attr('data-role', 'header');
-	// $('#education').attr('data-role','content');
-	// $('#footer').attr('data-role','footer');
+	$('#whole-page').attr('data-role', 'page');
+	$('#navigator').attr('data-role', 'header');
+	$('#contentnavigator').attr('data-role', 'navbar');
+	$('#content').attr('data-role','content');
+	$('h2').attr('class', 'ui-bar ui-bar-a');
+	$('#page-footer').attr('data-role','footer');
 }
