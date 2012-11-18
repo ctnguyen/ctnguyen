@@ -3,12 +3,12 @@ $(document).ready(function(){
 });
 
 /*
-	page-wrapper
-	 page-header
+	page-wrapper     [non for mobile]
+	 page-header     [non for mobile]
   	whole-page
-	 top-page
+	 top-page        [non for mobile]
 sidebar     content
-	bottmn-page
+	bottmn-page      [non for mobile]
 	page-footer
  */
 
