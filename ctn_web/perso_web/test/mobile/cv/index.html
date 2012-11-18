@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+   		<meta name="viewport" content="width=device-width, initial-scale=1"> 
 		<title>Test Separate Binding Jquery Mobile</title>
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
 		<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
@@ -46,50 +47,50 @@
 				</div>
 				<div id="competences">
 					<h2 class="cv">Skills</h2>
-					<table class="cv">
-						<tr class="cv">
-							<td class="cv">
-							<p class="cv skilllabel">
+					<table id="skillstable">
+						<tr class="cvskills">
+							<td class="cvskills">
+							<p class="skilllabel">
 								Numerical computation
 							</p>
 							<p>
 								Real-time simulation with Finite Element Method
 							</p></td>
-							<td class="cv">
-							<p class="cv skilllabel">
+							<td class="cvskills">
+							<p class="skilllabel">
 								Application areas
 							</p>
 							<p>
 								Finance, Mechanical, virtual surgery.
 							</p></td>
 						</tr>
-						<tr class="cv">
-							<td class="cv">
-							<p class="cv skilllabel">
+						<tr class="cvskills">
+							<td class="cvskills">
+							<p class="skilllabel">
 								Mathematics
 							</p>
 							<p>
 								PDE linear, nonlinear.
 							</p></td>
-							<td class="cv">
-							<p class="cv skilllabel">
+							<td class="cvskills">
+							<p class="skilllabel">
 								software
 							</p>
 							<p>
 								BOUML, FreeFem++, Matlab, Forge3.
 							</p></td>
 						</tr>
-						<tr class="cv">
-							<td class="cv">
-							<p class="cv skilllabel">
+						<tr class="cvskills">
+							<td class="cvskills">
+							<p class="skilllabel">
 								Languages
 							</p>
 							<p>
 								C/C++, UML, XML, Qt-Programming GUI, OpenGL,
 								Shell-scripting, XHTML, CSS, Javascript.
 							</p></td>
-							<td class="cv">
-							<p class="cv skilllabel">
+							<td class="cvskills">
+							<p class="skilllabel">
 								Tools &amp; systems
 							</p>
 							<p>
@@ -233,12 +234,12 @@
 						</div>
 					</div>
 				</div>
-				<div id="education clearfloatting">
+				<div id="education" class="clearfloatting">
 					<h2 class="cv">Education</h2>
-					<table class="cv">
-						<tr class="cv">
-							<td class="cv">2008-2009</td>
-							<td class="cv">
+					<table id="educationtable">
+						<tr class="cveducation">
+							<td class="cveducationyear">2008-2009</td>
+							<td class="cveducation">
 							<p>
 								Master Mathematics and Applications
 							</p>
@@ -250,9 +251,9 @@
 								Awarded in Laboratory Master Jaques-Louis Lion
 							</p></td>
 						</tr>
-						<tr class="cv">
-							<td class="cv">2004-2007</td>
-							<td class="cv">
+						<tr class="cveducation">
+							<td class="cveducationyear">2004-2007</td>
+							<td class="cveducation">
 							<p>
 								Bachelor Fundamental Mathematics
 							</p>
@@ -260,9 +261,9 @@
 								University Pierre &amp; Marie Curie.
 							</p></td>
 						</tr>
-						<tr class="cv">
-							<td class="cv">2001-2004</td>
-							<td class="cv">
+						<tr class="cveducation">
+							<td class="cveducationyear">2001-2004</td>
+							<td class="cveducation">
 							<p>
 								Studies of French language and civilization
 							</p>
