@@ -41,7 +41,7 @@ function bindmobilecvstyle()
 	}) ;
 	
 	//Experiences styles =============================================================
-	$('.xpdatebar').attr('class','ui-bar ui-bar-d')  ;
+	$('.xpdatebar').attr('data-role','header') ; $('.xpdatebar').attr('data-theme','c');
 	$('.xpdatebar').css({'padding':'0'});
 	$('.xpdate').css({'margin':'0','padding':'0'});
 	$('.xpenterprise').css({'margin':'0','padding':'0'});
