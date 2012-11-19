@@ -4,8 +4,10 @@ require_once GlobalConfig::SERVER_ROOT_DIR.'controller/GeneralRequestState.php';
 require_once GlobalConfig::SERVER_ROOT_DIR.'view/html_header.php';
 require_once GlobalConfig::SERVER_ROOT_DIR.'model/helper.php';
 
-$doctype = ModelHelper::getDocType();
-echo $doctype.PHP_EOL;
+$temporequest = new GeneralRequestState('en','home',false);
+$doctype = ModelHelper::getDocType( $temporequest );
+echo $doctype;
+
 ?>
 <html>
 <head>
@@ -42,7 +44,7 @@ if (isset($_GET['fismobile']))
 
 echo '	<div id="page-wrapper">'.PHP_EOL;
 
-$headercontent = ModelHelper::getHtmlHeader();
+$headercontent = ModelHelper::getHtmlHeader($rstate,2);
 echo $headercontent;
 
 echo '		<div id="whole-page">'.PHP_EOL;
@@ -52,10 +54,10 @@ echo '				<div id="actuallangue" style="display:none;">fr</div>'.PHP_EOL;
 echo '				<div id="actuallnavication" style="display:none;">home</div>'.PHP_EOL;
 echo '			</div>'.PHP_EOL;
 
-$htmlNavigator = ModelHelper::getHtmlNavigator($rstate);
+$htmlNavigator = ModelHelper::getHtmlNavigator($rstate,3);
 echo $htmlNavigator;
 
-$maincontent = ModelHelper::getHtmlMainContent($rstate);
+$maincontent = ModelHelper::getHtmlMainContent($rstate,3);
 echo $maincontent;
 
 echo '			<div id="bottom-page">'.PHP_EOL;
@@ -64,7 +66,7 @@ echo '			</div>'.PHP_EOL;
 
 
 echo '		</div>'.PHP_EOL;
-$footercontent = ModelHelper::getHtmlFooter($rstate->_lang_state);
+$footercontent = ModelHelper::getHtmlFooter($rstate,2);
 echo $footercontent;
 echo '	</div>'.PHP_EOL;
 

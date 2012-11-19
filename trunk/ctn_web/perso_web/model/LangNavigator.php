@@ -28,7 +28,7 @@ class LangNavigator
 		$this->htmlcontent .= $indent.'</div>'.PHP_EOL;
 		
 		$this->htmlcontent .= $indent.'<div align="center">'.PHP_EOL;
-		$this->htmlcontent .= $indent.'<img id="logo" src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/ctn.jpg"/>'.PHP_EOL;
+		$this->htmlcontent .= $indent.'	<img id="logo" src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/ctn.jpg"/>'.PHP_EOL;
 		$this->htmlcontent .= $indent.'</div>'.PHP_EOL;
 	}
 }

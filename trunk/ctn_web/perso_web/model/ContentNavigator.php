@@ -46,7 +46,7 @@ class ContentNavigator
 			}
 		}
 		
-		$this->htmlcontent .= $additionalInden.'		</ul>'.PHP_EOL;
+		$this->htmlcontent .= $additionalInden.'	</ul>'.PHP_EOL;
 		$this->htmlcontent .= $additionalInden.'</div>'.PHP_EOL;
 	}	
 }

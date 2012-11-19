@@ -31,12 +31,12 @@ class HtmlHeader
 			$this->htmlcontent .= '	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />'.PHP_EOL;
 			$this->htmlcontent .= '	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>'.PHP_EOL;
 			
-			$this->htmlcontent .= '	<script src="'.GlobalConfig::DOMAINE_NAME .'view/style/global_mobibrowser_layout.js"></script>'.PHP_EOL;
+			$this->htmlcontent .= '	<script src="'.GlobalConfig::DOMAINE_NAME .'view/style/mobibrowser_G_setting.js"></script>'.PHP_EOL;
 			$auxStyleBindRelativePath .= 'view/style/mobi_'.$_general_request->_content_state . '.js';
 		}
 		else
 		{
-			$this->htmlcontent .= '	<script src="'.GlobalConfig::DOMAINE_NAME .'view/style/global_normalbrowser_layout.js"></script>'.PHP_EOL;
+			$this->htmlcontent .= '	<script src="'.GlobalConfig::DOMAINE_NAME .'view/style/normalbrowser_G_setting.js"></script>'.PHP_EOL;
 			$auxStyleBindRelativePath .= 'view/style/'.$_general_request->_content_state .'.js';
 		}
 		

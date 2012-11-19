@@ -6,7 +6,7 @@ function bindmobilecvstyle()
 	$('#langnavigator').attr('data-role', 'navbar');
 	$('#contentnavigator').attr('data-role', 'navbar');
 	$('#content').attr('data-role','content');
-	$('#page-footer').attr('data-role','footer');
+	$('#bottom-wrapper').attr('data-role','footer');
 	
 	// CV mobile globale style =================================================
 	$('.xpdate').css({"float":"left"});
