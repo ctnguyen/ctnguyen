@@ -3,6 +3,7 @@ function bindmobilecvstyle()
 	// CV mobile globale layout ================================================ 
 	$('#whole-page').attr('data-role', 'page');
 	$('#navigator').attr('data-role', 'header');
+	$('#langnavigator').attr('data-role', 'navbar');
 	$('#contentnavigator').attr('data-role', 'navbar');
 	$('#content').attr('data-role','content');
 	$('#page-footer').attr('data-role','footer');
@@ -63,5 +64,4 @@ function bindmobilecvstyle()
 	$('td.cveducation').attr('data-role','content'); $('td.cveducation').attr('data-theme','c');
 
 	$('td.cveducationyear').attr('class','ui-bar ui-bar-d')  ;
-
 }
