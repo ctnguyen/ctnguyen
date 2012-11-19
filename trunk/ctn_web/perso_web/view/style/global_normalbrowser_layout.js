@@ -77,7 +77,7 @@ function set_global_layout()
 	});
 
 
-	$('#botton-page').css({
+	$('#bottom-page').css({
 		"margin":"0 0 0 0"
 		,"padding":"0 0 0 0"
 		,"clear":"both"
@@ -112,7 +112,7 @@ function debug_layout()
 	//$('#page').css({"border":"1px solid #008000"});
 	$('#maincontent').css({"border":"1px solid #00BFFF"});
 	$('#navigator').css({"border":"1px solid #0000FF"});
-	$('#botton-page').css({"border":"1px solid #808080"});
+	$('#bottom-page').css({"border":"1px solid #808080"});
 	$('#footer').css({"border":"1px solid #D2691E"});
 	//$('ul._sidebar.menu').css({"border":"1px solid black"});
 }
