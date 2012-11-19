@@ -23,7 +23,7 @@ require_once GlobalConfig::SERVER_ROOT_DIR.'model/helper.php';
 	$request = new GeneralRequestState('en','home',true);
 	*/
 		
-	$htmlNavigator = ModelHelper::getHtmlNavigator($request );
+	$htmlNavigator = ModelHelper::getHtmlNavigator($request , 3);
 	echo $htmlNavigator;
 	
 	$time_end = microtime(true);

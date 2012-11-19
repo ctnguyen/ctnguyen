@@ -4,12 +4,12 @@ $(document).ready(function(){
 
 /*
 	page-wrapper     [non for mobile]
-	 page-header     [non for mobile]
+	 top-wrapper     [non for mobile]
   	whole-page
 	 top-page        
 sidebar     content
-	bottom-page      
-	page-footer
+	 bottom-page      
+	bottom-wrapper   [different for mobile (included in the whole page instead of a wrapper)]
  */
 
 // page width depend on how many character it has, so its convenient to set it in relation to em
@@ -32,7 +32,7 @@ function set_global_layout()
 		,"padding":"0 0 0 0"
 	});
 
-	$('#page-header').css({
+	$('#top-wrapper').css({
 		"height":"100px"
 		,"width":$(window).width()
 		,"margin":"0 0 0 0"
@@ -83,7 +83,7 @@ function set_global_layout()
 		,"clear":"both"
 	});
 	
-	$('#page-footer').css({
+	$('#bottom-wrapper').css({
 		"height":"100px"
 		,"width":$(window).width()
 		,"font-size":"1em"
@@ -94,7 +94,7 @@ function set_global_layout()
 		,"bottom":"0px"
 	});
 
-	$('h1.page-footer').css({		
+	$('#page-footer').css({		
 		"font-size":"1em" 
 		,"padding-top":"40px"
 	});
@@ -107,12 +107,12 @@ function debug_layout()
 	//plot border of all bloc
 	//$('body').css({"border":"1px solid #ffffff"});
 	$('#whole-page').css({"border":"1px solid #00FF00"});
-	//$('#page-header').css({"border":"1px solid #D2691E"});
+	//$('#top-wrapper').css({"border":"1px solid #D2691E"});
 	$('#top-page').css({"border":"1px solid #808080"});
 	//$('#page').css({"border":"1px solid #008000"});
 	$('#maincontent').css({"border":"1px solid #00BFFF"});
 	$('#navigator').css({"border":"1px solid #0000FF"});
 	$('#bottom-page').css({"border":"1px solid #808080"});
-	$('#footer').css({"border":"1px solid #D2691E"});
+	$('#bottom-wrapper').css({"border":"1px solid #D2691E"});
 	//$('ul._sidebar.menu').css({"border":"1px solid black"});
 }
