@@ -57,9 +57,9 @@ class ModelHelper
 	{
 		$html_navigator = '';
 		
-		$flag_part = new LangNavigator();
+		$flag_part = new LangNavigator($_request);
 		
-		$content_part = new ContentNavigator($_request->_lang_state);
+		$content_part = new ContentNavigator($_request);
 		
 		$html_navigator .= '			<div id="navigator">'.PHP_EOL;
 		$html_navigator .= 					$flag_part->htmlcontent;
