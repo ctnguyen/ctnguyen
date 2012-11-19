@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>switch page using Ajax</title>
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+		<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+	</head>
+
+	<body>
+		<div id="pageA" data-role="page">
+			<div data-role="header">
+				<h1>This is Page A(initial)</h1>
+			</div>
+			<div data-role="content">
+				<ul>
+					<li>
+						<a href="#pageB">Link to page B</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div id="pageB" data-role="page">
+			<div data-role="header">
+				<h1>This is Page B</h1>
+			</div>
+			<div data-role="content">
+				<ul>
+					<li>
+						<a href="#pageA">Link to page A</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	</body>
+</html>
