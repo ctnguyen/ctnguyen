@@ -6,9 +6,9 @@ $(document).ready(function(){
 	page-wrapper     [non for mobile]
 	 page-header     [non for mobile]
   	whole-page
-	 top-page        [non for mobile]
+	 top-page        
 sidebar     content
-	bottmn-page      [non for mobile]
+	bottom-page      
 	page-footer
  */
 
