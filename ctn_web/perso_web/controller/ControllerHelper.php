@@ -28,6 +28,8 @@ class ControllerHelper
 
 		if($isgood)//lang is already good
 		{
+			$isgood = false;
+			
 			$datafilename = self::getDataNavigatorListFile();
 				
 			$xmlDoc = new DOMDocument;
@@ -41,8 +43,8 @@ class ControllerHelper
 				$buttonID = $button->getElementsByTagName('idNAME')->item(0);
 				if($buttonID)
 				{
-					if($buttonID->nodeValue === $_general_request->_lang_state){
-						$isgood = false;
+					if($buttonID->nodeValue == $_general_request->_content_state){
+						$isgood = true;
 					}
 				}
 			}

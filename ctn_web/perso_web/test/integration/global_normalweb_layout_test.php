@@ -12,39 +12,39 @@ echo $doctype;
 <html>
 <head>
 <?php 
-$rstate = new GeneralRequestState('en','home',false);
+$_general_request = new GeneralRequestState('en','home',false);
 if (!empty($_GET['fcontent']))
 {
-$rstate->resetContent($_GET['fcontent']);
+$_general_request->resetContent($_GET['fcontent']);
 }
 if (isset($_GET['fismobile']))
 {
-$rstate->resetIsMobil(TRUE);
+$_general_request->resetIsMobil(TRUE);
 }
 
-$headertool = new HtmlHeader($rstate);
+$headertool = new HtmlHeader($_general_request);
 echo $headertool->htmlcontent;
 ?>
 </head>
 <body>
 <?php
-$rstate = new GeneralRequestState('en','home',false);
+$_general_request = new GeneralRequestState('en','home',false);
 if (!empty($_GET['flang']))
 {
-	$rstate->resetContent($_GET['flang']);
+	$_general_request->resetContent($_GET['flang']);
 }
 if (!empty($_GET['fcontent']))
 {
-	$rstate->resetContent($_GET['fcontent']);
+	$_general_request->resetContent($_GET['fcontent']);
 }
 if (isset($_GET['fismobile']))
 {
-	$rstate->resetIsMobil(TRUE);
+	$_general_request->resetIsMobil(TRUE);
 }
 
 echo '	<div id="page-wrapper">'.PHP_EOL;
 
-$headercontent = ModelHelper::getHtmlHeader($rstate,2);
+$headercontent = ModelHelper::getHtmlHeader($_general_request,2);
 echo $headercontent;
 
 echo '		<div id="whole-page">'.PHP_EOL;
@@ -54,11 +54,12 @@ echo '				<div id="actuallangue" style="display:none;">fr</div>'.PHP_EOL;
 echo '				<div id="actualcontent" style="display:none;">home</div>'.PHP_EOL;
 echo '			</div>'.PHP_EOL;
 
-$htmlNavigator = ModelHelper::getHtmlNavigator($rstate,3);
-echo $htmlNavigator;
 
-$maincontent = ModelHelper::getHtmlMainContent($rstate,3);
+$htmlNavigator = ModelHelper::getHtmlNavigator($_general_request,3);
+echo $htmlNavigator;
+$maincontent = ModelHelper::getHtmlMainContent($_general_request,3);
 echo $maincontent;
+
 
 echo '			<div id="bottom-page">'.PHP_EOL;
 echo '				<div class="referencing"><h1>NGUYEN Chi Thanh, INRIA, SOFA, Digiplante, Paris VI, Paris 6</h1></div>'.PHP_EOL;
@@ -66,7 +67,7 @@ echo '			</div>'.PHP_EOL;
 
 
 echo '		</div>'.PHP_EOL;
-$footercontent = ModelHelper::getHtmlFooter($rstate,2);
+$footercontent = ModelHelper::getHtmlFooter($_general_request,2);
 echo $footercontent;
 echo '	</div>'.PHP_EOL;
 
