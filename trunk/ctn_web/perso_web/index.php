@@ -13,7 +13,7 @@ $isMobile = false;
 if ($_GET['isMobile'] ==='true' ){
 	$isMobile = true;
 }
-if (GlobalConfig::isMobile()){
+if (ControllerHelper::isMobile()){
 	$isMobile = true;
 }
 

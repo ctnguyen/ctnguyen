@@ -22,20 +22,7 @@ class GlobalConfig
 			setcookie("lang", self::DEFAULT_LANG , time()+$_cookie_time);
 		}
 	}
-	
-	
-	/** request if user is in a mobile browser
-	 * 
-	 */
-	public static function isMobile()
-	{
-		$ismobile = false;
-		if(strstr(strtolower($_SERVER['HTTP_USER_AGENT']), 'mobile') || strstr(strtolower($_SERVER['HTTP_USER_AGENT']), 'android'))
-		{
-			$ismobile = true;
-		}
-		return $ismobile;
-	}
+
 }
 
 
