@@ -75,11 +75,18 @@ echo '			<div id="bottom-page">'.PHP_EOL;
 echo '				<div class="referencing"><h1>NGUYEN Chi Thanh, INRIA, SOFA, Digiplante, Paris VI, Paris 6</h1></div>'.PHP_EOL;
 echo '			</div>'.PHP_EOL;
 
-
-echo '		</div>'.PHP_EOL; //end if of <div id="whole-page">
 $footercontent = ModelHelper::getHtmlFooter($_general_request,2);
-echo $footercontent;
 
+if(!$_general_request->_isMobile)//if not mobile, footer is out of whole-page
+{
+	echo '		</div>'.PHP_EOL; //end if of <div id="whole-page">
+	echo $footercontent;
+}
+else//if mobile, footer is in whole-page
+{
+	echo $footercontent;	
+	echo '		</div>'.PHP_EOL; //end if of <div id="whole-page">
+}
 
 if(!$_general_request->_isMobile)
 {
