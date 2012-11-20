@@ -1,4 +1,6 @@
 <?php
+require_once realpath( dirname(__FILE__ ) . '/../global-config.php');
+
 /** view helpers 
  */
 
