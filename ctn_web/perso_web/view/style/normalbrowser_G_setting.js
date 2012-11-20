@@ -105,14 +105,38 @@ function set_global_layout()
 function debug_layout()
 {
 	//plot border of all bloc
-	//$('body').css({"border":"1px solid #ffffff"});
+	$('body').css({"border":"1px solid #ffffff"});
 	$('#whole-page').css({"border":"1px solid #00FF00"});
-	//$('#top-wrapper').css({"border":"1px solid #D2691E"});
 	$('#top-page').css({"border":"1px solid #808080"});
-	//$('#page').css({"border":"1px solid #008000"});
 	$('#maincontent').css({"border":"1px solid #00BFFF"});
 	$('#navigator').css({"border":"1px solid #0000FF"});
 	$('#bottom-page').css({"border":"1px solid #808080"});
 	$('#bottom-wrapper').css({"border":"1px solid #D2691E"});
-	//$('ul._sidebar.menu').css({"border":"1px solid black"});
+}
+
+
+function get_actual_lang_state(){	return $("div#actuallangue").text(); }
+function reset_actual_lang_state(newlang){ $("div#actuallangue").html(newlang); }
+
+function get_actual_content_state(){	return $("div#actualcontent").text(); }
+function reset_actual_content_state(newlabel){ $("div#actualcontent").html(newlabel); }
+
+
+
+
+function update_langue(newlang)
+{
+	alert('actual lang is '+ get_actual_lang_state() ); //Debug
+	
+	reset_actual_lang_state(newlang);
+	alert('new lang is '+ get_actual_lang_state() );    //Debug
+}
+
+function update_maincontent(newcontentlabel)
+{
+	alert('actual content is '+ get_actual_content_state() );    //Debug
+	
+	
+	reset_actual_content_state(newcontentlabel);	
+	alert('new content label is '+ get_actual_content_state() ); //Debug
 }

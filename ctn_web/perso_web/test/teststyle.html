@@ -27,7 +27,7 @@
 			<div id="top-page">
 				<div class="referencing"><h1>NGUYEN Chi Thanh, INRIA, SOFA, Digiplante, Paris VI, Paris 6</h1></div>
 				<div id="actuallangue" style="display:none;">fr</div>
-				<div id="actuallnavication" style="display:none;">home</div>
+				<div id="actualcontent" style="display:none;">home</div>
 			</div>
 			<div id="navigator">
 				<div id="langnavigator">
@@ -68,12 +68,11 @@
 	</div>
 	<script type="text/javascript">
 		$("img.langbutton").click(function() {
-			reset_actuallang($(this).attr("id"));
-			reload_allpage($(this).attr("id"));
+			update_langue($(this).attr("id"));
+
 		});
 		$("a.navigatebutton").click(function() {
-			reset_actualnaviation(attr("id"));
-			reload_maincontent($(this).attr("id"));
+			update_maincontent($(this).attr("id"));
 		});
 	</script>
 </body>
