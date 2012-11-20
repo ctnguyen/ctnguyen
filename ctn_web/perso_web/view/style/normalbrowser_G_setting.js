@@ -3,10 +3,6 @@
  */
 
 
-$(document).ready(function(){
-	set_global_layout();
-});
-
 /*
 	page-wrapper     [non for mobile]
 	 top-wrapper     [non for mobile]
@@ -25,7 +21,7 @@ function _get_content_width(){return '70%';}
 /* setting up bloc size and several style like border, backround..
  * contribute with styles/layout.css
  * */
-function set_global_layout()
+function set_global_normal_layout()
 {
 	$('body').css({
 		"margin":"0 0 0 0"
