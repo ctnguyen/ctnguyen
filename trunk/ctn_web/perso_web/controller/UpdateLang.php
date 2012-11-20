@@ -2,9 +2,9 @@
 require_once realpath( dirname(__FILE__ ) . '/../global-config.php');
 require_once GlobalConfig::SERVER_ROOT_DIR.'controller/GeneralRequestState.php';
 require_once GlobalConfig::SERVER_ROOT_DIR.'controller/ControllerHelper.php';
-require_once GlobalConfig::SERVER_ROOT_DIR.'model/helper.php';
+require_once GlobalConfig::SERVER_ROOT_DIR.'model/ModelHelper.php';
 
-/* \script UpdateContent
+/* \script UpdateLang
  *
 * Giving a GeneralReauestState, UpdateLang controller give the html with feature as
 * [no header tag in the given page]
