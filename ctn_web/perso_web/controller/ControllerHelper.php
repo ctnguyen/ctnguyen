@@ -15,8 +15,8 @@ class ControllerHelper
 
 	/* Request is good if and only if satisfying
 	 *  - lang must be 'en' or 'fr' or 'vn'
-	*  - content must be listed in the data/NavigatorList.xml
-	*/
+	 *  - content must be listed in the data/NavigatorList.xml
+	 */
 	public static function isGoodRequest(&$_general_request)
 	{
 		$isgood = true;
@@ -50,6 +50,19 @@ class ControllerHelper
 			}
 		}
 		return $isgood;
+	}
+	
+	/** request if user is in a mobile browser
+	 *
+	 */
+	public static function isMobile()
+	{
+		$ismobile = false;
+		if(strstr(strtolower($_SERVER['HTTP_USER_AGENT']), 'mobile') || strstr(strtolower($_SERVER['HTTP_USER_AGENT']), 'android'))
+		{
+			$ismobile = true;
+		}
+		return $ismobile;
 	}
 }
 
