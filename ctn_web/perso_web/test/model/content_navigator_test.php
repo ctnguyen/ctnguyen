@@ -6,10 +6,10 @@ require_once GlobalConfig::SERVER_ROOT_DIR.'model/helper.php';
 
 <html>
 <head>
-<title>Main Content Test</title>
+<title>Content Navigator Test (Navbar)</title>
 </head>
 <body>
-	<h1>TEST FOR HTML CONTROLLER LIST CONTENT</h1>
+	<h1>Content Navigator Test (Navbar)</h1>
 	<h1>type ctr+u to see sources</h1>
 	<hr />
 	<?php 
