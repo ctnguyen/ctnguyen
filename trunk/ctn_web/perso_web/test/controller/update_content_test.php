@@ -10,7 +10,7 @@ require_once GlobalConfig::SERVER_ROOT_DIR.'controller/UpdateContent.php';
 </head>
 <body>
 	<h1>TEST REQUEST CONTROLLER UPDATE CONTENT</h1>
-	<form method='get'  target="_blank" action="<?php echo GlobalConfig::DOMAINE_NAME.'controller/UpdateContent.php';?>">
+	<form method="get" target="_blank" action="<?php echo GlobalConfig::DOMAINE_NAME.'controller/UpdateContent.php';?>">
 		<p>
 			lang: <input type="text" name='lang'/>
 		</p>

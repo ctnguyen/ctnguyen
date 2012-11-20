@@ -31,6 +31,7 @@ class GeneralRequestState
 	public function resetLang($_l)
 	{
 		$this->_lang_state    = $_l;
+		setcookie("lang", $_l , time()+$_cookie_time);
 	}
 	
 	public function resetContent($_c)

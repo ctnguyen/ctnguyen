@@ -6,7 +6,7 @@ class LangNavigator
 {
 	public $htmlcontent;
 	
-	public function __construct($_general_request , $nbIndent=0)
+	public function __construct(&$_general_request , $nbIndent=0)
 	{
 		$indent = '';
 		for($i=0; $i< $nbIndent ; $i++)
@@ -27,9 +27,13 @@ class LangNavigator
 		$this->htmlcontent .= $indent.'	</table>'.PHP_EOL;
 		$this->htmlcontent .= $indent.'</div>'.PHP_EOL;
 		
-		$this->htmlcontent .= $indent.'<div align="center">'.PHP_EOL;
-		$this->htmlcontent .= $indent.'	<img id="logo" src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/ctn.jpg"/>'.PHP_EOL;
-		$this->htmlcontent .= $indent.'</div>'.PHP_EOL;
+		//Printing logo if this is not on mobile
+		if( !$_general_request->_isMobile )
+		{
+			$this->htmlcontent .= $indent.'<div align="center">'.PHP_EOL;
+			$this->htmlcontent .= $indent.'	<img id="logo" src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/ctn.jpg"/>'.PHP_EOL;
+			$this->htmlcontent .= $indent.'</div>'.PHP_EOL;
+		}
 	}
 }
 

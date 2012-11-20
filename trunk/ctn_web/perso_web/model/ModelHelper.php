@@ -10,9 +10,17 @@ require_once dirname(__FILE__ ) . '/MainContent.php';
 
 class ModelHelper
 {
-	public static function getDocType($_request)
+	public static function getDocType(&$_request)
 	{
-		$doctype = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'.PHP_EOL;
+		$doctype = '';
+		if(!$_request->_isMobile)
+		{
+			$doctype .= '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'.PHP_EOL;
+		}
+		else
+		{
+			$doctype .= '<!DOCTYPE html>'.PHP_EOL;
+		}
 		return $doctype;
 	}
 
@@ -26,9 +34,12 @@ class ModelHelper
 		
 		$headerwrapimagepath = '\''. GlobalConfig::DOMAINE_NAME .'model/htmldata/image/top_wrapper.jpg\'';
 		$headerDiv = '';
-		$headerDiv .= $indent.'<div id="top-wrapper"  style="background-image:url('.$headerwrapimagepath.');background-repeat:repeat-x">'.PHP_EOL;
-		$headerDiv .= $indent.'	&nbsp;&nbsp;'.PHP_EOL;
-		$headerDiv .= $indent.'</div>'.PHP_EOL;
+		if(!($_request->isMobile) )
+		{
+			$headerDiv .= $indent.'<div id="top-wrapper"  style="background-image:url('.$headerwrapimagepath.');background-repeat:repeat-x">'.PHP_EOL;
+			$headerDiv .= $indent.'	&nbsp;&nbsp;'.PHP_EOL;
+			$headerDiv .= $indent.'</div>'.PHP_EOL;
+		}
 		return $headerDiv;
 	}
 
@@ -43,7 +54,14 @@ class ModelHelper
 		$footerwrapimagepath = '\''. GlobalConfig::DOMAINE_NAME .'model/htmldata/image/bottom_wrapper.jpg\'';
 
 		$footerDiv  = '';
-		$footerDiv .= $indent.'<div id="bottom-wrapper" style="background-image:url('.$footerwrapimagepath.');background-repeat:repeat-x">'.PHP_EOL;
+		if( !($_request->_isMobile) )
+		{
+			$footerDiv .= $indent.'<div id="bottom-wrapper" style="background-image:url('.$footerwrapimagepath.');background-repeat:repeat-x">'.PHP_EOL;
+		}
+		else
+		{
+			$footerDiv .= $indent.'<div id="bottom-wrapper">'.PHP_EOL;
+		}
 		$footerDiv .= $indent.'	<h1 id="page-footer"> Chi-Thanh NGUYEN &copy; ';
 		$actualyear = date('Y');
 		$footerDiv .= $indent. $actualyear .' ';
