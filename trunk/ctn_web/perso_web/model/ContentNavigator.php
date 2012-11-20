@@ -1,6 +1,7 @@
 <?php
 require_once realpath( dirname(__FILE__ ) . '/../global-config.php');
 require_once GlobalConfig::SERVER_ROOT_DIR.'controller/GeneralRequestState.php';
+require_once GlobalConfig::SERVER_ROOT_DIR.'controller/ControllerHelper.php';
 
 /* class returning the content html of all content
  * concretly this is the sidebar in the web
@@ -9,7 +10,7 @@ class ContentNavigator
 {
 	public $htmlcontent;
 	
-	public function __construct($_general_request , $nbIndent=0)
+	public function __construct(&$_general_request , $nbIndent=0)
 	{
 		$additionalInden = '';
 		for($i=0; $i< $nbIndent ; $i++)
@@ -17,8 +18,7 @@ class ContentNavigator
 			$additionalInden .= '	';
 		}
 		
-		$datafilename = '';
-		$datafilename .= GlobalConfig::SERVER_ROOT_DIR.'controller/data/NavigatorList.xml';
+		$datafilename = ControllerHelper::getDataNavigatorListFile();
 		
 		$xmlDoc = new DOMDocument;
 		$xmlDoc->load($datafilename);
