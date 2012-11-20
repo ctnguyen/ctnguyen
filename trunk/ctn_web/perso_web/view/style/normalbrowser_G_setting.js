@@ -1,3 +1,8 @@
+/* 
+ * NORMAL SETTING
+ */
+
+
 $(document).ready(function(){
 	set_global_layout();
 });
