@@ -42,7 +42,10 @@ class ContentNavigator
 			}
 			else
 			{
-				$this->htmlcontent .= $additionalInden.'		'.$button->getElementsByTagName("htmlNAME")->item(0)->nodeValue.PHP_EOL;;
+				if(!$_general_request->_isMobile)
+				{
+					$this->htmlcontent .= $additionalInden.'		'.$button->getElementsByTagName("htmlNAME")->item(0)->nodeValue.PHP_EOL;;
+				}
 			}
 		}
 		

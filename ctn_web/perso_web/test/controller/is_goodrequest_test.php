@@ -6,10 +6,10 @@ require_once GlobalConfig::SERVER_ROOT_DIR.'controller/ControllerHelper.php';
 
 <html>
 <head>
-<title>Update Content Test</title>
+<title>Check Good Request</title>
 </head>
 <body>
-	<h1>TEST REQUEST CONTROLLER UPDATE CONTENT</h1>
+	<h1>CHECK GOOD REQUEST</h1>
 	<form method="get" action="<?php echo $_SERVER['PHP_SELF'];?>">
 		<p>
 			lang: <input type="text" name='lang' />

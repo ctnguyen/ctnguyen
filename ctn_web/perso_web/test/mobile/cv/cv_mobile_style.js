@@ -1,6 +1,6 @@
 function bindmobilecvstyle() 
 {
-	// CV mobile globale layout ================================================ 
+	// mobile globale layout ================================================ 
 	$('#whole-page').attr('data-role', 'page');
 	$('#navigator').attr('data-role', 'header');
 	$('#langnavigator').attr('data-role', 'navbar');
