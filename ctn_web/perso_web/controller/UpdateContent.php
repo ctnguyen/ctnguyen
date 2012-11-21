@@ -24,6 +24,9 @@ $isMobile = false;
 if (isset($_GET['ismobile'])){
 	$isMobile = true;
 }
+if ($_GET['isMobile'] == 'true'){
+	$isMobile = true;
+}
 if (ControllerHelper::isMobile()){
 	$isMobile = true;
 }
