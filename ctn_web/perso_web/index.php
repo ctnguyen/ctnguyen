@@ -7,6 +7,11 @@ require_once GlobalConfig::SERVER_ROOT_DIR.'view/HtmlHeader.php';
 require_once GlobalConfig::SERVER_ROOT_DIR.'model/ModelHelper.php';
 
 
+// DEFAUTL REQUEST IS SETTING HERE WHEN VISITE index.php without GET[]
+$default_lang = 'en';
+$default_content = 'home';
+
+
 GlobalConfig::init_cookie_lang(5);//TODO set to big number
 
 $isMobile = false;
@@ -19,8 +24,8 @@ if (ControllerHelper::isMobile()){
 
 $good_request = true;
 
-// Default page request is in English and home page
-$_general_request = new GeneralRequestState('en', 'home', $isMobile);
+
+$_general_request = new GeneralRequestState($default_lang, $default_content, $isMobile);
 
 if (!empty($_GET['lang']))
 {
@@ -38,7 +43,7 @@ if( !ControllerHelper::isGoodRequest($_general_request) )
 }
 
 // If request is bad, reset the request to the default one
-//if(!$good_request){$_general_request->resetLang('en'); $_general_request->resetContent('home');}//TODO
+//if(!$good_request){$_general_request->resetLang($default_lang); $_general_request->resetContent($default_content);}//TODO
 
 ////	HTML	HTML	HTML	HTML	HTML	HTML	HTML	HTML	/////   
 $doctype = ModelHelper::getDocType($_general_request);
