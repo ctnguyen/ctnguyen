@@ -17,7 +17,8 @@ class ViewHelper
 		
 		// jquery is a common use
 		$commonheader.= '	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>'.PHP_EOL;
-
+		$commonheader.= '	<script src="'.GlobalConfig::DOMAINE_NAME.'view/style/common_setting.js"></script>'.PHP_EOL;
+		
 		return $commonheader;
 	}
 }
