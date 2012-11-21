@@ -1,10 +1,11 @@
 /* 
- * NORMAL SETTING
+ * NORMAL BROWSER SETTING
  */
 
 $(document).ready(function() {
 	initialize_normal_browser();
 });
+
 
 function initialize_normal_browser()
 {
@@ -132,15 +133,6 @@ function debug_layout()
 	$('#bottom-page').css({"border":"1px solid #808080"});
 	$('#bottom-wrapper').css({"border":"1px solid #D2691E"});
 }
-
-
-function get_actual_lang_state(){	return $("div#actuallangue").text(); }
-function reset_actual_lang_state(newlang){ $("div#actuallangue").html(newlang); }
-
-function get_actual_content_state(){	return $("div#actualcontent").text(); }
-function reset_actual_content_state(newlabel){ $("div#actualcontent").html(newlabel); }
-
-
 
 
 function update_langue(newlang)

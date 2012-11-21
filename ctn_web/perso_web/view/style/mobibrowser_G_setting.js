@@ -1,5 +1,5 @@
 /* 
- * MOBILE SETTING
+ * MOBILE BROWSER SETTING
  */
 
 function initialize_mobile_browser()
@@ -36,16 +36,6 @@ function set_global_mobile_layout()
 	$('#content').attr('data-role','content');
 	$('#bottom-wrapper').attr('data-role','footer');
 }
-
-
-
-function get_actual_lang_state(){	return $("div#actuallangue").text(); }
-function reset_actual_lang_state(newlang){ $("div#actuallangue").html(newlang); }
-
-function get_actual_content_state(){	return $("div#actualcontent").text(); }
-function reset_actual_content_state(newlabel){ $("div#actualcontent").html(newlabel); }
-
-
 
 
 function update_langue(newlang)
