@@ -3,10 +3,14 @@ require_once realpath( dirname(__FILE__ ) . '/../global-config.php');
 require_once GlobalConfig::SERVER_ROOT_DIR.'controller/GeneralRequestState.php';
 
 /* \class MainContent
- * This class in handle the main content of the web. The content is stored in a .html file
+ * This class in handle the main content of the web. 
+ * The content is read from .html file and store in the member variable $htmlcontent
+ * 
+ * <div id="maincontent">
+ * 	$htmlcontent readed here
+ * </div>
  * 
  * It is build by giving a GeneralRequestState from user. 
- *  
  */
 
 class MainContent

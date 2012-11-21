@@ -3,9 +3,18 @@ require_once realpath( dirname(__FILE__ ) . '/../global-config.php');
 require_once GlobalConfig::SERVER_ROOT_DIR.'controller/GeneralRequestState.php';
 require_once GlobalConfig::SERVER_ROOT_DIR.'controller/ControllerHelper.php';
 
-/* class returning the content html of all content
- * concretly this is the sidebar in the web
+/** \class ContentNavigator
+ * This class handle the par "contentnavigator" of the navigator in the html file
+ * Containing roughly a list of disponible content, read from a data xml file
+ *
+ * <div id="contentnavigator">
+ *	$htmlcontent
+ * </div>
+ * 
+ * All html content of this DIV is stored in the member variable $htmlcontent	
  */
+
+
 class ContentNavigator
 {
 	public $htmlcontent;

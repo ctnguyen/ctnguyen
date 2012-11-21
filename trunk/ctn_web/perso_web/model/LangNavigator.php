@@ -2,6 +2,17 @@
 require_once realpath( dirname(__FILE__ ) . '/../global-config.php');
 require_once GlobalConfig::SERVER_ROOT_DIR.'controller/GeneralRequestState.php';
 
+/** \class LangNavigator
+ * This class handle the par "lang" of the navigator in the html file
+ * Containing roughly three flags buttons in a div
+ *
+ * <div id="langnavigator">
+ *	$htmlcontent
+ * </div>
+ * 
+ * All html content of this DIV is stored in the member variable $htmlcontent	
+ */
+
 class LangNavigator
 {
 	public $htmlcontent;
