@@ -2,6 +2,24 @@
  * NORMAL SETTING
  */
 
+$(document).ready(function() {
+	initialize_normal_browser();
+});
+
+function initialize_normal_browser()
+{
+	set_global_normal_layout();
+
+	$("img.langbutton").live('click',function(event) {
+		event.preventDefault();
+		update_langue($(this).attr("id"));
+	});
+	$("a.navigatebutton").live('click',function(event) {
+		event.preventDefault();
+		update_maincontent($(this).attr("id"));
+	});
+}
+
 
 /*
 	page-wrapper     [non for mobile]

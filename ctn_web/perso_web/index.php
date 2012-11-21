@@ -90,23 +90,15 @@ if(!$_general_request->_isMobile)
 	echo '	</div>'.PHP_EOL;//end div of  <div id="page-wrapper">
 }
 
-echo '		<script type="text/javascript">'.PHP_EOL ;
-if(!$_general_request->_isMobile)
+//when it is a mobile, jquery instead of use document.ready for all initialize, 
+//jquery mobile cannot, and have to call the initialize function here
+//TODO modify if found the equivalent of document ready on jquery mobile 
+if($_general_request->_isMobile)
 {
-echo '		set_global_normal_layout();'.PHP_EOL ;
+	echo '		<script type="text/javascript">'.PHP_EOL ;
+	echo '			initialize_mobile_browser();'.PHP_EOL ;
+	echo '		</script>'.PHP_EOL ;
 }
-else
-{
-	echo '			set_global_mobile_layout();'.PHP_EOL ;
-}
-echo '		$("img.langbutton").click(function() {'.PHP_EOL ;
-echo '		update_langue($(this).attr("id"));'.PHP_EOL ;
-echo '		'.PHP_EOL ;
-echo '		});'.PHP_EOL ;
-echo '		$("a.navigatebutton").click(function() {'.PHP_EOL ;
-echo '		update_maincontent($(this).attr("id"));'.PHP_EOL ;
-echo '		});'.PHP_EOL ;
-echo '		</script>'.PHP_EOL ;
 
 echo '</body>'.PHP_EOL;
 //	HTML	HTML	HTML	HTML	HTML	HTML	HTML	HTML	/////
