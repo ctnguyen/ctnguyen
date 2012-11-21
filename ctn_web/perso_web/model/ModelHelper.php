@@ -10,6 +10,11 @@ require_once dirname(__FILE__ ) . '/MainContent.php';
 
 class ModelHelper
 {
+	/** return the Doctype for Html, depending if its a mobile browser or normal browser
+	 * return here
+	 * <head>
+	 * </head>
+	 */
 	public static function getDocType(&$_request)
 	{
 		$doctype = '';
@@ -24,6 +29,11 @@ class ModelHelper
 		return $doctype;
 	}
 
+	/* return the interior of the head tag in Html
+	 * <head>
+	 * 	return here 
+	 * </head>
+	 */
 	public static function getHtmlHeader($_request, $nbIndent=0)
 	{
 		$indent = '';
@@ -43,6 +53,7 @@ class ModelHelper
 		return $headerDiv;
 	}
 
+	// return the div of bottom-wrapper, containing page-footer
 	public static function getHtmlFooter($_request, $nbIndent=0)
 	{
 		$indent = '';
@@ -84,7 +95,28 @@ class ModelHelper
 		return $footerDiv;
 	}
 
+	/** return the div of top-page, containing nothings visible,
+	 *  but useful for referencing and, important, 
+	 *  TOOL FOR DETECTING ACTUAL STATE OF PAGE 
+	 */ 
+	public static function getHtmlTopPage($_request, $nbIndent=0)
+	{
+		$indent = '';
+		for($i=0; $i< $nbIndent ; $i++)
+		{
+			$indent .= '	';
+		}
+		
+		$toppageDiv = '';
+		$toppageDiv .= $indent.'<div id="top-page">'.PHP_EOL;
+		$toppageDiv .= $indent.'	<div class="referencing"><h1>NGUYEN Chi Thanh, INRIA, SOFA, Digiplante, Paris VI, Paris 6</h1></div>'.PHP_EOL;
+		$toppageDiv .= $indent.'	<div id="actuallangue" style="display:none;">fr</div>'.PHP_EOL;
+		$toppageDiv .= $indent.'	<div id="actualcontent" style="display:none;">home</div>'.PHP_EOL;
+		$toppageDiv .= $indent.'</div>'.PHP_EOL;
+		return $toppageDiv;
+	}
 
+	// return the div of navigator (navbar for mobile, sidebar for normal visualization)
 	public static function getHtmlNavigator($_request, $nbIndent=0)
 	{
 		$nbIndentPP =  $nbIndent+1;
@@ -108,6 +140,7 @@ class ModelHelper
 		return $html_navigator;
 	}
 
+	// return the div maincontent of the html page
 	public static function getHtmlMainContent($_request, $nbIndent=0)
 	{
 		$nbIndentPP =  $nbIndent+1;
@@ -126,6 +159,22 @@ class ModelHelper
 		$html_maincontent .= $indent.'</div>'.PHP_EOL;
 
 		return $html_maincontent;
+	}
+
+	// return the div of Bottom page, nothing visible, but useful for referencing
+	public static function getHtmlBottomPage($_request, $nbIndent=0)
+	{
+		$indent = '';
+		for($i=0; $i< $nbIndent ; $i++)
+		{
+			$indent .= '	';
+		}
+
+		$bottompageDiv = '';
+		$bottompageDiv .= $indent.'<div id="bottom-page">'.PHP_EOL;
+		$bottompageDiv .= $indent.'	<div class="referencing"><h1>NGUYEN Chi Thanh, INRIA, SOFA, Digiplante, Paris VI, Paris 6</h1></div>'.PHP_EOL;
+		$bottompageDiv .= $indent.'</div>'.PHP_EOL;
+		return $bottompageDiv;
 	}
 
 }

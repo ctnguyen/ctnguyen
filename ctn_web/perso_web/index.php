@@ -38,9 +38,9 @@ if( !ControllerHelper::isGoodRequest($_general_request) )
 }
 
 // If request is bad, reset the request to the default one
-//if(!$good_request){$_general_request->resetLang('en'); $_general_request->resetContent('home');}
+//if(!$good_request){$_general_request->resetLang('en'); $_general_request->resetContent('home');}//TODO
 
-
+////	HTML	HTML	HTML	HTML	HTML	HTML	HTML	HTML	/////   
 $doctype = ModelHelper::getDocType($_general_request);
 echo $doctype;
 
@@ -58,12 +58,9 @@ if(!$_general_request->_isMobile)
 	echo $headercontent;
 }
 echo '		<div id="whole-page">'.PHP_EOL;
-echo '			<div id="top-page">'.PHP_EOL;
-echo '				<div class="referencing"><h1>NGUYEN Chi Thanh, INRIA, SOFA, Digiplante, Paris VI, Paris 6</h1></div>'.PHP_EOL;
-echo '				<div id="actuallangue" style="display:none;">fr</div>'.PHP_EOL;
-echo '				<div id="actualcontent" style="display:none;">home</div>'.PHP_EOL;
-echo '			</div>'.PHP_EOL;
 
+$htmlTopPage = ModelHelper::getHtmlTopPage($_general_request,3);
+echo $htmlTopPage; 
 
 $htmlNavigator = ModelHelper::getHtmlNavigator($_general_request,3);
 echo $htmlNavigator;
@@ -71,9 +68,9 @@ $maincontent = ModelHelper::getHtmlMainContent($_general_request,3);
 echo $maincontent;
 
 
-echo '			<div id="bottom-page">'.PHP_EOL;
-echo '				<div class="referencing"><h1>NGUYEN Chi Thanh, INRIA, SOFA, Digiplante, Paris VI, Paris 6</h1></div>'.PHP_EOL;
-echo '			</div>'.PHP_EOL;
+$htmlBottomPage = ModelHelper::getHtmlBottomPage($_general_request,3);
+echo $htmlBottomPage;
+
 
 $footercontent = ModelHelper::getHtmlFooter($_general_request,2);
 
@@ -112,6 +109,6 @@ echo '		});'.PHP_EOL ;
 echo '		</script>'.PHP_EOL ;
 
 echo '</body>'.PHP_EOL;
-
+//	HTML	HTML	HTML	HTML	HTML	HTML	HTML	HTML	/////
 
 ?>
