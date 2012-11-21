@@ -147,6 +147,28 @@ function update_maincontent(newcontentlabel)
 {
 	alert('actual content is '+ get_actual_content_state() );    //Debug
 	
+	var lang_request    = get_actual_lang_state();
+	var content_request = newcontentlabel;
+	var isMobile_request= 'false';
+	
+    $.ajax({
+    	url : 'http://localhost/controller/UpdateContent.php',
+        type: 'GET',
+        data:{'lang':lang_request,'content':content_request,'isMobile':isMobile_request},
+        cache: false,    // or set to false
+        dataType: "xml",
+        async: false,
+        success: function(loadedXHTML) {
+        	alert('ajax call success');
+    		//Replacing the div#sidebar of index page  by the one newly loaded in the uriSideBar page
+			$('#maincontent').empty().html( $(loadedXHTML).contents().find('#maincontent').html() );
+			
+			//Replacing the local style of index page by the one newly loaded in the uriSideBar page
+			//$('#contentstyle').attr('href', $(loadedXHTML).contents().find('link#contentstyle').attr('href'));
+        }
+    });
+	
+	
 	
 	reset_actual_content_state(newcontentlabel);	
 	alert('new content label is '+ get_actual_content_state() ); //Debug
