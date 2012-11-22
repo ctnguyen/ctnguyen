@@ -75,7 +75,7 @@ class ModelHelper
 		}
 		$footerDiv .= $indent.'	<h1 id="page-footer"> Chi-Thanh NGUYEN &copy; ';
 		$actualyear = date('Y');
-		$footerDiv .= $indent. $actualyear .' ';
+		$footerDiv .= $actualyear .' ';
 		
 		if($_request->_lang_state=='vn')
 		{
