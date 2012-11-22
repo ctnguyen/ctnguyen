@@ -18,7 +18,7 @@ require_once GlobalConfig::SERVER_ROOT_DIR.'controller/UpdateContent.php';
 			content: <input type="text" name='content'/>
 		</p>
 		<p>
-		<input type="checkbox" name='ismobile'>isMobile<br>
+			ismobile: <input type="text" name='ismobile'/> (enter "true" if mobile request)
 		</p>
 		<p>
 			<input type="submit" value="getUpdateContent">

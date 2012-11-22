@@ -24,7 +24,6 @@ class HtmlHeader
 		
 		$this->htmlcontent .= PHP_EOL.'<!-- common global style (mobile or normal browser)-->'.PHP_EOL;
 		
-		$auxStyleBindRelativePath = '';
 		if($_general_request->_isMobile)
 		{
 			$this->htmlcontent .= '	<script src="'.GlobalConfig::DOMAINE_NAME .'view/style/mobibrowser_G_setting.js"></script>'.PHP_EOL.PHP_EOL;
@@ -32,12 +31,10 @@ class HtmlHeader
 			$this->htmlcontent .= '	<meta name="viewport" content="width=device-width, initial-scale=1">'.PHP_EOL;
 			$this->htmlcontent .= '	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />'.PHP_EOL;
 			$this->htmlcontent .= '	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>'.PHP_EOL;
-			$auxStyleBindRelativePath .= 'view/style/mobi_'.$_general_request->_content_state . '.js';
 		}
 		else
 		{
 			$this->htmlcontent .= PHP_EOL.'	<script src="'.GlobalConfig::DOMAINE_NAME .'view/style/normalbrowser_G_setting.js"></script>'.PHP_EOL;
-			$auxStyleBindRelativePath .= 'view/style/'.$_general_request->_content_state .'.js';
 		}
 		
 		$this->htmlcontent .= '<!--'.PHP_EOL;
@@ -45,7 +42,7 @@ class HtmlHeader
 		$this->htmlcontent .= ' Each time user change content, this part will also be updated'.PHP_EOL;
 		$this->htmlcontent .= ' The file name rule is view/[<mobile?>_][contentID].js'.PHP_EOL;
 		$this->htmlcontent .= '-->'.PHP_EOL;
-		$this->htmlcontent .= '	<script class="specificstyle" src="'. GlobalConfig::DOMAINE_NAME . $auxStyleBindRelativePath .'"></script>'.PHP_EOL;
+		$this->htmlcontent .= ViewHelper::getSpecificStyleSetting($_general_request);
 		//$this->htmlcontent .= '	<script type="text/javascript" src="'. GlobalConfig::DOMAINE_NAME . $auxStyleBindRelativePath .'"></script>'.PHP_EOL;
 	}
 }

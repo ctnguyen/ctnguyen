@@ -7,6 +7,14 @@ require_once realpath( dirname(__FILE__ ) . '/../global-config.php');
 //
 class ViewHelper
 {
+	/** Print the html common part for the html <heade>
+	 *  depending on the content requested and the device (mobile or not)
+	 *  <head>
+	 *  	[print the common part of this part]
+	 *  
+	 *  
+	 *  </head>
+	 */
 	public static function getCommonHeader()
 	{
 		$commonheader = '<!-- common html header for all case-->'.PHP_EOL;
@@ -21,6 +29,31 @@ class ViewHelper
 		$commonheader.= '	<script src="'.GlobalConfig::DOMAINE_NAME.'view/style/common_setting.js"></script>'.PHP_EOL;
 		
 		return $commonheader;
+	}
+	
+	
+	/** Print the html tag <script class="specificstyle"> for the html <heade>
+	 *  depending on the content requested and the device (mobile or not) 
+	 *   <head>
+	 *   
+	 *   
+	 *  	<script class="specificstyle" src="[DOMAINE_NAME]/view/style/[mobi]_[content].js"></script>
+	 *  </head>
+	 */
+	public static function getSpecificStyleSetting(&$_general_request)
+	{
+		$specificstylescript = '';
+		
+		if($_general_request->_isMobile)
+		{
+			$specificstylescript .= '	<script class="specificstyle" src="'.GlobalConfig::DOMAINE_NAME.'view/style/mobi_'.$_general_request->_content_state.'.js"></script>'.PHP_EOL;
+		}
+		else
+		{
+			$specificstylescript .= '	<script class="specificstyle" src="'.GlobalConfig::DOMAINE_NAME.'view/style/'.$_general_request->_content_state.'.js"></script>'.PHP_EOL;
+		}
+		
+		return $specificstylescript;
 	}
 }
 ?>
