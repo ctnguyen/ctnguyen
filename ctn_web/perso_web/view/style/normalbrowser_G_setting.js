@@ -160,7 +160,7 @@ function update_maincontent(newcontentlabel)
 		alert( 'ajax done mgs [' + msg + ']');
 		
 		$('#maincontent').empty().html('hello content changed');
-		$('script').remove();
+		$('head .specificstyle').remove();
 		//$('script[class=specificstyle]').remove();
 
 		//Replacing the div#sidebar of index page  by the one newly loaded in the uriSideBar page
