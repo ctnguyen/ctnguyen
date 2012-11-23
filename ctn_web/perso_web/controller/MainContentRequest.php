@@ -2,10 +2,9 @@
 require_once realpath( dirname(__FILE__ ) . '/../global-config.php');
 require_once GlobalConfig::SERVER_ROOT_DIR.'controller/GeneralRequestState.php';
 require_once GlobalConfig::SERVER_ROOT_DIR.'controller/ControllerHelper.php';
-require_once GlobalConfig::SERVER_ROOT_DIR.'model/ModelHelper.php';
-require_once GlobalConfig::SERVER_ROOT_DIR.'view/ViewHelper.php';
+require_once GlobalConfig::SERVER_ROOT_DIR.'model/MainContent.php';
 
-/* \script UpdateContent
+/* \script MainContentRequest
  *
 * Giving a GeneralReauestState, UpdateContent controller give the html with feature as
 *
@@ -15,7 +14,7 @@ require_once GlobalConfig::SERVER_ROOT_DIR.'view/ViewHelper.php';
 *</head>
 *<body>
 *			<div id="maincontent">
-*				<content loaded here by using model MainContent>
+*				<THIS SCRIPT GIVE THE CONTENT HERE>
 * 			</div>
 *</body>
 */
@@ -49,7 +48,6 @@ else
 	$good_request = false;
 }
 
-$htmlResult = '';
 
 if( !ControllerHelper::isGoodRequest($_general_request) )
 {
@@ -57,22 +55,19 @@ if( !ControllerHelper::isGoodRequest($_general_request) )
 }
 
 
-$htmlResult .= '<head>'.PHP_EOL;
-$htmlResult .= ViewHelper::getSpecificStyleSetting($_general_request);
-$htmlResult .= '</head>'.PHP_EOL;
-$htmlResult .= '<body>'.PHP_EOL;
+
+$htmlResult = '';
+
+$maincontent_part = new MainContent($_general_request,4);
+
 if($good_request)
 {
-	$htmlResult .= ModelHelper::getHtmlMainContent($_general_request,3);
+	$htmlResult .= $maincontent_part->htmlcontent;
 }
 else
 {
-	$htmlResult .= '			<div id="maincontent">'.PHP_EOL;
-	$htmlResult .= '				';
 	$htmlResult .= '<h1>Failed Request for : content['.$_general_request->_content_state.'] ,lang['.$_general_request->_lang_state.']</h1>'.PHP_EOL;
-	$htmlResult .= '			</div>'.PHP_EOL;
 }
-$htmlResult .= '</body>'.PHP_EOL;
 
 echo $htmlResult;
 
