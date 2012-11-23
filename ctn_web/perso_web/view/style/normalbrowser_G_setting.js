@@ -145,7 +145,7 @@ function update_langue(newlang)
 
 function update_maincontent(newcontentlabel)
 {
-	alert('actual content is '+ get_actual_content_state() );    //Debug
+	//alert('actual content is '+ get_actual_content_state() );    //Debug
 
 	var lang_request    = get_actual_lang_state();
 	var content_request = newcontentlabel;
@@ -153,14 +153,14 @@ function update_maincontent(newcontentlabel)
 
 	$.ajax({
 		type: 'GET'
-		,url : 'controller/UpdateContent.php'
+		,url : 'controller/MainContentRequest.php'
 		,data:{'lang':lang_request,'content':content_request,'isMobile':isMobile_request}
 		,dataType: 'html'
 	}).done(function( msg ) {
-		alert( 'ajax done mgs [' + msg + ']');
+		//alert( 'ajax done mgs [' + msg + ']'); //Debug
 		
-		$('#maincontent').empty().html('hello content changed');
-		$('head .specificstyle').remove();
+		$('#maincontent').empty().html(msg);
+		//$('head .specificstyle').remove();
 		//$('script[class=specificstyle]').remove();
 
 		//Replacing the div#sidebar of index page  by the one newly loaded in the uriSideBar page
@@ -171,5 +171,5 @@ function update_maincontent(newcontentlabel)
 
 
 	reset_actual_content_state(newcontentlabel);	
-	alert('new content label is '+ get_actual_content_state() ); //Debug
+	//alert('new content label is '+ get_actual_content_state() ); //Debug
 }
