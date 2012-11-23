@@ -155,10 +155,14 @@ function update_maincontent(newcontentlabel)
 		type: 'GET'
 		,url : 'controller/UpdateContent.php'
 		,data:{'lang':lang_request,'content':content_request,'isMobile':isMobile_request}
-		//,dataType: 'xml'
+		,dataType: 'html'
 	}).done(function( msg ) {
 		alert( 'ajax done mgs [' + msg + ']');
 		
+		$('#maincontent').empty().html('hello content changed');
+		$('script').remove();
+		//$('script[class=specificstyle]').remove();
+
 		//Replacing the div#sidebar of index page  by the one newly loaded in the uriSideBar page
 		//$('#maincontent').empty().html( $(loadedXHTML).contents().find('#maincontent').html() );
 
