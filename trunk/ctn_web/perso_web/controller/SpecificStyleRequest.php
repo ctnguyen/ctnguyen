@@ -2,19 +2,21 @@
 require_once realpath( dirname(__FILE__ ) . '/../global-config.php');
 require_once GlobalConfig::SERVER_ROOT_DIR.'controller/GeneralRequestState.php';
 require_once GlobalConfig::SERVER_ROOT_DIR.'controller/ControllerHelper.php';
+require_once GlobalConfig::SERVER_ROOT_DIR.'view/ViewHelper.php';
 
 
-/* \script PageFooterRequest
+/* \script SpecificStyleRequest
  *
- * Giving a GeneralReauestState, UpdateLang controller give the html with feature as
- * [no header tag in the given page]
- *<body>
- *			<div id="bottom-wrapper">
- *				<THIS SCRIPT GIVE THE CONTENT HERE>
- * 			</div>
- *</body>
- */
-
+* Giving a GeneralReauestState, UpdateLang controller give the html with feature as
+* [no header tag in the given page]
+*<head>
+*
+*
+*
+*
+*	<script class="specificstyle" src="[DOMAINE_NAME]/view/style/[mobi]_[content].js"></script>
+*</head>
+*/
 
 $isMobile = false;
 
@@ -54,23 +56,7 @@ if( !ControllerHelper::isGoodRequest($_general_request) )
 
 $htmlResult = '';
 
-$htmlResult .= '			<h1 id="page-footer"> Chi-Thanh NGUYEN &copy; ';
-$actualyear = date('Y');
-$htmlResult .= $actualyear .' ';
-
-if($_general_request->_lang_state=='vn')
-{
-	$htmlResult .= 'Web Đang xây dựng';
-}
-elseif($_general_request->_lang_state =='fr')
-{
-	$htmlResult .= 'Web en construction';
-}
-else
-{
-	$htmlResult .= 'Web in construct';
-}
-$htmlResult .= '</h1>'.PHP_EOL;
+$htmlResult .= ViewHelper::getSpecificStyleSetting($_general_request);
 
 echo $htmlResult;
 
