@@ -137,10 +137,44 @@ function debug_layout()
 
 function update_langue(newlang)
 {
-	alert('actual lang is '+ get_actual_lang_state() ); //Debug
+	//alert('actual lang is '+ get_actual_lang_state() ); //Debug
 
+	var lang_request    = newlang;
+	var content_request = get_actual_content_state();
+	var isMobile_request= 'false';
+	
+	$.ajax({
+		type: 'GET'
+		,url : 'controller/ContentNavigatorRequest.php'
+		,data:{'lang':lang_request,'content':content_request,'isMobile':isMobile_request}
+		,dataType: 'html'
+	}).done(function( loadedcontentnavigator ) {
+		$('#contentnavigator').empty().html( loadedcontentnavigator );
+	});
+	
+	
+	$.ajax({
+		type: 'GET'
+		,url : 'controller/MainContentRequest.php'
+		,data:{'lang':lang_request,'content':content_request,'isMobile':isMobile_request}
+		,dataType: 'html'
+	}).done(function( loadedmaincontentdiv ) {
+		
+		$('#maincontent').empty().html(loadedmaincontentdiv);
+
+	});
+	
+	$.ajax({
+		type: 'GET'
+		,url : 'controller/PageFooterRequest.php'
+		,data:{'lang':lang_request,'content':content_request,'isMobile':isMobile_request}
+		,dataType: 'html'
+	}).done(function( loadedfooterpage ) {
+		$('#bottom-wrapper').empty().html( loadedfooterpage );
+	});
+	
 	reset_actual_lang_state(newlang);
-	alert('new lang is '+ get_actual_lang_state() );    //Debug
+	//alert('new lang is '+ get_actual_lang_state() );    //Debug
 }
 
 function update_maincontent(newcontentlabel)
@@ -151,24 +185,28 @@ function update_maincontent(newcontentlabel)
 	var content_request = newcontentlabel;
 	var isMobile_request= 'false';
 
+	
+	$.ajax({
+		type: 'GET'
+		,url : 'controller/SpecificStyleRequest.php'
+		,data:{'lang':lang_request,'content':content_request,'isMobile':isMobile_request}
+		,dataType: 'html'
+	}).done(function( specificstylescript ) {
+		$('head .specificstyle').remove();
+		$('head').append(specificstylescript);
+	});
+	
+	
 	$.ajax({
 		type: 'GET'
 		,url : 'controller/MainContentRequest.php'
 		,data:{'lang':lang_request,'content':content_request,'isMobile':isMobile_request}
 		,dataType: 'html'
-	}).done(function( msg ) {
-		//alert( 'ajax done mgs [' + msg + ']'); //Debug
+	}).done(function( loadedmaincontentdiv ) {
 		
-		$('#maincontent').empty().html(msg);
-		//$('head .specificstyle').remove();
-		//$('script[class=specificstyle]').remove();
-
-		//Replacing the div#sidebar of index page  by the one newly loaded in the uriSideBar page
-		//$('#maincontent').empty().html( $(loadedXHTML).contents().find('#maincontent').html() );
+		$('#maincontent').empty().html(loadedmaincontentdiv);
 
 	});
-	
-
 
 	reset_actual_content_state(newcontentlabel);	
 	//alert('new content label is '+ get_actual_content_state() ); //Debug
