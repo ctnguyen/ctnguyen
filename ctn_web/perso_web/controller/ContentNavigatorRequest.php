@@ -5,12 +5,13 @@ require_once GlobalConfig::SERVER_ROOT_DIR.'controller/ControllerHelper.php';
 require_once GlobalConfig::SERVER_ROOT_DIR.'model/ContentNavigator.php';
 require_once GlobalConfig::SERVER_ROOT_DIR.'model/LangNavigator.php';
 
-/* \script NavigatorRequest
+/* \script ContentNavigatorRequest
  *
 * Giving a GeneralReauestState, UpdateLang controller give the html with feature as
 * [no header tag in the given page]
 *<body>
-*			<div id="navigator">
+*
+*			<div id="contentnavigator">
 *				<THIS SCRIPT GIVE THE CONTENT HERE>
 * 			</div>
 *</body>
@@ -55,10 +56,8 @@ if( !ControllerHelper::isGoodRequest($_general_request) )
 
 $htmlResult = '';
 
-$flag_part = new LangNavigator($_general_request,4);
 $content_part = new ContentNavigator($_general_request,4);
 
-$htmlResult .= $flag_part ->htmlcontent;
 $htmlResult .= $content_part->htmlcontent;
 
 echo $htmlResult;
