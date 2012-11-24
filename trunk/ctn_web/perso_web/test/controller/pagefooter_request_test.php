@@ -4,11 +4,11 @@ require_once realpath( dirname(__FILE__ ) . '/../../global-config.php');
 
 <html>
 <head>
-<title>Maint Content Request Test</title>
+<title>PageFooter Request Test</title>
 </head>
 <body>
-	<h1>TEST REQUEST MAIN CONTENT</h1>
-	<form method="get" target="_blank" action="<?php echo GlobalConfig::DOMAINE_NAME.'controller/MainContentRequest.php';?>">
+	<h1>TEST REQUEST PAGEFOOTER</h1>
+	<form method='get'  target="_blank" action="<?php echo GlobalConfig::DOMAINE_NAME.'controller/PageFooterRequest.php';?>">
 		<p>
 			lang: <input type="text" name='lang'/>
 		</p>
@@ -19,7 +19,7 @@ require_once realpath( dirname(__FILE__ ) . '/../../global-config.php');
 			ismobile: <input type="text" name='ismobile'/> (enter "true" if mobile request)
 		</p>
 		<p>
-			<input type="submit" value="getMainContent">
+			<input type="submit" value="getPageFooter">
 		</p>
 	</form>
 </body>
