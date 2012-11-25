@@ -4,7 +4,7 @@
 
 function initialize_mobile_browser()
 {
-	//set_global_mobile_layout();
+	set_global_mobile_layout();
 	
 	$("img.langbutton").live('click',function(event) {
 		event.preventDefault();

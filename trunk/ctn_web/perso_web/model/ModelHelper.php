@@ -34,7 +34,7 @@ class ModelHelper
 	 * 	return here 
 	 * </head>
 	 */
-	public static function getHtmlHeader($_request, $nbIndent=0)
+	public static function getHtmlTopWrapper($_request, $nbIndent=0)
 	{
 		$indent = '';
 		for($i=0; $i< $nbIndent ; $i++)
