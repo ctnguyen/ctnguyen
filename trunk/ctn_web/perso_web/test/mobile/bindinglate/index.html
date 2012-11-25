@@ -1,19 +1,65 @@
 <!DOCTYPE html>
-<html>
 <head>
-	<title>Test Separate Binding Jquery Mobile</title>
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+<!-- common html header for all case-->
+	<base href="http://localhost/">
+	<title>Chi-Thanh NGUYEN</title>
+	<meta name="keywords" content="NGUYEN Chi-Thanh, SOFA, INRIA, CEMEF, nanoindentation, UPMC, ANEDP, Paris 6, Paris VI"/>
+	<meta http-equiv="content-type"	content="application/xhtml+xml; charset=utf-8" />
+	<meta name="author" content="Chi-Thanh NGUYEN" />
+
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+	<script src="http://localhost/view/style/common_setting.js"></script>
+
+<!-- common global style (mobile or normal browser)-->
+	<script src="http://localhost/view/style/mobibrowser_G_setting.js"></script>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
-	<script src="separatebindmobilestyle.js"></script>
+<!--
+ Auxiliar style specific to a content (might be pluriel)
+ Each time user change content, this part will also be updated
+ The file name rule is view/[<mobile?>_][contentID].js
+-->
+	<script class="specificstyle" src="http://localhost/view/style/mobibrowser_home.js"></script>
 </head>
 <body>
- 
-<div id="page">
-	<div id="header"><h1>data-role="header"</h1></div>
-  	<div id="content"><p>data-role="content"</p></div>
-	<div id="footer"><h4>data-role="footer"</h4></div>
-</div>
-<script type="text/javascript">initialize_mobile_browser();</script>
+		<div id="whole-page" data-role="page">
+			<div id="top-page">
+				<div class="referencing"><h1>NGUYEN Chi Thanh, INRIA, SOFA, Digiplante, Paris VI, Paris 6</h1></div>
+				<div id="actuallangue" style="display:none;">fr</div>
+				<div id="actualcontent" style="display:none;">home</div>
+			</div>
+			<div id="navigator" data-role="header">
+				<div id="langnavigator">
+					<table>
+						<tr>
+							<td><img id="en" class="langbutton" src="http://localhost/model/htmldata/image/icon_en.png"/></td>
+							<td><img id="fr" class="langbutton" src="http://localhost/model/htmldata/image/icon_fr.png"/></td>
+							<td><img id="vn" class="langbutton" src="http://localhost/model/htmldata/image/icon_vn.png"/></td>
+						</tr>
+					</table>
+				</div>
+				<div id="contentnavigator">
+					<ul class="navigatebutton">
+						<li><a id="home" class="navigatebutton">Home</a></li>
+						<li><a id="cv" class="navigatebutton">CV</a></li>
+						<li><a id="contact" class="navigatebutton">Contact</a></li>
+						<li><a id="NS" class="navigatebutton">Navier-Stokes</a></li>
+						<li><a id="BS" class="navigatebutton">Black &amp; Scholes</a></li>
+					</ul>
+				</div>
+			</div>
+			<div id="maincontent" data-role="content">
+				<div class="home">
+					<h1>Home EN, conntent</h1>
+				</div>
+			</div>
+			<div id="bottom-page">
+				<div class="referencing"><h1>NGUYEN Chi Thanh, INRIA, SOFA, Digiplante, Paris VI, Paris 6</h1></div>
+			</div>
+		<div id="bottom-wrapper" data-role="footer">
+			<h1 id="page-footer"> Chi-Thanh NGUYEN &copy; 2012 Web in construct</h1>
+		</div>
+		</div>
 </body>
-</html>

@@ -4,7 +4,7 @@
 
 function initialize_mobile_browser()
 {
-	set_global_mobile_layout();
+	//set_global_mobile_layout();
 	
 	$("img.langbutton").live('click',function(event) {
 		event.preventDefault();
@@ -29,10 +29,10 @@ sidebar     content
 function set_global_mobile_layout()
 {
 	// mobile globale layout ================================================ 
-	$('#whole-page').attr('data-role', 'page');
-	$('#navigator').attr('data-role', 'header');
 	$('#langnavigator').attr('data-role', 'navbar');
 	$('#contentnavigator').attr('data-role', 'navbar');
+	$('#whole-page').attr('data-role', 'page');
+	$('#navigator').attr('data-role', 'header');
 	$('#content').attr('data-role','content');
 	$('#bottom-wrapper').attr('data-role','footer');
 }
