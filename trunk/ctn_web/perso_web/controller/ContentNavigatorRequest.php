@@ -18,17 +18,17 @@ require_once GlobalConfig::SERVER_ROOT_DIR.'model/LangNavigator.php';
 */
 
 
-$isMobile = false;
+$_isMobile = false;
 
-if ($_GET['ismobile'] ==='true' ){
-	$isMobile = true;
+if ($_GET['isMobile'] ==='true' ){
+	$_isMobile = true;
 }
 if (ControllerHelper::isMobile()){
-	$isMobile = true;
+	$_isMobile = true;
 }
 
 $good_request = true;
-$_general_request = new GeneralRequestState('en', 'home', $isMobile);
+$_general_request = new GeneralRequestState('en', 'home', $_isMobile);
 
 if (!empty($_GET['lang'])){
 	$_general_request->resetLang($_GET['lang']);

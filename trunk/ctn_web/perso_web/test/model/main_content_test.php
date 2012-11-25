@@ -35,7 +35,7 @@
 	{
 		$rstate->resetContent($_GET['fcontent']);
 	}
-	if (isset($_GET['fismobile']))
+	if (isset($_GET['fisMobile']))
 	{
 		$rstate->resetIsMobil(TRUE);
 	}
