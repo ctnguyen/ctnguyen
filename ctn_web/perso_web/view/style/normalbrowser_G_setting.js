@@ -15,9 +15,18 @@ function initialize_normal_browser()
 		event.preventDefault();
 		update_langue($(this).attr("id"));
 	});
+	
 	$("a.navigatebutton").live('click',function(event) {
 		event.preventDefault();
 		update_maincontent($(this).attr("id"));
+	});
+
+	$("#contentnavigator").live('divinnerreloaded',function(event) {
+		reset_contentnavigator_style();
+	});
+	
+	$("#bottom-wrapper").live('divinnerreloaded',function(event) {
+		reset_page_footer_style();
 	});
 }
 
@@ -54,9 +63,9 @@ function set_global_normal_layout()
 
 	$('#top-wrapper').css({
 		"height":"100px"
-			,"width":$(window).width()
-			,"margin":"0 0 0 0"
-				,"padding":"0 0 0 0"
+		,"width":$(window).width()
+		,"margin":"0 0 0 0"
+		,"padding":"0 0 0 0"
 	});
 
 	$('#whole-page').css({
@@ -67,60 +76,77 @@ function set_global_normal_layout()
 
 	$('#top-page').css({
 		"margin":"0 0 0 0"
-			,"padding":"0 0 0 0"
-				,"clear":"both"
+		,"padding":"0 0 0 0"
+		,"clear":"both"
 	});
 
 	$('#navigator').css({
 		"width":_get_sidebar_width()
 		,"margin-right":"0"
-			,"float":"left"
-//				,"border-right-style":"groove"
-//				,"border-right-width":"5px"
-//				,"border-right-color":"red"
+		,"float":"left"
+//		,"border-right-style":"groove"
+//		,"border-right-width":"5px"
+//		,"border-right-color":"red"
 	});
+	
+	reset_contentnavigator_style();
 
 	$('#logo').css({
 		"display":"block"
-			,"width":"80%"
-				,"margin-left":"auto"
-					,"margin-right":"auto"
+		,"width":"80%"
+		,"margin-left":"auto"
+		,"margin-right":"auto"
 	});
 
 	$('#maincontent').css({
 		"width":_get_content_width()
 		,"margin-right":"0"
-			,"float":"right"
-				,"border-left-style":"groove"
-					,"border-left-width":"1px"
-						,"border-left-color":"#000000"
+		,"float":"right"
+		,"border-left-style":"groove"
+		,"border-left-width":"1px"
+		,"border-left-color":"#000000"
 	});
 
 
 	$('#bottom-page').css({
 		"margin":"0 0 0 0"
-			,"padding":"0 0 0 0"
-				,"clear":"both"
+		,"padding":"0 0 0 0"
+		,"clear":"both"
 	});
 
 	$('#bottom-wrapper').css({
 		"height":"100px"
-			,"width":$(window).width()
-			,"font-size":"1em"
-				,"margin":"0 0 0 0"
-					,"padding":"0 0 0 0"
-						,"text-align":"center"
-							,"position":"fixed"
-								,"bottom":"0px"
+		,"width":$(window).width()
+		,"font-size":"1em"
+		,"margin":"0 0 0 0"
+		,"padding":"0 0 0 0"
+		,"text-align":"center"
+		,"position":"fixed"
+		,"bottom":"0px"
 	});
 
-	$('#page-footer').css({		
-		"font-size":"1em" 
-			,"padding-top":"40px"
-	});
+	reset_page_footer_style();
 
 	debug_layout();
 }
+
+function reset_page_footer_style()
+{
+	$('#page-footer').css({		
+		"font-size":"1em" 
+		,"padding-top":"40px"
+	});
+}
+
+function reset_contentnavigator_style()
+{
+	$('ul.navigatebutton').css({		
+		"list-style-type":"none"
+	});
+}
+
+
+
 
 function debug_layout()
 {
@@ -150,6 +176,7 @@ function update_langue(newlang)
 		,dataType: 'html'
 	}).done(function( loadedcontentnavigator ) {
 		$('#contentnavigator').empty().html( loadedcontentnavigator );
+		$('#contentnavigator').trigger('divinnerreloaded');
 	});
 	
 	
@@ -161,7 +188,7 @@ function update_langue(newlang)
 	}).done(function( loadedmaincontentdiv ) {
 		
 		$('#maincontent').empty().html(loadedmaincontentdiv);
-
+		$('#maincontent').trigger('divinnerreloaded');
 	});
 	
 	$.ajax({
@@ -171,6 +198,7 @@ function update_langue(newlang)
 		,dataType: 'html'
 	}).done(function( loadedfooterpage ) {
 		$('#bottom-wrapper').empty().html( loadedfooterpage );
+		$('#bottom-wrapper').trigger('divinnerreloaded');
 	});
 	
 	reset_actual_lang_state(newlang);
@@ -205,6 +233,7 @@ function update_maincontent(newcontentlabel)
 	}).done(function( loadedmaincontentdiv ) {
 		
 		$('#maincontent').empty().html(loadedmaincontentdiv);
+		$('#maincontent').trigger('divinnerreloaded');
 
 	});
 

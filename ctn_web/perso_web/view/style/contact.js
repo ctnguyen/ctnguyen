@@ -1,3 +1,13 @@
 $(document).ready(function() {
-	$('h1').css({"color":"#00FF00"});
+	
+	reset_contact_style();
+	
+	$("#maincontent").live('divinnerreloaded',function(event) {
+		reset_contact_style();
+	});
 });
+
+function reset_contact_style()
+{
+	$('h1').css({"color":"#00FF00"});	
+}

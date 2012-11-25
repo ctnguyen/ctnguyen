@@ -37,7 +37,7 @@ class ContentNavigator
 		
 		$this->htmlcontent = '';
 		$this->htmlcontent .= $additionalInden.'<div id="contentnavigator">'.PHP_EOL;
-		$this->htmlcontent .= $additionalInden.'	<ul>'.PHP_EOL;
+		$this->htmlcontent .= $additionalInden.'	<ul class="navigatebutton">'.PHP_EOL;
 		
 		foreach($buttonlist as $button)
 		{
