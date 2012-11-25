@@ -59,7 +59,7 @@ echo '<body>'.PHP_EOL;
 if(!$_general_request->_isMobile)
 {
 	echo '	<div id="page-wrapper">'.PHP_EOL;
-	$headercontent = ModelHelper::getHtmlHeader($_general_request,2);
+	$headercontent = ModelHelper::getHtmlTopWrapper($_general_request,2);
 	echo $headercontent;
 	echo '		<div id="whole-page">'.PHP_EOL;
 }
