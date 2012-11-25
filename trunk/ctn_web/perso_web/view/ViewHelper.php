@@ -46,11 +46,11 @@ class ViewHelper
 		
 		if($_general_request->_isMobile)
 		{
-			$specificstylescript .= '	<script class="specificstyle" src="'.GlobalConfig::DOMAINE_NAME.'view/style/mobi_'.$_general_request->_content_state.'.js"></script>'.PHP_EOL;
+			$specificstylescript .= '	<script class="specificstyle" src="'.GlobalConfig::DOMAINE_NAME.'view/style/mobibrowser_'.$_general_request->_content_state.'.js"></script>'.PHP_EOL;
 		}
 		else
 		{
-			$specificstylescript .= '	<script class="specificstyle" src="'.GlobalConfig::DOMAINE_NAME.'view/style/'.$_general_request->_content_state.'.js"></script>'.PHP_EOL;
+			$specificstylescript .= '	<script class="specificstyle" src="'.GlobalConfig::DOMAINE_NAME.'view/style/normalbrowser_'.$_general_request->_content_state.'.js"></script>'.PHP_EOL;
 		}
 		
 		return $specificstylescript;
