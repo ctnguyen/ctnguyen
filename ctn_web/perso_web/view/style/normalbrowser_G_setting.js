@@ -165,7 +165,7 @@ function reset_contentnavigator_style()
 }
 
 /** action to do when a langbutton is clicked
- * - defining the actual state of the page (lang, content, ismobile) and 
+ * - defining the actual state of the page (lang, content, isMobile) and 
  *   send request with the new lang to server
  * - reload the contentnavitagor adequate to the requested lang
  * - reload the same maincontent adequate to the requested lang
@@ -218,7 +218,7 @@ function update_langue(newlang)
 
 
 /** action to do when a navigationbutton is clicked
- * - defining the actual state of the page (lang, content, ismobile) and 
+ * - defining the actual state of the page (lang, content, isMobile) and 
  *   send request with the new lang to server
  * - delete the specific style to the content, replace it by a new style in adequate to the new content
  * - reload the new maincontent 

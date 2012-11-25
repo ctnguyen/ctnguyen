@@ -19,17 +19,17 @@ require_once GlobalConfig::SERVER_ROOT_DIR.'model/MainContent.php';
 *</body>
 */
 
-$isMobile = false;
+$_isMobile = false;
 
-if ($_GET['ismobile'] == 'true'){
-	$isMobile = true;
+if ($_GET['isMobile'] == 'true'){
+	$_isMobile = true;
 }
 if (ControllerHelper::isMobile()){
-	$isMobile = true;
+	$_isMobile = true;
 }
 
 $good_request = true;
-$_general_request = new GeneralRequestState('', '', $isMobile);
+$_general_request = new GeneralRequestState('', '', $_isMobile);
 
 if (!empty($_GET['lang']))
 {

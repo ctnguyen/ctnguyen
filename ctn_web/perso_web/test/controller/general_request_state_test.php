@@ -17,7 +17,7 @@
 			content: <input type="text" name='fcontent'/>
 		</p>
 		<p>
-		<input type="checkbox" name='fismobile'>isMobile<br>
+		<input type="checkbox" name='fisMobile'>isMobile<br>
 		</p>
 		<p>
 			<input type="submit" value="BuildRequestState">
@@ -32,7 +32,7 @@
 		{
 			$rstate->resetContent($_GET['fcontent']);
 		}
-		if (isset($_GET['fismobile']))
+		if (isset($_GET['fisMobile']))
 		{
 			$rstate->resetIsMobil(TRUE);
 		}

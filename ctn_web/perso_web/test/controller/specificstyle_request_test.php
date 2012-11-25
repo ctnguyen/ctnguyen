@@ -16,7 +16,7 @@ require_once realpath( dirname(__FILE__ ) . '/../../global-config.php');
 			content: <input type="text" name='content'/>
 		</p>
 		<p>
-			ismobile: <input type="text" name='ismobile'/> (enter "true" if mobile request)
+			isMobile: <input type="text" name='isMobile'/> (enter "true" if mobile request)
 		</p>
 		<p>
 			<input type="submit" value="getSpecificStyle">

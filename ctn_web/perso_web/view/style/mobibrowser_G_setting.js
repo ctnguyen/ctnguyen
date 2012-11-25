@@ -1,6 +1,18 @@
 /* 
  * MOBILE BROWSER SETTING
  */
+$( document ).bind( "pageinit", function(  ){
+
+	// Let the framework know we're going to handle the load.
+	//event.preventDefault();
+
+	initialize_mobile_browser();
+	
+	//data.deferred.reject( data.absUrl, data.options );
+
+});
+
+
 
 function initialize_mobile_browser()
 {
@@ -10,9 +22,18 @@ function initialize_mobile_browser()
 		event.preventDefault();
 		update_langue($(this).attr("id"));
 	});
+	
 	$("a.navigatebutton").live('click',function(event) {
 		event.preventDefault();
 		update_maincontent($(this).attr("id"));
+	});
+
+	$("#contentnavigator").live('divinnerreloaded',function(event) {
+		reset_contentnavigator_style();
+	});
+	
+	$("#bottom-wrapper").live('divinnerreloaded',function(event) {
+		reset_contentnavigator_style();
 	});
 }
 
@@ -40,17 +61,80 @@ function set_global_mobile_layout()
 
 function update_langue(newlang)
 {
-	alert('actual lang is '+ get_actual_lang_state() ); //Debug
+	//alert('actual lang is '+ get_actual_lang_state() ); //Debug
+
+	var lang_request    = newlang;
+	var content_request = get_actual_content_state();
+	var isMobile_request= 'true';
+	
+	$.ajax({
+		type: 'GET'
+		,url : 'controller/ContentNavigatorRequest.php'
+		,data:{'lang':lang_request,'content':content_request,'isMobile':isMobile_request}
+		,dataType: 'html'
+	}).done(function( loadedcontentnavigator ) {
+		$('#contentnavigator').empty().html( loadedcontentnavigator );
+		$('#contentnavigator').trigger('divinnerreloaded');
+	});
+	
+	
+	$.ajax({
+		type: 'GET'
+		,url : 'controller/MainContentRequest.php'
+		,data:{'lang':lang_request,'content':content_request,'isMobile':isMobile_request}
+		,dataType: 'html'
+	}).done(function( loadedmaincontentdiv ) {
+		
+		$('#maincontent').empty().html(loadedmaincontentdiv);
+		$('#maincontent').trigger('divinnerreloaded');
+	});
+	
+	$.ajax({
+		type: 'GET'
+		,url : 'controller/PageFooterRequest.php'
+		,data:{'lang':lang_request,'content':content_request,'isMobile':isMobile_request}
+		,dataType: 'html'
+	}).done(function( loadedfooterpage ) {
+		$('#bottom-wrapper').empty().html( loadedfooterpage );
+		$('#bottom-wrapper').trigger('divinnerreloaded');
+	});
 	
 	reset_actual_lang_state(newlang);
-	alert('new lang is '+ get_actual_lang_state() );    //Debug
+	//alert('new lang is '+ get_actual_lang_state() );    //Debug
 }
 
 function update_maincontent(newcontentlabel)
 {
-	alert('actual content is '+ get_actual_content_state() );    //Debug
+	//alert('actual content is '+ get_actual_content_state() );    //Debug
+
+	var lang_request    = get_actual_lang_state();
+	var content_request = newcontentlabel;
+	var isMobile_request= 'true';
+
+	
+	$.ajax({
+		type: 'GET'
+		,url : 'controller/SpecificStyleRequest.php'
+		,data:{'lang':lang_request,'content':content_request,'isMobile':isMobile_request}
+		,dataType: 'html'
+	}).done(function( specificstylescript ) {
+		$('head .specificstyle').remove();
+		$('head').append(specificstylescript);
+	});
 	
 	
+	$.ajax({
+		type: 'GET'
+		,url : 'controller/MainContentRequest.php'
+		,data:{'lang':lang_request,'content':content_request,'isMobile':isMobile_request}
+		,dataType: 'html'
+	}).done(function( loadedmaincontentdiv ) {
+		
+		$('#maincontent').empty().html(loadedmaincontentdiv);
+		$('#maincontent').trigger('divinnerreloaded');
+
+	});
+
 	reset_actual_content_state(newcontentlabel);	
-	alert('new content label is '+ get_actual_content_state() ); //Debug
+	//alert('new content label is '+ get_actual_content_state() ); //Debug
 }

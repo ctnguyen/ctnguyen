@@ -12,7 +12,7 @@ if (!empty($_GET['fcontent']))
 {
 $rstate->resetContent($_GET['fcontent']);
 }
-if (isset($_GET['fismobile']))
+if (isset($_GET['fisMobile']))
 {
 $rstate->resetIsMobil(TRUE);
 }
@@ -25,7 +25,7 @@ echo $headertool->htmlcontent;
 	<h1>TEST FOR MAIN CONTENT REQUEST</h1>
 	<form method='get' action='<?php echo $_SERVER['PHP_SELF'];?>'>
 		<p>
-			<input type="checkbox" name="fismobile">isMobile<br>
+			<input type="checkbox" name="fisMobile">isMobile<br>
 		</p>
 		<p>
 			content: <input type="text" name="fcontent" value="home" />
