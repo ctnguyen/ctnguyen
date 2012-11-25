@@ -61,8 +61,13 @@ if(!$_general_request->_isMobile)
 	echo '	<div id="page-wrapper">'.PHP_EOL;
 	$headercontent = ModelHelper::getHtmlHeader($_general_request,2);
 	echo $headercontent;
+	echo '		<div id="whole-page">'.PHP_EOL;
 }
-echo '		<div id="whole-page">'.PHP_EOL;
+else
+{
+	echo '		<div id="whole-page" data-role="page">'.PHP_EOL;
+}
+
 
 $htmlTopPage = ModelHelper::getHtmlTopPage($_general_request,3);
 echo $htmlTopPage; 
