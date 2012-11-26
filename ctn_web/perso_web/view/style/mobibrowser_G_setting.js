@@ -1,14 +1,12 @@
 /* 
  * MOBILE BROWSER SETTING
  */
-$( document ).bind( "pageinit", function(  ){
 
-	// Let the framework know we're going to handle the load.
-	//event.preventDefault();
+// Binding 'pagebeforecreate' event on document for mobile is 
+// someway equivalent of the usual 'ready' event on document use for normal browser
+$( document ).bind("pagebeforecreate", function(event) {
 
 	initialize_mobile_browser();
-	
-	//data.deferred.reject( data.absUrl, data.options );
 
 });
 
@@ -50,9 +48,9 @@ sidebar     content
 function set_global_mobile_layout()
 {
 	// mobile globale layout ================================================ 
+	//$('#whole-page').attr('data-role', 'page');
 	$('#langnavigator').attr('data-role', 'navbar');
 	$('#contentnavigator').attr('data-role', 'navbar');
-	$('#whole-page').attr('data-role', 'page');
 	$('#navigator').attr('data-role', 'header');
 	$('#content').attr('data-role','content');
 	$('#bottom-wrapper').attr('data-role','footer');
