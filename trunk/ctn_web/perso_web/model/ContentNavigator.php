@@ -36,15 +36,15 @@ class ContentNavigator
 		$buttonlist = $langnode->getElementsByTagName("navigatebutton");
 		
 		$this->htmlcontent = '';
-		$this->htmlcontent .= $additionalInden.'<div id="contentnavigator">'.PHP_EOL;
-		$this->htmlcontent .= $additionalInden.'	<ul class="navigatebutton">'.PHP_EOL;
+		//$this->htmlcontent .= $additionalInden.'<div id="contentnavigator">'.PHP_EOL;
+		$this->htmlcontent .= $additionalInden.'<ul class="navigatebutton">'.PHP_EOL;
 		
 		foreach($buttonlist as $button)
 		{
 			$buttonID = $button->getElementsByTagName("idNAME")->item(0);
 			if($buttonID)
 			{
-				$this->htmlcontent .= $additionalInden.'		<li><a ';
+				$this->htmlcontent .= $additionalInden.'	<li><a ';
 				$this->htmlcontent .= 'id="'.$buttonID->nodeValue.'" class="navigatebutton"';
 				$this->htmlcontent .= '>'.$button->getElementsByTagName("htmlNAME")->item(0)->nodeValue;
 				$this->htmlcontent .= '</a></li>'.PHP_EOL;
@@ -58,8 +58,8 @@ class ContentNavigator
 			}
 		}
 		
-		$this->htmlcontent .= $additionalInden.'	</ul>'.PHP_EOL;
-		$this->htmlcontent .= $additionalInden.'</div>'.PHP_EOL;
+		$this->htmlcontent .= $additionalInden.'</ul>'.PHP_EOL;
+		//$this->htmlcontent .= $additionalInden.'</div>'.PHP_EOL;
 	}	
 }
 
