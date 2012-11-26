@@ -120,6 +120,7 @@ class ModelHelper
 	public static function getHtmlNavigator($_request, $nbIndent=0)
 	{
 		$nbIndentPP =  $nbIndent+1;
+		$nbIndentPPP=  $nbIndentPP+1;
 		$indent = '';
 		for($i=0; $i< $nbIndent ; $i++)
 		{
@@ -130,11 +131,13 @@ class ModelHelper
 
 		$flag_part = new LangNavigator($_request,$nbIndentPP);
 
-		$content_part = new ContentNavigator($_request,$nbIndentPP);
+		$content_part = new ContentNavigator($_request,$nbIndentPPP);
 
 		$html_navigator .= $indent.'<div id="navigator">'.PHP_EOL;
 		$html_navigator .= 					$flag_part->htmlcontent;
+		$html_navigator .= $indent.'	<div id="contentnavigator">'.PHP_EOL;
 		$html_navigator .= 					$content_part->htmlcontent;
+		$html_navigator .= $indent.'	</div>'.PHP_EOL;
 		$html_navigator .= $indent.'</div>'.PHP_EOL;
 
 		return $html_navigator;

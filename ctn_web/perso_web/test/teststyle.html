@@ -1,6 +1,6 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <head>
-	<!-- common html header for all case-->
+<!-- common html header for all case-->
 	<base href="http://localhost/">
 	<title>Chi-Thanh NGUYEN</title>
 	<meta name="keywords" content="NGUYEN Chi-Thanh, SOFA, INRIA, CEMEF, nanoindentation, UPMC, ANEDP, Paris 6, Paris VI"/>
@@ -8,231 +8,27 @@
 	<meta name="author" content="Chi-Thanh NGUYEN" />
 
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+	<script src="http://localhost/view/style/common_setting.js"></script>
 
-	<script  type="text/javascript">
-		$(document).ready(function() {
-			initialize_normal_browser();
-		});
-		function get_actual_lang_state() {
-			return $("div#actuallangue").text();
-		}
+<!-- common global style (mobile or normal browser)-->
+	<script src="http://localhost/view/style/mobibrowser_G_setting.js"></script>
 
-		function reset_actual_lang_state(newlang) {
-			$("div#actuallangue").html(newlang);
-		}
-
-		function get_actual_content_state() {
-			return $("div#actualcontent").text();
-		}
-
-		function reset_actual_content_state(newlabel) {
-			$("div#actualcontent").html(newlabel);
-		}
-
-		function initialize_normal_browser() {
-			set_global_normal_layout();
-
-			$("img.langbutton").live('click', function(event) {
-				event.preventDefault();
-				update_langue($(this).attr("id"));
-			});
-			$("a.navigatebutton").live('click', function(event) {
-				event.preventDefault();
-				update_maincontent($(this).attr("id"));
-			});
-		}
-
-		/*
-		page-wrapper     [non for mobile]
-		top-wrapper     [non for mobile]
-		whole-page
-		top-page
-		sidebar     content
-		bottom-page
-		bottom-wrapper   [different for mobile (included in the whole page instead of a wrapper)]
-		*/
-
-		// page width depend on how many character it has, so its convenient to set it in relation to em
-		function _get_page_width() {
-			return '80em';
-		}
-
-		function _get_sidebar_width() {
-			return '22%';
-		}
-
-		function _get_content_width() {
-			return '70%';
-		}
-
-		/* setting up bloc size and several style like border, backround..
-		 * contribute with styles/layout.css
-		 * */
-		function set_global_normal_layout() {
-			$('body').css({
-				"margin" : "0 0 0 0",
-				"padding" : "0 0 0 0"
-			});
-
-			$('#page-wrapper').css({
-				"margin" : "0 0 0 0",
-				"padding" : "0 0 0 0"
-			});
-
-			$('#top-wrapper').css({
-				"height" : "100px",
-				"width" : $(window).width(),
-				"margin" : "0 0 0 0",
-				"padding" : "0 0 0 0"
-			});
-
-			$('#whole-page').css({
-				"width" : _get_page_width(),
-				"margin-left" : "10em"
-				//			,"margin-right":"auto"
-			});
-
-			$('#top-page').css({
-				"margin" : "0 0 0 0",
-				"padding" : "0 0 0 0",
-				"clear" : "both"
-			});
-
-			$('#navigator').css({
-				"width" : _get_sidebar_width(),
-				"margin-right" : "0",
-				"float" : "left"
-				//			,"border-right-style":"groove"
-				//			,"border-right-width":"5px"
-				//			,"border-right-color":"red"
-			});
-
-			$('#logo').css({
-				"display" : "block",
-				"width" : "80%",
-				"margin-left" : "auto",
-				"margin-right" : "auto"
-			});
-
-			$('#maincontent').css({
-				"width" : _get_content_width(),
-				"margin-right" : "0",
-				"float" : "right",
-				"border-left-style" : "groove",
-				"border-left-width" : "1px",
-				"border-left-color" : "#000000"
-			});
-
-			$('#bottom-page').css({
-				"margin" : "0 0 0 0",
-				"padding" : "0 0 0 0",
-				"clear" : "both"
-			});
-
-			$('#bottom-wrapper').css({
-				"height" : "100px",
-				"width" : $(window).width(),
-				"font-size" : "1em",
-				"margin" : "0 0 0 0",
-				"padding" : "0 0 0 0",
-				"text-align" : "center",
-				"position" : "fixed",
-				"bottom" : "0px"
-			});
-
-			$('#page-footer').css({
-				"font-size" : "1em",
-				"padding-top" : "40px"
-			});
-
-			debug_layout();
-		}
-
-		function debug_layout() {
-			//plot border of all bloc
-			$('body').css({
-				"border" : "1px solid #ffffff"
-			});
-			$('#whole-page').css({
-				"border" : "1px solid #00FF00"
-			});
-			$('#top-page').css({
-				"border" : "1px solid #808080"
-			});
-			$('#maincontent').css({
-				"border" : "1px solid #00BFFF"
-			});
-			$('#navigator').css({
-				"border" : "1px solid #0000FF"
-			});
-			$('#bottom-page').css({
-				"border" : "1px solid #808080"
-			});
-			$('#bottom-wrapper').css({
-				"border" : "1px solid #D2691E"
-			});
-		}
-
-		function update_langue(newlang) {
-			alert('actual lang is ' + get_actual_lang_state());
-			//Debug
-
-			reset_actual_lang_state(newlang);
-			alert('new lang is ' + get_actual_lang_state());
-			//Debug
-		}
-
-		function update_maincontent(newcontentlabel) {
-			alert('actual content is ' + get_actual_content_state());
-			//Debug
-
-			var lang_request = get_actual_lang_state();
-			var content_request = newcontentlabel;
-			var isMobile_request = 'false';
-
-			$.ajax({
-				url : 'http://localhost/controller/UpdateContent.php',
-				type : 'GET',
-				data : {
-					'lang' : lang_request,
-					'content' : content_request,
-					'isMobile' : isMobile_request
-				},
-				cache : false, // or set to false
-				dataType : "xml",
-				async : false,
-				success : function(loadedXHTML) {
-					alert('ajax call success');
-					//Replacing the div#sidebar of index page  by the one newly loaded in the uriSideBar page
-					$('#maincontent').empty().html($(loadedXHTML).contents().find('#maincontent').html());
-
-					//Replacing the local style of index page by the one newly loaded in the uriSideBar page
-					//$('#contentstyle').attr('href', $(loadedXHTML).contents().find('link#contentstyle').attr('href'));
-				}
-			});
-
-			reset_actual_content_state(newcontentlabel);
-			alert('new content label is ' + get_actual_content_state());
-			//Debug
-		}
-	</script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+<!--
+ Auxiliar style specific to a content (might be pluriel)
+ Each time user change content, this part will also be updated
+ The file name rule is view/[<mobile?>_][contentID].js
+-->
+	<script class="specificstyle" src="http://localhost/view/style/mobibrowser_cv.js"></script>
 </head>
 <body>
-	<div id="page-wrapper">
-		<div id="top-wrapper"  style="background-image:url('http://localhost/model/htmldata/image/top_wrapper.jpg');background-repeat:repeat-x">
-			&nbsp;&nbsp;
-		</div>
-		<div id="whole-page">
+		<div id="whole-page" data-role="page">
 			<div id="top-page">
-				<div class="referencing">
-					<h1>NGUYEN Chi Thanh, INRIA, SOFA, Digiplante, Paris VI, Paris 6</h1>
-				</div>
-				<div id="actuallangue" style="display:none;">
-					fr
-				</div>
-				<div id="actualcontent" style="display:none;">
-					home
-				</div>
+				<div class="referencing"><h1>NGUYEN Chi Thanh, INRIA, SOFA, Digiplante, Paris VI, Paris 6</h1></div>
+				<div id="actuallangue" style="display:none;">fr</div>
+				<div id="actualcontent" style="display:none;">home</div>
 			</div>
 			<div id="navigator">
 				<div id="langnavigator">
@@ -244,43 +40,28 @@
 						</tr>
 					</table>
 				</div>
-				<div align="center">
-					<img id="logo" src="http://localhost/model/htmldata/image/ctn.jpg"/>
-				</div>
 				<div id="contentnavigator">
-					<ul>
-						<li>
-							<a id="home" class="navigatebutton">Home</a>
-						</li>
-						<li>
-							<a id="cv" class="navigatebutton">CV</a>
-						</li>
-						<li>
-							<a id="contact" class="navigatebutton">Contact</a>
-						</li>
-						<hr/>
-						<li>
-							<a id="NS" class="navigatebutton">Navier-Stokes</a>
-						</li>
-						<li>
-							<a id="BS" class="navigatebutton">Black &amp; Scholes</a>
-						</li>
+					<ul class="navigatebutton">
+						<li><a id="home" class="navigatebutton">Accueil</a></li>
+						<li><a id="cv" class="navigatebutton">CV</a></li>
+						<li><a id="contact" class="navigatebutton">Contact</a></li>
+						<li><a id="NS" class="navigatebutton">Navier-Stokes</a></li>
+						<li><a id="BS" class="navigatebutton">Black &amp; Scholes</a></li>
 					</ul>
 				</div>
 			</div>
 			<div id="maincontent">
-				<div class="home">
-					Home EN, conntent
-				</div>
-			</div>
+				<div class="cv">
+					<h1>CV  FR, contenu</h1>
+				</div>			</div>
 			<div id="bottom-page">
-				<div class="referencing">
-					<h1>NGUYEN Chi Thanh, INRIA, SOFA, Digiplante, Paris VI, Paris 6</h1>
-				</div>
+				<div class="referencing"><h1>NGUYEN Chi Thanh, INRIA, SOFA, Digiplante, Paris VI, Paris 6</h1></div>
 			</div>
+		<div id="bottom-wrapper">
+			<h1 id="page-footer"> Chi-Thanh NGUYEN &copy; 2012 Web en construction</h1>
 		</div>
-		<div id="bottom-wrapper" style="background-image:url('http://localhost/model/htmldata/image/bottom_wrapper.jpg');background-repeat:repeat-x">
-			<h1 id="page-footer"> Chi-Thanh NGUYEN &copy; 2012 Web in construct</h1>
 		</div>
-	</div>
+		<script type="text/javascript">
+			initialize_mobile_browser();
+		</script>
 </body>
