@@ -31,7 +31,7 @@ function initialize_normal_browser()
 {
 	set_global_normal_layout();
 
-	$("img.langbutton").live('click',function(event) {
+	$("a.langbutton").live('click',function(event) {
 		event.preventDefault();
 		update_langue($(this).attr("id"));
 	});

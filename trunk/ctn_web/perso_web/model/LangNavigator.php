@@ -32,15 +32,15 @@ class LangNavigator
 
 		if( $_general_request->_isMobile )
 		{
-			$this->htmlcontent .= $indent.'			<td><a href="#whole-page"><img id="en" class="langbutton" src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/icon_en.png"/></a></td>'.PHP_EOL;
-			$this->htmlcontent .= $indent.'			<td><a href="#whole-page"><img id="fr" class="langbutton" src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/icon_fr.png"/></a></td>'.PHP_EOL;
-			$this->htmlcontent .= $indent.'			<td><a href="#whole-page"><img id="vn" class="langbutton" src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/icon_vn.png"/></a></td>'.PHP_EOL;
+			$this->htmlcontent .= $indent.'			<td><a id="en" class="langbutton" href="#whole-page"><img class="langbutton" src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/icon_en.png"/></a></td>'.PHP_EOL;
+			$this->htmlcontent .= $indent.'			<td><a id="fr" class="langbutton" href="#whole-page"><img class="langbutton" src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/icon_fr.png"/></a></td>'.PHP_EOL;
+			$this->htmlcontent .= $indent.'			<td><a id="vn" class="langbutton" href="#whole-page"><img class="langbutton" src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/icon_vn.png"/></a></td>'.PHP_EOL;
 		}
 		else
 		{
-			$this->htmlcontent .= $indent.'			<td><a href="#"><img id="en" class="langbutton" src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/icon_en.png"/></a></td>'.PHP_EOL;
-			$this->htmlcontent .= $indent.'			<td><a href="#"><img id="fr" class="langbutton" src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/icon_fr.png"/></a></td>'.PHP_EOL;
-			$this->htmlcontent .= $indent.'			<td><a href="#"><img id="vn" class="langbutton" src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/icon_vn.png"/></a></td>'.PHP_EOL;
+			$this->htmlcontent .= $indent.'			<td><a id="en" class="langbutton" href="#"><img class="langbutton" src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/icon_en.png"/></a></td>'.PHP_EOL;
+			$this->htmlcontent .= $indent.'			<td><a id="fr" class="langbutton" href="#"><img class="langbutton" src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/icon_fr.png"/></a></td>'.PHP_EOL;
+			$this->htmlcontent .= $indent.'			<td><a id="vn" class="langbutton" href="#"><img class="langbutton" src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/icon_vn.png"/></a></td>'.PHP_EOL;
 		}
 		$this->htmlcontent .= $indent.'		</tr>'.PHP_EOL;
 		$this->htmlcontent .= $indent.'	</table>'.PHP_EOL;
