@@ -45,7 +45,15 @@ class ContentNavigator
 			if($buttonID)
 			{
 				$this->htmlcontent .= $additionalInden.'	<li><a ';
-				$this->htmlcontent .= 'id="'.$buttonID->nodeValue.'" class="navigatebutton"';
+				$this->htmlcontent .= 'id="'.$buttonID->nodeValue.'" class="navigatebutton" ';
+				if( $_general_request->_isMobile )
+				{
+					$this->htmlcontent .='href="#whole-page"';
+				}
+				else
+				{
+					$this->htmlcontent .='href="#"';
+				}
 				$this->htmlcontent .= '>'.$button->getElementsByTagName("htmlNAME")->item(0)->nodeValue;
 				$this->htmlcontent .= '</a></li>'.PHP_EOL;
 			}
