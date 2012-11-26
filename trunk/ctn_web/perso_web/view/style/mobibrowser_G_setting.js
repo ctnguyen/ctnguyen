@@ -49,8 +49,8 @@ function set_global_mobile_layout()
 {
 	// mobile globale layout ================================================ 
 	//$('#whole-page').attr('data-role', 'page');
-	$('#langnavigator').attr('data-role', 'navbar');
-	$('#contentnavigator').attr('data-role', 'navbar');
+	$('#langnavigator').attr('data-role', 'listview');	 //TODO find a appropriated style
+	$('#contentnavigator').attr('data-role', 'listview');//TODO find a appropriated style
 	$('#navigator').attr('data-role', 'header');
 	$('#content').attr('data-role','content');
 	$('#bottom-wrapper').attr('data-role','footer');
