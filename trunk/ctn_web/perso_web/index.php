@@ -100,16 +100,6 @@ if(!$_general_request->_isMobile)
 	echo '	</div>'.PHP_EOL;//end div of  <div id="page-wrapper">
 }
 
-//when it is a mobile, jquery instead of use document.ready for all initialize, 
-//jquery mobile cannot, and have to call the initialize function here
-//TODO modify if found the equivalent of document ready on jquery mobile 
-if($_general_request->_isMobile)
-{
-	echo '		<script type="text/javascript">'.PHP_EOL ;
-	echo '			initialize_mobile_browser();'.PHP_EOL ;
-	echo '		</script>'.PHP_EOL ;
-}
-
 echo '</body>'.PHP_EOL;
 //	HTML	HTML	HTML	HTML	HTML	HTML	HTML	HTML	/////
 
