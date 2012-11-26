@@ -74,7 +74,6 @@ function update_langue(newlang)
 		$('#contentnavigator').empty().html( loadedcontentnavigator );
 		$('#contentnavigator').trigger('divinnerreloaded');
 		
-		$.mobile.changePage();
 	});
 	
 	
