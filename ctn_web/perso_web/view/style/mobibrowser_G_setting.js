@@ -15,11 +15,11 @@ $( document ).bind("pagebeforecreate", function(event) {
 function initialize_mobile_browser()
 {
 	set_global_mobile_layout();
-	
+	/*
 	$("a.langbutton").live('click',function(event) {
 		event.preventDefault();
 		update_langue($(this).attr("id"));
-	});
+	});*/
 	
 	$("a.navigatebutton").live('click',function(event) {
 		event.preventDefault();
