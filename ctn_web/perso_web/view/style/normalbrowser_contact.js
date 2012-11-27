@@ -9,5 +9,5 @@ $(document).ready(function() {
 
 function reset_contact_style()
 {
-	$('h1').css({"color":"#00FF00"});	
+	$('h1.contact').css({"color":"#00FF00"});	
 }

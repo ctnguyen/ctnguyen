@@ -20,11 +20,11 @@ function initialize_mobile_browser()
 		event.preventDefault();
 		update_langue($(this).attr("id"));
 	});*/
-	
+	/*
 	$("a.navigatebutton").live('click',function(event) {
 		event.preventDefault();
 		update_maincontent($(this).attr("id"));
-	});
+	});*/
 
 	$("#contentnavigator").live('divinnerreloaded',function(event) {
 		reset_contentnavigator_style();
