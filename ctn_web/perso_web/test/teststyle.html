@@ -20,10 +20,10 @@
 	<!--JSON data of navigatorlist in relation to multipages-->
 	<script type="text/javascript">
 	var navigatorJSONDATA = [
-			{pageID :"NS" , loaded : true }
-			,{pageID :"home" , loaded : false }
+			{pageID :"home" , loaded : true }
 			,{pageID :"cv" , loaded : false }
 			,{pageID :"contact" , loaded : false }
+			,{pageID :"NS" , loaded : false }
 			,{pageID :"BS" , loaded : false }
 	];
 	</script>
@@ -32,10 +32,10 @@
  Each time user change content, this part will also be updated
  The file name rule is view/[<mobile?>_][contentID].js
 -->
-	<script class="specificstyle" src="http://localhost/view/style/mobibrowser_NS.js"></script>
 	<script class="specificstyle" src="http://localhost/view/style/mobibrowser_home.js"></script>
 	<script class="specificstyle" src="http://localhost/view/style/mobibrowser_cv.js"></script>
 	<script class="specificstyle" src="http://localhost/view/style/mobibrowser_contact.js"></script>
+	<script class="specificstyle" src="http://localhost/view/style/mobibrowser_NS.js"></script>
 	<script class="specificstyle" src="http://localhost/view/style/mobibrowser_BS.js"></script>
 </head>
 <body>
@@ -44,37 +44,7 @@
 		<div id="actuallangue" style="display:none;">fr</div>
 		<div id="actualcontent" style="display:none;">home</div>
 	</div>
-	<div id="NS" data-role="page">
-		<div id="navigator">
-			<div id="langnavigator">
-				<table>
-					<tr>
-						<td><a id="en" class="langbutton" data-ajax="false" href="http://localhost//index.php?lang=en&isMobile=true&content=NS"><img class="langbutton" src="http://localhost/model/htmldata/image/icon_en.png"/></a></td>
-						<td><a id="fr" class="langbutton" data-ajax="false" href="http://localhost//index.php?lang=fr&isMobile=true&content=NS"><img class="langbutton" src="http://localhost/model/htmldata/image/icon_fr.png"/></a></td>
-						<td><a id="vn" class="langbutton" data-ajax="false" href="http://localhost//index.php?lang=vn&isMobile=true&content=NS"><img class="langbutton" src="http://localhost/model/htmldata/image/icon_vn.png"/></a></td>
-					</tr>
-				</table>
-			</div>
-			<div id="contentnavigator">
-				<ul class="navigatebutton">
-					<li><a id="home" class="navigatebutton" href="#home">Home</a></li>
-					<li><a id="cv" class="navigatebutton" href="#cv">CV</a></li>
-					<li><a id="contact" class="navigatebutton" href="#contact">Contact</a></li>
-					<li><a id="NS" class="navigatebutton" href="#NS">Navier-Stokes</a></li>
-					<li><a id="BS" class="navigatebutton" href="#BS">Black &amp; Scholes</a></li>
-				</ul>
-			</div>
-		</div>
-		<div id="maincontent">
-			<div class="NS">
-				<h1 class="NS">NavierStocks EN, conntent</h1>
-			</div>
-		</div>
-		<div id="bottom-wrapper">
-			<h1 id="page-footer"> Chi-Thanh NGUYEN &copy; 2012 Web in construct</h1>
-		</div>
-	</div>
-	<div id="home" data-role="page">
+	<div id="home" data-role="page" data-url="home">
 		<div id="navigator">
 			<div id="langnavigator">
 				<table>
@@ -104,7 +74,7 @@
 			<h1 id="page-footer"> Chi-Thanh NGUYEN &copy; 2012 Web in construct</h1>
 		</div>
 	</div>
-	<div id="cv" data-role="page">
+	<div id="cv" data-role="page" data-url="cv">
 		<div id="navigator">
 			<div id="langnavigator">
 				<table>
@@ -134,7 +104,7 @@
 			<h1 id="page-footer"> Chi-Thanh NGUYEN &copy; 2012 Web in construct</h1>
 		</div>
 	</div>
-	<div id="contact" data-role="page">
+	<div id="contact" data-role="page" data-url="contact">
 		<div id="navigator">
 			<div id="langnavigator">
 				<table>
@@ -163,7 +133,37 @@
 			<h1 id="page-footer"> Chi-Thanh NGUYEN &copy; 2012 Web in construct</h1>
 		</div>
 	</div>
-	<div id="BS" data-role="page">
+	<div id="NS" data-role="page" data-url="NS">
+		<div id="navigator">
+			<div id="langnavigator">
+				<table>
+					<tr>
+						<td><a id="en" class="langbutton" data-ajax="false" href="http://localhost//index.php?lang=en&isMobile=true&content=NS"><img class="langbutton" src="http://localhost/model/htmldata/image/icon_en.png"/></a></td>
+						<td><a id="fr" class="langbutton" data-ajax="false" href="http://localhost//index.php?lang=fr&isMobile=true&content=NS"><img class="langbutton" src="http://localhost/model/htmldata/image/icon_fr.png"/></a></td>
+						<td><a id="vn" class="langbutton" data-ajax="false" href="http://localhost//index.php?lang=vn&isMobile=true&content=NS"><img class="langbutton" src="http://localhost/model/htmldata/image/icon_vn.png"/></a></td>
+					</tr>
+				</table>
+			</div>
+			<div id="contentnavigator">
+				<ul class="navigatebutton">
+					<li><a id="home" class="navigatebutton" href="#home">Home</a></li>
+					<li><a id="cv" class="navigatebutton" href="#cv">CV</a></li>
+					<li><a id="contact" class="navigatebutton" href="#contact">Contact</a></li>
+					<li><a id="NS" class="navigatebutton" href="#NS">Navier-Stokes</a></li>
+					<li><a id="BS" class="navigatebutton" href="#BS">Black &amp; Scholes</a></li>
+				</ul>
+			</div>
+		</div>
+		<div id="maincontent">
+			<div class="NS">
+				<h1 class="NS">NavierStocks EN, conntent</h1>
+			</div>
+		</div>
+		<div id="bottom-wrapper">
+			<h1 id="page-footer"> Chi-Thanh NGUYEN &copy; 2012 Web in construct</h1>
+		</div>
+	</div>
+	<div id="BS" data-role="page" data-url="BS">
 		<div id="navigator">
 			<div id="langnavigator">
 				<table>

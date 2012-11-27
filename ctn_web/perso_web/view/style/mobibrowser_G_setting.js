@@ -36,7 +36,7 @@ function set_global_mobile_layout()
 		pageSelector = "#" + navigatorJSONDATA[i].pageID;
 		//alert("page ["+i+"] name is "+ pageSelector);
 
-		var $page = $(pageSelector);
+		var $page = $('body').children(pageSelector);
 		var  $langnavigator   = $page.children("#langnavigator")
 		     ,$contentnavigator = $page.children("#contentnavigator")
 		     ,$navigator        = $page.children("#navigator")
@@ -48,7 +48,6 @@ function set_global_mobile_layout()
 		$contentnavigator.attr('data-role', 'navbar');
 		$content.attr('data-role','content');
 		$bottom_wrapper.attr('data-role','footer');
-		// Get the content area element for the page.
 	}
 	/*
 	// mobile globale layout ================================================ 
