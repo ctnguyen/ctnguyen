@@ -15,24 +15,6 @@ $( document ).bind("pagebeforecreate", function(event) {
 function initialize_mobile_browser()
 {
 	set_global_mobile_layout();
-	/*
-	$("a.langbutton").live('click',function(event) {
-		event.preventDefault();
-		update_langue($(this).attr("id"));
-	});*/
-	/*
-	$("a.navigatebutton").live('click',function(event) {
-		event.preventDefault();
-		update_maincontent($(this).attr("id"));
-	});*/
-
-	$("#contentnavigator").live('divinnerreloaded',function(event) {
-		reset_contentnavigator_style();
-	});
-	
-	$("#bottom-wrapper").live('divinnerreloaded',function(event) {
-		reset_contentnavigator_style();
-	});
 }
 
 /*
@@ -47,93 +29,34 @@ sidebar     content
 
 function set_global_mobile_layout()
 {
+	
+	nbPages = navigatorJSONDATA.length;
+	//alert("number of pages = "+nbPages);
+	for (var i = 0; i < nbPages ; i++) {
+		pageSelector = "#" + navigatorJSONDATA[i].pageID;
+		//alert("page ["+i+"] name is "+ pageSelector);
+
+		var $page = $(pageSelector);
+		var  $langnavigator   = $page.children("#langnavigator")
+		     ,$contentnavigator = $page.children("#contentnavigator")
+		     ,$navigator        = $page.children("#navigator")
+		     ,$content          = $page.children("#maincontent")
+		     ,$bottom_wrapper  = $page.children("#bottom-wrapper");
+
+		$navigator.attr('data-role', 'header');
+		$langnavigator.attr('data-role', 'navbar');	 
+		$contentnavigator.attr('data-role', 'navbar');
+		$content.attr('data-role','content');
+		$bottom_wrapper.attr('data-role','footer');
+		// Get the content area element for the page.
+	}
+	/*
 	// mobile globale layout ================================================ 
 	//$('#whole-page').attr('data-role', 'page');
 	$('#langnavigator').attr('data-role', 'listview');	 //TODO find a appropriated style
 	$('#contentnavigator').attr('data-role', 'listview');//TODO find a appropriated style
 	$('#navigator').attr('data-role', 'header');
 	$('#content').attr('data-role','content');
-	$('#bottom-wrapper').attr('data-role','footer');
+	$('#bottom-wrapper').attr('data-role','footer');*/
 }
 
-
-function update_langue(newlang)
-{
-	//alert('actual lang is '+ get_actual_lang_state() ); //Debug
-
-	var lang_request    = newlang;
-	var content_request = get_actual_content_state();
-	var isMobile_request= 'true';
-	
-	$.ajax({
-		type: 'GET'
-		,url : 'controller/ContentNavigatorRequest.php'
-		,data:{'lang':lang_request,'content':content_request,'isMobile':isMobile_request}
-		,dataType: 'html'
-	}).done(function( loadedcontentnavigator ) {
-		$('#contentnavigator').empty().html( loadedcontentnavigator );
-		$('#contentnavigator').trigger('divinnerreloaded');
-		
-	});
-	
-	
-	$.ajax({
-		type: 'GET'
-		,url : 'controller/MainContentRequest.php'
-		,data:{'lang':lang_request,'content':content_request,'isMobile':isMobile_request}
-		,dataType: 'html'
-	}).done(function( loadedmaincontentdiv ) {
-		
-		$('#maincontent').empty().html(loadedmaincontentdiv);
-		$('#maincontent').trigger('divinnerreloaded');
-	});
-	
-	$.ajax({
-		type: 'GET'
-		,url : 'controller/PageFooterRequest.php'
-		,data:{'lang':lang_request,'content':content_request,'isMobile':isMobile_request}
-		,dataType: 'html'
-	}).done(function( loadedfooterpage ) {
-		$('#bottom-wrapper').empty().html( loadedfooterpage );
-		$('#bottom-wrapper').trigger('divinnerreloaded');
-	});
-	
-	reset_actual_lang_state(newlang);
-	//alert('new lang is '+ get_actual_lang_state() );    //Debug
-}
-
-function update_maincontent(newcontentlabel)
-{
-	//alert('actual content is '+ get_actual_content_state() );    //Debug
-
-	var lang_request    = get_actual_lang_state();
-	var content_request = newcontentlabel;
-	var isMobile_request= 'true';
-
-	
-	$.ajax({
-		type: 'GET'
-		,url : 'controller/SpecificStyleRequest.php'
-		,data:{'lang':lang_request,'content':content_request,'isMobile':isMobile_request}
-		,dataType: 'html'
-	}).done(function( specificstylescript ) {
-		$('head .specificstyle').remove();
-		$('head').append(specificstylescript);
-	});
-	
-	
-	$.ajax({
-		type: 'GET'
-		,url : 'controller/MainContentRequest.php'
-		,data:{'lang':lang_request,'content':content_request,'isMobile':isMobile_request}
-		,dataType: 'html'
-	}).done(function( loadedmaincontentdiv ) {
-		
-		$('#maincontent').empty().html(loadedmaincontentdiv);
-		$('#maincontent').trigger('divinnerreloaded');
-
-	});
-
-	reset_actual_content_state(newcontentlabel);	
-	//alert('new content label is '+ get_actual_content_state() ); //Debug
-}

@@ -106,7 +106,7 @@ if($_general_request->_isMobile)
 	
 	
 	//print the default page at first place	
-	echo '	<div id="#'.$_general_request->_content_state.'" data-role="page">'.PHP_EOL;
+	echo '	<div id="'.$_general_request->_content_state.'" data-role="page">'.PHP_EOL;
 	$htmlNavigator = ModelHelper::getHtmlNavigator($_general_request,2);
 	echo $htmlNavigator;
 	$maincontent = ModelHelper::getHtmlMainContent($_general_request,2);

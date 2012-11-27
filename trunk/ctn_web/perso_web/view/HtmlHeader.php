@@ -43,7 +43,7 @@ class HtmlHeader
 		{
 			$this->htmlcontent .= PHP_EOL.'	<!--JSON data of navigatorlist in relation to multipages-->'.PHP_EOL;
 			$this->htmlcontent .= '	<script type="text/javascript">'.PHP_EOL;
-			$this->htmlcontent .= '	var navigatordata = {['.PHP_EOL;
+			$this->htmlcontent .= '	var navigatorJSONDATA = ['.PHP_EOL;
 			
 			
 			$default_content_request = $_general_request->_content_state;
@@ -71,7 +71,7 @@ class HtmlHeader
 			$_general_request->resetContent($default_content_request);
 			
 			
-			$this->htmlcontent .= '	]};'.PHP_EOL;
+			$this->htmlcontent .= '	];'.PHP_EOL;
 			$this->htmlcontent .= '	</script>'.PHP_EOL;
 		}	
 		
