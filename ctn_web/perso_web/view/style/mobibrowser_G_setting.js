@@ -37,25 +37,19 @@ function set_global_mobile_layout()
 		//alert("page ["+i+"] name is "+ pageSelector);
 
 		var $page = $('body').children(pageSelector);
-		var  $langnavigator   = $page.children("#langnavigator")
-		     ,$contentnavigator = $page.children("#contentnavigator")
-		     ,$navigator        = $page.children("#navigator")
-		     ,$content          = $page.children("#maincontent")
-		     ,$bottom_wrapper  = $page.children("#bottom-wrapper");
+		var $navigator        = $page.children("#navigator");
+		var $langnavigator    = $navigator.children("#langnavigator");
+		var $contentnavigator = $navigator.children("#contentnavigator");
+		var $content          = $page.children("#maincontent");
+		var $bottom_wrapper   = $page.children("#bottom-wrapper");
 
-		$navigator.attr('data-role', 'header');
-		$langnavigator.attr('data-role', 'navbar');	 
+		$navigator.attr(       'data-role', 'header');
+		$langnavigator.attr(   'data-role', 'navbar');	 
 		$contentnavigator.attr('data-role', 'navbar');
-		$content.attr('data-role','content');
-		$bottom_wrapper.attr('data-role','footer');
+		$content.attr(         'data-role','content');
+		$bottom_wrapper.attr(  'data-role','footer');
 	}
-	/*
-	// mobile globale layout ================================================ 
-	//$('#whole-page').attr('data-role', 'page');
-	$('#langnavigator').attr('data-role', 'listview');	 //TODO find a appropriated style
-	$('#contentnavigator').attr('data-role', 'listview');//TODO find a appropriated style
-	$('#navigator').attr('data-role', 'header');
-	$('#content').attr('data-role','content');
-	$('#bottom-wrapper').attr('data-role','footer');*/
+	
+	$('.referencing').css({ "display":"none" });
 }
 
