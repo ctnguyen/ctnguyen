@@ -30,11 +30,12 @@ class LangNavigator
 		$this->htmlcontent .= $indent.'	<table>'.PHP_EOL;
 		$this->htmlcontent .= $indent.'		<tr>'.PHP_EOL;
 
+		$index_page = GlobalConfig::DOMAINE_NAME . '/index.php';
 		if( $_general_request->_isMobile )
 		{
-			$this->htmlcontent .= $indent.'			<td><a id="en" class="langbutton" href="#whole-page"><img class="langbutton" src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/icon_en.png"/></a></td>'.PHP_EOL;
-			$this->htmlcontent .= $indent.'			<td><a id="fr" class="langbutton" href="#whole-page"><img class="langbutton" src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/icon_fr.png"/></a></td>'.PHP_EOL;
-			$this->htmlcontent .= $indent.'			<td><a id="vn" class="langbutton" href="#whole-page"><img class="langbutton" src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/icon_vn.png"/></a></td>'.PHP_EOL;
+			$this->htmlcontent .= $indent.'			<td><a id="en" class="langbutton" data-ajax="false" href="'.$index_page.'?lang=en&isMobile=true&content='.$_general_request->_content_state.'"><img class="langbutton" src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/icon_en.png"/></a></td>'.PHP_EOL;
+			$this->htmlcontent .= $indent.'			<td><a id="fr" class="langbutton" data-ajax="false" href="'.$index_page.'?lang=fr&isMobile=true&content='.$_general_request->_content_state.'"><img class="langbutton" src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/icon_fr.png"/></a></td>'.PHP_EOL;
+			$this->htmlcontent .= $indent.'			<td><a id="vn" class="langbutton" data-ajax="false" href="'.$index_page.'?lang=vn&isMobile=true&content='.$_general_request->_content_state.'"><img class="langbutton" src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/icon_vn.png"/></a></td>'.PHP_EOL;
 		}
 		else
 		{
