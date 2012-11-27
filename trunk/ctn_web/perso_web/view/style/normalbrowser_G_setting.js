@@ -145,7 +145,8 @@ function set_global_normal_layout()
 	});
 
 	reset_page_footer_style();
-
+	
+	$('.referencing').css({ "display":"none" });
 	debug_layout();
 }
 
@@ -155,6 +156,7 @@ function reset_page_footer_style()
 		"font-size":"1em" 
 		,"padding-top":"40px"
 	});
+	
 }
 
 function reset_contentnavigator_style()
@@ -273,4 +275,5 @@ function debug_layout()
 	$('#navigator').css({"border":"1px solid #0000FF"});
 	$('#bottom-page').css({"border":"1px solid #808080"});
 	$('#bottom-wrapper').css({"border":"1px solid #D2691E"});
+	$('.referencing').css({ "display":"block" });
 }
