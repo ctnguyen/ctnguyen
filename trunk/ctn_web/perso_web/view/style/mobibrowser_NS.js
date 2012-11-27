@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$( document ).bind("pagebeforecreate", function(event) {
 	
 	reset_navierstocks_mobistyle();
 	
@@ -10,5 +10,6 @@ $(document).ready(function() {
 
 function reset_navierstocks_mobistyle()
 {
+	$('div.NS').attr('data-role','button');
 	$('h1').css({"color":"#FFFF00"});
 }
