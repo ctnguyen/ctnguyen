@@ -11,5 +11,5 @@ $( document ).bind("pagebeforecreate", function(event) {
 function reset_cv_mobistyle()
 {
 	$('div.cv').attr('data-role','button');
-	$('h1').css({"color":"#0000FF"});
+	$('h1.cv').css({"color":"#0000FF"});
 }

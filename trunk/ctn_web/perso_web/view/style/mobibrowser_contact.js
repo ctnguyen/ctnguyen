@@ -10,5 +10,5 @@ $( document ).bind("pagebeforecreate", function(event) {
 function reset_contact_mobistyle()
 {
 	$('div.contact').attr('data-role','button');
-	$('h1').css({"color":"#00FF00"});	
+	$('h1.contact').css({"color":"#00FF00"});	
 }
