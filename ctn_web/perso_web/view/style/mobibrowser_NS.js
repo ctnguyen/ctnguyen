@@ -11,5 +11,5 @@ $( document ).bind("pagebeforecreate", function(event) {
 function reset_navierstocks_mobistyle()
 {
 	$('div.NS').attr('data-role','button');
-	$('h1').css({"color":"#FFFF00"});
+	$('h1.NS').css({"color":"#FFFF00"});
 }

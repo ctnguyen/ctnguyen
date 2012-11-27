@@ -11,5 +11,5 @@ $( document ).bind("pagebeforecreate", function(event) {
 function reset_home_mobistyle()
 {
 	$('div.home').attr('data-role','button');
-	$('h1').css({"color":"#FFFF00"});
+	$('h1.home').css({"color":"#FFFF00"});
 }

@@ -12,5 +12,5 @@ $( document ).bind("pagebeforecreate", function(event) {
 function reset_blacksholes_mobistyle()
 {
 	$('div.BS').attr('data-role','button');
-	$('h1').css({"color":"#FF0000"});	
+	$('h1.BS').css({"color":"#FF0000"});	
 }
