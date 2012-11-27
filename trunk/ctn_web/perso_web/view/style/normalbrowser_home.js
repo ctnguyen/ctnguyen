@@ -10,5 +10,5 @@ $(document).ready(function() {
 
 function reset_home_style()
 {
-	$('h1').css({"color":"#FFFF00"});
+	$('h1.home').css({"color":"#FFFF00"});
 }

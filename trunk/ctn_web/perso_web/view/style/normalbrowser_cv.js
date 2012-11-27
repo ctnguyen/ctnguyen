@@ -10,5 +10,5 @@ $(document).ready(function() {
 
 function reset_cv_style()
 {
-	$('h1').css({"color":"#0000FF"});
+	$('h1.cv').css({"color":"#0000FF"});
 }

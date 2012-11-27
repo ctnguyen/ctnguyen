@@ -48,7 +48,7 @@ class ContentNavigator
 				$this->htmlcontent .= 'id="'.$buttonID->nodeValue.'" class="navigatebutton" ';
 				if( $_general_request->_isMobile )
 				{
-					$this->htmlcontent .='href="#whole-page"';
+					$this->htmlcontent .='href="#'.$buttonID->nodeValue.'"';
 				}
 				else
 				{
