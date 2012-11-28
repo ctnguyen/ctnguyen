@@ -9,5 +9,9 @@ $(document).ready(function() {
 
 function reset_contact_style()
 {
-	$('h1.contact').css({"color":"#00FF00"});	
+	$('div.contact').css({"background-color":"#00FF00"});//TODO debug
+	
+	$('ul.contact').css({
+		"list-style-type":"none"
+	});
 }
