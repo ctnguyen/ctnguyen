@@ -1,10 +1,6 @@
 $( document ).bind("pagebeforecreate", function(event) {
 	
 	reset_blacksholes_mobistyle();
-	
-	$("#maincontent").live('divinnerreloaded',function(event) {
-		reset_blacksholes_mobistyle();
-	});
 
 });
 

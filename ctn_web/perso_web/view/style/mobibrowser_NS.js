@@ -1,10 +1,7 @@
 $( document ).bind("pagebeforecreate", function(event) {
 	
 	reset_navierstocks_mobistyle();
-	
-	$("#maincontent").live('divinnerreloaded',function(event) {
-		reset_home_style();
-	});
+
 });
 
 

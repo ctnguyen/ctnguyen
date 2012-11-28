@@ -1,10 +1,6 @@
 $( document ).bind("pagebeforecreate", function(event) {
 	
 	reset_home_mobistyle();
-	
-	$("#maincontent").live('divinnerreloaded',function(event) {
-		reset_home_mobistyle();
-	});
 
 });
 

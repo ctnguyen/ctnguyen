@@ -2,7 +2,7 @@ $(document).ready(function() {
 	
 	reset_contact_style();
 	
-	$("#maincontent").live('divinnerreloaded',function(event) {
+	$("#maincontent").live('maincontenthaschanged',function(event) {
 		reset_contact_style();
 	});
 });
