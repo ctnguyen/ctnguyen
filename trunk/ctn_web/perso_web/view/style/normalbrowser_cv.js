@@ -2,7 +2,7 @@ $(document).ready(function() {
 	
 	reset_cv_style();
 	
-	$("#maincontent").live('divinnerreloaded',function(event) {
+	$("#maincontent").live('maincontenthaschanged',function(event) {
 		reset_cv_style();
 	});
 	

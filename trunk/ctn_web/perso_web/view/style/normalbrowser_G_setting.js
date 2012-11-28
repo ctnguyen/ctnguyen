@@ -41,11 +41,11 @@ function initialize_normal_browser()
 		update_maincontent($(this).attr("id"));
 	});
 
-	$("#contentnavigator").live('divinnerreloaded',function(event) {
+	$("#contentnavigator").live('maincontenthaschanged',function(event) {
 		reset_contentnavigator_style();
 	});
 	
-	$("#bottom-wrapper").live('divinnerreloaded',function(event) {
+	$("#bottom-wrapper").live('maincontenthaschanged',function(event) {
 		reset_page_footer_style();
 	});
 }
@@ -181,7 +181,7 @@ function reset_contentnavigator_style()
  * - reload the contentnavitagor adequate to the requested lang
  * - reload the same maincontent adequate to the requested lang
  * - reload the page-footer adequate to the requested lang 
- * - launch event 'divinnerreloaded' to the 'contentnavigator', 'maincontent' and 'bottom-wrapper' divs
+ * - launch event 'maincontenthaschanged' to the 'contentnavigator', 'maincontent' and 'bottom-wrapper' divs
  */
 function update_langue(newlang)
 {
@@ -198,7 +198,7 @@ function update_langue(newlang)
 		,dataType: 'html'
 	}).done(function( loadedcontentnavigator ) {
 		$('#contentnavigator').empty().html( loadedcontentnavigator );
-		$('#contentnavigator').trigger('divinnerreloaded');
+		$('#contentnavigator').trigger('maincontenthaschanged');
 	});
 	
 	
@@ -210,7 +210,7 @@ function update_langue(newlang)
 	}).done(function( loadedmaincontentdiv ) {
 		
 		$('#maincontent').empty().html(loadedmaincontentdiv);
-		$('#maincontent').trigger('divinnerreloaded');
+		$('#maincontent').trigger('maincontenthaschanged');
 	});
 	
 	$.ajax({
@@ -220,7 +220,7 @@ function update_langue(newlang)
 		,dataType: 'html'
 	}).done(function( loadedfooterpage ) {
 		$('#bottom-wrapper').empty().html( loadedfooterpage );
-		$('#bottom-wrapper').trigger('divinnerreloaded');
+		$('#bottom-wrapper').trigger('maincontenthaschanged');
 	});
 	
 	reset_actual_lang_state(newlang);
@@ -233,7 +233,7 @@ function update_langue(newlang)
  *   send request with the new lang to server
  * - delete the specific style to the content, replace it by a new style in adequate to the new content
  * - reload the new maincontent 
- * - launch event 'divinnerreloaded' to the 'maincontent' div 
+ * - launch event 'maincontenthaschanged' to the 'maincontent' div 
  */
 function update_maincontent(newcontentlabel)
 {
@@ -263,7 +263,7 @@ function update_maincontent(newcontentlabel)
 	}).done(function( loadedmaincontentdiv ) {
 		
 		$('#maincontent').empty().html(loadedmaincontentdiv);
-		$('#maincontent').trigger('divinnerreloaded');
+		$('#maincontent').trigger('maincontenthaschanged');
 
 	});
 
