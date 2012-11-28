@@ -132,10 +132,8 @@ if($_general_request->_isMobile)
 				$_general_request->resetContent($buttonID->nodeValue);
 				
 					echo '	<div id="'.$_general_request->_content_state.'" data-role="page" data-url="'.$_general_request->_content_state.'">'.PHP_EOL;
-						$_general_request->resetContent($buttonID->nodeValue);
 						$htmlNavigator = ModelHelper::getHtmlNavigator($_general_request,2);
 						echo $htmlNavigator;
-						$_general_request->resetContent($default_content_request);
 						$maincontent = ModelHelper::getHtmlMainContent($_general_request,2);
 						echo $maincontent;
 						$footercontent = ModelHelper::getHtmlFooter($_general_request,2);
@@ -144,9 +142,9 @@ if($_general_request->_isMobile)
 			}
 		}
 		
-		//reset the content request to the default one
-		$_general_request->resetContent($default_content_request);
 	}
+	//reset the content request to the default one
+	$_general_request->resetContent($default_content_request);
 	
 	$htmlTopPage = ModelHelper::getHtmlBottomPage($_general_request,1);
 	echo $htmlTopPage;
