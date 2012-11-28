@@ -34,7 +34,7 @@ class ModelHelper
 	 * 	return here 
 	 * </head>
 	 */
-	public static function getHtmlTopWrapper($_request, $nbIndent=0)
+	public static function getHtmlTopWrapper(&$_request, $nbIndent=0)
 	{
 		$indent = '';
 		for($i=0; $i< $nbIndent ; $i++)
@@ -54,7 +54,7 @@ class ModelHelper
 	}
 
 	// return the div of bottom-wrapper, containing page-footer
-	public static function getHtmlFooter($_request, $nbIndent=0)
+	public static function getHtmlFooter(&$_request, $nbIndent=0)
 	{
 		$indent = '';
 		for($i=0; $i< $nbIndent ; $i++)
@@ -99,7 +99,7 @@ class ModelHelper
 	 *  but useful for referencing and, important, 
 	 *  TOOL FOR DETECTING ACTUAL STATE OF PAGE 
 	 */ 
-	public static function getHtmlTopPage($_request, $nbIndent=0)
+	public static function getHtmlTopPage(&$_request, $nbIndent=0)
 	{
 		$indent = '';
 		for($i=0; $i< $nbIndent ; $i++)
@@ -117,7 +117,7 @@ class ModelHelper
 	}
 
 	// return the div of navigator (navbar for mobile, sidebar for normal visualization)
-	public static function getHtmlNavigator($_request, $nbIndent=0)
+	public static function getHtmlNavigator(&$_request, $nbIndent=0)
 	{
 		$nbIndentPP =  $nbIndent+1;
 		$nbIndentPPP=  $nbIndentPP+1;
@@ -129,7 +129,7 @@ class ModelHelper
 		
 		$html_navigator = '';
 
-		$flag_part = new LangNavigator($_request,$nbIndentPP);
+		$flag_part = new LangNavigator(&$_request,$nbIndentPP);
 
 		$content_part = new ContentNavigator($_request,$nbIndentPPP);
 
@@ -144,7 +144,7 @@ class ModelHelper
 	}
 
 	// return the div maincontent of the html page
-	public static function getHtmlMainContent($_request, $nbIndent=0)
+	public static function getHtmlMainContent(&$_request, $nbIndent=0)
 	{
 		$nbIndentPP =  $nbIndent+1;
 		$indent = '';
@@ -165,7 +165,7 @@ class ModelHelper
 	}
 
 	// return the div of Bottom page, nothing visible, but useful for referencing
-	public static function getHtmlBottomPage($_request, $nbIndent=0)
+	public static function getHtmlBottomPage(&$_request, $nbIndent=0)
 	{
 		$indent = '';
 		for($i=0; $i< $nbIndent ; $i++)
