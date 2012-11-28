@@ -45,77 +45,78 @@ if( !ControllerHelper::isGoodRequest($_general_request) )
 // If request is bad, reset the request to the default one
 //if(!$good_request){$_general_request->resetLang($default_lang); $_general_request->resetContent($default_content);}//TODO
 
+$totalhtmldoc = '';
 ////	HTML	HTML	HTML	HTML	HTML	HTML	HTML	HTML	/////
 $doctype = ModelHelper::getDocType($_general_request);
-echo $doctype;
+$totalhtmldoc .= $doctype;
 
 if(!$_general_request->_isMobile)
 {
-	echo '<head>'.PHP_EOL;
+	$totalhtmldoc .= '<head>'.PHP_EOL;
 	$headertool = new HtmlHeader($_general_request);
-	echo $headertool->htmlcontent;
-	echo '</head>'.PHP_EOL;
-	echo '<body>'.PHP_EOL;
+	$totalhtmldoc .= $headertool->htmlcontent;
+	$totalhtmldoc .= '</head>'.PHP_EOL;
+	$totalhtmldoc .= '<body>'.PHP_EOL;
 
-	echo '	<div id="page-wrapper">'.PHP_EOL;
+	$totalhtmldoc .= '	<div id="page-wrapper">'.PHP_EOL;
 	$headercontent = ModelHelper::getHtmlTopWrapper($_general_request,2);
-	echo $headercontent;
-	echo '		<div id="whole-page">'.PHP_EOL;
+	$totalhtmldoc .= $headercontent;
+	$totalhtmldoc .= '		<div id="whole-page">'.PHP_EOL;
 
 
 	$htmlTopPage = ModelHelper::getHtmlTopPage($_general_request,3);
-	echo $htmlTopPage;
+	$totalhtmldoc .= $htmlTopPage;
 
 	$htmlNavigator = ModelHelper::getHtmlNavigator($_general_request,3);
-	echo $htmlNavigator;
+	$totalhtmldoc .= $htmlNavigator;
 	$maincontent = ModelHelper::getHtmlMainContent($_general_request,3);
-	echo $maincontent;
+	$totalhtmldoc .= $maincontent;
 
 
 	$htmlBottomPage = ModelHelper::getHtmlBottomPage($_general_request,3);
-	echo $htmlBottomPage;
+	$totalhtmldoc .= $htmlBottomPage;
 
 
 	$footercontent = ModelHelper::getHtmlFooter($_general_request,2);
 
-	echo '		</div>'.PHP_EOL; //end if of <div id="whole-page">
-	echo $footercontent;
+	$totalhtmldoc .= '		</div>'.PHP_EOL; //end if of <div id="whole-page">
+	$totalhtmldoc .= $footercontent;
 
-	echo '	</div>'.PHP_EOL;//end div of  <div id="page-wrapper">
+	$totalhtmldoc .= '	</div>'.PHP_EOL;//end div of  <div id="page-wrapper">
 
-	echo '</body>'.PHP_EOL;
+	$totalhtmldoc .= '</body>'.PHP_EOL;
 }
 /* separate for mobile, is totally different senarios
  * page for mobile is printing in the multi-template pages
 *  TODO first implementatin print all pages, but its not good
-*  the idea is to print only the default page and load successively other 
+*  the idea is to print only the default page and load successively other
 *  by ajax loading
 */
 if($_general_request->_isMobile)
 {
-	echo '<head>'.PHP_EOL;
+	$totalhtmldoc .= '<head>'.PHP_EOL;
 	$headertool = new HtmlHeader($_general_request);
-	echo $headertool->htmlcontent;
-	echo '</head>'.PHP_EOL;
-	echo '<body>'.PHP_EOL;
+	$totalhtmldoc .= $headertool->htmlcontent;
+	$totalhtmldoc .= '</head>'.PHP_EOL;
+	$totalhtmldoc .= '<body>'.PHP_EOL;
 
 	$htmlTopPage = ModelHelper::getHtmlTopPage($_general_request,1);
-	echo $htmlTopPage;
+	$totalhtmldoc .= $htmlTopPage;
 
 	$default_content_request = $_general_request->_content_state;
-	
-	
-	//print the default page at first place	
-	echo '	<div id="'.$_general_request->_content_state.'" data-role="page" data-url="'.$_general_request->_content_state.'">'.PHP_EOL;
-	$htmlNavigator = ModelHelper::getHtmlNavigator($_general_request,2);
-	echo $htmlNavigator;
-	$maincontent = ModelHelper::getHtmlMainContent($_general_request,2);
-	echo $maincontent;
-	$footercontent = ModelHelper::getHtmlFooter($_general_request,2);
-	echo $footercontent;
-	echo '	</div>'.PHP_EOL;
 
-	
+
+	//print the default page at first place
+	$totalhtmldoc .= '	<div id="'.$_general_request->_content_state.'" data-role="page" data-url="'.$_general_request->_content_state.'">'.PHP_EOL;
+	$htmlNavigator = ModelHelper::getHtmlNavigator($_general_request,2);
+	$totalhtmldoc .= $htmlNavigator;
+	$maincontent = ModelHelper::getHtmlMainContent($_general_request,2);
+	$totalhtmldoc .= $maincontent;
+	$footercontent = ModelHelper::getHtmlFooter($_general_request,2);
+	$totalhtmldoc .= $footercontent;
+	$totalhtmldoc .= '	</div>'.PHP_EOL;
+
+
 	//loop printint all other mobile prefetch pages
 	$datafilename = ControllerHelper::getDataNavigatorListFile();
 	$xmlDoc = new DOMDocument;
@@ -130,28 +131,33 @@ if($_general_request->_isMobile)
 			if($buttonID->nodeValue != $default_content_request)
 			{
 				$_general_request->resetContent($buttonID->nodeValue);
+
+				$totalhtmldoc .= '	<div id="'.$_general_request->_content_state.'" data-role="page" data-url="'.$_general_request->_content_state.'">'.PHP_EOL;
 				
-					echo '	<div id="'.$_general_request->_content_state.'" data-role="page" data-url="'.$_general_request->_content_state.'">'.PHP_EOL;
-						$htmlNavigator = ModelHelper::getHtmlNavigator($_general_request,2);
-						echo $htmlNavigator;
-						$maincontent = ModelHelper::getHtmlMainContent($_general_request,2);
-						echo $maincontent;
-						$footercontent = ModelHelper::getHtmlFooter($_general_request,2);
-						echo $footercontent;
-					echo '	</div>'.PHP_EOL;
+				$htmlNavigator = ModelHelper::getHtmlNavigator($_general_request,2);
+				$totalhtmldoc .= $htmlNavigator;
+				
+				$maincontent = ModelHelper::getHtmlMainContent($_general_request,2);
+				$totalhtmldoc .= $maincontent;
+				
+				$footercontent = ModelHelper::getHtmlFooter($_general_request,2);
+				$totalhtmldoc .= $footercontent;
+				
+				$totalhtmldoc .= '	</div>'.PHP_EOL;
 			}
 		}
-		
+
 	}
 	//reset the content request to the default one
 	$_general_request->resetContent($default_content_request);
-	
+
 	$htmlTopPage = ModelHelper::getHtmlBottomPage($_general_request,1);
-	echo $htmlTopPage;
-	
-	echo '</body>'.PHP_EOL;
+	$totalhtmldoc .= $htmlTopPage;
+
+	$totalhtmldoc .= '</body>'.PHP_EOL;
 
 }
 
 //	HTML	HTML	HTML	HTML	HTML	HTML	HTML	HTML	/////
+echo $totalhtmldoc;
 ?>
