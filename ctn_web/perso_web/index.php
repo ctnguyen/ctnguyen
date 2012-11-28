@@ -59,28 +59,19 @@ if(!$_general_request->_isMobile)
 	$totalhtmldoc .= '<body>'.PHP_EOL;
 
 	$totalhtmldoc .= '	<div id="page-wrapper">'.PHP_EOL;
-	$headercontent = ModelHelper::getHtmlTopWrapper($_general_request,2);
-	$totalhtmldoc .= $headercontent;
+	$totalhtmldoc .= ModelHelper::getHtmlTopWrapper($_general_request,2);
 	$totalhtmldoc .= '		<div id="whole-page">'.PHP_EOL;
 
+	$totalhtmldoc .= ModelHelper::getHtmlTopPage($_general_request,3);
 
-	$htmlTopPage = ModelHelper::getHtmlTopPage($_general_request,3);
-	$totalhtmldoc .= $htmlTopPage;
-
-	$htmlNavigator = ModelHelper::getHtmlNavigator($_general_request,3);
-	$totalhtmldoc .= $htmlNavigator;
-	$maincontent = ModelHelper::getHtmlMainContent($_general_request,3);
-	$totalhtmldoc .= $maincontent;
-
-
-	$htmlBottomPage = ModelHelper::getHtmlBottomPage($_general_request,3);
-	$totalhtmldoc .= $htmlBottomPage;
-
-
-	$footercontent = ModelHelper::getHtmlFooter($_general_request,2);
+	$totalhtmldoc .= ModelHelper::getHtmlNavigator($_general_request,3);
+	$totalhtmldoc .= ModelHelper::getHtmlMainContent($_general_request,3);
+	
+	$totalhtmldoc .= ModelHelper::getHtmlBottomPage($_general_request,3);
 
 	$totalhtmldoc .= '		</div>'.PHP_EOL; //end if of <div id="whole-page">
-	$totalhtmldoc .= $footercontent;
+
+	$totalhtmldoc .= ModelHelper::getHtmlFooter($_general_request,2);
 
 	$totalhtmldoc .= '	</div>'.PHP_EOL;//end div of  <div id="page-wrapper">
 
@@ -100,20 +91,16 @@ if($_general_request->_isMobile)
 	$totalhtmldoc .= '</head>'.PHP_EOL;
 	$totalhtmldoc .= '<body>'.PHP_EOL;
 
-	$htmlTopPage = ModelHelper::getHtmlTopPage($_general_request,1);
-	$totalhtmldoc .= $htmlTopPage;
+	$totalhtmldoc .= ModelHelper::getHtmlTopPage($_general_request,1);
 
 	$default_content_request = $_general_request->_content_state;
 
 
 	//print the default page at first place
 	$totalhtmldoc .= '	<div id="'.$_general_request->_content_state.'" data-role="page" data-url="'.$_general_request->_content_state.'">'.PHP_EOL;
-	$htmlNavigator = ModelHelper::getHtmlNavigator($_general_request,2);
-	$totalhtmldoc .= $htmlNavigator;
-	$maincontent = ModelHelper::getHtmlMainContent($_general_request,2);
-	$totalhtmldoc .= $maincontent;
-	$footercontent = ModelHelper::getHtmlFooter($_general_request,2);
-	$totalhtmldoc .= $footercontent;
+	$totalhtmldoc .= ModelHelper::getHtmlNavigator($_general_request,2);
+	$totalhtmldoc .= ModelHelper::getHtmlMainContent($_general_request,2);
+	$totalhtmldoc .= ModelHelper::getHtmlFooter($_general_request,2);
 	$totalhtmldoc .= '	</div>'.PHP_EOL;
 
 
@@ -134,14 +121,11 @@ if($_general_request->_isMobile)
 
 				$totalhtmldoc .= '	<div id="'.$_general_request->_content_state.'" data-role="page" data-url="'.$_general_request->_content_state.'">'.PHP_EOL;
 				
-				$htmlNavigator = ModelHelper::getHtmlNavigator($_general_request,2);
-				$totalhtmldoc .= $htmlNavigator;
+				$totalhtmldoc .= ModelHelper::getHtmlNavigator($_general_request,2);
 				
-				$maincontent = ModelHelper::getHtmlMainContent($_general_request,2);
-				$totalhtmldoc .= $maincontent;
+				$totalhtmldoc .= ModelHelper::getHtmlMainContent($_general_request,2);
 				
-				$footercontent = ModelHelper::getHtmlFooter($_general_request,2);
-				$totalhtmldoc .= $footercontent;
+				$totalhtmldoc .= ModelHelper::getHtmlFooter($_general_request,2);
 				
 				$totalhtmldoc .= '	</div>'.PHP_EOL;
 			}
@@ -151,8 +135,7 @@ if($_general_request->_isMobile)
 	//reset the content request to the default one
 	$_general_request->resetContent($default_content_request);
 
-	$htmlTopPage = ModelHelper::getHtmlBottomPage($_general_request,1);
-	$totalhtmldoc .= $htmlTopPage;
+	$totalhtmldoc .= ModelHelper::getHtmlBottomPage($_general_request,1);
 
 	$totalhtmldoc .= '</body>'.PHP_EOL;
 
