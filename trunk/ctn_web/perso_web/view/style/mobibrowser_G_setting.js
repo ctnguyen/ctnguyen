@@ -4,6 +4,9 @@
 
 // Binding 'pagebeforecreate' event on document for mobile is 
 // someway equivalent of the usual 'ready' event on document use for normal browser
+
+
+
 $( document ).bind("pagebeforecreate", function(event) {
 
 	initialize_mobile_browser();
@@ -19,13 +22,8 @@ function initialize_mobile_browser()
 	/*
 	//DEBUG
 	$(document).live("pagebeforechange", function(e, data) {
-		// We only want to handle changePage() calls where the caller is
-		// asking us to load a page by URL.
-		alert("document.pagebeforechange is fired off");
 		if ( typeof data.toPage === "string") {
-			// We are being asked to load a page by URL, but we only
-			// want to handle URLs that request the data for a specific
-			// category.
+
 			var u = $.mobile.path.parseUrl(data.toPage);
 			alert("data.toPage=["+data.toPage+"]");
 		}

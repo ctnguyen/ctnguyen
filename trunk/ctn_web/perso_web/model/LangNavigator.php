@@ -33,9 +33,34 @@ class LangNavigator
 		$index_page = GlobalConfig::DOMAINE_NAME . '/index.php';
 		if( $_general_request->_isMobile )
 		{
-			$this->htmlcontent .= $indent.'			<td><a id="en" class="langbutton" data-ajax="false" href="'.$index_page.'?lang=en&isMobile=true&content='.$_general_request->_content_state.'"><img class="langbutton" src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/icon_en.png"/></a></td>'.PHP_EOL;
-			$this->htmlcontent .= $indent.'			<td><a id="fr" class="langbutton" data-ajax="false" href="'.$index_page.'?lang=fr&isMobile=true&content='.$_general_request->_content_state.'"><img class="langbutton" src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/icon_fr.png"/></a></td>'.PHP_EOL;
-			$this->htmlcontent .= $indent.'			<td><a id="vn" class="langbutton" data-ajax="false" href="'.$index_page.'?lang=vn&isMobile=true&content='.$_general_request->_content_state.'"><img class="langbutton" src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/icon_vn.png"/></a></td>'.PHP_EOL;
+			//for mobile , langbutton better be a form than a link
+			//TODO, if one day understand better how links works with jQM, change langbuttons to link instead of form
+			$this->htmlcontent .= $indent.'			<td>'.PHP_EOL;
+			$this->htmlcontent .= $indent.'				<form method="get" action="'.$index_page.'">'.PHP_EOL;
+			$this->htmlcontent .= $indent.'					<input style="display:none;" type="text" name="lang" value="en"/>'.PHP_EOL;
+			$this->htmlcontent .= $indent.'					<input style="display:none;" type="text" name="content" value="'.$_general_request->_content_state.'"/>'.PHP_EOL;
+			$this->htmlcontent .= $indent.'					<input style="display:none;" type="text" name="isMobile" value="true"/>'.PHP_EOL;
+			$this->htmlcontent .= $indent.'					<input type="image" src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/icon_en.png">'.PHP_EOL;
+			$this->htmlcontent .= $indent.'				</form>'.PHP_EOL;
+			$this->htmlcontent .= $indent.'			</td>'.PHP_EOL;
+			
+			$this->htmlcontent .= $indent.'			<td>'.PHP_EOL;
+			$this->htmlcontent .= $indent.'				<form method="get" action="'.$index_page.'">'.PHP_EOL;
+			$this->htmlcontent .= $indent.'					<input style="display:none;" type="text" name="lang" value="fr"/>'.PHP_EOL;
+			$this->htmlcontent .= $indent.'					<input style="display:none;" type="text" name="content" value="'.$_general_request->_content_state.'"/>'.PHP_EOL;
+			$this->htmlcontent .= $indent.'					<input style="display:none;" type="text" name="isMobile" value="true"/>'.PHP_EOL;
+			$this->htmlcontent .= $indent.'					<input type="image" src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/icon_fr.png">'.PHP_EOL;
+			$this->htmlcontent .= $indent.'				</form>'.PHP_EOL;
+			$this->htmlcontent .= $indent.'			</td>'.PHP_EOL;
+				
+			$this->htmlcontent .= $indent.'			<td>'.PHP_EOL;
+			$this->htmlcontent .= $indent.'				<form method="get" action="'.$index_page.'">'.PHP_EOL;
+			$this->htmlcontent .= $indent.'					<input style="display:none;" type="text" name="lang" value="vn"/>'.PHP_EOL;
+			$this->htmlcontent .= $indent.'					<input style="display:none;" type="text" name="content" value="'.$_general_request->_content_state.'"/>'.PHP_EOL;
+			$this->htmlcontent .= $indent.'					<input style="display:none;" type="text" name="isMobile" value="true"/>'.PHP_EOL;
+			$this->htmlcontent .= $indent.'					<input type="image" src="'. GlobalConfig::DOMAINE_NAME . 'model/htmldata/image/icon_vn.png">'.PHP_EOL;
+			$this->htmlcontent .= $indent.'				</form>'.PHP_EOL;
+			$this->htmlcontent .= $indent.'			</td>'.PHP_EOL;
 		}
 		else
 		{
