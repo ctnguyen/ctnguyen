@@ -6,6 +6,15 @@ $( document ).bind("pagebeforecreate", function(event) {
 
 function reset_home_mobistyle()
 {
-	$('div.home').attr('data-role','button');
-	$('h1.home').css({"color":"#FFFF00"});
+	var $home_mobile_page = $('body').children('#home');
+	
+	$home_mobile_page.find('div.home').css({"background-color":"#FFFF00"});//TODO debug
+	
+	$home_mobile_page.find('ul#motivations.home').css({
+		"list-style-type":"square"
+	});
+
+	$home_mobile_page.find('ul#webtechnologies.home').css({
+		"list-style-type":"none"
+	});
 }

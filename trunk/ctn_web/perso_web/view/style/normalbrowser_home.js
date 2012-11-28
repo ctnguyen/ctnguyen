@@ -10,5 +10,13 @@ $(document).ready(function() {
 
 function reset_home_style()
 {
-	$('h1.home').css({"color":"#FFFF00"});
+	$('div.home').css({"background-color":"#FFFF00"});//TODO debug
+	
+	$('ul#motivations.home').css({
+		"list-style-type":"square"
+	});
+
+	$('ul#webtechnologies.home').css({
+		"list-style-type":"none"
+	});
 }
