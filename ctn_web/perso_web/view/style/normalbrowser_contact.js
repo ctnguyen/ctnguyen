@@ -14,4 +14,6 @@ function reset_contact_style()
 	$('ul.contact').css({
 		"list-style-type":"none"
 	});
+	
+	$('#bottom-wrapper').css({	"position":"fixed"	});
 }

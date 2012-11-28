@@ -19,4 +19,6 @@ function reset_home_style()
 	$('ul#webtechnologies.home').css({
 		"list-style-type":"none"
 	});
+	
+	$('#bottom-wrapper').css({	"position":"fixed"	});
 }
