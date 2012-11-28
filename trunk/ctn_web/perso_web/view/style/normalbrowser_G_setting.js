@@ -129,6 +129,7 @@ function set_global_normal_layout()
 	$('#maincontent').css({
 		"width":_get_content_width()
 		,"margin-right":"0"
+		,"padding-left":"3em"
 		,"float":"right"
 		,"border-left-style":"groove"
 		,"border-left-width":"1px"
@@ -149,14 +150,14 @@ function set_global_normal_layout()
 		,"margin":"0 0 0 0"
 		,"padding":"0 0 0 0"
 		,"text-align":"center"
-		,"position":"fixed"
+		//,"position":"fixed"
 		,"bottom":"0px"
 	});
 
 	reset_page_footer_style();
 	
 	$('.referencing').css({ "display":"none" });
-	debug_layout();
+	//debug_layout();//TODO debug
 }
 
 function reset_page_footer_style()
