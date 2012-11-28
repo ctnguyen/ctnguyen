@@ -61,6 +61,15 @@ sidebar     content
 	bottom-wrapper   [different for mobile (included in the whole page instead of a wrapper)]
  */
 
+/* checking the actual and reset the new page state
+ * a page state is determined by the lang and the maincontent
+ * this information are stored on the specific div, hidden on the html doc
+ */
+function get_actual_lang_state()              {	return $("div#actuallangue").text(); }
+function reset_actual_lang_state(newlang)     { $("div#actuallangue").html(newlang); }
+function get_actual_content_state()           { return $("div#actualcontent").text(); }
+function reset_actual_content_state(newlabel) {	$("div#actualcontent").html(newlabel);}
+
 //page width depend on how many character it has, so its convenient to set it in relation to em
 function _get_page_width(){return '80em';}
 function _get_sidebar_width(){return '22%';}
@@ -277,3 +286,4 @@ function debug_layout()
 	$('#bottom-wrapper').css({"border":"1px solid #D2691E"});
 	$('.referencing').css({ "display":"block" });
 }
+
