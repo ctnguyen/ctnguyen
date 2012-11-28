@@ -6,6 +6,11 @@ $( document ).bind("pagebeforecreate", function(event) {
 
 function reset_contact_mobistyle()
 {
-	$('div.contact').attr('data-role','button');
-	$('h1.contact').css({"color":"#00FF00"});	
+	var $contact_mobile_page = $('body').children('#contact');
+	
+	$contact_mobile_page.find('div.contact').css({"background-color":"#00FF00"});//TODO debug
+	
+	$contact_mobile_page.find('ul.contact').css({
+		"list-style-type":"none"
+	});
 }
