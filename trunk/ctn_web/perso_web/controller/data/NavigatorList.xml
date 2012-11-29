@@ -26,10 +26,12 @@
 		<navigatebutton>
 			<idNAME>NS</idNAME>
 			<htmlNAME>Navier-Stokes</htmlNAME>
+			<specificstyle>&lt;script class=&quot;specificstyle&quot; type=&quot;text/javascript&quot; src=&quot;https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;&lt;/script&gt;</specificstyle>
 		</navigatebutton>
 		<navigatebutton>
 			<idNAME>BS</idNAME>
 			<htmlNAME>Black &amp;amp; Scholes</htmlNAME>
+			<specificstyle>&lt;script class=&quot;specificstyle&quot; type=&quot;text/javascript&quot; src=&quot;https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;&lt;/script&gt;</specificstyle>
 		</navigatebutton>
 	</en>
 	<fr>
@@ -51,10 +53,12 @@
 		<navigatebutton>
 			<idNAME>NS</idNAME>
 			<htmlNAME>Navier-Stokes</htmlNAME>
+			<specificstyle>&lt;script class=&quot;specificstyle&quot; type=&quot;text/javascript&quot; src=&quot;https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;&lt;/script&gt;</specificstyle>
 		</navigatebutton>
 		<navigatebutton>
 			<idNAME>BS</idNAME>
 			<htmlNAME>Black &amp;amp; Scholes</htmlNAME>
+			<specificstyle>&lt;script class=&quot;specificstyle&quot; type=&quot;text/javascript&quot; src=&quot;https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;&lt;/script&gt;</specificstyle>
 		</navigatebutton>
 	</fr>
 	<vn>
@@ -76,10 +80,12 @@
 		<navigatebutton>
 			<idNAME>NS</idNAME>
 			<htmlNAME>Navier-Stokes</htmlNAME>
+			<specificstyle>&lt;script class=&quot;specificstyle&quot; type=&quot;text/javascript&quot; src=&quot;https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;&lt;/script&gt;</specificstyle>
 		</navigatebutton>
 		<navigatebutton>
 			<idNAME>BS</idNAME>
 			<htmlNAME>Black &amp;amp; Scholes</htmlNAME>
+			<specificstyle>&lt;script class=&quot;specificstyle&quot; type=&quot;text/javascript&quot; src=&quot;https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;&lt;/script&gt;</specificstyle>
 		</navigatebutton>
 	</vn>
 </ContentNavigator>

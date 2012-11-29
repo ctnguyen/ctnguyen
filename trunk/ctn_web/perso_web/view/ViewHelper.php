@@ -1,6 +1,6 @@
 <?php
 require_once realpath( dirname(__FILE__ ) . '/../global-config.php');
-
+require_once GlobalConfig::SERVER_ROOT_DIR.'controller/ControllerHelper.php';
 /** view helpers 
  */
 
@@ -51,6 +51,34 @@ class ViewHelper
 		{
 			$specificstylescript .= '	<script class="specificstyle" src="'.GlobalConfig::DOMAINE_NAME.'view/style/normalbrowser_'.$_general_request->_content_state.'.js"></script>'.PHP_EOL;
 		}
+		
+		//
+		//Proccess requesting the data controller file
+		$default_content_request = $_general_request->_content_state;
+		$datafilename = ControllerHelper::getDataNavigatorListFile();
+		$xmlDoc = new DOMDocument;
+		$xmlDoc->load($datafilename);
+		$langnode   = $xmlDoc->getElementsByTagName($_general_request->_lang_state)->item(0);
+		$buttonlist = $langnode->getElementsByTagName("navigatebutton");
+		foreach($buttonlist as $button)
+		{
+			$buttonID = $button->getElementsByTagName("idNAME")->item(0);
+			if($buttonID)
+			{
+				if($buttonID->nodeValue == $_general_request->_content_state)
+				{
+		
+					$specificstylelist = $button->getElementsByTagName("specificstyle");
+					foreach($specificstylelist as $specificstyle)
+					{
+						$debugvar = $specificstyle->nodeValue;
+						$specificstylescript .= $specificstyle->nodeValue.PHP_EOL;
+					}
+		
+				}
+			}
+		}
+		
 		
 		return $specificstylescript;
 	}
