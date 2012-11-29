@@ -71,7 +71,6 @@ class ViewHelper
 					$specificstylelist = $button->getElementsByTagName("specificstyle");
 					foreach($specificstylelist as $specificstyle)
 					{
-						$debugvar = $specificstyle->nodeValue;
 						$specificstylescript .= $specificstyle->nodeValue.PHP_EOL;
 					}
 		

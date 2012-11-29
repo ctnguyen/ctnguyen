@@ -51,15 +51,6 @@ function initialize_normal_browser()
 }
 
 
-/*
-	page-wrapper     [non for mobile]
-	 top-wrapper     [non for mobile]
-  	whole-page
-	 top-page        
-sidebar     content
-	 bottom-page      
-	bottom-wrapper   [different for mobile (included in the whole page instead of a wrapper)]
- */
 
 /* checking the actual and reset the new page state
  * a page state is determined by the lang and the maincontent
@@ -75,8 +66,49 @@ function _get_page_width(){return '80em';}
 function _get_sidebar_width(){return '22%';}
 function _get_content_width(){return '70%';}
 
+
+/** When a specific content require use of MathJax, 
+ *  Mathjax add some additional div in the body and some <style></style> on html head
+ *  Hence, when remove from this content, a clean MathJax stuff is needed
+ */
+function is_use_mathjax( odler_content_state )
+{
+	var result = new Boolean();
+	result = false;
+	
+	if( odler_content_state === "NS"){	result = true; }
+	if( odler_content_state === "BS"){	result = true; }
+	
+	return result;
+}
+
+function remove_mathjax()
+{
+	//MathJax has added style  tag to the end of head, now need to remove
+	$('head style').remove(); 
+
+	//Every div added by MathJax are out of the maindiv "page-wrapper"
+	//will be removed
+	$('body').children('div').each(function () {
+		if( $(this).attr('id') != 'page-wrapper')
+		{
+			$(this).remove();
+			//alert("id of Div is [" + $(this).attr("id") +"]");//TODO Debug
+		}
+	});
+}
+
 /* setting up bloc size and several style like border, backround..
  * */
+/*
+	page-wrapper     [non for mobile]
+	 top-wrapper     [non for mobile]
+  	whole-page
+	 top-page        
+sidebar     content
+	 bottom-page      
+	bottom-wrapper   [different for mobile (included in the whole page instead of a wrapper)]
+ */
 function set_global_normal_layout()
 {
 	$('body').css({
@@ -243,6 +275,7 @@ function update_maincontent(newcontentlabel)
 	var lang_request    = get_actual_lang_state();
 	var content_request = newcontentlabel;
 	var isMobile_request= 'false';
+	var odler_content_state = get_actual_content_state();
 
 	
 	$.ajax({
@@ -252,7 +285,21 @@ function update_maincontent(newcontentlabel)
 		,dataType: 'html'
 	}).done(function( specificstylescript ) {
 		$('head .specificstyle').remove();
-		$('head').append(specificstylescript);
+		
+		
+		var used_mathjax = new Boolean();
+		used_mathjax = is_use_mathjax( odler_content_state ); 
+		if( used_mathjax )
+		{
+			remove_mathjax();
+		}
+
+		/*
+		var old_head = $('head').html();
+		var new_head = old_head + specificstylescript;
+		$('head').html( new_head );
+		*/
+		$('head').append(specificstylescript);//This bug, dont see the added dom in firebug
 	});
 	
 	

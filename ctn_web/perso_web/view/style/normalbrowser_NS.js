@@ -3,7 +3,7 @@ $(document).ready(function() {
 	reset_navierstocks_style();
 	
 	$("#maincontent").live('maincontenthaschanged',function(event) {
-		reset_home_style();
+		reset_navierstocks_style();
 	});
 });
 
