@@ -67,36 +67,19 @@ function _get_sidebar_width(){return '22%';}
 function _get_content_width(){return '70%';}
 
 
-/** When a specific content require use of MathJax, 
- *  Mathjax add some additional div in the body and some <style></style> on html head
- *  Hence, when remove from this content, a clean MathJax stuff is needed
+/** give true if the content state is attached by some mathematic formula
  */
-function is_use_mathjax( odler_content_state )
+function is_use_mathjax( content_state )
 {
 	var result = new Boolean();
 	result = false;
 	
-	if( odler_content_state === "NS"){	result = true; }
-	if( odler_content_state === "BS"){	result = true; }
+	if( content_state === "NS"){	result = true; }
+	if( content_state === "BS"){	result = true; }
 	
 	return result;
 }
 
-function remove_mathjax()
-{
-	//MathJax has added style  tag to the end of head, now need to remove
-	$('head style').remove(); 
-
-	//Every div added by MathJax are out of the maindiv "page-wrapper"
-	//will be removed
-	$('body').children('div').each(function () {
-		if( $(this).attr('id') != 'page-wrapper')
-		{
-			$(this).remove();
-			//alert("id of Div is [" + $(this).attr("id") +"]");//TODO Debug
-		}
-	});
-}
 
 /* setting up bloc size and several style like border, backround..
  * */
@@ -284,22 +267,21 @@ function update_maincontent(newcontentlabel)
 		,data:{'lang':lang_request,'content':content_request,'isMobile':isMobile_request}
 		,dataType: 'html'
 	}).done(function( specificstylescript ) {
+		
 		$('head .specificstyle').remove();
+
+		$('head').append(specificstylescript);//This bug, dont see the added dom in firebug
+
 		
-		
+		//specific treat for use of latex (mathJax)
 		var used_mathjax = new Boolean();
-		used_mathjax = is_use_mathjax( odler_content_state ); 
+		used_mathjax = is_use_mathjax( content_request ); 
 		if( used_mathjax )
 		{
-			remove_mathjax();
+			// dynamically changing math content of the page
+			// http://docs.mathjax.org/en/v1.1-latest/typeset.html
+			MathJax.Hub.Queue(["Typeset",MathJax.Hub,"mathformula"]);
 		}
-
-		/*
-		var old_head = $('head').html();
-		var new_head = old_head + specificstylescript;
-		$('head').html( new_head );
-		*/
-		$('head').append(specificstylescript);//This bug, dont see the added dom in firebug
 	});
 	
 	
