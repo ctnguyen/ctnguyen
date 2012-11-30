@@ -227,6 +227,16 @@ function update_langue(newlang)
 		
 		$('#maincontent').empty().html(loadedmaincontentdiv);
 		$('#maincontent').trigger('maincontenthaschanged');
+		
+		//specific treat for use of latex (mathJax)
+		var used_mathjax = new Boolean();
+		used_mathjax = is_use_mathjax( content_request ); 
+		if( used_mathjax )
+		{
+			// dynamically changing math content of the page
+			// http://docs.mathjax.org/en/v1.1-latest/typeset.html
+			MathJax.Hub.Queue(["Typeset",MathJax.Hub,"maincontent"]);
+		}
 	});
 	
 	$.ajax({
@@ -280,7 +290,7 @@ function update_maincontent(newcontentlabel)
 		{
 			// dynamically changing math content of the page
 			// http://docs.mathjax.org/en/v1.1-latest/typeset.html
-			MathJax.Hub.Queue(["Typeset",MathJax.Hub,"mathformula"]);
+			MathJax.Hub.Queue(["Typeset",MathJax.Hub,"maincontent"]);
 		}
 	});
 	
