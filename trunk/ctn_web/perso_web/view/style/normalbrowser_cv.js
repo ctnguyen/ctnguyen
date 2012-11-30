@@ -54,7 +54,7 @@ function reset_cv_style()
 	$('td.cvskills').css({ 'border':'1px solid black' });
 	
 	$('p.skilllabel').css({
-		'font-family':'Georgia, "Times New Roman", Times, serif'
+		'font-family':'Georgia, "Times New Roman", Times, serif','font-weight':'bold'
 	}) ;
 	
 	//Experiences styles =============================================================
