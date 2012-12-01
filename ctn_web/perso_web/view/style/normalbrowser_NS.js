@@ -10,5 +10,19 @@ $(document).ready(function() {
 
 function reset_navierstocks_style()
 {
-	$('h1.NS').css({"color":"#FFFF00"});
+	//$('div.NS').css({"background-color":"#FFFF00"});//TODO debug
+	
+	$('img').css({
+		"display":"block"
+		,"margin-left":"auto"
+		,"margin-right":"auto"
+	});
+
+	$('h1.projectname').css({
+		"text-align":"center"
+		,"font-variant":"small-caps"
+		,"font-family":"Georgia, 'Times New Roman', Times, serif"
+	});
+	
+	$('#bottom-wrapper').css({	"position":"static"	});
 }

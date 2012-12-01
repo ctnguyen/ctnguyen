@@ -9,7 +9,7 @@ $(document).ready(function() {
 
 function reset_contact_style()
 {
-	$('div.contact').css({"background-color":"#00FF00"});//TODO debug
+	//$('div.contact').css({"background-color":"#0000FF"});//TODO debug
 	
 	$('ul.contact').css({
 		"list-style-type":"none"
