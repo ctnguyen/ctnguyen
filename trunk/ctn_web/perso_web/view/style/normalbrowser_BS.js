@@ -11,5 +11,5 @@ $(document).ready(function() {
 
 function reset_blacksholes_style()
 {
-	$('h1.BS').css({"color":"#FF0000"});	
+	$('div.BS').css({"background-color":"#00FFFF"});//TODO debug
 }

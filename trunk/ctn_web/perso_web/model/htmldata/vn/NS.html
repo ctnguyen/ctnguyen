@@ -1,6 +1,66 @@
 <div class="NS">
-	<h1 class="NS">NavierStocks VN, Nội dung</h1>
-	<p class="latexformula">
-		\[ \left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right) \]
-	</p>
+	<div id="titre">
+		<h1 class="projectname">Dòng chảy thành tầng trong ống dẫn</h1>
+		<h1 class="projectname">Navier-Stokes 2D tĩnh</h1>
+	</div>
+	<div id="abstract">
+		<div id="domaine_img">
+			<img class="equation" src="model/htmldata/image/navier_stokes_domain.png"
+			alt="Laminar flow" />
+		</div>
+		<p>
+			Dòng chảy thành tầng trong một ống dẫn được mô tả bằng phương trình Navier-Stokes. Hệ phương trình kết nối vận tốc và áp suất như sau :
+		</p>
+		<div class="latexformula">
+			\[
+			(\wp)\hspace{0.25cm}\left\{
+			\begin{array}{rl}
+			(\textbf{u}.\triangledown) \textbf{u} -\nu \bigtriangleup \textbf{u} + \triangledown p & =0 \\
+			\triangledown \textbf{u} & =0 \\
+			\textbf{u}_\Gamma &=g
+			\end{array}\right.
+			\]
+		</div>
+		<p>
+			Hệ phương trình phi tuyến tính này sau khi tuyến tính hóa được đưa về dạng rời rạc theo Newton :
+		</p>
+		<div class="latexformula">
+			\[
+			(N)\hspace{0.25cm}\left\{
+			\begin{array}{rl}
+			-\bigtriangleup \textbf{u}^{n+1} + \frac{1}{\nu}[( \textbf{u}^n. \triangledown) \textbf{u}^{n+1}+ (\textbf{u}^{n+1} .\triangledown) \textbf{u}^n] + \triangledown p^{n+1} &=\frac{1}{\nu}(\textbf{u}^n.\triangledown)\textbf{u}^n \\
+			\text{div}\textbf{u}^{n+1}          &=0 \\
+			\textbf{u}^{n+1}_{|\Gamma_D}  &=g
+			\end{array}\right.
+			\]
+		</div>
+	</div>
+	<div id="keywords">
+		<p>
+			Dự án học và nghiên cứu các bước mô hình hóa toán học một cách đầy đủ
+		</p>
+		<ul>
+			<li>
+				Chứng minh tồn tại duy nhất của đáp số trong không gian liên tục
+			</li>
+			<li>
+				Tuyến tính hóa và đưa về dạng rời rạc
+			</li>
+			<li>
+				Phương pháp các phần tử hữu hạn tiên tiến (Taylor-Hood)
+			</li>
+			<li>
+				Vi phân số
+			</li>
+			<li>
+				Lập trình C++ cấp cao (template, fonction virtuelle)
+			</li>
+			<li>
+				Lập trình Giao Diện với Người Sử Dung bằng Qt
+			</li>
+		</ul>
+	</div>
+	<div id="pdf">
+		<a href="model/htmldata/doc/ProjetM2_NS.pdf" target="_blank">Xem thêm (pdf Tiếng Pháp)</a>
+	</div>
 </div>

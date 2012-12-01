@@ -7,6 +7,20 @@ $( document ).bind("pagebeforecreate", function(event) {
 
 function reset_navierstocks_mobistyle()
 {
-	$('div.NS').attr('data-role','button');
-	$('h1.NS').css({"color":"#FFFF00"});
+	var $NS_mobile_page = $('body').children('#NS');
+	
+	$NS_mobile_page.find('div.NS').css({"background-color":"#FFFF00"});//TODO debug
+	
+	$NS_mobile_page.find('img').css({
+		"display":"block"
+		,"margin-left":"auto"
+		,"margin-right":"auto"
+	});
+	
+	$NS_mobile_page.find('h1.projectname').css({
+		"text-align":"center"
+		,"font-variant":"small-caps"
+		,"font-family":"Georgia, 'Times New Roman', Times, serif"
+	});
+
 }

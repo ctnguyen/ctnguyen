@@ -7,6 +7,7 @@ $( document ).bind("pagebeforecreate", function(event) {
 
 function reset_blacksholes_mobistyle()
 {
-	$('div.BS').attr('data-role','button');
-	$('h1.BS').css({"color":"#FF0000"});	
+	var $BS_mobile_page = $('body').children('#BS');
+	
+	$BS_mobile_page.find('div.BS').css({"background-color":"#00FFFF"});//TODO debug
 }

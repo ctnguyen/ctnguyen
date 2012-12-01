@@ -10,7 +10,7 @@ $(document).ready(function() {
 
 function reset_home_style()
 {
-	$('div.home').css({"background-color":"#FFFF00"});//TODO debug
+	//$('div.home').css({"background-color":"#FF0000"});//TODO debug
 	
 	$('ul#motivations.home').css({
 		"list-style-type":"square"

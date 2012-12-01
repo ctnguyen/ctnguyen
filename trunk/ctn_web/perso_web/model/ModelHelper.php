@@ -110,8 +110,8 @@ class ModelHelper
 		$toppageDiv = '';
 		$toppageDiv .= $indent.'<div id="top-page">'.PHP_EOL;
 		$toppageDiv .= $indent.'	<div class="referencing"><h1>NGUYEN Chi Thanh, INRIA, SOFA, Digiplante, Paris VI, Paris 6</h1></div>'.PHP_EOL;
-		$toppageDiv .= $indent.'	<div id="actuallangue" style="display:none;">fr</div>'.PHP_EOL;
-		$toppageDiv .= $indent.'	<div id="actualcontent" style="display:none;">home</div>'.PHP_EOL;
+		$toppageDiv .= $indent.'	<div id="actuallangue" style="display:none;">'.$_request->_lang_state.'</div>'.PHP_EOL;
+		$toppageDiv .= $indent.'	<div id="actualcontent" style="display:none;">'.$_request->_content_state.'</div>'.PHP_EOL;
 		$toppageDiv .= $indent.'</div>'.PHP_EOL;
 		return $toppageDiv;
 	}

@@ -10,7 +10,7 @@ $(document).ready(function() {
 
 function reset_cv_style()
 {
-	//$('div.cv').css({"background-color":"#0000FF"});//TODO debug
+	//$('div.cv').css({"background-color":"#00FF00"});//TODO debug
 	
 	// CV mobile globale style =================================================
 	$('div.cv').css({
