@@ -19,15 +19,9 @@ function initialize_mobile_browser()
 {
 	set_global_mobile_layout();
 	
-	/*
-	//DEBUG
-	$(document).live("pagebeforechange", function(e, data) {
-		if ( typeof data.toPage === "string") {
-
-			var u = $.mobile.path.parseUrl(data.toPage);
-			alert("data.toPage=["+data.toPage+"]");
-		}
-	});*/
+	// dynamically changing math content of the page
+	// http://docs.mathjax.org/en/v1.1-latest/typeset.html
+	MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 }
 
 /*
@@ -67,18 +61,21 @@ function set_global_mobile_layout()
 }
 
 
-/* TODO debug when change lang button does not behave as desire
+//TODO debug when change lang button does not behave as desire
 //Listen for any attempts to call changePage().
+/*
 $(document).bind("pagebeforechange", function(e, data) {
 
 	if ( typeof data.toPage === "string") {
 
 		var u = $.mobile.path.parseUrl(data.toPage);
 
-			alert("document.pagebeforechange is fired off");
+		//window.location.href = 'http://localhost/index.php';
+	//		alert("document.pagebeforechange is fired off");
 			
-			$.mobile.changePage(u.hrefNoHash);
+	//		$.mobile.changePage(u.hrefNoHash);
 
-			e.preventDefault();
+	//		e.preventDefault();
 	}
-});*/
+});
+*/
