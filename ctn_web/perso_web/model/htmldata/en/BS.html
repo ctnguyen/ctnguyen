@@ -1,30 +1,72 @@
 <div class="BS">
-	<h1 class="BS">BlackSholes EN, conntent</h1>
-	<p class="latexformula">
-		Black and schole problem
-		\[
-		\left\{
-		\begin{array}{rcl}
-		dS_1(t)             &=& S_1(t)(r dt + d W_1(t) ) \\
-		dS_2(t)             &=& S_2(t)(r dt + d W_2(t) ) \\
-		&lt;dW_i,dW_j&gt;        &=& \sigma_i\sigma_j \rho_{ij} . dt \\
-		\rho_{11}=\rho_{22} &=& 1                       \\
-		\rho_{12}=\rho_{21} &=& q
-		\end{array}\right.
-		\]
-	</p>
-	<p class="latexformula">
-		after ito and variable change
-		\[
-		\left\{
-		\begin{array}{c}
-		\frac{\partial u}{\partial t} - \frac{\sigma_1^2}2\frac{\partial^2 u}{\partial x^2}
-		- \frac{\sigma_2^2}2\frac{\partial^2 u}{\partial y^2}
-		- q\sigma_1\sigma_2\frac{\partial^2 u}{\partial x\partial y} +
-		\mu_1\frac{\partial u}{\partial x} + \mu_2 \frac{\partial u}{\partial y}+r u  = 0    \\
-		u(x,y,0) = (K-e^{x}-e^{y})^{+} \hspace{1cm} \hbox{,} (x,y)\in R^{2}                                \\
-		\mu_{1}=\frac{\sigma_{1}^{2}}{2}-r  \hbox{    , } \mu_{2}=\frac{\sigma_{2}^{2}}{2}-r
-		\end{array}\right.
-		\]
-	</p>
+	<div id="titre">
+		<h1 class="projectname">Basket option pricing (two underlying)</h1>
+		<h1 class="projectname">by PDE method</h1>
+	</div>
+	<div id="abstract">
+		<p>
+			The basket option on two underlying can be modeled by the
+			system of stochastic differential equations :
+		</p>
+		<div class="latexformula">
+			\[
+			\left\{
+			\begin{array}{rcl}
+			dS_1(t)             &=& S_1(t)(r dt + d W_1(t) ) \\
+			dS_2(t)             &=& S_2(t)(r dt + d W_2(t) ) \\
+			&lt;dW_i,dW_j&gt;        &=& \sigma_i\sigma_j \rho_{ij} . dt \\
+			\rho_{11}=\rho_{22} &=& 1                       \\
+			\rho_{12}=\rho_{21} &=& q
+			\end{array}\right.
+			\]
+		</div>
+		<p>
+			After applying the Itô formula, the problem amounts to solving
+			an partial differential equation
+		</p>
+		<div class="latexformula">
+			\[
+			\left\{
+			\begin{array}{c}
+			\frac{\partial u}{\partial t} - \frac{\sigma_1^2}2\frac{\partial^2 u}{\partial x^2}
+			- \frac{\sigma_2^2}2\frac{\partial^2 u}{\partial y^2}
+			- q\sigma_1\sigma_2\frac{\partial^2 u}{\partial x\partial y} +
+			\mu_1\frac{\partial u}{\partial x} + \mu_2 \frac{\partial u}{\partial y}+r u  = 0    \\
+			u(x,y,0) = (K-e^{x}-e^{y})^{+} \hspace{1cm} \hbox{,} (x,y)\in R^{2}                                \\
+			\mu_{1}=\frac{\sigma_{1}^{2}}{2}-r  \hbox{    , } \mu_{2}=\frac{\sigma_{2}^{2}}{2}-r
+			\end{array}\right.
+			\]
+		</div>
+	</div>
+	<div id="keywords">
+		<p>
+			This project with the very compressive time allows the study
+			and practice many aspects:
+		</p>
+		<ul>
+			<li>
+				Introduction to Financial Modeling
+			</li>
+			<li>
+				The basic steps for the numerical solution of a PDE
+			</li>
+			<li>
+				The programming C++
+			</li>
+			<li>
+				Introduction to openGL
+			</li>
+			<li>
+				Some numerical techniques in theory and its implementation:
+				the finite element method, automatic differentiation, computation
+				of iso-surface.
+			</li>
+			<li>
+				Some methods for the numerical solution of a large matrix system (LU, CG, GMRES)
+			</li>
+		</ul>
+	</div>
+	<div id="pdf">
+		<a href="model/htmldata/doc/ProjetM1.pdf" target="_blank">more (pdf in fr)</a>
+	</div>
 </div>
