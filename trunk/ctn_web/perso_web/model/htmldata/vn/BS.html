@@ -1,30 +1,73 @@
 <div class="BS">
-	<h1 class="BS">BlackSholes VN, Nội dung</h1>
-	<p class="latexformula">
-		Black and schole problem
-		\[
-		\left\{
-		\begin{array}{rcl}
-		dS_1(t)             &=& S_1(t)(r dt + d W_1(t) ) \\
-		dS_2(t)             &=& S_2(t)(r dt + d W_2(t) ) \\
-		&lt;dW_i,dW_j&gt;        &=& \sigma_i\sigma_j \rho_{ij} . dt \\
-		\rho_{11}=\rho_{22} &=& 1                       \\
-		\rho_{12}=\rho_{21} &=& q
-		\end{array}\right.
-		\]
-	</p>
-	<p class="latexformula">
-		after ito and variable change
-		\[
-		\left\{
-		\begin{array}{c}
-		\frac{\partial u}{\partial t} - \frac{\sigma_1^2}2\frac{\partial^2 u}{\partial x^2}
-		- \frac{\sigma_2^2}2\frac{\partial^2 u}{\partial y^2}
-		- q\sigma_1\sigma_2\frac{\partial^2 u}{\partial x\partial y} +
-		\mu_1\frac{\partial u}{\partial x} + \mu_2 \frac{\partial u}{\partial y}+r u  = 0    \\
-		u(x,y,0) = (K-e^{x}-e^{y})^{+} \hspace{1cm} \hbox{,} (x,y)\in R^{2}                                \\
-		\mu_{1}=\frac{\sigma_{1}^{2}}{2}-r  \hbox{    , } \mu_{2}=\frac{\sigma_{2}^{2}}{2}-r
-		\end{array}\right.
-		\]
-	</p>
+	<div id="titre">
+		<h1 class="projectname">Định giá basket option (2 underlying)</h1>
+		<h1 class="projectname">bằng phương trình đạo hàm riêng</h1>
+	</div>
+	<div id="abstract">
+		<p>
+			basket option (2 underlying) có thể mô hình hóa bằng hệ phương
+			trình đạo hàm ngẫu nhiên
+		</p>
+		<div class="latexformula">
+			\[
+			\left\{
+			\begin{array}{rcl}
+			dS_1(t)             &=& S_1(t)(r dt + d W_1(t) ) \\
+			dS_2(t)             &=& S_2(t)(r dt + d W_2(t) ) \\
+			&lt;dW_i,dW_j&gt;        &=& \sigma_i\sigma_j \rho_{ij} . dt \\
+			\rho_{11}=\rho_{22} &=& 1                       \\
+			\rho_{12}=\rho_{21} &=& q
+			\end{array}\right.
+			\]
+		</div>
+		<p>
+			Sau khi áp dụng công thức Itô, vấn đề trở thành tìm đáp số của
+			phương trình đạo hàm riêng
+		</p>
+		<div class="latexformula">
+			\[
+			\left\{
+			\begin{array}{c}
+			\frac{\partial u}{\partial t} - \frac{\sigma_1^2}2\frac{\partial^2 u}{\partial x^2}
+			- \frac{\sigma_2^2}2\frac{\partial^2 u}{\partial y^2}
+			- q\sigma_1\sigma_2\frac{\partial^2 u}{\partial x\partial y} +
+			\mu_1\frac{\partial u}{\partial x} + \mu_2 \frac{\partial u}{\partial y}+r u  = 0    \\
+			u(x,y,0) = (K-e^{x}-e^{y})^{+} \hspace{1cm} \hbox{,} (x,y)\in R^{2}                                \\
+			\mu_{1}=\frac{\sigma_{1}^{2}}{2}-r  \hbox{    , } \mu_{2}=\frac{\sigma_{2}^{2}}{2}-r
+			\end{array}\right.
+			\]
+		</div>
+	</div>
+	<div id="keywords">
+		<p>
+			Dự án với thời gian rất ngắn nhưng đã thực hành được rất nhiều
+			kĩ năng
+		</p>
+		<ul>
+			<li>
+				Giới thiệu qua phương pháp mô hình hóa các sản phẩm tài
+				chính
+			</li>
+			<li>
+				Các bước cơ bản giải phương trình đạo hàm riêng bằng phương
+				pháp số
+			</li>
+			<li>
+				Lập trình C++
+			</li>
+			<li>
+				Giới thiệu qua về openGL
+			</li>
+			<li>
+				Lý thuyết và lập trình cho một vài phương pháp số : phương
+				pháp các phần tử hữu hạn, tính vi phân tự động, cách tính trên đơn tử bề mặt
+			</li>
+			<li>
+				Một vài cách giải hệ phương trình tuyến tính cỡ lớn (LU, GC, GMRES)
+			</li>
+		</ul>
+	</div>
+	<div id="pdf">
+		<a href="model/htmldata/doc/ProjetM1.pdf" target="_blank">Xem thêm (pdf Tiếng Pháp)</a>
+	</div>
 </div>

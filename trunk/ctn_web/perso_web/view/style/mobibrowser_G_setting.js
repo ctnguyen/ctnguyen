@@ -65,6 +65,3 @@ function set_global_mobile_layout()
 	
 	$('.referencing').css({ "display":"none" });
 }
-
-
-
