@@ -8,7 +8,7 @@ function reset_cv_mobistyle()
 {
 	var $cv_mobile_page = $('body').children('#cv');
 	
-	$cv_mobile_page.find('div.cv').css({"background-color":"#00FF00"});//TODO debug
+	//$cv_mobile_page.find('div.cv').css({"background-color":"#00FF00"});//TODO debug
 	
 	// CV mobile globale style =================================================
 	$cv_mobile_page.find('.xpdate').css({"float":"left"});
