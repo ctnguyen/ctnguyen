@@ -65,3 +65,20 @@ function set_global_mobile_layout()
 	
 	$('.referencing').css({ "display":"none" });
 }
+
+
+/* TODO debug when change lang button does not behave as desire
+//Listen for any attempts to call changePage().
+$(document).bind("pagebeforechange", function(e, data) {
+
+	if ( typeof data.toPage === "string") {
+
+		var u = $.mobile.path.parseUrl(data.toPage);
+
+			alert("document.pagebeforechange is fired off");
+			
+			$.mobile.changePage(u.hrefNoHash);
+
+			e.preventDefault();
+	}
+});*/
