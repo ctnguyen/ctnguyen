@@ -9,7 +9,7 @@ function reset_navierstocks_mobistyle()
 {
 	var $NS_mobile_page = $('body').children('#NS');
 	
-	$NS_mobile_page.find('div.NS').css({"background-color":"#FFFF00"});//TODO debug
+	//$NS_mobile_page.find('div.NS').css({"background-color":"#FFFF00"});//TODO debug
 	
 	$NS_mobile_page.find('img').css({
 		"display":"block"

@@ -77,7 +77,18 @@ function reset_cv_style()
 		'align':'center'
 		,'margin-left':'auto'
 		,'margin-right':'auto'
+		,'border-collapse':'collapse'
+		,'border':'1px solid black'
 	});
+	
+	$('tr.cveducation').css({ 'border':'1px solid black' });
+	
+	$('td.cveducationyear').css({
+		'font-weight':'bold'
+		,'border':'1px solid black' 
+	});
+	
+	
 	
 	$('td.cveducation').css({'padding-left':'1em'});
 	
