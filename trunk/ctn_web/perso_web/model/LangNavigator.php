@@ -30,7 +30,7 @@ class LangNavigator
 		$this->htmlcontent .= $indent.'	<table>'.PHP_EOL;
 		$this->htmlcontent .= $indent.'		<tr>'.PHP_EOL;
 
-		$index_page = GlobalConfig::DOMAINE_NAME . '/index.php';
+		$index_page = GlobalConfig::DOMAINE_NAME . 'index.php';
 		if( $_general_request->_isMobile )
 		{
 			//for mobile , langbutton better be a form than a link
