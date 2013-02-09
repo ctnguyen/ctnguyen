@@ -6,30 +6,155 @@
 
 \usepackage{lmodern}
 \usepackage[a4paper]{geometry}
-%\usepackage[frenchb]{babel}
-\usepackage{graphicx}
+
 \usepackage{hyperref}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
 
 \usepackage{pstricks}
 \usepackage{pst-node}
-%\usepackage{wrapfig}
-\usepackage{amsmath}
-\usepackage{amssymb}
 
 
 \begin{document}
 %%%%%%%%%%%%%%%%%% DOCUMENT TITLE %%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{center}\resizebox{12cm}{0.6cm}{Memento for Usuals Probability Distributions}\end{center}
+\begin{center}Memento for Usuals Probability Distributions\end{center}
 %%%%%%%%%%%%%%%%%% DOCUMENT TITLE %%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Base }
+\paragraph{Convergences and relations}
+\begin{center}
+\begin{pspicture}(-7,-2)(7,2)
+%\psline(-7,-2)(7,2)
+\rput(-1, 1){\Rnode{as}{\psframebox{$X_n \xrightarrow{a.s} X$}}}
+\rput(-1,-1){\Rnode{Lp}{\psframebox{$X_n \xrightarrow{\textbf{L}^p} X$}}}
+\rput(-4,-1){\Rnode{Lq}{\psframebox{$X_n \xrightarrow{\textbf{L}^q} X$}}}
+\rput( 2, 0){\Rnode{P}{\psframebox{$X_n \xrightarrow{\mathbb{P}} X$}}}
+\rput( 5, 0){\Rnode{L}{\psframebox{$X_n \rightsquigarrow X$}}}
+\rput( -5, 0.5){\Rnode{cond}{$ _{0<p<q \leq \infty} \Rightarrow \begin{array}{l}
+                                                                     |.|_p \leq |.|_q \\
+								    \textbf{L}^q \subset \textbf{L}^p
+                                                                    \end{array}$}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ncline[linestyle=dashed]{->}{Lq}{Lp}
+\ncline[linestyle=dashed]{->}{as}{P}
+\ncline[linestyle=dashed]{->}{Lp}{P}
+\ncline[linestyle=dashed]{->}{P}{L}
+\end{pspicture}
+\end{center}
+
+
+\paragraph{Law of large numbers}
+\[
+\text{if} \hspace{5mm} (X_{n})_{(n\geqslant 0)} \in \textbf{L}^1 \text{  i.i.d,} \hspace{5mm} \text{ then  } \hspace{5mm}  \overline{X}_n\xrightarrow{a.s} \mathbb{E}[X_{0}]  
+\]
+\paragraph{Central Limit Theorem}
+\[
+\text{if} \hspace{5mm} (X_{n})_{(n\geqslant 0)} \in \textbf{L}^2 \text{  i.i.d,} \hspace{5mm} \text{ then  } \hspace{5mm}
+\frac{\overline{X}_n - \mu}{\frac{\sigma}{\sqrt{n}}} \rightsquigarrow   \mathcal{N}(0,1)
+ \hspace{5mm}  \text{    or} \hspace{5mm}  
+\sqrt{n}(\overline{X}_n - \mu) \rightsquigarrow   \mathcal{N}(0,\sigma^{2})
+\]
+
+\paragraph{Slutsky's Theorem}
+\[
+\text{if} \hspace{5mm} 
+\left\{ 
+\begin{array}{l}
+X_n \rightsquigarrow X \\
+Y_n \xrightarrow{\mathbb{P}} c 
+\end{array}\right. 
+\hspace{5mm} \text{ then  } \hspace{5mm}
+\left\{ 
+\begin{array}{l}
+X_n + Y_n \rightsquigarrow X+c \\
+X_n . Y_n \rightsquigarrow  c.X 
+\end{array}\right. 
+\]
+
+\paragraph{The Delta Method}
+\[
+\text{if} \hspace{5mm} 
+\left\{ 
+\begin{array}{l}
+\sqrt{n}(U_n - \mu) \rightsquigarrow   \mathcal{N}(0,\sigma^{2}) \\
+g \in \mathbb{C}^1_{(\mu)}
+\end{array}\right. 
+\hspace{5mm} \text{ then  } \hspace{5mm}
+\sqrt{n}(g(U_n) - g(\mu) ) \rightsquigarrow   \mathcal{N}(0,\sigma^{2}[g'(\mu)]^2) 
+\]
+
+\paragraph{Markov's inequality}
+\[
+\text{for all}\hspace{5mm} \varepsilon > 0, p>0, X\in \textbf{L}^p \hspace{20mm} \mathbb{P}(|X| \geq \varepsilon) \leq \frac{\mathbb{E}[|X|^p]}{\varepsilon ^p}
+\]
+\paragraph{Bienayme-Tchebychev's inequality}
+\[
+\text{for all  } \hspace{5mm} \varepsilon > 0, X\in \textbf{L}^2 \hspace{20mm} \mathbb{P}(|X- \mathbb{E}X| \geq \varepsilon) \leq \frac{\textbf{Var}[X]}{\varepsilon ^2}
+\]
+\paragraph{Berry-Esseen's inequality}
+\[
+\text{if} \hspace{5mm} (X_{i})_{(0\leqslant i \leqslant n)} \in \textbf{L}^3 \text{  i.i.d,} \hspace{5mm} \text{ then  } \hspace{5mm}
+\sup_{t\in \mathbb{R}} \left| \mathbb{P}(\frac{\overline{X}_n - \mu}{\frac{\sigma}{\sqrt{n}}} \leq t) - F_{\mathcal{N}_{0,1}}(t) \right| 
+\leq \frac{\mathbb{E}[|X_i - \mu|^3]}{\sigma^3 \sqrt{n}}
+\]
+\paragraph{Hoeffding's inequality}
+if $(X_{i})_{(0\leqslant i \leqslant n)}$ independant bounded $X_i \in [a_i,b_i]$, then
+\[
+\mathbb{P}(\overline{X}_n- \mathbb{E}[\overline{X}_n] \geq t) \leq exp\left(-\frac{2n^2t^2}{\sum_{i=0}^{n} (b_i-a_i)^2}\right) 
+\hspace{5mm} \text{ for all } t >0
+\]
+
+\paragraph{Kolmogorov's inequality}
+if $(X_{i})_{(0\leqslant i \leqslant n)} \in \textbf{L}^2$ independant, $\mathbb{E}[X_i]=0$, then
+\[
+\mathbb{P}\left( \max_{0\leqslant k \leqslant n}\left| \sum_{i=0}^{k} X_i  \right| 
+\geq \varepsilon \right) \leq \frac{1}{\varepsilon^2} \sum_{i=0}^{n} \textbf{Var}[X_i]
+\hspace{5mm} \text{ for all } \varepsilon >0
+\]
+
 \paragraph{Gamma Function}
 \[
-\Gamma(z) = \int_{0}^{\infty} t^{z-1}e^{-t}dt \hspace{30mm}  \Gamma(1) = 1 \hspace{10mm}  \Gamma(z+1) = z\Gamma(z) 
+\Gamma(z) = \int_{0}^{\infty} t^{z-1}e^{-t}dt 
+\hspace{30mm}  \Gamma(1) = 1 
+\hspace{10mm}  \Gamma(z+1) = z\Gamma(z) 
+\hspace{10mm}  \Gamma(n) = (n-1)! 
 \]
 \paragraph{Beta Function}
 \[
-\beta(x,y)=  \int_{0}^{1}  t^{x-1}(1-t)^{y-1}dt  \hspace{30mm} \beta(x,y)= \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}
+\beta(x,y)=  \int_{0}^{1}  t^{x-1}(1-t)^{y-1}dt  \hspace{30mm} \beta(y,x)=\beta(x,y)= \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}
 \]
-\paragraph{Binomial Coefficient}
+\paragraph{Binomial Coefficient k-combination of n elements}
+\[
+\textbf{C}^{k}_{n} = \binom{n}{k} = \frac{n!}{k!(n-k)!}
+\hspace{30mm} \textbf{C}^{k}_{n} = \textbf{C}^{n-k}_{n} 
+\hspace{10mm} \textbf{C}^{k+1}_{n+1} = \textbf{C}^{k}_{n} + \textbf{C}^{k+1}_{n} 
+\]
+
+\paragraph{Generating Function (discrete variables)}
+\[
+\textbf{G}_{X}(t)= \mathbb{E}[t^{\textbf{X}}] = \sum t^{x}.p(x)
+\hspace{6mm} \mathbb{P}(\textbf{X}=k) = \frac{\textbf{G}_{X}^{(k)}(0)}{k!}
+\hspace{6mm} \textbf{G}_{X}^{(m)}(1)  = \mathbb{E}[(X)(X-1)...(X-m+1)]
+\]
+\paragraph{Characteristic Function}
+\[
+\mathbb{R}^{n}
+\left\{
+\begin{array}{l}
+\varphi_{X}(t)= \mathbb{E}[e^{i<t,X>}] = \int_{\mathbb{R}} e^{i<t,x>} . f_{X}(x).dx \\
+f_{X}(x) = \frac{1}{2\pi}\int_{\mathbb{R}} e^{i<t,x>} . \varphi_{X}(t).dt
+\end{array}\right. 
+\hspace{5mm}
+(\mathbb{E}[X^{k}]< \infty) \Rightarrow 
+\left\{
+\begin{array}{l}
+\varphi_{X}^{(r)}(t)= i^{r}\mathbb{E}[X^{r}e^{itX}] \\
+\varphi_{X}^{(r)}(0)= i^{r}\mathbb{E}[X^{r}]
+\end{array}\right. 
+\]
+
+
+
+\section{Discrete Probability Distributions}
 
 \end{document}
