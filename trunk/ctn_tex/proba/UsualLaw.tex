@@ -104,6 +104,20 @@ if $(X_{i})_{(0\leqslant i \leqslant n)}$ independant bounded $X_i \in [a_i,b_i]
 \hspace{5mm} \text{ for all } t >0
 \]
 
+\paragraph{Dvoretzky–Kiefer–Wolfowitz inequality}
+if $(X_{i})_{(0\leqslant i \leqslant n)}$ i.i.d  $X_i \sim F $, and its empirical distribution $F_n$ 
+\[
+\left\{
+\begin{array}{l}
+\mathbb{P}( \sup_{x\in \mathbb{R}} ( {F}_n(x)- F(x) ) > \varepsilon ) \leq e^{-2n\varepsilon^2} 
+\hspace{5mm} \text{ for all } \varepsilon \geq \sqrt{\frac{1}{2n}log2} \\ \\
+\mathbb{P}( \sup_{x\in \mathbb{R}} | {F}_n(x)- F(x) | > \varepsilon ) \leq 2.e^{-2n\varepsilon^2} 
+\hspace{5mm} \text{ for all } \varepsilon > 0
+\end{array}
+\right.
+\]
+
+
 \paragraph{Kolmogorov's inequality}
 if $(X_{i})_{(0\leqslant i \leqslant n)} \in \textbf{L}^2$ independant, $\mathbb{E}[X_i]=0$, then
 \[
@@ -285,7 +299,7 @@ X_i \stackrel{\textbf{i.i.d}}{\sim} \gamma(a_i,b) \Longrightarrow \sum X_i \sim 
 \]
 (*) The imcomplete gamma function is defined by $\gamma(a,x) = \int_{0}^{x} t^{a-1}e^{-t}dt $
 
-\paragraph{Normal} $X\sim \mathcal{N}(\mu,\sigma^2)$ when $X \in \mathbb{R}$ and,
+\paragraph{Normal} $X \sim \mathcal{N}(\mu,\sigma^2)$ when $X \in \mathbb{R}$ and,
 \[
 f_{X}(x) = \frac{1}{\sigma \sqrt{2\pi}} exp (-\frac{(x-\mu)^2}{2\sigma^2})
 \hspace{10mm}
@@ -313,9 +327,9 @@ q^{\mathcal{N}(0,1)}_{1-\alpha} = - q^{\mathcal{N}(0,1)}_{\alpha}
 \end{array}\right.
 \]
 
-\paragraph{Chi-squared} $X\sim \chi^2_n$ when 
+\paragraph{Chi-squared} $X\sim \chi^2_n$ when  $X \in \mathbb{R}_+$ and
 \[
-\left\|
+\left[
 \begin{array}{l}
 X \sim \gamma(\frac{n}{2}, \frac{1}{2}) \\
 X = \sum^{n}_{\textbf{i.i.d}} [ \mathcal{N}(0,1) ]^2
@@ -327,6 +341,38 @@ X = \sum^{n}_{\textbf{i.i.d}} [ \mathcal{N}(0,1) ]^2
 \textbf{Var}[X]=2n
 \end{array}\right.
 \]
+
+
+\paragraph{Student} $T\sim \textbf{t}_m$ when  $T \in \mathbb{R}$ and
+\[
+\left[
+\begin{array}{l}
+Y \bot Z                \\
+Y \sim \mathcal{N}(0,1) \\
+Z \sim  \chi^2_m  
+\end{array}\right.
+\hspace{3mm} \Rightarrow
+T=\frac{Y}{\sqrt{\frac{Z}{m}}} \sim \textbf{t}_n
+\hspace{10mm}
+\textbf{Var}[T]= \frac{m}{m-2} , \text{  when } m>2 
+\]
+
+
+\paragraph{Fisher} $F\sim \mathcal{F}_{(m_1,m_2)}$ when  $F \in \mathbb{R}_+$ and
+\[
+\left[
+\begin{array}{l}
+X_1 \bot X_2            \\
+X_1 \sim \chi^2_{(m_1)} \\
+X_2 \sim \chi^2_{(m_2)}
+\end{array}\right.
+\hspace{3mm} \Rightarrow
+F=\frac{\frac{X_1}{m_1}}{\frac{X_2}{m_2}} \sim \mathcal{F}_{(m_1,m_2)}
+\hspace{10mm}
+F\sim \mathcal{F}_{(m_1,m_2)} \Rightarrow \frac{1}{F} \sim \mathcal{F}_{(m_2,m_1)} 
+\]
+
+
 
 \section{Gaussian}
 \paragraph{Cochran's theorem}
