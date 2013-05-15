@@ -125,6 +125,11 @@ if $(X_{i})_{(0\leqslant i \leqslant n)} \in \textbf{L}^2$ independant, $\mathbb
 \hspace{5mm} \text{ for all } \varepsilon >0
 \]
 
+\paragraph{Compute k-moment from cumulative distribution function}
+\[
+\mathbb{E}[ |X|^k ] = \int_0^{\infty} kt^{k-1} \mathbb{P}(|X|>t)dt
+\]
+
 \paragraph{Gamma Function}
 \[
 \Gamma(z) = \int_{0}^{\infty} t^{z-1}e^{-t}dt 
@@ -324,11 +329,7 @@ f_{X}(x) = \frac{1}{\sigma \sqrt{2\pi}} exp (-\frac{(x-\mu)^2}{2\sigma^2})
 \hspace{10mm}
 f_{X}(x) = \frac{1}{\sigma}f_{\mathcal{N}(0,1)}(\frac{x-\mu}{\sigma})
 \hspace{10mm}
-\left\{
-\begin{array}{l}
-F^{\mathcal{N}(0,1)} (\alpha) + F^{\mathcal{N}(0,1)}(-\alpha) = 1 \\
-q^{\mathcal{N}(0,1)}_{1-\alpha} = - q^{\mathcal{N}(0,1)}_{\alpha} 
-\end{array}\right.
+\mathbb{F}_{X}(x) = \frac{1}{\sigma}\phi(\frac{x-\mu}{\sigma})
 \]
 
 \paragraph{Chi-squared} $X\sim \chi^2_n= \gamma(\frac{n}{2}, \frac{1}{2})$ when  $X \in \mathbb{R}_+$ and
@@ -352,7 +353,7 @@ Y \sim \mathcal{N}(0,1) \\
 Z \sim  \chi^2_m  
 \end{array}\right.
 \hspace{3mm} \Rightarrow
-T=\frac{Y}{\sqrt{\frac{Z}{m}}} \sim \textbf{t}_n
+T=\frac{Y}{\sqrt{\frac{Z}{m}}} \sim \textbf{t}_m
 \hspace{10mm}
 \textbf{Var}[T]= \frac{m}{m-2} , \text{  when } m>2 
 \]
@@ -375,24 +376,74 @@ F\sim \mathcal{F}_{(m_1,m_2)} \Rightarrow \frac{1}{F} \sim \mathcal{F}_{(m_2,m_1
 
 
 \section{Gaussian}
-\paragraph{Cochran's theorem}
+\paragraph{General Linear Transform}
+\[
+\text{if }
+\textbf{Y} = A \textbf{X} + B
+\hspace{1cm}
+\text{ then }
+\hspace{1cm}
+\left\{
+\begin{array}{l}
+\mathbb{E}[\textbf{Y}] = A.\mathbb{E}[\textbf{X}] + B  \\ \\
+\textbf{Cov}[\textbf{Y}] =  A .\textbf{Cov}[\textbf{X}]. A^t  
+\end{array}\right.
+\]
 
-\paragraph{Gaussian samples}
+
+\paragraph{Cochran's theorem}
 \[
 \text{if }
 \left\{
 \begin{array}{l}
-X_i \stackrel{\textbf{i.i.d}}{\sim} \mathcal{N}(\mu, \sigma^2) \\
-\overline{X}_n = \frac{1}{n}\sum^n_1 X_i \\
-S^2 = \frac{1}{n-1}\sum^n_1 (X_i - \overline{X}_n) 
+\textbf{X} = (X_1,X_2 ...,X_n) \sim \mathcal{N}(0, \sigma^2 \textbf{I}_n) \\
+\textbf{E}_1\oplus\textbf{E}_2\oplus ... \textbf{E}_p\oplus = \mathbb{R}^n \text{ ortho. subspace} \\
+\text{Dim}(\textbf{E}_i) = r_i   \\
+\textbf{X}_{\textbf{E}_i} = P^{\textbf{E}_i}(\textbf{X}) \text{ ortho. project} 
+\end{array}\right.
+\text{ then }
+\left\{
+\begin{array}{l}
+\textbf{X}_{\textbf{E}_i} \text{ are indept. and gaussian} \\
+ \| \textbf{X}_{\textbf{E}_i} \|^{2} \text{ are indept. and } \sim \sigma^2\chi^2_{r_i}
+\end{array}\right.
+\]
+
+\paragraph{Typical example}
+\[
+\left\{
+\begin{array}{l}
+\textbf{X} = (X_1,X_2 ...,X_n) \sim \mathcal{N}(0, \textbf{I}_n) \\ \\
+\textbf{E}_1 = \text{Vect}(\frac{1}{\sqrt{n}} \mathbf{1}_n) \\ \\
+\textbf{E}_2 = \textbf{E}_1^{\bot} \text{ , } \textbf{E}_1\oplus\textbf{E}_2= \mathbb{R}^n
+\end{array}\right.
+\hspace{2cm}
+\left\{
+\begin{array}{l}
+ \sqrt{n} \overline{X}_n =  \textbf{X}_{\textbf{E}_1}\\ \\
+ \sum^n_1 (X_i- \overline{X}_n) = \| \textbf{X}_{\textbf{E}_2} \|^{2} \\ \\
+\overline{X}_n \text{ indept. } \sum^n_1 (X_i- \overline{X}_n) \\ \\
+\sum^n_1 (X_i- \overline{X}_n) \sim \chi^2_{n-1}
+\end{array}\right. 
+\]
+
+
+\paragraph{General case}
+\[
+\text{if }
+\left\{
+\begin{array}{l}
+X_i \stackrel{\textbf{i.i.d}}{\sim} \mathcal{N}(\mu, \sigma^2) \\ \\
+\overline{X}_n = \frac{1}{n}\sum^n_1 X_i \\ \\
+S^2 = \frac{1}{n-1}\sum^n_1 (X_i - \overline{X}_n)  
 \end{array}\right.
 \hspace{10mm}
 \text{then }
 \left\{
 \begin{array}{l}
-\frac{\sqrt{n} (\overline{X}_n - \mu)}{\sigma} \sim \mathcal{N}(0,1) \\
-\frac{1}{\sigma2}\sum^n_1 (X_i - \mu)^2 \sim \chi^2_{(n)} \\
-\frac{1}{\sigma2}\sum^n_1 (X_i - \overline{X}_n)^2 \sim \chi^2_{(n-1)} \\
+\frac{\sqrt{n} (\overline{X}_n - \mu)}{\sigma} \sim \mathcal{N}(0,1) \\ \\
+\frac{1}{\sigma2}\sum^n_1 (X_i - \mu)^2 \sim \chi^2_{(n)} \\ \\
+\frac{1}{\sigma2}\sum^n_1 (X_i - \overline{X}_n)^2 \sim \chi^2_{(n-1)} \\ \\
 \frac{\sqrt{n} (\overline{X}_n - \mu)}{S} \sim \textbf{t}_{(n-1)}
 \end{array}\right.
 \]
@@ -412,16 +463,15 @@ X=\sigma Y+\mu
 \Longleftrightarrow
 Y=\frac{X-\mu}{\sigma}
 \Longleftrightarrow
-f_{X}(x) = \frac{1}{|\sigma|} f_{Y}(\frac{x-\mu}{\sigma}) 
+\left\{
+\begin{array}{l}
+f_{X}(x) = \frac{1}{|\sigma|} f_{Y}(\frac{x-\mu}{\sigma}) \\ \\
+\mathbb{F}_{X}(t) = \mathbb{F}_{Y}(\frac{t-\mu}{\sigma}) \text{ if smooth} \\ \\
+y_{p} =  \frac{x_{p}-\mu}{\sigma} \text{ p-quantile}
+\end{array}\right.
 \]
-\paragraph{Translated variables}
-\[
-X= Y+\mu 
-\Longleftrightarrow
-Y=X-\mu
-\Longleftrightarrow
-f_{X}(x) = f_{Y}(x-\mu) 
-\]
+
+
 \paragraph{Tests multi-parameters level $\alpha$} 
 \begin{enumerate}
  \item build the confidence region $\textbf{D}_{1-\alpha}$ of level $1-\alpha$ 
@@ -467,12 +517,12 @@ We can define a order relation of sufficient statistics and then a notion of min
 \[
 S(X) \preccurlyeq T(X) \text{ if } \exists \varphi \text{ that } S(X) = \varphi(T(X))
 \]
-
+For example $\textbf{T}(X)$ in exponential family, $\overline{X}_n$ for normal distribution, $(X_{(1)},X_{(n)})$ for uniform distribution. 
 
 \section{Linear Regression formula}
 The general linear model is described by equation :
 \[
-\textbf{Y} = \textbf{X} \beta + \varepsilon    
+Y = \textbf{X} \beta + \varepsilon    
 \hspace{1.5cm} 
 \left\{
 \begin{array}{l}
@@ -480,36 +530,97 @@ The general linear model is described by equation :
  \varepsilon \text{  i.i.d of variance }\sigma^2
 \end{array}\right. 
 \]
+\[
+P_{X} = \textbf{X}(\textbf{X}^t \textbf{X})^{-1} \textbf{X}^t
+\hspace{10mm}
+\left\{
+\begin{array}{rclcrcl}
+X\widehat{\beta} &=& P_{X}(\textbf{Y}) 
+& &
+\widehat{\beta} &=& (\textbf{X}^t \textbf{X})^{-1} \textbf{X}^t Y \\
+\widehat{\varepsilon} &=& P_{X^\bot}(Y)
+& &
+\widehat{\varepsilon} &=& \textbf{Y} - X\widehat{\beta}
+\end{array}\right. 
+\]
+
 \paragraph{General case} If the identifiability condition is satisfied ($\textbf{X}^t \textbf{X}$ invertible or $\textbf{X}$ is full rank), then the estimator existe and has propreties
-\begin{itemize}
- \item $\widehat{\beta} = (\textbf{X}^t \textbf{X})^{-1} \textbf{X}^t \textbf{Y} $
- \item $\mathbb{E}_{\beta}[\widehat{\beta}] = \beta $
- \item $\textbf{Cov}_{\beta}[\widehat{\beta}] = \sigma^2 (\textbf{X}^t \textbf{X})^{-1} $
- \item $\mathbb{E}_{\beta}[(\widehat{\beta}_i - \beta_i)^2 ] = \textbf{Var}_{\beta}[\widehat{\beta}_i] = \sigma^2 [(\textbf{X}^t \textbf{X})^{-1}]_{(i,i)} \hspace{1cm}$ for i-th parameter
- \item $\widehat{s}^2_n = \frac{\|\widehat{\varepsilon}\|^2}{n-p} \hspace{1cm}$ where $\widehat{\varepsilon} = \textbf{Y} - \textbf{X}\widehat{\beta} $ is an unbiased estimator of $\sigma^2$
-\end{itemize}
-\paragraph{Gaussian case} when the gaussian vector $\varepsilon \sim \mathcal{N}(0,\sigma^2.\textbf{I}_n)$, everything is gaussian, then the model has several propreties
-\begin{itemize}
- \item $\widehat{\beta} \sim \mathcal{N}(\beta,\sigma^2.(\textbf{X}^t \textbf{X})^{-1}) $
- \item $\frac{n-p}{\sigma^2} \widehat{s}^2_n = \frac{\|\widehat{\varepsilon}\|^2}{\sigma^2} \sim \chi^2_{n-p}  $
- \item $\widehat{\beta} \bot \widehat{s}^2_n $
-\end{itemize}
+\[
+\mathbb{E}_{\beta}[\widehat{\beta}] = \beta
+\hspace{1cm}
+\textbf{Cov}_{\beta}[\widehat{\beta}] = \sigma^2 (\textbf{X}^t \textbf{X})^{-1}
+\hspace{1cm}
+\textbf{Var}_{\beta}[\widehat{\beta}_j] = \sigma^2 [(\textbf{X}^t \textbf{X})^{-1}]_{(j,j)}
+\]
+\[
+\mathbb{E}_{\beta} (\|\widehat{\varepsilon}\|^2) = \sigma^2\text{Tr}(P_{X^\bot})=\sigma^2(n-p)
+\hspace{2cm}
+\widehat{s}^2_n = \frac{\|\widehat{\varepsilon}\|^2}{n-p}
+\]
+
+\paragraph{Gaussian case when } $\varepsilon \sim \mathcal{N}(0,\sigma^2.\textbf{I}_n)$
+\[
+\widehat{\beta} \sim \mathcal{N}(\beta,\sigma^2.(\textbf{X}^t \textbf{X})^{-1}) 
+\hspace{1cm}
+ \frac{\|\widehat{\varepsilon}\|^2}{\sigma^2} \sim \chi^2_{n-p}  
+\hspace{1cm}
+\frac{n-p}{\sigma^2} \widehat{s}^2_n \sim \chi^2_{n-p}  
+\hspace{1cm} 
+\widehat{\beta} \bot \widehat{s}^2_n 
+\]
+Inference for $\beta$ :
+\[
+\frac{\widehat{\beta}_j -\beta_j}{\widehat{s}_n \sqrt{[(\textbf{X}^t \textbf{X})^{-1}]_{(j,j)}}} \sim \textbf{t}_{n-p}
+\hspace{2cm}
+\frac{a^t(\widehat{\beta} -\beta)}{\widehat{s}_n \sqrt{a^t.(\textbf{X}^t \textbf{X})^{-1}.a}} \sim \textbf{t}_{n-p}
+\hspace{5mm}
+a \in \mathbb{R}^n
+\]
+On a general case when having a linear transform by matrix $\textbf{A}$ of dimension $[q\times p]$ ($q<p$) of rank $q$, we have
+\[
+\frac{1}{q\widehat{s}^2_n}
+(\textbf{A}(\widehat{\beta} -\beta))^t 
+[\textbf{A}  (\textbf{X}^t \textbf{X})^{-1} \textbf{A}^t]^{-1}
+\textbf{A}(\widehat{\beta} -\beta)
+\sim \mathcal{F}_{(q,n-p)}
+\]
+When testing the hypothesis multi-parameter of type $\beta_1 = \beta_2 = \beta_3$, the model is projected to the subspace $V_{\textbf{X}_0}$
+of dimension $p_0<p$. The test guess if this smaller model is close to the whole model, using the statistics 
+\[
+T(X) = \frac{\| \widehat{Y}_0 -\widehat{Y} \|^2 / ( p-p_0 )}{\| Y -\widehat{Y} \|^2 / ( n-p )}  = 
+\frac{n-p}{p-p_0}\frac{\| \widehat{\varepsilon}_0 \|^2 - \| \widehat{\varepsilon} \|^2 }{ \| \widehat{\varepsilon} \|^2} \sim
+\mathcal{F}_{p-p_0,n-p}
+\]
+The hypothesis $H_0$ is rejected if $T(X) > q_{1-\alpha}$, where $q_{1-\alpha}$ is the $(1-\alpha)$-quantile of Fisher distribution. 
 
 \section{Empirical estimation formules}
-\paragraph{Empirical estimator : }$\hspace{1cm} \overline{X}_n\xrightarrow{P} \mathbb{E}[X_{1}] \hspace{1cm} \sqrt{n}(\overline{X}_n -\mathbb{E}[X_{1}]) \rightsquigarrow   \mathcal{N}(0,\sigma^2) $
+\paragraph{Empirical estimator : }
+\[
+\hspace{1cm} \overline{X}_n\xrightarrow{P} \mathbb{E}[X_{1}] \hspace{1cm} \sqrt{n}(\overline{X}_n -\mathbb{E}[X_{1}]) \rightsquigarrow   \mathcal{N}(0,\sigma^2) 
+\]
+In general for a $h$ a function, $\mathbb{E}_{\nu_n}[h(X)] = \frac{1}{n}\sum^n_1 h(X_i) $. If $\textbf{Var}[h(X)]<\infty$ then 
+\[
+\mathbb{E}_{\nu_n}[h(X)] \xrightarrow{ \mathbb{P} } \mathbb{E}[h(X)]
+\hspace{2cm}
+\sqrt{n}(\mathbb{E}_{\nu_n}[h(X)]  -   \mathbb{E}[h(X)]) \rightsquigarrow   \mathcal{N}(0, \textbf{Var}[h(X)] )
+\]
+
 
 \paragraph{Empirical distribution : }
 \[
-\nu_n(\omega) = \frac{1}{n}\sum^{n}_{1} \delta_{X_i}(\omega) \hspace{2cm} 
+\nu_n(\omega) = \frac{1}{n}\sum^{n}_{1} \delta_{X_i}(\omega) 
+\hspace{1cm} 
+\nu_n(A) = \frac{1}{n} \sum^{n}_{1} \mathbf{1}_A(X_i)
+\hspace{1cm} 
 \mathbb{F}_n(x) = \frac{1}{n} \sum^{n}_{1} \mathbf{1}_{]-\infty;x]}(X_i) 
 \]
-There are several propreties for empirical distribution :
-\begin{itemize}
- \item $n\mathbb{F}_n(x) \sim \mathcal{B}(n,\mathbb{F}(x) )$
- \item $\mathbb{F}_n(x) \xrightarrow{a.s}   \mathbb{F}(x)$
- \item $\sqrt{n}(\mathbb{F}_n(x) -  \mathbb{F}(x)) \rightsquigarrow   \mathcal{N}(0,\mathbb{F}(x)[1-\mathbb{F}(x)] )$
- \item $\sup_{x} \| \mathbb{F}_n(x) -  \mathbb{F}(x) \| \xrightarrow{a.s} 0 $  (Glivenko-Centelli)
-\end{itemize}
+Remark that $\forall x, n\mathbb{F}_n(x) \sim \mathcal{B}(n,\mathbb{F}(x) )$, we have
+\[
+\mathbb{F}_n(x) \xrightarrow{a.s}   \mathbb{F}(x)
+\hspace{2cm} 
+\sqrt{n}(\mathbb{F}_n(x) -  \mathbb{F}(x)) \rightsquigarrow   \mathcal{N}(0,\mathbb{F}(x)[1-\mathbb{F}(x)] )
+\]
+A stronger convergence in Glivenko-Centelli's theorem state that : $\sup_{x} \| \mathbb{F}_n(x) -  \mathbb{F}(x) \| \xrightarrow{a.s} 0$
 \paragraph{Empirical Quantile : }
 \[
 \left\{
@@ -587,9 +698,10 @@ By inverting the $A'(\eta)$ with $\delta$-method, we define the convergent maxim
 \]
 
 \paragraph{General model}
-The general model issu from the variable transform and mesure transform of the canonical model
+The general model issu from the variable reparametrization and mesure transform of the canonical model
 \[
-d\nu = h.d\mu  \hspace{10mm} \eta = Q(\theta) \hspace{10mm}  \theta = Q^{-1}(\eta) 
+d\nu = h.d\mu  \hspace{10mm} \eta = Q(\theta) \hspace{10mm}  \theta = Q^{-1}(\eta) \hspace{10mm} 
+A(\eta) = -\text{log}C(\theta) =  -\text{log}C[Q^{-1}(\eta)] 
 \]
 Under conditions 
 \begin{enumerate}
@@ -597,55 +709,71 @@ Under conditions
  \item $T(x)$ is not constant $\nu$-a.s
  \item $h(x) \geq 0$ is a must, and we suppose $C(\theta) \geq 0$
  \item $Q(\theta)$ is continuous and strictly monotonic (admitting inversion). 
- \item if $Q(\theta) \in C^{1}(\theta)$ and $Q'\neq 0$ the the model is regular
 \end{enumerate}
-
+$\textbf{If } Q(\theta) \in C^{1}(\theta)$ and $Q'\neq 0$ the the model is $\textbf{ regular}$
 \[
 f_{\theta}(x) = C(\theta) exp[Q(\theta) T(x)] h(x)
 \hspace{10mm} \text{with} \hspace{10mm}
 C(\theta) = (\int exp[Q(\theta) T(x)] h(x) d\mu(x) ) ^{-1}
 \]
 \[
-A(\eta) = -\text{log}C(\theta)
-\hspace{20mm} 
 \mathbb{E}_{\theta}[\varphi(X)]  = \mathbb{E}_{\eta}[\varphi(X)]
- \hspace{10mm}
+ \hspace{20mm}
 \textbf{Var}_{\theta}[\varphi(X)]  = \textbf{Var}_{\eta}[\varphi(X)]
 \]
 \paragraph{Maximun likelihood estimator}
-By inverting the $Q(\eta)$ with $\delta$-method, we define the convergent maximun likelihood estimator 
+By inverting the $Q(\theta)$ with $\delta$-method, we define the convergent maximun likelihood estimator 
 \[
 \widehat{\theta}_n \xrightarrow{a.s} \theta 
 \hspace{20mm}
 \sqrt{n}(\widehat{\theta}_n - \theta ) \rightsquigarrow   \mathcal{N}(0,\frac{1}{\textbf{Var}_{\theta}(T)[Q'(\theta)]^2  } )
 \]
+\paragraph{Typical examples}
+\[
+\mathcal{B}(p)
+\text{ , }
+\mathcal{P}(\lambda)
+\text{ , }
+\mathcal{E}(\lambda)
+\text{ , }
+\mathcal{N}(\mu,\sigma^2)
+\text{ , }
+log\mathcal{N}(\mu,\sigma^2)
+\text{ , }
+\chi^2_n
+\]
+\[
+\mathcal{B}(n,p) \text{ knowing n, }
+\gamma(a,b) \text{ knowing a,  }
+\mathcal{W}(a,\theta) \text{ knowing a, }
+\]
+
 \section{Regular models}
-\paragraph{Regularity Definition}  {$\mathbb{P}_{\theta},\theta \in \Theta$}
+\paragraph{Regularity Definition}  $\{\mathbb{P}_{\theta},\theta \in \Theta\}$
 \begin{enumerate}
  \item the function $\theta \mapsto \xi_{\theta}(x)=\sqrt{f_{\theta}(x)}$ is a.s absolute continuous.
- \item $\forall \theta, \xi'_{\theta}(x) \in L^2(d\mu)$ and the map $\theta \mapsto \xi'_{\theta}(x)$ is continuous in $L^2(d\mu)$
- \item its Fisher information is $I(\theta) = 4 \| \xi'_{\theta} \|^{2}_{L^2_{\mu}}$
+ \item $\forall \theta, \xi'_{\theta}(x) \in L^2(dx)$ and the map $\theta \mapsto \xi'_{\theta}(x)$ is continuous in $L^2(dx)$
 \end{enumerate}
-
+Its Fisher information is $I(\theta) = 4 \| \xi'_{\theta} \|^{2}_{L^2_{dx}}$
 \paragraph{Hypothesis 1}
 \begin{enumerate}
- \item the support {$x, f_{\theta}(x)>0$} is independent of $\theta$
- \item $f_{\theta}(x) \in C^1_{(\theta)}$ for $\mu$-a.e $x$ points  
- \item The family {$\frac{f'^2_{\theta}}{f_{\theta}} $} are locally dominated in $L^1_{\mu}$ space
- \item its Fisher informqtion is 
+ \item the support $\{f_{\theta}(x)>0\}$ is independent of $\theta$
+ \item $f_{\theta}(x) \in C^1_{(\theta)}$ for $dx$-almost everywhere $x$ points  
+ \item The family {$\frac{f'^2_{\theta}}{f_{\theta}} $} are locally dominated in $L^1_{dx}$ space
+\end{enumerate}
+Its Fisher informqtion is 
 \[
 I(\theta) 
 = \mathbb{E}_{\theta}[( \frac{\partial}{\partial \theta} \text{log}f_{\theta} )^2]
 = \textbf{Var}_{\theta} [ \frac{\partial}{\partial \theta} \text{log} f_{\theta}]  
 \]
-\end{enumerate}
-
 \paragraph{Hypothesis 2}
 \begin{enumerate}
- \item $f_{\theta}(x) \in C^2_{(\theta)}$ for $\mu$-a.e $x$ points 
- \item The family {$f''_{\theta}$} are locally dominated in $L^1_{\mu}$ space
- \item its Fisher informqtion is $I(\theta) = -\mathbb{E}_{\theta}[ \frac{\partial^2}{\partial \theta^2} \text{log}f_{\theta} ]$
+ \item $f_{\theta}(x) \in C^2_{(\theta)}$ for $dx$-a.e $x$ points 
+ \item The family {$f''_{\theta}$} are locally dominated in $L^1_{dx}$ space
 \end{enumerate}
+Its Fisher informqtion is $I(\theta) = -\mathbb{E}_{\theta}[ \frac{\partial^2}{\partial \theta^2} \text{log}f_{\theta} ]$
+
 \paragraph{Translated models}
 \[
 \text{if }
@@ -667,8 +795,8 @@ f_{\theta}(x)=f(x-\theta) \text{ is regular and } I(\theta)=4\| \xi' \|^2
 \text{if }
 \left\{
 \begin{array}{l}
-f_{\theta}(x) ,I(\theta) , \theta \in \Theta \text{ regular model} \\
-\eta = g(\theta), h(\eta)=g^{-1}(\eta) \in C^1(\eta)
+\{f_{\theta}(x) ,I(\theta) , \theta \in \Theta\} \text{ regular model} \\
+\eta = g(\theta), \theta = h(\eta)=g^{-1}(\eta) \in C^1_{\eta}
 \end{array}\right.
 \text{ then }
 \left\{
@@ -695,6 +823,13 @@ f_{\theta} = f_{x,} f_{y} \text{ , } \xi_{\theta} = \sqrt{f_{x} f_{y}}\\
 \end{array}\right.
 \]
 Then if {$ f_{\theta}(x) ,I_1(\theta) $} is regular, the sample model $ \bigotimes^n f_{\theta}(x_i)$ is also regular and $I_n(\theta) = n I_1(\theta)$
+\paragraph{Propreties}
+\begin{itemize}
+ \item In a regular model, if a max-likelihood estimator converge, it always converge in $\frac{1}{\sqrt{n}}$
+ \item In a regular model, if a max-likelihood estimator converge, it is asymtotically efficient
+\end{itemize}
+
+
 
 \section{Efficiency of regular models}
 \paragraph{Informations inequality}
@@ -702,10 +837,10 @@ Then if {$ f_{\theta}(x) ,I_1(\theta) $} is regular, the sample model $ \bigotim
 \text{if }
 \left\{
 \begin{array}{l}
-f_{\theta}, \theta \in \Theta \text{ regular model} \\
+\{f_{\theta}, \theta \in \Theta\} \text{ regular model} \\
 \theta \mapsto \mathbb{E}_{\theta}[T^2(X)] \text{ locally bounded} \\
-T(X) \text{ estimator of } g(\theta) \text{ , } I(\theta) > 0 \\
-T(X) \text{ is estimator's biais}
+T(X) \text{ estimator of } g(\theta) \\
+b(\theta) \text{ is estimator's biais, }I(\theta) > 0
 \end{array}\right.
 \text{ then }
 \mathbb{E}_{\theta}[(T(X)-g(\theta))^2] \geq 
@@ -717,7 +852,7 @@ b^2(\theta) + \frac{[g'(\theta)+b'(\theta)]^2}{I(\theta)}
 \text{if }
 \left\{
 \begin{array}{l}
-f_{\theta}, \theta \in \Theta \text{ regular model} \\
+\{f_{\theta}, \theta \in \Theta\} \text{ regular model} \\
 \widehat{\theta}_n(X) \text{ is unbiased estimator of } \theta \\
 \textbf{Var}_{\theta}[\widehat{\theta}_n] \text{ locally bouned, } I(\theta) > 0 \\
 \end{array}\right.
@@ -740,13 +875,36 @@ g'(\theta) \neq 0  \\
 I_1(\theta) > 0 
 \end{array}\right.
 \]  
-
+The model regular exponential is asymtotically efficient 
 
 
 \section{Improving estimators}
 \paragraph{Unbiazing an estimator}
+\[
+\text{if } \widehat{\theta}_n = \varphi(n)\theta \text{ biased estimator, }
+\widetilde{\theta}_n = \frac{1}{\varphi(n)}\widehat{\theta}_n \text{ is a unbiased estimator}
+\]
 \paragraph{Rao-Blackwell}
-\paragraph{One step method} if the maximum likelihood is can not compute directly, one can use Newton method for finding numerically 
+\[
+\left\{
+\begin{array}{l}
+g(x) \text{ a strictly convex function, ex. } x^2\\
+\textbf{T(X)} \text{ a sufficient statistics}  \\
+\widehat{\theta}(\textbf{X}) \text{ a } \theta \text{ estimator}
+\end{array}\right.
+\text{  then  }
+\left\{
+\begin{array}{l}
+\widetilde{\theta}(\textbf{X}) = \mathbb{E}_{\theta}[\widehat{\theta}(\textbf{X}) | \textbf{T(X)} ] \text{ is better} \\
+\text{same biais but better risk} \\
+\mathbb{E}_{\theta}[g(\widetilde{\theta}(\textbf{X}) - \theta) ] \leq \mathbb{E}_{\theta}[g(\widehat{\theta}(\textbf{X}) - \theta) ] 
+\end{array}\right.
+\]
+The idea is that if a model have a sufficient statistics, it's always good to take an estimator as function of this statistics. 
+If an estimator is not already a function of this sufficient statistics, by conditioning to this statistics, we have the better one 
+in the sens that they have the same biais, but the improved estimator has a better risk.
+
+\paragraph{One step method} if the maximum likelihood is can not compute directly, one can use Newton's method ($x_{n+1}=x_n - \frac{f(x_n)}{f'(x_n)}$) for finding numerically 
 the solution of $L'_n = 0 $
 \[
 \widetilde{\theta}_n =  T_n - \frac{L'_n(T_n)}{L''_n(T_n)} 
@@ -792,8 +950,23 @@ If all mesures are dominated by Lebesgues, the baysian risk is
 R_{\textbf{B}}(\theta, \textbf{T(X)}) = \int_{\Theta} g(\theta) d\theta \int_{\Omega} l(\theta,\textbf{T}(x))   f(x|\theta) dx  
 = \int_{\Omega}  \overline{f}(x) dx\int_{\Theta} l(\theta,\textbf{T}(x))  g(\theta|x) d\theta 
 \]
-The Baysian estimator is the one who minimize the Baysian risk, or equivalently 
+In the sample model, the joint likelihood are
 \[
-\widehat{\theta}^{B} = \text{argmin}_{\textbf{T} } \int_{\Theta} l(\theta,\textbf{T}(x))  g(\theta|x) d\theta 
+\textbf{L}_n(\theta, \textbf{x}) = g(\theta).\textbf{L}_n(\textbf{x}|\theta) = g(\theta|\textbf{x}).\overline{\textbf{f}}_n(\textbf{x})
+\hspace{1cm}
+dQ_x(\theta) =  g(\theta|\textbf{x}) d\theta \text{ the posterior law}
+\] 
+The Baysian estimator is the one who minimize the Baysian risk, or equivalently
+\[
+\widehat{\theta}^{B} = \text{argmin}_{\textbf{T} } \mathbb{E}_{Q_x} [ l(\theta,\textbf{T}(x)) ]
+=\text{argmin}_{\textbf{T} } \int_{\Theta} l(\theta,\textbf{T}(x))  g(\theta|x) d\theta 
+\]
+In most popular cases, we know this minimum
+\[
+\left\{
+\begin{array}{lcl}
+ l = [\theta-\textbf{T}(x)]^2  &\rightarrow& \widehat{\theta}^{B} =  \mathbb{E}_{Q_x}[\theta] \\
+ l = |\theta-\textbf{T}(x)|    &\rightarrow& \widehat{\theta}^{B} =  \theta^{Q_x}_{\frac{1}{2}}
+\end{array}\right.
 \]
 \end{document}
