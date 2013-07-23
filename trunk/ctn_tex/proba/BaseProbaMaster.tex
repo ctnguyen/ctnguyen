@@ -21,20 +21,101 @@
 \begin{center}Memento Basis Requirement knowledge for Laure Elie Master\end{center}
 %%%%%%%%%%%%%%%%%% DOCUMENT TITLE %%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Topology Notions}
-\paragraph{Complete metric space}
-\paragraph{Separable space}
-\paragraph{Second-countable space}
-\paragraph{Hilbert space}
-\paragraph{Banach space}
+\paragraph{Countable set} $K$ is a countable set if either it is empty or there exists a surjection from $\mathbb{N}$ onto $K$ 
 
-\section{Mesure Theory}
+
+\paragraph{Complete metric space} A metric space $\textbf{X}$ is complete if every Cauchy sequence in $\textbf{X}$ converges in $\textbf{X}$ 
+
+\paragraph{Topological separable space} A topological space having a countable dense subset.
+
+\paragraph{Topological countable basis} A subset of the topology that an arbitrary open sets can be written as countable union of this subset
+
+\subsection{Banach space}
+\paragraph{Definition} A Banach space is a complete normed vector space, noting ($\mathcal{B}, \|.\|$). Banach space become a Hilbert space if and only if the norm satisfy the parallelogram identity
+\[
+\| a+b \|^2  + \| a-b \|^2 = 2\|a\|^2  + 2\|b\|^2 
+\]
+
+\subsection{Hilbert space} 
+\paragraph{Definition} Hilbert space is a Banach space having a inner product $<.,.>$ associating to its norm
+\[
+\| x \| = \sqrt{<x,x>}
+\]
+
+
+
+
+
+\section{Mesure space}
+\paragraph{$\sigma$-algebra} Giving a set $\textbf{X}$, a $\sigma$-algebra of $\textbf{X}$ is a familly of subsets $\Sigma$ satisfying 
+\begin{enumerate}
+ \item $\emptyset \in \Sigma$
+ \item $\Sigma$ is closed under complement : $ E \in \Sigma \Longrightarrow E^{c} \in \Sigma$
+ \item $\Sigma$ is closed under countable union : $ \langle E_{n} \rangle_{n \in \mathbb{N}} \in \Sigma \Longrightarrow \cup E_{n} \in \Sigma $ 
+\end{enumerate}
+It imply that $\sigma$-algebra is stable by other set operators as difference, symetric difference, finite intersection, union, $\textit{countable}$ intersection, union. 
+
+\subsection{Mesurable function}
+
+\subsection{Mesure Space}
+\paragraph{Definition} A Mesure space is a triple $(X,\Sigma,\mu)$ where
+\begin{itemize}
+ \item $X$ is a set, and $\Sigma$ is the $\sigma$-algebra of $X$
+ \item $\mu : \Sigma \longrightarrow \bar{\mathbb{R}}_{+}$ is a positive function such that
+ \begin{enumerate}
+  \item $\mu(\emptyset) = 0$
+  \item if $\langle E_{n} \rangle_{n \in \mathbb{N}}$ is a disjoint sequence set in $\Sigma$, then $\mu(\uplus E_{n}) = \sum_{n \in \mathbb{N}}\mu(E_n) $
+ \end{enumerate}
+\end{itemize}
+Appart general cases, there are several special mesures as point-supported mesure, counting mesure, dirac mesure...
+
+\paragraph{Elementary properties of mesure}
+\begin{enumerate}
+ \item increasing : for all $E,F \in \Sigma$ 
+ \begin{itemize}
+  \item $E \subseteq F \Longrightarrow \mu(E) \leq \mu(F)$
+  \item if $\mu(F) < \infty  \Longrightarrow \mu(E\backslash F) = \mu(E) - \mu(F)$
+ \end{itemize}
+
+ \item strong additivity : $\mu(E\cup F) + \mu(E\cap F) = \mu(E) + \mu(F)$ for all $E,F \in \Sigma$ 
+ \item left-continuity : if $\langle E_{n} \rangle_{n \in \mathbb{N}}$ a non-decreasing sequence in $\Sigma$ then 
+ $\mu(\cup^{\uparrow} E_{n}) = \text{lim}^{\uparrow} \mu(E_{n})$
+ \item right-continuity : if $\langle E_{n} \rangle_{n \in \mathbb{N}}$ a non-increasing sequence in $\Sigma$ then 
+ $\mu(\cup^{\downarrow} E_{n}) = \text{lim}^{\downarrow} \mu(E_{n})$
+ \item subadditivity : for all $\langle E_{n} \rangle_{n \in \mathbb{N}}$ a sequence in $\Sigma$ then $\mu(\cup E_{n}) \leq \sum_{n \in \mathbb{N}}\mu(E_n) $
+\end{enumerate}
+
+\paragraph{Negligible sets} $A \subset X$ is a negligible set if $\exists E \in \Sigma, A \subset E, \text{ and } \mu(E)=0$
+\paragraph{Conegligible sets} $A \subset X$ is a conegligible set if $X \backslash A$ is negligible.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \section{Integration}
 
 \section{Functional analysis}
+\paragraph{Banach fixed-point theorem}
+Let $(X,d)$ be a non-empty complete metric space with a contraction mapping $T:X\longrightarrow X$. Then $T$ admits a unique fixed-point $x^{*}$ in $X$ satisfying $T(x^{*}) = x^{*}$. Furthermore, $x^{*}$ can be found as followsm star with an arbitrary element $x_0$ in $X$ and define a sequence ${x_n}$ by $x_{n+1}=T(x_n)$, then $x_n \longrightarrow x^*$
+
 \paragraph{Implicit function theorem}
-\paragraph{Fixed-point theorem}
-\paragraph{Lax–Milgram theorem}
+
+\paragraph{Lax–Milgram theorem} Let $b$ be a bounded coercive bilinear functional on a Hilbert space $H$. Then for every bounded linear functional $L$ on $H$ there exists a unique $u_{L} \in H$ such that 
+\[
+L(v) = b(v,u_{L}) \hspace{2cm} ,\forall v \in H
+\]
+
 \paragraph{Riesz representation theorem}
 \paragraph{Riesz–Markov–Kakutani representation theorem}
 \paragraph{densities in functional spaces}
