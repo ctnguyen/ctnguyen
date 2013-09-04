@@ -14,21 +14,25 @@
 
 \usepackage{pstricks}
 \usepackage{pst-node}
-
+\usepackage{pst-plot}
+\usepackage{enumerate}
 
 \begin{document}
 %%%%%%%%%%%%%%%%%% DOCUMENT TITLE %%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{center}Memento Basis Requirement knowledge for Laure Elie Master\end{center}
 %%%%%%%%%%%%%%%%%% DOCUMENT TITLE %%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Topology Notions}
-\paragraph{Countable set} $K$ is a countable set if either it is empty or there exists a surjection from $\mathbb{N}$ onto $K$ 
+\paragraph{Topological separated space} called also Hausdorff space or T$_2$-space is a topological space in which distinct points have disjoint neighbourhoods. All metric space are separated.
 
+\paragraph{Countable set} $K$ is a countable set if either it is empty or there exists a surjection from $\mathbb{N}$ onto $K$ 
 
 \paragraph{Complete metric space} A metric space $\textbf{X}$ is complete if every Cauchy sequence in $\textbf{X}$ converges in $\textbf{X}$ 
 
 \paragraph{Topological separable space} A topological space having a countable dense subset.
 
 \paragraph{Topological countable basis} A subset of the topology that an arbitrary open sets can be written as countable union of this subset
+
+\paragraph{Polish space} is a separable complete metric space.
 
 \subsection{Banach space}
 \paragraph{Definition} A Banach space is a complete normed vector space, noting ($\mathcal{B}, \|.\|$). Banach space become a Hilbert space if and only if the norm satisfy the parallelogram identity
@@ -42,9 +46,45 @@
 \| x \| = \sqrt{<x,x>}
 \]
 
+\paragraph{Sublinear function} Let $V$ a vector space, $p:V\longrightarrow \mathbb{R}$. Then $p$ is a sublinear function iff
+\begin{itemize}
+ \item $p$ is positive homogene : $p(\alpha v) = \alpha p(v) \hspace{3mm} \forall \alpha \geq 0$
+ \item $p$ is subadditive : $p(u+v) \leq p(u)+ p(v) \hspace{3mm} \forall u,v \in V$ 
+\end{itemize}
 
+\subsection{Compactness}
+\paragraph{Definition} A topological space $E$ is compact if it is separated and verify the Borel-Lebesgue proprety expressed equivalently in three ways, i.e 
+\begin{itemize}
+\renewcommand{\labelitemi}{$\vcenter{\hbox{\tiny$\bullet$}}$}
+ \item Each open covers of $E$ has finite subcover.
+ \item Each familly of closed sets with empty intersection, we can extrait a finite subfamilly with also empty intersection.
+ \item Each familly of closed sets in which every finite subfamilly are of non-empty intersection, is itself of non-empty intersection.
+\end{itemize}
+A subset $K$ of a topological space $E$ is called compact iff it is compact in the induced topology.
+\paragraph{Propreties}
+\begin{enumerate}
+ \item All finite space are compact.
+ \item Every sequence of points in a compact space has an accumulation point.
+ \item If a sequence in a compact space has a unique accumulation point, it converges.
+ \item Each closed subset in a compact space is compact.
+ \item Each compact subset in a separated space is closed.
+ \item In a separated space, every finite union or intersection of compacts are compact.
+ \item An image of a continuous function from a compact to a separated space is a compact.
+ \item A continuous real-valued function on a non-empty compact space is bounded and attains its supremum.
+ \item \textbf{Tychonoff theorem : } The product of any collection of compact space is compact.
+ \item In $\mathbb{R}^n$ a subset is compact iff it is closed and bouned.   
+\end{enumerate}
 
+\paragraph{Locally compact space} A topological space is locally compact if it is separated and each point has a compact neighbourhood.
+\begin{itemize}
+ \item Every compact space is locally compact.
+ \item $\mathbb{R}^n$ is locally compact.
+ \item In a locally compact space, every open, closed subset are locally compact.
+ \item In a separated space, intersection of two locally compact subset is locally compact.\textit{ It is not the case for union.}
+ \item Finite product of locally compact space is locally compact.
+\end{itemize}
 
+\paragraph{Sequentially compact space} A topological is sequentially compact if every infinite sequence has a convergent subsequence. In metric spaces, there are equivalent of \textit{sequentially compact} and \textit{compact}.  
 
 \section{Mesurable space}
 \paragraph{$\sigma$-algebra} Giving a set $\textbf{X}$, a $\sigma$-algebra of $\textbf{X}$ is a familly of subsets $\Sigma$ satisfying 
@@ -151,6 +191,37 @@ Let $(X, \mathcal{O}(X))$ a topological space, and $\mu$ a measure defined on th
 \]
 A theorem state that all is measure (finite on compacts) on a metric space, locally compact and separable is regular. Especially the Lebesgue measure on $\mathbb{R}^d$, or all measure defined by a density $\mu=f.\lambda_d$ where $f$ is locally integrable (i.e $\int_K fd\lambda_d < \infty \hbox{ , } K \text{compact}$) are all regular.
 
+\subsection{Product measure}
+\paragraph{Product $\sigma$-algebra} Let $(X,\mathcal{A})$ and $(Y,\mathcal{B})$ be two measurable spaces. Then the product measurable space is generated by the cartesian product of $\sigma$-algebra, i.e :
+\[
+\mathcal{A} \otimes \mathcal{B} := \sigma (\{A \times B \hbox{ , } A \in \mathcal{A} \hbox{ , }  B \in \mathcal{B} \})
+\]
+\paragraph{Propreties of product measurable spaces}
+\begin{itemize}
+\renewcommand{\labelitemi}{$\vcenter{\hbox{\tiny$\bullet$}}$}
+ \item The product measurable space $(X\times Y, \mathcal{A}\otimes\mathcal{B})$ is the smallest $\sigma$-algebra making measurable the canonical projections $\pi_{X}$ and $\pi_{Y}$
+ \item The product $\sigma$-algebra is associative, i.e 
+  \[
+    \mathcal{A} \otimes \mathcal{B} \otimes \mathcal{C} = (\mathcal{A} \otimes \mathcal{B}) \otimes \mathcal{C} = \mathcal{A} \otimes( \mathcal{B} \otimes \mathcal{C})
+  \]
+  \item In case of Borelian $\sigma$-algebra,
+  \begin{enumerate}[i]
+   \item $\mathcal{B}(X) \otimes \mathcal{B}(Y) \subset \mathcal{B}(X\times Y)$
+   \item if $X$ and $Y$ has a countable base, then $\mathcal{B}(X) \otimes \mathcal{B}(Y) = \mathcal{B}(X\times Y)$
+  \end{enumerate}
+  \item Givent the product measurable space $(X\times Y, \mathcal{A}\otimes\mathcal{B})$, then for every $C \in \mathcal{A}\otimes\mathcal{B})$, the $x$-section $C_x=\{y\in Y | (x,y) \in C \} \subset Y$  and $y$-section $C_y=\{x\in X | (x,y) \in C \} \subset X$ are respectively in $\mathcal{B}$ and $\mathcal{A}$
+\end{itemize}
+\paragraph{Measure product} Let $(X,\mathcal{A},\mu)$ and $(Y,\mathcal{B},\nu)$ be two $\sigma$-\textit{finite} measure spaces. Then
+\begin{enumerate}
+ \item There exists an unique measure $m$ on $(X\times Y, \mathcal{A}\otimes \mathcal{B} )$ verify
+ \[
+ \forall A\in \mathcal{A} \hbox{ , } B\in\mathcal{B} \hbox{ , } \hspace{5mm} m(A\times B) = \mu(A)\nu(B)
+ \]
+ It is also a $\sigma$-finite measure noting $\mu \otimes \nu$
+ \item $\forall C \in  \mathcal{A}\otimes \mathcal{B} \hspace{5mm}  m(C) = \int_X \nu(C_x)d\mu_x = \int_Y \mu(C_y)d\nu_y $
+\end{enumerate}
+
+
 \section{Integration}
 \paragraph{Simple function} is a finite linear combination of indicator functions on a measurable sets. 
 \[
@@ -193,65 +264,247 @@ then
 \]
 
 \subsection{\texorpdfstring{$\textbf{L}^p$}{LpSpace} space}
-\paragraph{Holder inequality} Let $p,p \in [1,\infty]$ which are Holder conjugates $\frac{1}{p} + \frac{1}{p} = 1$, then
+\paragraph{Holder inequality} Let $p,q \in [1,\infty]$ which are Holder conjugates $\frac{1}{p} + \frac{1}{p} = 1$, then
 \[
 \| f.g \|_{1} \leq \| f \|_{p}  \| g \|_{q}  
 \]
 If $p,p \in (1,\infty)$ and $ \| f \|_{p} + \| g \|_{q} <  \infty$ then there are equality iff $\alpha |f|^p = \beta |g|^q$ $\mu$-a.e
 
-\paragraph{Minkowski inequality}
+\paragraph{Minkowski inequality} Let $p \in [1,\infty]$ and $f,g \in \textbf{L}^p$, then
+\[
+\| f+g \|_p \leq \| f \|_p  + \| g \|_p 
+\]
+The case $p=1 \text{ or } p=\infty $ follow from the triangular inequality. In case  $p \in (1,\infty)$, equality happens iif $f=0 \text{ a.e }$ or $ g= \alpha.f \text{ a.e}$. The Minkowski inequality can be generalized for a sequence $f_{n}$ of $\textbf{non-negative}$ functions in $\text{L}^p$ :
+\[
+\| \sum_{n \geq 1} f_n \|_p \leq  \sum_{n \geq 1} \| f_n \|_p
+\]
 
 \paragraph{Densities in $\textbf{L}^p$ spaces with $1 \leq p < \infty$}
+For the first view on the $\mathbb{R}^n$ Lebesgue measure which is \textbf{regular}, the densities for $\textbf{L}^p$ spaces with $1 \leq p < \infty$ are built step by step :
+\begin{itemize}
+ \item \textbf{Simple integrable functions} are $\|.\|_p$-dense in $\text{L}^p \hbox{ , } 1 \leq p < \infty$ (Beppo-Levi)
+ \item \textbf{Steps functions with compact support} are $\|.\|_p$-dense in \textbf{Simple integrable functions} (use of inner regularity)
+ \item \textbf{Continuous functions with comptact support} are $\|.\|_p$-dense in \textbf{Steps functions with comptact support} (distance function to a set)
+\end{itemize}
+By the implication of densities, we conclude that all are dense in $\textbf{L}^p_{1 \leq p < \infty}$ spaces for the norm $\|.\|_p$.
+ 
 
-\paragraph{$\textbf{L}^{\infty}$ space}
-common point with others p, particular point of p=infty
+\paragraph{$\textbf{L}^{\infty}$ space} si firstly defined by the essential supremum of a non-negative measurable function  :
+\[
+\text{supess} f = \text{inf} \{a > 0 | \mu(\{ f>a \}) = 0 \}
+\]
+Therefor we can define a equivalent class of bounded functions with the essential bounded functions with the $\mu$-a.e. Then all the Banach propreties of the norm $\|.\|_{\text{sup}}$ imply the one of the norm $\|.\|_{\infty}$. The space $\text{L}^{\infty}$ has almost the same principale propreties of the other spaces $\textbf{L}^p_{1 \leq p < \infty}$, except the important difference is that the last one is separable while the first one is not (density of step functions).
+
+\paragraph{Venn diagram illustrating $\textbf{L}^{p}$ space}
+\begin{center}
+\begin{pspicture}(-4,-4)(4,4)
+%\psline(-4,-4)(4,4)
+\psaxes[labels=none,ticks=none]{->}(0,0)(-4,-4)(4,4)
+\psline[linewidth=0.2pt](3,0)(0,3)(-3,0)(0,-3)(3,0)
+\psframe[linestyle=dashed,linewidth=0.2pt,fillstyle=solid,fillcolor=lightgray](-2,-1)(2,1)
+\rput(3.1, 0.2){\Rnode{One}{1}}
+\rput(2.1, 0.3){\Rnode{P}{$\frac{1}{p}$}}
+\rput(0.2, 1.3){\Rnode{Q}{$\frac{1}{q}$}}
+\rput(3.2, 1.2){\Rnode{PQ}{$\frac{1}{p}+\frac{1}{q}=1$}}
+\rput(0, 0){\Rnode{Lp}{$\text{L}^p$ space}}
+\end{pspicture}
+\end{center}
+The $\text{L}^p$-spaces have myriad relationshisp that can sometimes be confusing to remember. Observe that all the $\text{L}^p$-spaces live inside the square, that no $\text{L}^p$-space is contianed in the other. The space $\text{L}^{\infty}$ is the vertical line and the space $\text{L}^1$ is the horizontal line. The space $\text{L}^2$ is a square, which indicates self-duality. The spaces $\text{L}^p$ and $\text{L}^q$ are congruent rectangles: we can get one from the other geometrically by reflecting in the line $y = x$, which indicate that they are dual. Finally, the intersection of $\text{L}^p$ and $\text{L}^r$ is contained in all the $\text{L}^s$ for $p \leq s \leq r$, a fact again reflected in the Venn diagram.
+
+\subsection{Randon-Nykodym}
+\paragraph{Theorem } Let $\mu$ and $\nu$ two $\sigma$-\textit{finite} (or simply finite) measure on $(X,\mathcal{A})$, then there are equivalent
+\begin{itemize}
+ \item $\forall A \in \mathcal{A} \hbox{ , } \mu(A)=0 \Longrightarrow \nu(A)=0$ (absolute continuity $\nu \ll \mu$)
+ \item $\exists f:X\longmapsto \mathbb{R}_{+} \text{ such that } \forall A\in \mathcal{A} \hbox{ , } \nu(A)= \int_A fd\mu $
+\end{itemize}
+This function is $\mu$-a.e uniquely defined, called the derivative $f=\frac{d\nu}{d\mu}$ 
+\paragraph{Propreties }
+ Let $\nu$, $\mu$ and $\lambda$ be $\sigma$-finite measure.
+\begin{enumerate}
+ \item If $\nu \ll \lambda$ and $\mu \ll \lambda$, then
+\[
+\frac{d(\nu+\mu)}{d\lambda} = \frac{d\nu}{d\lambda} + \frac{d\mu}{d\lambda} \hspace{5mm} \lambda\text{-a.e}
+\] 
+ \item If $\nu \ll \mu \ll \lambda$, then
+\[
+\frac{d\nu}{d\lambda} = \frac{d\nu}{d\mu} \frac{d\mu}{d\lambda} \hspace{5mm} \lambda\text{-a.e}
+\]
+ \item If $\mu \ll \lambda$ and $g$ is a $\mu$-integrable function, then
+\[
+\int_{X} gd\mu = \int_{X} g .\frac{d\mu}{d\lambda} .d\lambda
+\] 
+\end{enumerate}
+
+\subsection{Fubini's theorem}
+\begin{description}
+ \item[Fubini-Tonelli] \hfill \\ 
+ Let $(X,\mathcal{A},\mu)$ and $(Y,\mathcal{B},\nu)$ be two $\sigma$-finite measure spaces, let $f:(X\times Y, \mathcal{A} \otimes \mathcal{B})\longrightarrow \bar{\mathbb{R}}_+$ a measureable \textit{non-negative} function. Then
+ \begin{enumerate}[i]
+  \item The functions everywhere defined $x\longmapsto \int_{Y}f(x,y)d\nu_y$ and $y\longmapsto \int_{X}f(x,y)d\mu_x$ are respectively $\mathcal{A}$ and $\mathcal{B}$-measurable.
+  \item $\int_{X\times Y} fd\mu \otimes \nu = \int_X (\int_{Y}f(x,y)d\nu_y )d\mu_x = \int_Y(\int_{X}f(x,y)d\mu_x)d\nu_y$
+ \end{enumerate} 
+ \item[Fubini-Lebesgue] \hfill \\
+ Let $(X,\mathcal{A},\mu)$ and $(Y,\mathcal{B},\nu)$ be two measure spaces, let $f \in \mathcal{L}^1(\mu \otimes \nu)$ a \textit{integrable} function on the product measure. Then
+  \begin{enumerate}[i]
+   \item $
+	  \left\{
+	  \begin{array}{l}
+	  \mu(dx)\text{-a.e } \hspace{5mm} y\longmapsto f(\cdot,y) \in \mathcal{L}^1(\nu)   \\
+	  \nu(dy)\text{-a.e } \hspace{5mm} x\longmapsto f(x,\cdot) \in \mathcal{L}^1(\mu)  
+	  \end{array}
+	  \right.
+	 $
+   \item $
+	  \left\{
+	  \begin{array}{l}
+	  x\longmapsto \int_Y f(x,y)d\nu_y \in \mathcal{L}^1(\mu)  \text{ is a function defined } \mu(dx)\text{-a.e on } X\\
+	  y\longmapsto \int_X f(x,y)d\mu_x \in \mathcal{L}^1(\nu)  \text{ is a function defined } \nu(dy)\text{-a.e on } Y
+	  \end{array}
+	  \right.
+	 $
+   \item $\int_{X\times Y} fd\mu \otimes \nu = \int_X (\int_{Y}f(x,y)d\nu_y )d\mu_x = \int_Y(\int_{X}f(x,y)d\mu_x)d\nu_y$
+  \end{enumerate}
+
+ \end{description}
+ 
+\subsection{Push-forward measure} 
+
+\paragraph{Definition-theorem} Let $(X,\mathcal{A})$ and $(Y,\mathcal{B})$ two measurable spaces, $h:X\longrightarrow Y$ a measurable mapping, $\mu$ a positive measure on $(X,\mathcal{A})$. The function noted $\mu_h$ or $h_{*}\mu$ defined by 
+\[
+h_{*}\mu : \mathcal{B} \longrightarrow \bar{\mathbb{R}}_+  \hspace{10mm} h_{*}\mu(B) = \mu(h^{-1}(B))     \hspace{5mm} \forall B \in \mathcal{B}
+\]
+is a measure on $(Y,\mathcal{B})$ (to prove) and is called pushforward measure. 
+
+\paragraph{Transfert theorem} Let things be defined as above and a measureable function $f:Y\longrightarrow \mathbb{K}$. Then
+\begin{itemize}
+\renewcommand{\labelitemi}{$\vcenter{\hbox{\tiny$\bullet$}}$}
+ \item if $f \geq 0$ then $\int_Y f d(h_{*}\mu) = \int_X f\circ h d\mu$
+ \item $f \text{ is } (h_{*}\mu)\text{-integrable} \Longleftrightarrow f\circ h \text{ is } \mu\text{-integrable}$ in this case we also have
+ \[\int_Y f d(h_{*}\mu) = \int_X f\circ h d\mu\]
+\end{itemize}
+
+\paragraph{Change of variables theorem}
+Let $\varDelta$ and $D$ be two open sets of $\mathbb{R}^n$ and $\Phi:\varDelta \longrightarrow D$ a $\mathcal{C}^1$-diffeomorphism. Then these three statements below are equivalent :
+\begin{itemize}
+ \item The Lebesgue measure on $D$ is the $\Phi$-pushforward measure of $|J_{\Phi}|.\lambda_{\varDelta}$ (measure on $\varDelta$ by density $|J_{\Phi}|$), i.e  $\lambda_{D} = \Phi_{*}(|J_{\Phi}|.\lambda_{\varDelta})$
+ \item For every borelian function $f : D \longrightarrow \mathbb{R}_+$,
+ \[
+ \int_D f(x)dx = \int_{\varDelta} f(\Phi(u)) |J_{\Phi}|(u) du \leq \infty
+ \]
+ \item For every borelian function $f : D \longrightarrow \mathbb{R}_+$, f is $\lambda_{D}$-integrable  if and only if $(f\circ \Phi) |J_{\Phi}|$ is $\lambda_{\varDelta}$-integrable and in this case, we also have 
+  \[
+ \int_D f(x)dx = \int_{\varDelta} f(\Phi(u)) |J_{\Phi}|(u) du
+ \]
+\end{itemize}
+Where $J_{\Phi}(x)= \text{det} \frac{d\Phi}{dx} $
 
 
 
+\section{Probability ...}%TODO
+\subsection{Independence and conditional}
+Def of independance, functional equivalent of independance, asymptotical event, 0-1 law, borel cantelli
+def of conditinal probability (transition), link of transition proba to product measure, transfert theorem for conditional case
+\subsection{Conditional esperance}
+tree approach from L2, to L1, and to M+
+propreties of conditional esperance operator.
+conditional convergence is preseved
+Link of conditional esperance and transition probability
+\subsection{Conditional independance}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 \section{Functional analysis}
-\paragraph{Banach space}
-\paragraph{Hilbert space}
+\subsection{Normed vector space} 
+\paragraph{Finite dimension}
+\begin{itemize}
+ \item On a normed vector space of finite dimension, every norms are equivalent.
+ \item A normed vector space of finite dimension is complete.
+ \item Finite product of complete normed vector space is complete.
+\end{itemize}
 
+\paragraph{Continuous map}
+\begin{itemize}
+ \item Let $E$ , $F$ be two normed vector spaces on the scalar field $\mathbb{K} = \mathbb{R} \text{ or } \mathbb{C} $, and $f:E\longrightarrow F$ a linear map. Then these above are equivalent :
+ \begin{enumerate}
+  \item $f$ is continuous at one point $x_0$ of $E$
+  \item $f$ is continuous
+  \item $f$ is uniformly continuous
+  \item $f$ is bounded
+ \end{enumerate}
+ When $f$ is continuous, we can define the norm : $\|f\| = \sup_{x\in E, \|x\|\leq 1} \|f(x)\|_{F}$. The space $\mathcal{L}(E,F)$ of continuous linear map is a normed vector space with this norm. If $F$ is complete, $\mathcal{L}(E,F)$ is complete too.
+ \item Let $E$, $F$ and $G$ be three normed vector space, and $f \in \mathcal{L}(E,F)$, $g \in \mathcal{L}(F,G)$, then
+ \[ g\circ f \in \mathcal{L}(E,G) \hspace{5mm} \text{ and } \hspace{5mm} \| g\circ f\| \leq \|g\|.\|f\| \]
+ \item All linear map from a \textit{finite dimension} N.V.S to a arbitrary normed vector space are continuous.
+ \item The topological dual $E'$ of all \textit{continuous} linear form (linear functional) is a complete space.
+\end{itemize}
+\paragraph{Hahn-Banach's theorem} 
+\begin{itemize}
+\renewcommand{\labelitemi}{$\vcenter{\hbox{\tiny$\bullet$}}$}
+ \item Let $V$ be a vector space over $\mathbb{R}$, a linear subspace $U \subset V$.
+ \item Let $p:V\longrightarrow \mathbb{R}$ a sublinear function.
+ \item Let $\phi:U\longrightarrow \mathbb{R}$ a linear functional, which is dominated by $p$ : $\phi(x)\leq p(x) \hspace{2mm} \forall x \in U$
+\end{itemize}
+then there exists a linear functional $\psi:V\longrightarrow \mathbb{R}$ such that extend $\phi$, i.e
+\begin{itemize}
+\renewcommand{\labelitemi}{$\vcenter{\hbox{\tiny$\bullet$}}$}
+ \item $\psi_{|U}=\phi$
+ \item $|\psi(x)| \leq p(x) \hspace{2mm} \forall x \in V $
+\end{itemize}
+
+\subsection{Banach space}
+Let $X$ a normed vector space. There are two equivalent definition of Banach space
+\begin{itemize}
+ \item $X$ is a complete space.
+ \item Each absolutely convergent series in $X$ converges : $\sum_n \|v_n\| < \infty \Longrightarrow \sum_n v_n \text{ converges }  $ 
+\end{itemize}
+If $Y$ is a Banach space, then $\mathcal{L(X,Y)}$ is Banach too.
+
+
+\subsection{Hilbert space ...}%TODO
+
+
+\subsection{Other theorems}
 
 \paragraph{Banach fixed-point theorem}
 Let $(X,d)$ be a non-empty complete metric space with a contraction mapping $T:X\longrightarrow X$. Then $T$ admits a unique fixed-point $x^{*}$ in $X$ satisfying $T(x^{*}) = x^{*}$. Furthermore, $x^{*}$ can be found as followsm star with an arbitrary element $x_0$ in $X$ and define a sequence ${x_n}$ by $x_{n+1}=T(x_n)$, then $x_n \longrightarrow x^*$
 
-\paragraph{Hilbert projection theorem}
+\paragraph{Hilbert projection theorem} Let $H$ be a Hilbert space, and a \textit{closed convex} $C \subset H$. Then for every $x\in H$, there exists a unique point $x^{*}\in C$ that minimized $\|x-x^{*}\|_{H}$ over $C$. In particular, if $C$ is a closed subspace of $H$, the necessary and sufficient condition for finding $x^{*}$ is that $(x-x^{*}) \perp C$
 
 
-\paragraph{Implicit function theorem}
+\paragraph{Implicit function theorem...}%TODO
+\paragraph{Lagrange multiplier...}%TODO
+\paragraph{Local inversion theorem..}%TODO
 
 \paragraph{Lax–Milgram theorem} Let $b$ be a bounded coercive bilinear functional on a Hilbert space $H$. Then for every bounded linear functional $L$ on $H$ there exists a unique $u_{L} \in H$ such that 
 \[
 L(v) = b(v,u_{L}) \hspace{2cm} ,\forall v \in H
 \]
 
-\paragraph{Riesz representation theorem}
-\paragraph{Riesz–Markov–Kakutani representation theorem}
-\paragraph{densities in functional spaces}
+\paragraph{Riesz representation theorem...}%TODO
+\paragraph{Riesz–Markov–Kakutani representation theorem...}%TODO
+\subsection{densities in functional spaces}
+\paragraph{Density $\text{Lip}_b(X) \text{ in } \textbf{L}^p_{1 \leq p < \infty}$} Let $X$ be a metric space and $\mu$ an \textit{outer regular} measure on its borelians. Let $\text{Lip}_b(X)$ be the set of all bounded lipschitz functions (to $\mathbb{R} \text{ or } \mathbb{C} $). Then for all $ p \in [1, \infty[ $
+\[
+\text{Lip}_b(X) \cap \mathcal{L}^p(\mu) \text{ is } \|.\|_p \text{-dense in }  \mathcal{L}^p(\mu)
+\]
+\paragraph{Density $\text{Lip}_K(X) \text{ in } \textbf{L}^p_{1 \leq p < \infty}$} be a metric space, \textit{separable and locally compact}. Let $\mu$ be a \textit{Borel measure} on such a metric space (imply regular measure). Let $\text{Lip}_{K}(X)$ be the set of all compactly supported lipschitz functions (to $\mathbb{R} \text{ or } \mathbb{C} $). Then for all $ p \in [1, \infty[ $
+\[
+\text{Lip}_{K}(X) \text{ is } \|.\|_p \text{-dense in }  \mathcal{L}^p(\mu)
+\]
 
-\section{Differential equations}
+
+
+
+\section{Differential equations ...}%TODO
 
 \end{document}
