@@ -426,7 +426,18 @@ Let $(X_t)_{t\in T}$ a family of $L^1$ r.v. Then there are two equivalent defini
 \[
 \lim_{a\rightarrow \infty} \sup_{t\in T} \mathbb{E}[|X_t|\mathbf{1}_{|X_t|>a}] = 0
 \]
-Usually, when need to prove if a family is uniformly integrable, we use the second definition, but when knowing a family is already u.i, we use the first definition to use.
+Usually, when need to prove if a family is uniformly integrable, we use the second definition, but when knowing a family is already u.i, we use the first definition to use. The important consequence of uniform integrability is the below theorem.
+\paragraph{Theorem} Let $X_n$ be a sequence of r.v in $L^1$, then
+\[
+\left\{
+\begin{array}{l}
+X_n \text{ are u.i}             \\
+X_n \xrightarrow{\mathbb{P}} X 
+\end{array}
+\right.
+\Longleftrightarrow
+X_n \xrightarrow{\textbf{L}^1} X
+\]
 
 
 \subsection{Independence and conditional}
