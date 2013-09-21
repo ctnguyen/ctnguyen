@@ -9,7 +9,11 @@
 
 class Base_Hello
 {
+public:
 
+	virtual void say_hello() = 0;
+
+	virtual ~Base_Hello(){}
 };
 
 #endif /* hello_HELLO_H */
