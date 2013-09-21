@@ -12,3 +12,5 @@ How does it works :
 Assuming you have the source folder of a c++ project, in the present case, it is src_cmake_template
 Create an other folder named build_cmake_template ( the easiest way is to create side by side with the src_folder).
 Then use the shell command, go into the build_folder.
+
+The idea we create a project "hello world" in different languages.
