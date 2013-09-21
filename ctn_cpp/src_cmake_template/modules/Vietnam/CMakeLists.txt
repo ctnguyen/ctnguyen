@@ -1,0 +1,1 @@
+add_library(hello_vietnamese hello_vietnamese.cpp)

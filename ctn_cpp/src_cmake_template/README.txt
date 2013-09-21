@@ -1,5 +1,7 @@
 I created this project as an example of how to start a cpp project using cmake
 
+cmake -G"Eclipse CDT4 - Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug ../src_cmake_template
+
 This use a very minimal knowing of cmake : 
 - link to the include directories containing all .h files
 - link to the modules as library
