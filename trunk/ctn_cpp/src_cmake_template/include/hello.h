@@ -12,6 +12,4 @@ class Base_Hello
 
 };
 
-
-
 #endif /* hello_HELLO_H */
