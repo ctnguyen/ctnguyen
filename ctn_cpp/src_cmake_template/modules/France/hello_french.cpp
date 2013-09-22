@@ -1,15 +1,5 @@
-#include <hello.h>
+#include <modules/hello_french.hpp>
 #include <iostream>
-
-class hello_french : public Base_Hello
-{
-public:
-
-	void say_hello();
-
-	virtual ~hello_french(){}
-};
-
 
 void hello_french::say_hello()
 {

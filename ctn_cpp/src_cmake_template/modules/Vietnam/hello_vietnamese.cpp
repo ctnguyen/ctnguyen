@@ -1,15 +1,5 @@
-#include <hello.h>
+#include <modules/hello_vietnamese.hpp>
 #include <iostream>
-
-class hello_vietnamese : public Base_Hello
-{
-public:
-
-	void say_hello();
-
-	virtual ~hello_vietnamese(){}
-};
-
 
 void hello_vietnamese::say_hello()
 {
