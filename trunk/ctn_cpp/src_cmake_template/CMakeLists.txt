@@ -11,5 +11,5 @@ project (cmake_template)
 #link_directories(${Boost_LIBRARY_DIRS})
 
 include_directories(include)
-add_subdirectory(modules)
+add_subdirectory(src)
 add_subdirectory(prog)
