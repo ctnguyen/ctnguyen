@@ -1,3 +1,15 @@
+/************************************************
+*     Mini Porject helloworld for cmake         *
+*     @authors Chi Thanh NGUYEN                 *
+*     contact chithanhnguyen.math@gmail.com     *
+*************************************************/
+
+/*!
+ *	@file include/moduels/hello_english.hpp
+ *	@date Sept 2013
+ */
+
+
 #ifndef HELLO_ENGLISH_H
 #define HELLO_ENGLISH_H
 
