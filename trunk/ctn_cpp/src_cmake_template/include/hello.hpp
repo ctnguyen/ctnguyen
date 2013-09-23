@@ -1,8 +1,13 @@
+/************************************************
+*     Mini Porject helloworld for cmake         *
+*     @authors Chi Thanh NGUYEN                 *
+*     contact chithanhnguyen.math@gmail.com     *
+*************************************************/
 /*!
-	@file include/hello.h
-	@authors NGUYEN Chi Thanh
-	@date Sept 2013
-*/
+ *	@file include/hello.h
+ *	@date Sept 2013
+ */
+
 
 #ifndef hello_HELLO_H
 #define hello_HELLO_H

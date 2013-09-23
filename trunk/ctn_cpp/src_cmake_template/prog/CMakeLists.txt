@@ -1,5 +1,3 @@
-
-
 link_directories(${CMAKE_BINARY_DIR}/modules)
 
 add_executable(say_hello say_hello.cpp)

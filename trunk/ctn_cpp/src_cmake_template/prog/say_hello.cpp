@@ -1,3 +1,13 @@
+/************************************************
+*     Mini Porject helloworld for cmake         *
+*     @authors Chi Thanh NGUYEN                 *
+*     contact chithanhnguyen.math@gmail.com     *
+*************************************************/
+/*!
+ *	@file prog/say_hello.cpp
+ *	@date Sept 2013
+ */
+
 #include <hello.hpp>
 #include <modules/hello_english.hpp>
 #include <modules/hello_french.hpp>

@@ -1,3 +1,14 @@
+/************************************************
+*     Mini Porject helloworld for cmake         *
+*     @authors Chi Thanh NGUYEN                 *
+*     contact chithanhnguyen.math@gmail.com     *
+*************************************************/
+/*!
+ *	@file include/moduels/hello_vietnamese.hpp
+ *	@date Sept 2013
+ */
+
+
 #ifndef HELLO_VIETNAMESE_H
 #define HELLO_VIETNAMESE_H
 
