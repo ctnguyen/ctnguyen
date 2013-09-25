@@ -12,7 +12,10 @@ tab[,c(1,3)];
 tab$transaction;
 ## Reponse 1 : the data containing in the immo.txt file composed of 3 variables, 20 observations
 
+#postscript('figure/my_plot_tab.ps');
 plot(tab);
+#dev.off();
+
 ## Reponse 2 : Because there are 3 variables, the plot function of the data frame plot
 ##             each variable in function of other, then there are 6 graphics.
 
