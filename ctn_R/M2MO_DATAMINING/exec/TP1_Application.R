@@ -21,3 +21,5 @@ plot(tab);
 
 cor(tab);
 ## Reponse  : the variable "valeur" is hightly correlated to the variable "surface"
+
+rm(tab); # remove the tab object at the end of the program
