@@ -14,6 +14,13 @@
 namespace TP1
 {
 
+/*! Exercice 2
+ * Function returning the Greatest Common Divisor (pgcd in French) using recursive algorithm
+ * [1] http://en.wikipedia.org/wiki/Euclidean_algorithm
+ */
+unsigned int pgcd_r(unsigned int a, unsigned int b);
+
+
 
 
 
