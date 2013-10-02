@@ -7,9 +7,13 @@ int main(int argc,char** argv)
 {
 	int d; // une variable entiere d
 	int i;
-	cout<<"****Premier programme****"<<endl;
+
+	//cout<<"****Premier programme****"<<endl;
+	cout<<"****Division****"<<endl; // Question 1
 	cout<<"Saisissez un nombre puis appuyez sur entree : ";
+
 	cin >> d;
+
 	i=0; // on met 0 dans i
 	while(i<=15)
 	{
