@@ -21,6 +21,15 @@ namespace TP1
 unsigned int pgcd_r(unsigned int a, unsigned int b);
 
 
+/*! Exercice 3
+ *  Uniform Random Generator : generate random integer between given a and b
+ *  For trivial implementation, one can use [1], for advanced algorithm (take times), use [2]
+ *  [1] http://stackoverflow.com/questions/5008804/generating-random-integer-from-a-range
+ *  [2] http://en.wikipedia.org/wiki/Rejection_sampling
+ *  [3] http://stackoverflow.com/questions/137783/expand-a-random-range-from-15-to-17
+ */
+int uniform(int a,int b, bool reainitialize_seed=true);
+
 
 
 
