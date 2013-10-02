@@ -41,5 +41,16 @@ int uniform(int a,int b, bool reainitialize_seed)
 
 
 
+void interger_factorrize(std::vector<unsigned int> & result, unsigned int number)
+{
+	// clear the vector of result before puting the prime sequence factorized in it
+	result.clear();
+
+	result.resize(number,7); //empty test
+}
+
+
+
+
 
 } // end TP1

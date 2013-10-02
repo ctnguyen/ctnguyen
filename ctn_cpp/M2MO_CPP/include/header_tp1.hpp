@@ -1,8 +1,8 @@
-
 /*!
  *	@file include/header_TP1.hpp
  *	@date Sept 2013
  */
+#include <vector>
 
 
 #ifndef M2MO_HEADER_TP1_H
@@ -30,6 +30,14 @@ unsigned int pgcd_r(unsigned int a, unsigned int b);
  */
 int uniform(int a,int b, bool reainitialize_seed=true);
 
+
+
+/*! Exercice 4
+ *  Interger Factorization
+ *
+ *  [1] http://en.wikipedia.org/wiki/Integer_factorization
+ */
+void interger_factorrize(std::vector<unsigned int> & prime_sequence, unsigned int number);
 
 
 
