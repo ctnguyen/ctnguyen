@@ -11,7 +11,12 @@
 /*! \brief all declaration functions of tp1 will be declared here
  * 
  */
+namespace TP1
+{
 
 
+
+
+} // End TP1
 
 #endif /* M2MO_HEADER_TP1_H */
