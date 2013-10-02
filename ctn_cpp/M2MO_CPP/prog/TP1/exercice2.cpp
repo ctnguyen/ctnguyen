@@ -10,14 +10,13 @@ int main(int argc,char* argv[])
 	int a;int b;
 
 	if (argc != 3) {
-		std::cout << "Two arguments expected : excercice1 [divisor] [Max_dividend]"<<std::endl;
+		std::cout << "Two arguments expected : excercice1 [a] [b]"<<std::endl;
 		return 0;
 	}
 	else
 	{
 		a = atoi(argv[1]) ; b = atoi(argv[2]) ;
 	}
-
 
 	unsigned int pgcd = TP1::pgcd_r(a,b);
 
