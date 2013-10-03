@@ -1,11 +1,11 @@
 /************************************************
-*                                               *
-*   C++ PROGRAMMING                             *
-*   MASTER LAURE ELIE 2013-2014                 *
-*   Student Chi Thanh NGUYEN                    *
-*                                               *
-*   chithanhnguyen.math@gmail.com               *
-*************************************************/
+ *                                               *
+ *   C++ PROGRAMMING                             *
+ *   MASTER LAURE ELIE 2013-2014                 *
+ *   Student Chi Thanh NGUYEN                    *
+ *                                               *
+ *   chithanhnguyen.math@gmail.com               *
+ *************************************************/
 
 /*!
  *	@file include/header_tp1.hpp
@@ -54,7 +54,6 @@ void interger_factorrize(std::vector<unsigned int> & prime_sequence, unsigned in
 
 
 
-
 /*! ==  Exercice 5  ==
  *
  *  Manually Computing Square Root
@@ -68,6 +67,32 @@ unsigned int integer_sqrt(unsigned int N);
 double newton_sqrt(const double &r, const double &epsilon);
 
 
+
+
+/*! ==  Exercice 6  ==
+ */
+class Point
+{
+public:
+
+	///! The ONLY Constructor
+	Point(int ab, int ord, char name);
+
+	///! translate the point to (x,y)
+	void translate(int x, int y);
+
+	///! printout the point'name, and its coordinates
+	void affiche() const;
+
+	///! destructor
+	~Point();
+
+private:
+
+	char nom;     // name of point
+	int abscisse; // abscisse of point
+	int ordonne;  // ordonne of point
+};
 
 
 } // End TP1
