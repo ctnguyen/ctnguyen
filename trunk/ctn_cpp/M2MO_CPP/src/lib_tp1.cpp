@@ -1,3 +1,12 @@
+/************************************************
+*                                               *
+*   C++ PROGRAMMING                             *
+*   MASTER LAURE ELIE 2013-2014                 *
+*   Student Chi Thanh NGUYEN                    *
+*                                               *
+*   chithanhnguyen.math@gmail.com               *
+*************************************************/
+
 #include <iostream>
 #include <cstdlib>
 #include <cassert>
@@ -77,6 +86,38 @@ void interger_factorrize(std::vector<unsigned int> & result, unsigned int N)
 
 
 
+unsigned int integer_sqrt(unsigned int N)
+{
+	if ( N <2 ) return N;
+	unsigned int int_sqrt = 1;
+
+	while ( int_sqrt*int_sqrt <= N) ++int_sqrt;
+
+	--int_sqrt;// decrement for its square be smaller than N
+
+	return int_sqrt;
+}
+
+double newton_sqrt(const double &S, const double &epsilon)
+{
+	// see [1] for notation and method
+	// for the newton method, we choose roughly the initial point as the mid of S
+	// remark : when S is close to zero, the newton method does not work well
+	//          because its derivative is near zero, dividing by this give a very big value
+
+	double x_n  = 0.5*S; //initiate the point x_n
+	double x_nn =     S; //initiate the point x_{n+1}
+	double x_buffer = x_nn ;
+
+	while( abs(x_nn*x_nn - x_n*x_n) >epsilon )
+	{
+		x_buffer = x_nn ;           // reserve the value of
+		x_nn = 0.5 * (x_n + S/x_n); // advance one step for the iteration
+		x_n = x_buffer ;            // set x_n to the older value of precedent step
+	}
+
+	return x_n;
+}
 
 
 } // end TP1
