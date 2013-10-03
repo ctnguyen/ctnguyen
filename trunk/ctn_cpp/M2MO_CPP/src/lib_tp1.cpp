@@ -2,6 +2,8 @@
 #include <cstdlib>
 #include <cassert>
 #include <ctime>
+#include <algorithm>
+#include <cmath>
 
 #include <header_tp1.hpp>
 
@@ -41,12 +43,36 @@ int uniform(int a,int b, bool reainitialize_seed)
 
 
 
-void interger_factorrize(std::vector<unsigned int> & result, unsigned int number)
+void interger_factorrize(std::vector<unsigned int> & result, unsigned int N)
 {
 	// clear the vector of result before puting the prime sequence factorized in it
 	result.clear();
 
-	result.resize(number,7); //empty test
+	// We use the trial division algorithm for the factorisation
+	// Running a "candidate" divisor increasing sequence
+	// Test if candidate divide the number
+	// If yes, save the candidate, reset the number to the quotient, relaunch the loop
+	// If non, increment candidate
+	// When candidate > number, stop loop and put the nunber lastly to the sequence of factors
+
+	unsigned int candidate=2;
+	unsigned int number =N;
+
+	while( candidate < number )
+	{
+		// While the candidate divide the number, do two things
+		while(number%candidate == 0)
+		{
+			// this candidate is good then store it to the result sequence
+			result.push_back(candidate);
+			// now only the quotient part need to be factorize
+			number/=candidate;
+		}
+		++candidate;
+	}
+
+	//sort the result in the decreasing order
+	std::sort(result.begin(), result.end());
 }
 
 

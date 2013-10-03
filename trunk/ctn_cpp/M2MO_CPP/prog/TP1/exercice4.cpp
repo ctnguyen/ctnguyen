@@ -29,7 +29,19 @@ int main(int argc,char* argv[])
 	for(unsigned int i=1;i< seq_size;++i){           // print the rest of factor sequence
 		std::cout<<"*" <<prime_sequence[i];
 	}
-	std::cout << std::endl<< std::endl;
+
+	//Test if the factorization is good
+	unsigned int product=1;
+	for(unsigned int i=0;i< seq_size;++i){           // print the rest of factor sequence
+		product *= prime_sequence[i];
+	}
+
+	std::cout<<"       || Test multiplication equality : ";
+	if (product == number)
+		std::cout<<"[OK]";
+	else
+		std::cout<<"[BAD]";
+	std::cout<<std::endl<<std::endl;
 
 	return 0;
 }
