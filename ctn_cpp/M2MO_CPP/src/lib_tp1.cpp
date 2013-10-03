@@ -120,4 +120,30 @@ double newton_sqrt(const double &S, const double &epsilon)
 }
 
 
+
+/////////////     class Point    /////////////////////
+Point::Point(int ab, int ord, char name):abscisse(ab),ordonne(ord),nom(name)
+{
+	std::cout<<"Call of Point class's constructor "<<std::endl;
+}
+
+void Point::translate(int x, int y)
+{
+	abscisse += x;
+	ordonne  += y;
+}
+
+void Point::affiche() const
+{
+	std::cout<<this->nom <<"("<<this->abscisse <<","<<this->ordonne<<")"<<std::endl;
+}
+
+Point::~Point()
+{
+	std::cout<<"Call of Point class's desstructor "<<std::endl;
+}
+
+
+
+
 } // end TP1
