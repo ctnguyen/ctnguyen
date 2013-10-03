@@ -1,8 +1,10 @@
 #################################################
-#  
-#   C++ PROGRAMMING  
-#   MASTER LAURE ELIE 2013-2014
-#   Student Chi Thanh NGUYEN 
+#                                               #
+#   C++ PROGRAMMING                             #
+#   MASTER LAURE ELIE 2013-2014                 #
+#   Student Chi Thanh NGUYEN                    # 
+#                                               #
+#   chithanhnguyen.math@gmail.com               #
 #################################################
 
 #CMAKE INITIALIZATION
