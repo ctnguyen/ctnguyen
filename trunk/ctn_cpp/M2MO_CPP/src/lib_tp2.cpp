@@ -8,6 +8,9 @@
 *************************************************/
 
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
+
 
 #include <header_tp2.hpp>
 
@@ -28,6 +31,20 @@ void exchange(int* pa, int*pb)
 	const int tempo = *pa ;
 	*pa = *pb ;
 	*pb = tempo;
+}
+
+
+
+// ==  Exercice 4  ==
+void random_fill(int *const array, const unsigned int array_size)
+{
+	srand (time(NULL)); // IMPORTANT reinitialize random seed
+
+	for(unsigned int i=0;i<array_size;++i)
+	{
+		int sample = rand();
+		array[i]=sample;
+	}
 }
 
 
