@@ -37,6 +37,14 @@ void exchange(int* pa, int*pb);
 
 
 
+/*! ==  Exercice 4  ==
+ *
+ * \brief randomly field of a integer array
+ * giving an integer array and its lenght, random_fill will fill randomly all the array by integers numbers
+ */
+void random_fill(int*const array, const unsigned int array_size);
+
+
 } // End TP2
 
 #endif /* M2MO_HEADER_TP2_H */

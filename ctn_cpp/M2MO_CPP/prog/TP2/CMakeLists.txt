@@ -15,8 +15,8 @@ target_link_libraries(exercice2_tp2 lib_tp2)
 add_executable(exercice3_tp2 exercice3.cpp)
 target_link_libraries(exercice3_tp2 lib_tp2)
 
-#add_executable(exercice4_tp2 exercice4.cpp)
-#target_link_libraries(exercice4_tp2	lib_tp2)
+add_executable(exercice4_tp2 exercice4.cpp)
+target_link_libraries(exercice4_tp2	lib_tp2)
 
 #add_executable(exercice5_tp2 exercice5.cpp)
 #target_link_libraries(exercice5_tp2	lib_tp2)
