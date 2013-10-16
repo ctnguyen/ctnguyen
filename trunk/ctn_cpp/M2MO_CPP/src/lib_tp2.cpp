@@ -12,8 +12,8 @@
 #include <ctime>
 
 
+#include <header_tp1.hpp>
 #include <header_tp2.hpp>
-
 
 namespace TP2
 {
@@ -42,7 +42,7 @@ void random_fill(int *const array, const unsigned int array_size)
 
 	for(unsigned int i=0;i<array_size;++i)
 	{
-		int sample = rand();
+		int sample = TP1::uniform(0,100,false);
 		array[i]=sample;
 	}
 }
