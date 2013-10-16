@@ -7,21 +7,23 @@
 *   chithanhnguyen.math@gmail.com               *
 *************************************************/
 
-#include<iostream>
-#include<cstdlib>
+#include <iostream>
 
-#include<header_tp2.hpp>
-
-using namespace std;
+#include <header_tp2.hpp>
 
 
-int main(int argc,char** argv)
+namespace TP2
 {
 
-	int* p = new int;
-	*p = 1;
-
-	TP2::adress(p);
-
-	return 0;
+//==  Exercice 2  ==
+void adress(const void *a)
+{
+	std::cout<<"hello adress void pointer "<< a <<std::endl;
 }
+
+
+
+
+
+
+} // end TP2
