@@ -15,8 +15,7 @@ using namespace std;
 
 int main(int argc,char** argv)
 {
-
-	std::cout<<"hello exercice 1 tp2 "<<std::endl;
-
+	int i;
+	std::cout<<std::endl<<"adress of int variable declared : "<< &i <<std::endl<<std::endl;
 	return 0;
 }
