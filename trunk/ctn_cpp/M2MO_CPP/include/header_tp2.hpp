@@ -28,6 +28,15 @@ namespace TP2
  */
 void adress(const void *a);
 
+
+/*! ==  Exercice 3  ==
+ *
+ * \brief exchange the value of two arguments by givings its pointers
+ */
+void exchange(int* pa, int*pb);
+
+
+
 } // End TP2
 
 #endif /* M2MO_HEADER_TP2_H */

@@ -7,31 +7,20 @@
 *   chithanhnguyen.math@gmail.com               *
 *************************************************/
 
-#include <iostream>
+#include<iostream>
+#include<cstdlib>
 
-#include <header_tp2.hpp>
+#include<header_tp2.hpp>
+
+using namespace std;
 
 
-namespace TP2
+int main(int argc,char** argv)
 {
+	int a = 1, b = 2;
+	std::cout <<"Value before exchange  a=" << a << ", b=" << b ;
+	TP2::exchange(&a, &b);
+	std::cout <<"     after exchange  a=" << a << ", b=" << b << std::endl;
 
-//==  Exercice 2  ==
-void adress(const void *a)
-{
-	std::cout<<"hello adress void pointer "<< a <<std::endl;
+	return 0;
 }
-
-
-// ==  Exercice 3  ==
-void exchange(int* pa, int*pb)
-{
-	const int tempo = *pa ;
-	*pa = *pb ;
-	*pb = tempo;
-}
-
-
-
-
-
-} // end TP2
