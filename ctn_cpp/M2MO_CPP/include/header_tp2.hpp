@@ -45,6 +45,20 @@ void exchange(int* pa, int*pb);
 void random_fill(int*const array, const unsigned int array_size);
 
 
+
+/*! ==  Exercice 5  ==
+ *
+ * \brief remove all vowel from a charater chain
+ */
+void vowel_remove(char *const chain);
+
+
+
+
+
+
+
+
 } // End TP2
 
 #endif /* M2MO_HEADER_TP2_H */
