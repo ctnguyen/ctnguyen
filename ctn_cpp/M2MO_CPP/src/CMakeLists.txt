@@ -8,3 +8,4 @@
 #################################################
 
 add_library(lib_tp1 lib_tp1.cpp)
+add_library(lib_tp2 lib_tp2.cpp)
