@@ -58,6 +58,7 @@ if(M2MO_BUILD_TEST)
     # so if you dont have boost, tests can not be build
     if(Boost_FOUND)
         include(CTest)
+        enable_testing()
         add_subdirectory(test)
     else()
         message("${M2MO_HEAD_MESSAGE}You can build test only if you have boost library -- test IS NOT BUILD")
