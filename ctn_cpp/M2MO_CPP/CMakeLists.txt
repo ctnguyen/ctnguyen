@@ -26,21 +26,40 @@ endif()
 if(NOT M2MO_USER_DEFINE_GENERATOR)
     if(UNIX AND NOT APPLE)
         set(CMAKE_GENERATOR "Eclipse CDT4 - Unix Makefiles")
+        add_definitions(-DM2MO_LINUX_OS)
     elseif(APPLE)
         set(CMAKE_GENERATOR "Xcode")
+        add_definitions(-DM2MO_MAC_OSX)
     elseif(WIN32)
         set(CMAKE_GENERATOR "Visual Studio 10")
+        add_definitions(-DM2MO_WIN_OS)
     endif()
 endif()
 message("${M2MO_HEAD_MESSAGE}Building with CMAKE_GENERATOR='${CMAKE_GENERATOR}'")
 
+
+#Boost
+find_package(Boost COMPONENTS chrono filesystem serialization system thread)
+if(Boost_FOUND)
+    set(Boost_USE_STATIC_LIBS ON)
+    include_directories(${Boost_INCLUDE_DIRS})
+#    link_directories(${Boost_LIBRARY_DIRS})
+endif()
 
 
 include_directories(include)
 add_subdirectory(src)
 add_subdirectory(prog)
 
+
+# Build test
 if(M2MO_BUILD_TEST)
-    add_definitions(-DM2MO_BUILD_TEST)
-    add_subdirectory(test)
+    # Test batteries is build using boost library, 
+    # so if you dont have boost, tests can not be build
+    if(Boost_FOUND)
+        include(CTest)
+        add_subdirectory(test)
+    else()
+        message("${M2MO_HEAD_MESSAGE}You can build test only if you have boost library -- test IS NOT BUILD")
+    endif()
 endif()
