@@ -26,6 +26,12 @@ set(CMAKE_BUILD_TYPE Debug)
 ###
 set(M2MO_BUILD_TEST TRUE)
 
+### Uncomment this line if you want to run test on your own developement
+### if this variable is true, the test process printout all messages when test failed
+### if not, all failed test messages will printed in a .log file
+#set(M2MO_LOCAL_TEST TRUE)
+
+
 ### If you have to build cpp project with a special compiler, IDE, 
 ### Search the document for it about your cmake_generator, 
 ### Uncomment these two lines and modify "your_special_cmake_generator" 

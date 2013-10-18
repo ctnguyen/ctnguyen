@@ -39,7 +39,7 @@ unsigned int pgcd_r(unsigned int a, unsigned int b);
  *  [2] http://en.wikipedia.org/wiki/Rejection_sampling
  *  [3] http://stackoverflow.com/questions/137783/expand-a-random-range-from-15-to-17
  */
-int uniform(int a,int b, bool reainitialize_seed=true);
+int uniform(const int& a, const int& b, bool reainitialize_seed=true);
 
 
 

@@ -34,7 +34,7 @@ unsigned int pgcd_r(unsigned int a, unsigned int b)
 
 
 
-int uniform(int a,int b, bool reainitialize_seed)
+int uniform(const int& a, const int& b, bool reainitialize_seed)
 {
 	// http://stackoverflow.com/questions/5008804/generating-random-integer-from-a-range
 
