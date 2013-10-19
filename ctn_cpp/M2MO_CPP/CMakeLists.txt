@@ -54,15 +54,12 @@ add_subdirectory(prog)
 
 # Build test
 if(M2MO_BUILD_TEST)
-    # Test batteries is build using boost library, 
+    # Test batteries is built using boost test framework, 
     # so if you dont have boost, tests can not be build
     if(Boost_FOUND)
         include(CTest)
-        if(M2MO_LOCAL_TEST)
-            set(CTEST_OUTPUT_ON_FAILURE TRUE)
-        endif()     
         add_subdirectory(test)
     else()
-        message("${M2MO_HEAD_MESSAGE}You can build test only if you have boost library -- test IS NOT BUILD")
+        message("${M2MO_HEAD_MESSAGE} WARNING : You can build test only if you have boost library -- tests ARE NOT BUILD")
     endif()
 endif()
