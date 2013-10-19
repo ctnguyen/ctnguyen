@@ -38,7 +38,7 @@ BOOST_AUTO_TEST_CASE(test_uniform)
 		a1=a2;
 	}
 
-	BOOST_CHECK( bad_ramdom >= nb_sample );
+	BOOST_CHECK( bad_ramdom <= nb_sample );
 }
 
 
