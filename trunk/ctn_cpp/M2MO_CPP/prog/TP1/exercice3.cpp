@@ -9,6 +9,7 @@
 
 #include<iostream>
 #include <cstdlib>
+#include <ctime>
 #include <header_tp1.hpp>
 
 
