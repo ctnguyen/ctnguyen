@@ -23,5 +23,5 @@ prompt$> ctest --extra-verbose  # if you have build with test
 
 -   For windows or Mac OS X user, who don't use command line for running test,
 - one should set the environment variable CTEST_OUTPUT_ON_FAILURE=1 before running test
-- There will be a project named RUN Test on the projects tree, run it for testss
+- There will be a project named RUN_TESTS on the projects tree, run it for testss
 
