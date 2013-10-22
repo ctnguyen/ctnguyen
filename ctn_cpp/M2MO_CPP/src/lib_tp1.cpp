@@ -80,6 +80,9 @@ void interger_factorrize(std::vector<unsigned int> & result, unsigned int N)
 		++candidate;
 	}
 
+	// add the last result
+	result.push_back(number);
+
 	//sort the result in the decreasing order
 	std::sort(result.begin(), result.end());
 }
