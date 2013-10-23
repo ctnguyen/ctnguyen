@@ -89,9 +89,9 @@ public:
 
 private:
 
-	char nom;     // name of point
 	int abscisse; // abscisse of point
 	int ordonne;  // ordonne of point
+	char nom;     // name of point
 };
 
 

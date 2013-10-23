@@ -15,7 +15,7 @@
 using namespace std;
 
 
-int main(int argc,char** argv)
+int main(int /*argc*/,char** /*argv*/)
 {
 	int a = 1, b = 2;
 	std::cout <<"Value before exchange  a=" << a << ", b=" << b ;

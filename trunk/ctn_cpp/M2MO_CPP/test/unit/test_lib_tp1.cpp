@@ -48,7 +48,7 @@ BOOST_AUTO_TEST_CASE(interger_factorrize)
 	int number = 1;
 
 	//25486 = 2*12743
-	int first_sequence[2] = { 2 , 12743 };
+	unsigned int first_sequence[2] = { 2 , 12743 };
 	TP1::interger_factorrize( prime_sequence, 25486 );
 
 	BOOST_CHECK( prime_sequence.size() == 2 ); // check if factorize give the good sequence size
@@ -61,7 +61,7 @@ BOOST_AUTO_TEST_CASE(interger_factorrize)
 	number=1; //reinitialize the nubmer
 
 	//1928 = 2*2*2*241
-	int second_sequence[4] = { 2 , 2 , 2 , 241 };
+	unsigned int second_sequence[4] = { 2 , 2 , 2 , 241 };
 	TP1::interger_factorrize( prime_sequence, 1928 );
 
 	BOOST_CHECK( prime_sequence.size() == 4 ); // check if factorize give the good sequence size
@@ -75,7 +75,7 @@ BOOST_AUTO_TEST_CASE(interger_factorrize)
 
 
 	//           260467200 =   2*2*2*2*2*2*2*2*2*3*3*5*5*7*17*19
-	int third_sequence[16] = { 2,2,2,2,2,2,2,2,2,3,3,5,5,7,17,19 };
+	unsigned int third_sequence[16] = { 2,2,2,2,2,2,2,2,2,3,3,5,5,7,17,19 };
 	TP1::interger_factorrize( prime_sequence, 260467200 );
 
 	BOOST_CHECK( prime_sequence.size() == 16 ); // check if factorize give the good sequence size
@@ -97,7 +97,6 @@ BOOST_AUTO_TEST_CASE(integer_sqrt)
 	unsigned int nb_sample =200;
 	unsigned int min=1;unsigned int max=10000;
 	srand (time(NULL));
-	int a1 = TP1::uniform(min,max,false);
 	for(unsigned int i=0;i<nb_sample;++i)
 	{
 		unsigned int m_sqrt = TP1::uniform(min,max,false);
