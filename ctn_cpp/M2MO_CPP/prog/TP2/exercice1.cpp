@@ -13,7 +13,7 @@
 using namespace std;
 
 
-int main(int argc,char** argv)
+int main(int /*argc*/,char** /*argv*/)
 {
 	int i;
 	std::cout<<std::endl<<"adress of int variable declared : "<< &i <<std::endl<<std::endl;

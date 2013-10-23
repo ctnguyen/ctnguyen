@@ -82,8 +82,6 @@ void vowel_remove(char *const chain)
 		{
 			for(unsigned int j=offset;j<N_1;++j)
 			{
-				char chain_j = chain[j];
-				char chain_jj = chain[j+1];
 				chain[j]=chain[j+1];
 			}
 

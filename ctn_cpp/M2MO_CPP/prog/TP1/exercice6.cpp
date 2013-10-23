@@ -13,7 +13,7 @@
 
 #include<header_tp1.hpp>
 
-int main(int argc,char* argv[])
+int main(int /*argc*/,char** /*argv*/)
 {
 	TP1::Point m_point(1,3,'A');
 	m_point.affiche();
