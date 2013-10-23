@@ -18,4 +18,14 @@ BOOST_AUTO_TEST_CASE(test_adress)
 }
 
 
+BOOST_AUTO_TEST_CASE(test_exchange)
+{
+	int pa = 10;
+	int pb = 20;
+	TP2::exchange(&pa,&pb);
+	BOOST_CHECK( pa == 20 );
+	BOOST_CHECK( pb == 10 );
+}
+
+
 BOOST_AUTO_TEST_SUITE_END()
