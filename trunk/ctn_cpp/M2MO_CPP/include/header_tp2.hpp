@@ -33,7 +33,7 @@ void adress(const void *a);
  *
  * \brief exchange the value of two arguments by givings its pointers
  */
-void exchange(int* pa, int*pb);
+void exchange(int* pa, int* pb);
 
 
 
