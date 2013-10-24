@@ -12,9 +12,6 @@ cmake_minimum_required (VERSION 2.8)
 
 project(m2m0_20132014) 
 
-set(M2MO_HEAD_MESSAGE " [M2MO_Project]  =======  ") 
-
-
 ## include the project configuration file
 if(EXISTS "${CMAKE_SOURCE_DIR}/user-config.cmake")
     include(${CMAKE_SOURCE_DIR}/user-config.cmake)
@@ -56,8 +53,6 @@ elseif(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
 endif()
 
 
-
-
 ## Boost
 find_package(Boost COMPONENTS chrono filesystem serialization system thread)
 if(Boost_FOUND)
@@ -65,6 +60,11 @@ if(Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS})
 #    link_directories(${Boost_LIBRARY_DIRS})
 endif()
+
+
+## Copy configure file for getting absolute output path 
+file(MAKE_DIRECTORY ${M2MO_OUTPUT_PATH})
+configure_file("${CMAKE_SOURCE_DIR}/include/m2mo_path.h.in" "${CMAKE_SOURCE_DIR}/include/m2mo_path.h" @ONLY)
 
 
 include_directories(include)
@@ -83,3 +83,5 @@ if(M2MO_BUILD_TEST)
         message("${M2MO_HEAD_MESSAGE} WARNING : You can build test only if you have boost library -- tests ARE NOT BUILD")
     endif()
 endif()
+
+
