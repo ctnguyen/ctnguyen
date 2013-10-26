@@ -1,0 +1,26 @@
+Datafile Name:US Crime
+Datafile Subjects:Social science
+Story Names:US Crime
+Reference:
+Vandaele, W. (1978) Participation in illegitimate activities: Erlich revisited. In Deterrence and incapacitation, Blumstein, A., Cohen, J. and Nagin, D., eds., Washington, D.C.: National Academy of Sciences, 270-335. Methods: A Primer, New York: Chapman & Hall, 11. Also found in: Hand, D.J., et al. (1994) A Handbook of Small Data Sets, London: Chapman & Hall, 101-103.
+Authorization:Contact author
+Description:
+These data are crime-related and demographic statistics for 47 US states in 1960. The data were collected from the FBI's Uniform Crime Report and other government agencies to determine how the variable crime rate depends on the other variables measured in the study.
+Number of cases:
+47
+Variable Names:
+
+   1. R: Crime rate: # of offenses reported to police per million population
+   2. Age: The number of males of age 14-24 per 1000 population
+   3. S: Indicator variable for Southern states (0 = No, 1 = Yes)
+   4. Ed: Mean # of years of schooling x 10 for persons of age 25 or older
+   5. Ex0: 1960 per capita expenditure on police by state and local government
+   6. Ex1: 1959 per capita expenditure on police by state and local government
+   7. LF: Labor force participation rate per 1000 civilian urban males age 14-24
+   8. M: The number of males per 1000 females
+   9. N: State population size in hundred thousands
+  10. NW: The number of non-whites per 1000 population
+  11. U1: Unemployment rate of urban males per 1000 of age 14-24
+  12. U2: Unemployment rate of urban males per 1000 of age 35-39
+  13. W: Median value of transferable goods and assets or family income in tens of $
+  14. X: The number of families per 1000 earning below 1/2 the median income 
