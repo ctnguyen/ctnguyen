@@ -315,17 +315,17 @@ X_i \stackrel{\textbf{i.i.d}}{\sim} \gamma(a_i,b) \Longrightarrow \sum X_i \sim 
 \paragraph{Normal} $X \sim \mathcal{N}(\mu,\sigma^2)$ when $X \in \mathbb{R}$ and,
 \[
 f_{X}(x) = \frac{1}{\sigma \sqrt{2\pi}} exp (-\frac{(x-\mu)^2}{2\sigma^2})
-\hspace{10mm}
+\hspace{5mm}
 \left\{
 \begin{array}{l}
 \mathbb{E}[X]=\mu \\
 \textbf{Var}[X]=\sigma^2
 \end{array}\right.
-\hspace{10mm}
+\hspace{5mm}
 \left\{
 \begin{array}{l}
-\textbf{F}_X(x) =  \frac{1}{2}(1+erf(\frac{x}{\sqrt{2}})) \\
-\varphi_{X}(t) = exp(i\mu t - \frac{1}{2}\sigma^2 t^2)
+\mathcal{L}_{X}(s) =  \text{exp}(\mu s  + \frac{1}{2} \sigma^2 s^2) \hbox{ , } s\in\mathbb{C} \\
+\varphi_{X}(t)     =  \text{exp}(i\mu t - \frac{1}{2} \sigma^2 t^2) \hbox{ , } t\in\mathbb{R}
 \end{array}\right.
 \]
 \[
@@ -379,7 +379,21 @@ F\sim \mathcal{F}_{(m_1,m_2)} \Rightarrow \frac{1}{F} \sim \mathcal{F}_{(m_2,m_1
 
 
 
-\section{Gaussian}
+\section{Gaussian Vector}
+\paragraph{Multivariate Normal Distribution}
+A random vector $X\in \mathbb{R}^d$ has a multivariate normal distrubution it satisfied one of these conditions
+\begin{enumerate}
+ \item $\forall a \in \mathbb{R}^d, \hspace{3mm} a^{t}.X$ is a Gaussian variable
+ \item There existe $\mu \in \mathbb{R}^d$ and $\Sigma \in \mathbb{R}^{d\times d}$ a \textbf{non-negative definite} matrix such that the characteristic function of $X$ is
+ \[
+  \varphi_{X}(u)     =  \text{exp}(i u^{t} .\mu  - \frac{1}{2} u^{t} .\Sigma. u) \hspace{10mm},\hspace{3mm} u\in\mathbb{R}^d
+ \]
+\end{enumerate}
+The multivariate normal distribution is said to be \textbf{non-degenerate} iif the its covariance matrix $\Sigma$ is \textbf{positive definite}, and it has a density 
+\[
+f_{X}(x) = \frac{1}{ (2\pi)^{\frac{d}{2}} |\text{det}(\Sigma)|^{\frac{1}{2}} } \text{exp}\{ -\frac{1}{2} (x-\mu)^{t} \Sigma^{-1} (x-\mu) \}
+\]
+
 \paragraph{General Linear Transform}
 \[
 \text{if }
@@ -409,7 +423,7 @@ F\sim \mathcal{F}_{(m_1,m_2)} \Rightarrow \frac{1}{F} \sim \mathcal{F}_{(m_2,m_1
 \left\{
 \begin{array}{l}
 \textbf{X}_{\textbf{E}_i} \text{ are indept. and gaussian} \\
- \| \textbf{X}_{\textbf{E}_i} \|^{2} \text{ are indept. and } \sim \sigma^2\chi^2_{r_i}
+ \| \textbf{X}_{\textbf{E}_i} \|^{2} \text{ are indept. and } \sim \sigma^2\chi^2_{(r_i)}
 \end{array}\right.
 \]
 
