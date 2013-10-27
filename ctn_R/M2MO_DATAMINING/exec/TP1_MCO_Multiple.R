@@ -9,9 +9,11 @@ tab=read.table("data/immo.txt", header=TRUE, sep=";") # Read the data file from 
 
 ## start by plotting data
 ## Plotting multiple figures in a single page by using layout mechanisme
+postscript("output/figure/immo.eps")
 layout(rbind(c(1,2))) 
 plot(tab$valeur,tab$transaction,xlab="valeur",ylab="transaction")
 plot(tab$surface,tab$transaction,xlab="surface",ylab="transaction")
+dev.off()
 
 
 X<-tab[c("surface","valeur")]; # Assign the X variable
