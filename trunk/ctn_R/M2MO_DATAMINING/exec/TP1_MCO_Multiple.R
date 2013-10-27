@@ -8,6 +8,7 @@
 tab=read.table("data/immo.txt", header=TRUE, sep=";") # Read the data file from the data folder
 
 ## start by plotting data
+## Plotting multiple figures in a single page by using layout mechanisme
 layout(rbind(c(1,2))) 
 plot(tab$valeur,tab$transaction,xlab="valeur",ylab="transaction")
 plot(tab$surface,tab$transaction,xlab="surface",ylab="transaction")
