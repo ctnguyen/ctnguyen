@@ -8,8 +8,10 @@
 tab=read.table("data/immo.txt", header=TRUE, sep=";") # Read the data file from the data folder
 
 ## start by plotting data
-plot(tab[,1],tab[,3],xlab=names(tab[1]),ylab=names(tab[3]))
-plot(tab[,2],tab[,3],xlab=names(tab[2]),ylab=names(tab[3]))
+layout(rbind(c(1,2))) 
+plot(tab$valeur,tab$transaction,xlab="valeur",ylab="transaction")
+plot(tab$surface,tab$transaction,xlab="surface",ylab="transaction")
+
 
 X<-tab[c("surface","valeur")]; # Assign the X variable
 Y<-tab[c("transaction")]     ; # Assign the Y variable
