@@ -12,7 +12,7 @@ tab[,c(1,3)];
 tab$transaction;
 ## Reponse 1 : the data containing in the immo.txt file composed of 3 variables, 20 observations
 
-#postscript('figure/my_plot_tab.ps');
+#postscript('output/figure/my_plot_tab.ps');
 plot(tab);
 #dev.off();
 
