@@ -7,13 +7,13 @@
 
 
 ### Application 1 
-data_crime=read.table("data/UsCrime.txt", header=TRUE, sep="")
-dim_data<-dim(data_crime)
+crime.data=read.table("data/UsCrime.txt", header=TRUE, sep="")
+data.dim<-dim(crime.data)
 ## by looking to the dim_data, we see there are 13 explanator variable and 47 observations
 
 #postscript('output/figure/control_DataCrime_Cov.ps');
-plot(data_crime)
+plot(crime.data)
 #dev.off();
 
-data_corr<-cor(data_crime)
+data.corr<-cor(crime.data)
 ## Question about how to interpret the correlation matrix??
