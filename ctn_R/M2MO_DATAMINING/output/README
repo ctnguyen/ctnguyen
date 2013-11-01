@@ -1,4 +1,0 @@
-In general, every file in this folder are supposed to be output of some computation and temporary
-Therefor nothing will be added to the repository
-
-The ignoring proprety of svn has setted that every file of type  *.* will be ignoring by the svn
