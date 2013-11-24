@@ -1,0 +1,96 @@
+%Texlive-full Version 3.141592-1.40.3 (Web2C 7.5.6)
+%Kile Version 2.0.83
+
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8x]{inputenc}
+
+\usepackage{lmodern}
+\usepackage[a4paper]{geometry}
+
+\usepackage{hyperref}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{multicol}
+
+\newcommand{\fnc}[2]{%
+  \text{#1}\hspace{1pt} #2
+}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%% DOCUMENT TITLE %%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}Base Calculus and Algebra, ODE preparing for Interview Quant\end{center}
+%%%%%%%%%%%%%%%%%% DOCUMENT TITLE %%%%%%%%%%%%%%%%%%%%%%%%%
+Following the advise of ~\cite{michael2004}, ~\cite{PDGuide},~\cite{advise} this brief memento regroup basical mathematicals formula preparing for quant interview (and only mathematical side)
+\section{Calculus and Analysis}
+\subsection{Common functions}
+\paragraph{Power, logarithm}
+\[
+\fnc{ln}{ab}=\fnc{ln}{a}+\fnc{ln}{b} \hspace{1cm} \text{log}_{a}x=\frac{\fnc{ln}{x}}{\fnc{ln}{a}} \hspace{1cm} x^{\alpha} = e^{\alpha \fnc{ln}{x}}
+\]
+\[
+\fnc{ch}{x} = \frac{e^x + e^{-x}}{2} \hspace{1cm} \fnc{sh}{x} = \frac{e^x - e^{-x}}{2} \hspace{1cm} \fnc{ch}{x}+\fnc{sh}{x} = e^x \hspace{1cm} \fnc{ch}{x}-\fnc{sh}{x}=e^{-x}
+\]
+\subsection{Sequence limits, series limit and function limit}
+\[
+\underset{x\rightarrow \infty}{\text{lim}} \frac{(\fnc{ln}{x})^{\alpha}}{x^{\beta}}=0 \hspace{1cm} \forall \alpha,\beta > 0
+\]
+\subsection{Derivative and antiderivative of common functions}
+\begin{multicols}{2}
+\paragraph{Derivative}
+\[
+\def\arraystretch{2.0}
+\begin{array}{ll}
+f(x)=x^n             & f'(x)=nx^{n-1}                     \\
+f(x)=\fnc{ln}{x}     & f'(x)=\frac{1}{x}                  \\
+f(x)=e^x             & f'(x)=e^x                          \\
+f(x)=\fnc{ch}{x}     & f'(x)=\fnc{sh}{x}                  \\
+f(x)=\fnc{sh}{x}     & f'(x)=\fnc{ch}{x}                  \\
+f(x)=\text{log}_a x  & f'(x)=\frac{1}{x \fnc{ln}{a}}      \\ 
+f(x)=\fnc{sin}{x}    & f'(x)=\fnc{cos}{x}                 \\
+f(x)=\fnc{cos}{x}    & f'(x)=-\fnc{sin}{x}                \\
+f(x)=\fnc{tan}{x}    & f'(x)=1+\fnc{tan}^2x               \\
+f(x)=\fnc{cotan}{x}  & f'(x)=-1-\text{cotan}^2x    
+\end{array}
+\]
+\columnbreak
+\paragraph{Antiderivative}
+\[
+\def\arraystretch{2.0}
+\begin{array}{lcl}
+\int x^n                    dx   &=& \frac{x^{n+1}}{n+1}                      \\
+\int \frac{1}{x}            dx   &=& ln(|x|)                                  \\
+\int e^{\alpha x}           dx   &=& \frac{1}{\alpha} e^{\alpha x}            \\
+\int \fnc{tan}{x}           dx   &=& - \fnc{ln}{ |\fnc{cos}{x}|}              \\
+\int \frac{1}{1+x^2}        dx   &=& \fnc{arctan}{x}                          \\
+\int \frac{1}{1-x^2}        dx   &=&\frac{1}{2}\fnc{ln}{|\frac{1+x}{1-x}|}    \\
+\int \frac{1}{\sqrt{1+x^2}} dx   &=& \fnc{ln}{(x+\sqrt{x^2+1})}               \\
+\int \frac{1}{\sqrt{1-x^2}} dx   &=& \fnc{arcsin}{x}                          \\
+\int \frac{1}{\sqrt{x^2-1}} dx   &=& \fnc{ln}{|x+\sqrt{x^2-1}|}
+\end{array}
+\]
+\end{multicols}
+\paragraph{Common antiderivatives}
+\[
+\int P(x)e^{\alpha x}dx \hspace{2cm} \int P(x)\fnc{cos}{(\beta x)}dx  \hspace{2cm} \int P(x)\fnc{sin}{(\beta x)}dx
+\]
+\[
+\int P(x)e^{\alpha x}\fnc{cos}{(\beta x)}dx \hspace{3cm} \int P(x)e^{\alpha x}\fnc{sin}{(\beta x)}dx
+\]
+
+\subsection{Taylor series and Maclaurin expansion}
+Formula of Taylor serie and Maclaurin expansion for usual functions
+\section{Linear Algebra}
+\subsection{Eigenvalues and eigenvectors}
+\subsection{svd decompositions and propreties}
+\subsection{orthogonalities}
+\section{Ordinary Differential Equations}
+\section{Optimization}
+\subsection{Lagrange Multipliers equality and inequality constraint}
+\section{Advanced theorems}
+\subsection{Implicit Function theorem}
+\subsection{Local Inversion}
+
+\bibliographystyle{siam}
+\bibliography{MathBook}
+\end{document}
