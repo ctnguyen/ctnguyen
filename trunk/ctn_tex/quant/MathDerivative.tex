@@ -29,6 +29,44 @@ These formula taken from books ~\cite{mathfiElliot} and ~\cite{mathfiMarek}
 - Bound for European Put
 - Bound for American Call, Put
 \section{Black Scholes Model}
+There are two approach leads to the Black-Scholes tools
+\begin{itemize}
+ \item Black-Scholes formula : Starting from the self-financing porfolio, based on the probabiliste approach (martingale theory), one can build the closed formula of price for every attainable contingent claim. 
+ \item Black-Scholes PDE : Starting from the riskless porfolio (delta neutral) idea, give the Black-Scholes PDE.
+\end{itemize}
+Lecturer can see detail formulations from ~\cite{mathfiElliot}.ch7 , ~\cite{mathfiMarek}.ch3 or ~\cite{rouah}.  
+\paragraph{The Model} Black-Scholes define the dynamic of risky and riskless assets :
+\[
+\frac{dS^1_t}{S^1_t} = \mu dt + \sigma d W_t   \hspace{2cm} \frac{dS^0_t}{S^0_t} = r dt
+\]
+\paragraph{The Self-financing porfolio} or self-financing porfolio $\phi = (H^0,H^1)$ is defined by
+\[
+V_t(\phi) = H^0_t S^0_t + H^1_t S^1_t   
+\hspace{1.5cm} 
+dV_t = H^0_t dS^0_t + H^1_t dS^1_t 
+\hspace{1cm} \longrightarrow
+d\widetilde{V}_t = H^1_t d\widetilde{S}^1_t 
+\]
+\paragraph{The Girsanov Probability transform}
+\[
+\theta = \frac{\mu - r}{\sigma} 
+\hspace{1cm} 
+\frac{d\mathbb{P}^*}{d\mathbb{P}}|_{\mathcal{F}_t} = \text{exp}\{ -\int_0^t \theta dW_s - \frac{1}{2} \int_0^t \theta^2 ds \}
+\hspace{1cm} 
+W^*_t = W_t + \int_0^t \theta ds
+\]
+\paragraph{Comparing in two probabilities}
+\begin{center}
+\begin{tabular}{l|l}
+ Under $\mathbb{P}$ & Under $\mathbb{P}^*$                                                      \\[6pt]
+ $ dS^1_t = S^1_t( \mu dt + \sigma d W_t) $       &  $ dS^1_t = S^1_t( r dt + \sigma d W^*_t) $ \\[3pt]
+ $ dV_t = H^0_t dS^0_t + H^1_t dS^1_t     $       &  $ dV_t = r V_t dt + \sigma H^1_t dW^*_t  $ \\[3pt]
+ $ d\widetilde{S}^1_t = \widetilde{S}^1_t( (\mu-r)dt + \sigma dW_t ) $ & $d\widetilde{S}^1_t = \widetilde{S}^1_t \sigma dW^*_t  $ \\[3pt]
+ $ d\widetilde{V}_t = H^1_t d\widetilde{S}^1_t $ & $d\widetilde{V}_t = H^1_t d\widetilde{S}^1_t =  \sigma H^1_t \widetilde{S}^1_t dW^*_t $
+\end{tabular}
+\end{center}
+
+
 - Black Scholes Formula for European Call, Put
 - Black-Scholes Equations
 - Forward price formula
