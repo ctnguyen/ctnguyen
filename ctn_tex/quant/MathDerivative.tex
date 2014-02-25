@@ -24,9 +24,26 @@
 These formula taken from books ~\cite{mathfiElliot} and ~\cite{mathfiMarek} 
 \section{Basis financial Option}
 \subsection{European Option}
-- Call put parity
-- Bound for European Call
-- Bound for European Put
+\paragraph{Call-Put parity} 
+\[
+C_t - P_t = S_t - B(t,T).K
+\]
+\paragraph{Bound for European options}
+\[
+B_{(t,T)}(K-F_{(t,T)})_+ \leq P_t \leq B_{(t,T)}K 
+\hspace{1cm}
+B_{(t,T)}(F_{(t,T)}-K)_+ \leq C_t \leq B_{(t,T)}F_{(t,T)}
+\]
+Where $B_{(t,T)}$ and $F_{(t,T)}$ are zero-coupon price and T-Forward price
+\paragraph{Three no-arbitrage inequalities}
+\begin{itemize}
+ \item Call Spread : $K_1 < K_2 \rightarrow C(K_1)-C(K_2) \geq 0 \rightarrow \frac{\partial C }{\partial K} \leq 0  $
+ \item Butterfly Spread : $C(K-\epsilon) - 2C(K) + C(K+\epsilon) \geq 0 \rightarrow \frac{\partial^2 C }{\partial K^2} \geq 0 $
+ \item Calandar Spread : $T_1<T_2  \rightarrow C_{t}(T_1,K) \leq C_{t}(T_2,e^{r(T_2-T_1)} K) \rightarrow \frac{\partial C }{\partial T} \geq 0 \text{ if } r=0 $
+\end{itemize}
+
+
+
 - Bound for American Call, Put
 \section{Black Scholes Model}
 There are two approach leads to the Black-Scholes tools
@@ -35,9 +52,9 @@ There are two approach leads to the Black-Scholes tools
  \item Black-Scholes PDE : Starting from the riskless porfolio (delta neutral) idea, give the Black-Scholes PDE.
 \end{itemize}
 Lecturer can see detail formulations from ~\cite{mathfiElliot}.ch7 , ~\cite{mathfiMarek}.ch3 or ~\cite{rouah}.  
-\paragraph{The Model} Black-Scholes define the dynamic of risky and riskless assets :
+\paragraph{The Model} Black-Scholes define the dynamic of risky and riskless assets \footnote{In this section, the interest rate and volatility subscripted $t$ mean $r_t$ and $\sigma_t$ is a deterministic function in time} :
 \[
-\frac{dS^1_t}{S^1_t} = \mu dt + \sigma d W_t   \hspace{2cm} \frac{dS^0_t}{S^0_t} = r dt
+\frac{dS^1_t}{S^1_t} = \mu dt + \sigma_t d W_t   \hspace{2cm} \frac{dS^0_t}{S^0_t} = r_t dt
 \]
 \paragraph{The Self-financing porfolio} or self-financing porfolio $\phi = (H^0,H^1)$ is defined by
 \[
@@ -49,28 +66,73 @@ d\widetilde{V}_t = H^1_t d\widetilde{S}^1_t
 \]
 \paragraph{The Girsanov Probability transform}
 \[
-\theta = \frac{\mu - r}{\sigma} 
+\theta_t = \frac{\mu - r_t}{\sigma_t} 
 \hspace{1cm} 
-\frac{d\mathbb{P}^*}{d\mathbb{P}}|_{\mathcal{F}_t} = \text{exp}\{ -\int_0^t \theta dW_s - \frac{1}{2} \int_0^t \theta^2 ds \}
+\frac{d\mathbb{P}^*}{d\mathbb{P}}|_{\mathcal{F}_t} = \text{exp}\{ -\int_0^t \theta_s dW_s - \frac{1}{2} \int_0^t \theta^2_s ds \}
 \hspace{1cm} 
-W^*_t = W_t + \int_0^t \theta ds
+W^*_t = W_t + \int_0^t \theta_s ds
 \]
-\paragraph{Comparing in two probabilities}
+\paragraph{Comparing processes's dynamic in two probabilities}
 \begin{center}
 \begin{tabular}{l|l}
  Under $\mathbb{P}$ & Under $\mathbb{P}^*$                                                      \\[6pt]
- $ dS^1_t = S^1_t( \mu dt + \sigma d W_t) $       &  $ dS^1_t = S^1_t( r dt + \sigma d W^*_t) $ \\[3pt]
- $ dV_t = H^0_t dS^0_t + H^1_t dS^1_t     $       &  $ dV_t = r V_t dt + \sigma H^1_t dW^*_t  $ \\[3pt]
- $ d\widetilde{S}^1_t = \widetilde{S}^1_t( (\mu-r)dt + \sigma dW_t ) $ & $d\widetilde{S}^1_t = \widetilde{S}^1_t \sigma dW^*_t  $ \\[3pt]
- $ d\widetilde{V}_t = H^1_t d\widetilde{S}^1_t $ & $d\widetilde{V}_t = H^1_t d\widetilde{S}^1_t =  \sigma H^1_t \widetilde{S}^1_t dW^*_t $
+ $ dS^1_t = S^1_t( \mu dt + \sigma_t d W_t) $       &  $ dS^1_t = S^1_t( r_t dt + \sigma_t d W^*_t) $ \\[3pt]
+ $ dV_t = H^0_t dS^0_t + H^1_t dS^1_t     $       &  $ dV_t = r_t V_t dt + \sigma_t H^1_t dW^*_t  $ \\[3pt]
+ $ d\widetilde{S}^1_t = \widetilde{S}^1_t( (\mu-r_t)dt + \sigma_t dW_t ) $ & $d\widetilde{S}^1_t = \widetilde{S}^1_t \sigma_t dW^*_t  $ \\[3pt]
+ $ d\widetilde{V}_t = H^1_t d\widetilde{S}^1_t $ & $d\widetilde{V}_t = H^1_t d\widetilde{S}^1_t =  \sigma_t H^1_t \widetilde{S}^1_t dW^*_t $
 \end{tabular}
 \end{center}
+The result under risk-neutral probability is
+\[
+S^1_t = S^1_0\text{exp}\{  \sigma W^*_t + (r-\frac{\sigma^2}{2})t \}
+\hspace{1cm}
+\widetilde{S}^1_t = S^1_0\text{exp}\{ \sigma W^*_t -\frac{\sigma^2}{2}t\}
+\hspace{2cm}
+\pi_t(h_{T}) = S^0_t \mathbb{E}^*[\frac{h_T}{S^0_T} | \mathcal{F}_t]
+\]
+\paragraph{The prices formula when parameters are constants}
+\[
+C_t = S^1_t \Phi(d_+) - e^{-r(T-t)} K \Phi(d_-)
+\hspace{1cm}
+P_t = e^{-r(T-t)} K \Phi(-d_-) - S^1_t \Phi(-d_+)
+\]
 
+\[
+d\pm = \frac{ \text{ln}(\frac{S^1_t}{K}) + (T-t)( r\pm \frac{\sigma^2}{2})  }{\sigma \sqrt{T-t}} 
+\hspace{2cm}
+d_- = d_+  - \sigma \sqrt{T-t}
+\]
+\paragraph{The prices formula when parameters are functions in time}
+\[
+C_t = S^1_t \Phi(d_+) - e^{- \int^T_t r_udu } K \Phi(d_-)
+\hspace{1cm}
+P_t = e^{- \int^T_t r_udu } K \Phi(-d_-) - S^1_t \Phi(-d_+)
+\]
 
-- Black Scholes Formula for European Call, Put
-- Black-Scholes Equations
-- Forward price formula
-- Numeraire Change formula
+\[
+\overline{\sigma}^2_{t,T} = \int^T_t \sigma^2_u du
+\hspace{2cm}
+d\pm =  \frac{1}{\overline{\sigma}_{t,T}} \text{ln}(\frac{S^1_t}{e^{- \int^T_t r_udu }.K}) \pm \frac{1}{2}\overline{\sigma}_{t,T}
+\hspace{2cm}
+d_- = d_+  - \overline{\sigma}_{t,T}
+\]
+\paragraph{Numeraraire change }
+A proccess $Z_t > 0$ can be considered as a numeraire. 
+\[
+\frac{d\mathbb{P}^{Z}}{d\mathbb{P}^*} | \mathcal{F}_t = \frac{\widetilde{Z}_t }{Z_0} = \frac{1}{Z_0} \frac{Z_t}{S^0_t} 
+\]
+Then for every $X_t$ asset price process, $\frac{X_t}{Z_t}$ is a $\mathbb{P}^Z$-martingale, as $\frac{X_t}{S^0_t}$ is a $\mathbb{P}^*$-martingale. 
+\textbf{T-Forward measure } is the measure using the numeaire zero-coupon $B(t,T)$, under which the T-forward price procces is a martingale.
+
+\paragraph{PDE Black-Scholes}
+\[
+\frac{\partial C}{\partial t} +
+(r_t - q_t)S_t \frac{\partial C}{\partial S} + 
+\frac{1}{2}\sigma^2_tS^2_t \frac{\partial^2 C}{\partial S^2} -
+r_t C_t =0
+\hspace{2cm}
+\text{ divident : } dQ_t = S_t q_t dt 
+\]
 \subsection{Exotic Options}
 - every Exotic Option, see Hull, Martingale Finance, ...
 - packages options, 
@@ -85,6 +147,51 @@ W^*_t = W_t + \int_0^t \theta ds
 - quantile options, 
 - others
 \section{Greek letters}
+\paragraph{Delta} $\frac{\partial}{\partial S}$
+\[
+\Delta_C(t) = \Phi(d_+(t))
+\hspace{1cm}
+\Delta_P(t) = -\Phi(-d_+(t))
+\hspace{1cm}
+\Delta_C(t) - \Delta_P(t) = 1
+\]
+\paragraph{Gamma} $\frac{\partial^2}{\partial S^2}$
+\[
+\Gamma_C(t) = \Gamma_P(t) = \frac{1}{S_t \sigma \sqrt{T-t}} 
+\]
+\paragraph{Theta} $\frac{\partial}{\partial T}$
+\[
+\left\| 
+\begin{array}{l}
+\Theta_C = \frac{-S_t \phi(d_+(t)) \sigma}{2\sqrt{T-t}} - rKe^{-r(T-t)} \Phi(d_-(t))  <0 \\
+\Theta_P = \frac{-S_t \phi(d_+(t)) \sigma}{2\sqrt{T-t}} + rKe^{-r(T-t)} \Phi(-d_-(t)) 
+\end{array}\right. 
+\hspace{2cm}
+\left\{ 
+\begin{array}{l}
+\phi \text{ normal density} \\
+\Theta_P - \Theta_C = rKe^{-r(T-t)}
+\end{array}\right. 
+\]
+\paragraph{Delta - Theta - Gamma of delta-neutral porfolio $\Pi$}
+\[
+d\Pi = \Theta dt + \frac{1}{2} \Gamma dS^2
+\hspace{2cm}
+\Theta + \frac{1}{2}\sigma^2 S^2 \Gamma = r\Pi
+\]
+\paragraph{Vega}$\frac{\partial}{\partial \sigma}$
+\[
+\mathcal{V}_C = \mathcal{V}_P = S_t \sqrt{T-t} \phi(d_+(t))
+\]
+\paragraph{Rho} $\frac{\partial}{\partial r}$
+\[
+\left\| 
+\begin{array}{l}
+\rho_C = (T-t)Ke^{-r(T-t)}\Phi(d_-(t))    > 0 \\
+\rho_P = -(T-t)Ke^{-r(T-t)}\Phi(-d_-(t))  < 0
+\end{array}\right. 
+\]
+
 - every greek and its graphics
 - relation between greeks
 - greek letter in black-scholes formula
