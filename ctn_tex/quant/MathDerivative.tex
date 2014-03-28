@@ -21,6 +21,47 @@
 %%%%%%%%%%%%%%%%%% DOCUMENT TITLE %%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{center}\resizebox{9cm}{0.6cm}{Quant's interview 1 - Math Derivatives}\end{center}
 %%%%%%%%%%%%%%%%%% DOCUMENT TITLE %%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Some trivial probabilities}
+
+\subsection{Common}
+
+\subsection{Binomial, multinomial, random warks}
+Further remaining the formulas, one has to reformulate the urn models and understand the signification of variables
+\paragraph{Binomial} $X\sim \mathcal{B}(n,\theta)$ when,
+\[
+X \in \{0,1 .. , n\} , 
+\hspace{10mm}
+P(X=k)=C^k_n\theta ^k (1-\theta)^{n-k} 
+\hspace{10mm}
+\left\{
+\begin{array}{l}
+\mathbb{E}[X]=n\theta \\
+\textbf{Var}[X]=n \theta (1-\theta) 
+\end{array}\right.
+\]
+\paragraph{Multinomial}  $ \textbf{X} \sim \mathcal{M}(n,\textbf{p} ) \hbox{ , } \textbf{p}\in \mathbb{R}^k $ when \footnote{Use of multi-index notation : $ \hspace{1cm} |\textbf{x}|=x_1 + ... + x_k \hspace{1cm} \textbf{x}!=x_1! ... x_k!  \hspace{1cm} \textbf{p}^{\textbf{x}} = p_1^{x_1}...p_k^{x_k}  \hspace{1cm} $, multinomial is a generalization of the binomial.},
+\[
+\textbf{X} \in \Omega = \{ \textbf{x} \in \mathbb{N}^k, |\textbf{x}| = n \} , 
+\hspace{10mm}
+P(\textbf{X}=\textbf{x})= \frac{n!}{\textbf{x}!}\textbf{p}^{\textbf{x}}
+\hspace{10mm}
+\left\{
+\begin{array}{l}
+\mathbb{E}[X_i]=np_i \\
+\textbf{Var}[X_i]=n p_i (1-p_i) 
+\end{array}\right.
+\]
+\paragraph{Random walk and Gambler's ruin problem} is a markov based problem modeled as random walks ~\cite{KARL}. A Gambler play a coin-flipping game, he initiate with $i\$$ and stop the game if his fortune reach $W\$$ (win) or $0\$$ (lost). Each flip of coin he gains/looses $1\$$ with probability $p \text{ or } q$. Note $P_i^{W}$ the probability he win the game, then
+\[
+P_i^{W} = \frac{1- (\frac{q}{p})^i }{1- (\frac{q}{p})^W } \hspace{0.5cm} \text{  if } p\neq q
+\hspace{3cm}
+P_i^{W} = \frac{i}{W} \hspace{0.5cm}\text{  if } p = q = \frac{1}{2}
+\]
+
+\subsection{Gaussians}
+
+
+
 \section{Basis financial Option}
 In this section $B_{(t,T)}$ and $F_{(t,T)}$ are zero-coupon price and T-Forward price \footnote{ All relations in this section are model-free. That mean they can be demonstrated without assumption of a model, only by the non arbitrage theory}, see  ~\cite{hull} 
 \subsection{European Option}
