@@ -89,20 +89,32 @@ f_{X}(x) = \frac{1}{\sigma}f_{\mathcal{N}(0,1)}(\frac{x-\mu}{\sigma})
  \hspace{5mm}  \text{    or} \hspace{5mm}  
 \sqrt{n}(\overline{X}_n - \mu) \rightsquigarrow   \mathcal{N}(0,\sigma^{2})
 \]
-\subsection{Brownian motion} see in ~\cite{MONIQUE} sec1.4
-\paragraph{Definition} Brownian motion is a \textit{continuous} procces $X$ satisfying one of following equivalent properties :
+\subsection{Brownian motion} 
+\paragraph{Definition} Brownian motion is a \textit{continuous} procces $X$ satisfying one of following equivalent properties  (see~\cite{MONIQUE}sec1.4):
 \begin{itemize}
  \item $X$ has stationary independent increments, and for any $t>0$, $X_t \sim \mathcal{N}(0,t)$
  \item $X$ is a Gaussian process, with mean 0 and covariance $t\wedge s$
+ \item $X_t$ and $(X_t^2 - t)$ are local martingales.
  \item $\forall \lambda \hspace{0.5cm} \text{exp}\{  \lambda X - \frac{\lambda^2}{2}t \}_{t\geq0}$ is a local martingale
  \item $\forall \lambda \hspace{0.5cm} \text{exp}\{ i\lambda X + \frac{\lambda^2}{2}t \}_{t\geq0}$ is a local martingale
 \end{itemize}
+\paragraph{Properties}
+If $B_t$ is a brownian motion, then \footnote{$\tau$ is a a.s finite stopping time} (see~\cite{PETER})
+\begin{itemize}
+ \item $\hspace{2cm} (B_t-B_{\tau})_{t\geq \tau} \hspace{1cm}  (\frac{1}{a}B_{a^2 t}) \hspace{1cm}  (tB_{\frac{1}{t}})$ are brownian motion.
+ \item a.s, $\hspace{2cm} \text{Lim}\frac{B_t}{t} = 0   \hspace{1cm} \varlimsup\frac{B_n}{\sqrt{n}}=+\infty \hspace{1cm} \varliminf\frac{B_n}{\sqrt{n}}=-\infty$
+ \item a.s, Bronian motion is nowhere differentiable and on any small interval $t\in[a,b]$, brownian motion is non monotone.
+ \item \textbf{Reflexion principle} : $\tilde{B}_t = \mathbf{1}_{\{t\leq \tau\}} B_t + \mathbf{1}_{\{t>\tau\}} (2B_T - B_t) $ is Brownian motion  
+\end{itemize}
+
+ 
+
 
 
 
 
 \section{Basis financial Option}
-In this section $B_{(t,T)}$ and $F_{(t,T)}$ are zero-coupon price and T-Forward price \footnote{ All relations in this section are model-free. That mean they can be demonstrated without assumption of a model, only by the non arbitrage theory}, see  ~\cite{hull} 
+In this section\footnote{ All relations in this section are model-free. That mean they can be demonstrated without assumption of a model, only by the non arbitrage theory} $B_{(t,T)}$ and $F_{(t,T)}$ are zero-coupon price and T-Forward price of the stock $S_t$ in question, see  ~\cite{hull} 
 \subsection{European Option}
 \paragraph{Call-Put parity} 
 \[
