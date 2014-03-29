@@ -59,6 +59,45 @@ P_i^{W} = \frac{i}{W} \hspace{0.5cm}\text{  if } p = q = \frac{1}{2}
 \]
 
 \subsection{Gaussians}
+\paragraph{Normal variable} $X \sim \mathcal{N}(\mu,\sigma^2)$ when $X \in \mathbb{R}$ and,
+\[
+f_{X}(x) = \frac{1}{\sigma \sqrt{2\pi}} exp (-\frac{(x-\mu)^2}{2\sigma^2})
+\hspace{5mm}
+\left\{
+\begin{array}{l}
+\mathbb{E}[X]=\mu \\
+\textbf{Var}[X]=\sigma^2
+\end{array}\right.
+\hspace{5mm}
+\left\{
+\begin{array}{l}
+\mathcal{L}_{X}(s) =  \text{exp}(\mu s  + \frac{1}{2} \sigma^2 s^2) \hbox{ , } s\in\mathbb{C} \\
+\varphi_{X}(t)     =  \text{exp}(i\mu t - \frac{1}{2} \sigma^2 t^2) \hbox{ , } t\in\mathbb{R}
+\end{array}\right.
+\]
+\[
+\frac{X - \mu}{\sigma} \sim \mathcal{N}(0,1)
+\hspace{10mm}
+f_{X}(x) = \frac{1}{\sigma}f_{\mathcal{N}(0,1)}(\frac{x-\mu}{\sigma})
+\hspace{10mm}
+\mathbb{F}_{X}(x) = \frac{1}{\sigma}\phi(\frac{x-\mu}{\sigma})
+\]
+\paragraph{Central Limit Theorem}
+\[
+\text{if} \hspace{5mm} (X_{n})_{(n\geqslant 0)} \in \textbf{L}^2 \text{  i.i.d,} \hspace{5mm} \text{ then  } \hspace{5mm}
+\frac{\overline{X}_n - \mu}{\frac{\sigma}{\sqrt{n}}} \rightsquigarrow   \mathcal{N}(0,1)
+ \hspace{5mm}  \text{    or} \hspace{5mm}  
+\sqrt{n}(\overline{X}_n - \mu) \rightsquigarrow   \mathcal{N}(0,\sigma^{2})
+\]
+\subsection{Brownian motion} see in ~\cite{MONIQUE} sec1.4
+\paragraph{Definition} Brownian motion is a \textit{continuous} procces $X$ satisfying one of following equivalent properties :
+\begin{itemize}
+ \item $X$ has stationary independent increments, and for any $t>0$, $X_t \sim \mathcal{N}(0,t)$
+ \item $X$ is a Gaussian process, with mean 0 and covariance $t\wedge s$
+ \item $\forall \lambda \hspace{0.5cm} \text{exp}\{  \lambda X - \frac{\lambda^2}{2}t \}_{t\geq0}$ is a local martingale
+ \item $\forall \lambda \hspace{0.5cm} \text{exp}\{ i\lambda X + \frac{\lambda^2}{2}t \}_{t\geq0}$ is a local martingale
+\end{itemize}
+
 
 
 
@@ -360,6 +399,60 @@ CEV model use the fact that the relative volatility $\alpha S^{1-\beta}_t$ depen
 - 
 \section{Lagrange Multiplier}
 \section{Statistical Linear Gaussian Model}
+
+\appendix
+\section{Gaussian Vector}
+\paragraph{Multivariate Normal Distribution}
+A random vector $X\in \mathbb{R}^d$ has a multivariate normal distrubution it satisfied one of these conditions
+\begin{enumerate}
+ \item $\forall a \in \mathbb{R}^d, \hspace{3mm} a^{t}.X$ is a Gaussian variable
+ \item There existe $\mu \in \mathbb{R}^d$ and $\Sigma \in \mathbb{R}^{d\times d}$ a \textbf{non-negative definite} matrix such that the characteristic function of $X$ is
+ \[
+  \varphi_{X}(u)     =  \text{exp}(i u^{t} .\mu  - \frac{1}{2} u^{t} .\Sigma. u) \hspace{10mm},\hspace{3mm} u\in\mathbb{R}^d
+ \]
+\end{enumerate}
+The multivariate normal distribution is said to be \textbf{non-degenerate} iif the its covariance matrix $\Sigma$ is \textbf{positive definite}, and it has a density 
+\[
+f_{X}(x) = \frac{1}{ (2\pi)^{\frac{d}{2}} |\text{det}(\Sigma)|^{\frac{1}{2}} } \text{exp}\{ -\frac{1}{2} (x-\mu)^{t} \Sigma^{-1} (x-\mu) \}
+\]
+\paragraph{Cochran's theorem}
+\[
+\text{if }
+\left\{
+\begin{array}{l}
+\textbf{X} = (X_1,X_2 ...,X_n) \sim \mathcal{N}(0, \sigma^2 \textbf{I}_n) \\
+\textbf{E}_1\oplus\textbf{E}_2\oplus ... \textbf{E}_p\oplus = \mathbb{R}^n \text{ ortho. subspace} \\
+\text{Dim}(\textbf{E}_i) = r_i   \\
+\textbf{X}_{\textbf{E}_i} = P^{\textbf{E}_i}(\textbf{X}) \text{ ortho. project} 
+\end{array}\right.
+\text{ then }
+\left\{
+\begin{array}{l}
+\textbf{X}_{\textbf{E}_i} \text{ are indept. and gaussian} \\
+ \| \textbf{X}_{\textbf{E}_i} \|^{2} \text{ are indept. and } \sim \sigma^2\chi^2_{(r_i)}
+\end{array}\right.
+\]
+
+\paragraph{Typical example}
+\[
+\left\{
+\begin{array}{l}
+\textbf{X} = (X_1,X_2 ...,X_n) \sim \mathcal{N}(0, \textbf{I}_n) \\ \\
+\textbf{E}_1 = \text{Vect}(\frac{1}{\sqrt{n}} \mathbf{1}_n) \\ \\
+\textbf{E}_2 = \textbf{E}_1^{\bot} \text{ , } \textbf{E}_1\oplus\textbf{E}_2= \mathbb{R}^n
+\end{array}\right.
+\hspace{2cm}
+\left\{
+\begin{array}{l}
+ \sqrt{n} \overline{X}_n =  \textbf{X}_{\textbf{E}_1}\\ \\
+ \sum^n_1 (X_i- \overline{X}_n) = \| \textbf{X}_{\textbf{E}_2} \|^{2} \\ \\
+\overline{X}_n \text{ indept. } \sum^n_1 (X_i- \overline{X}_n) \\ \\
+\sum^n_1 (X_i- \overline{X}_n) \sim \chi^2_{n-1}
+\end{array}\right. 
+\]
+
+
+
 \bibliographystyle{siam}
 \bibliography{QuantBib}
 \end{document}
