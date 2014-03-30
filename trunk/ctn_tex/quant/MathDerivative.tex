@@ -106,6 +106,14 @@ If $B_t$ is a brownian motion, then \footnote{$\tau$ is a a.s finite stopping ti
  \item a.s, Bronian motion is nowhere differentiable and on any small interval $t\in[a,b]$, brownian motion is non monotone.
  \item \textbf{Reflexion principle} : $\tilde{B}_t = \mathbf{1}_{\{t\leq \tau\}} B_t + \mathbf{1}_{\{t>\tau\}} (2B_T - B_t) $ is Brownian motion  
 \end{itemize}
+\paragraph{Multidimensional}
+If $\textbf{B}_t$ is a $d$-Brownian motion, then (see~\cite{OKSENDAL}8.4.2)
+\[
+Y_t = \int_0^t v^t d\textbf{B}_t \text{ is a reel Brownian} 
+\hspace{1.5cm} \Longleftrightarrow \hspace{1.5cm}
+vv^t = \textbf{I}_d
+\]
+A correlated Bronian motion $\textbf{X}_t$ is similarily defined as a standard Brownia, i.e a continuous process having stationary independent increments and $\textbf{X}_t - \textbf{X}_s \sim \mathcal{N}(0,(t-s).\rho)$ where $\rho$ is the correlation matrix\footnote{Note that for being a correlation matrix, $\rho$ or $\rho^{\frac{1}{2}}$ has to satisfied somes conditions}. It is equivalent to say that $\textbf{X}_t = \rho^{\frac{1}{2}} \textbf{B}_t$ where $\rho^{\frac{1}{2}}$ is the Cholesky decomposition of $\rho$ (see~\cite{MONIQUE}1.4.3).
 
 \subsection{Stochastic calculus}
 \paragraph{Wiener Integral} is $\int_a^t f(s)dB_s$ for all $f\in \mathbb{L}^2([a,b])$ which is a $\mathbb{L}^2$-martingale such that
@@ -168,7 +176,7 @@ where $\theta,\mu,\sigma >0$
 
 
 \section{Basis financial Option}
-In this section\footnote{ All relations in this section are model-free. That mean they can be demonstrated without assumption of a model, only by the non arbitrage theory} $B_{(t,T)}$ and $F_{(t,T)}$ are zero-coupon price and T-Forward price of the stock $S_t$ in question, see  ~\cite{hull} 
+In this section\footnote{ All relations in this section are model-free. That mean they can be demonstrated without assumption of a model, only by the non arbitrage theory} $B_{(t,T)}$ and $F_{(t,T)}$ are zero-coupon price and T-Forward price of the stock $S_t$ in question, see  ~\cite{HULL} 
 \subsection{European Option}
 \paragraph{Call-Put parity} 
 \[
@@ -196,17 +204,21 @@ P^A_t \geq K - S_t
  \item Butterfly Spread : $C(K-\epsilon) - 2C(K) + C(K+\epsilon) \geq 0 \rightarrow \frac{\partial^2 C }{\partial K^2} \geq 0 $
  \item Calandar Spread : $T_1<T_2  \rightarrow C_{t}(T_1,K) \leq C_{t}(T_2,e^{r(T_2-T_1)} K) \rightarrow \frac{\partial C }{\partial T} \geq 0 \text{ if } r=0 $
 \end{itemize}
-
-
-
 - Bound for American Call, Put
+\subsection{Trading strategies}
+Every strategies in Hull,
+\paragraph{Call,Put calandar}
+\paragraph{Alpha hedging}
+\paragraph{Delta hedging}
+\paragraph{Vega hedging}
+
 \section{Black Scholes Model}
 There are two approach leads to the Black-Scholes tools
 \begin{itemize}
  \item Black-Scholes formula : Starting from the self-financing porfolio, based on the probabiliste approach (martingale theory), one can build the closed formula of price for every attainable contingent claim. 
  \item Black-Scholes PDE : Starting from the riskless porfolio (delta neutral) idea, give the Black-Scholes PDE.
 \end{itemize}
-Lecturer can see detail formulations from ~\cite{mathfiElliot}.ch7 , ~\cite{mathfiMarek}.ch3 or ~\cite{rouah}.  
+Lecturer can see detail formulations from ~\cite{ELLIOT}.ch7 , ~\cite{mathfiMarek}.ch3 or ~\cite{rouah}.  
 \paragraph{The Model} Black-Scholes define the dynamic of risky and riskless assets \footnote{In this section, the interest rate and volatility subscripted $t$ mean $r_t$ and $\sigma_t$ is a deterministic function in time} :
 \[
 \frac{dS^1_t}{S^1_t} = \mu dt + \sigma_t d W_t   \hspace{2cm} \frac{dS^0_t}{S^0_t} = r_t dt
@@ -364,6 +376,41 @@ d\Pi = \Theta dt + \frac{1}{2} \Gamma dS^2
 - greek letter in black-scholes formula
 \section{Volatility}
 \section{Interest rate}
+Interest rate concern usually study the relation between zero rate $R(t,T)$, short rate $r_t$, zerocoupon price $B(t,T)$ and forward short rate $f(t,T)$ (see~\cite{RUDI}4.1)
+\[
+B(t,T)=e^{-R(t,T)(T-t)}
+\hspace{1cm} \text{or} \hspace{1cm}
+R(t,T) = -\frac{\text{ln}B(t,T)}{T-t}
+\]
+The short rate is defined as
+\[
+r_t = R(t,t) = -\lim_{\vartriangle t \rightarrow 0} \frac{\text{ln}B(t,t+\vartriangle t)}{\vartriangle t} = -\frac{\partial}{\partial T}\text{ln}B(t,t) 
+\]
+Let $B(t,T_1,T_2)$ and $R(t,T_1,T_2)$ be forward zero coupon and forward rate, then
+\[
+B(t,T_1,T_2) = \frac{B(t,T_2)}{B(t,T_1)}
+\hspace{1cm} \text{and} \hspace{1cm}
+B(t,T_1,T_2) = e^{-R(t,T_1,T_2)(T_2-T_1)}
+\]
+hence
+\[
+R(t,T_1,T_2) = - \frac{\text{ln}B(t,T_1,T_2)}{T_2-T_1}
+\hspace{1cm} \text{or} \hspace{1cm}
+R(t,T_1,T_2) = - \frac{\text{ln}B(t,T_2)-\text{ln}B(t,T_1)}{T_2-T_1}
+\]
+The forward short rate is defined as
+\[
+f(t,T)=R(t,T,T) = - \lim_{\vartriangle t \rightarrow 0}  \frac{\text{ln}B(t,T+\vartriangle t)-\text{ln}B(t,T)}{\vartriangle t}
+=  -\frac{\partial}{\partial T}\text{ln}B(t,T) 
+\]
+The zerocoupon bond prices and the zero rate return can be deduced from forward short rate
+\[
+B(t,T) = e^{-\int_t^Tf(t,s)ds}
+\hspace{1cm} \text{and} \hspace{1cm}
+R(t,T) = \frac{1}{T-t}\int_t^T f(t,s)ds
+\]
+
+
 \section{Models}
 Models are well explained in ~\cite{mathfiMarek}
 \subsection{Bachelier Model}
@@ -422,9 +469,9 @@ d<W^S,W^B> = \rho dt
 Where $S$ and $B(t,T)$ are stock and zero-coupon price proccess. The model's parameters $\mu_t, \sigma_t, a_t$ and $b_t$ are all supposed deterministic, functions in time.
 
 \subsection{Black Model}
-Black Model used for modelling the options on future. See ~\cite{mathfiMarek} ch3.4, ~\cite{mathfiElliot}.ch9
+Black Model used for modelling the options on future. See ~\cite{mathfiMarek} ch3.4, ~\cite{ELLIOT}.ch9
 \subsection{Vasicek Model}
-Vasicek's model is used for modelling the short rate, see ~\cite{mathfiElliot}.ch9.6.
+Vasicek's model is used for modelling the short rate, see ~\cite{ELLIOT}.ch9.6.
 \[
 dr_t = a (b-r_t) dt +\sigma  dW_t
 \hspace{3cm}
@@ -436,7 +483,7 @@ r_t = e^{-at}( r_0 + b(e^{at} -1) + \sigma\int_0^t e^{au}dW_u   )
 \]
 This is a Urnstein-Uhlenbeck process. Where $b$ is the long term mean lever, $a$ is the speed of reversion, $\sigma$ is the volatility, $\frac{\sigma^2}{2a}$ is the long term variance. Vasicek's model allow the mean reversion proprety of the interest rate.
 \subsection{Hull-White Model}
-Hull-White's Model is a generalization of Vasicek's model, see ~\cite{mathfiElliot}.ch9.6. 
+Hull-White's Model is a generalization of Vasicek's model, see ~\cite{ELLIOT}.ch9.6. 
 \[
 dr_t = (\alpha_t - \beta_t r_t) dt +\sigma_t dW_t
 \]
@@ -447,7 +494,7 @@ r_t = e^{-b_t} ( r_0 + \int_0^t e^{b_u}\alpha_u du + \int_0^t e^{b_u} \sigma_u d
 b_u = \int_0^u \beta_s ds 
 \]
 \subsection{Cox-Ingersoll-Ross model}
-CIR model is used for modelling the short rate, see ~\cite{mathfiElliot}.ch9.6. CIR better then Hull-White and Vasicek in the sens that the short rate in this model is always positive.
+CIR model is used for modelling the short rate, see ~\cite{ELLIOT}.ch9.6. CIR better then Hull-White and Vasicek in the sens that the short rate in this model is always positive.
 \[
 dr_t = a (b-r_t) dt +\sigma \sqrt{r_t} dW_t
 \hspace{3cm}
@@ -463,8 +510,11 @@ dS_t = S_t ( r dt + \alpha S^{1-\beta}_t d W^*_t )   \hspace{2cm}  0< \alpha,0<\
 CEV model use the fact that the relative volatility $\alpha S^{1-\beta}_t$ depend to the actual level of stock price.
 
 \subsection{Heston Model}
-\subsection{Heath-Jarrow-Morton Model}
-
+\subsection{Heath-Jarrow-Morton framework}
+HJM model the forward short rate $f(t,T)$ where $t_0\leq t \leq T \leq T^*$.
+\[
+d_t f(t,T) = \mu(t,T)dt + \sigma(t,T)d\textbf{W}_t
+\]
 
 \section{Useful mathematical formula}
 - Ito multidim
@@ -473,6 +523,19 @@ CEV model use the fact that the relative volatility $\alpha S^{1-\beta}_t$ depen
 - Martingale Representation theorem
 - 
 \section{Lagrange Multiplier}
+To solve a optimization problem 
+\[
+\text{find maxima of } f(\textbf{x})  
+\hspace{2cm}
+\text{ subject to } g(\textbf{x}) = c
+\]
+This is equivalent to write down the Lagrangian and its equations
+\[
+\text{Lagrangian }\Lambda(\textbf{x},\lambda) = f(\textbf{x}) + \lambda(g(\textbf{x}) -c ) 
+\hspace{2cm}
+\text{ Solve } \triangledown_{(\textbf{x},\lambda)} \Lambda(\textbf{x},\lambda) = 0
+\]
+
 \section{Statistical Linear Gaussian Model}
 
 \appendix
