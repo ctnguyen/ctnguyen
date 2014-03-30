@@ -107,7 +107,61 @@ If $B_t$ is a brownian motion, then \footnote{$\tau$ is a a.s finite stopping ti
  \item \textbf{Reflexion principle} : $\tilde{B}_t = \mathbf{1}_{\{t\leq \tau\}} B_t + \mathbf{1}_{\{t>\tau\}} (2B_T - B_t) $ is Brownian motion  
 \end{itemize}
 
- 
+\subsection{Stochastic calculus}
+\paragraph{Wiener Integral} is $\int_a^t f(s)dB_s$ for all $f\in \mathbb{L}^2([a,b])$ which is a $\mathbb{L}^2$-martingale such that
+\[
+\mathbb{E}[\int_a^t f(s)dB_s \int_a^t g(s)dB_s] = \int_a^t f(s)g(s)ds
+\hspace{1.5cm}
+\int_a^t f(s)dB_s \sim \mathcal{N}(0, \int_a^t f(s)^2ds)
+\]
+\paragraph{Ito Integral} is $\int_a^t f(s,w)dB_s$ for all $f\in \mathbb{L}^2([a,b],\Omega)$ which is a $\mathbb{L}^2$-martingale a.s continuous of zero mean and
+\[
+\mathbb{E}[\int_a^t f(s,w)dB_s \int_a^t g(s,w)dB_s] = \int_a^t \mathbb{E}[f(s)g(s)]ds
+\]
+If $f\in \mathbb{L}_{\text{loc}}^2([a,b],\Omega)$ then $\int_a^t f(s,w)dB_s$ is a local martingale and the isometry property is not remaining.
+\paragraph{Ito Formula}
+Let $\textbf{X}_t$ be a multidimensional Ito proccess
+\[
+d\textbf{X}_t = u(t,w)dt + v(t,w)d\textbf{B}_t
+\]
+and $f(t,\textbf{X})$ be a $\mathbb{C}^{1,2}$ function, then
+\[
+df = \partial_t f dt + \triangledown f \cdot d\textbf{X} + \frac{1}{2} \text{Tr}(vv^T \textbf{D}^2f  )
+\]
+\paragraph{Ito presentation theorem}
+if $F \in \mathbb{L}^2(\mathcal{F}_T)$, there existe a unique stochastic process $f\in \mathbb{L}^2([0,T],\Omega)$ such that
+\[
+F = \mathbb{E}[F] + \int_0^T f(t,w)dB_t
+\]
+\paragraph{Martingale presentation theorem}
+If $M_t$ is a $\mathbb{L}^2$-martingale, then for all $t$ there existe a unique stochastic process $g\in \mathbb{L}^2([0,t],\Omega)$ such that
+\[
+M_t = \mathbb{E}[M_0] + \int_0^t g(s,w)dB_s
+\]
+\paragraph{Girsanov theorem}
+\[
+\text{Let }\hspace{1cm}
+h\in \mathbb{L}_{\text{loc}}^2([0,T],\Omega)
+\hspace{2cm}
+\xi_h(t) = \text{exp}\{ \int_0^t h_s dB_s - \frac{1}{2} \int_0^t h^2_s ds \}
+\]
+Under the Novikov\footnote{$\mathbb{E}\text{exp}(\frac{1}{2}\int_0^T h^2_tdt) < \infty $} condition, then $\xi_h(t)$ is a $\mathbb{P}$-martingale with $\mathbb{E}[\xi_h(t)]=1$ and
+\[
+W_t = B_t - \int_0^t h_sdB_s \text{ is a Brownien Motion under }d\mathbb{Q} =\xi_h(T) d\mathbb{P}
+\]
+\paragraph{Geometric Brownian Motion}
+\[
+dx_t = x_t (\mu dt + \sigma dB_t ) 
+\hspace{1cm} \longrightarrow \hspace{1cm}
+x_t = x_0\text{exp}\{(\mu-\frac{\sigma^2}{2})t +\sigma B_t  \}
+\]
+\paragraph{Ornstein–Uhlenbeck process}
+\[
+dx_t = \theta (\mu-x_t) dt + \sigma dB_t
+\hspace{1cm} \longrightarrow \hspace{1cm}
+x_t = x_0e^{-\theta t} + \mu(1-e^{-\theta t}) +\int_0^t \sigma e^{\theta(s-t)}dB_s
+\]
+where $\theta,\mu,\sigma >0$
 
 
 
@@ -237,8 +291,17 @@ r_t C_t =0
 \text{ divident : } dQ_t = S_t q_t dt 
 \]
 \subsection{Exotic Options}
+\paragraph{Packages options} is a combination of standard options, cash and underlying asset.
+\begin{description}
+ \item[Collars : ] $\textbf{CL}_T = \text{min}\{ \text{max}(S_T,K_1),K_2\} = K_1 +(S_T-K_1)^+ - (S_T - K_2)^+ $ where $K_2>K_1>0$
+ \item[Break Forward : ] $\textbf{BF}_T = \text{max}(S_T,F_S^T)-K = (S_T- F_S^T)^+ +F_S^T -K $ where $F_S^T$ is the $T$-forward price of the underlying asset.
+ \item[Range Forward : ] $\textbf{RF}_T = \text{max}\{ \text{min}(S_T,K_2),K_1\} - F_S^T  = S_T - F_S^T +(K_1 - S_T)^+ - (S_T-K_2)^+ $ where $K_1<F_S^T<K_2$
+\end{description}
+\paragraph{Forward-start options} $\textbf{FS}_T = (S_T - KS_{T_0})$ with $K>0$ and $0<T_0<T$
+
+
 - every Exotic Option, see Hull, Martingale Finance, ...
-- packages options, 
+ 
 - forward-start options, 
 - chooser options, 
 - compound options, 
