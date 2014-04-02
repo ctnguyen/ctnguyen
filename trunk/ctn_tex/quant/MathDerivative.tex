@@ -184,17 +184,17 @@ C_t - P_t = S_t - B(t,T).K
 \]
 \paragraph{Bound for European options}
 \[
-B_{(t,T)}(K-F_{(t,T)})_+ \leq P_t \leq B_{(t,T)}K 
+B_{(t,T)}(K-F_{(t,T)})^+ \leq P_t \leq B_{(t,T)}K 
 \hspace{1cm}
-B_{(t,T)}(F_{(t,T)}-K)_+ \leq C_t \leq B_{(t,T)}F_{(t,T)}
+B_{(t,T)}(F_{(t,T)}-K)^+ \leq C_t \leq B_{(t,T)}F_{(t,T)}
 \]
 \paragraph{Bound for American options}
 \[
 S_t - K \leq C^A_t - P^A_t \leq S_t - B(t,T)K
 \hspace{1cm}
-C^A_t \geq S_t - B(t,T)K
+C^A_t \geq (S_t - K)^+
 \hspace{1cm}
-P^A_t \geq K - S_t
+P^A_t \geq (K - S_t)^+
 \]
 
 
@@ -218,7 +218,7 @@ There are two approach leads to the Black-Scholes tools
  \item Black-Scholes formula : Starting from the self-financing porfolio, based on the probabiliste approach (martingale theory), one can build the closed formula of price for every attainable contingent claim. 
  \item Black-Scholes PDE : Starting from the riskless porfolio (delta neutral) idea, give the Black-Scholes PDE.
 \end{itemize}
-Lecturer can see detail formulations from ~\cite{ELLIOT}.ch7 , ~\cite{mathfiMarek}.ch3 or ~\cite{rouah}.  
+Lecturer can see detail formulations from ~\cite{ELLIOT}.ch7 , ~\cite{MAREK}.ch3 or ~\cite{rouah}.  
 \paragraph{The Model} Black-Scholes define the dynamic of risky and riskless assets \footnote{In this section, the interest rate and volatility subscripted $t$ mean $r_t$ and $\sigma_t$ is a deterministic function in time} :
 \[
 \frac{dS^1_t}{S^1_t} = \mu dt + \sigma_t d W_t   \hspace{2cm} \frac{dS^0_t}{S^0_t} = r_t dt
@@ -326,17 +326,18 @@ r_t C_t =0
 - others
 
 \section{Greek letters}
+Greek are coefficients studying the sensitivities of \textit{Standard European Option} in relation to other variables (see~\cite{MAREK} s3.1.11)
 \paragraph{Delta} $\frac{\partial}{\partial S}$
 \[
-\Delta_C(t) = \Phi(d_+(t))
+\Delta_C(t) = \Phi(d_+(t))>0
 \hspace{1cm}
-\Delta_P(t) = -\Phi(-d_+(t))
+\Delta_P(t) = -\Phi(-d_+(t))<0
 \hspace{1cm}
 \Delta_C(t) - \Delta_P(t) = 1
 \]
 \paragraph{Gamma} $\frac{\partial^2}{\partial S^2}$
 \[
-\Gamma_C(t) = \Gamma_P(t) = \frac{1}{S_t \sigma \sqrt{T-t}} 
+\Gamma_C(t) = \Gamma_P(t) = \frac{\phi(d_+(t)) }{S_t \sigma \sqrt{T-t}} >0
 \]
 \paragraph{Theta} $\frac{\partial}{\partial T}$
 \[
@@ -360,7 +361,7 @@ d\Pi = \Theta dt + \frac{1}{2} \Gamma dS^2
 \]
 \paragraph{Vega}$\frac{\partial}{\partial \sigma}$
 \[
-\mathcal{V}_C = \mathcal{V}_P = S_t \sqrt{T-t} \phi(d_+(t))
+\mathcal{V}_C = \mathcal{V}_P = S_t \sqrt{T-t} \phi(d_+(t))>0
 \]
 \paragraph{Rho} $\frac{\partial}{\partial r}$
 \[
@@ -370,11 +371,18 @@ d\Pi = \Theta dt + \frac{1}{2} \Gamma dS^2
 \rho_P = -(T-t)Ke^{-r(T-t)}\Phi(-d_-(t))  < 0
 \end{array}\right. 
 \]
+\paragraph{others}
+\[
+\partial_{K}C = -e^{-r(T-t)} \Phi(d_-(t)) <0
+\hspace{2cm}
+\partial_{K}P = e^{-r(T-t)} (1-\Phi(d_-(t))) >0
+\]
 
 - every greek and its graphics
 - relation between greeks
 - greek letter in black-scholes formula
 \section{Volatility}
+Correlated brownian, implied vol, local vol, sto vol.
 \section{Interest rate}
 Interest rate concern usually study the relation between zero rate $R(t,T)$, short rate $r_t$, zerocoupon price $B(t,T)$ and forward short rate $f(t,T)$ (see~\cite{RUDI}4.1)
 \[
@@ -412,9 +420,9 @@ R(t,T) = \frac{1}{T-t}\int_t^T f(t,s)ds
 
 
 \section{Models}
-Models are well explained in ~\cite{mathfiMarek}
+Models are well explained in ~\cite{MAREK}
 \subsection{Bachelier Model}
-Instead of using the geometric brownian motion, Bachelier use the arithmetic brownian to model the stock price. See ~\cite{mathfiMarek} ch3.3
+Instead of using the geometric brownian motion, Bachelier use the arithmetic brownian to model the stock price. See ~\cite{MAREK} ch3.3
 \[
 dS^1_t = \mu dt + \sigma_t d W_t   \hspace{1cm} dS^0_t =S^0_t r_t dt
 \hspace{1cm} \rightarrow \hspace{2cm}
@@ -456,7 +464,7 @@ r_t C_t =0
 \text{ boundary : } v(s,T) = h(s)
 \]
 \subsection{Merton Model}
-Instead of using the deterministic interest rate, Merton introduce a model for the zero-coupon proccess ~\cite{mathfiMarek} ch3.1.7.
+Instead of using the deterministic interest rate, Merton introduce a model for the zero-coupon proccess ~\cite{MAREK} ch3.1.7.
 \[
 \left\{ 
 \begin{array}{rcl}
@@ -469,7 +477,7 @@ d<W^S,W^B> = \rho dt
 Where $S$ and $B(t,T)$ are stock and zero-coupon price proccess. The model's parameters $\mu_t, \sigma_t, a_t$ and $b_t$ are all supposed deterministic, functions in time.
 
 \subsection{Black Model}
-Black Model used for modelling the options on future. See ~\cite{mathfiMarek} ch3.4, ~\cite{ELLIOT}.ch9
+Black Model used for modelling the options on future. See ~\cite{MAREK} ch3.4, ~\cite{ELLIOT}.ch9
 \subsection{Vasicek Model}
 Vasicek's model is used for modelling the short rate, see ~\cite{ELLIOT}.ch9.6.
 \[
@@ -482,7 +490,14 @@ The solution of the SDE is
 r_t = e^{-at}( r_0 + b(e^{at} -1) + \sigma\int_0^t e^{au}dW_u   )
 \]
 This is a Urnstein-Uhlenbeck process. Where $b$ is the long term mean lever, $a$ is the speed of reversion, $\sigma$ is the volatility, $\frac{\sigma^2}{2a}$ is the long term variance. Vasicek's model allow the mean reversion proprety of the interest rate.
-\subsection{Hull-White Model}
+
+\subsection{Heath-Jarrow-Morton framework}
+HJM model the forward short rate $f(t,T)$ where $t_0\leq t \leq T \leq T^*$.
+\[
+d_t f(t,T) = \mu(t,T)dt + \sigma(t,T)d\textbf{W}_t
+\]
+
+\subsection{Hull-White Model - interest rate}
 Hull-White's Model is a generalization of Vasicek's model, see ~\cite{ELLIOT}.ch9.6. 
 \[
 dr_t = (\alpha_t - \beta_t r_t) dt +\sigma_t dW_t
@@ -509,12 +524,20 @@ dS_t = S_t ( r dt + \alpha S^{1-\beta}_t d W^*_t )   \hspace{2cm}  0< \alpha,0<\
 \]
 CEV model use the fact that the relative volatility $\alpha S^{1-\beta}_t$ depend to the actual level of stock price.
 
+\subsection{Hull-White Model - volatility}
 \subsection{Heston Model}
-\subsection{Heath-Jarrow-Morton framework}
-HJM model the forward short rate $f(t,T)$ where $t_0\leq t \leq T \leq T^*$.
+Heston model is a stochastic volatility model. Further than giving the dynamic of underlying asset, Heston give the dynamic of the volatility (see ~\cite{MAREK})
 \[
-d_t f(t,T) = \mu(t,T)dt + \sigma(t,T)d\textbf{W}_t
+\left\{ 
+\begin{array}{rcl}
+dS_t    &=& S_t( \mu_t dt + \sqrt{\nu_t} d W^{S}_t )  \\ 
+d\nu_t  &=& \hat{\kappa}( \hat{\nu} -\nu_t ) dt + \eta d W^{\nu}_t )
+\end{array}\right. 
+\hspace{1cm}
+d<W^S,W^{\nu}> = \rho dt
 \]
+
+\subsection{SARB Model}
 
 \section{Useful mathematical formula}
 - Ito multidim
