@@ -16,7 +16,7 @@
 \usepackage{pstricks}
 \usepackage{pst-node}
 
-
+\usepackage{booktabs}
 \begin{document}
 %%%%%%%%%%%%%%%%%% DOCUMENT TITLE %%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{center}\resizebox{9cm}{0.6cm}{Quant's interview 1 - Math Derivatives}\end{center}
@@ -113,7 +113,7 @@ Y_t = \int_0^t v^t d\textbf{B}_t \text{ is a reel Brownian}
 \hspace{1.5cm} \Longleftrightarrow \hspace{1.5cm}
 vv^t = \textbf{I}_d
 \]
-A correlated Bronian motion $\textbf{X}_t$ is similarily defined as a standard Brownia, i.e a continuous process having stationary independent increments and $\textbf{X}_t - \textbf{X}_s \sim \mathcal{N}(0,(t-s).\rho)$ where $\rho$ is the correlation matrix\footnote{Note that for being a correlation matrix, $\rho$ or $\rho^{\frac{1}{2}}$ has to satisfied somes conditions}. It is equivalent to say that $\textbf{X}_t = \rho^{\frac{1}{2}} \textbf{B}_t$ where $\rho^{\frac{1}{2}}$ is the Cholesky decomposition of $\rho$ (see~\cite{MONIQUE}1.4.3).
+\paragraph{Correlated Bronian motion } $\textbf{X}_t$ is similarily defined as a standard Brownia, i.e a continuous process having stationary independent increments and $\textbf{X}_t - \textbf{X}_s \sim \mathcal{N}(0,(t-s).\rho)$ where $\rho$ is the correlation matrix\footnote{Note that correlation matrix is different from covariance matrix. Indeed it is a 'normalized covariance'. For being a correlation matrix, $\rho$ has to satisfied somes conditions, $\rho_{ii}=1$ and $\rho_{ij} \in ]-1,1[$ for exemple}. It is equivalent to say that $\textbf{X}_t = \rho^{\frac{1}{2}} \textbf{B}_t$ where $\rho^{\frac{1}{2}}$ is the Cholesky decomposition of $\rho$. Note that $\rho^{\frac{1}{2}}$ is a lower triangular matrix (see~\cite{MAREK}7.1.9 for exemple in two dimensinal).
 
 \subsection{Stochastic calculus}
 \paragraph{Wiener Integral} is $\int_a^t f(s)dB_s$ for all $f\in \mathbb{L}^2([a,b])$ which is a $\mathbb{L}^2$-martingale such that
@@ -146,17 +146,49 @@ If $M_t$ is a $\mathbb{L}^2$-martingale, then for all $t$ there existe a unique 
 \[
 M_t = \mathbb{E}[M_0] + \int_0^t g(s,w)dB_s
 \]
-\paragraph{Girsanov theorem}
+\paragraph{Girsanov theorem}\footnote{the theorem can apply identically for d dimension}
 \[
 \text{Let }\hspace{1cm}
-h\in \mathbb{L}_{\text{loc}}^2([0,T],\Omega)
+\textbf{h}\in \mathbb{L}_{\text{loc}}^2([0,T],\Omega)
 \hspace{2cm}
-\xi_h(t) = \text{exp}\{ \int_0^t h_s dB_s - \frac{1}{2} \int_0^t h^2_s ds \}
+\xi_h(t) = \text{exp}\{ \int_0^t \textbf{h}_s d\textbf{B}_s - \frac{1}{2} \int_0^t |\textbf{h}|_s^2 ds \}
 \]
-Under the Novikov\footnote{$\mathbb{E}\text{exp}(\frac{1}{2}\int_0^T h^2_tdt) < \infty $} condition, then $\xi_h(t)$ is a $\mathbb{P}$-martingale with $\mathbb{E}[\xi_h(t)]=1$ and
+Under the Novikov\footnote{$\mathbb{E}\text{exp}(\frac{1}{2}\int_0^T \textbf{h}^2_sdt) < \infty $} condition, then $\xi_h(t)$ is a $\mathbb{P}$-martingale with $\mathbb{E}[\xi_h(t)]=1$ and
 \[
-W_t = B_t - \int_0^t h_sdB_s \text{ is a Brownien Motion under }d\mathbb{Q} =\xi_h(T) d\mathbb{P}
+\textbf{W}_t = \textbf{B}_t - \int_0^t \textbf{h}_sds \text{ is a Brownien Motion under }d\mathbb{Q} =\xi_h(T) d\mathbb{P}
 \]
+\paragraph{Girsanov transform for correlated Brownian} is the way to translate the correlated Brownian. When having a correlated Brownian, how to translate it through the Girsanov theorem?
+\begin{center}
+\begin{pspicture}(-7,-1.3)(7,1.3) 
+\psline(-7,-1.3)(7,1.3) 
+\rput( -4, 0)
+{
+	\begin{tabular}{l}
+	  $\textbf{W}_t$ d-Brownian under $\mathbb{P}$ \\
+	  $\textbf{W}^*_t$ translated d-Brownian under $\mathbb{P}^*$ \\
+	  $\widetilde{\textbf{W}}_t$ Correlated d-Brownian  under $\mathbb{P}$ \\
+	  $\hat{\textbf{W}}_t$ Correlated d-Brownian under $\mathbb{P}^*$
+	\end{tabular}
+}
+\rput( 0, 0){\Rnode{w1}{$\textbf{W}_t$}}
+\rput( 3, 1){\Rnode{w2}{$\textbf{W}_t^*$}}
+\rput( 3, -1){\Rnode{w3}{$\widetilde{\textbf{W}}_t$}}
+\rput( 6, 0){\Rnode{w4}{$\hat{\textbf{W}}_t$}}
+\ncline{->}{w1}{w3}\ncput*{1}
+\ncline{->}{w1}{w2}\ncput*{2}
+\ncline{->}{w2}{w4}\ncput*{3}
+\ncline{->}{w3}{w4}\ncput*{4}
+\end{pspicture}
+\end{center}
+By order as below, from the correlated Brownian $\widetilde{\textbf{W}}_t$ with correlation matrix $\rho$, which is indeed $\rho^{\frac{1}{2}}\textbf{W}_t $ ( we find $\rho^{\frac{1}{2}}$ by Cholesky ). At the same time, $\textbf{W}^*_t$ is a Brownian under $\mathbb{P}^*$ which is translated from $\textbf{W}_t$ through $\textbf{h}_t$. Finally we find $\hat{\textbf{W}}_t$ under $\mathbb{P}^*$ the Brownian translated of $\widetilde{\textbf{W}}_t$ through  $\textbf{h}_t$.
+\begin{enumerate}
+ \item $\textbf{d}\widetilde{\textbf{W}}_t = \rho^{\frac{1}{2}}\textbf{dW}_t $
+ \item $\textbf{dW}^*_t=\textbf{dW}_t - \textbf{h}_tdt$ 
+ \item $\textbf{d}\hat{\textbf{W}}_t=\rho^{\frac{1}{2}}\textbf{dW}^*_t = \rho^{\frac{1}{2}}\textbf{dW}_t - \rho^{\frac{1}{2}}\textbf{h}_tdt$
+ \item $\textbf{d}\hat{\textbf{W}}_t=\textbf{d}\widetilde{\textbf{W}}_t - \rho^{\frac{1}{2}}\textbf{h}_tdt$
+\end{enumerate}
+
+
 \paragraph{Geometric Brownian Motion}
 \[
 dx_t = x_t (\mu dt + \sigma dB_t ) 
