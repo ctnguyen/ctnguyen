@@ -558,15 +558,87 @@ CEV model use the fact that the relative volatility $\alpha S^{1-\beta}_t$ depen
 
 \subsection{Hull-White Model - volatility}
 \subsection{Heston Model}
-Heston model is a stochastic volatility model. Further than giving the dynamic of underlying asset, Heston give the dynamic of the volatility (see ~\cite{MAREK})
+Heston model is a stochastic volatility model. Further than giving the dynamic of underlying asset, Heston add the dynamic of the volatility (see ~\cite{MAREK}) under the historical probability $\mathbb{P}$
 \[
 \left\{ 
 \begin{array}{rcl}
-dS_t    &=& S_t( \mu_t dt + \sqrt{\nu_t} d W^{S}_t )  \\ 
-d\nu_t  &=& \hat{\kappa}( \hat{\nu} -\nu_t ) dt + \eta d W^{\nu}_t )
+dS_t    &=& S_t( \mu_t dt + \sqrt{\nu_t} d \widetilde{W}^{1}_t )  \\ 
+d\nu_t  &=& \hat{\kappa}( \hat{\nu} -\nu_t ) dt + \eta d \widetilde{W}^{2}_t )
 \end{array}\right. 
 \hspace{1cm}
-d<W^S,W^{\nu}> = \rho dt
+d<\widetilde{W}^{1},\widetilde{W}^{2}> = \rho dt
+\]
+In this model, there are two market price of risk
+\begin{itemize}
+ \item $\theta = \frac{r-\mu}{\sqrt{\nu_t}}$ as usual in the Black Scholes model
+ \item $\lambda=\alpha\sqrt{\nu_t}$ is the market price of volatility 
+\end{itemize}
+We can define a translated correlated Brownian by
+\[
+\left[
+\begin{array}{c}
+ \hat{W}^1  \\
+ \hat{W}^2
+\end{array}
+\right]
+=
+\left[
+\begin{array}{c}
+ \widetilde{W}^1  \\
+ \widetilde{W}^2
+\end{array}
+\right]
++
+\left[
+\begin{array}{c}
+ \theta  \\
+ \lambda
+\end{array}
+\right]
+=
+\left[
+\begin{array}{c}
+ \widetilde{W}^1  \\
+ \widetilde{W}^2
+\end{array}
+\right]
++
+\left[
+\begin{array}{c}
+ \frac{r-\mu}{\sqrt{\nu_t}}  \\
+ \alpha\sqrt{\nu_t}
+\end{array}
+\right]
+\text{ and }
+\left[
+\begin{array}{c}
+ \frac{r-\mu}{\sqrt{\nu_t}}  \\
+ \alpha\sqrt{\nu_t}
+\end{array}
+\right]
+=
+\left[
+\begin{array}{cc}
+ 1    & 0  \\
+ \rho & \sqrt{1-\rho^2}
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+ h^1\\
+ h^2
+\end{array}
+\right]
+\]
+By inverting the correlation matrix, we find \textbf{h} and put into the Girsanov probability change, we find the risk-neutral probability $\mathbb{P}^*$ under what $\hat{\textbf{W}}_t$ is Brownian, and the EDS under $\mathbb{P}^*$ become
+\[
+\left\{ 
+\begin{array}{rcl}
+dS_t    &=& S_t( r dt + \sqrt{\nu_t} d \hat{W}^{1}_t )  \\ 
+d\nu_t  &=& \kappa( \nu -\nu_t ) dt + \eta d \hat{W}^{2}_t )
+\end{array}\right. 
+\hspace{1cm}
+d<\hat{W}^{1},\hat{W}^{2}> = \rho dt
 \]
 
 \subsection{SARB Model}
