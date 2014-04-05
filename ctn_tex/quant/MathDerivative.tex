@@ -241,8 +241,23 @@ P^A_t \geq (K - S_t)^+
 Every strategies in Hull,
 \paragraph{Call,Put calandar}
 \paragraph{Alpha hedging}
-\paragraph{Delta hedging}
-\paragraph{Delta-Vega hedging}see ~\cite{GATHERAL}p.4-5
+\paragraph{Delta hedging} consiste in holding $\Delta$ quantity of the underlying asset in order to neutralize the asset price move when having a option. Assumed a investor short one option $V$ and hold $\Delta$ asset. 
+\[
+\varPi(t,S_t) = -V(t,S_t) + \Delta.S_t
+\hspace{2cm}
+\text{ Delta Hedging }
+\Delta = \frac{\partial V}{\partial S}
+\]
+\paragraph{Delta-Vega hedging} consiste in holding $\Delta$ quantity of underlying asset and $\Delta_{1}$ quantity of another option (whose values depend to volatility\footnote{ Note that every option and stock are about only one underlying asset} ) in order to neutralize the asset price move and the volatility move (see~\cite{GATHERAL}p.4-5). Assumed a investor short one option $V$, hold $\Delta$ asset and $\Delta_{1}$ quantity of an other option $V_1$
+\[
+\varPi(t,S_t,\sigma_t) = -V(t,S_t,\sigma_t) + \Delta.S_t + \Delta_1 V_1(t,S_t,\sigma_t)
+\]
+Then Delta-Vega hedging strategy is 
+\[
+\Delta_1 =\frac{\frac{\partial V}{\partial \sigma} }{\frac{\partial V_1}{\partial \sigma} }
+\hspace{2cm}
+\Delta   =\frac{\partial V}{\partial S} - \Delta_1 \frac{\partial V_1}{\partial S} 
+\]
 
 \section{Black Scholes Model}
 There are two approach leads to the Black-Scholes tools
