@@ -464,7 +464,27 @@ B(t,T) = e^{-\int_t^Tf(t,s)ds}
 \hspace{1cm} \text{and} \hspace{1cm}
 R(t,T) = \frac{1}{T-t}\int_t^T f(t,s)ds
 \]
-
+\paragraph{T-Forward price} for a claim $h_T\in \mathbb{L}^2(\mathcal{F}_T)$ is the the price \textit{agreed at time} $t\leq T$ that will be paid at time $T$ (see ~\cite{ELLIOT}ch.9)
+\[
+F(h_T,t,T) = \frac{\pi_t(h_T)}{B(t,T)}
+\hspace{2cm}
+\pi_t(h_T) \text{ is the risk-neutral price of } h_T \text{ at time } t
+\]
+In particular
+\[
+F(S_T,t,T) = \frac{S_t}{B(t,T)} \text{ for an asset,}
+\hspace{2cm}
+F(B(T_1,T_2),t,T_1) = \frac{B(t,T_2)}{B(t,T_1)}
+\text{ , }
+t\leq T_1 \leq T_2
+\]
+\paragraph{T-Forward measure} is the measure the equivalent measure using $B(t,T)$ as numeraire
+\[
+B(t,T)=S^0_t \mathbb{E}_{\mathbb{P}^*}[\frac{1}{S^0_T}|\mathcal{F}_t]
+\hspace{2cm}
+\frac{d\mathbb{Q}_T}{d\mathbb{P}^*} = \frac{1}{S^0 B(0,T)}
+\]
+For any $h_T\in \mathbb{L}^2(\mathcal{F}_T)$ contigent claim, its $T$-forward price is a $\mathbb{Q}_T$-martingale.
 
 \section{Models}
 Models are well explained in ~\cite{MAREK}
