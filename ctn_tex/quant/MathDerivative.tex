@@ -585,13 +585,37 @@ a>0,b>0
 CIR model has the same behavior of the Vasicek model. This process can be defined as a sum of squared Ornstein-Uhlenbeck process.
 
 \subsection{Constant Elasticity of Variance Model}
-CEV model describe the asset price dynamic under the martingale measure $\mathbb{P}^*$as below
+CEV model is a local volatility model describing the asset price dynamic under the martingale measure $\mathbb{P}^*$as below
 \[
 dS_t = S_t ( r dt + \alpha S^{1-\beta}_t d W^*_t )   \hspace{2cm}  0< \alpha,0<\beta<1
 \]
 CEV model use the fact that the relative volatility $\alpha S^{1-\beta}_t$ depend to the actual level of stock price.
 
 \subsection{Hull-White Model - volatility}
+Hull-White model for volatility is a stochastic volatility model, where brownians are independent.
+\[
+\text{ under }\mathbb{P}, 
+\hspace{1cm}
+\left\{ 
+\begin{array}{rcl}
+dS_t    &=& S_t( \mu_t dt + \sigma_t d W^{S}_t )  \\ 
+d\sigma_t  &=&  a(\sigma_t,t) dt + b(\sigma_t,t) d {W}^{\sigma}_t )
+\end{array}\right. 
+\hspace{2cm}
+{W}^{\sigma}_t \perp {W}^{S}_t
+\]
+By Girsanov translating with asset price of risk and volatility price of risk
+\[
+\text{ under }\mathbb{P}^*, 
+\hspace{1cm}
+\left\{ 
+\begin{array}{rcl}
+dS_t    &=& S_t( r_t dt + \sigma_t d W^{*}_t )  \\ 
+d\sigma_t  &=&  \widetilde{a}(\sigma_t,t) dt + b(\sigma_t,t) d \widetilde{W}_t )
+\end{array}\right. 
+\]
+Note that under martingale measure, the two brownians are not necessarily independent.
+
 \subsection{Heston Model}
 Heston model is a stochastic volatility model. Further than giving the dynamic of underlying asset, Heston add the dynamic of the volatility (see ~\cite{MAREK}) under the historical probability $\mathbb{P}$
 \[
@@ -676,7 +700,20 @@ d\nu_t  &=& \kappa( \nu -\nu_t ) dt + \eta d \hat{W}^{2}_t )
 d<\hat{W}^{1},\hat{W}^{2}> = \rho dt
 \]
 
-\subsection{SARB Model}
+\subsection{SABR Model}
+Stochastic-Alpha-Beta-Rho is a stochastic volatility model for the Forward price of an asset, or in particular for the Libor forward rate, interest rate derivatives. Such model has under the martingale measure the dynamic  
+\[
+\text{ under }\mathbb{P}^*, 
+\hspace{1cm}
+\left\{ 
+\begin{array}{rcl}
+dF_t       &=&     \alpha_t F^{\beta}_t d W^{*}_t )  \\ 
+d\alpha_t  &=& \nu \alpha_t d \widetilde{W}_t )
+\end{array}\right. 
+\hspace{1cm}
+d< W^{*},\widetilde{W}> = \rho dt
+\]
+
 
 \section{Useful mathematical formula}
 - Ito multidim
