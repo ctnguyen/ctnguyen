@@ -49,7 +49,7 @@
 \rput(3,-0.5){
 \begin{tabular}{l}
 Prof.                                                    \\ 
-\href{http://www.ann.jussieu.fr/~achdou/}{\textbf{ Olivier Gueant} }          
+\href{http://www.oliviergueant.com/}{\textbf{ Olivier Gueant} }          
 \end{tabular}	    
 }
 %\psline(-7,0)(7,2)
@@ -62,34 +62,24 @@ Prof.                                                    \\
 \vspace{2cm}
 
 \begin{center}
-\resizebox{14cm}{0.8cm}{About a numertical method for an optimal order execution problem}
+\resizebox{14cm}{0.6cm}{About Numertical method for an optimal order execution problem}
 \end{center}
 %%%%%%%%%%%%%%%%%% DOCUMENT TITLE %%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{center}
 \huge{ Version : \today }
 \end{center}
 
-
 \begin{tabular}{l}
 Students                                                                          \\ 
 \href{mailto:chithanhnguyen.math@gmail.com}{\LARGE{\textbf{Chi Thanh NGUYEN}}}    \\
-\href{mailto:nqcuong32@gmail.com}{\LARGE{\textbf{Dinh Hai NGUYEN}}}
+\href{mailto:ndhai1905@gmail.com}{\LARGE{\textbf{Dinh Hai NGUYEN}}}
 \end{tabular}
-
-
 
 \vfill
 \begin{abstract}
 In the course 'High Frequency Trading' directed by M. GUEANT Olivier of the Master program M2MO, we initiate our research experience by studying a recent publication. We are interested in the article \textit{ Numerical methods for an optimal order execution problem} Fabien G. et al. The goal of this report is to summary the main results of this article, which concentrate to provide a numerical solution for the optimal portfolio liquidation problem mentioned in \cite{KP}. 
 \end{abstract}
 \end{titlepage}
-
-
-%\newpage
-%\pagenumbering{roman}
-%\tableofcontents
-
-%\listoffigures
 
 \newpage
 \pagenumbering{arabic}
@@ -187,15 +177,19 @@ where $P^{t,p}$ is solution of $dP_s = P_s\left(bds + \sigma dW_s\right)$ with $
 \par Now, instead of using an usual iteration method, \cite{GMP} introduce another way to make the numerical schemes (\ref{3.3}) and (\ref{3.4}) explicit by taking effect of the state variable $\theta$ and obtain (noting $z^e_\theta = \Gamma_\varepsilon (z, \theta, e)$)
 \begin{eqnarray}
 \label{3.5}
-{v^h}(T,z,\theta ) &=& \left\{ \begin{array}{ll}
-{U_{{L_\varepsilon }}}\left( {z,0} \right) & \textrm{if $\theta = 0$}\\
-\max \left[ {{U_{{L_\varepsilon }}}\left( {z,\theta } \right),{\mathcal{H}_\varepsilon }{U_{{L_\varepsilon }}}\left( {z,\theta } \right)} \right] & \textrm{if $\theta > 0$}
+{v^h}(T,z,\theta ) &=& 
+\left\{ \begin{array}{ll}
+{U_{{L_\varepsilon }}}\left( {z,0} \right) & \text{ if } \theta = 0 \\
+\max \left[ {{U_{{L_\varepsilon }}}\left( {z,\theta } \right),{\mathcal{H}_\varepsilon }{U_{{L_\varepsilon }}}\left( {z,\theta } \right)} \right] & \text{ if } \theta > 0
 \end{array} \right.
 \\
 \label{3.6}
-{v^h}(t,z,\theta ) &=& \left\{ \begin{array}{ll}
-\mathbb{E}\left[ {{v^h}\left( {t + h,Z_{t + h}^{0,t,z},h} \right)} \right] & \textrm{if $\theta = 0$}\\
-\max \left[ {\mathbb{E}\left[ {{v^h}\left( {t + h,Z_{t + h}^{0,t,z},\theta  + h} \right)} \right],\mathop {\sup }\limits_{e \in {\mathcal{C}_\varepsilon }\left( {z,\theta } \right)} \mathbb{E}\left[ {{v^h}\left( {t + h,Z_{t + h}^{0,t,z_\theta ^e},h} \right)} \right]} \right] & \textrm{if $\theta > 0$}
+{v^h}(t,z,\theta ) &=& 
+\left\{ \begin{array}{ll}
+\scriptstyle
+\mathbb{E}\left[ {{v^h}\left( {t + h,Z_{t + h}^{0,t,z},h} \right)} \right] & \text{ if } \theta = 0\\
+\scriptstyle
+\max \left[ {\mathbb{E}\left[ {{v^h}\left( {t + h,Z_{t + h}^{0,t,z},\theta  + h} \right)} \right],\mathop {\sup }\limits_{e \in {\mathcal{C}_\varepsilon }\left( {z,\theta } \right)} \mathbb{E}\left[ {{v^h}\left( {t + h,Z_{t + h}^{0,t,z_\theta ^e},h} \right)} \right]} \right] & \text{ if } \theta > 0
 \end{array} \right.
 \end{eqnarray}
 for $0 \le t \le T-h$ and $v^h(t,z,\theta) = v^h(T-h,z,\theta) $ for $T-h < t < T$.
