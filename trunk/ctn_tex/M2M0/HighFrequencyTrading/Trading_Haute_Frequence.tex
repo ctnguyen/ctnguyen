@@ -1,36 +1,31 @@
-\documentclass{article}
+\documentclass[a4paper,10pt]{article}
 \usepackage[utf8]{inputenc} 
+\usepackage[a4paper]{geometry}
 \usepackage[english]{babel}
-\usepackage{indentfirst}
-%\usepackage{amssymb}
-\usepackage{graphicx}
-\usepackage{booktabs}
-\usepackage{picinpar}
-\usepackage[title,titletoc]{appendix}
-\usepackage{fancyhdr}
-\usepackage{pgfplots}
-\usepackage{titlesec}
-\usepackage{threeparttable}
-\usepackage{multirow}
-\usepackage{amsmath}
+
 \usepackage{enumerate}
-\usepackage[width=.75\textwidth]{caption}
 \usepackage{amstext, amsmath,latexsym,amsbsy,amssymb}
-\usepackage{longtable}
+
+
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{pstricks}
+\usepackage{pst-node}
 
 \setlength{\parindent}{1em}
 \setlength{\parskip}{12pt}
 
 
-\textwidth=6.7in 
-\textheight=9.7in 
-\topmargin -.4in
-\setlength{\oddsidemargin}{0.0in}
-\setlength{\evensidemargin}{0.0in}
+%\textwidth=6.7in 
+%\textheight=9.7in 
+%\topmargin -.4in
+%\setlength{\oddsidemargin}{0.0in}
+%\setlength{\evensidemargin}{0.0in}
 
-\setlength{\headheight}{0.1in}
-\setlength{\headsep}{0.05in}
-\setlength{\footskip}{0.1in}
+
+%\setlength{\headheight}{0.1in}
+%\setlength{\headsep}{0.05in}
+%\setlength{\footskip}{0.1in}
 
 \newcommand{\bequ}{\begin{equation}}
 \newcommand{\eequ}{\end{equation}}
@@ -38,44 +33,57 @@
 
 \begin{document}
 
-\baselineskip 17pt
-
 \begin{titlepage}
-\vspace{3in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%  LOGO  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{center}
-\LARGE{\sc  University Paris Denis Diderot}
+\begin{pspicture}(-7,0)(7,2)
+\rput(-8,1){\href{http://www.univ-paris-diderot.fr/english/sc/site.php?bc=accueil&np=accueil&g=m}{\includegraphics[scale=1.2]{logo_p7}}}
+\rput(4,2){\href{https://masterfinance.math.univ-paris-diderot.fr/}
+	    {	\begin{tabular}{l}
+		\resizebox{6cm}{2cm}{M2MO} \\
+		\resizebox{6cm}{0.5cm}{DEA Laure Elie}  
+		\end{tabular}
+	    }
+}
 
-\vspace{1.0in}
+\rput(3,-0.5){
+\begin{tabular}{l}
+Prof.                                                    \\ 
+\href{http://www.ann.jussieu.fr/~achdou/}{\textbf{ Olivier Gueant} }          
+\end{tabular}	    
+}
+%\psline(-7,0)(7,2)
+\end{pspicture}
+\end{center}
 
-\Large {\sc Project High Frequency Trading}
-\vspace{1.0in}
 
-\LARGE{\bf About a numertical method for an optimal order execution problem}
-\Large
-\begin{tabular}{c l}
-GROUP :  & NGUYEN Dinh Hai
-\\
-\\
-& NGUYEN Chi Thanh
-\\
-\\
-Supervisor : & Dr. GUEANT Olivier 
+
+%%%%%%%%%%%%%%%%%% DOCUMENT TITLE %%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{2cm}
+
+\begin{center}
+\resizebox{14cm}{0.8cm}{About a numertical method for an optimal order execution problem}
+\end{center}
+%%%%%%%%%%%%%%%%%% DOCUMENT TITLE %%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\huge{ Version : \today }
+\end{center}
+
+
+\begin{tabular}{l}
+Students                                                                          \\ 
+\href{mailto:chithanhnguyen.math@gmail.com}{\LARGE{\textbf{Chi Thanh NGUYEN}}}    \\
+\href{mailto:nqcuong32@gmail.com}{\LARGE{\textbf{Dinh Hai NGUYEN}}}
 \end{tabular}
-\end{center}
 
-\vspace{0.5in}
 
-\begin{center}
-{\sc \today}
-\vspace{0.5in}
-\end{center}
 
-\begin{center}
-{\bf Abstract}
-\end{center}
+\vfill
+\begin{abstract}
 In the course 'High Frequency Trading' directed by M. GUEANT Olivier of the Master program M2MO, we initiate our research experience by studying a recent publication. We are interested in the article \textit{ Numerical methods for an optimal order execution problem} Fabien G. et al. The goal of this report is to summary the main results of this article, which concentrate to provide a numerical solution for the optimal portfolio liquidation problem mentioned in \cite{KP}. 
-
+\end{abstract}
 \end{titlepage}
+
 
 %\newpage
 %\pagenumbering{roman}
@@ -140,10 +148,7 @@ where $\mathcal{A}_l(t,z,\theta)$ is a set of all admissible trading strategies 
 \label{prob2}
 v(t, z, \theta) = \sup\limits_{\alpha \in \mathcal{A}(t,z,\theta)}\mathbb{E}\left[U\left(L\left(Z_T, \Theta_T\right)\right)\right], \qquad \left( {t,z,\theta } \right) \in \left[ {0,T} \right] \times \overline {\mathcal{S}}
 \eequ
-
-
 %=========================================================================
-
 \subsection{A suitable approximation}
 \par In general, a stochastic control problem (\ref{prob2}) can be solved by introducing its Hamilton-Jacobi-Bellman (HJB) equation. However, in order to have a complete characterization of the value function via its HJB equation, we need a uniqueness result. Unfortunately, in the above model, it seems not possible to get such result, at least by classical arguments since there is no strict supersolution. The authors of \cite{KP} solved this problem by adding a fixed transaction fee $\varepsilon > 0$ to the original model at each trading. To adapt to this change, they introduce a modified liquidation function for $L$, named $L_{\varepsilon}$ defined by
 \[
