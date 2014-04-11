@@ -1,0 +1,256 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc} 
+\usepackage[english]{babel}
+\usepackage{indentfirst}
+%\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{picinpar}
+\usepackage[title,titletoc]{appendix}
+\usepackage{fancyhdr}
+\usepackage{pgfplots}
+\usepackage{titlesec}
+\usepackage{threeparttable}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage[width=.75\textwidth]{caption}
+\usepackage{amstext, amsmath,latexsym,amsbsy,amssymb}
+\usepackage{longtable}
+
+\setlength{\parindent}{1em}
+\setlength{\parskip}{12pt}
+
+
+\textwidth=6.7in 
+\textheight=9.7in 
+\topmargin -.4in
+\setlength{\oddsidemargin}{0.0in}
+\setlength{\evensidemargin}{0.0in}
+
+\setlength{\headheight}{0.1in}
+\setlength{\headsep}{0.05in}
+\setlength{\footskip}{0.1in}
+
+\newcommand{\bequ}{\begin{equation}}
+\newcommand{\eequ}{\end{equation}}
+
+
+\begin{document}
+
+\baselineskip 17pt
+
+\begin{titlepage}
+\vspace{3in}
+\begin{center}
+\LARGE{\sc  University Paris Denis Diderot}
+
+\vspace{1.0in}
+
+\Large {\sc Project High Frequency Trading}
+\vspace{1.0in}
+
+\LARGE{\bf About a numertical method for an optimal order execution problem}
+\Large
+\begin{tabular}{c l}
+GROUP :  & NGUYEN Dinh Hai
+\\
+\\
+& NGUYEN Chi Thanh
+\\
+\\
+Supervisor : & Dr. GUEANT Olivier 
+\end{tabular}
+\end{center}
+
+\vspace{0.5in}
+
+\begin{center}
+{\sc \today}
+\vspace{0.5in}
+\end{center}
+
+\begin{center}
+{\bf Abstract}
+\end{center}
+In the course 'High Frequency Trading' directed by M. GUEANT Olivier of the Master program M2MO, we initiate our research experience by studying a recent publication. We are interested in the article \textit{ Numerical methods for an optimal order execution problem} Fabien G. et al. The goal of this report is to summary the main results of this article, which concentrate to provide a numerical solution for the optimal portfolio liquidation problem mentioned in \cite{KP}. 
+
+\end{titlepage}
+
+%\newpage
+%\pagenumbering{roman}
+%\tableofcontents
+
+%\listoffigures
+
+\newpage
+\pagenumbering{arabic}
+
+%=========================================================================
+\section{Introduction}
+\par As descibed in the book \cite{NARANG}, trading strategies generally use three model : alpha models, risk models and transaction cost models. The transaction costs are generally composed of three major components : commisions and fees, slippage and market impact. The model in \cite{KP} \cite{GMP} proposed the mathematical and numerical study for finding the optimal study confronting to the issu when traders want to liquidate a big volume of stocks.      
+
+\par When trying to follow an implemented portfolio in reality, an investor suffers from some components of illiquidity effects such as the bid/ask spread, the broker's fees and the market impact. A former is a little bit objective, while the later is a most remarkable factor. Indeed, if one chooses to sell immediately a large amount of stock, he will penalize his performance by the reduction of stock’s price due to his action, i.e, by the market impact. 
+
+\par Most of market places and brokers offer several common tools to reduce market impact. For example, a large order is split up in multiple children orders and on can trade them gradually at regular time intervals. If the children orders are in same size, we call this strategy uniform. Moreover, brokers also propose more sophisticated tools as smart order routing (SOR) or volume weighted average price (VWAP) based algorithmic strategies. The goal of \cite{GMP} is to provide a numerical method to find optimal schedule and associated quantities for the children orders. 
+
+%=========================================================================
+\section{Problem formulation}
+In this section we recall some theoretical result that describe the optimal portfolio liquidation problem \footnote{Please see more detail in \cite{KP}.} We set a probability space $\left(\Omega,\mathcal{F}, \left(\mathcal{F}_t\right)_{0\le t\le T}, \mathbb{P}\right)$ supporting a one-dimensional Brownian motion on a time horizon $[0, T]$ with $T < \infty$. We denote by $P_t$
+the market price of the risky asset follows a geometric Brownian motion with constant parameters, by $X_t$ the cash holdings, by $Y_t$ the number of stock shares held by the investor at time $t$ and by $\Theta_t$ the time interval between $t$ and the last trade before $t$. 
+
+\subsection{The model of portfolio liquidation}
+A fact that an investor can only trade at discrete time on $[0, T]$ leads us to define his {\it impulse trading strategy} $\alpha = \left(\tau_n, \zeta_n\right)_{n\ge 1}$, where $\tau_1 \le \tau_2 \le \ldots \le T$ are stopping times representing the trading times and $\zeta_n$ are $\mathcal{F}_{\tau_n}-$measurable giving the quantity of traded stocks. Consequently, we get
+\begin{eqnarray}
+\Theta_t &=& t - \tau_n, \; \tau_n \le t < \tau_{n+1}, \qquad \Theta_{\tau_{n+1}} = 0, \, n\ge 0
+\nonumber
+\\
+Y_t &=& Y_{\tau_n}, \; \tau_n \le t < \tau_{n+1}, \qquad Y_{\tau_{n+1}} = Y_{\tau_{n}} + \zeta_{n+1}, \, n\ge 0.
+\nonumber
+\\
+X_t &=& X_{\tau_n}, \; \tau_n \le t < \tau_{n+1}, \, n\ge 0.
+\nonumber
+\end{eqnarray}
+\cite{KP} focuses on the temporary price impact that penalize the price at which an investor will trade the asset by introducing a function of actual price $Q$ satisfies
+\[
+Q(e, p, \theta) = p f(e,\theta)
+\]
+where $e$ is a traded quantity at time $t$ with the current market price $p$ and the time lag from the last order $\theta$. A temporary price impact $f$ is a function from $\mathbb{R}\times [0, T]$ into $\mathbb{R}_+ \cap \{+\infty\}$:
+\[
+f\left( {e,\theta } \right) = 
+\exp \left( 
+{\lambda {{\left| {\frac{e}{\theta }} \right|}^\beta }{\mathop{\rm sgn}} \left( e \right)} \right)
+\left( {{\kappa_a}{\mathbf{1}_{e > 0}} + {\mathbf{1}_{e = 0}} + {\kappa_b}{\mathbf{1}_{e < 0}}} \right)
+\]
+\par To ensure that our strategy is legal, we need to defind a {\it solvency constraint and liquidation function}. Due to the illegality of short-selling in France, one must have $Y_t \ge 0$ for $t \in [0, T]$. In addition, if an investor want to liquidate immediately his stock position $y$ by a single block knowing that the pre-trade price is $p$ and the last order is $\theta$, he will obtain a value defined through a function called liquidation function $L$, which is defined on $\mathbb{R}\times\mathbb{R}_+\times (0,\infty)\times [0, T]$ by
+\[
+L(x, y, p, \theta) = x + ypf(-y,\theta)
+\]  
+Naturally we introduce the solvency region
+\[
+\mathcal{S} = \left\{(z, \theta) = (x, y, p, \theta) \in \mathbb{R}\times\mathbb{R}_+\times (0,\infty)\times [0, T] \; : \; y > 0 \;  \textrm{and} \; L(z, \theta) > 0\right\}
+\]
+Along with a strictly increasing and concave ulitility function $U$, the objective of our problem is to maximize the (expected) utility of the remain cash $X_T$ after a serie of execution
+\bequ
+\label{prob1}
+v(t, z, \theta) = \sup\limits_{\alpha \in \mathcal{A}_l(t,z,\theta)}\mathbb{E}\left[U\left(X_T\right)\right], \qquad \left( {t,z,\theta } \right) \in \left[ {0,T} \right] \times \overline {\mathcal{S}}
+\eequ
+where $\mathcal{A}_l(t,z,\theta)$ is a set of all admissible trading strategies such that we can complete the trading target by following such the strategies, i.e. $\mathcal{A}_l(t,z,\theta) = \left\{\alpha \in \mathcal{A}(t,z,\theta) \, : \; Y_T = 0\right\}$. Moreover, the works of \cite{KP} show that the problem (\ref{prob1}) can be written equivalently in
+\bequ
+\label{prob2}
+v(t, z, \theta) = \sup\limits_{\alpha \in \mathcal{A}(t,z,\theta)}\mathbb{E}\left[U\left(L\left(Z_T, \Theta_T\right)\right)\right], \qquad \left( {t,z,\theta } \right) \in \left[ {0,T} \right] \times \overline {\mathcal{S}}
+\eequ
+
+
+%=========================================================================
+
+\subsection{A suitable approximation}
+\par In general, a stochastic control problem (\ref{prob2}) can be solved by introducing its Hamilton-Jacobi-Bellman (HJB) equation. However, in order to have a complete characterization of the value function via its HJB equation, we need a uniqueness result. Unfortunately, in the above model, it seems not possible to get such result, at least by classical arguments since there is no strict supersolution. The authors of \cite{KP} solved this problem by adding a fixed transaction fee $\varepsilon > 0$ to the original model at each trading. To adapt to this change, they introduce a modified liquidation function for $L$, named $L_{\varepsilon}$ defined by
+\[
+L_\varepsilon (z, \theta) = \max \left[x, L(z, \theta) - \varepsilon\right], \qquad (z, \theta) = (x, y, p, \theta) \in \mathbb{R}\times\mathbb{R}_+\times (0,\infty)\times [0, T].
+\] 
+It means, an investor will choose either liquidate his position in stock shares (which would give him $L(z, \theta) - \varepsilon$), or bin his stock shares, by keeping only his cash amount (which would give him $x$). 
+
+\par Along with this new liquidation function, they introduce also a new solvency region $\mathcal{S}_\varepsilon \subset \mathcal{S}$ given by
+\[
+\mathcal{S}_\varepsilon = \left\{(z, \theta) = (x, y, p, \theta) \in \mathbb{R}\times\mathbb{R}_+\times (0,\infty)\times [0, T] \; : \; y > 0 \; \textrm{and}\; L_{\varepsilon}(z,\theta) > 0\right\}.
+\] 
+These changes lead to a slightly different modification to problem (\ref{prob2}) and yield a new value function
+\bequ
+\label{prob3}
+v_{\varepsilon}(t, z, \theta) = \sup\limits_{\alpha \in \mathcal{A}_\varepsilon (t,z,\theta)}\mathbb{E}\left[U\left(L_\varepsilon \left(Z^\varepsilon _T, \Theta_T\right)\right)\right], \qquad \left( {t,z,\theta } \right) \in \left[ {0,T} \right] \times \overline {\mathcal{S}_\varepsilon }
+\eequ
+This value function has some remarkable properties: the function $z \mapsto v_\varepsilon (t, z, 0)$ is strictly increasing in the argument of cash holdings $x$, and is non-decreasing in the argument of number of shares $y$, for $(z = (x, y, p); 0) \in \overline {\mathcal{S}_\varepsilon}$ and fixed $t \in [0, T]$. The works of [11] provide a unique PDE characterization of the value functions $v_\varepsilon$ for  $\varepsilon > 0$, and prove that the sequence $\left(v_\varepsilon\right)_\varepsilon$ converges to the original value function $v$ as $\varepsilon$ goes to zero.
+
+
+%=========================================================================
+\section{Time discretization and convergence analysis}
+\par By fixing $\varepsilon > 0$ and a time discretization step $h > 0$ on the interval $[0, T]$, \cite{GMP} introduce the following approximation scheme $v^h$ for $v^\varepsilon$: 
+\begin{eqnarray}
+{v^{h}}(T,z,\theta ) &=& \max \left[ {{U_{L_\varepsilon }}\left( {z,\theta } \right),{\mathcal{H}_\varepsilon }{v^{h}}(T,z,\theta )} \right]
+\label{3.3}
+\\
+{v^{h}}(t,z,\theta ) &=& \max \left[ {\mathbb{E}\left[ {{v^{h}}\left( {t + h,Z_{t + h}^{0,t,z},\theta t + h} \right)} \right],{\mathcal{H}_\varepsilon }{v^{h}}(t,z,\theta )} \right], \quad 0 \le t \le T - h
+\label{3.4}
+\end{eqnarray}
+and $v^h (t,z,\theta) = v^h (T-h,z,\theta)$ for $T-h < t < T$. Here $\left( {{Z^{0,t,z}},{\Theta ^{0,t,z}}} \right)$ denotes the state process starting from $(z, \theta)$ at time $t$ given by
+\[
+\left( {Z_s^{0,t,z},\Theta _s^{0,t,z}} \right) = \left( {x,y,P_s^{t,p},\theta  + s - t} \right)
+\]
+where $P^{t,p}$ is solution of $dP_s = P_s\left(bds + \sigma dW_s\right)$ with $s \ge t$ and $P_t = p$. 
+
+\par Now, instead of using an usual iteration method, \cite{GMP} introduce another way to make the numerical schemes (\ref{3.3}) and (\ref{3.4}) explicit by taking effect of the state variable $\theta$ and obtain (noting $z^e_\theta = \Gamma_\varepsilon (z, \theta, e)$)
+\begin{eqnarray}
+\label{3.5}
+{v^h}(T,z,\theta ) &=& \left\{ \begin{array}{ll}
+{U_{{L_\varepsilon }}}\left( {z,0} \right) & \textrm{if $\theta = 0$}\\
+\max \left[ {{U_{{L_\varepsilon }}}\left( {z,\theta } \right),{\mathcal{H}_\varepsilon }{U_{{L_\varepsilon }}}\left( {z,\theta } \right)} \right] & \textrm{if $\theta > 0$}
+\end{array} \right.
+\\
+\label{3.6}
+{v^h}(t,z,\theta ) &=& \left\{ \begin{array}{ll}
+\mathbb{E}\left[ {{v^h}\left( {t + h,Z_{t + h}^{0,t,z},h} \right)} \right] & \textrm{if $\theta = 0$}\\
+\max \left[ {\mathbb{E}\left[ {{v^h}\left( {t + h,Z_{t + h}^{0,t,z},\theta  + h} \right)} \right],\mathop {\sup }\limits_{e \in {\mathcal{C}_\varepsilon }\left( {z,\theta } \right)} \mathbb{E}\left[ {{v^h}\left( {t + h,Z_{t + h}^{0,t,z_\theta ^e},h} \right)} \right]} \right] & \textrm{if $\theta > 0$}
+\end{array} \right.
+\end{eqnarray}
+for $0 \le t \le T-h$ and $v^h(t,z,\theta) = v^h(T-h,z,\theta) $ for $T-h < t < T$.
+
+\par This $v^h$ scheme has been proved to be existed uniquely for all $h > 0$ and satisfied the monotonicity, stablility and consistency properties. Hence it converges locally uniformly to $v^\varepsilon$ on $[0, T) \times \mathcal{S}_{\varepsilon}$.
+
+\paragraph{Mesh and Quantization} are defined for the discrete computational domaine. There are two main ideas when discretize spatial variables. The first is there are a very small probability that these variables goes to infinite, then one can localize the space into a bounded domaine (max, min for each variable). The second is the scheme (\ref{3.6}) are built to use the probabilistical method, that require computing expectation within a Brownian motion at each time step. For $z$ and $y$, a regular grid with suitable min-max are setted. For the price variables $P_t$ which is a geometric brownian motion, the optimal quantization method is used for computing the expectation around this variable. It consist of using a precomputed emprical normal distribution (values and weighted) in order to easily apply the Monte-Carlo method. One can see \cite{GP}\cite{GPHP} for the quantization methods.    
+
+%=========================================================================
+\section{Numerical results}
+\par The numerical result is performed through simulation prodedure. Many price path (geometric brownian) are simulated, and the optimal strategies are computed, realized of the optimal liquidation are saved. To demonstrate the effectiveness of the scheme above, \cite{GMP} designs several descriptive statistics resulting from the realization obtained by implementing (\ref{3.5}) and (\ref{3.6}) with given parameters. These 4 statistics are: 
+\begin{enumerate}[(a)]
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+\item The performance of the $i$-th realization of the optimal strategy
+\[
+L_{opt}^{(i)} = \frac{1}{{{X_0} + {P_0}{Y_0}}}{L_\varepsilon }\left( {Z_T^{(i),{\alpha ^{opt}}},\Theta _T^{(i),{\alpha ^{opt}}}} \right)
+\]
+\item The mean utility ${\widehat V_.} = \dfrac{1}{R}\sum\limits_{i = 1}^R {U\left( {L_.^{(i)}} \right)}$
+\item The mean performance ${\widehat L_.} = \dfrac{1}{R}\sum\limits_{i = 1}^R {L_.^{(i)}}$
+\item The standard deviation of the strategy ${\widehat \sigma _.} = \sqrt {\dfrac{1}{R}\sum\limits_{i = 1}^R {{{\left( {L_.^{(i)}} \right)}^2}}  - {{\widehat L}_.}^2}$
+\end{enumerate}
+Three tests are performed and analyzed. 
+\begin{itemize}
+ \item The first is a purely simulation scenario. The aim of the first test is to see the characteristic of the algorithm, and analyse some coherences with the financial intuition.
+ \item The second test used the real data on BNP.PA at 2010. It demonstrate the present optimal result is better than other trivial strategies like the uniform lidiquation and the ideal Merton liquidation.
+ \item The third test analyse the sensitivity of the algorithm in relation two factors : the bid-ask spreak and the market impact. It perform two scenarios, one without market impact, and one without bid-ask spread. The result show that with big bid-ask spread, the number of trade decrease. 
+\end{itemize}
+
+
+%=========================================================================
+\section{Our view points}
+\begin{itemize}
+ \item In term of numerical resolution, \cite{GMP} work on a base Monte-Carlo  method. One can use an other approach, originally studied by Kushner \cite{KUSH} and developped by \cite{DJ} for fully nonlinear equation. When facing to a liquidation of multi-asset, this numerical method allow high dimentional equation and should be quicker than the Monte-Carlo method. 
+ \item In term of performance analysis, authors compare their algorithm with the uniform liquidation which is two much trivial. In addition this uniform liquidation is not specified in what time steps, i.e sell are ordered every time step discretized or every $k$ time step. We should prefer to compare with a decay algorithm of form $e^{\alpha t_i}$ where $\alpha$ is the scaling coefficient, with the approximatively same number of trades of the present optimal strategies, instead of every discretized time steps.
+ \item Market impact model used in this article is quite an \textit{offline} approach, i.e a market impact model is predefined, and parameters are calibrated with a pack of historial data. Indeed, one can imagine that market impact is something very sensible, and change over time. A parameterized model, calibrated with historical data should not used for an algorithm in future. It comes then the idea that when liquidating a big position, one can alternate with a procedure of dynamically measuring market impact. Indeed at the mechanical point of view, market impact and illiquidity can be seen as material hardness, and a sell order can see as an indentation into the market. Each sell order is applied, one does not only reduce the position, but  can also retreive the actual market informations. One can alternate big liquidation sells order with small sell/buy orders to track the market illiquidity and market impact. The tracking market properties have a cost, of course, due to the bid-ask spread. The problem 
+becomes how to optimize these two altertative phases in the whole liquidation procedure. For the indentation, one can inpire from \cite{BRIAN}       
+\end{itemize}
+
+%=========================================================================
+%=========================================================================
+\addcontentsline{toc}{section}{References}
+\begin{thebibliography}{9}
+\bibitem{KP} Kharroubi I. and H. Pham, {\it Optimal portfolio liquidation with execution cost and risk}, Preprint, University Paris 7, LPMA (2009).
+
+\bibitem{GMP} Fabien G., Mohamed M. and H. Pham, {\it Numerical methods for an optimal order execution problem} Computational Finance (2010).
+
+\bibitem{GP} G. Pages {\it A space vector quantization method for numerical integration} Journal Comp. and Applied Mathematics (1997).
+
+\bibitem{GPHP} G.Pages H.Pham J. Printemps{\it Optimal quantization methods and applications to numerical problems in finance}. Handbook on Numerical Method In Finance (2003).
+
+\bibitem{NARANG} Rishi K. Narang {\it Inside the Black Box : A simple guide to quantitative and high-frequency trading} (2013)
+
+\bibitem{KUSH} H.J. Kushner {\it Probability Methods for Approximations in Stochastic Control and for Elliptic Equations} Academic Press, New York, 1977
+
+\bibitem{DJ} K. Debrabant and E. R. Jakobsen {\it Semi-Lagrangian schemes for linear and fully non-linear diffusion equations} Math. Comp (2013)
+
+\bibitem{BRIAN} Brian J. Koeppel, Ghatu Subhash {\it Dynamic Indentation Hardness of Metals} Solid Mech and Applications (2002). 
+
+\end{thebibliography}
+\bibliographystyle{siam}
+%\bibliography{THF.bib}
+\end{document}
