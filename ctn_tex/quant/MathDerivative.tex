@@ -10,8 +10,7 @@
 
 \usepackage{hyperref}
 
-\usepackage{amsmath}
-\usepackage{amssymb}
+\usepackage{amsmath,amssymb}%
 
 \usepackage{pstricks}
 \usepackage{pst-node}
@@ -350,31 +349,77 @@ r_t C_t =0
 \text{ divident : } dQ_t = S_t q_t dt 
 \]
 \subsection{Exotic Options}
-\paragraph{Packages options} is a combination of standard options, cash and underlying asset.
+\paragraph{Packages options} is a combination of standard options, cash and underlying asset ~\footnote{in this paragraph, $F$ is the $T$-forward price at time zero of the underlying asset $F = F_{S}(0,T)= e^{rT} S_0$.}
 \begin{description}
- \item[Collars : ] $\textbf{CL}_T = \text{min}\{ \text{max}(S_T,K_1),K_2\} = K_1 +(S_T-K_1)^+ - (S_T - K_2)^+ $ where $K_2>K_1>0$
- \item[Break Forward : ] $\textbf{BF}_T = \text{max}(S_T,F_S^T)-K = (S_T- F_S^T)^+ +F_S^T -K $ where $F_S^T$ is the $T$-forward price of the underlying asset.
- \item[Range Forward : ] $\textbf{RF}_T = \text{max}\{ \text{min}(S_T,K_2),K_1\} - F_S^T  = S_T - F_S^T +(K_1 - S_T)^+ - (S_T-K_2)^+ $ where $K_1<F_S^T<K_2$
+ \item[Collars : ] 
+\[ 
+\begin{array}{rl}
+\textbf{CL}_T &= \text{min}\{ \text{max}(S_T,K_1),K_2\} \\
+              &= K_1 +(S_T-K_1)^+ - (S_T - K_2)^+       \\
+\textbf{CL}_t &= K_1e^{-r(T-t)} + C(S_t,T-t,K_1)- C(S_t,T-t,K_1)
+\end{array} 
+\hspace{2cm} K_2>K_1>0
+\]
+ \item[Break Forward : ] 
+\[
+\begin{array}{rl}
+ \textbf{BF}_T &= \text{max}(S_T,F)-K \\
+               &= (S_T- F)^+ +F -K    \\
+ \textbf{BF}_t &= C(S_t,T-t,F) + e^{-r(T-t)}(F-K) 
+\end{array} 
+\]
+\item[Range Forward : ] 
+\[
+\begin{array}{rl}
+\textbf{RF}_T  &= \text{max}\{ \text{min}(S_T,K_2),K_1\} - F  \\
+               &= S_T - F +(K_1 - S_T)^+ - (S_T-K_2)^+        \\
+\textbf{RF}_t  &= S_t - e^{rt}S_{0} + P(S_t,T-t,K_1) - C(S_t,T-t,K_2)
+\end{array} 
+\hspace{2cm} K_1<F<K_2
+\]
 \end{description}
-\paragraph{Forward-start options} $\textbf{FS}_T = (S_T - KS_{T_0})$ with $K>0$ and $0<T_0<T$
-
-
-- every Exotic Option, see Hull, Martingale Finance, ...
- 
-- forward-start options, 
-- chooser options, 
-- compound options, 
-- digital options, 
-- barrier options, 
-- look back options, 
-- asian options, 
-- basket options, 
-- quantile options, 
-- others
+\paragraph{Forward-start options} are options that will start at some time in future (future dependend strike). The important point is a at-the-money call Black-Scholes price is proportional to the asset price at time zero.
+\[
+\begin{array}{rl}
+\textbf{FS}_{T_2} &=  (S_{T_2} - KS_{T_1})^+  \\
+\textbf{FS}_{T_1} &= C( S_{T_1},T_2 - T_1, KS_{T_1} )    \\
+\textbf{FS}_{0} &= S_0 C( 1,T_2 - T_1, K ) = C( S_0 ,T_2 - T_1, KS_0 ) 
+\end{array}
+\hspace{2cm}
+0<K,0<T_1<T_2
+\]
+\paragraph{Chooser options} are option that holder can choose at future time if it can be Call or Put
+\[
+\begin{array}{rl}
+\textbf{CH}_{T_1} &=  \text{max}\left\{ C( S_{T_1} ,T_2 - T_1, K ) \hbox{ , }  P( S_{T_1} ,T_2 - T_1, K ) \right\}  \\
+                  &=  C( S_{T_1} ,T_2 - T_1, K ) + (e^{-r(T_2-T_1)}K - S_{T_1} )^+     \\
+\textbf{CH}_{t}   &=  C(S_t, T-t, K) + P(S_t, T_1 -t, e^{-r(T_2-T_1)}K)
+\end{array}
+\hspace{2cm}
+0<K,0<T_1<T_2
+\]
+\paragraph{Compound options - TODO}
+\paragraph{Digital options}
+\[
+\begin{array}{rll}
+\textbf{BCC}_T &= X\mathbf{1}_{\left\{S_T>K\right\}} & \text{Binary Cash-or-nothing Call} \\
+\textbf{BCP}_T &= X\mathbf{1}_{\left\{S_T<K\right\}} & \text{Binary Cash-or-nothing Put}  \\
+\textbf{BAC}_T &= S_T\mathbf{1}_{\left\{S_T>K\right\}} & \text{Binary Asset-or-nothing Call} \\
+\textbf{BAP}_T &= S_T\mathbf{1}_{\left\{S_T<K\right\}} & \text{Binary Asset-or-nothing Put}  \\
+\textbf{GC}_T &= (S_T-X)\mathbf{1}_{\left\{S_T>K\right\}}=\textbf{BAC}_T - \textbf{BCC}_T & \text{Gap Option Call}  \\
+\textbf{GP}_T &= (X-S_T)\mathbf{1}_{\left\{S_T<K\right\}}=\textbf{BCP}_T - \textbf{BAP}_T & \text{Gap Option Put}   \\
+\textbf{SS}_T &=\frac{S_T}{K_1} \mathbf{1}_{\left\{K_1<S_T<K_2\right\}} & \text{Super Share option}   
+\end{array}
+\]
+\paragraph{Barrier options} pricable
+\paragraph{Loopback options} pricable
+\paragraph{Asian options} pricable
+\paragraph{Basket options} pricable
+\paragraph{other}
 
 \section{Greek letters}
 Greek are coefficients studying the sensitivities of \textit{Standard European Option} in relation to other variables (see~\cite{MAREK} s3.1.11)
-\paragraph{Delta} $\frac{\partial}{\partial S}$
+\paragraph{Delta} $\partial_{S}$
 \[
 \Delta_C(t) = \Phi(d_+(t))>0
 \hspace{1cm}
@@ -382,11 +427,11 @@ Greek are coefficients studying the sensitivities of \textit{Standard European O
 \hspace{1cm}
 \Delta_C(t) - \Delta_P(t) = 1
 \]
-\paragraph{Gamma} $\frac{\partial^2}{\partial S^2}$
+\paragraph{Gamma} $\partial^2_{SS}$
 \[
 \Gamma_C(t) = \Gamma_P(t) = \frac{\phi(d_+(t)) }{S_t \sigma \sqrt{T-t}} >0
 \]
-\paragraph{Theta} $\frac{\partial}{\partial T}$
+\paragraph{Theta} $\partial_{T}$
 \[
 \left\| 
 \begin{array}{l}
@@ -406,11 +451,11 @@ d\Pi = \Theta dt + \frac{1}{2} \Gamma dS^2
 \hspace{2cm}
 \Theta + \frac{1}{2}\sigma^2 S^2 \Gamma = r\Pi
 \]
-\paragraph{Vega}$\frac{\partial}{\partial \sigma}$
+\paragraph{Vega}$\partial_{\sigma}$
 \[
 \mathcal{V}_C = \mathcal{V}_P = S_t \sqrt{T-t} \phi(d_+(t))>0
 \]
-\paragraph{Rho} $\frac{\partial}{\partial r}$
+\paragraph{Rho} $\partial_{r}$
 \[
 \left\| 
 \begin{array}{l}
@@ -429,14 +474,38 @@ d\Pi = \Theta dt + \frac{1}{2} \Gamma dS^2
 - relation between greeks
 - greek letter in black-scholes formula
 
-\section{PDE - TODO}
-\paragraph{Separation variable for Heat Equation}
+\section{Differential Equations and numerical methods}
+\paragraph{Linear 1st-order differential equations} (see~\cite{STEWART}9.5)
+\[
+y(t)' + P(t)y(t) = Q(t)
+\hspace{2cm}
+\left\{ 
+\begin{array}{l}
+I(t)y(t) = \int I(t)Q(t)dt + \text{ Cte }           \\
+I(t) = e^{\int P(t)dt } \text{ Integrating factor} 
+\end{array}\right. 
+\]
+\paragraph{Linear 2nd-order differential equations} (see~\cite{STEWART}17.1)
+\[
+\left\{ 
+\begin{array}{rl}
+ay(t)'' + by(t)' + c y(t) &= 0   \\
+           ar^2 + br + c  &= 0   
+\end{array}\right. 
+\hspace{1cm}
+\left\{ 
+\begin{array}{ll}
+y(t)=c_1 e^{r_1 t} + c_2 e^{r_2 t} & \Delta >0 \\
+y(t)=c_1 e^{r t} + t c_2 e^{r t}   & \Delta =0 \\
+y(t)=e^{\alpha t}( c_1 \text{cos}\beta t + c_2 \text{sin}\beta t ) & r_{1,2} = \alpha \pm i \beta
+\end{array}\right.
+\]
+\paragraph{One dimensional Heat Equation}
 \[
 \frac{\partial u}{\partial t} + a \frac{\partial^2 u}{\partial x^2} = 0 \textbf{ TODO solution}
 \]
 \paragraph{Finite Difference Method}
-In time, $\theta$-scheme, --> explicite, implicite, Crank-Nilcoson. 
-In space, central differencing.
+In time, $\theta$-scheme, explicite, implicite, Crank-Nilcoson, newton method, LU, Cholesky. In space, central differencing.
 \paragraph{Error Analysis}
 Consistant error, stability, CFL Condition.
 
