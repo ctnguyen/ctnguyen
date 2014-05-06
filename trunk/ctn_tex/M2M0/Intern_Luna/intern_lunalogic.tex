@@ -1,0 +1,78 @@
+%Texlive-full Version 3.141592-1.40.3 (Web2C 7.5.6)
+%TexStudio Version 2.7.0
+
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+
+\usepackage{lmodern}
+\usepackage[a4paper]{geometry}
+
+\usepackage{hyperref}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\usepackage{pstricks}
+\usepackage{pst-node}
+\usepackage[ddmmyyyy]{datetime} 
+
+
+
+\begin{document}
+\begin{titlepage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%  LOGO  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\begin{pspicture}(-7,0)(7,2)
+\rput(-8,1){\href{http://www.univ-paris-diderot.fr/english/sc/site.php?bc=accueil&np=accueil&g=m}{\includegraphics[scale=1.2]{logo_p7}}}
+\rput(4,2){\href{https://masterfinance.math.univ-paris-diderot.fr/}
+	    {	\begin{tabular}{l}
+		\resizebox{6cm}{2cm}{M2MO} \\
+		\resizebox{6cm}{0.5cm}{DEA Laure Elie}  
+		\end{tabular}
+	    }
+}
+
+\rput(3,-0.5){
+\begin{tabular}{l}
+Tutors                                                                \\ 
+\href{mailto:revierdenord@gmail.com}{\textbf{uan LI} }                \\
+\href{mailto:scotti@math.univ-paris-diderot.fr}{\textbf{Simone SCOTTI}}   
+\end{tabular}	    
+}
+%\psline(-7,0)(7,2)
+\end{pspicture}
+\end{center}
+
+
+
+%%%%%%%%%%%%%%%%%% DOCUMENT TITLE %%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{2cm}
+
+\begin{center}
+%\resizebox{14cm}{0.7cm}{High dimensional PDE solver for multi-asset pricing option}
+\resizebox{14cm}{0.8cm}{Variant of Libor Market Model}
+\end{center}
+%%%%%%%%%%%%%%%%%% DOCUMENT TITLE %%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\huge{ Version : \today }
+\end{center}
+
+
+\begin{center}
+\href{mailto:chithanhnguyen.math@gmail.com}{\LARGE{\textbf{Chi Thanh NGUYEN}}}
+\end{center}
+
+
+
+\vfill
+\begin{abstract}
+In the internship at Lunalogic, we continu the work of ~\cite{THAI2013} and use the book  ~\cite{BRIGO2006}
+\end{abstract}
+\end{titlepage}
+
+
+\bibliographystyle{siam}
+\bibliography{intern_lunalogic}
+\end{document}
