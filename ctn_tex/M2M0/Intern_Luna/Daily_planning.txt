@@ -1,3 +1,6 @@
+2014.05.06
+Build and install QuantLib-1.4 Release/Debug. General lecture about interest rate, report apprendices
+
 
 2014.05.06
 install texstudio, notepad++, vsmc2012, cmake, boost(full build dll, lib, debug, release), BOUML

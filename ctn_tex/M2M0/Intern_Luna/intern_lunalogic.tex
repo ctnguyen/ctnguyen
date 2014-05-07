@@ -16,9 +16,24 @@
 
 \usepackage{pstricks}
 \usepackage{pst-node}
+\usepackage{color}
 \usepackage[ddmmyyyy]{datetime} 
 
 
+
+\newcommand{\Bt}{B_t}
+\newcommand{\RtT}{R(t,T)}
+\newcommand{\PtT}{P(t,T)}
+\newcommand{\PtS}{P(t,S)}
+\newcommand{\LtT}{L(t,T)}
+\newcommand{\YtT}{Y(t,T)}
+\newcommand{\ftT}{f(t,T)}
+\newcommand{\tautT}{\tau(t,T)}
+\newcommand{\inttT}{\int_t^T}
+\newcommand{\intt}{\int_0^t}
+\newcommand{\FuncExp}{\text{exp}}
+\newcommand{\FuncLn}{\text{ln}}
+\newcommand{\todo}[1]{\begin{center}\color{red} TODO : #1\end{center}}
 
 \begin{document}
 \begin{titlepage}
@@ -80,11 +95,11 @@ In the internship at Lunalogic, we continu the work of ~\cite{THAI2013} and use 
 \newpage
 \section{About Lunalogic}
 \begin{tabular}{llll}
-Position                 &            Name             & Contact                         &Telephone      \\
-Executive Director       & Fathia Rahmani               & fathia.rahmani@lunalogic.com   &               \\
-Human Resources Director & Isabelle Marouby             & isabelle.marouby@lunalogic.com &06.51.44.06.78 \\
-Senior Quant Consultant  & Yuan Li                      & revierdenord@gmail.com         &06.52.17.69.75 \\    
-Technical support        & Fastah Rahmani               & fastah.rahmani@gmail.com       &
+Position          &            Name             & Contact                         &Telephone      \\
+Exec Director     & Fathia Rahmani               & fathia.rahmani@lunalogic.com   &               \\
+HR   Director     & Isabelle Marouby             & isabelle.marouby@lunalogic.com &06.51.44.06.78 \\
+Quant Consultant  & Yuan Li                      & revierdenord@gmail.com         &06.52.17.69.75 \\    
+Tech. support     & Fastah Rahmani               & fastah.rahmani@gmail.com       &
 \end{tabular}
 
 
@@ -93,13 +108,144 @@ Technical support        & Fastah Rahmani               & fastah.rahmani@gmail.c
 \section{Appendices}
 \appendix
 Some apprendices are to be added by lecture of the book ~\cite{BRIGO2006}
-\section{generalities about interest rate}
-relation between monney market account, zerocoupon, spot rate, short rate, forward rate ... 
-\section{Forward price, change of numeraire}
-\section{HJM Framework}
-\section{Correlated Brownian motion, volatility}
-\section{LIBOR Market Model}
+\subsection{Generalities about interest rate}
+\begin{itemize}
+ \item Zero-coupon curves, interest rate curve. When talking about curve, its is function of maturity $T$. When talking about the present time $t$, it is about process, zero-coupon process, interest rate process.
+ \item Interest rate are quoted, zero-coupon are deduced from interest rate in a consistent way.
+\end{itemize}
 
+\paragraph{Money-market account (riskless asset)}
+\[
+d\Bt=r_t \Bt dt \hspace{1cm} B(0)=1 \hspace{1cm} B_t = \intt r_s ds
+\hspace{1cm}
+\left\{
+\begin{array}{r l}
+\Bt &\text{: Money market} \\
+r_t &\text{: Instantaneous rate} 
+\end{array}
+\right.
+\]
+\paragraph{Stochastic discount factor} 
+\[
+D(t,T) = \FuncExp\left( -\inttT r_s ds \right)
+\]
+Note that $D(t,T)$ is the present value of future amount currency, while $\PtT$ zero-coupon is a contract value. $D(t,T)=\PtT$ when $r_t$ is determinist.
+\paragraph{Spot Interest Rate}~\footnote{The time to maturity $\tautT$ denote the day-count convention between $t$ and $T$. The simplest case $\tautT=T-t$}\\
+Continuously-compounded 
+\[
+R(t,T) = -\frac{\FuncLn\PtT }{\tautT}
+\hspace{1.5cm}
+e^{\RtT\tautT}\PtT = 1
+\hspace{1.5cm}
+\PtT = e^{-\RtT\tautT}
+\]
+Simply-compounded ~\footnote{This quantity is related to LIBOR, when time to maturity is lesser than one year} 
+\[
+\LtT = \frac{1-\PtT}{\tautT\PtT}
+\hspace{0.7 cm}
+\PtT(1+\LtT\tautT)=1
+\hspace{0.7cm}
+\PtT = \frac{1}{1+\LtT\tautT}
+\]
+Annually-compounded
+\[
+\YtT = \frac{1}{\PtT^{1/\tautT}} -1
+\hspace{0.8cm}
+\PtT(1+\YtT)^{\tautT} = 1
+\hspace{0.8cm}
+\PtT = \frac{1}{(1+\YtT)^{\tautT}}
+\]
+
+\paragraph{Zero-coupon curve / Yield curve / term structure of interest rate}
+\[
+\text{graphic of}
+\hspace{2cm}
+T \longmapsto
+\left\{
+\begin{array}{lll}
+\LtT  &  t < T \leq t+1 & \text{Simply compounded} \\
+\YtT  &  t+1 < T        & \text{Annually compounded} 
+\end{array}
+\right.
+\]
+Yield curve in a general way is the graph of $T \longmapsto \RtT$.
+\todo{read about behavior of this curve (inverted at behavior at the begining)}
+\paragraph{Zero-bond curve / term structure of discount factors}
+\[
+\text{Graphic of }
+\hspace{2cm}
+T \longmapsto \PtT
+\hspace{1cm}
+,t<T
+\]
+Note that zero-bond curve is less informative than the zero-coupon curve.
+\paragraph{Forward interest rate} is the fair value of strike $K$ that make the contract \textbf{FRA} worth zero at time $t<T<S$  
+\[
+\text{Simply-compounded}
+\hspace{2cm}
+F(t,T,S) = \frac{1}{\tautT}\left( \frac{\PtT}{\PtS} - 1 \right)
+\hspace{1cm}
+,t<T<S
+\]
+Instantanuous forward interest rate ~\footnote{This fundamental quantity is related HJM model}
+\[
+\ftT = \lim_{S\rightarrow T^+} F(t,T,S) = -\frac{\partial \FuncLn\PtT}{\partial T}
+\hspace{2cm}
+\PtT = \FuncExp\left( -\inttT f(t,u)du \right)
+\]
+
+\paragraph{Swap} is a contract helping to convert fixed rate flow into floating rate flow and vice versa. 
+\[
+\left\{
+\begin{array}{l}
+T_{\alpha},T_{\alpha+1},...T_{\beta} \\
+\tau_i = \tau(T_{i-1},T_i)           \\
+L_i    = L(T_{i-1},T_i)
+\end{array}
+\right.
+\hspace{2cm}
+\begin{array}{l}
+\text{Nominal $N$, paements at dates $T_i$,  } i=\alpha+1,...,\beta \\
+\text{ - For fixed legs    } N\tau_iK  \\
+\text{ - For floating legs } N\tau_iL_i  
+\end{array}
+\]
+\paragraph{Caps / Floors}  
+\[
+\left\{
+\begin{array}{l}
+T_{\alpha},T_{\alpha+1},...T_{\beta} \\
+\tau_i = \tau(T_{i-1},T_i)           \\
+L_i    = L(T_{i-1},T_i)
+\end{array}
+\right.
+\hspace{2cm}
+\begin{array}{l}
+\text{Nominal $N$, payments at dates $T_i$,  } i=\alpha+1,...,\beta \\
+\text{ - For Caps    } N\tau_i(L_i-K)^+                              \\
+\text{ - For Floors  } N\tau_i(K-L_i)^+
+\end{array}
+\]
+\paragraph{Swaption}
+\todo{Black Formula for pricing Caps, Floors, Swaptions}  
+
+
+
+
+
+
+
+
+
+relation between monney market account, zerocoupon, spot rate, short rate, forward rate , swaps, caps, floor, swaptions... 
+\subsection{Forward price, change of numeraire, Forward measure}
+Definitions of forward price, forward measure, change of numeraire. Pricing Caps, Floors, Swap?, Swaption?
+
+\subsection{HJM Framework}
+\subsection{Correlated Brownian motion, volatility}
+\subsection{LIBOR Market Model}
+\subsection{Software and systems}
+Installed on PC : TortoiseSVN, tex-live, texstudio, nodepadd++, Visual Studio Express 2012, cmake, boost\_1\_55\_0 (self full built), QuantLib-1.4, BOUML, 7-zip, GLE, GSview. 
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 \newpage
