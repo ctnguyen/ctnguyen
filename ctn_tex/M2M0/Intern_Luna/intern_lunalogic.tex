@@ -9,6 +9,7 @@
 \usepackage[a4paper]{geometry}
 
 \usepackage{hyperref}
+\usepackage{enumitem}
 
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -20,7 +21,9 @@
 \usepackage[ddmmyyyy]{datetime} 
 
 
-
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Proba}{\mathbb{P}}
+\newcommand{\F}{\mathcal{F}}
 \newcommand{\Bt}{B_t}
 \newcommand{\RtT}{R(t,T)}
 \newcommand{\PtT}{P(t,T)}
@@ -52,10 +55,10 @@
 }
 
 \rput(3,-0.5){
-\begin{tabular}{l}
-Tutors                                                                \\ 
-\href{mailto:revierdenord@gmail.com}{\textbf{Yuan LI} }                \\
-\href{mailto:scotti@math.univ-paris-diderot.fr}{\textbf{Simone SCOTTI}}   
+\begin{tabular}{ll}
+Tutors                                                                  &              \\ 
+\href{mailto:revierdenord@gmail.com}{\textbf{Yuan LI} }                 &(Lunalogic)  \\
+\href{mailto:scotti@math.univ-paris-diderot.fr}{\textbf{Simone SCOTTI}} &(Paris 7)  
 \end{tabular}	    
 }
 %\psline(-7,0)(7,2)
@@ -85,7 +88,7 @@ Tutors                                                                \\
 
 \vfill
 \begin{abstract}
-In the internship at Lunalogic, we continu the work of ~\cite{THAI2013} and use the book  ~\cite{BRIGO2006}
+In the internship at Lunalogic, we continu the work of ~\cite{THAI2013} and use the book  ~\cite{BRIGO2006} ~\cite{BRIGO2005}
 \end{abstract}
 \end{titlepage}
 
@@ -232,15 +235,39 @@ L_i    = L(T_{i-1},T_i)
 \todo{Black Formula for pricing Caps, Floors, Swaptions}  
 
 
-
-
-
-
-
-
-
 relation between monney market account, zerocoupon, spot rate, short rate, forward rate , swaps, caps, floor, swaptions... 
 \subsection{Forward price, change of numeraire, Forward measure}
+\paragraph{Numeraire change}
+\begin{itemize}[label={--}]
+ \item If $X$ a tradable asset, $N^1$ a numeraire associated to a martingale measure $\Proba^{N^1}$, i.e 
+ \[
+ \frac{X_t}{N^1_t} = \E^{N^1}\left\{ \frac{X_T}{N^1_T}| \mathcal{F}_t \right\}
+ \]
+ Then for an arbitrary other numeraire $N^2$, we can define an other martingale measure $\Proba^{N^2}$ with the new numeraire
+ \[
+ \frac{d\Proba^{N^2}}{d\Proba^{N^1}}=\frac{N^1_0}{N^2_0}\frac{N^2_T}{N^1_T}
+ \hspace{3cm}
+ \frac{X_t}{N^2_t} = \E^{N^2}\left\{ \frac{X_T}{N^2_T}| \mathcal{F}_t \right\}
+ \]
+ \item The price of any atteinable contigent claim $h_T$ is invariant by change of numeraire :
+ \[
+ \pi_t(h_T) = N^1_t \E^{N^1}\left\{ \frac{h_T}{N^1_T}| \mathcal{F}_t \right\} = N^2_t\E^{N^2}\left\{ \frac{h_T}{N^2_T}| \mathcal{F}_t \right\}
+ \]
+ \item Change of numeraire toolkit ~\cite{BRIGO2006}2.3 Fact Three explain relation between new drift and old drift when changing numeraire.
+\end{itemize}
+
+\paragraph{T-forward measure} is the martingale measure $\Proba^{T}$ using zero-coupond bond $\PtT$ as numeraire. Under this probability
+\[
+\pi_t(h_T)=\PtT\E^{T}[h_T|\F_t]
+\hspace{1cm}
+F(t,S,T)=\E^{T}[L(S,T)|\F_t]
+\hspace{1cm}
+f(t,T)=\E^{T}[r_T|\F_t]
+\]
+
+
+
+
 Definitions of forward price, forward measure, change of numeraire. Pricing Caps, Floors, Swap?, Swaption?
 
 \subsection{HJM Framework}
