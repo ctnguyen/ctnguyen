@@ -1,11 +1,10 @@
-2014.05.06
+2014.05.09
+Continue reading LIBOR Market Model, Black formula ... Create cmake hello world for boost, quantlib. 
+Boost, QuantLib libraries are functional.
+2014.05.07
 Build and install QuantLib-1.4 Release/Debug. General lecture about interest rate, report apprendices
-
-
 2014.05.06
 install texstudio, notepad++, vsmc2012, cmake, boost(full build dll, lib, debug, release), BOUML
-
-
 2014.05.05 (1/2 journée)
 Install tex-live, prise en main de l'ordinateur, rapport du stage de Adrien THAI. Attente droit d'administrateur sur l'ordi pour installation  
 
