@@ -10,6 +10,7 @@
 
 \usepackage{hyperref}
 \usepackage{enumitem}
+% \usepackage{nomencl}\makenomenclature
 
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -118,7 +119,7 @@ Some apprendices are to be added by lecture of the book ~\cite{BRIGO2006}
  \item Zero-coupon curves, interest rate curve. When talking about curve, its is function of maturity $T$. When talking about the present time $t$, it is about process, zero-coupon process, interest rate process.
  \item Interest rate are quoted, zero-coupon are deduced from interest rate in a consistent way.
 \end{itemize}
-
+{\color{red}IMPORTANT NOTE : Concerning multiperiod product as Swaps, Caps, Floors ... there are a dangeruous difference definitions of time increment between different sources. For example ~\cite{THAI2013} defined $L_i=L(T_i,T_{i+1})$ while ~\cite{BRIGO2006} defines $L_i=L(T_{i-1},T_i)$}
 \paragraph{Money-market account (riskless asset)}
 \[
 d\Bt=r_t \Bt dt \hspace{1cm} B(0)=1 \hspace{1cm} B_t = \intt r_s ds
@@ -204,33 +205,38 @@ Instantanuous forward interest rate ~\footnote{This fundamental quantity is rela
 \left\{
 \begin{array}{l}
 T_{\alpha},T_{\alpha+1},...T_{\beta} \\
-\tau_i = \tau(T_{i-1},T_i)           \\
-L_i    = L(T_{i-1},T_i)
+\tau_i = \tau(T_i,T_{i+1})           \\
+L_i    = L(T_i,T_{i+1})
 \end{array}
 \right.
 \hspace{2cm}
 \begin{array}{l}
 \text{Nominal $N$, paements at dates $T_i$,  } i=\alpha+1,...,\beta \\
-\text{ - For fixed legs    } N\tau_iK  \\
-\text{ - For floating legs } N\tau_iL_i  
+\text{ - For fixed legs    } N\tau_{i-1}K  \\
+\text{ - For floating legs } N\tau_{i-1}L_{i-1}  
 \end{array}
+\]
+The \textbf{Payer IRS (PFS)} receive the floatting legs, pays the fixed legs, while the \textbf{Receiver IRS (RFS)} receive the fixed legs and pays the floatting legs.s. The \textbf{Forward Swap Rate} is the value of strike $K$ that make the swap contract worth zero at time $t$
+\[
+S_{\alpha,\beta}(t) = \frac{P(t,T_{\alpha})-P(t,T_{\beta})}{\sum^{\beta}_{i=\alpha+1}\tau_{i-1}P(t,T_i)} 
 \]
 \paragraph{Caps / Floors}  
 \[
 \left\{
 \begin{array}{l}
 T_{\alpha},T_{\alpha+1},...T_{\beta} \\
-\tau_i = \tau(T_{i-1},T_i)           \\
-L_i    = L(T_{i-1},T_i)
+\tau_i = \tau(T_i,T_{i+1})           \\
+L_i    = L(T_i,T_{i+1})
 \end{array}
 \right.
 \hspace{2cm}
 \begin{array}{l}
-\text{Nominal $N$, payments at dates $T_i$,  } i=\alpha+1,...,\beta \\
-\text{ - For Caps    } N\tau_i(L_i-K)^+                              \\
-\text{ - For Floors  } N\tau_i(K-L_i)^+
+\text{Nominal $N$, payments at dates $T_i$,  } i=\alpha+1,...,\beta   \\
+\text{ - For Caps    } N\tau_{i-1}(L_{i-1}-K)^+ \hspace{1.2 cm}\text{(caplet)}              \\
+\text{ - For Floors  } N\tau_{i-1}(K-L_{i-1})^+ \hspace{1cm}\text{(floorlet)}
 \end{array}
 \]
+Black formulas
 \paragraph{Swaption}
 \todo{Black Formula for pricing Caps, Floors, Swaptions}  
 
@@ -256,7 +262,7 @@ relation between monney market account, zerocoupon, spot rate, short rate, forwa
  \item Change of numeraire toolkit ~\cite{BRIGO2006}2.3 Fact Three explain relation between new drift and old drift when changing numeraire.
 \end{itemize}
 
-\paragraph{T-forward measure} is the martingale measure $\Proba^{T}$ using zero-coupond bond $\PtT$ as numeraire. Under this probability
+\paragraph{T-forward measure} is the martingale measure $\Proba^{T}$ using zero-coupond bond $\PtT$ as numeraire. Under this probability~\footnote{The first equallity explain relation betweent discount factor and zero-coupon, which sometimes involves confusion \[\pi_t(h_T)=\E^{*}[e^{-\int^T_t r_udu}h_T|\F_t]= \PtT\E^{T}[h_T|\F_t]\]}
 \[
 \pi_t(h_T)=\PtT\E^{T}[h_T|\F_t]
 \hspace{1cm}
@@ -273,11 +279,13 @@ Definitions of forward price, forward measure, change of numeraire. Pricing Caps
 \subsection{HJM Framework}
 \subsection{Correlated Brownian motion, volatility}
 \subsection{LIBOR Market Model}
+Libor model divided into two important part, one for pricing caps, floors markets, other for swaptions. The first is easier, one simply divide caps, floors into caplets and floorlets and apply Black's formula. The second can not do so, thus need to model the correlation between different LIBOR forward rate.
 \subsection{Software and systems}
 Installed on PC : TortoiseSVN, tex-live, texstudio, nodepadd++, Visual Studio Express 2012, cmake, boost\_1\_55\_0 (self full built), QuantLib-1.4, BOUML, 7-zip, GLE, GSview. 
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 \newpage
+%\printnomenclature % % % % % % % % % % %
 \bibliographystyle{siam}
 \bibliography{intern_lunalogic.bib}
 \end{document}
