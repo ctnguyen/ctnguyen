@@ -109,6 +109,14 @@ Tech. support     & Fastah Rahmani               & fastah.rahmani@gmail.com     
 \end{tabular}
 
 
+\section{The Model lastly implemented at Lunalogic}
+We explain here how are implemented the last model, calibration, test..., some critical views from the older work, what is done, what is to to, see \cite{THAI2013}.
+
+\section{The implemented model}
+\section{Calibration}
+\section{Tests and validations}
+Back testing, forward testing, validation. critical view points.
+
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 \newpage
 \section{Appendices}
@@ -230,13 +238,15 @@ L_i    = L(T_i,T_{i+1})
 \end{array}
 \right.
 \hspace{2cm}
-\begin{array}{l}
+\begin{array}{l}  
 \text{Nominal $N$, payments at dates $T_i$,  } i=\alpha+1,...,\beta   \\
 \text{ - For Caps    } N\tau_{i-1}(L_{i-1}-K)^+ \hspace{1.2 cm}\text{(caplet)}              \\
 \text{ - For Floors  } N\tau_{i-1}(K-L_{i-1})^+ \hspace{1cm}\text{(floorlet)}
 \end{array}
 \]
-Black formulas
+The simpliest idea of pricing Caps and Floors to decompose into Caplets and Floorlets, then use the model descibing the forward price's dynamic instead of underlying asset. The \textbf{Black Model} is well explained in ~\cite{MAREK2009}ch3.4.
+
+
 \paragraph{Swaption}
 \todo{Black Formula for pricing Caps, Floors, Swaptions}  
 
