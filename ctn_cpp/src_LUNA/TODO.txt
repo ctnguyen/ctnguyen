@@ -1,0 +1,15 @@
+To separate into component headers, sources,
+To better trac the libraries on windows with divers variant suffix
+To add a generic path input/output
+
+
+
+
+
+
+
+
+
+
+
+
