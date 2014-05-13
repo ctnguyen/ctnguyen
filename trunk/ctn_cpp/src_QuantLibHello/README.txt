@@ -3,7 +3,7 @@ This Tutorial is of date May 2014
 This small project is to test a "hello world" project in C++ that use
 - cmake
 - boost
-- QuantLib
+- QuantLib-1.4
 
 Ensure that you've fully built and installed boost and QuantLib library on your computer.
 
@@ -18,6 +18,7 @@ cd build_QuantLibHello
 cmake ..\src_QuantLibHello -G "YOUR_APPROPRIATED_CMAKE_GENERATOR"
 
 For Visual studio 2012, use the generator by "Visual Studio 11"
+For Mac OS X and Linux , use the generator by "Eclipse CDT4 - Unix Makefiles"
 
 
 ==========Installation QuantLib 1.4 Mac OS ==========
@@ -30,8 +31,11 @@ cd QuantLib-1.4
 make && sudo make install
 
 
-
-
+==========Installation QuantLib 1.4 Windows ==========
+Windows 7, Visual Studio Express 2012
+Open the file .sln
+Compile 4 times, Release, Release (Static Runtime), Debug, Debug (Static Runtime)
+The result is in the lib folder, there are files as :
 
 
 
