@@ -1,3 +1,5 @@
+2014.05.13
+Take the code C++ of LMM. Lecture of Automatic Differentiation cpp ADOL-C. Put last code in a cmake project and version to google code
   
 2014.05.12
 Continue lecture Adrien Report. Looking for bloomberg terminal.
