@@ -24,13 +24,22 @@ endif()
 
 ## QuantLib Finding Library
 ## You have to rightly specify your QUANTLIB_ROOT environment variable
-include_directories($ENV{QUANTLIB_ROOT})
-link_directories($ENV{QUANTLIB_ROOT}/lib)
+#include_directories($ENV{QUANTLIB_ROOT})
+#link_directories($ENV{QUANTLIB_ROOT}/lib)
+
+##########################################
+## tempo for Mac os
+## include dir is /usr/local/opt/QuantLib/include/
+## lib dir is     /usr/local/opt/QuantLib/lib
+include_directories(/usr/local/opt/QuantLib/include/)
+link_directories(/usr/local/opt/QuantLib/lib)
 
 ## File test QuantLib function copied from example
 #  QuantLib\Examples\Bonds\bond.cpp
 add_executable(qlHello main.cpp)
 
+# Works for Mac Install
+target_link_libraries(qlHello QuantLib)
 
 ## Debug cmake messages
 message("Environment variable has specified BOOST_ROOT[$ENV{BOOST_ROOT}]")

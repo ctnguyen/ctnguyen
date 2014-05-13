@@ -27,7 +27,7 @@ By following the link of QuantLib and adapting for path similar to boost library
 
 tar xzvf QuantLib-1.4.tar
 cd QuantLib-1.4
-./configure --enable-static --with-boost-include=/usr/local/opt/boost/include --with-boost-lib=/usr/local/opt/boost/lib --prefix=/usr/local/opt/
+./configure --enable-static --with-boost-include=/usr/local/opt/boost/include --with-boost-lib=/usr/local/opt/boost/lib --prefix=/usr/local/opt/QuantLib
 make && sudo make install
 
 
