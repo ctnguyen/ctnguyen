@@ -2,7 +2,15 @@ To separate into component headers, sources,
 To better trac the libraries on windows with divers variant suffix
 To add a generic path input/output
 
+To build the 4 version of QuantLib for Windows : Debug, Debug (Static Runtime), Release, Release (Static Runtime)
+Document and do a FindQuantLib.cmake module.
 
+Test to build QuantLib and link all on Linux
+
+See 
+http://msdn.microsoft.com/en-us/library/2kzt1wy3.aspx
+For building libraries QuantLib without option,
+The simplest is using QuantLib compiled in Release and Debug, in static, without optimized option
 
 
 

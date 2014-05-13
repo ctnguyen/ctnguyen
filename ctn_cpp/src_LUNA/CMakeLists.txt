@@ -18,7 +18,8 @@ project(LunaLib)
 
 ## Boost Finding Library
 ## You have to rightly specify your BOOST_ROOT environment variable
-find_package(Boost 1.55.0 COMPONENTS filesystem regex)
+#find_package(Boost 1.55.0 COMPONENTS filesystem regex)
+find_package(Boost)
 if(Boost_FOUND)
     set(Boost_USE_STATIC_LIBS ON)
     include_directories(${Boost_INCLUDE_DIRS})
@@ -29,6 +30,8 @@ endif()
 ## You have to rightly specify your QUANTLIB_ROOT environment variable
 include_directories($ENV{QUANTLIB_ROOT})
 link_directories($ENV{QUANTLIB_ROOT}/lib)
+# setting the QuantLib built name 
+set(QuantLib_LIBRAIRES)
 if(WIN32)
 #set(QuantLib_LIBRAIRES "QuantLib-vc110-mt.lib QuantLib-vc110-mt-gd.lib")
 set(QuantLib_LIBRAIRES "QuantLib-vc110-mt-gd.lib")
