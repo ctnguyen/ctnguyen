@@ -1,12 +1,13 @@
 #pragma once
 #include <vector>
 #include <string>
-#include "Name.h"
-#include "TenorType.h"
 #include <cassert>
 #include <string>
+
 #include <boost/shared_array.hpp>
 
+#include <LMM/Name.h>
+#include <LMM/instrument/TenorType.h>
 
 class LMMTenorStructure
 {

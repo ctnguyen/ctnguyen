@@ -1,4 +1,4 @@
-#include "TenorType.h"
+#include <LMM/instrument/TenorType.h>
 
 std::map<TenorTypeEnum::TenorTypeEnum, int> TenorType::tenorTypeMap_ = create();
 

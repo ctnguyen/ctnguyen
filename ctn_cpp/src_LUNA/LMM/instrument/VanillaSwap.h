@@ -1,14 +1,14 @@
 
 #pragma once
 #include <vector>
+#include <string>
 
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/vector.hpp>
 #include <boost/shared_ptr.hpp>
 
-#include <string>
-#include "Name.h"
-#include "TenorType.h"
+#include <LMM/Name.h>
+#include <LMM/instrument/TenorType.h>
 
 //YY  Now suppose we use the LMM model Tenor, to change it latter. 
 // 1. suppose knowing the LMM's Tenor structure. 

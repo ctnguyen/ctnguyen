@@ -1,7 +1,9 @@
 #pragma once
-#include "Name.h"
-#include "TenorType.h"
+
 #include <cassert>
+
+#include <LMM/Name.h>
+#include <LMM/instrument/TenorType.h>
 
 class Caplet
 {
@@ -24,6 +26,6 @@ public:
 		 underlyingLiborTenorType_(underlyingLiborTenorType), 
 		 lmmTenorStructureTenorType_(lmmTenorStructureTenorType)
 	{
-		assert(underlyingLiborTenorType_ == lmmTenorStructureTenorType_);
+///////////////		assert(underlyingLiborTenorType_ == lmmTenorStructureTenorType_);//TODO
 	}
 };

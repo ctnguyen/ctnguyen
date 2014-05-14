@@ -1,8 +1,9 @@
 #pragma once
 
 #include <boost/shared_ptr.hpp>
-#include "VanillaSwap.h"
-#include "LMMTenorStructure.h"
+
+#include <LMM/instrument/VanillaSwap.h>
+#include <LMM/instrument/LMMTenorStructure.h>
 
 
 namespace VanillaSwaptionType
