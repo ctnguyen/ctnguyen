@@ -11,5 +11,10 @@
 #   14.Mai.2014                                 #
 #################################################
 
-add_subdirectory(helper)
-add_subdirectory(numeric)
+
+add_library(LMM_numeric
+    "${CMAKE_SOURCE_DIR}/LMM/numeric/IntegraltionMethod.h"
+    "${CMAKE_SOURCE_DIR}/LMM/numeric/NumericalMethods.h"
+	"IntegraltionMethod.cpp"
+	"NumericalMethods.cpp"	
+)
