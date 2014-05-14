@@ -1,3 +1,6 @@
+2014.05.14
+write a FindQuantLib.cmake module. add generic path for runtime path management. First refactoring the code
+
 2014.05.13
 Take the code C++ of LMM. Lecture of Automatic Differentiation cpp ADOL-C. Put last code in a cmake project and version to google code
   
