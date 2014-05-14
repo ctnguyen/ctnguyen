@@ -27,21 +27,13 @@ if(Boost_FOUND)
 endif()
 
 ## QuantLib Finding Library
-## You have to rightly specify your QUANTLIB_ROOT environment variable
-include_directories($ENV{QUANTLIB_ROOT})
-link_directories($ENV{QUANTLIB_ROOT}/lib)
-# setting the QuantLib built name 
-set(QuantLib_LIBRAIRES)
-if(WIN32)
-#set(QuantLib_LIBRAIRES "QuantLib-vc110-mt.lib QuantLib-vc110-mt-gd.lib")
-set(QuantLib_LIBRAIRES "QuantLib-vc110-mt-gd.lib")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/config/")
+find_package(QuantLib)
+if(QuantLib_FOUND)
+    #set(QuantLib_USE_STATIC_LIBS ON)
+    include_directories(${QuantLib_INCLUDE_DIR})
+	#    link_directories(${QuantLib_LIBRARY_DIR})
 endif()
-
-## Debug cmake messages
-message("Environment variable has specified BOOST_ROOT[$ENV{BOOST_ROOT}]")
-message("Environment variable has specified QUANTLIB_ROOT[$ENV{QUANTLIB_ROOT}]")
-message("Boost_LIBRARY : [${Boost_LIBRARIES}]")
-
 
 add_subdirectory(LMM) 
 

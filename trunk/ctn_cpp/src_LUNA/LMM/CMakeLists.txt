@@ -10,4 +10,4 @@ add_executable(LunaLMM
 	"Main.cpp"
 )
 
-target_link_libraries(LunaLMM ${QuantLib_LIBRAIRES})
+target_link_libraries(LunaLMM ${QuantLib_LIBRARY})
