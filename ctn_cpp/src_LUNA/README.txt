@@ -11,7 +11,8 @@ Define your ENVIRONMENT VARIABLES
 BOOST_ROOT    : path\to\your\boost_installed_version
 QUANTLIB_ROOT : path\to\your\QuantLib_installed_version
 
-Open a command terminal and go into the folder of this sources code.
+Open a command terminal and go into the folder of this sources code. For Windows user, open the developer Command Prompt for VS-version
+
 cd ..
 mkdir build_Luna
 cd build_Luna
