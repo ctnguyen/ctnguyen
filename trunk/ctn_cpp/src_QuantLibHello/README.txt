@@ -30,6 +30,10 @@ cd QuantLib-1.4
 ./configure --enable-static --with-boost-include=/usr/local/opt/boost/include --with-boost-lib=/usr/local/opt/boost/lib --prefix=/usr/local/opt/QuantLib
 make && sudo make install
 
+setting QUANTLIB_ROOT environment variable by modifying /etc/launchd.conf file
+setenv QUANTLIB_ROOT /usr/local/opt/QuantLib
+
+
 
 ==========Installation QuantLib 1.4 Windows ==========
 Windows 7, Visual Studio Express 2012
