@@ -3,9 +3,9 @@
 add_executable(LunaLMM 
     "${CMAKE_SOURCE_DIR}/LMM/helper/Printer.h"
 	"${CMAKE_SOURCE_DIR}/src/helper/Printer.cpp"
+	"${CMAKE_SOURCE_DIR}/LMM/numeric/NumericalMethods.h"
+	"${CMAKE_SOURCE_DIR}/src/numeric/NumericalMethods.cpp"	
     "${CMAKE_SOURCE_DIR}/LMM/Test.h"
-	"${CMAKE_SOURCE_DIR}/LMM/NumericalMethods.h"
-	"NumericalMethods.cpp"	
 	"Test_BlackGreek.cpp"
 	"Main.cpp"
 )

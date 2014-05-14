@@ -6,7 +6,7 @@
 
 #include <ql/math/distributions/normaldistribution.hpp>
 
-#include <LMM/NumericalMethods.h>
+#include <LMM/numeric/NumericalMethods.h>
 
 
 double NumericalMethods::d1(double fwd,
