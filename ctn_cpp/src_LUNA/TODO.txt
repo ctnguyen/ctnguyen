@@ -1,9 +1,7 @@
-To separate into component headers, sources,
-To better trac the libraries on windows with divers variant suffix
-To add a generic path input/output
+To separate into component headers, sources, (see older code)
+add directive for HEADER_FILE_H
+embeded into boost test framework
 
-To build the 4 version of QuantLib for Windows : Debug, Debug (Static Runtime), Release, Release (Static Runtime)
-Document and do a FindQuantLib.cmake module.
 
 Test to build QuantLib and link all on Linux
 
