@@ -1,6 +1,6 @@
 #include <vector>
 
-#include <LMM/Printer.h>
+#include <LMM/helper/Printer.h>
 #include <LMM/NumericalMethods.h>
 
 void test_BlackGreek()

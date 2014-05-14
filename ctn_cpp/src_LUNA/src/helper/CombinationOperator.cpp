@@ -1,4 +1,4 @@
-//#include "CombinationOperator.h"
+//#include <LMM/helper/CombinationOperator.h>
 //#include <iostream>
 //
 //DerivatibleFunction CombinationOperator::combine(const DerivatibleFunction& derivatibleFunc1, 

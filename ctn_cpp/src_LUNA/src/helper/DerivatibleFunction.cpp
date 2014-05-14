@@ -1,5 +1,5 @@
-//#include "DerivatibleFunction.h"
-//#include "CombinationOperator.h"
+//#include <LMM/helper/DerivatibleFunction.h>
+//#include <LMM/helper/CombinationOperator.h>
 //
 //DerivatibleFunction DerivatibleFunction::operator+(const DerivatibleFunction& func)
 //{
