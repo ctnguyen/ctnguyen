@@ -10,7 +10,7 @@
 //#include <boost/random/mersenne_twister.hpp>
 //#include <boost/random/variate_generator.hpp>
 
-#include "Test.h"
+#include <LMM/Test.h>
 //#include "MC.h"
 //#include "McPricer.h"
 //#include "TestPricing.h"

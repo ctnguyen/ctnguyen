@@ -1,10 +1,16 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include <boost/shared_ptr.hpp>
 #include <vector>
 
-const std::string printPath = std::string("E:\\Visual_Studio_Project\\Visual_Stuidio_2012_Project\\LMM\\Output\\");
+#include <boost/shared_ptr.hpp>
+
+#include <LMM/generic_path.h>
+
+const std::string printPath = LMM::get_output_path();
+
+#ifndef LMM_PRINTER_H
+#define LMM_PRINTER_H
 
 class PrintElement
 {
@@ -165,3 +171,5 @@ public:
 		myfile.close();
 	}
 };
+
+#endif /* LMM_PRINTER_H */

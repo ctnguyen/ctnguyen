@@ -1,6 +1,9 @@
 #pragma once
 #include <vector>
 
+#ifndef LMM_NUMERICAL_METHOD_H
+#define LMM_NUMERICAL_METHOD_H
+
 class NumericalMethods
 {
 public:
@@ -43,3 +46,5 @@ public:
 	//--------- TESTS ----------//
 	//void test_interpolator();
 };
+
+#endif /* LMM_NUMERICAL_METHOD_H */

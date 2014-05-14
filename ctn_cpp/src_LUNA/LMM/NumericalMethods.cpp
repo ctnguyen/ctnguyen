@@ -1,9 +1,12 @@
-#include "NumericalMethods.h"
-#include <boost/math/distributions.hpp>
-#include <boost\function.hpp>
-#include <boost\bind.hpp>
-#include <ql\math\distributions\normaldistribution.hpp>
 #include <cassert>
+
+#include <boost/math/distributions.hpp>
+#include <boost/function.hpp>
+#include <boost/bind.hpp>
+
+#include <ql/math/distributions/normaldistribution.hpp>
+
+#include <LMM/NumericalMethods.h>
 
 
 double NumericalMethods::d1(double fwd,
