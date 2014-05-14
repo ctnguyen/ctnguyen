@@ -1,13 +1,13 @@
 #pragma once
 
-#include "RNGenerator.h"
-
 #include <vector>
 #include <ql/math/randomnumbers/sobolrsg.hpp>
 #include <ql/math/distributions/normaldistribution.hpp>
 #include <ql/math/randomnumbers/inversecumulativersg.hpp>
 #include <ql/types.hpp>
 #include <ql/math/array.hpp>
+
+#include <LMM/helper/RNGenerator.h>
 
 using namespace QuantLib ;
 

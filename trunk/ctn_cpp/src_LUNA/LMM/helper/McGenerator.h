@@ -1,10 +1,10 @@
 #pragma once
 
-#include "RNGenerator.h"
-
 #include <boost/random/normal_distribution.hpp>
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/variate_generator.hpp>
+
+#include <LMM/helper/RNGenerator.h>
 
 typedef boost::variate_generator<boost::mt19937, boost::normal_distribution<>> RNG_Type;
 //typedef std::vector<std::vector<double>> matrix_;
