@@ -1,6 +1,8 @@
-#include "StaticReplicationFormula.h"
-#include <ql/math/integrals/simpsonintegral.hpp>
 #include <boost/bind.hpp>
+
+#include <ql/math/integrals/simpsonintegral.hpp>
+
+#include <LMM/helper/StaticReplicationFormula.h>
 
 double StaticReplicationFormula::evaluate() const // do integration
 {
