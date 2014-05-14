@@ -1,6 +1,7 @@
-//#include "Tarn.h"
 //#include <iostream>
 //
+
+//#include <LMM/instrument/Tarn.h>
 //Tarn::Tarn()
 //	: strike_(0.), target_(0.), indexStart_(0), indexEnd_(0) ,exoticLegTenor_(0), liborLegTenor_(0), exoLiborTenorRatio_(0)
 //{}

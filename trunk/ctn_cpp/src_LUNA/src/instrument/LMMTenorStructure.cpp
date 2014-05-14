@@ -1,6 +1,7 @@
-#include "LMMTenorStructure.h"
-#include "Printer.h"
-#include "EqualOperator.h"
+#include <LMM/helper/Printer.h>
+#include <LMM/helper/EqualOperator.h>
+
+#include <LMM/instrument/LMMTenorStructure.h>
 
 //! constructor
 LMMTenorStructure::LMMTenorStructure(const TenorTypeEnum::TenorTypeEnum&  tenorType, //! User should make sure the coherence.

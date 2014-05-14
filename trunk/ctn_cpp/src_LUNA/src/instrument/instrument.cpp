@@ -1,5 +1,7 @@
-//#include "instrument.h"
 //#include <cassert>
+//
+//
+//#include <LMM/instrument/nstrument.h>
 //
 //using namespace Instruments;
 //

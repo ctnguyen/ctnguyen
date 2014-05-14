@@ -1,4 +1,5 @@
 #include <iostream>
-#include "Caplet.h"
+
+#include <LMM/instrument/Caplet.h>
 
 using namespace std;

@@ -1,8 +1,9 @@
 #pragma once
-#include "VanillaSwaption.h"
+
 #include <cassert>
 #include <cmath>
 
+#include <LMM/instrument/VanillaSwaption.h>
 
 double VanillaSwaption::payoff(double pvVloatingLeg, double pvFixedLeg) const
 {
