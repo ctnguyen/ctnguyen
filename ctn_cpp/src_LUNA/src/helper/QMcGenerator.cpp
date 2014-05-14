@@ -1,5 +1,6 @@
 #include <iostream>
-#include "QMcGenerator.h"
+
+#include <LMM/helper/QMcGenerator.h>
 
 
 QMcGenerator::QMcGenerator(unsigned long qmcSeed, size_t sequence_size, size_t skipRank) 
