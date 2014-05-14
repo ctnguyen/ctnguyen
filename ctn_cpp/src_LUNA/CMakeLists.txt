@@ -35,6 +35,29 @@ if(QuantLib_FOUND)
 	#    link_directories(${QuantLib_LIBRARY_DIR})
 endif()
 
+
+### Runtime path will be used for storing input files required when executing programs
+### This path is dependent of OS, for windows, it's "\", for unix it's "/"
+### In cmake, set always with forward space, it will by replaced by backward automatically if windows
+###
+
+# copy all data from source directory into binary directory in order to execute and retreive output
+file(COPY "${CMAKE_SOURCE_DIR}/data/" DESTINATION "${CMAKE_BINARY_DIR}/data/")
+
+set(LMM_OUTPUT_RUNTIMEPATH "${CMAKE_BINARY_DIR}/data/output/")
+set(LMM_DATA_RUNTIMEPATH "${CMAKE_BINARY_DIR}/data/input/")
+
+file(MAKE_DIRECTORY ${LMM_OUTPUT_RUNTIMEPATH})
+
+### change "/" to be "\\" in the runtime path for RvsB_path.h
+if(WIN32)
+    string(REGEX REPLACE "/" "\\\\\\\\" LMM_OUTPUT_RUNTIMEPATH "${LMM_OUTPUT_RUNTIMEPATH}")
+    string(REGEX REPLACE "/" "\\\\\\\\" LMM_DATA_RUNTIMEPATH "${LMM_DATA_RUNTIMEPATH}") 
+endif()
+configure_file("${CMAKE_SOURCE_DIR}/config/generic_path.h.in" "${CMAKE_SOURCE_DIR}/LMM/generic_path.h" @ONLY)
+
+
+
 add_subdirectory(LMM) 
 
 
