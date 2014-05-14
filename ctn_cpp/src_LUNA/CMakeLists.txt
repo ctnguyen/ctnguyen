@@ -59,6 +59,7 @@ configure_file("${CMAKE_SOURCE_DIR}/config/generic_path.h.in" "${CMAKE_SOURCE_DI
 # add the root source directory for include directory
 include_directories(${CMAKE_SOURCE_DIR})
 
+add_subdirectory(src) 
 add_subdirectory(LMM) 
 
 
