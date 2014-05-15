@@ -22,6 +22,10 @@ add_executable(test_DerivatibleFunction "Test_DerivatibleFunction.cpp")
 target_link_libraries(test_DerivatibleFunction LMM_helper)
 add_test(test_DerivatibleFunction ${CMAKE_CURRENT_BINARY_DIR}/test_DerivatibleFunction "--log_level=message")
 
+add_executable(test_BlackGreek "Test_BlackGreek.cpp")
+target_link_libraries(test_BlackGreek LMM_helper LMM_numeric)
+add_test(test_BlackGreek ${CMAKE_CURRENT_BINARY_DIR}/test_BlackGreek "--log_level=message")
+
 add_executable(test_LMMTenorStructure "Test_LMMTenorStructure.cpp")
 target_link_libraries(test_LMMTenorStructure LMM_ModelMCLMM)
 add_test(test_LMMTenorStructure ${CMAKE_CURRENT_BINARY_DIR}/test_LMMTenorStructure "--log_level=message")
