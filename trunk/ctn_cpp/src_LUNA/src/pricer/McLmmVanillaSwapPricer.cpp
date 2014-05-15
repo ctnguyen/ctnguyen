@@ -1,9 +1,9 @@
-#include "MCLmmVanillaSwapPricer.h"
-#include "LMMTenorStructure.h"
 #include <cassert>
 #include <iostream>
 #include <cmath>
 
+#include <LMM/pricer/MCLmmVanillaSwapPricer.h>
+#include <LMM/ModelMCLMM/LMMTenorStructure.h>
 
 double MCLmmVanillaSwapPricer::swapRate(const VanillaSwap& vanillaSwap, size_t nbSimulation) const
 {

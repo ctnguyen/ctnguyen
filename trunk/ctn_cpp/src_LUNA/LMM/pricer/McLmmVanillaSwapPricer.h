@@ -3,9 +3,9 @@
 
 #pragma once
 #include <boost/shared_ptr.hpp>
-#include "McLmm.h"        // Model
-#include "VanillaSwap.h"  // Instrument
-#include "VanillaSwapPricer.h"
+#include <LMM/ModelMCLMM/McLmm.h>        // Model
+#include <LMM/instrument/VanillaSwap.h>  // Instrument
+#include <LMM/pricer/VanillaSwapPricer.h>
 
 
 class MCLmmVanillaSwapPricer : public VanillaSwapPricer// want to use the pre-calculation of 

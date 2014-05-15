@@ -1,4 +1,4 @@
-#include "McPricer.h"
+#include <LMM/pricer/McPricer.h>
 //
 //// Function computing a random gaussian vector
 //template<class T>

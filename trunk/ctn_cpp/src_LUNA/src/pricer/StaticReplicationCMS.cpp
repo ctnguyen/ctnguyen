@@ -1,4 +1,4 @@
-#include "VanillaSwaption.h"
+#include <LMM/instrument/VanillaSwaption.h>
 //#include 
 
 //class StaticReplicationCMSwapletPricer

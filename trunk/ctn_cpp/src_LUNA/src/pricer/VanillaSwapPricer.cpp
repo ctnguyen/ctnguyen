@@ -1,4 +1,4 @@
-#include "VanillaSwapPricer.h"
+#include <LMM/pricer/VanillaSwapPricer.h>
 
 void VanillaSwapPricer::precalculate(const VanillaSwap& vanillaSwap) const
 {

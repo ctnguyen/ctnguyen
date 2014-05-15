@@ -1,11 +1,13 @@
 #pragma once
 
-#include "Dispersion.h"
-#include "VanillaSwaption.h"
-#include "NumericalMethods.h"
-#include "Lmm.h"
-#include "VanillaSwapPricer.h"
 #include <cassert>
+
+#include <LMM/numeric/NumericalMethods.h>
+#include <LMM/instrument/VanillaSwaption.h>
+#include <LMM/ModelMCLMM/Lmm.h>
+#include <LMM/ModelMCLMM/Dispersion.h>
+#include <LMM/pricer/VanillaSwapPricer.h>
+
 
 
 //-- Class defining approx methods for swaption pricing  

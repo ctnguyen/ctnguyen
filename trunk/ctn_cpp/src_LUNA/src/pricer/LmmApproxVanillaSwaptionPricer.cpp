@@ -1,10 +1,11 @@
-#include "LmmApproxVanillaSwaptionPricer.h"
 #include <cassert>
 #include <vector>
 
 //#include <boost/math/distributions.hpp>
 //#include <boost\bind.hpp>
 //#include <ql\math\distributions\normaldistribution.hpp>
+
+#include <LMM/pricer/LmmApproxVanillaSwaptionPricer.h>
 
 void LmmApproxVanillaSwaptionPricer::calculateZC()
 {
