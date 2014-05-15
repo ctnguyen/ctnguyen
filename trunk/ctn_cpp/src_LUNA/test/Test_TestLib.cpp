@@ -9,9 +9,6 @@ int main()
 	//! Swaption Test
 	//pricingSwaptionTest();
 
-	
-	
-	test_BoostUBLASMatrix();
 	//DateCreator::testMatrixDatesCreator();
 
 	//! YY Test: test MC Euler 
