@@ -234,7 +234,7 @@ if(NOT "$ENV{QUANTLIB_ROOT}" STREQUAL "")
 	if(WIN32)
 
 		find_path(QuantLib_INCLUDE_DIR
-		NAMES         ql
+		NAMES         ql/quantlib.hpp
 		HINTS         $ENV{QUANTLIB_ROOT}
 		#PATH_SUFFIXES ${_QuantLib_PATH_SUFFIXES}
 		)
@@ -251,7 +251,7 @@ if(NOT "$ENV{QUANTLIB_ROOT}" STREQUAL "")
 	elseif(UNIX)
 	
 		find_path(QuantLib_INCLUDE_DIR
-		NAMES         ql
+		NAMES         ql/quantlib.hpp
 		#HINTS         /home/vctnguyen/QuantLib-1.4/include
 		HINTS         $ENV{QUANTLIB_ROOT}/include
 		#PATH_SUFFIXES ${_QuantLib_PATH_SUFFIXES}
