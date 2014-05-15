@@ -38,4 +38,4 @@ add_library(LMM_ModelMCLMM
 	"VolatilityGridBuilder.cpp"
 )
 
-target_link_libraries(LMM_ModelMCLMM LMM_instrument LMM_helper)
+target_link_libraries(LMM_ModelMCLMM LMM_instrument LMM_helper ${QuantLib_LIBRARY})
