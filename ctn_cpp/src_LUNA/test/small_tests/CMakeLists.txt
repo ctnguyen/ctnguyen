@@ -22,5 +22,8 @@ add_executable(test_VolatilityFunction "Test_VolatilityFunction.cpp")
 target_link_libraries(test_VolatilityFunction LMM_ModelMCLMM)
 add_test(test_VolatilityFunction ${CMAKE_CURRENT_BINARY_DIR}/test_VolatilityFunction "--log_level=message")
 
+add_executable(test_McTerminalLmm "Test_McTerminalLmm.cpp")
+target_link_libraries(test_McTerminalLmm LMM_ModelMCLMM LMM_helper)
+add_test(test_McTerminalLmm ${CMAKE_CURRENT_BINARY_DIR}/test_McTerminalLmm "--log_level=message")
 
 

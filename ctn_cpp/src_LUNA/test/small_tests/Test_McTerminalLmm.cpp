@@ -1,3 +1,6 @@
+#define BOOST_TEST_MODULE LMM_unit_test_model
+#include <boost/test/included/unit_test.hpp>
+
 #include <LMM/helper/McGenerator.h>
 #include <LMM/helper/RNGenerator.h>
 
@@ -5,9 +8,10 @@
 #include <LMM/ModelMCLMM/HGVolatilityFunction.h>
 #include <LMM/ModelMCLMM/McTerminalLmm.h>
 
-#include <test/testlib/Test.h>
 
-void test_McTerminalLmm()  // OK: Test passed!
+BOOST_AUTO_TEST_SUITE(lmm_test_model_McTerminalLmm)
+
+BOOST_AUTO_TEST_CASE(test_McTerminalLmm)  // OK: Test passed!
 {
 	//! LMMTenorStructure
 	TenorTypeEnum::TenorTypeEnum tenorType = TenorTypeEnum::TenorTypeEnum::_6M;
@@ -64,4 +68,9 @@ void test_McTerminalLmm()  // OK: Test passed!
 	McTerminalLmm mcTerminalLmm(dispersion, shifts, liborsInitValue, rnGenerator, MCSchemeType::MCSchemeType::EULER);
 
     mcTerminalLmm.print();  // Attention, there are two print: parent class and derived class
+	
+	
+	BOOST_CHECK(true);
 }
+
+BOOST_AUTO_TEST_SUITE_END()

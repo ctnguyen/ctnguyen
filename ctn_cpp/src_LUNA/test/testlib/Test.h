@@ -1,7 +1,6 @@
 #pragma once
 
 
-void test_McTerminalLmm();
 void test_VanillaSwap();
 void test_VanillaSwapPricer();
 void test_VanillaSwaptionPricer();
