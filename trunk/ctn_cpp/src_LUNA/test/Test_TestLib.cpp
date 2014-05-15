@@ -13,12 +13,9 @@ int main()
 
 	//! YY Test: test MC Euler 
 
-	
-	//test_VanillaSwaptionPricer();
-	
 	//test_DateConvention();
 
-	test_InegrationMethod();
+	//test_InegrationMethod();
 
 	test_DerivatibleFunction();
 
