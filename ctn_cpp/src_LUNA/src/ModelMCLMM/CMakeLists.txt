@@ -11,20 +11,7 @@
 #   14.Mai.2014                                 #
 #################################################
 
-add_library(LMM_instrument
-    "${CMAKE_SOURCE_DIR}/LMM/instrument/Caplet.h"
-	"${CMAKE_SOURCE_DIR}/LMM/instrument/CMS.h"
-	"${CMAKE_SOURCE_DIR}/LMM/instrument/instrument.h"
-	"${CMAKE_SOURCE_DIR}/LMM/instrument/Product.h"
-	"${CMAKE_SOURCE_DIR}/LMM/instrument/Tarn.h"
-	"${CMAKE_SOURCE_DIR}/LMM/instrument/TenorType.h"
-	"${CMAKE_SOURCE_DIR}/LMM/instrument/VanillaSwap.h"
-	"${CMAKE_SOURCE_DIR}/LMM/instrument/VanillaSwaption.h"
-	"Caplet.cpp"
-	"CMS.cpp"
-	"instrument.cpp"
-	"Tarn.cpp"
-	"TenorType.cpp"
-	"VanillaSwap.cpp"
-	"VanillaSwaption.cpp"
+add_library(LMM_ModelMCLMM
+    "${CMAKE_SOURCE_DIR}/LMM/ModelMCLMM/LMMTenorStructure.h"
+	"LMMTenorStructure.cpp"	
 )

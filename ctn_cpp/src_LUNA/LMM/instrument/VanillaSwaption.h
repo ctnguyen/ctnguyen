@@ -3,7 +3,7 @@
 #include <boost/shared_ptr.hpp>
 
 #include <LMM/instrument/VanillaSwap.h>
-#include <LMM/instrument/LMMTenorStructure.h>
+//#include <LMM/instrument/LMMTenorStructure.h>
 
 
 namespace VanillaSwaptionType
