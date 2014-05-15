@@ -7,7 +7,7 @@
 
 #include <LMM/generic_path.h>
 
-const std::string printPath = LMM::get_output_path();
+const std::string printPathOutput = LMM::get_output_path();
 
 #ifndef LMM_PRINTER_H
 #define LMM_PRINTER_H

@@ -9,6 +9,7 @@
 #include <LMM/ModelMCLMM/McSpotLmm.h>
 #include <LMM/pricer/MCLmmVanillaSwapPricer.h>
 
+#include <test/testlib/Test.h>
 
 //----------------------------------------------------------------------------------------------
 //
@@ -146,7 +147,7 @@ void test_VanillaSwapPricer()
 	double analyticalSwapPrice=0.0;
 
 	std::string fileName = "test_VanillaSwapPricer.csv"; //+ MCSchemeType::mcSchemeType2String(mcSchemeType) +".csv";
-	std::string path = printPath + fileName;
+	std::string path = printPathOutput + fileName;
 
 	//! Terminal Euler
 	test_McLmm( true, MCSchemeType::MCSchemeType::EULER,minNbSimulation,maxNbSimulation,bnSimualtionPowStep,

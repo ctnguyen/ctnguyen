@@ -1,5 +1,8 @@
 #include <LMM/ModelMCLMM/LMMTenorStructure.h>
 
+
+#include <test/testlib/Test.h>
+
 LMMTenorStructure get_LMMTenorStrucure_example()
 {
 	TenorTypeEnum::TenorTypeEnum tenorType = TenorTypeEnum::TenorTypeEnum::_3M;

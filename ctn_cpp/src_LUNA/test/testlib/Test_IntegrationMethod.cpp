@@ -3,6 +3,9 @@
 #include <cmath>
 #include <iostream>
 
+#include <test/testlib/Test.h>
+
+
 double lnFunc(double x){return std::log(x);}
 double xCubicFunc(double x){return x*x*x;}
 

@@ -14,7 +14,11 @@
 #CMAKE INITIALIZATION
 cmake_minimum_required (VERSION 2.8)
 
-project(LunaLib) 
+project(LunaLMM)
+ 
+include(CTest)
+#enable_testing()
+
 
 ## Boost Finding Library
 ## You have to rightly specify your BOOST_ROOT environment variable

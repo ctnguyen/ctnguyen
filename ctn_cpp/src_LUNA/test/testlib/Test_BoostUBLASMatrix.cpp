@@ -7,6 +7,8 @@
 #include <boost/numeric/ublas/operation_blocked.hpp>
 #include <ctime>
 
+#include <test/testlib/Test.h>
+
 using namespace boost::numeric::ublas;
 
 void test_BoostUBLASMatrix()
@@ -22,8 +24,13 @@ void test_BoostUBLASMatrix()
    
 	boost::numeric::ublas::matrix<double> m2(z1,z2);
 	for(size_t i=0; i<m1.size1(); ++i)
+	{
 		for(size_t j=0; j<m1.size1(); ++j)
+		{
 			m1(i,j) = i+j*10;
+			std::cout<<"Mat["<<i<<","<<j<<"]"<<std::endl;
+		}
+	}
 
 
 	clock_t t1,t2;

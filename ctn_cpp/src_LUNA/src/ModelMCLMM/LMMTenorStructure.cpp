@@ -58,7 +58,7 @@ bool LMMTenorStructure::operator == (const LMMTenorStructure& lmmTenorStructure)
 void LMMTenorStructure::print()
 {
 	std::string fileName = "LMMTenorStructure.csv";
-	std::string path = printPath + fileName;
+	std::string path = printPathOutput + fileName;
 
 	//seems a problem of shared ptr polymorphisms ... 
 	PrintElement_PTR tenorType_print    = PrintElement_PTR(new ScalarPrintElement<std::string>("tenorType", TenorTypeEnum::toString(tenorType_)));

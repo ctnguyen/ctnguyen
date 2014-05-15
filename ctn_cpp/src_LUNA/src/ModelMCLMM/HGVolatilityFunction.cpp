@@ -172,7 +172,7 @@ double HGVolatilityFunction::covIntegral( size_t indexTime_i,
 void HGVolatilityFunction::print() const  // OK: test passed.
 {
 	std::string fileName = "HGVolatilityFunction.csv";
-	std::string path = printPath + fileName;
+	std::string path = printPathOutput + fileName;
 	std::vector<PrintElement_PTR> elements_print;
 
 	//! Abcd function for h

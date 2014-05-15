@@ -5,7 +5,7 @@
 #include <LMM/ModelMCLMM/HGVolatilityFunction.h>
 #include <LMM/ModelMCLMM/McTerminalLmm.h>
 
-
+#include <test/testlib/Test.h>
 
 void test_McTerminalLmm()  // OK: Test passed!
 {
