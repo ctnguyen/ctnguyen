@@ -1,5 +1,7 @@
-#include <iostream>
+#define BOOST_TEST_MODULE LMM_unit_test_swaption
+#include <boost/test/included/unit_test.hpp>
 
+#include <iostream>
 
 #include <LMM/Name.h>
 #include <LMM/helper/Printer.h>
@@ -10,11 +12,11 @@
 #include <LMM/ModelMCLMM/McSpotLmm.h>
 #include <LMM/pricer/MCLmmVanillaSwaptionPricer.h>
 
-#include <test/testlib/Test.h>
 
+BOOST_AUTO_TEST_SUITE(lmm_test_swaption)
 //----------------------------------------------------------------------------------------------
 //
-//                                       Test_VanillaSwap
+//                                       Test_VanillaSwaption
 //
 //----------------------------------------------------------------------------------------------
 VanillaSwaption get_VanillaSwaption()
@@ -140,7 +142,7 @@ void test_McLmm2( bool TerminalOrSpotProb,
 
 
 
-void test_VanillaSwaptionPricer()
+BOOST_AUTO_TEST_CASE(test_VanillaSwaptionPricer)
 {
 	size_t minNbSimulation = 1000;
 	size_t maxNbSimulation = 10000; //300000;
@@ -199,4 +201,8 @@ void test_VanillaSwaptionPricer()
 
 	Printer printer(path, elements_print);
 	printer.print();
+
+	BOOST_CHECK(true);
 }
+
+BOOST_AUTO_TEST_SUITE_END()

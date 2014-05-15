@@ -12,11 +12,9 @@ int main()
 	//DateCreator::testMatrixDatesCreator();
 
 	//! YY Test: test MC Euler 
+
 	
-	//test_VanillaSwap();
-	//test_VanillaSwapPricer();
-	
-	test_VanillaSwaptionPricer();
+	//test_VanillaSwaptionPricer();
 	
 	//test_DateConvention();
 

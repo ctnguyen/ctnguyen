@@ -25,7 +25,12 @@ add_test(test_VolatilityFunction ${CMAKE_CURRENT_BINARY_DIR}/test_VolatilityFunc
 add_executable(test_McTerminalLmm "Test_McTerminalLmm.cpp")
 target_link_libraries(test_McTerminalLmm LMM_ModelMCLMM LMM_helper)
 add_test(test_McTerminalLmm ${CMAKE_CURRENT_BINARY_DIR}/test_McTerminalLmm "--log_level=message")
-	
+
 add_executable(test_VanillaSwapPricer "Test_VanillaSwapPricer.cpp")
 target_link_libraries(test_VanillaSwapPricer LMM_pricer LMM_ModelMCLMM LMM_helper)
 add_test(test_VanillaSwapPricer ${CMAKE_CURRENT_BINARY_DIR}/test_VanillaSwapPricer "--log_level=message")
+
+add_executable(test_VanillaSwaptionPricer "Test_VanillaSwaptionPricer.cpp")
+target_link_libraries(test_VanillaSwaptionPricer LMM_pricer LMM_ModelMCLMM LMM_helper)
+add_test(test_VanillaSwaptionPricer ${CMAKE_CURRENT_BINARY_DIR}/test_VanillaSwaptionPricer "--log_level=message")
+
