@@ -5,6 +5,7 @@
 #include <LMM/helper/Printer.h>
 #include <LMM/helper/DerivatibleFunction.h>
 
+#include <test/testlib/Test.h>
 
 class Helper_CubicFunction : public DerivatibleFunction // a*x^3 + b*x^2 + c*x + d
 {
@@ -164,7 +165,7 @@ void test_DerivatibleFunction() // OK Test passed.
 	}
 
 	std::string fileName = "DerivatibleFunction.csv";
-	std::string path = printPath + fileName;
+	std::string path = printPathOutput + fileName;
 	std::vector<PrintElement_PTR> elements_print;
 
 

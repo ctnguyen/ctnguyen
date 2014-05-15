@@ -43,4 +43,4 @@ add_library(LMM_testlib
 	"VolatilityTests.cpp"
 )
 
-target_link_libraries(LMM_testlib LMM_ModelMCLMM LMM_instrument LMM_helper)
+target_link_libraries(LMM_testlib LMM_pricer LMM_ModelMCLMM LMM_instrument LMM_numeric LMM_helper)

@@ -1,6 +1,8 @@
 //#include <LMM/ModelMCLMM/LMMTenorStructure.h>
 #include <LMM/ModelMCLMM/HGVolatilityFunction.h>
 
+#include <test/testlib/Test.h>
+
 HGVolatilityFunction get_VolatilityFunction_example()
 {
 	TenorTypeEnum::TenorTypeEnum tenorType = TenorTypeEnum::TenorTypeEnum::_3M;

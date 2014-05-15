@@ -34,7 +34,7 @@ void test_BlackGreek()
 
 	//! print 
 	std::string fileName = "test_BlackGreek.csv"; //+ MCSchemeType::mcSchemeType2String(mcSchemeType) +".csv";
-	std::string path = printPath + fileName;
+	std::string path = printPathOutput + fileName;
 
 	PrintElement_PTR stirkes_print      = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("strike", strikes));
 	PrintElement_PTR Black_Vegas_print  = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("Black_Vegas", Vegas));

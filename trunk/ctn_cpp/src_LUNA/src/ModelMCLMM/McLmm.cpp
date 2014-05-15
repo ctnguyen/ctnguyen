@@ -124,7 +124,7 @@ void McLmm::initLiborMatrix(const std::vector<double>& libors_init)
 void McLmm::print() const
 {
 	std::string fileName = "McLmm.csv";
-	std::string path = printPath + fileName;
+	std::string path = printPathOutput + fileName;
 
 	std::vector<PrintElement_PTR> elements_print;
 

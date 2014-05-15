@@ -98,7 +98,7 @@ void Correlation::print() const
 	assert(flagApproxConstruced_ == true);
 
 	std::string fileName = "Correlation.csv";
-	std::string path = printPath + fileName;
+	std::string path = printPathOutput + fileName;
 
 	std::vector<PrintElement_PTR> elements_print;
 
