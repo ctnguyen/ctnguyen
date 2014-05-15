@@ -25,8 +25,8 @@ HGVolatilityFunction get_VolatilityFunction_example()
 
 BOOST_AUTO_TEST_CASE(test_VolatilityFunction)
 {
-	//HGVolatilityFunction hgVolatilityFunction = get_VolatilityFunction_example();
-	//hgVolatilityFunction.print();
+	HGVolatilityFunction hgVolatilityFunction = get_VolatilityFunction_example();
+	hgVolatilityFunction.print();
 
 	BOOST_CHECK(true);
 }

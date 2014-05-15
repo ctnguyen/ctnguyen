@@ -1,3 +1,7 @@
+#define BOOST_TEST_MODULE LMM_unit_test_swap
+#include <boost/test/included/unit_test.hpp>
+
+
 #include <iostream>
 
 #include <LMM/Name.h>
@@ -9,8 +13,8 @@
 #include <LMM/ModelMCLMM/McSpotLmm.h>
 #include <LMM/pricer/MCLmmVanillaSwapPricer.h>
 
-#include <test/testlib/Test.h>
 
+BOOST_AUTO_TEST_SUITE(lmm_test_swap)
 //----------------------------------------------------------------------------------------------
 //
 //                                       Test_VanillaSwap
@@ -27,12 +31,6 @@ VanillaSwap get_VanillaSwap()
 
 	VanillaSwap vanillaSwap(strike, indexStart, indexEnd, floatingLegTenorType, fixedLegTenorType, lmmTenorStructureTenorType);
 	return vanillaSwap;
-}
-
-void test_VanillaSwap()
-{
-	VanillaSwap vanillaSwap = get_VanillaSwap();
-	vanillaSwap.print_details();
 }
 
 
@@ -136,7 +134,16 @@ void test_McLmm( bool TerminalOrSpotProb,
 
 
 
-void test_VanillaSwapPricer()
+BOOST_AUTO_TEST_CASE(test_VanillaSwap)
+{
+	VanillaSwap vanillaSwap = get_VanillaSwap();
+	vanillaSwap.print_details();
+
+	BOOST_CHECK(true);
+}
+
+
+BOOST_AUTO_TEST_CASE(test_VanillaSwapPricer)
 {
 	size_t minNbSimulation = 100;
 	size_t maxNbSimulation = 300000; //300000;
@@ -195,4 +202,8 @@ void test_VanillaSwapPricer()
 
 	Printer printer(path, elements_print);
 	printer.print();
+
+	BOOST_CHECK(true);
 }
+
+BOOST_AUTO_TEST_SUITE_END()
