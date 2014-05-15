@@ -1,8 +1,9 @@
-#include "DerivatibleFunction.h"
+
 #include <boost/bind.hpp>
 #include <vector>
-#include "Printer.h"
 
+#include <LMM/helper/Printer.h>
+#include <LMM/helper/DerivatibleFunction.h>
 
 
 class Helper_CubicFunction : public DerivatibleFunction // a*x^3 + b*x^2 + c*x + d

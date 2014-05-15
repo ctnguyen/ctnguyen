@@ -1,4 +1,4 @@
-#include "LMMTenorStructure.h"
+#include <LMM/ModelMCLMM/LMMTenorStructure.h>
 
 LMMTenorStructure get_LMMTenorStrucure_example()
 {

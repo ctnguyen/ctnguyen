@@ -1,12 +1,13 @@
-#include "VanillaSwap.h"
-#include "McGenerator.h"
-#include "HGVolatilityFunction.h"
-#include "McTerminalLmm.h"
-#include "McSpotLmm.h"
-#include "MCLmmVanillaSwapPricer.h"
-#include "Name.h"
 #include <iostream>
-#include "Printer.h"
+
+#include <LMM/Name.h>
+#include <LMM/helper/Printer.h>
+#include <LMM/helper/McGenerator.h>
+#include <LMM/instrument/VanillaSwap.h>
+#include <LMM/ModelMCLMM/HGVolatilityFunction.h>
+#include <LMM/ModelMCLMM/McTerminalLmm.h>
+#include <LMM/ModelMCLMM/McSpotLmm.h>
+#include <LMM/pricer/MCLmmVanillaSwapPricer.h>
 
 
 //----------------------------------------------------------------------------------------------

@@ -1,5 +1,5 @@
-//#include "LMMTenorStructure.h"
-#include "HGVolatilityFunction.h"
+//#include <LMM/ModelMCLMM/LMMTenorStructure.h>
+#include <LMM/ModelMCLMM/HGVolatilityFunction.h>
 
 HGVolatilityFunction get_VolatilityFunction_example()
 {

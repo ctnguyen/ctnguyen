@@ -1,8 +1,11 @@
-#include "HGVolatilityFunction.h"
-#include "McGenerator.h"
-#include "McTerminalLmm.h"
-#include "Correlation.h"
-#include "RNGenerator.h"
+#include <LMM/helper/McGenerator.h>
+#include <LMM/helper/RNGenerator.h>
+
+#include <LMM/ModelMCLMM/Correlation.h>
+#include <LMM/ModelMCLMM/HGVolatilityFunction.h>
+#include <LMM/ModelMCLMM/McTerminalLmm.h>
+
+
 
 void test_McTerminalLmm()  // OK: Test passed!
 {
