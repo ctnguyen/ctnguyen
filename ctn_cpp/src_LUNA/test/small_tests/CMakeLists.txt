@@ -18,6 +18,10 @@ add_executable(test_IntegrationMethod "Test_IntegrationMethod.cpp")
 target_link_libraries(test_IntegrationMethod ${QuantLib_LIBRARY})
 add_test(test_IntegrationMethod ${CMAKE_CURRENT_BINARY_DIR}/test_IntegrationMethod "--log_level=message")
 
+add_executable(test_DerivatibleFunction "Test_DerivatibleFunction.cpp")
+target_link_libraries(test_DerivatibleFunction LMM_helper)
+add_test(test_DerivatibleFunction ${CMAKE_CURRENT_BINARY_DIR}/test_DerivatibleFunction "--log_level=message")
+
 add_executable(test_LMMTenorStructure "Test_LMMTenorStructure.cpp")
 target_link_libraries(test_LMMTenorStructure LMM_ModelMCLMM)
 add_test(test_LMMTenorStructure ${CMAKE_CURRENT_BINARY_DIR}/test_LMMTenorStructure "--log_level=message")
@@ -37,6 +41,3 @@ add_test(test_VanillaSwapPricer ${CMAKE_CURRENT_BINARY_DIR}/test_VanillaSwapPric
 add_executable(test_VanillaSwaptionPricer "Test_VanillaSwaptionPricer.cpp")
 target_link_libraries(test_VanillaSwaptionPricer LMM_pricer LMM_ModelMCLMM LMM_helper)
 add_test(test_VanillaSwaptionPricer ${CMAKE_CURRENT_BINARY_DIR}/test_VanillaSwaptionPricer "--log_level=message")
-
-
-

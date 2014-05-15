@@ -1,3 +1,5 @@
+#define BOOST_TEST_MODULE LMM_unit_test_helper
+#include <boost/test/included/unit_test.hpp>
 
 #include <boost/bind.hpp>
 #include <vector>
@@ -5,7 +7,9 @@
 #include <LMM/helper/Printer.h>
 #include <LMM/helper/DerivatibleFunction.h>
 
-#include <test/testlib/Test.h>
+
+BOOST_AUTO_TEST_SUITE(lmm_test_derivative)
+
 
 class Helper_CubicFunction : public DerivatibleFunction // a*x^3 + b*x^2 + c*x + d
 {
@@ -59,7 +63,7 @@ public:
 	}
 };
 
-void test_DerivatibleFunction() // OK Test passed.
+BOOST_AUTO_TEST_CASE(test_DerivatibleFunction) // OK Test passed.
 {
 	CombinedDerivatibleFunction_PTR cubicFuncHelper (new Helper_CubicFunction(0.5, 0.85, 3.14, 0.17));
 	CombinedDerivatibleFunction_PTR expFuncHelper   (new Helper_ExpFunction(1.1, 1.3, 0.75));
@@ -233,5 +237,7 @@ void test_DerivatibleFunction() // OK Test passed.
 	Printer printer(path, elements_print);
 	printer.print();
 
-
+	BOOST_CHECK(true);
 }
+
+BOOST_AUTO_TEST_SUITE_END()

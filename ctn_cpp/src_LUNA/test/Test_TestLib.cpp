@@ -15,9 +15,8 @@ int main()
 
 	//test_DateConvention();
 
-	//test_InegrationMethod();
 
-	test_DerivatibleFunction();
+	//test_DerivatibleFunction();
 
 	test_BlackGreek();
 
