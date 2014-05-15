@@ -1,6 +1,6 @@
 #pragma once
 #include <boost/shared_ptr.hpp>
-#include "LMMTenorStructure.h"
+#include <LMM/ModelMCLMM/LMMTenorStructure.h>
 
 //! YY TODO: make this function more general: calculate covariance for whatever time interval.
 //           so at least make it possible to use piecewise linear vol.

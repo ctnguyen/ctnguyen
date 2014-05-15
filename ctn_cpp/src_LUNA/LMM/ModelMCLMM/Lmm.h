@@ -1,19 +1,21 @@
 #pragma once
 
-//#include "Interpolation.h"
-//#include "MarketInfoCollector.h"
-#include "Dispersion.h"
-#include "Name.h"
-#include "LMMTenorStructure.h"
-#include "Dispersion.h"
-#include "RNGenerator.h"
-
 #include <vector>
+#include <cassert>  // for assert
+
 #include <boost/numeric/ublas/io.hpp>
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/shared_ptr.hpp>
 
-#include <cassert>  // for assert
+
+//#include "Interpolation.h"
+//#include "MarketInfoCollector.h"
+#include <LMM/Name.h>
+#include <LMM/helper/RNGenerator.h>
+#include <LMM/ModelMCLMM/Dispersion.h>
+#include <LMM/ModelMCLMM/LMMTenorStructure.h>
+
+
 
 class Tensor
 {

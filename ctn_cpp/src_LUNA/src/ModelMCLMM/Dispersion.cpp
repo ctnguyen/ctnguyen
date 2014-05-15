@@ -1,4 +1,4 @@
-#include "Dispersion.h"
+#include <LMM/ModelMCLMM/Dispersion.h>
 #include <cassert>
 
 Dispersion::Dispersion(Correlation_PTR correlation,

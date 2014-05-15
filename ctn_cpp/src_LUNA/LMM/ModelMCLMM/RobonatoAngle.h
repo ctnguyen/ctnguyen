@@ -12,10 +12,11 @@
 #include <math.h>
 #include <cassert>
 
+#include <boost/function.hpp>
+
 #include <ql/math/optimization/costfunction.hpp>
 #include <ql/math/array.hpp>
 #include <ql/math/matrix.hpp>
-#include <boost/function.hpp>
 #include <ql/utilities/disposable.hpp>
 
 //using namespace QuantLib;

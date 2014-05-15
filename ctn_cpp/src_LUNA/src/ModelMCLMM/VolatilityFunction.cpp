@@ -1,4 +1,4 @@
-//#include "VolatilityFunction.h"
+//#include <LMM/ModelMCLMM/VolatilityFunction.h>
 //
 //// #include <ql/termstructures/volatility/abcd.hpp>
 //// AbcdFunction func(a,b,c,d);

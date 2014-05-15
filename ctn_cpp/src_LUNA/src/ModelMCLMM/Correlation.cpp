@@ -1,7 +1,8 @@
-#include "Correlation.h"
-#include "Printer.h"
-#include "TypeConverter.h"
 #include <boost/numeric/ublas/matrix.hpp>
+
+#include <LMM/helper/Printer.h>
+#include <LMM/helper/TypeConverter.h>
+#include <LMM/ModelMCLMM/Correlation.h>
 
 // ------------------------------------------------------------------------------
 //

@@ -1,13 +1,17 @@
 #include <iostream>
 #include <cassert>
 #include <string>
-#include <ql/termstructures/volatility/abcd.hpp>
+#include <cassert>
+
 #include <boost/numeric/ublas/matrix_proxy.hpp>
 
-#include "McLmm.h"
-#include "Printer.h"
-#include "TypeConverter.h"
-#include <cassert>
+#include <ql/termstructures/volatility/abcd.hpp>
+
+#include <LMM/helper/Printer.h>
+#include <LMM/helper/TypeConverter.h>
+#include <LMM/ModelMCLMM/McLmm.h>
+
+
 
 using namespace std;
 

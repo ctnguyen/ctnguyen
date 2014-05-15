@@ -1,7 +1,10 @@
 #pragma once
-#include "HGVolatilityFunction.h"
-#include "Printer.h"
 #include <cassert>
+
+#include <LMM/helper/Printer.h>
+#include <LMM/ModelMCLMM/HGVolatilityFunction.h>
+
+
 
 
 //! Inner class: h vol

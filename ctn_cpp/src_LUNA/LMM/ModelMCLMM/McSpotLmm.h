@@ -1,6 +1,6 @@
 #pragma once
 
-#include "McLmm.h"
+#include <LMM/ModelMCLMM/McLmm.h>
 
 class McSpotLmm : public McLmm
 {
