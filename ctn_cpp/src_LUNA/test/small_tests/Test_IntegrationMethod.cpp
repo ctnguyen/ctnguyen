@@ -1,9 +1,14 @@
-#include <ql/math/integrals/simpsonintegral.hpp>
-#include <boost/function.hpp>
+#define BOOST_TEST_MODULE LMM_unit_test_integration
+#include <boost/test/included/unit_test.hpp>
+
 #include <cmath>
 #include <iostream>
 
-#include <test/testlib/Test.h>
+#include <boost/function.hpp>
+
+#include <ql/math/integrals/simpsonintegral.hpp>
+
+BOOST_AUTO_TEST_SUITE(lmm_test_integration)
 
 
 double lnFunc(double x){return std::log(x);}
@@ -28,7 +33,12 @@ void test_Simpsonintegral()
 	std::cout << "int_{0}^{1} ln(x) dx = " << numInt(func, boundLower, boundUpper) << std::endl;
 }
 
-void test_InegrationMethod()
+BOOST_AUTO_TEST_CASE(test_InegrationMethod)
 {
+
 	test_Simpsonintegral();
+	
+	BOOST_CHECK(true);
 }
+
+BOOST_AUTO_TEST_SUITE_END()

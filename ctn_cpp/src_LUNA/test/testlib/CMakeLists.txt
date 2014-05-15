@@ -32,7 +32,6 @@ add_library(LMM_testlib
 	"Test_Correlation.cpp"
 	"Test_DerivatibleFunction.cpp"
 	"Test_Instrument.cpp"
-	"Test_IntegrationMethod.cpp"
 	"Test_PCA.cpp"
 	"VolatilityTests.cpp"
 )
