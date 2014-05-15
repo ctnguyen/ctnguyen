@@ -3,10 +3,8 @@
 void test_DateConvention();
 
 
-//void test_InegrationMethod();
 
-
-void test_DerivatibleFunction();
+//void test_DerivatibleFunction();
 
 
 
