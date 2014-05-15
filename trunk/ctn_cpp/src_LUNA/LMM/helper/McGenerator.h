@@ -6,7 +6,7 @@
 
 #include <LMM/helper/RNGenerator.h>
 
-typedef boost::variate_generator<boost::mt19937, boost::normal_distribution<>> RNG_Type;
+typedef boost::variate_generator<boost::mt19937, boost::normal_distribution<> > RNG_Type;
 //typedef std::vector<std::vector<double>> matrix_;
 
 class McGenerator : public RNGenerator
