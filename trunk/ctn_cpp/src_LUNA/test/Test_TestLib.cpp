@@ -12,7 +12,6 @@ int main()
 	//DateCreator::testMatrixDatesCreator();
 
 	//! YY Test: test MC Euler 
-	test_McTerminalLmm();       // OK: covarianceTensor 
 	test_VanillaSwap();
 	test_VanillaSwapPricer();
 	test_VanillaSwaptionPricer();

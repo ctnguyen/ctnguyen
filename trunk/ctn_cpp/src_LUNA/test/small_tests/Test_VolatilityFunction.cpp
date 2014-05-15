@@ -1,4 +1,4 @@
-#define BOOST_TEST_MODULE LMM_unit_test_volatility
+#define BOOST_TEST_MODULE LMM_unit_test_model
 #include <boost/test/included/unit_test.hpp>
 
 #include <LMM/ModelMCLMM/HGVolatilityFunction.h>
