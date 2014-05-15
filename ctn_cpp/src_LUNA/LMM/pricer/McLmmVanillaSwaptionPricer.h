@@ -1,11 +1,11 @@
 
 //! MClmm price Swap, don't need to be too general !!!  
-
 #pragma once
 #include <boost/shared_ptr.hpp>
-#include "McLmm.h"        // Model
-#include "VanillaSwaption.h"  // Instrument
-#include "McLmmVanillaSwapPricer.h"
+
+#include <LMM/ModelMCLMM/McLmm.h>        // Model
+#include <LMM/instrument/VanillaSwaption.h>  // Instrument
+#include <LMM/pricer/McLmmVanillaSwapPricer.h>
 
 
 

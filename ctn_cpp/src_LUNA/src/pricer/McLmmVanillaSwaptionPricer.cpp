@@ -1,5 +1,6 @@
-#include "McLmmVanillaSwaptionPricer.h"
 #include <cassert>
+
+#include <LMM/pricer/McLmmVanillaSwaptionPricer.h>
 
 double MCLmmVanillaSwaptionPricer::price(const VanillaSwaption& vanillaSwaption, size_t nbSimulation)  const
 {

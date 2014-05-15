@@ -2,11 +2,14 @@
 //! MClmm price Swap, don't need to be too general !!!  
 
 #pragma once
-#include <boost/shared_ptr.hpp>
-#include "McLmm.h"        // Model
-#include "VanillaSwap.h"  // Instrument
-#include "LMMTenorStructure.h"
+
 #include <cassert>
+#include <boost/shared_ptr.hpp>
+
+#include <LMM/instrument/VanillaSwap.h>  // Instrument
+#include <LMM/ModelMCLMM/McLmm.h>        // Model
+#include <LMM/ModelMCLMM/LMMTenorStructure.h>
+
 
 
 class VanillaSwapPricer// : public VanillaSwapPricer
