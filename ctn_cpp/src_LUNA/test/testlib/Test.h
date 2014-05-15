@@ -1,6 +1,5 @@
 #pragma once
 
-void test_BoostUBLASMatrix();
 void test_LMMTenorStrucure();
 void test_VolatilityFunction();
 void test_McTerminalLmm();

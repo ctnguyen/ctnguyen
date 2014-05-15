@@ -29,7 +29,6 @@ add_library(LMM_testlib
 	"TestCostFunction.cpp"
 	"TestPricing.cpp"
 	"Test_BlackGreek.cpp"
-	"Test_BoostUBLASMatrix.cpp"
 	"Test_Correlation.cpp"
 	"Test_DerivatibleFunction.cpp"
 	"Test_Instrument.cpp"
