@@ -33,12 +33,10 @@ add_library(LMM_testlib
 	"Test_DerivatibleFunction.cpp"
 	"Test_Instrument.cpp"
 	"Test_IntegrationMethod.cpp"
-	"Test_LMMTenorStructure.cpp"
 	"Test_McTerminalLmm.cpp"
 	"Test_PCA.cpp"
 	"Test_VanillaSwapPricer.cpp"
 	"Test_VanillaSwaptionPricer.cpp"
-	"Test_VolatilityFunction.cpp"
 	"VolatilityTests.cpp"
 )
 

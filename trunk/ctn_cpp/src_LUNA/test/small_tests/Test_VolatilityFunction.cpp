@@ -1,7 +1,9 @@
-//#include <LMM/ModelMCLMM/LMMTenorStructure.h>
+#define BOOST_TEST_MODULE LMM_unit_test_volatility
+#include <boost/test/included/unit_test.hpp>
+
 #include <LMM/ModelMCLMM/HGVolatilityFunction.h>
 
-#include <test/testlib/Test.h>
+BOOST_AUTO_TEST_SUITE(lmm_test_volatility)
 
 HGVolatilityFunction get_VolatilityFunction_example()
 {
@@ -21,9 +23,13 @@ HGVolatilityFunction get_VolatilityFunction_example()
 	return hgVolatilityFunction;
 }
 
-void test_VolatilityFunction()
+BOOST_AUTO_TEST_CASE(test_VolatilityFunction)
 {
-	HGVolatilityFunction hgVolatilityFunction = get_VolatilityFunction_example();
-	hgVolatilityFunction.print();
+	//HGVolatilityFunction hgVolatilityFunction = get_VolatilityFunction_example();
+	//hgVolatilityFunction.print();
 
+	BOOST_CHECK(true);
 }
+
+
+BOOST_AUTO_TEST_SUITE_END()

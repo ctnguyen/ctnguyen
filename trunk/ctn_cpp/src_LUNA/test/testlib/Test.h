@@ -1,7 +1,6 @@
 #pragma once
 
-void test_LMMTenorStrucure();
-void test_VolatilityFunction();
+
 void test_McTerminalLmm();
 void test_VanillaSwap();
 void test_VanillaSwapPricer();
