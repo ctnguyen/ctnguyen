@@ -10,7 +10,7 @@
 //#include <boost/random/mersenne_twister.hpp>
 //#include <boost/random/variate_generator.hpp>
 
-#include <LMM/Test.h>
+
 //#include "MC.h"
 //#include "McPricer.h"
 //#include "TestPricing.h"
@@ -687,6 +687,7 @@ const size_t nbMCSimulation = 1; // Number of MC simulations
 
 
 //#include "DateCreator.h"
+#include <test/testlib/Test.h>
 int main()
 {
 

@@ -1,6 +1,6 @@
-#include "Correlation.h"
 #include <ql/math/matrixutilities/symmetricschurdecomposition.hpp>
 
+#include <LMM/ModelMCLMM/Correlation.h>
 //-----------------------------------------------------------------------------------------------
 //
 //                                             Test 

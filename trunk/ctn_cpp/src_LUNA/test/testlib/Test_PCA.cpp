@@ -1,6 +1,8 @@
-#include "PCA.h"
-#include <ql/math/matrixutilities/symmetricschurdecomposition.hpp>
 #include <iostream>
+
+#include <ql/math/matrixutilities/symmetricschurdecomposition.hpp>
+
+#include <LMM/ModelMCLMM/PCA.h>
 
 using namespace QuantLib; // for Matrix
 

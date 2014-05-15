@@ -1,5 +1,6 @@
 #include <vector>
 
+#include <test/testlib/Test.h>
 #include <LMM/helper/Printer.h>
 #include <LMM/numeric/NumericalMethods.h>
 
