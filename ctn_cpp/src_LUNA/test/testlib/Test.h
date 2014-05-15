@@ -1,9 +1,7 @@
 #pragma once
 
 
-//void test_VanillaSwap();
-//void test_VanillaSwapPricer();
-void test_VanillaSwaptionPricer();
+//void test_VanillaSwaptionPricer();
 
 void test_DateConvention();
 
