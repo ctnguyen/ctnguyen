@@ -1,10 +1,17 @@
+#define BOOST_TEST_MODULE LMM_unit_test_greek
+#include <boost/test/included/unit_test.hpp>
+
 #include <vector>
 
-#include <test/testlib/Test.h>
 #include <LMM/helper/Printer.h>
 #include <LMM/numeric/NumericalMethods.h>
 
-void test_BlackGreek()
+
+
+BOOST_AUTO_TEST_SUITE(lmm_test_greek)
+
+
+BOOST_AUTO_TEST_CASE(test_BlackGreek)
 {
 	double fwd     = 100;
 	double K  = 100;
@@ -48,4 +55,7 @@ void test_BlackGreek()
 	Printer printer(path, elements_print);
 	printer.print();
 
+	BOOST_CHECK(true);
 }
+
+BOOST_AUTO_TEST_SUITE_END()

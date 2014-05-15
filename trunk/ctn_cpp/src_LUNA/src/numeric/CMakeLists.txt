@@ -18,3 +18,5 @@ add_library(LMM_numeric
 	"IntegraltionMethod.cpp"
 	"NumericalMethods.cpp"	
 )
+
+target_link_libraries(LMM_numeric ${QuantLib_LIBRARY})

@@ -1,8 +1,15 @@
+#ifndef LMM_NUMERICAL_METHOD_H
+#define LMM_NUMERICAL_METHOD_H
+
 #pragma once
 #include <vector>
 
-#ifndef LMM_NUMERICAL_METHOD_H
-#define LMM_NUMERICAL_METHOD_H
+#include <boost/math/distributions.hpp>
+#include <boost/function.hpp>
+#include <boost/bind.hpp>
+
+#include <ql/math/distributions/normaldistribution.hpp>
+
 
 class NumericalMethods
 {

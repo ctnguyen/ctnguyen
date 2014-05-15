@@ -1,5 +1,4 @@
 
-#include <test/testlib/Test.h>
 int main()
 {
 
@@ -15,11 +14,6 @@ int main()
 
 	//test_DateConvention();
 
-
-	//test_DerivatibleFunction();
-
-	test_BlackGreek();
-
-	return 1;
+	return 0;
 }
 

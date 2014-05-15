@@ -1,11 +1,4 @@
 #include <cassert>
-
-#include <boost/math/distributions.hpp>
-#include <boost/function.hpp>
-#include <boost/bind.hpp>
-
-#include <ql/math/distributions/normaldistribution.hpp>
-
 #include <LMM/numeric/NumericalMethods.h>
 
 
