@@ -1,3 +1,6 @@
+2014.05.15
+formation Bloomberg. Accomplished factoring old code, reactive tests.
+
 2014.05.14
 write a FindQuantLib.cmake module. add generic path for runtime path management. First refactoring the code
 
