@@ -12,7 +12,10 @@
 #################################################
 
 add_library(LMM_ModelMCLMM
-    "${CMAKE_SOURCE_DIR}/LMM/ModelMCLMM/Correlation.h"
+    "${CMAKE_SOURCE_DIR}/LMM/Name.h"
+	"${CMAKE_SOURCE_DIR}/LMM/helper/RNGenerator.h"
+	"${CMAKE_SOURCE_DIR}/LMM/instrument/TenorType.h"
+	"${CMAKE_SOURCE_DIR}/LMM/ModelMCLMM/Correlation.h"
 	"${CMAKE_SOURCE_DIR}/LMM/ModelMCLMM/Dispersion.h"
 	"${CMAKE_SOURCE_DIR}/LMM/ModelMCLMM/HGVolatilityFunction.h"
 	"${CMAKE_SOURCE_DIR}/LMM/ModelMCLMM/Lmm.h"
@@ -37,3 +40,5 @@ add_library(LMM_ModelMCLMM
 	"VolatilityFunction.cpp"
 	"VolatilityGridBuilder.cpp"
 )
+
+target_link_libraries(LMM_ModelMCLMM LMM_instrument LMM_helper)

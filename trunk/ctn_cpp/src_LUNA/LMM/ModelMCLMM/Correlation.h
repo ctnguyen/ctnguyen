@@ -6,10 +6,10 @@
 #include <string>
 #include <math.h>
 
-#include "PCA.h"
-#include "RobonatoAngle.h"
-
 #include <boost/shared_ptr.hpp>
+
+#include <LMM/ModelMCLMM/PCA.h>
+#include <LMM/ModelMCLMM/RobonatoAngle.h>
 
 using namespace std;
 using namespace QuantLib;

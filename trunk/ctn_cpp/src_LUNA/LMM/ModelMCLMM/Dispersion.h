@@ -1,13 +1,14 @@
 #pragma once
 
-#include "Correlation.h"
-#include "VolatilityFunction.h"
-
 #include <vector>
+
 #include <boost/shared_ptr.hpp>
 #include <boost/function.hpp>
 
-#include "LMMTenorStructure.h"
+#include <LMM/ModelMCLMM/LMMTenorStructure.h>
+#include <LMM/ModelMCLMM/Correlation.h>
+#include <LMM/ModelMCLMM/VolatilityFunction.h>
+
 
 //! YY: suppose correlation is time dependent, so can separate: Correlation & Vol 
 

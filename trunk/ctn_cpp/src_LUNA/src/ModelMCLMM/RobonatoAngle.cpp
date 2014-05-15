@@ -1,6 +1,11 @@
 
-#include "RobonatoAngle.h"
+#include <math.h>
+#include <cassert>
 
+#include <boost/random/variate_generator.hpp>
+#include <boost/random/mersenne_twister.hpp>
+#include <boost/random/uniform_real_distribution.hpp>
+#include <boost/math/constants/constants.hpp>
 
 #include <ql\math\optimization\endcriteria.hpp>
 #include <ql\math\optimization\constraint.hpp>
@@ -8,17 +13,14 @@
 #include <ql\math\optimization\simplex.hpp>
 #include <ql\math\optimization\levenbergmarquardt.hpp>
 #include <ql\math\optimization\conjugategradient.hpp>
-#include <boost/random/variate_generator.hpp>
-#include <boost/random/mersenne_twister.hpp>
 #include <ql/math/matrixutilities/tapcorrelations.hpp>
-#include <boost/random/uniform_real_distribution.hpp>
 #include <ql/math/matrixutilities/pseudosqrt.hpp>
-#include <boost/math/constants/constants.hpp>
 //#include <ql/errors.hpp>
-#include <cassert>
 
-#include "PCA.h"
-#include <math.h>
+#include <LMM/ModelMCLMM/PCA.h>
+#include <LMM/ModelMCLMM/RobonatoAngle.h>
+
+
 
 using namespace QuantLib;
 

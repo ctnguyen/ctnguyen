@@ -1,4 +1,4 @@
-#include "McSpotLmm.h"
+#include <LMM/ModelMCLMM/McSpotLmm.h>
 
 
 

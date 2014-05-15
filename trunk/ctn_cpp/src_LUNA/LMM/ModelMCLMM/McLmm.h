@@ -8,8 +8,10 @@
 //#include "Name.h"
 //#include "LMMTenorStructure.h"
 //#include "Dispersion.h"
-#include "Lmm.h"
-#include "RNGenerator.h"
+
+#include <LMM/helper/RNGenerator.h>
+#include <LMM/ModelMCLMM/Lmm.h>
+
 
 //#include <vector>
 //#include <boost/numeric/ublas/io.hpp>

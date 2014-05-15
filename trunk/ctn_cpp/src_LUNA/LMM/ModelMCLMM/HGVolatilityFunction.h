@@ -1,13 +1,13 @@
 #pragma once
-#include <ql/termstructures/volatility/abcd.hpp>
-//#include <boost/shared_ptr.hpp>
-
 
 #include <boost/numeric/ublas/triangular.hpp>  // Triangular matrix
 #include <boost/numeric/ublas/io.hpp>
 
-#include "LMMTenorStructure.h"
-#include "VolatilityFunction.h"
+#include <ql/termstructures/volatility/abcd.hpp>
+//#include <boost/shared_ptr.hpp>
+
+#include <LMM/ModelMCLMM/LMMTenorStructure.h>
+#include <LMM/ModelMCLMM/VolatilityFunction.h>
 
 
 //! The idea is to use h represent the humped shape (homogeneity), and then use function g to match the swaptionMatrix

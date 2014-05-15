@@ -1,4 +1,4 @@
-#include "Lmm.h"
+#include <LMM/ModelMCLMM/Lmm.h>
 #include <cassert>
 void Lmm::initCovarianceTensor()
 {
