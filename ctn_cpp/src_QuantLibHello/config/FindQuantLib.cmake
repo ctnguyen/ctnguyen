@@ -252,7 +252,6 @@ if(NOT "$ENV{QUANTLIB_ROOT}" STREQUAL "")
 	
 		find_path(QuantLib_INCLUDE_DIR
 		NAMES         ql/quantlib.hpp
-		#HINTS         /home/vctnguyen/QuantLib-1.4/include
 		HINTS         $ENV{QUANTLIB_ROOT}/include
 		#PATH_SUFFIXES ${_QuantLib_PATH_SUFFIXES}
 		)
@@ -296,17 +295,20 @@ if(QuantLib_FOUND)
 		find_package_handle_standard_args(QuantLib DEFAULT_MSG QuantLib_LIBRARY QuantLib_INCLUDE_DIR)
 		mark_as_advanced(QuantLib_LIBRARY)
 	endif()
+message("-- QuantLib  --------------------------------------------------------")
 	message(STATUS "Found QuantLib ${QuantLib_VERSION} library:")
 	message("QuantLib_INCLUDE_DIR")
 	message("	[${QuantLib_INCLUDE_DIR}]")
 	message("QuantLib_LIBRARY_DIR")
 	message("	[${QuantLib_LIBRARY_DIR}]")
 	message("QuantLib_LIBRARY:[${QuantLib_LIBRARY}]")
-	message("----------------------------------------------  End QuantLib Informations")
+	
 else()
+message("-- QuantLib  --------------------------------------------------------")
 	message(" ")
 	message("!!!!!! QuantLib can not be found")
 	message("!!!!!! Be sure that you have correctly define your QUANTLIB_ROOT environment variable")
 	message("!!!!!! This variable QUANTLIB_ROOT indicate where is installed your QuantLib library")
 	message(" ")
 endif()
+message("-- QuantLib  --------------------------------------------------------")
