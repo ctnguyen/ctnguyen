@@ -52,9 +52,9 @@ add_executable(qlHello main.cpp)
 target_link_libraries(qlHello ${QuantLib_LIBRARY})
 
 ## Debug cmake messages
-#message("Environment variable has specified BOOST_ROOT[$ENV{BOOST_ROOT}]")
-#message("Environment variable has specified QUANTLIB_ROOT[$ENV{QUANTLIB_ROOT}]")
-##message("Boost_LIBRARY : [${Boost_LIBRARIES}]")
+message("Environment variable has specified BOOST_ROOT[$ENV{BOOST_ROOT}]")
+message("Environment variable has specified QUANTLIB_ROOT[$ENV{QUANTLIB_ROOT}]")
+message("Boost_LIBRARY : [${Boost_LIBRARIES}]")
 message("Boost_INCLUDE_DIRS[${Boost_INCLUDE_DIRS}]")
 message("Boost_LIBRARY_DIRS[${Boost_LIBRARY_DIRS}]")
 
