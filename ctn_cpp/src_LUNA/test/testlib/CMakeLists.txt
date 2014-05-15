@@ -34,7 +34,6 @@ add_library(LMM_testlib
 	"Test_Instrument.cpp"
 	"Test_IntegrationMethod.cpp"
 	"Test_PCA.cpp"
-	"Test_VanillaSwapPricer.cpp"
 	"Test_VanillaSwaptionPricer.cpp"
 	"VolatilityTests.cpp"
 )
