@@ -26,6 +26,6 @@ public:
 		 underlyingLiborTenorType_(underlyingLiborTenorType), 
 		 lmmTenorStructureTenorType_(lmmTenorStructureTenorType)
 	{
-///////////////		assert(underlyingLiborTenorType_ == lmmTenorStructureTenorType_);//TODO
+		assert( TenorTypeEnum::operator==(underlyingLiborTenorType_,lmmTenorStructureTenorType_) );
 	}
 };
