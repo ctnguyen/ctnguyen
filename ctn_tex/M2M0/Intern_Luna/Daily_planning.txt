@@ -1,3 +1,6 @@
+2014.05.16
+Reading code.
+
 2014.05.15
 formation Bloomberg. Accomplished factoring old code, reactive tests.
 
