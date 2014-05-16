@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef LMM_TENOR_STRUCTURE_H
+#define LMM_TENOR_STRUCTURE_H
+
 #include <vector>
 #include <string>
 #include <cassert>
@@ -11,7 +15,7 @@
 
 class LMMTenorStructure
 {
-	TenorTypeEnum::TenorTypeEnum   tenorType_;      // eg: "6M"
+	const TenorTypeEnum::TenorTypeEnum   tenorType_;      // eg: "6M" // never change, to be constant
 	Name::indexInLMMTenorStructure horizon_;        // N 
 	std::vector<double>            tenorDates_;     // size = N+2, LMMTenorDates[k] = T_k, k =[0,...,N+1]
 	std::vector<double>            tenorDeltaT_;    // size = N+1, LMMTenorDeltaT_[k] = T_{k+1} - T_k, k = [0,...,N]
@@ -61,3 +65,5 @@ public:
 };
 
 typedef boost::shared_ptr<LMMTenorStructure> LMMTenorStructure_PTR;
+
+#endif /* LMM_TENOR_STRUCTURE_H */
