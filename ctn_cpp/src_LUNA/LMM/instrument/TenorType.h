@@ -16,14 +16,14 @@
 //}
 
 //http://stackoverflow.com/questions/15451382/implementation-of-operators-for-enum-class
-namespace TenorTypeEnum
+namespace TenorTypeEnum //TODO rewrite in a clean way
 {
 	enum class TenorTypeEnum
 	{
 		_Non, _1M, _3M, _6M, _12M, _1Y
 	};
 
-	bool operator==(TenorTypeEnum& tenorType1, TenorTypeEnum& tenorType2);
+	bool operator==(TenorTypeEnum& tenorType1, TenorTypeEnum& tenorType2); // TODO rewrite this isEqual
 	std::string toString(const TenorTypeEnum& tenorType);
 }
 

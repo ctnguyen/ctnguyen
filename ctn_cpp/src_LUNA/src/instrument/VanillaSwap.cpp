@@ -29,13 +29,13 @@ VanillaSwap::VanillaSwap(double strike,
 	//floatingVsLiborTenorTypeRatio_ = get_floatingLegTenorLmmTenorRatio(); //TenorType::TenorTypeRatio(floatingLegTenorType_,lmmTenorStructureTenorType_); 
 	fixedVsLiborTenorTypeRatio_    = get_fixedLegTenorLmmTenorRatio();    //TenorType::TenorTypeRatio(fixedLegTenorType_,   lmmTenorStructureTenorType_); 
 
-///////////	assert(floatingLegTenorType == lmmTenorStructureTenorType);//TODO
+	assert(TenorTypeEnum::operator==(floatingLegTenorType , lmmTenorStructureTenorType) );
 
 	assert(    indexEnd > indexStart
 		    && indexStart >=0
 		    && (indexEnd_ - indexStart_)%floatingVsLiborTenorTypeRatio_==0 
 		    && (indexEnd_ - indexStart_)%fixedVsLiborTenorTypeRatio_   ==0
-			/*&& floatingLegTenorType_ == lmmTenorStructureTenorType_  TODO */);         // floatingTenor == lmmTenor
+			&& TenorTypeEnum::operator==(floatingLegTenorType_ , lmmTenorStructureTenorType_)  );         // floatingTenor == lmmTenor
 
 	size_t floatingPaymentSize =  (indexEnd_ - indexStart_)/floatingVsLiborTenorTypeRatio_;
 	size_t fixingPaymentSize   =  (indexEnd_ - indexStart_)/fixedVsLiborTenorTypeRatio_;
