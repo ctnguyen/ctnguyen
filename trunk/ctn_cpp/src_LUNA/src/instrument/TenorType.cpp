@@ -1,6 +1,6 @@
 #include <LMM/instrument/TenorType.h>
 
-std::map<TenorTypeEnum::TenorTypeEnum, int> TenorType::tenorTypeMap_ = create();
+std::map<TenorTypeEnum::TenorTypeEnum, int> TenorType::tenorTypeMap_ = TenorType::create();
 
 namespace TenorTypeEnum
 {
