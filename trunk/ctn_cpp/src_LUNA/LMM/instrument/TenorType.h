@@ -1,4 +1,7 @@
 #pragma once
+#ifndef TENOR_TYPE_H
+#define TENOR_TYPE_H
+
 #include <map>
 #include <string>
 #include <cassert>
@@ -79,5 +82,13 @@ public:
 
 		return tenorTypeValue1/tenorTypeValue2;  
 	}
+
+	//! this private part is to ensure that TenorType class IS NOT to be instantiated
+private :
+	TenorType(){}
+	TenorType(TenorType const& );
+	void operator=(TenorType const& );
 };
 
+
+#endif /* TENOR_TYPE_H */
