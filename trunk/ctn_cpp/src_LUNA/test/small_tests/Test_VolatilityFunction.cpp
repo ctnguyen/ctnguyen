@@ -7,7 +7,7 @@ BOOST_AUTO_TEST_SUITE(lmm_test_volatility)
 
 HGVolatilityFunction get_VolatilityFunction_example()
 {
-	TenorTypeEnum::TenorTypeEnum tenorType = TenorTypeEnum::TenorTypeEnum::_3M;
+	Tenor tenorType = Tenor::_3M;
 	size_t horizonYear = 10;
 
 	LMMTenorStructure lmmTenorStructure(tenorType, horizonYear);

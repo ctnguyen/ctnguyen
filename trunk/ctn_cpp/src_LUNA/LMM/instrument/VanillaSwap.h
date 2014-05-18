@@ -18,6 +18,10 @@
 
 //! Suppose there is a LMM Tenor structure: {T_k}_{k=0}^{N}, and forall k, T_{k+1} - T_k = liborTenor, the unity is in Month. 
 //! a swap begins at: T_i, end at T_j.
+
+namespace LMM
+{
+
 class VanillaSwap
 {
 private:
@@ -26,9 +30,9 @@ private:
 	Name::indexInLMMTenorStructure indexStart_;       // i 
 	Name::indexInLMMTenorStructure indexEnd_;         // j 
 
-	TenorTypeEnum::TenorTypeEnum floatingLegTenorType_;			  // floatingLeg payment frequency = Libor's tenorType 
-	TenorTypeEnum::TenorTypeEnum fixedLegTenorType_;			  // fixedLeg payment frequency: each "1M", "3M", "6M", "1Y"
-	TenorTypeEnum::TenorTypeEnum lmmTenorStructureTenorType_;     // fixedLeg payment frequency: each "1M", "3M", "6M", "1Y"
+	Tenor floatingLegTenorType_;			  // floatingLeg payment frequency = Libor's tenorType
+	Tenor fixedLegTenorType_;			  // fixedLeg payment frequency: each "1M", "3M", "6M", "1Y"
+	Tenor lmmTenorStructureTenorType_;     // fixedLeg payment frequency: each "1M", "3M", "6M", "1Y"
 
 	size_t floatingVsLiborTenorTypeRatio_;
 	size_t fixedVsLiborTenorTypeRatio_;
@@ -43,23 +47,23 @@ private:
 public:
 	VanillaSwap();
 
-	VanillaSwap::VanillaSwap(double strike,
+	VanillaSwap(double strike,
 		Name::indexInLMMTenorStructure  indexStart, 
 		Name::indexInLMMTenorStructure  indexEnd, 
-		TenorTypeEnum::TenorTypeEnum    floatingLegTenorType, 
-		TenorTypeEnum::TenorTypeEnum	fixedLegTenorType, 						 
-		TenorTypeEnum::TenorTypeEnum    lmmTenorStructureTenorType);
+		Tenor    floatingLegTenorType,
+		Tenor	fixedLegTenorType,
+		Tenor    lmmTenorStructureTenorType);
 
 
 	double get_strike() const {return strike_;}
 	void   set_strike(double strike) {strike_ = strike;}
 
-	TenorTypeEnum::TenorTypeEnum get_floatingLegTenorType()		  const {return floatingLegTenorType_;}
-	TenorTypeEnum::TenorTypeEnum get_fixedLegTenorType()		  const {return fixedLegTenorType_;}
-	TenorTypeEnum::TenorTypeEnum get_lmmTenorStructureTenorType() const {return lmmTenorStructureTenorType_; }
+	Tenor get_floatingLegTenorType()		  const {return floatingLegTenorType_;}
+	Tenor get_fixedLegTenorType()		  const {return fixedLegTenorType_;}
+	Tenor get_lmmTenorStructureTenorType() const {return lmmTenorStructureTenorType_; }
 
 	//size_t get_floatingLegTenorLmmTenorRatio() const { return TenorType::TenorTypeRatio(floatingLegTenorType_,lmmTenorStructureTenorType_);}		
-	size_t get_fixedLegTenorLmmTenorRatio()    const { return TenorType::TenorTypeRatio(fixedLegTenorType_,   lmmTenorStructureTenorType_);}
+	size_t get_fixedLegTenorLmmTenorRatio()    const { return fixedLegTenorType_.ratioTo( lmmTenorStructureTenorType_);}
 
 
 	const std::vector<Name::indexInLMMTenorStructure>& get_floatingLegPaymentIndexSchedule() const {return floatingLegPaymentIndexSchedule_;}
@@ -76,6 +80,6 @@ public:
 typedef boost::shared_ptr<VanillaSwap> VanillaSwap_PTR;
 
 
-
+}
 
 

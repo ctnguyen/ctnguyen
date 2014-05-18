@@ -1,7 +1,8 @@
-#pragma once
-
 #ifndef LMM_TENOR_STRUCTURE_H
 #define LMM_TENOR_STRUCTURE_H
+#pragma once
+
+
 
 #include <vector>
 #include <string>
@@ -15,14 +16,14 @@
 
 class LMMTenorStructure
 {
-	const TenorTypeEnum::TenorTypeEnum   tenorType_;      // eg: "6M" // never change, to be constant
+	const Tenor   tenorType_;      // eg: "6M" // never change, to be constant
 	Name::indexInLMMTenorStructure horizon_;        // N 
 	std::vector<double>            tenorDates_;     // size = N+2, LMMTenorDates[k] = T_k, k =[0,...,N+1]
 	std::vector<double>            tenorDeltaT_;    // size = N+1, LMMTenorDeltaT_[k] = T_{k+1} - T_k, k = [0,...,N]
 
 public:
 
-	LMMTenorStructure(const TenorTypeEnum::TenorTypeEnum&  tenorType, //! User should make sure the coherence.
+	LMMTenorStructure(const Tenor&  tenorType, //! User should make sure the coherence.
 					  const size_t horizonYear);
 
 	//! getter
@@ -54,8 +55,8 @@ public:
 	}
 
 
-	TenorTypeEnum::TenorTypeEnum get_tenorType() const {return tenorType_;} 
-	std::string get_tenorTypeStr() const {tenorType_;} 
+	Tenor get_tenorType() const {return tenorType_;}
+	std::string get_tenorTypeStr() const {return tenorType_.name;}
 
 	//! equal operator: when modify the class, don't forget to adjust == operator
     bool operator == (const LMMTenorStructure& LMMTenorStructure);

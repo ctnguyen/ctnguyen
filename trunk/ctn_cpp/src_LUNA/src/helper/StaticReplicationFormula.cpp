@@ -1,5 +1,6 @@
 #include <boost/bind.hpp>
 
+#include <ql/quantlib.hpp>
 #include <ql/math/integrals/simpsonintegral.hpp>
 
 #include <LMM/helper/StaticReplicationFormula.h>

@@ -14,7 +14,7 @@ BOOST_AUTO_TEST_SUITE(lmm_test_model_McTerminalLmm)
 BOOST_AUTO_TEST_CASE(test_McTerminalLmm)  // OK: Test passed!
 {
 	//! LMMTenorStructure
-	TenorTypeEnum::TenorTypeEnum tenorType = TenorTypeEnum::TenorTypeEnum::_6M;
+	Tenor tenorType = Tenor::_6M;
 	size_t horizonYear = 2;
 	LMMTenorStructure lmmTenorStructure(tenorType, horizonYear);
 	lmmTenorStructure.print();
@@ -34,7 +34,7 @@ BOOST_AUTO_TEST_CASE(test_McTerminalLmm)  // OK: Test passed!
 	size_t nbFactor       = 3; // need to test nbFactor  = 3, and nbFactor = 
 	size_t correlFullRank = lmmTenorStructure.get_horizon()+1;
 	size_t correlReducedRank = nbFactor;
-	CorrelationReductionTyype correlReductionType = CorrelationReductionTyype::PCA;
+	CorrelationReductionTyype::CorrelationReductionTyype correlReductionType = CorrelationReductionTyype::PCA;
 	double correlAlpha = 0.0;
 	double correlBeta  = 0.1;
 	Correlation_PTR correlation(new XY_beta_Correlation(correlFullRank,correlReducedRank, correlReductionType,correlAlpha,correlBeta));
@@ -65,7 +65,7 @@ BOOST_AUTO_TEST_CASE(test_McTerminalLmm)  // OK: Test passed!
 
 	size_t nbSimulation = 1;
 
-	McTerminalLmm mcTerminalLmm(dispersion, shifts, liborsInitValue, rnGenerator, MCSchemeType::MCSchemeType::EULER);
+	McTerminalLmm mcTerminalLmm(dispersion, shifts, liborsInitValue, rnGenerator, MCSchemeType::EULER);
 
     mcTerminalLmm.print();  // Attention, there are two print: parent class and derived class
 	

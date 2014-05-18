@@ -98,7 +98,7 @@ public:
 
 	//! diffusion integration.
 	//! int_{T_{k-1}}^{T_k} sigma_i(t) dW_t,   indexTime = k
-	Real McLmm::computeIntSto(size_t indexTime, 
+	Real computeIntSto(size_t indexTime,
 		size_t indexLibor, 
 		const std::vector<double>& G);
 

@@ -26,7 +26,7 @@ void LmmApproxVanillaSwaptionPricer::calculateZC()
 double LmmApproxVanillaSwaptionPricer::volBlack(const VanillaSwaption& vanillaSwaption,
 												const std::vector<double>& liborsInitValue) const
 {
-	const VanillaSwap& vanillaSwap = vanillaSwaption.getUnderlyingSwap();
+	const LMM::VanillaSwap& vanillaSwap = vanillaSwaption.getUnderlyingSwap();
 
 	assert(horizon_ >= vanillaSwap.get_indexEnd()); //! if not cannot price it.
 	//! YY TODO: implement the == operator and active this test!

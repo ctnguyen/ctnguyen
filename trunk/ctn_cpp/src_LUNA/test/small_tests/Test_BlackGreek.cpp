@@ -43,9 +43,9 @@ BOOST_AUTO_TEST_CASE(test_BlackGreek)
 	std::string fileName = "test_BlackGreek.csv"; //+ MCSchemeType::mcSchemeType2String(mcSchemeType) +".csv";
 	std::string path = printPathOutput + fileName;
 
-	PrintElement_PTR stirkes_print      = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("strike", strikes));
-	PrintElement_PTR Black_Vegas_print  = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("Black_Vegas", Vegas));
-	PrintElement_PTR Black_Volgas_print = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("Black_Volgas", Volgas));
+	PrintElement_PTR stirkes_print      = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("strike", strikes));
+	PrintElement_PTR Black_Vegas_print  = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("Black_Vegas", Vegas));
+	PrintElement_PTR Black_Volgas_print = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("Black_Volgas", Volgas));
 
 	std::vector<PrintElement_PTR> elements_print;
 	elements_print.push_back(stirkes_print);

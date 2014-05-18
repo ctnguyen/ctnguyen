@@ -24,14 +24,14 @@ VanillaSwaption get_VanillaSwaption()
 	double strike = 0.04;
 	Name::indexInLMMTenorStructure  indexStart = 12; // 12
 	Name::indexInLMMTenorStructure  indexEnd   = 18; // 28;
-	TenorTypeEnum::TenorTypeEnum	floatingLegTenorType = TenorTypeEnum::TenorTypeEnum::_6M;
-	TenorTypeEnum::TenorTypeEnum	fixedLegTenorType    = TenorTypeEnum::TenorTypeEnum::_1Y; 						 
-	TenorTypeEnum::TenorTypeEnum    lmmTenorStructureTenorType = TenorTypeEnum::TenorTypeEnum::_6M;
+	Tenor	floatingLegTenorType = Tenor::_6M;
+	Tenor	fixedLegTenorType    = Tenor::_1Y;
+	Tenor    lmmTenorStructureTenorType = Tenor::_6M;
 
-	VanillaSwap vanillaSwap(strike, indexStart, indexEnd, floatingLegTenorType, fixedLegTenorType, lmmTenorStructureTenorType);
+	LMM::VanillaSwap vanillaSwap(strike, indexStart, indexEnd, floatingLegTenorType, fixedLegTenorType, lmmTenorStructureTenorType);
 
 	Name::indexInLMMTenorStructure  indexMaturity = indexStart;
-	VanillaSwaption vanillaSwaption(vanillaSwap,VanillaSwaptionType::VanillaSwaptionType::CALL,indexMaturity);
+	VanillaSwaption vanillaSwaption(vanillaSwap,VanillaSwaptionType::CALL,indexMaturity);
 	return vanillaSwaption;
 }
 //
@@ -52,7 +52,7 @@ MCLmm_PTR get_McLmm2(bool TerminalOrSpotProb, MCSchemeType::MCSchemeType mcSchem
 {
 	//! McTerminalLmm
 	//! LMMTenorStructure
-	TenorTypeEnum::TenorTypeEnum tenorType = TenorTypeEnum::TenorTypeEnum::_6M;
+	Tenor tenorType = Tenor::_6M;
 	size_t horizonYear = 15;
 	LMMTenorStructure lmmTenorStructure(tenorType, horizonYear);
 	lmmTenorStructure.print();
@@ -72,7 +72,7 @@ MCLmm_PTR get_McLmm2(bool TerminalOrSpotProb, MCSchemeType::MCSchemeType mcSchem
 	size_t nbFactor       = 3; // need to test nbFactor  = 3, and nbFactor = 
 	size_t correlFullRank = lmmTenorStructure.get_horizon()+1;
 	size_t correlReducedRank = nbFactor;
-	CorrelationReductionTyype correlReductionType = CorrelationReductionTyype::PCA;
+	CorrelationReductionTyype::CorrelationReductionTyype correlReductionType = CorrelationReductionTyype::PCA;
 	double correlAlpha = 0.0;
 	double correlBeta  = 0.1;
 	Correlation_PTR correlation(new XY_beta_Correlation(correlFullRank,correlReducedRank, correlReductionType,correlAlpha,correlBeta));
@@ -129,7 +129,7 @@ void test_McLmm2( bool TerminalOrSpotProb,
 
 	for(size_t i=0;; ++i)
 	{
-		size_t nbSimulation = (size_t)std::pow(bnSimualtionPowStep,i)*minNbSimulation;
+		size_t nbSimulation = (size_t)std::pow(bnSimualtionPowStep,(int)i)*minNbSimulation;
 		if(nbSimulation>maxNbSimulation)
 			break;
 		nbSimulationVector.push_back(nbSimulation);
@@ -156,37 +156,37 @@ BOOST_AUTO_TEST_CASE(test_VanillaSwaptionPricer)
 	std::string path = printPathOutput + fileName;
 
 	//! Terminal Euler
-	test_McLmm2( true, MCSchemeType::MCSchemeType::EULER,minNbSimulation,maxNbSimulation,bnSimualtionPowStep,
+	test_McLmm2( true, MCSchemeType::EULER,minNbSimulation,maxNbSimulation,bnSimualtionPowStep,
 		nbSimulationVector, swaptionPriceVector, analyticalSwaptionPrice);
 	std::vector<double> analyticalSwapPriceConstVector(nbSimulationVector.size(), analyticalSwaptionPrice);
 
 	std::cout << analyticalSwaptionPrice << std::endl;
 
-	PrintElement_PTR nbSimulationVector_print   = PrintElement_PTR(new VectorPrintElement<std::vector<size_t>>("nbSimulationVector", nbSimulationVector));
-	PrintElement_PTR analyticalSwapPrice_print  = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("analyticalSwapPrice", analyticalSwapPriceConstVector));
-	PrintElement_PTR Euler_swaptionPriceVector_print  = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("Euler_swapNPVResultVector", swaptionPriceVector));
+	PrintElement_PTR nbSimulationVector_print   = PrintElement_PTR(new VectorPrintElement<std::vector<size_t> >("nbSimulationVector", nbSimulationVector));
+	PrintElement_PTR analyticalSwapPrice_print  = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("analyticalSwapPrice", analyticalSwapPriceConstVector));
+	PrintElement_PTR Euler_swaptionPriceVector_print  = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("Euler_swapNPVResultVector", swaptionPriceVector));
 
 	//! Terminal PC
-	test_McLmm2( true, MCSchemeType::MCSchemeType::PC,minNbSimulation,maxNbSimulation,bnSimualtionPowStep,
+	test_McLmm2( true, MCSchemeType::PC,minNbSimulation,maxNbSimulation,bnSimualtionPowStep,
 		nbSimulationVector,swaptionPriceVector, analyticalSwaptionPrice);
-	PrintElement_PTR PC_swaptionPriceVector_print  = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("PC_swapNPVResultVector", swaptionPriceVector));
+	PrintElement_PTR PC_swaptionPriceVector_print  = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("PC_swapNPVResultVector", swaptionPriceVector));
 
 
 	//! Terminal IPC
-	test_McLmm2( true, MCSchemeType::MCSchemeType::IPC,minNbSimulation,maxNbSimulation,bnSimualtionPowStep,
+	test_McLmm2( true, MCSchemeType::IPC,minNbSimulation,maxNbSimulation,bnSimualtionPowStep,
 		nbSimulationVector,swaptionPriceVector, analyticalSwaptionPrice);
-	PrintElement_PTR IPC_swaptionPriceVector_print  = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("IPC_swapNPVResultVector", swaptionPriceVector));
+	PrintElement_PTR IPC_swaptionPriceVector_print  = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("IPC_swapNPVResultVector", swaptionPriceVector));
 
 
 	//! Spot Euler
-	test_McLmm2( false, MCSchemeType::MCSchemeType::EULER,minNbSimulation,maxNbSimulation,bnSimualtionPowStep,
+	test_McLmm2( false, MCSchemeType::EULER,minNbSimulation,maxNbSimulation,bnSimualtionPowStep,
 		nbSimulationVector,swaptionPriceVector, analyticalSwaptionPrice);
-	PrintElement_PTR Spot_EULER_swaptionPriceVector_print  = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("Spot_EULER_swapNPVResultVector_print", swaptionPriceVector));
+	PrintElement_PTR Spot_EULER_swaptionPriceVector_print  = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("Spot_EULER_swapNPVResultVector_print", swaptionPriceVector));
 
 	//! Spot PC
-	test_McLmm2( false, MCSchemeType::MCSchemeType::PC,minNbSimulation,maxNbSimulation,bnSimualtionPowStep,
+	test_McLmm2( false, MCSchemeType::PC,minNbSimulation,maxNbSimulation,bnSimualtionPowStep,
 		nbSimulationVector,swaptionPriceVector, analyticalSwaptionPrice);
-	PrintElement_PTR Spot_PC_swaptionPriceVector_print  = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("Spot_PC_swapNPVResultVector_print", swaptionPriceVector));
+	PrintElement_PTR Spot_PC_swaptionPriceVector_print  = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("Spot_PC_swapNPVResultVector_print", swaptionPriceVector));
 
 
 	std::vector<PrintElement_PTR> elements_print;

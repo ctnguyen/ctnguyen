@@ -1,6 +1,6 @@
 #include <LMM/pricer/VanillaSwapPricer.h>
 
-void VanillaSwapPricer::precalculate(const VanillaSwap& vanillaSwap) const
+void VanillaSwapPricer::precalculate(const LMM::VanillaSwap& vanillaSwap) const
 {
 	assert(lmmTenorStructure_.get_horizon() >= vanillaSwap.get_indexEnd());  // if not cannot price this swap;
 	//! YY TODO: need to implement the == operator for enum TenorType
@@ -32,7 +32,7 @@ void VanillaSwapPricer::precalculate(const VanillaSwap& vanillaSwap) const
 
 
 double VanillaSwapPricer::annuity( Name::indexInLMMTenorStructure indexValuationDate,
-								   const VanillaSwap& vanillaSwap,
+								   const LMM::VanillaSwap& vanillaSwap,
 								   const std::vector<double>& numeraire) const
 {
 	assert(indexValuationDate <= vanillaSwap.get_indexStart()); //YY TODO: this test too slow, esp: within MC simulation
@@ -51,7 +51,7 @@ double VanillaSwapPricer::annuity( Name::indexInLMMTenorStructure indexValuation
 }
 
 double VanillaSwapPricer::pvFixedLeg(Name::indexInLMMTenorStructure indexValuationDate,
-								     const VanillaSwap& vanillaSwap,
+								     const LMM::VanillaSwap& vanillaSwap,
 									 const std::vector<double>& numeraire)  const
 {
 	assert(indexValuationDate <= vanillaSwap.get_indexStart()); //YY TODO: this test too slow, esp: within MC simulation
@@ -61,15 +61,15 @@ double VanillaSwapPricer::pvFixedLeg(Name::indexInLMMTenorStructure indexValuati
 }
 
 
-double VanillaSwapPricer::swapNPV_Analytical_1(const VanillaSwap& vanillaSwap, const std::vector<double>& liborsInitValue)  const // initLibor[i] = L_i[T_0]
+double VanillaSwapPricer::swapNPV_Analytical_1(const LMM::VanillaSwap& vanillaSwap, const std::vector<double>& liborsInitValue)  const // initLibor[i] = L_i[T_0]
 {
 	assert(lmmTenorStructure_.get_horizon()+1 == liborsInitValue.size());
 	assert(lmmTenorStructure_.get_horizon() >= vanillaSwap.get_indexEnd());  // if not cannot price this swap;
 	size_t horizon = lmmTenorStructure_.get_horizon();
 
 
-	double floatingLegdelta_T = TenorType::convertToYear(vanillaSwap.get_floatingLegTenorType());
-	double fixedLegdelta_T = TenorType::convertToYear(vanillaSwap.get_fixedLegTenorType());
+	double floatingLegdelta_T = vanillaSwap.get_floatingLegTenorType().convertToYear();
+	double fixedLegdelta_T = vanillaSwap.get_fixedLegTenorType().convertToYear();
 
 	//! ZC[i] = P(T_0,T_i)
 	std::vector<double> ZC(horizon+2);
@@ -112,15 +112,15 @@ double VanillaSwapPricer::swapNPV_Analytical_1(const VanillaSwap& vanillaSwap, c
 	return pvFloatingLeg - pvFixedLeg;
 }
 
-double VanillaSwapPricer::swapNPV_Analytical_2(const VanillaSwap& vanillaSwap, const std::vector<double>& liborsInitValue)  const // initLibor[i] = L_i[T_0]
+double VanillaSwapPricer::swapNPV_Analytical_2(const LMM::VanillaSwap& vanillaSwap, const std::vector<double>& liborsInitValue)  const // initLibor[i] = L_i[T_0]
 {
 	assert(lmmTenorStructure_.get_horizon()+1 == liborsInitValue.size());
 	assert(lmmTenorStructure_.get_horizon() >= vanillaSwap.get_indexEnd());  // if not cannot price this swap;
 	size_t horizon = lmmTenorStructure_.get_horizon();
 
 
-	double floatingLegdelta_T = TenorType::convertToYear(vanillaSwap.get_floatingLegTenorType());
-	double fixedLegdelta_T = TenorType::convertToYear(vanillaSwap.get_fixedLegTenorType());
+	double floatingLegdelta_T = vanillaSwap.get_floatingLegTenorType().convertToYear();
+	double fixedLegdelta_T = vanillaSwap.get_fixedLegTenorType().convertToYear();
 
 	//! ZC[i] = P(T_0,T_i)
 	std::vector<double> ZC(horizon+2);
@@ -163,7 +163,7 @@ double VanillaSwapPricer::swapNPV_Analytical_2(const VanillaSwap& vanillaSwap, c
 }
 
 //! same as swapNPV_Analytical_1(...)
-double VanillaSwapPricer::swapRate_Analytical(const VanillaSwap& vanillaSwap,
+double VanillaSwapPricer::swapRate_Analytical(const LMM::VanillaSwap& vanillaSwap,
 											  const std::vector<double>& liborsInitValue)  const
 {
 	assert(lmmTenorStructure_.get_horizon()+1 == liborsInitValue.size());
@@ -171,8 +171,8 @@ double VanillaSwapPricer::swapRate_Analytical(const VanillaSwap& vanillaSwap,
 	size_t horizon = lmmTenorStructure_.get_horizon();
 
 
-	double floatingLegdelta_T = TenorType::convertToYear(vanillaSwap.get_floatingLegTenorType());
-	double fixedLegdelta_T = TenorType::convertToYear(vanillaSwap.get_fixedLegTenorType());
+	double floatingLegdelta_T = vanillaSwap.get_floatingLegTenorType().convertToYear();
+	double fixedLegdelta_T = vanillaSwap.get_fixedLegTenorType().convertToYear();
 
 	//! ZC[i] = P(T_0,T_i)
 	std::vector<double> ZC(horizon+2);

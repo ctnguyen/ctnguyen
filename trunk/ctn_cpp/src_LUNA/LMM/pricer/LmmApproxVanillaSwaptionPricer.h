@@ -23,7 +23,7 @@ private:
 
 public:
 	//! constructor  
-	LmmApproxVanillaSwaptionPricer::LmmApproxVanillaSwaptionPricer(const Lmm_PTR& lmmModel)
+	LmmApproxVanillaSwaptionPricer(const Lmm_PTR& lmmModel)
 		:VanillaSwapPricer(lmmModel->get_LMMTenorStructure()),
 		 lmm_(lmmModel),
 		 horizon_(lmm_->get_horizon()),

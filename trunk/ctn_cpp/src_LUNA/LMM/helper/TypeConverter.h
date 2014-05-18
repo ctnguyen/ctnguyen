@@ -6,6 +6,8 @@
 
 #include <boost/numeric/ublas/io.hpp>
 #include <boost/numeric/ublas/matrix.hpp>
+
+#include <ql/quantlib.hpp>
 #include <ql/math/matrix.hpp>
 
 template <typename T>

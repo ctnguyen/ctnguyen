@@ -1,6 +1,8 @@
 #pragma once
 
 #include <vector>
+
+#include <ql/quantlib.hpp>
 #include <ql/math/randomnumbers/sobolrsg.hpp>
 #include <ql/math/distributions/normaldistribution.hpp>
 #include <ql/math/randomnumbers/inversecumulativersg.hpp>

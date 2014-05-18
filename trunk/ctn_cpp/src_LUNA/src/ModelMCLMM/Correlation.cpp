@@ -10,7 +10,7 @@
 //
 // ------------------------------------------------------------------------------
 
-Correlation::Correlation(size_t fullRank, size_t reducedRank, CorrelationReductionTyype& reductionType) // YY: TODO don't like default parameter: use boost::defaultable<size_t> for reduceRank latter.
+Correlation::Correlation(size_t fullRank, size_t reducedRank, CorrelationReductionTyype::CorrelationReductionTyype& reductionType) // YY: TODO don't like default parameter: use boost::defaultable<size_t> for reduceRank latter.
 	: fullRank_(fullRank),
 	reducedRank_(reducedRank),
 	originalCorrelMatrix_(fullRank,fullRank), 
@@ -74,7 +74,7 @@ size_t Correlation::get_reducedRank(){return reducedRank_;}
 const Matrix& Correlation::get_originalCorrelMatrix() const {return originalCorrelMatrix_;}
 const Matrix& Correlation::get_reducedCorrelMatrixB() const {return reducedCorrelMatrixB_;}
 const Matrix& Correlation::get_reducedCorrelMatrixApprox() const {return reducedCorrelMatrixApprox_;}
-const CorrelationReductionTyype& Correlation::get_reductionType() const {return reductionType_;}
+const CorrelationReductionTyype::CorrelationReductionTyype& Correlation::get_reductionType() const {return reductionType_;}
 const std::string Correlation::get_reductionTypeString() const
 {
 	if(reductionType_ == CorrelationReductionTyype::PCA)
@@ -213,7 +213,7 @@ void Correlation::print_details(string& fileName) const
 //
 // ------------------------------------------------------------------------------
 
-Shosemaker2_Correlation::Shosemaker2_Correlation(size_t fullRank, size_t reducedRank, CorrelationReductionTyype& reductionType, double eta, double rhoInfty) // // YY: TODO don't like default parameter: use boost::defaultable<size_t> for reduceRank latter.
+Shosemaker2_Correlation::Shosemaker2_Correlation(size_t fullRank, size_t reducedRank, CorrelationReductionTyype::CorrelationReductionTyype& reductionType, double eta, double rhoInfty) // // YY: TODO don't like default parameter: use boost::defaultable<size_t> for reduceRank latter.
 	: Correlation(fullRank,reducedRank, reductionType), 
 	eta_(eta),
 	rhoInfty_(rhoInfty)
@@ -251,7 +251,7 @@ double Shosemaker2_Correlation::correlOriginal(size_t index_i, size_t index_j)
 //                          Shosemaker3_Correlation
 //
 // ------------------------------------------------------------------------------
-Shosemaker3_Correlation::Shosemaker3_Correlation(size_t fullRank, size_t reducedRank, CorrelationReductionTyype& reductionType, double eta1, double eta2, double rhoInfty)
+Shosemaker3_Correlation::Shosemaker3_Correlation(size_t fullRank, size_t reducedRank, CorrelationReductionTyype::CorrelationReductionTyype& reductionType, double eta1, double eta2, double rhoInfty)
 	: Correlation(fullRank,reducedRank, reductionType),
 	eta1_(eta1), 
 	eta2_(eta2),
@@ -296,7 +296,7 @@ double Shosemaker3_Correlation::correlOriginal(size_t index_i, size_t index_j)
 //                          Robonato2_Correlation
 //
 // ------------------------------------------------------------------------------
-Robonato2_Correlation::Robonato2_Correlation(size_t fullRank, size_t reducedRank, CorrelationReductionTyype& reductionType, double beta, double rhoInfty)
+Robonato2_Correlation::Robonato2_Correlation(size_t fullRank, size_t reducedRank, CorrelationReductionTyype::CorrelationReductionTyype& reductionType, double beta, double rhoInfty)
 	: Correlation(fullRank,reducedRank, reductionType),
 	beta_(beta),
 	rhoInfty_(rhoInfty)
@@ -331,7 +331,7 @@ double Robonato2_Correlation::correlOriginal(size_t index_i, size_t index_j)
 //
 // ------------------------------------------------------------------------------
 
-Robonato3_Correlation::Robonato3_Correlation(size_t fullRank, size_t reducedRank, CorrelationReductionTyype& reductionType, double alpha, double beta, double rhoInfty)
+Robonato3_Correlation::Robonato3_Correlation(size_t fullRank, size_t reducedRank, CorrelationReductionTyype::CorrelationReductionTyype& reductionType, double alpha, double beta, double rhoInfty)
 	: Correlation(fullRank, reducedRank, reductionType),
 	alpha_(alpha), 
 	beta_(beta),
@@ -370,7 +370,7 @@ double Robonato3_Correlation::correlOriginal(size_t index_i, size_t index_j) // 
 
 XY_beta_Correlation::XY_beta_Correlation(size_t fullRank, 
 	size_t reducedRank, 
-	CorrelationReductionTyype& reductionType, 
+	CorrelationReductionTyype::CorrelationReductionTyype& reductionType,
 	double alpha, 
 	double beta)
 	: Correlation(fullRank, reducedRank, reductionType),
@@ -409,7 +409,7 @@ double XY_beta_Correlation::correlOriginal(size_t index_i, size_t index_j) // co
 
 Const_Correlation::Const_Correlation  (size_t fullRank, 
 	size_t reducedRank, 
-	CorrelationReductionTyype& reductionType, 
+	CorrelationReductionTyype::CorrelationReductionTyype& reductionType,
 	double correlConst)
 	:Correlation(fullRank,reducedRank,reductionType),
 		correlConst_(correlConst)

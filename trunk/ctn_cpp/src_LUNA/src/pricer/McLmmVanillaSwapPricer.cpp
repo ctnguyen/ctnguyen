@@ -5,14 +5,14 @@
 #include <LMM/pricer/MCLmmVanillaSwapPricer.h>
 #include <LMM/ModelMCLMM/LMMTenorStructure.h>
 
-double MCLmmVanillaSwapPricer::swapRate(const VanillaSwap& vanillaSwap, size_t nbSimulation) const
+double MCLmmVanillaSwapPricer::swapRate(const LMM::VanillaSwap& vanillaSwap, size_t nbSimulation) const
 {
 	throw("Error: not implemented");
 	precalculate(vanillaSwap);
 	return 0.0;
 }
 
-double MCLmmVanillaSwapPricer::swapNPV(const VanillaSwap& vanillaSwap, size_t nbSimulation)  const
+double MCLmmVanillaSwapPricer::swapNPV(const LMM::VanillaSwap& vanillaSwap, size_t nbSimulation)  const
 {
 	precalculate(vanillaSwap);
 	double result = 0.0;
@@ -77,7 +77,7 @@ double MCLmmVanillaSwapPricer::swapNPV(const VanillaSwap& vanillaSwap, size_t nb
 
 //! for one simulation: suppose LMMTenorStructure.data[0] = 0.0
 double MCLmmVanillaSwapPricer::pvFloatingLeg(Name::indexInLMMTenorStructure indexValuationDate,
-											 const VanillaSwap& vanillaSwap,
+											 const LMM::VanillaSwap& vanillaSwap,
 										     const std::vector<double>& numeraire, //numeraire[i]: numeraire value at T_i
 									         const matrix& liborMatrix) const
 {
