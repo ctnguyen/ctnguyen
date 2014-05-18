@@ -75,13 +75,13 @@ template<> const char* Tenor::TYPE_4::NAME =  "_9M";template<> const unsigned in
 template<> const char* Tenor::TYPE_5::NAME = "_12M";template<> const unsigned int Tenor::TYPE_5::NB_MONTH = 12;
 template<> const char* Tenor::TYPE_6::NAME =  "_1Y";template<> const unsigned int Tenor::TYPE_6::NB_MONTH = 12;
 
-template<> const Tenor::TYPE_0 Tenor::_Non;// initialization static variable
-template<> const Tenor::TYPE_1 Tenor::_1M;// initialization static variable
-template<> const Tenor::TYPE_2 Tenor::_3M;// initialization static variable
-template<> const Tenor::TYPE_3 Tenor::_6M;// initialization static variable
-template<> const Tenor::TYPE_4 Tenor::_9M;// initialization static variable
-template<> const Tenor::TYPE_5 Tenor::_12M;// initialization static variable
-template<> const Tenor::TYPE_6 Tenor::_1Y;// initialization static variable
+const Tenor::TYPE_0 Tenor::_Non;// initialization static variable
+const Tenor::TYPE_1 Tenor::_1M;// initialization static variable
+const Tenor::TYPE_2 Tenor::_3M;// initialization static variable
+const Tenor::TYPE_3 Tenor::_6M;// initialization static variable
+const Tenor::TYPE_4 Tenor::_9M;// initialization static variable
+const Tenor::TYPE_5 Tenor::_12M;// initialization static variable
+const Tenor::TYPE_6 Tenor::_1Y;// initialization static variable
 
 
 BOOST_AUTO_TEST_CASE(test_TenorTypePrototype_constructors)
