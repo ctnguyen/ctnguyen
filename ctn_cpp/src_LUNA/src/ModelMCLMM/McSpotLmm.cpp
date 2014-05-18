@@ -17,13 +17,13 @@ void McSpotLmm::simulateLMM()
 	//! YY slow ? 
 	switch(mcSchemeType_)
 	{
-	case MCSchemeType::MCSchemeType::EULER:
+	case MCSchemeType::EULER:
 		SpotLmmModel_Euler();
 		break;
-	case MCSchemeType::MCSchemeType::PC:
+	case MCSchemeType::PC:
 		SpotLmmModel_Pc();
 		break;
-	case MCSchemeType::MCSchemeType::IPC: // improved predictor-corrector
+	case MCSchemeType::IPC: // improved predictor-corrector
 		SpotLmmModel_Ipc();
 		break;
 	default:

@@ -3,6 +3,7 @@
 #include <boost/numeric/ublas/triangular.hpp>  // Triangular matrix
 #include <boost/numeric/ublas/io.hpp>
 
+#include <ql/quantlib.hpp>
 #include <ql/termstructures/volatility/abcd.hpp>
 //#include <boost/shared_ptr.hpp>
 
@@ -90,7 +91,7 @@ private:
 
 public:
 	//! Constructor
-	HGVolatilityFunction::HGVolatilityFunction(const AbcdPWConstFunction::AbcdParams& abcdParams,  // h FunctionParam
+	HGVolatilityFunction(const AbcdPWConstFunction::AbcdParams& abcdParams,  // h FunctionParam
 											   const LMMTenorStructure& lmmTenorStructure);        // horizon = N, total number of Libor: L_k, k = [0,N]
 
 private:

@@ -8,6 +8,7 @@
 #include <boost/function.hpp>
 #include <boost/bind.hpp>
 
+#include <ql/quantlib.hpp>
 #include <ql/math/distributions/normaldistribution.hpp>
 
 

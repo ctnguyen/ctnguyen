@@ -7,12 +7,12 @@
 #include <boost/random/uniform_real_distribution.hpp>
 #include <boost/math/constants/constants.hpp>
 
-#include <ql\math\optimization\endcriteria.hpp>
-#include <ql\math\optimization\constraint.hpp>
-#include <ql\math\optimization\problem.hpp>
-#include <ql\math\optimization\simplex.hpp>
-#include <ql\math\optimization\levenbergmarquardt.hpp>
-#include <ql\math\optimization\conjugategradient.hpp>
+#include <ql/math/optimization/endcriteria.hpp>
+#include <ql/math/optimization/constraint.hpp>
+#include <ql/math/optimization/problem.hpp>
+#include <ql/math/optimization/simplex.hpp>
+#include <ql/math/optimization/levenbergmarquardt.hpp>
+#include <ql/math/optimization/conjugategradient.hpp>
 #include <ql/math/matrixutilities/tapcorrelations.hpp>
 #include <ql/math/matrixutilities/pseudosqrt.hpp>
 //#include <ql/errors.hpp>

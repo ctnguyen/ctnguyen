@@ -1,4 +1,3 @@
-#pragma once
 #include <cassert>
 
 #include <LMM/helper/Printer.h>
@@ -176,8 +175,8 @@ void HGVolatilityFunction::print() const  // OK: test passed.
 	std::vector<PrintElement_PTR> elements_print;
 
 	//! Abcd function for h
-	PrintElement_PTR abcdParamVector     = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("abcdParamVector",  abcdPWConstFunction_.get_AbcdParams().toVector()));
-	PrintElement_PTR abcdFunctionFormula = PrintElement_PTR(new ScalarPrintElement<std::string>("abcdFunctionFormula",  "abcdFunc(tau) = (a+ b*tau)*exp(-c*tau) + d   tau = T_i-t"));
+	PrintElement_PTR abcdParamVector     = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("abcdParamVector",  abcdPWConstFunction_.get_AbcdParams().toVector() ) );
+	PrintElement_PTR abcdFunctionFormula = PrintElement_PTR(new ScalarPrintElement<std::string>("abcdFunctionFormula",  "abcdFunc(tau) = (a+ b*tau)*exp(-c*tau) + d   tau = T_i-t") );
 	elements_print.push_back(abcdParamVector);
 	elements_print.push_back(abcdFunctionFormula);
 

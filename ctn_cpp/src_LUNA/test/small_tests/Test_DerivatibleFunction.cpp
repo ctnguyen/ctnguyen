@@ -175,35 +175,35 @@ BOOST_AUTO_TEST_CASE(test_DerivatibleFunction) // OK Test passed.
 
 
 	//seems a problem of shared ptr polymorphisms ... 
-	PrintElement_PTR x_print    = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("xGrid", xGrid));
+	PrintElement_PTR x_print    = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("xGrid", xGrid));
 
-	PrintElement_PTR yAdd_print    = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("yAdd", yAdd));
-	PrintElement_PTR yAddCompare_print    = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("yAddCompare", yAddCompare));
-	PrintElement_PTR yAdd1st_print = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("yAdd1st", yAdd1st));
-	PrintElement_PTR yAdd1stCompare_print = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("yAdd1stCompare", yAdd1stCompare));
-	PrintElement_PTR yAdd2nd_print = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("yAdd2nd", yAdd2nd));
-	PrintElement_PTR yAdd2ndCompare_print = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("yAdd2ndCompare", yAdd2ndCompare));
+	PrintElement_PTR yAdd_print    = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("yAdd", yAdd));
+	PrintElement_PTR yAddCompare_print    = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("yAddCompare", yAddCompare));
+	PrintElement_PTR yAdd1st_print = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("yAdd1st", yAdd1st));
+	PrintElement_PTR yAdd1stCompare_print = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("yAdd1stCompare", yAdd1stCompare));
+	PrintElement_PTR yAdd2nd_print = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("yAdd2nd", yAdd2nd));
+	PrintElement_PTR yAdd2ndCompare_print = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("yAdd2ndCompare", yAdd2ndCompare));
 
-	PrintElement_PTR ySub_print    = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("ySub", ySub));
-	PrintElement_PTR ySubCompare_print    = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("ySubCompare", ySubCompare));
-	PrintElement_PTR ySub1st_print = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("ySub1st", ySub1st));
-	PrintElement_PTR ySub1stCompare_print = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("ySub1stCompare", ySub1stCompare));
-	PrintElement_PTR ySub2nd_print = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("ySub2nd", ySub2nd));
-	PrintElement_PTR ySub2ndCompare_print = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("ySub2ndCompare", ySub2ndCompare));
+	PrintElement_PTR ySub_print    = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("ySub", ySub));
+	PrintElement_PTR ySubCompare_print    = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("ySubCompare", ySubCompare));
+	PrintElement_PTR ySub1st_print = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("ySub1st", ySub1st));
+	PrintElement_PTR ySub1stCompare_print = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("ySub1stCompare", ySub1stCompare));
+	PrintElement_PTR ySub2nd_print = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("ySub2nd", ySub2nd));
+	PrintElement_PTR ySub2ndCompare_print = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("ySub2ndCompare", ySub2ndCompare));
 
-	PrintElement_PTR yMul_print    = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("yMul", yMul));
-	PrintElement_PTR yMulCompare_print    = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("yMulCompare", yMulCompare));
-	PrintElement_PTR yMul1st_print = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("yMul1st", yMul1st));
-	PrintElement_PTR yMul1stCompare_print = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("yMul1stCompare", yMul1stCompare));
-	PrintElement_PTR yMul2nd_print = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("yMul2nd", yMul2nd));
-	PrintElement_PTR yMul2ndCompare_print = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("yMul2ndCompare", yMul2ndCompare));
+	PrintElement_PTR yMul_print    = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("yMul", yMul));
+	PrintElement_PTR yMulCompare_print    = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("yMulCompare", yMulCompare));
+	PrintElement_PTR yMul1st_print = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("yMul1st", yMul1st));
+	PrintElement_PTR yMul1stCompare_print = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("yMul1stCompare", yMul1stCompare));
+	PrintElement_PTR yMul2nd_print = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("yMul2nd", yMul2nd));
+	PrintElement_PTR yMul2ndCompare_print = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("yMul2ndCompare", yMul2ndCompare));
 
-	PrintElement_PTR yDiv_print    = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("yDiv", yDiv));
-	PrintElement_PTR yDivCompare_print    = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("yDivCompare", yDivCompare));
-	PrintElement_PTR yDiv1st_print = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("yDiv1st", yDiv1st));
-	PrintElement_PTR yDiv1stCompare_print = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("yDiv1stCompare", yDiv1stCompare));
-	PrintElement_PTR yDiv2nd_print = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("yDiv2nd", yDiv2nd));
-	PrintElement_PTR yDiv2ndCompare_print = PrintElement_PTR(new VectorPrintElement<std::vector<double>>("yDiv2ndCompare", yDiv2ndCompare));
+	PrintElement_PTR yDiv_print    = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("yDiv", yDiv));
+	PrintElement_PTR yDivCompare_print    = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("yDivCompare", yDivCompare));
+	PrintElement_PTR yDiv1st_print = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("yDiv1st", yDiv1st));
+	PrintElement_PTR yDiv1stCompare_print = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("yDiv1stCompare", yDiv1stCompare));
+	PrintElement_PTR yDiv2nd_print = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("yDiv2nd", yDiv2nd));
+	PrintElement_PTR yDiv2ndCompare_print = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("yDiv2ndCompare", yDiv2ndCompare));
 
 
 	elements_print.push_back(yAdd_print);

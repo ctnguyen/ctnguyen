@@ -2,13 +2,15 @@
 
 #include <LMM/instrument/VanillaSwap.h>
 
+namespace LMM{
+
 VanillaSwap::VanillaSwap() 
 	: strike_(0.0),
 	indexStart_(0),
 	indexEnd_(0),
-	floatingLegTenorType_(TenorTypeEnum::TenorTypeEnum::_Non),
-	fixedLegTenorType_(TenorTypeEnum::TenorTypeEnum::_Non),
-	lmmTenorStructureTenorType_(TenorTypeEnum::TenorTypeEnum::_Non)
+	floatingLegTenorType_(Tenor::_Non),
+	fixedLegTenorType_(Tenor::_Non),
+	lmmTenorStructureTenorType_(Tenor::_Non)
 {}
 
 //! Suppose there is a LMM Tenor structure: {T_k}_{k=0}^{N}, and forall k, T_{k+1} - T_k = liborTenor, the unity is in Month. 
@@ -16,9 +18,9 @@ VanillaSwap::VanillaSwap()
 VanillaSwap::VanillaSwap(double strike,
 	                     Name::indexInLMMTenorStructure  indexStart, 
 						 Name::indexInLMMTenorStructure  indexEnd, 
-						 TenorTypeEnum::TenorTypeEnum		 floatingLegTenorType, 
-						 TenorTypeEnum::TenorTypeEnum		 fixedLegTenorType, 						 
-						 TenorTypeEnum::TenorTypeEnum        lmmTenorStructureTenorType)
+						 Tenor		 floatingLegTenorType,
+						 Tenor		 fixedLegTenorType,
+						 Tenor        lmmTenorStructureTenorType)
 						 : strike_(strike),
 						   indexStart_(indexStart),
 						   indexEnd_(indexEnd),
@@ -29,13 +31,13 @@ VanillaSwap::VanillaSwap(double strike,
 	//floatingVsLiborTenorTypeRatio_ = get_floatingLegTenorLmmTenorRatio(); //TenorType::TenorTypeRatio(floatingLegTenorType_,lmmTenorStructureTenorType_); 
 	fixedVsLiborTenorTypeRatio_    = get_fixedLegTenorLmmTenorRatio();    //TenorType::TenorTypeRatio(fixedLegTenorType_,   lmmTenorStructureTenorType_); 
 
-	assert(TenorTypeEnum::operator==(floatingLegTenorType , lmmTenorStructureTenorType) );
+	assert(floatingLegTenorType == lmmTenorStructureTenorType) ;
 
 	assert(    indexEnd > indexStart
 		    && indexStart >=0
 		    && (indexEnd_ - indexStart_)%floatingVsLiborTenorTypeRatio_==0 
 		    && (indexEnd_ - indexStart_)%fixedVsLiborTenorTypeRatio_   ==0
-			&& TenorTypeEnum::operator==(floatingLegTenorType_ , lmmTenorStructureTenorType_)  );         // floatingTenor == lmmTenor
+			&& floatingLegTenorType_ == lmmTenorStructureTenorType_  );         // floatingTenor == lmmTenor
 
 	size_t floatingPaymentSize =  (indexEnd_ - indexStart_)/floatingVsLiborTenorTypeRatio_;
 	size_t fixingPaymentSize   =  (indexEnd_ - indexStart_)/fixedVsLiborTenorTypeRatio_;
@@ -99,3 +101,4 @@ void VanillaSwap::print_details() const
 //		fixingPaymentIndexSchedule.push_back(indexStart_+(i+1)*fixedLegfrequency_);
 //	}
 //}
+}

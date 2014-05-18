@@ -42,7 +42,7 @@
 //using namespace QuantLib;
 
 
-const size_t nbMCSimulation = 1; // Number of MC simulations
+//const size_t nbMCSimulation = 1; // Number of MC simulations
 #include <vector>
 
 int main()

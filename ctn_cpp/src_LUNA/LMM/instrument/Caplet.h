@@ -12,20 +12,20 @@ private:
 
 	Name::indexInLMMTenorStructure indexFixing_;      
 	Name::indexInLMMTenorStructure indexPayement_;   
-	TenorTypeEnum::TenorTypeEnum   underlyingLiborTenorType_;
-	TenorTypeEnum::TenorTypeEnum   lmmTenorStructureTenorType_; // used to check pricer's tenor type
+	Tenor   underlyingLiborTenorType_;
+	Tenor   lmmTenorStructureTenorType_; // used to check pricer's tenor type
 
 public:
-	Caplet::Caplet(double strike,
+	Caplet(double strike,
 		Name::indexInLMMTenorStructure  indexFixing, 
 		Name::indexInLMMTenorStructure  indexPayement, 
-		TenorTypeEnum::TenorTypeEnum    underlyingLiborTenorType, 			 
-		TenorTypeEnum::TenorTypeEnum    lmmTenorStructureTenorType)
+		Tenor    underlyingLiborTenorType,
+		Tenor    lmmTenorStructureTenorType)
 		:indexFixing_(indexFixing), 
 		 indexPayement_(indexPayement), 
 		 underlyingLiborTenorType_(underlyingLiborTenorType), 
 		 lmmTenorStructureTenorType_(lmmTenorStructureTenorType)
 	{
-		assert( TenorTypeEnum::operator==(underlyingLiborTenorType_,lmmTenorStructureTenorType_) );
+		assert( underlyingLiborTenorType_ == lmmTenorStructureTenorType_);
 	}
 };

@@ -6,7 +6,7 @@
 //                                             Test 
 //
 //-----------------------------------------------------------------------------------------------
-void test_Robonato2_Correlation(size_t fullRank, size_t reducedRank, CorrelationReductionTyype& reductionType)
+void test_Robonato2_Correlation(size_t fullRank, size_t reducedRank, CorrelationReductionTyype::CorrelationReductionTyype& reductionType)
 {
 	double beta  = 0.1;
 	double rhoInfty = 0.0158;
@@ -20,7 +20,7 @@ void test_Robonato2_Correlation(size_t fullRank, size_t reducedRank, Correlation
 	delete rb2_Correlation;
 }
 
-void test_Robonato3_Correlation(size_t fullRank, size_t reducedRank, CorrelationReductionTyype& reductionType)
+void test_Robonato3_Correlation(size_t fullRank, size_t reducedRank, CorrelationReductionTyype::CorrelationReductionTyype& reductionType)
 {
 	double alpha = -0.001;
 	double beta  = 0.1;
@@ -35,7 +35,7 @@ void test_Robonato3_Correlation(size_t fullRank, size_t reducedRank, Correlation
 	delete rb3_Correlation;
 }
 
-void test_Shosemaker2_Correlation(size_t fullRank, size_t reducedRank, CorrelationReductionTyype& reductionType)
+void test_Shosemaker2_Correlation(size_t fullRank, size_t reducedRank, CorrelationReductionTyype::CorrelationReductionTyype& reductionType)
 {
 	double eta = 1.036;
 	double rhoInfty = 0.0158;
@@ -49,7 +49,7 @@ void test_Shosemaker2_Correlation(size_t fullRank, size_t reducedRank, Correlati
 	delete sm2_Correlation;
 }
 
-void test_Shosemaker3_Correlation(size_t fullRank, size_t reducedRank, CorrelationReductionTyype& reductionType)
+void test_Shosemaker3_Correlation(size_t fullRank, size_t reducedRank, CorrelationReductionTyype::CorrelationReductionTyype& reductionType)
 {
 	double eta1 = 1.036;
 	double eta2 = 3.108;
@@ -65,7 +65,7 @@ void test_Shosemaker3_Correlation(size_t fullRank, size_t reducedRank, Correlati
 }
 
 
-void test_XY_beta_Correlation(size_t fullRank, size_t reducedRank, CorrelationReductionTyype& reductionType)
+void test_XY_beta_Correlation(size_t fullRank, size_t reducedRank, CorrelationReductionTyype::CorrelationReductionTyype& reductionType)
 {
 	double beta  = 0.3;
 	double alpha = 0.5;
@@ -87,7 +87,7 @@ void test_PCAEigenVectorRobonato2(size_t fullRank, size_t reducedRank) // to pri
 	double beta  = 0.1;
 	double rhoInfty = 0.0158;
 
-	CorrelationReductionTyype reductionType = CorrelationReductionTyype::PCA;
+	CorrelationReductionTyype::CorrelationReductionTyype reductionType = CorrelationReductionTyype::PCA;
 	Correlation* rb2_Correlation = new Robonato2_Correlation(fullRank, reducedRank, reductionType, beta, rhoInfty);
 	rb2_Correlation->calculate();
 	Matrix m = rb2_Correlation->get_originalCorrelMatrix();
@@ -124,7 +124,7 @@ void test_PCAEigenVectorXY_beta(size_t fullRank, size_t reducedRank) // to print
 
 
 
-	CorrelationReductionTyype reductionType = CorrelationReductionTyype::PCA;
+	CorrelationReductionTyype::CorrelationReductionTyype reductionType = CorrelationReductionTyype::PCA;
 	Correlation* xyBeta_Correlation = new XY_beta_Correlation(fullRank, reducedRank, reductionType, alpha,beta);
 	xyBeta_Correlation->calculate();
 	Matrix m = xyBeta_Correlation->get_originalCorrelMatrix();
@@ -158,7 +158,7 @@ void testCorrelation()
 	{
 		size_t fullRank = 40;    // 40=15Y/6M
 		size_t reducedRank = 3;
-		CorrelationReductionTyype reductionType =  CorrelationReductionTyype::RA; // PCA, RA;
+		CorrelationReductionTyype::CorrelationReductionTyype reductionType =  CorrelationReductionTyype::RA; // PCA, RA;
 
 		//! TEST Correlation reduction approximation
 		//test_Shosemaker2_Correlation(fullRank,reducedRank,reductionType);

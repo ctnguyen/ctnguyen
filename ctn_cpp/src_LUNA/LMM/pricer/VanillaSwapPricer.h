@@ -32,7 +32,7 @@ public:
 
 protected: 
 	//! pre-calculation
-	void precalculate(const VanillaSwap& vanillaSwap) const;
+	void precalculate(const LMM::VanillaSwap& vanillaSwap) const;
 
 	//! YY TODO: maybe move it here, as the fixing leg ...
 	//double pvFloatingLeg(Name::indexInLMMTenorStructure indexValuationDate,
@@ -42,18 +42,18 @@ protected:
 
 
 	virtual double annuity( Name::indexInLMMTenorStructure indexValuationDate,
-		const VanillaSwap& vanillaSwap,
+		const LMM::VanillaSwap& vanillaSwap,
 		const std::vector<double>& numeraire) const;
 
 	virtual double pvFixedLeg(Name::indexInLMMTenorStructure indexValuationDate,
-		const VanillaSwap& vanillaSwap,
+		const LMM::VanillaSwap& vanillaSwap,
 		const std::vector<double>& numeraire)  const;
 
 public:
 	//! To validate the result
-	double swapNPV_Analytical_1(const VanillaSwap& vanillaSwap, const std::vector<double>& liborsInitValue)  const; // initLibor[i] = L_i[T_0]
-	double swapNPV_Analytical_2(const VanillaSwap& vanillaSwap, const std::vector<double>& liborsInitValue)  const; // initLibor[i] = L_i[T_0]
+	double swapNPV_Analytical_1(const LMM::VanillaSwap& vanillaSwap, const std::vector<double>& liborsInitValue)  const; // initLibor[i] = L_i[T_0]
+	double swapNPV_Analytical_2(const LMM::VanillaSwap& vanillaSwap, const std::vector<double>& liborsInitValue)  const; // initLibor[i] = L_i[T_0]
 
-	double VanillaSwapPricer::swapRate_Analytical(const VanillaSwap& vanillaSwap,
+	double swapRate_Analytical(const LMM::VanillaSwap& vanillaSwap,
 												  const std::vector<double>& liborsInitValue)  const;
 };
