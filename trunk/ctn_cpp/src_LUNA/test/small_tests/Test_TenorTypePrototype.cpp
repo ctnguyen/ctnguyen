@@ -2,6 +2,7 @@
 #include <boost/test/included/unit_test.hpp>
 
 #include <iostream>
+#include <cassert>
 #include <string.h>
 
 BOOST_AUTO_TEST_SUITE(lmm_test_tenor)
@@ -43,11 +44,21 @@ public:
 	bool operator==(const Tenor& other) const { return (nbMonth == other.nbMonth); }
 	bool operator!=(const Tenor& other) const { return (nbMonth != other.nbMonth); }
 
-	bool isValidTenorType(){return nbMonth>0;}
+	bool isValidTenor()     const { return nbMonth>0;    }
 
-	//ctntodo
-	//double convertToYear()const{ return 0.0;}
-	//size_t convertToMonth()const{return 0;}
+	double convertToYear()  const { assert( this->isValidTenor() ); return nbMonth/12.0;}
+	size_t convertToMonth() const { assert( this->isValidTenor() ); return nbMonth;}
+
+	size_t ratioTo(const Tenor& other)
+	{
+		assert( this->isValidTenor() );assert( other.isValidTenor() );
+
+		size_t nb_month1 = this->convertToMonth();
+ 		size_t nb_month2 = other.convertToMonth();
+
+ 		assert(nb_month1>=nb_month2); // to compute the ratio only when tenor1>=tenor2
+ 		return (nb_month1/nb_month2);
+	}
 
 public:
 	// A tenor is never to change after being instanciated
@@ -56,7 +67,7 @@ public:
 
 };
 
-template<> const char* Tenor::TYPE_0::NAME = "_Non";template<> const unsigned int Tenor::TYPE_0::NB_MONTH = -1;
+template<> const char* Tenor::TYPE_0::NAME = "_Non";template<> const unsigned int Tenor::TYPE_0::NB_MONTH =  0;
 template<> const char* Tenor::TYPE_1::NAME =  "_1M";template<> const unsigned int Tenor::TYPE_1::NB_MONTH =  1;
 template<> const char* Tenor::TYPE_2::NAME =  "_3M";template<> const unsigned int Tenor::TYPE_2::NB_MONTH =  3;
 template<> const char* Tenor::TYPE_3::NAME =  "_6M";template<> const unsigned int Tenor::TYPE_3::NB_MONTH =  6;
@@ -77,7 +88,7 @@ BOOST_AUTO_TEST_CASE(test_TenorTypePrototype_constructors)
 {
 
 	Tenor tenorNon = Tenor::_Non;
-	BOOST_CHECK(tenorNon.nbMonth==-1);
+	BOOST_CHECK(tenorNon.nbMonth==0);
 	BOOST_CHECK(strcmp(tenorNon.name, "_Non")==0);
 
 	Tenor tenor1M  = Tenor::_1M;
@@ -116,7 +127,32 @@ BOOST_AUTO_TEST_CASE(test_TenorTypePrototype_comparing)
 	BOOST_CHECK(tenor12M == tenor1Y);
 
 	BOOST_CHECK(tenorNon1 != tenor12M);
+
+	BOOST_CHECK( !tenorNon1.isValidTenor() );
+	BOOST_CHECK( tenor12M.isValidTenor() );
 }
 
+BOOST_AUTO_TEST_CASE(test_TenorTypePrototype_calculus)
+{
+	Tenor tenor1M  = Tenor::_1M;
+	Tenor tenor3M  = Tenor::_3M;
+	Tenor tenor6M  = Tenor::_6M;
+	Tenor tenor9M  = Tenor::_9M;
+	Tenor tenor12M = Tenor::_12M;
+	Tenor tenor1Y  = Tenor::_1Y;
+
+	BOOST_CHECK(tenor1Y.convertToMonth()  == 12 );
+	BOOST_CHECK(tenor12M.convertToMonth() == 12 );
+	BOOST_CHECK(tenor6M.convertToMonth()  == 6  );
+
+	BOOST_CHECK(tenor3M.convertToYear()  == 0.25 );
+	BOOST_CHECK(tenor6M.convertToYear()   == 0.5 );
+	BOOST_CHECK(tenor12M.convertToYear()  == 1.0 );
+
+	BOOST_CHECK(tenor12M.ratioTo(tenor1Y)  == 1 );
+	BOOST_CHECK(tenor12M.ratioTo(tenor9M)  == 1 );
+	BOOST_CHECK(tenor12M.ratioTo(tenor3M)  == 4 );
+	BOOST_CHECK(tenor12M.ratioTo(tenor6M)  == 2 );
+}
 
 BOOST_AUTO_TEST_SUITE_END()
