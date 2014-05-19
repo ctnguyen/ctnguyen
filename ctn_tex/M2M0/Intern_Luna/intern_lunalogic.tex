@@ -26,6 +26,7 @@
 \newcommand{\Proba}{\mathbb{P}}
 \newcommand{\F}{\mathcal{F}}
 \newcommand{\Bt}{B_t}
+\newcommand{\DtT}{D(t,T)}
 \newcommand{\RtT}{R(t,T)}
 \newcommand{\PtT}{P(t,T)}
 \newcommand{\PtS}{P(t,S)}
@@ -37,6 +38,8 @@
 \newcommand{\intt}{\int_0^t}
 \newcommand{\FuncExp}{\text{exp}}
 \newcommand{\FuncLn}{\text{ln}}
+\newcommand{\Discount}[2]{e^{-\int_{#1}^{#2}r_u du} }
+
 \newcommand{\todo}[1]{\begin{center}\color{red} TODO : #1\end{center}}
 
 \begin{document}
@@ -145,7 +148,7 @@ r_t &\text{: Instantaneous rate}
 D(t,T) = \FuncExp\left( -\inttT r_s ds \right)
 \]
 Note that $D(t,T)$ is the present value of future amount currency, while $\PtT$ zero-coupon is a contract value. $D(t,T)=\PtT$ when $r_t$ is determinist.
-\paragraph{Spot Interest Rate}~\footnote{The time to maturity $\tautT$ denote the day-count convention between $t$ and $T$. The simplest case $\tautT=T-t$}\\
+\paragraph{Spot Interest Rate}~\footnote{The time to maturity $\tautT$ denote the day-count convention between $t$ and $T$. The simplest case $\tautT=T-t$. see~\cite{PICARDO2014} }\\
 Continuously-compounded 
 \[
 R(t,T) = -\frac{\FuncLn\PtT }{\tautT}
@@ -281,7 +284,21 @@ F(t,S,T)=\E^{T}[L(S,T)|\F_t]
 \hspace{1cm}
 f(t,T)=\E^{T}[r_T|\F_t]
 \]
-
+\paragraph{Deferred payoff}
+\[
+\pi_t(H_{\tau})=\E[\Discount{t}{T}H_{\tau}|\F_t] = \E[\Discount{t}{\tau}P(\tau,T)H_{\tau}|\F_t]
+\hspace{1.5cm}
+t<\tau<T
+\]
+\paragraph{Pricing}
+\[
+\left\{
+\begin{array}{l}
+\textbf{Caps}\rightarrow\textbf{Caplets}\rightarrow\textbf{Deffered payoff} \rightarrow \textbf{Put Zerocoupon} \\
+\textbf{Floors}\rightarrow\textbf{Floorlets}\rightarrow\textbf{Deffered payoff} \rightarrow \textbf{Call Zerocoupon}
+\end{array}
+\right.
+\]
 
 
 

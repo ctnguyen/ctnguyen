@@ -1,27 +1,2 @@
-2014.05.16
-Reading code. Reading Swap structure on Bloomberg
-
-2014.05.15
-formation Bloomberg. Accomplished factoring old code, reactive tests.
-
-2014.05.14
-write a FindQuantLib.cmake module. add generic path for runtime path management. First refactoring the code
-
-2014.05.13
-Take the code C++ of LMM. Lecture of Automatic Differentiation cpp ADOL-C. Put last code in a cmake project and version to google code
-  
-2014.05.12
-Continue lecture Adrien Report. Looking for bloomberg terminal.
-
----------------------------------------------------------------------------
-2014.05.09
-Continue reading LIBOR Market Model, Black formula ... Create cmake hello world for boost, quantlib. 
-Boost, QuantLib libraries are functional.
-2014.05.07
-Build and install QuantLib-1.4 Release/Debug. General lecture about interest rate, report apprendices
-2014.05.06
-install texstudio, notepad++, vsmc2012, cmake, boost(full build dll, lib, debug, release), BOUML
-2014.05.05 (1/2 journée)
-Install tex-live, prise en main de l'ordinateur, rapport du stage de Adrien THAI. Attente droit d'administrateur sur l'ordi pour installation  
-
-
+add examples of QuantLib into QuantLibHello Project
+modify FindQuantLib.cmake for further x64 system (particulary Windows)
