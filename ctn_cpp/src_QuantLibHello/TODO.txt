@@ -1,0 +1,12 @@
+Todo for QuantLib hello
+- put all examples compile into a 'example' folder
+- fix bug for FindQuantLib.cmake
+.	+ On windows, add difference of lib for x64 build
+.	+ On Mac, fix lib name for debug build, there are not '-d' in the lib name
+- add other possibilities for path search, several default path are to be search
+. instead of actually only $QUANLIB_ROOT/inlude. For example 
+.	C:\Programme\QuantLib\ 
+.	C:\Programme\QuantLib\include 
+.	/etc/local 
+.	/etc/local/include 
+ 
