@@ -1,3 +1,6 @@
+To move Tenor and LMMTenorStructure classes into helper package
+Set namespace for packages
+
 To separate into component headers, sources, (see older code)
 add directive for HEADER_FILE_H
 embeded into boost test framework

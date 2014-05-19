@@ -1,5 +1,7 @@
-
+#ifndef LMM_INSTRUMENT_VANILLA_SWAP_H
+#define LMM_INSTRUMENT_VANILLA_SWAP_H
 #pragma once
+
 #include <vector>
 #include <string>
 
@@ -83,3 +85,4 @@ typedef boost::shared_ptr<VanillaSwap> VanillaSwap_PTR;
 }
 
 
+#endif /* LMM_INSTRUMENT_VANILLA_SWAP_H */
