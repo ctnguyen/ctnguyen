@@ -18,8 +18,8 @@ cd build_QuantLibHello
 cmake ..\src_QuantLibHello -G "YOUR_APPROPRIATED_CMAKE_GENERATOR"
 
 For Visual studio 2012, use the generator by "Visual Studio 11"
-For Mac OS X and Linux , use the generator by "Eclipse CDT4 - Unix Makefiles"
-
+For Eclipse CDT Linux . use the generator by "Eclipse CDT4 - Unix Makefiles"
+For Mac OS Xcode       use the generator by "Xcode"
 
 ==========Installation QuantLib 1.4 Mac OS ==========
 http://quantlib.org/install/macosx.shtml

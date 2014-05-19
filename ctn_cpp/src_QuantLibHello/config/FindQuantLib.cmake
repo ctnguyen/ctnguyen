@@ -187,34 +187,25 @@ elseif(UNIX)
 	set(_ql_SUFFIX "a")
 endif()	
 
-# Key       Use this library when:
-#  s        linking statically to the C++ standard library and
-#           compiler runtime support libraries.
-if(QuantLib_USE_STATIC_RUNTIME)
-  set( _ql_RELEASE_ABI_TAG "${_ql_RELEASE_ABI_TAG}s")
-  set( _ql_DEBUG_ABI_TAG   "${_ql_DEBUG_ABI_TAG}s")
-endif()
-#  g        using debug versions of the standard and runtime
-#           support libraries
+### Setting ABI tag for Windows QuantLib library name
 if(WIN32)
-  if(MSVC OR "${CMAKE_CXX_COMPILER}" MATCHES "icl"
-          OR "${CMAKE_CXX_COMPILER}" MATCHES "icpc")
-    set(_ql_DEBUG_ABI_TAG "${_ql_DEBUG_ABI_TAG}g")
-  endif()
-endif()
-#  d        using a debug version of your code
-set(_ql_DEBUG_ABI_TAG "${_ql_DEBUG_ABI_TAG}d")
-
-# We want to use the tag inline below without risking double dashes
-if(_ql_RELEASE_ABI_TAG)
-  if(${_ql_RELEASE_ABI_TAG} STREQUAL "-")
-    set(_ql_RELEASE_ABI_TAG "")
-  endif()
-endif()
-if(_ql_DEBUG_ABI_TAG)
-  if(${_ql_DEBUG_ABI_TAG} STREQUAL "-")
+## Key       Use this library when:
+##  s        linking statically to the C++ standard library and
+##           compiler runtime support libraries.
+    if(QuantLib_USE_STATIC_RUNTIME)
+      set( _ql_RELEASE_ABI_TAG "${_ql_RELEASE_ABI_TAG}s")
+      set( _ql_DEBUG_ABI_TAG   "${_ql_DEBUG_ABI_TAG}s")
+    endif()
+##  g        using debug versions of the standard and runtime
+##           support libraries
+    if(MSVC OR "${CMAKE_CXX_COMPILER}" MATCHES "icl" OR "${CMAKE_CXX_COMPILER}" MATCHES "icpc")
+        set(_ql_DEBUG_ABI_TAG "${_ql_DEBUG_ABI_TAG}g")
+    endif()
+##  d        using a debug version of your code
+    set(_ql_DEBUG_ABI_TAG "${_ql_DEBUG_ABI_TAG}d")
+else()## TODO for instance on NON WIN32 OS, debug and release QuantLib is the same, there are no futher tag 
+    set( _ql_RELEASE_ABI_TAG "")
     set(_ql_DEBUG_ABI_TAG "")
-  endif()
 endif()
 
 set(_QuantLib_RELEASE_NAMES ${_ql_PREFIX}QuantLib${_ql_COMPILER}${_ql_MT}${_ql_RELEASE_ABI_TAG}.${_ql_SUFFIX})
