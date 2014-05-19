@@ -1,3 +1,6 @@
+#ifndef LMM_HELPER_PRINTER_H
+#define LMM_HELPER_PRINTER_H
+
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -8,9 +11,6 @@
 #include <LMM/generic_path.h>
 
 const std::string printPathOutput = LMM::get_output_path();
-
-#ifndef LMM_PRINTER_H
-#define LMM_PRINTER_H
 
 class PrintElement
 {
@@ -172,4 +172,4 @@ public:
 	}
 };
 
-#endif /* LMM_PRINTER_H */
+#endif /* LMM_HELPER_PRINTER_H */

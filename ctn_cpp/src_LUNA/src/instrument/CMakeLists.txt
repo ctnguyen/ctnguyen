@@ -12,6 +12,7 @@
 #################################################
 
 add_library(LMM_instrument
+	"${CMAKE_SOURCE_DIR}/LMM/Name.h"
 	"${CMAKE_SOURCE_DIR}/LMM/instrument/Caplet.h"
 	"${CMAKE_SOURCE_DIR}/LMM/instrument/CMS.h"
 	"${CMAKE_SOURCE_DIR}/LMM/instrument/instrument.h"

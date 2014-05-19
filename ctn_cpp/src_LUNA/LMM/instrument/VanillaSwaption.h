@@ -1,26 +1,23 @@
+#ifndef LMM_INSTRUMENT_VANILLA_SWAPTION_H
+#define LMM_INSTRUMENT_VANILLA_SWAPTION_H
 #pragma once
 
 #include <boost/shared_ptr.hpp>
 
+#include <LMM/Name.h>
 #include <LMM/instrument/VanillaSwap.h>
-//#include <LMM/instrument/LMMTenorStructure.h>
 
-
-namespace VanillaSwaptionType
-{
-	enum VanillaSwaptionType {CALL, PUT};
-}
 
 class VanillaSwaption
 {
 private:
 	LMM::VanillaSwap vanillaSwap_;              // The underlying swap, indexStart is the payement date.
-	VanillaSwaptionType::VanillaSwaptionType vanillaSwaptionType_;
+	OptionType::OptionType vanillaSwaptionType_;
 	Name::indexInLMMTenorStructure indexMaturity_;
 public:
 
 	VanillaSwaption(const LMM::VanillaSwap& vanillaSwap,
-					VanillaSwaptionType::VanillaSwaptionType vanillaSwaptionType,
+					OptionType::OptionType vanillaSwaptionType,
 					Name::indexInLMMTenorStructure  indexMaturity)
 					:vanillaSwap_(vanillaSwap),
 					 vanillaSwaptionType_(vanillaSwaptionType),
@@ -36,3 +33,6 @@ public:
 };
 
 typedef boost::shared_ptr<VanillaSwaption> VanillaSwaption_PTR;
+
+
+#endif /* LMM_INSTRUMENT_VANILLA_SWAPTION_H */
