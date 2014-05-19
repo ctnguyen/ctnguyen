@@ -14,6 +14,13 @@
 #include <LMM/Name.h>
 #include <LMM/instrument/TenorType.h>
 
+
+/*! \class LMMTenorStructure 
+ *  Implement the structure of LMM model
+ *   - number of setlement dates ,T_k, k from 0 to N (horizon)   
+ *   - the setlement date set (tenorDates)    (converted to year unit)
+ *   - the tenor set (\tau_k)                 (converted to year unit)
+ */
 class LMMTenorStructure
 {
 	const Tenor   tenorType_;      // eg: "6M" // never change, to be constant
@@ -49,14 +56,14 @@ public:
 		return tenorDeltaT_;
 	}
 
-	double get_deltaT(size_t index) const
+	const double& get_deltaT(size_t index) const
 	{
 		return tenorDeltaT_[index];
 	}
 
 
-	Tenor get_tenorType() const {return tenorType_;}
-	std::string get_tenorTypeStr() const {return tenorType_.name;}
+	const Tenor& get_tenorType() const {return tenorType_;}
+	const char* get_tenorTypeStr() const {return tenorType_.name;}
 
 	//! equal operator: when modify the class, don't forget to adjust == operator
     bool operator == (const LMMTenorStructure& LMMTenorStructure);
