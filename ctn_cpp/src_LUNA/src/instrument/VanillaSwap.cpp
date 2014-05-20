@@ -28,7 +28,8 @@ VanillaSwap::VanillaSwap(double strike,
 						   fixedLegTenorType_(fixedLegTenorType),
 						   lmmTenorStructureTenorType_(lmmTenorStructureTenorType)
 {
-	//floatingVsLiborTenorTypeRatio_ = get_floatingLegTenorLmmTenorRatio(); //TenorType::TenorTypeRatio(floatingLegTenorType_,lmmTenorStructureTenorType_); 
+	//ctntodo : uncomment this function initially commented (get_floatingLeg...)
+	floatingVsLiborTenorTypeRatio_ = get_floatingLegTenorLmmTenorRatio(); //TenorType::TenorTypeRatio(floatingLegTenorType_,lmmTenorStructureTenorType_); 
 	fixedVsLiborTenorTypeRatio_    = get_fixedLegTenorLmmTenorRatio();    //TenorType::TenorTypeRatio(fixedLegTenorType_,   lmmTenorStructureTenorType_); 
 
 	assert(floatingLegTenorType == lmmTenorStructureTenorType) ;
