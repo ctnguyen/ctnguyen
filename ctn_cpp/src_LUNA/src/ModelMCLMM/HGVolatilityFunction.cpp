@@ -1,5 +1,6 @@
 #include <cassert>
 
+#include <LMM/generic_path.h>
 #include <LMM/helper/Printer.h>
 #include <LMM/ModelMCLMM/HGVolatilityFunction.h>
 
@@ -164,10 +165,11 @@ double HGVolatilityFunction::covIntegral( size_t indexTime_i,
 	return covIntegralValue;
 }
 
-void HGVolatilityFunction::print() const  // OK: test passed.
+void HGVolatilityFunction::print(const std::string& filename) const  // OK: test passed.
 {
-	std::string fileName = "HGVolatilityFunction.csv";
-	std::string path = printPathOutput + fileName;
+	//std::string fileName = "HGVolatilityFunction.csv";
+	std::string path = LMM::get_output_path() + fileName;
+	
 	std::vector<PrintElement_PTR> elements_print;
 
 	//! Abcd function for h

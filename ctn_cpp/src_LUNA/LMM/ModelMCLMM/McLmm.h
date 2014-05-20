@@ -1,52 +1,20 @@
 #pragma once
 
-//#include "Interpolation.h"
-//#include "MarketInfoCollector.h"
+#include <iostream>
+#include <cassert>
+#include <string>
+#include <cassert>
 
-//#include "Dispersion.h"
-//#include "McGenerator.h"
-//#include "Name.h"
-//#include "LMMTenorStructure.h"
-//#include "Dispersion.h"
+#include <boost/numeric/ublas/matrix_proxy.hpp>
 
+#include <ql/quantlib.hpp>
+#include <ql/termstructures/volatility/abcd.hpp>
+
+#include <LMM/helper/TypeConverter.h>
 #include <LMM/helper/RNGenerator.h>
 #include <LMM/ModelMCLMM/Lmm.h>
 
 
-//#include <vector>
-//#include <boost/numeric/ublas/io.hpp>
-//#include <boost/numeric/ublas/matrix.hpp>
-//#include <boost/shared_ptr.hpp>
-
-//#include <cassert>  // for assert
-
-//class Tensor
-//{
-//	typedef boost::numeric::ublas::matrix<double> matrix;
-//    std::vector<matrix> tensor_; // tensor_(k,i,j): L_i, L_j 's integral of vol in [T_{k-1},T_k], k=[1,...,N], i,j=[k,...,N]
-//public:
-//
-//	Tensor(size_t size1, size_t size2, size_t size3)
-//		:tensor_(size1, matrix(size2, size3)){}
-//
-//	double & operator()(size_t index_T, size_t indexLibor_i, size_t indexLibor_j)
-//	{
-//		//! YY Attention: This is a special condition for My LMM implementation, not general tensor condition.
-//		//! YY TODO: remove this check when the code is stable.
-//		assert(index_T >=1 && indexLibor_i>=index_T && indexLibor_j >= index_T);
-//		return tensor_[index_T](indexLibor_i, indexLibor_j);
-//	}
-//
-//	//! getter ans setter
-//	const std::vector<matrix>& get_tensor() const { return tensor_; }
-//	void set_ensor(std::vector<matrix> val) { tensor_ = val;}
-//	const matrix& operator[](size_t indexT) const
-//	{ 
-//		assert(indexT >=1);
-//		return tensor_[indexT];
-//	}
-//
-//};
 
 namespace MCSchemeType
 {
@@ -121,7 +89,7 @@ public:
 	//void set_shifts(const std::vector<double>& shifts);
 
 	//!
-	virtual void print() const;
+	virtual void print(const std::string& filename) const;
 };
 
 typedef boost::shared_ptr<McLmm> MCLmm_PTR;

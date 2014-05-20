@@ -4,6 +4,7 @@
 #include <boost/bind.hpp>
 #include <vector>
 
+#include <LMM/generic_path.h>
 #include <LMM/helper/Printer.h>
 #include <LMM/helper/DerivatibleFunction.h>
 
@@ -168,8 +169,8 @@ BOOST_AUTO_TEST_CASE(test_DerivatibleFunction) // OK Test passed.
 			) / (bump * bump);
 	}
 
-	std::string fileName = "DerivatibleFunction.csv";
-	std::string path = printPathOutput + fileName;
+	std::string fileName = "test_DerivatibleFunction.csv";
+	std::string path = LMM::get_output_path() + fileName;
 	std::vector<PrintElement_PTR> elements_print;
 
 

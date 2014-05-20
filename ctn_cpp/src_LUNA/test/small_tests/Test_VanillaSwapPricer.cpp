@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include <LMM/Name.h>
+#include <LMM/generic_path.h>
 #include <LMM/helper/Printer.h>
 #include <LMM/helper/McGenerator.h>
 #include <LMM/instrument/VanillaSwap.h>
@@ -155,7 +156,7 @@ BOOST_AUTO_TEST_CASE(test_VanillaSwapPricer)
 	double analyticalSwapPrice=0.0;
 
 	std::string fileName = "test_VanillaSwapPricer.csv"; //+ MCSchemeType::mcSchemeType2String(mcSchemeType) +".csv";
-	std::string path = printPathOutput + fileName;
+	std::string path = LMM::get_output_path() + fileName;
 
 	//! Terminal Euler
 	test_McLmm( true, MCSchemeType::EULER,minNbSimulation,maxNbSimulation,bnSimualtionPowStep,

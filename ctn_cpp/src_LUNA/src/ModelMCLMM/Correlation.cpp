@@ -1,5 +1,6 @@
 #include <boost/numeric/ublas/matrix.hpp>
 
+#include <LMM/generic_path.h>
 #include <LMM/helper/Printer.h>
 #include <LMM/helper/TypeConverter.h>
 #include <LMM/ModelMCLMM/Correlation.h>
@@ -93,12 +94,12 @@ double Correlation::correlApprox(size_t i, size_t j) const
 }
 
 
-void Correlation::print() const
+void Correlation::print(const std::string& filename) const
 {
 	assert(flagApproxConstruced_ == true);
 
-	std::string fileName = "Correlation.csv";
-	std::string path = printPathOutput + fileName;
+	//std::string fileName = "Correlation.csv";
+	std::string path =  LMM::get_output_path() + filename;
 
 	std::vector<PrintElement_PTR> elements_print;
 

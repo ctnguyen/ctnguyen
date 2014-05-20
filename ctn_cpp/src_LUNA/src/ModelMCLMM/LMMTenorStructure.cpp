@@ -1,3 +1,4 @@
+#include <LMM/generic_path.h>
 #include <LMM/helper/Printer.h>
 #include <LMM/helper/EqualOperator.h>
 
@@ -55,10 +56,10 @@ bool LMMTenorStructure::operator == (const LMMTenorStructure& lmmTenorStructure)
 }
 
 
-void LMMTenorStructure::print() const
+void LMMTenorStructure::print(const std::string& filename) const
 {
-	std::string fileName = "LMMTenorStructure.csv";
-	std::string path = printPathOutput + fileName;
+	//std::string fileName = "LMMTenorStructure.csv";
+	std::string path = LMM::get_output_path() + fileName;
 
 	//seems a problem of shared ptr polymorphisms ... 
 	PrintElement_PTR tenorType_print    = PrintElement_PTR(new ScalarPrintElement<std::string>("tenorType", tenorType_.name));

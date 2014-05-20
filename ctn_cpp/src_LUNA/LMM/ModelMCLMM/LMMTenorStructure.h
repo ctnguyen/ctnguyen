@@ -69,7 +69,7 @@ public:
     bool operator == (const LMMTenorStructure& LMMTenorStructure) const;
 
 	//! print in Excel
-	void print() const;
+	void print(const std::string& filename) const;
 };
 
 typedef boost::shared_ptr<LMMTenorStructure> LMMTenorStructure_PTR;

@@ -3,6 +3,7 @@
 
 #include <vector>
 
+#include <LMM/generic_path.h>
 #include <LMM/helper/Printer.h>
 #include <LMM/numeric/NumericalMethods.h>
 
@@ -41,7 +42,7 @@ BOOST_AUTO_TEST_CASE(test_BlackGreek)
 
 	//! print 
 	std::string fileName = "test_BlackGreek.csv"; //+ MCSchemeType::mcSchemeType2String(mcSchemeType) +".csv";
-	std::string path = printPathOutput + fileName;
+	std::string path = LMM::get_output_path() + fileName;
 
 	PrintElement_PTR stirkes_print      = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("strike", strikes));
 	PrintElement_PTR Black_Vegas_print  = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("Black_Vegas", Vegas));
