@@ -45,9 +45,8 @@ public:
 
 };
 
-
-
 typedef boost::numeric::ublas::matrix<double> matrix;
+
 class Lmm 
 {
 protected:

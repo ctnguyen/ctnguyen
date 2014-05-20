@@ -1,14 +1,15 @@
+#ifndef LMM_MODEL_VOLATILITY_FUNCTION_H
+#define LMM_MODEL_VOLATILITY_FUNCTION_H
 #pragma once
+
+//#include <boost/numeric/ublas/triangular.hpp>  // Triangular matrix
+//#include <boost/numeric/ublas/io.hpp>
+
 #include <boost/shared_ptr.hpp>
 #include <LMM/ModelMCLMM/LMMTenorStructure.h>
 
 //! YY TODO: make this function more general: calculate covariance for whatever time interval.
 //           so at least make it possible to use piecewise linear vol.
-
-//#include <boost/numeric/ublas/triangular.hpp>  // Triangular matrix
-//#include <boost/numeric/ublas/io.hpp>
-
-//#include "LMMTenorStructure.h""
 
 //! YY TODO:  to put these class in different class.
 class VolatilityFunction
@@ -48,3 +49,4 @@ public:
 typedef boost::shared_ptr<VolatilityFunction>   VolatilityFunction_PTR;  // is it useful ? 
 
 
+#endif /* LMM_MODEL_VOLATILITY_FUNCTION_H */

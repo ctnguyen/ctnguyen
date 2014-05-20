@@ -1,3 +1,5 @@
+#ifndef LMM_MODEL_CORRELATION_H
+#define LMM_MODEL_CORRELATION_H
 #pragma once
 
 #include <iostream>
@@ -47,7 +49,9 @@ private:
 	void calculateCorrelOriginal();
 	void calculateReducedCorrelB();
 	void calculateReducedCorrelApprox();
-	virtual double correlOriginal(size_t i, size_t j) = 0; // YY Question: can the pure virtual function be private ? 
+
+protected:
+	virtual double correlOriginal(size_t i, size_t j) const = 0; // YY Question: can the pure virtual function be private ? 
 
 public:
 	//! getter.
@@ -82,10 +86,10 @@ private:
 
 public:
 	Shosemaker2_Correlation(size_t fullRank, size_t reducedRank, CorrelationReductionTyype::CorrelationReductionTyype& reductionType, double eta, double rhoInfty); // // YY: TODO don't like default parameter: use boost::defaultable<size_t> for reduceRank latter.
-	bool checkParams();
+	bool checkParams() const;
 
-private:
-	double correlOriginal(size_t index_i, size_t index_j); 
+protected:
+	double correlOriginal(size_t index_i, size_t index_j) const; 
 };
 
 
@@ -104,10 +108,10 @@ private:
 
 public:
 	Shosemaker3_Correlation(size_t fullRank, size_t reducedRank, CorrelationReductionTyype::CorrelationReductionTyype& reductionType, double eta1, double eta2, double rhoInfty);
-	bool checkParams();
+	bool checkParams() const;
 
-private:
-	double correlOriginal(size_t index_i, size_t index_j); 
+protected:
+	double correlOriginal(size_t index_i, size_t index_j) const; 
 };	
 
 
@@ -125,9 +129,10 @@ private:
 
 public:
 	Robonato2_Correlation(size_t fullRank, size_t reducedRank, CorrelationReductionTyype::CorrelationReductionTyype& reductionType, double beta, double rhoInfty);
-	bool checkParams();
-private:
-	double correlOriginal(size_t index_i, size_t index_j); 
+	bool checkParams() const;
+
+protected:
+	double correlOriginal(size_t index_i, size_t index_j) const; 
 };	
 
 
@@ -147,10 +152,10 @@ private:
 public:
 	Robonato3_Correlation(size_t fullRank, size_t reducedRank, CorrelationReductionTyype::CorrelationReductionTyype& reductionType, double alpha, double beta, double rhoInfty);
 
-	bool checkParams();
+	bool checkParams() const;
 
-private:
-	double correlOriginal(size_t index_i, size_t index_j); 
+protected:
+	double correlOriginal(size_t index_i, size_t index_j)const; 
 };	
 
 
@@ -174,10 +179,10 @@ public:
 						  double alpha, 
 						  double beta);
 
-	bool checkParams();
+	bool checkParams() const;
 
-private:
-	double correlOriginal(size_t index_i, size_t index_j); 
+protected:
+	double correlOriginal(size_t index_i, size_t index_j) const; 
 };	
 
 
@@ -198,9 +203,12 @@ public:
 		CorrelationReductionTyype::CorrelationReductionTyype& reductionType,
 		double correlConst);
 
-	bool checkParams();
+	bool checkParams() const;
 
-private:
-	double correlOriginal(size_t index_i, size_t index_j); 
+protected:
+	double correlOriginal(size_t index_i, size_t index_j) const; 
 
 };	
+
+
+#endif /* LMM_MODEL_CORRELATION_H */

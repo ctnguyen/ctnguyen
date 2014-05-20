@@ -1,3 +1,5 @@
+#ifndef LMM_MODEL_HGVOLATILITY_FUNCTION_H
+#define LMM_MODEL_HGVOLATILITY_FUNCTION_H
 #pragma once
 
 #include <boost/numeric/ublas/triangular.hpp>  // Triangular matrix
@@ -126,3 +128,4 @@ typedef HGVolatilityFunction::AbcdPWConstFunction::AbcdParams AbcdParams;
 typedef HGVolatilityFunction::AbcdPWConstFunction    AbcdPWConstFunction;
 
 
+#endif /* LMM_MODEL_HGVOLATILITY_FUNCTION_H */

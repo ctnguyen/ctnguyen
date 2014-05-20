@@ -222,13 +222,13 @@ Shosemaker2_Correlation::Shosemaker2_Correlation(size_t fullRank, size_t reduced
 		throw("Error in Shosemaker2_Correlation:: Parameters of class Correlation is not permitted.");
 }
 
-bool Shosemaker2_Correlation::checkParams()
+bool Shosemaker2_Correlation::checkParams() const
 {
 	std::cout << "condition not implemented yet... " << std::endl;
 	return true;
 }
 
-double Shosemaker2_Correlation::correlOriginal(size_t index_i, size_t index_j) 
+double Shosemaker2_Correlation::correlOriginal(size_t index_i, size_t index_j) const
 {
 	size_t i = index_i + 1;  // convert i,j \in [0,rank-1] --> [1,rank]
 	size_t j = index_j + 1;
@@ -261,7 +261,7 @@ Shosemaker3_Correlation::Shosemaker3_Correlation(size_t fullRank, size_t reduced
 		throw("Error in Shosemaker3_Correlation: Parameters of class Correlation is not permitted.");
 }
 
-bool Shosemaker3_Correlation::checkParams()
+bool Shosemaker3_Correlation::checkParams() const
 {
 	if(3*eta1_ < eta2_ || eta2_ <0 || 0 > eta1_+ eta2_ || eta1_+ eta2_ > -log(rhoInfty_))
 		return false;
@@ -269,7 +269,7 @@ bool Shosemaker3_Correlation::checkParams()
 		return true;
 }
 
-double Shosemaker3_Correlation::correlOriginal(size_t index_i, size_t index_j) 
+double Shosemaker3_Correlation::correlOriginal(size_t index_i, size_t index_j) const
 {
 	size_t i = index_i + 1;  // convert index: i,j \in [0,rank-1] --> [1,rank]
 	size_t j = index_j + 1;
@@ -305,7 +305,7 @@ Robonato2_Correlation::Robonato2_Correlation(size_t fullRank, size_t reducedRank
 		throw("Error in Robonato2_Correlation: Parameters of class Correlation is not permitted.");
 }
 
-bool Robonato2_Correlation::checkParams()
+bool Robonato2_Correlation::checkParams() const
 {
 	std::cout << "condition not implemented yet... " << std::endl;
 	//! YY: TODO:  not sure if this is the good condition
@@ -315,7 +315,7 @@ bool Robonato2_Correlation::checkParams()
 		return false;
 }
 
-double Robonato2_Correlation::correlOriginal(size_t index_i, size_t index_j) 
+double Robonato2_Correlation::correlOriginal(size_t index_i, size_t index_j) const
 {
 	size_t i = index_i + 1;  // convert i,j \in [0,rank-1] --> [1,rank]
 	size_t j = index_j + 1;
@@ -341,7 +341,7 @@ Robonato3_Correlation::Robonato3_Correlation(size_t fullRank, size_t reducedRank
 		throw("Error in Robonato3_Correlation: Parameters of class Correlation is not permitted.");
 }
 
-bool Robonato3_Correlation::checkParams()
+bool Robonato3_Correlation::checkParams() const
 {
 	std::cout << "condition not implemented yet... " << std::endl;
 	//! YY: not sure if this is the good condition
@@ -351,7 +351,7 @@ bool Robonato3_Correlation::checkParams()
 		return false;
 }
 
-double Robonato3_Correlation::correlOriginal(size_t index_i, size_t index_j) // convert i,j \in [0,rank-1] --> [1,rank]
+double Robonato3_Correlation::correlOriginal(size_t index_i, size_t index_j) const// convert i,j \in [0,rank-1] --> [1,rank]
 {
 	size_t i = index_i + 1;
 	size_t j = index_j + 1;
@@ -381,7 +381,7 @@ XY_beta_Correlation::XY_beta_Correlation(size_t fullRank,
 		throw("Error in Robonato3_Correlation: Parameters of class Correlation is not permitted.");
 }
 
-bool XY_beta_Correlation::checkParams()
+bool XY_beta_Correlation::checkParams() const
 {
 	std::cout << "condition not implemented yet... " << std::endl;
 	if(beta_<0 || alpha_<0)
@@ -389,7 +389,7 @@ bool XY_beta_Correlation::checkParams()
 	return true;
 }
 
-double XY_beta_Correlation::correlOriginal(size_t index_i, size_t index_j) // convert i,j \in [0,rank-1] --> [1,rank]
+double XY_beta_Correlation::correlOriginal(size_t index_i, size_t index_j) const// convert i,j \in [0,rank-1] --> [1,rank]
 {
 	size_t i = index_i + 1;
 	size_t j = index_j + 1;
@@ -415,7 +415,7 @@ Const_Correlation::Const_Correlation  (size_t fullRank,
 		correlConst_(correlConst)
 {}
 
-bool Const_Correlation::checkParams()
+bool Const_Correlation::checkParams() const
 {
 	if(correlConst_ <= 1.0 && correlConst_ >= -1.0)
 		return true;
@@ -423,7 +423,7 @@ bool Const_Correlation::checkParams()
 		return false;
 }
 
-double Const_Correlation::correlOriginal(size_t index_i, size_t index_j) // convert i,j \in [0,rank-1] --> [1,rank]
+double Const_Correlation::correlOriginal(size_t index_i, size_t index_j) const// convert i,j \in [0,rank-1] --> [1,rank]
 {
 	if(index_i != index_j)
 		return correlConst_;
