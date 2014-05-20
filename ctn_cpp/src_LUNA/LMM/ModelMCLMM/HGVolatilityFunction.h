@@ -36,8 +36,7 @@ public:
 			double d_;
 
 			//abcdFunc(tau) = (a+ b*tau)*exp(-c*tau) + d;
-			AbcdParams(double a, double b, double c, double d)
-				:a_(a), b_(b), c_(c), d_(d){}
+			AbcdParams(double a, double b, double c, double d) : a_(a), b_(b), c_(c), d_(d){}
 
 			std::vector<double> toVector() const 
 			{
@@ -51,15 +50,14 @@ public:
 			}
 		};
 	private:
-		AbcdParams			   abcdParam_;
-		QuantLib::AbcdFunction abcdFunction_;  // homogeneous part, decide the hump shape. 
-		LMMTenorStructure      lmmTenorStructure_;
+		AbcdParams			     abcdParam_;
+		QuantLib::AbcdFunction   abcdFunction_;  // homogeneous part, decide the hump shape. 
+		const LMMTenorStructure& lmmTenorStructure_;
 	public:
 		AbcdPWConstFunction(const AbcdParams& abcdParams, const LMMTenorStructure& lmmTenorStructure)
-			:
-			abcdParam_(abcdParams.a_, abcdParams.b_, abcdParams.c_, abcdParams.d_),
-			abcdFunction_(abcdParams.a_,abcdParams.b_,abcdParams.c_,abcdParams.d_),
-			lmmTenorStructure_(lmmTenorStructure)
+			: abcdParam_(abcdParams.a_, abcdParams.b_, abcdParams.c_, abcdParams.d_)
+			, abcdFunction_(abcdParams.a_,abcdParams.b_,abcdParams.c_,abcdParams.d_)
+			, lmmTenorStructure_(lmmTenorStructure)
 		{};
 
 		//! Attention: a very slow function.
@@ -112,7 +110,7 @@ public:
 	double covIntegral( size_t indexTime_i,
 						size_t indexTime_j,
 						size_t indexLibor_i,
-						size_t indexLibor_j);
+						size_t indexLibor_j) const;
 
 	//!getter
 	const AbcdPWConstFunction::AbcdParams& get_AbcdParams() const {return abcdPWConstFunction_.get_AbcdParams();}
@@ -121,7 +119,7 @@ public:
 	void print() const;
 private:
 	//! Whne t in [T_i,T_{i+1}], return index= i+1
-	size_t indexSearch(double t);
+	size_t indexSearch(const double& t) const;
 };
 
 typedef HGVolatilityFunction::AbcdPWConstFunction::AbcdParams AbcdParams;

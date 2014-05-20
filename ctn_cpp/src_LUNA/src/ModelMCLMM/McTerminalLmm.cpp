@@ -1,5 +1,4 @@
 #include <LMM/ModelMCLMM/McTerminalLmm.h>
-#include <LMM/ModelMCLMM/Dispersion.h>
 
 McTerminalLmm::McTerminalLmm(const Dispersion&                  dispersion,
 							 const std::vector<double>&         shifts,

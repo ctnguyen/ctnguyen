@@ -1,6 +1,7 @@
 #pragma once
 
 #include <LMM/ModelMCLMM/McLmm.h>
+#include <LMM/ModelMCLMM/Dispersion.h>
 
 class McTerminalLmm : public McLmm
 {

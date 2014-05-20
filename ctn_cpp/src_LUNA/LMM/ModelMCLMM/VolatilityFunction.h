@@ -2,10 +2,8 @@
 #define LMM_MODEL_VOLATILITY_FUNCTION_H
 #pragma once
 
-//#include <boost/numeric/ublas/triangular.hpp>  // Triangular matrix
-//#include <boost/numeric/ublas/io.hpp>
-
 #include <boost/shared_ptr.hpp>
+
 #include <LMM/ModelMCLMM/LMMTenorStructure.h>
 
 //! YY TODO: make this function more general: calculate covariance for whatever time interval.
@@ -15,7 +13,7 @@
 class VolatilityFunction
 {
 protected:
-	LMMTenorStructure   lmmTenorStructure_;
+	const LMMTenorStructure lmmTenorStructure_;
 public:
 	// f(t,i) = f_i(t) vol function for libor_i, a deterministic function of time
 	//virtual double operator()(double t, size_t index) = 0; 
@@ -29,16 +27,11 @@ public:
 	virtual double covIntegral( size_t indexTime_i,
 								size_t indexTime_j,
 								size_t indexLibor_i,
-								size_t indexLibor_j) = 0;
+								size_t indexLibor_j) const = 0;
 
-	virtual double varIntegral( size_t indexTime_i,
-								size_t indexTime_j,
-								size_t indexLibor) 
+	virtual double varIntegral( size_t indexTime_i, size_t indexTime_j, size_t indexLibor) const 
 	{
-		return covIntegral( indexTime_i,
-							indexTime_j,
-							indexLibor,
-							indexLibor);
+		return covIntegral(indexTime_i,indexTime_j,indexLibor,indexLibor);
 	}
 
 	//! getter

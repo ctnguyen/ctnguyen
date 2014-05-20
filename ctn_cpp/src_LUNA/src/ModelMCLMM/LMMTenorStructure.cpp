@@ -37,7 +37,7 @@ LMMTenorStructure::LMMTenorStructure(const Tenor&  tenorType, //! User should ma
 }
 
 //! equal operator: when modify the class, don't forget to adjust == operator
-bool LMMTenorStructure::operator == (const LMMTenorStructure& lmmTenorStructure)
+bool LMMTenorStructure::operator == (const LMMTenorStructure& lmmTenorStructure) const
 {
 	if(tenorType_ != lmmTenorStructure.tenorType_)
 		return false;
@@ -55,7 +55,7 @@ bool LMMTenorStructure::operator == (const LMMTenorStructure& lmmTenorStructure)
 }
 
 
-void LMMTenorStructure::print()
+void LMMTenorStructure::print() const
 {
 	std::string fileName = "LMMTenorStructure.csv";
 	std::string path = printPathOutput + fileName;

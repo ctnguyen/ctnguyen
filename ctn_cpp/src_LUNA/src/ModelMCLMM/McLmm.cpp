@@ -52,6 +52,8 @@ McLmm::McLmm(const Dispersion&                  dispersion,
 			  rnGenerator_(rnGenerator),
 			  mcSchemeType_(mcSchemeType)
 {
+
+
 	assert(dispersion.get_lmmTenorStructure().get_tenorDate()[0] == 0.0); 
 
 	size_t horizon = dispersion_.get_horizon();

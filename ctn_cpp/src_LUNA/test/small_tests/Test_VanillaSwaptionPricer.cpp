@@ -144,8 +144,8 @@ void test_McLmm2( bool TerminalOrSpotProb,
 
 BOOST_AUTO_TEST_CASE(test_VanillaSwaptionPricer)
 {
-	size_t minNbSimulation = 1000;
-	size_t maxNbSimulation = 10000; //300000;
+	size_t minNbSimulation = 100;
+	size_t maxNbSimulation = 1000; //300000;
 	double bnSimualtionPowStep = 2;
 
 	std::vector<size_t> nbSimulationVector;
