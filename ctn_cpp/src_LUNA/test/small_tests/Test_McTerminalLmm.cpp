@@ -17,7 +17,7 @@ BOOST_AUTO_TEST_CASE(test_McTerminalLmm)  // OK: Test passed!
 	Tenor tenorType = Tenor::_6M;
 	size_t horizonYear = 2;
 	LMMTenorStructure lmmTenorStructure(tenorType, horizonYear);
-	lmmTenorStructure.print();
+	lmmTenorStructure.print("test_McTerminalLmm_Tenor.csv");
 
 	//! volatility function
 	double a = -0.06;
@@ -28,7 +28,7 @@ BOOST_AUTO_TEST_CASE(test_McTerminalLmm)  // OK: Test passed!
 	AbcdPWConstFunction abcdPWConstFunction(abcdParams, lmmTenorStructure);
 
 	VolatilityFunction_PTR hgVolatilityFunction (new HGVolatilityFunction(abcdParams,  lmmTenorStructure)); 
-	hgVolatilityFunction->print();
+	hgVolatilityFunction->print("test_McTerminalLmm_Volatility.csv");
 
 	//! Correlation 1
 	size_t nbFactor       = 3; // need to test nbFactor  = 3, and nbFactor = 
@@ -39,7 +39,7 @@ BOOST_AUTO_TEST_CASE(test_McTerminalLmm)  // OK: Test passed!
 	double correlBeta  = 0.1;
 	Correlation_PTR correlation(new XY_beta_Correlation(correlFullRank,correlReducedRank, correlReductionType,correlAlpha,correlBeta));
 	correlation->calculate(); // for print.
-	correlation->print();
+	correlation->print("test_McTerminalLmm_Correlation.csv");
 	////! Correlation 2: don't do reduction.
 	//size_t nbFactor          = lmmTenorStructure.get_horizon()+1;; // need to test nbFactor  = 3, and nbFactor = 
 	//size_t correlFullRank    = lmmTenorStructure.get_horizon()+1;
@@ -67,7 +67,7 @@ BOOST_AUTO_TEST_CASE(test_McTerminalLmm)  // OK: Test passed!
 
 	McTerminalLmm mcTerminalLmm(dispersion, shifts, liborsInitValue, rnGenerator, MCSchemeType::EULER);
 
-    mcTerminalLmm.print();  // Attention, there are two print: parent class and derived class
+    mcTerminalLmm.print("test_McTerminalLmm_McTerminal.csv");  // Attention, there are two print: parent class and derived class
 	
 	
 	BOOST_CHECK(true);

@@ -30,8 +30,8 @@ BOOST_AUTO_TEST_CASE(test_VolatilityFunction)
 {
 	HGVolatilityFunction hgVolatilityFunction = get_VolatilityFunction_example();
 
-	std::string filename("test_VolatilityFunction.svc");
-	hgVolatilityFunction.print();
+	std::string filename("test_VolatilityFunction.csv");
+	hgVolatilityFunction.print("test_VolatilityFunction.csv");
 
 	BOOST_CHECK(true);
 }

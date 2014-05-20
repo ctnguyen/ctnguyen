@@ -49,7 +49,7 @@ MCLmm_PTR get_McLmm(bool TerminalOrSpotProb, MCSchemeType::MCSchemeType mcScheme
 	Tenor tenorType = Tenor::_6M;
 	size_t horizonYear = 15;
 	LMMTenorStructure lmmTenorStructure(tenorType, horizonYear);
-	lmmTenorStructure.print();
+	lmmTenorStructure.print("test_VanillaSwapPricer_Tenor.csv");
 
 	//! volatility function
 	double a = -0.06;
@@ -60,7 +60,7 @@ MCLmm_PTR get_McLmm(bool TerminalOrSpotProb, MCSchemeType::MCSchemeType mcScheme
 	AbcdPWConstFunction abcdPWConstFunction(abcdParams, lmmTenorStructure);
 
 	VolatilityFunction_PTR hgVolatilityFunction (new HGVolatilityFunction(abcdParams,  lmmTenorStructure)); 
-	hgVolatilityFunction->print();
+	hgVolatilityFunction->print("test_VanillaSwapPricer_Volatility.csv");
 
 	//! Correlation 1
 	size_t nbFactor       = 3; // need to test nbFactor  = 3, and nbFactor = 
@@ -71,7 +71,7 @@ MCLmm_PTR get_McLmm(bool TerminalOrSpotProb, MCSchemeType::MCSchemeType mcScheme
 	double correlBeta  = 0.04;
 	Correlation_PTR correlation(new XY_beta_Correlation(correlFullRank,correlReducedRank, correlReductionType,correlAlpha,correlBeta));
 	correlation->calculate(); // for print.
-	correlation->print();
+	correlation->print("test_VanillaSwapPricer_Correlation.csv");
 
 	//! Dispersion
 	Dispersion dispersion(correlation, hgVolatilityFunction);

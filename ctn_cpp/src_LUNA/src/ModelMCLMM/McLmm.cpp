@@ -1,6 +1,6 @@
 #include <LMM/generic_path.h>
 #include <LMM/helper/Printer.h>
-#include <LMM/LMM_Model/McLmm.h>
+#include <LMM/ModelMCLMM/McLmm.h>
 
 using namespace std;
 
@@ -115,7 +115,7 @@ void McLmm::initLiborMatrix(const std::vector<double>& libors_init)
 void McLmm::print(const std::string& filename) const
 {
 	//std::string fileName = "McLmm.csv";
-	std::string path = LMM::get_output_path() + fileName;
+	std::string path = LMM::get_output_path() + filename;
 
 	std::vector<PrintElement_PTR> elements_print;
 
