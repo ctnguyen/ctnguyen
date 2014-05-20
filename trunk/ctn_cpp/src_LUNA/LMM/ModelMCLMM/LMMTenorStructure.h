@@ -45,7 +45,7 @@ public:
 	{
 		return tenorDates_;
 	}
-	double get_tenorDate(size_t index) const
+	const double& get_tenorDate(size_t index) const
 	{
 		return tenorDates_[index];
 	}
@@ -66,10 +66,10 @@ public:
 	const char* get_tenorTypeStr() const {return tenorType_.name;}
 
 	//! equal operator: when modify the class, don't forget to adjust == operator
-    bool operator == (const LMMTenorStructure& LMMTenorStructure);
+    bool operator == (const LMMTenorStructure& LMMTenorStructure) const;
 
 	//! print in Excel
-	void print();
+	void print() const;
 };
 
 typedef boost::shared_ptr<LMMTenorStructure> LMMTenorStructure_PTR;
