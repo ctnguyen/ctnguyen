@@ -34,7 +34,6 @@ add_library(LMM_ModelMCLMM
 	"McTerminalLmm.cpp"
 	"PCA.cpp"
 	"RobonatoAngle.cpp"
-	"VolatilityFunction.cpp"
 	"VolatilityGridBuilder.cpp"
 )
 

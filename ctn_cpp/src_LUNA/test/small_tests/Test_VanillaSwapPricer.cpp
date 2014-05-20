@@ -8,6 +8,7 @@
 #include <LMM/helper/Printer.h>
 #include <LMM/helper/McGenerator.h>
 #include <LMM/instrument/VanillaSwap.h>
+#include <LMM/ModelMCLMM/Correlation.h>
 #include <LMM/ModelMCLMM/HGVolatilityFunction.h>
 #include <LMM/ModelMCLMM/McTerminalLmm.h>
 #include <LMM/ModelMCLMM/McSpotLmm.h>

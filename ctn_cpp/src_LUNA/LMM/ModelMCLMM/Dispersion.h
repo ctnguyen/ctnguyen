@@ -1,3 +1,5 @@
+#ifndef LMM_MODEL_DISPERSION_H
+#define LMM_MODEL_DISPERSION_H
 #pragma once
 
 #include <vector>
@@ -12,7 +14,10 @@
 
 //! YY: suppose correlation is time dependent, so can separate: Correlation & Vol 
 
-
+/*! \class Dispersion 
+ *  Modelize the structure of volatility
+ *
+ */
 class Dispersion 
 {
 protected:
@@ -49,3 +54,5 @@ public:
 
 
 typedef  boost::shared_ptr<Dispersion>  Dispersion_PTR;
+
+#endif /* LMM_MODEL_DISPERSION_H */
