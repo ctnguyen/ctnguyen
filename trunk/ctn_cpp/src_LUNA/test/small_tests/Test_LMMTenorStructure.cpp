@@ -21,7 +21,7 @@ BOOST_AUTO_TEST_SUITE(lmm_test_model)
 BOOST_AUTO_TEST_CASE(test_LMMTenorStrucure)
 {
 	LMMTenorStructure lmmTenorStructure = LMM_unittest::get_LMMTenorStrucure_example();
-	lmmTenorStructure.print();
+	lmmTenorStructure.print("test_LMMTenorStructure.csv");
 
 	BOOST_CHECK(true);
 }

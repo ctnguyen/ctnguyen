@@ -209,11 +209,15 @@ else()## TODO for instance on NON WIN32 OS, debug and release QuantLib is the sa
 endif()
 
 # We want to use the tag inline below without risking double dashes
-if(${_ql_RELEASE_ABI_TAG} STREQUAL "-")
-	set(_ql_RELEASE_ABI_TAG "")
+if(_ql_RELEASE_ABI_TAG)
+    if(${_ql_RELEASE_ABI_TAG} STREQUAL "-")
+    	set(_ql_RELEASE_ABI_TAG "")
+    endif()
 endif()
-if(${_ql_DEBUG_ABI_TAG} STREQUAL "-")
-	set(_ql_DEBUG_ABI_TAG "")
+if(_ql_DEBUG_ABI_TAG)
+    if(${_ql_DEBUG_ABI_TAG} STREQUAL "-")
+    	set(_ql_DEBUG_ABI_TAG "")
+    endif()
 endif()
 
 

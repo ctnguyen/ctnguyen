@@ -131,7 +131,7 @@ double HGVolatilityFunction::operator()(size_t indexLibor, size_t indexTime) con
 //! Whne t in [T_i,T_{i+1}], return index= i+1
 size_t HGVolatilityFunction::indexSearch(const double& t) const
 {
-
+	size_t indexsearch;
 	 if(t<lmmTenorStructure_.get_tenorDate(0) || t>lmmTenorStructure_.get_tenorDate(horizon_))  // check condition: t in [T_0,T_N]
 		for(size_t i=0; i<horizon_; ++i)
 		{
@@ -139,9 +139,10 @@ size_t HGVolatilityFunction::indexSearch(const double& t) const
 			const double&  t2 = lmmTenorStructure_.get_tenorDate(i+1);
 			if(t>=t1 && t<t2)
 			{
-				return i+1;
+				indexsearch = i+1;break;
 			}
 		}
+	 return indexsearch;
 }
 
 
@@ -168,7 +169,7 @@ double HGVolatilityFunction::covIntegral( size_t indexTime_i,
 void HGVolatilityFunction::print(const std::string& filename) const  // OK: test passed.
 {
 	//std::string fileName = "HGVolatilityFunction.csv";
-	std::string path = LMM::get_output_path() + fileName;
+	std::string path = LMM::get_output_path() + filename;
 	
 	std::vector<PrintElement_PTR> elements_print;
 
