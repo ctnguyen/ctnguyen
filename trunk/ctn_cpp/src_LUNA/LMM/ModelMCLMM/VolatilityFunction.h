@@ -37,7 +37,7 @@ public:
 	//! getter
 	const LMMTenorStructure& get_LMMTenorStructure() const {return lmmTenorStructure_;}
 
-	virtual void print() const = 0;
+	virtual void print(const std::string& filename) const = 0;
 };
 typedef boost::shared_ptr<VolatilityFunction>   VolatilityFunction_PTR;  // is it useful ? 
 

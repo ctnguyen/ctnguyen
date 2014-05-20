@@ -66,7 +66,7 @@ public:
 	double correlApprox(size_t i, size_t j) const ;
 
 	//print
-	void print() const;
+	void print(const std::string& filename) const;
 	void print_details(string& fileName) const;	
 
 };

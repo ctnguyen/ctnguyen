@@ -1,4 +1,7 @@
 #define BOOST_TEST_MODULE LMM_unit_test_model
+
+#include <string>
+
 #include <boost/test/included/unit_test.hpp>
 
 #include <LMM/ModelMCLMM/HGVolatilityFunction.h>
@@ -26,6 +29,8 @@ HGVolatilityFunction get_VolatilityFunction_example()
 BOOST_AUTO_TEST_CASE(test_VolatilityFunction)
 {
 	HGVolatilityFunction hgVolatilityFunction = get_VolatilityFunction_example();
+
+	std::string filename("test_VolatilityFunction.svc");
 	hgVolatilityFunction.print();
 
 	BOOST_CHECK(true);

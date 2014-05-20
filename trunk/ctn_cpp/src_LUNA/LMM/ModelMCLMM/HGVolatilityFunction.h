@@ -116,7 +116,7 @@ public:
 	const AbcdPWConstFunction::AbcdParams& get_AbcdParams() const {return abcdPWConstFunction_.get_AbcdParams();}
 
 	//! 
-	void print() const;
+	void print(const std::string& filename) const;
 private:
 	//! Whne t in [T_i,T_{i+1}], return index= i+1
 	size_t indexSearch(const double& t) const;

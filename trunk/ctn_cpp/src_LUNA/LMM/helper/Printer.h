@@ -10,7 +10,7 @@
 
 #include <LMM/generic_path.h>
 
-const std::string printPathOutput = LMM::get_output_path();
+//const std::string printPathOutput = LMM::get_output_path();
 
 class PrintElement
 {
