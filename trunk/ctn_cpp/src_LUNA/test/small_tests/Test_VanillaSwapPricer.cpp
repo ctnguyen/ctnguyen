@@ -147,7 +147,7 @@ BOOST_AUTO_TEST_CASE(test_VanillaSwap)
 BOOST_AUTO_TEST_CASE(test_VanillaSwapPricer)
 {
 	size_t minNbSimulation = 100;
-	size_t maxNbSimulation = 300000; //300000;
+	size_t maxNbSimulation = 1000; //300000;
 	double bnSimualtionPowStep = 2;
 
 	std::vector<size_t> nbSimulationVector;

@@ -57,14 +57,15 @@ public:
 		Tenor    lmmTenorStructureTenorType);
 
 
-	double get_strike() const {return strike_;}
+	const double& get_strike() const {return strike_;}
 	void   set_strike(double strike) {strike_ = strike;}
 
-	Tenor get_floatingLegTenorType()		  const {return floatingLegTenorType_;}
-	Tenor get_fixedLegTenorType()		  const {return fixedLegTenorType_;}
-	Tenor get_lmmTenorStructureTenorType() const {return lmmTenorStructureTenorType_; }
+	const Tenor& get_floatingLegTenorType()		  const {return floatingLegTenorType_;}
+	const Tenor& get_fixedLegTenorType()		  const {return fixedLegTenorType_;}
+	const Tenor& get_lmmTenorStructureTenorType() const {return lmmTenorStructureTenorType_; }
 
-	//size_t get_floatingLegTenorLmmTenorRatio() const { return TenorType::TenorTypeRatio(floatingLegTenorType_,lmmTenorStructureTenorType_);}		
+	//ctntodo : uncomment this function initially commented (get_floatingLeg...)
+	size_t get_floatingLegTenorLmmTenorRatio() const { return floatingLegTenorType_.ratioTo(lmmTenorStructureTenorType_);}		
 	size_t get_fixedLegTenorLmmTenorRatio()    const { return fixedLegTenorType_.ratioTo( lmmTenorStructureTenorType_);}
 
 
