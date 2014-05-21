@@ -23,7 +23,7 @@ class Dispersion
 
 protected:
 	const size_t nbFactor_;                            // comes from correlation_.reducedRank
-	const LMMTenorStructure& lmmTenorStructure_;        // comes from volatility .
+	const LMMTenorStructure lmmTenorStructure_;        // comes from volatility .
 	Correlation_PTR correlation_;  
 	VolatilityFunction_PTR volatilityFunction_;  
 

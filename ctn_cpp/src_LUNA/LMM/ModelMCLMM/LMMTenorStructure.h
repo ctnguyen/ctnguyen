@@ -7,7 +7,6 @@
 #include <vector>
 #include <string>
 #include <cassert>
-#include <string>
 
 #include <boost/shared_array.hpp>
 
@@ -23,50 +22,33 @@
  */
 class LMMTenorStructure
 {
-	const Tenor   tenorType_;      // eg: "6M" // never change, to be constant
-	Name::indexInLMMTenorStructure horizon_;        // N 
-	std::vector<double>            tenorDates_;     // size = N+2, LMMTenorDates[k] = T_k, k =[0,...,N+1]
-	std::vector<double>            tenorDeltaT_;    // size = N+1, LMMTenorDeltaT_[k] = T_{k+1} - T_k, k = [0,...,N]
+
+	//! tau_i = T_{i+1} - T_i
+	const Tenor&         tenorType_   ;    // eg: "6M" // never change, to be constant
+	Name::indexInLMMTenorStructure horizon_     ;    // N 
+	std::vector<double>  tenorDates_  ;    // size = N+2, T_0, T_1,  ......... T_{N+1}
+	std::vector<double>  tenorDeltaT_ ;    // size = N+1, \tau_0, \tau_1,...\tau_{N+1}
 
 public:
 
-	LMMTenorStructure(const Tenor&  tenorType, //! User should make sure the coherence.
-					  const size_t horizonYear);
+	//! constructor
+	LMMTenorStructure(const Tenor&  tenorType, const size_t horizonYear);
 
 	//! getter
-	Name::indexInLMMTenorStructure get_horizon() const
-	{
-		return horizon_;
-	}
+	const Tenor& get_tenorType()                           const ;
 
+	Name::indexInLMMTenorStructure get_horizon()           const ;
+	
+	const double&              get_deltaT(size_t index)    const ;
+	const std::vector<double>& get_deltaT(            )    const ;
+	
+	const double&              get_tenorDate(size_t index) const ;
+	const std::vector<double>& get_tenorDate(            ) const ;
 
-
-	const std::vector<double>& get_tenorDate() const
-	{
-		return tenorDates_;
-	}
-	const double& get_tenorDate(size_t index) const
-	{
-		return tenorDates_[index];
-	}
-
-
-	const std::vector<double>& get_deltaT() const
-	{
-		return tenorDeltaT_;
-	}
-
-	const double& get_deltaT(size_t index) const
-	{
-		return tenorDeltaT_[index];
-	}
-
-
-	const Tenor& get_tenorType() const {return tenorType_;}
-	const char* get_tenorTypeStr() const {return tenorType_.name;}
-
-	//! equal operator: when modify the class, don't forget to adjust == operator
+	
+	//! equal operator: 
     bool operator == (const LMMTenorStructure& LMMTenorStructure) const;
+	bool operator != (const LMMTenorStructure& LMMTenorStructure) const;
 
 	//! print in Excel
 	void print(const std::string& filename) const;

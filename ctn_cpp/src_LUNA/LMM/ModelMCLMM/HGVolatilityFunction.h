@@ -7,70 +7,69 @@
 
 #include <ql/quantlib.hpp>
 #include <ql/termstructures/volatility/abcd.hpp>
-//#include <boost/shared_ptr.hpp>
 
 #include <LMM/ModelMCLMM/LMMTenorStructure.h>
 #include <LMM/ModelMCLMM/VolatilityFunction.h>
 
 
-//! The idea is to use h represent the humped shape (homogeneity), and then use function g to match the swaptionMatrix
+//! struct helper regrouping abcd parameters for abcd volatility model
+struct AbcdParams 
+{
+	//abcdFunc(tau) = (a+ b*tau)*exp(-c*tau) + d;
+	const double& a_; const double& b_; const double& c_; const double& d_;			
+	AbcdParams(const double& a, const double& b, const double& c, const double& d):a_(a), b_(b), c_(c), d_(d){}			
+};
 
 
+/*! \class HGVolatilityFucntion
+*
+*
+*
+*/
 
-//! YY: Currently it's piecewise Constant version: when implement other version, need to implement the heritage version. 
-//! YY: TODO the implementation latter... 
 class HGVolatilityFunction : public VolatilityFunction
 {
 	//! --------------------------------- h ------------------------------------
 	//! h: ABCD function: totally Homogeneous, give the humped shape.
 	//    same for every Libor.
 public:
+
 	class AbcdPWConstFunction  // regroup the QuantLib defined abcdFunction.
 	{
 	public:
-		struct AbcdParams
-		{
-			double a_;
-			double b_;
-			double c_;
-			double d_;
-
-			//abcdFunc(tau) = (a+ b*tau)*exp(-c*tau) + d;
-			AbcdParams(double a, double b, double c, double d) : a_(a), b_(b), c_(c), d_(d){}
-
-			std::vector<double> toVector() const 
-			{
-			    std::vector<double> v;
-				v.reserve(4);
-				v.push_back(a_);
-				v.push_back(b_);
-				v.push_back(c_);
-				v.push_back(d_);
-			    return v;
-			}
-		};
-	private:
-		AbcdParams			     abcdParam_;
-		QuantLib::AbcdFunction   abcdFunction_;  // homogeneous part, decide the hump shape. 
-		const LMMTenorStructure& lmmTenorStructure_;
-	public:
 		AbcdPWConstFunction(const AbcdParams& abcdParams, const LMMTenorStructure& lmmTenorStructure)
-			: abcdParam_(abcdParams.a_, abcdParams.b_, abcdParams.c_, abcdParams.d_)
-			, abcdFunction_(abcdParams.a_,abcdParams.b_,abcdParams.c_,abcdParams.d_)
-			, lmmTenorStructure_(lmmTenorStructure)
+			: lmmTenorStructure_(lmmTenorStructure)
+			, abcdFunction_(abcdParams.a_,abcdParams.b_,abcdParams.c_,abcdParams.d_)			
 		{};
 
-		//! Attention: a very slow function.
-		//! return piecewise constant vol of   L_indexLibor in time interval: [T_{indexTime-1}, T_indexTime]
-		double operator()(size_t indexLibor, size_t indexTime) const; // operator(i,j) --return vol--> hij, i>=j
-
 		//! getter
-		const AbcdParams& get_AbcdParams() const {return abcdParam_;}
+		const QuantLib::AbcdFunction& get_AbcdFunction() const {return abcdFunction_;}
+
+		//! return piecewise constant vol of   L_indexLibor in time interval: [T_{indexTime-1}, T_indexTime]
+		double operator()(size_t indexLibor, size_t indexTime) const; // operator(i,j) --return vol--> hij, i>=j			
+	
+	private:
+		const LMMTenorStructure lmmTenorStructure_;
+		QuantLib::AbcdFunction  abcdFunction_     ;    // homogeneous part, decide the hump shape. 
 	};
 
 
+	//! Constructor
+	HGVolatilityFunction(const AbcdParams& abcdParams, const LMMTenorStructure& lmmTenorStructure);        // horizon = N, total number of Libor: L_k, k = [0,N]
+
+	
+	//! int_{T_indexTime_i}^{T_indexTime_j} vol_{indexLibor_i}(u)*vol_{indexLibor_j}(u) du, 
+	double covIntegral( size_t indexTime_i,
+		size_t indexTime_j,
+		size_t indexLibor_i,
+		size_t indexLibor_j) const;
+
+	//! 
+	void print(const std::string& filename) const;
+
+
 private:
-	size_t              horizon_;
+	const size_t        horizon_;
 	AbcdPWConstFunction abcdPWConstFunction_;
 
 
@@ -88,13 +87,7 @@ private:
 	//boost::numeric::ublas::triangular_matrix<double, lower> volCumulated_;  //! precalculated Vol
 
 	//bool ifVolisUpToDate_; 
-
-public:
-	//! Constructor
-	HGVolatilityFunction(const AbcdPWConstFunction::AbcdParams& abcdParams,  // h FunctionParam
-											   const LMMTenorStructure& lmmTenorStructure);        // horizon = N, total number of Libor: L_k, k = [0,N]
-
-private:
+	
 	void construct_hPWConstFunc();
 	void construct_gPWConstFunc();
 
@@ -104,26 +97,16 @@ private:
 	//! volatility of L_i at [T_{j-1},T_j]
 	double operator()(size_t indexLibor, size_t indexTime) const; // operator(ij) --return vol--> hij, i>=j
 
-public:
-
-	//! int_{T_indexTime_i}^{T_indexTime_j} vol_{indexLibor_i}(u)*vol_{indexLibor_j}(u) du, 
-	double covIntegral( size_t indexTime_i,
-						size_t indexTime_j,
-						size_t indexLibor_i,
-						size_t indexLibor_j) const;
-
-	//!getter
-	const AbcdPWConstFunction::AbcdParams& get_AbcdParams() const {return abcdPWConstFunction_.get_AbcdParams();}
-
-	//! 
-	void print(const std::string& filename) const;
-private:
 	//! Whne t in [T_i,T_{i+1}], return index= i+1
 	size_t indexSearch(const double& t) const;
+
 };
 
-typedef HGVolatilityFunction::AbcdPWConstFunction::AbcdParams AbcdParams;
-typedef HGVolatilityFunction::AbcdPWConstFunction    AbcdPWConstFunction;
+typedef HGVolatilityFunction::AbcdPWConstFunction AbcdPWConstFunction;
 
+
+//! The idea is to use h represent the humped shape (homogeneity), and then use function g to match the swaptionMatrix
+//! YY: Currently it's piecewise Constant version: when implement other version, need to implement the heritage version. 
+//! YY: TODO the implementation latter... 
 
 #endif /* LMM_MODEL_HGVOLATILITY_FUNCTION_H */
