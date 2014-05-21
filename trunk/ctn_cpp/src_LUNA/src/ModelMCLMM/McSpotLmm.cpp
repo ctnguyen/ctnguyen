@@ -39,7 +39,7 @@ void McSpotLmm::simulateLMM()
 //! 1/P(T_k,T_{k+1}) = 1+deltaT[k]*Libor_k(T_k)
 void McSpotLmm::computeNumeraires()
 {
-	const std::vector<double>& deltaTVector = dispersion_.get_lmmTenorStructure().get_deltaT();
+	const std::vector<double>& deltaTVector = dispersion_.get_lmmTenorStructure()->get_deltaT();
 
 	//! init condition:
 	numeraires_[0] = 1.0;
@@ -61,7 +61,7 @@ void McSpotLmm::SpotLmmModel_Euler()
 {
 	size_t nbFactors = dispersion_.getNbFactors();
 	std::vector<Real>   gaussian_tmp(nbFactors,0.); 
-	const std::vector<double>& deltaT = dispersion_.get_lmmTenorStructure().get_deltaT();
+	const std::vector<double>& deltaT = dispersion_.get_lmmTenorStructure()->get_deltaT();
 	std::vector<double> drift_coeff(horizon_+1); // working place: delta_k*libor_k/(1+delta_k*libor_k)
 
 	// Compute each Libor rate's value at every tenor date (except at time 0)
@@ -102,7 +102,7 @@ void McSpotLmm::SpotLmmModel_Pc()
 {
 	size_t nbFactors = dispersion_.getNbFactors();
 	std::vector<Real>   gaussian_tmp(nbFactors,0.); 
-	const std::vector<double>& deltaT = dispersion_.get_lmmTenorStructure().get_deltaT();
+	const std::vector<double>& deltaT = dispersion_.get_lmmTenorStructure()->get_deltaT();
 	std::vector<double> drift_coeff(horizon_+1); // working place: delta_k*libor_k/(1+delta_k*libor_k)
 
 	for (size_t indexTime = 1; indexTime <= horizon_; ++indexTime)   // forward indexTime: 1->N   

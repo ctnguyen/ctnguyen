@@ -7,8 +7,12 @@
 #include <string>
 #include <cassert>
 
-/*! To factorize, the class 'Tenor' will replace the 'TenorTypeEnum::TenorTypeEnum'
- *
+/*! \class Tenor
+ *  This class model the Tenor Type 1M,2M ... 12M
+ *  Its design is an advanced of and enumeration, who can have instance and method
+ * User can do
+ * Tenor m_tenor=Tenor::3M;
+ * and use all method of Tenor 
  */
 class Tenor
 {
@@ -25,8 +29,6 @@ public:
 	public :
 		static const char*        NAME     ;
 		static const unsigned int NB_MONTH ;
-
-		TenorType(){}
 	};
 
 	static const TenorType<0>  _Non;typedef TenorType<0> TYPE_0;
@@ -66,7 +68,6 @@ public:
 	// A tenor is never to change after being instanciated
 	const         char* name   ;
 	const unsigned int& nbMonth;
-
 };
 
 #endif /* LMM_INSTRUMENT_TENOR_TYPE_H */

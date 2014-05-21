@@ -9,7 +9,7 @@
 
 void LmmApproxVanillaSwaptionPricer::calculateZC()
 {
-	const std::vector<double>& deltaT = lmm_->get_LMMTenorStructure().get_deltaT();
+	const std::vector<double>& deltaT = lmm_->get_LMMTenorStructure()->get_deltaT();
 	const std::vector<double>& liborsInitValue = lmm_->get_liborsInitValue();
 	ZC_[0] = 1.0;
 	for(size_t i=1; i<ZC_.size(); ++i)
@@ -30,7 +30,7 @@ double LmmApproxVanillaSwaptionPricer::volBlack(const VanillaSwaption& vanillaSw
 
 	assert(horizon_ >= vanillaSwap.get_indexEnd()); //! if not cannot price it.
 	//! YY TODO: implement the == operator and active this test!
-	//assert(lmm_->get_LMMTenorStructure().get_tenorType() == vanillaSwaption.getUnderlyingSwap().get_lmmTenorStructureTenorType());
+	//assert(lmm_->get_LMMTenorStructure()->get_tenorType() == vanillaSwaption.getUnderlyingSwap().get_lmmTenorStructureTenorType());
 	precalculate(vanillaSwap);
 	                                                                                  
 	//! Annuity at time 0

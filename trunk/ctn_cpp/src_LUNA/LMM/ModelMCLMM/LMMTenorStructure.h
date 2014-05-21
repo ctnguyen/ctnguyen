@@ -8,6 +8,7 @@
 #include <string>
 #include <cassert>
 
+#include <boost/shared_ptr.hpp>
 #include <boost/shared_array.hpp>
 
 #include <LMM/Name.h>
@@ -24,7 +25,7 @@ class LMMTenorStructure
 {
 
 	//! tau_i = T_{i+1} - T_i
-	const Tenor&         tenorType_   ;    // eg: "6M" // never change, to be constant
+	const Tenor          tenorType_   ;    // eg: "6M" // never change, to be constant
 	Name::indexInLMMTenorStructure horizon_     ;    // N 
 	std::vector<double>  tenorDates_  ;    // size = N+2, T_0, T_1,  ......... T_{N+1}
 	std::vector<double>  tenorDeltaT_ ;    // size = N+1, \tau_0, \tau_1,...\tau_{N+1}
@@ -54,6 +55,6 @@ public:
 	void print(const std::string& filename) const;
 };
 
-typedef boost::shared_ptr<LMMTenorStructure> LMMTenorStructure_PTR;
+typedef boost::shared_ptr<const LMMTenorStructure> ConstLMMTenorStructure;
 
 #endif /* LMM_TENOR_STRUCTURE_H */

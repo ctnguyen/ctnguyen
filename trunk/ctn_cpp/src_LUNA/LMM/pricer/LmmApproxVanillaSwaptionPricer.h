@@ -29,7 +29,7 @@ public:
 		 horizon_(lmm_->get_horizon()),
 		 ZC_(horizon_+2)
 	{
-		assert(lmm_->get_LMMTenorStructure().get_tenorDate()[0] == 0.0);
+		assert(lmm_->get_LMMTenorStructure()->get_tenorDate()[0] == 0.0);
 		calculateZC();
 	}
 

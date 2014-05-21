@@ -2,9 +2,9 @@
 
 void VanillaSwapPricer::precalculate(const LMM::VanillaSwap& vanillaSwap) const
 {
-	assert(lmmTenorStructure_.get_horizon() >= vanillaSwap.get_indexEnd());  // if not cannot price this swap;
+	assert(lmmTenorStructure_->get_horizon() >= vanillaSwap.get_indexEnd());  // if not cannot price this swap;
 	//! YY TODO: need to implement the == operator for enum TenorType
-	assert(lmmTenorStructure_.get_tenorType() == vanillaSwap.get_lmmTenorStructureTenorType());
+	assert(lmmTenorStructure_->get_tenorType() == vanillaSwap.get_lmmTenorStructureTenorType());
 
 	//! floatingLeg
 	const std::vector<Name::indexInLMMTenorStructure>& floatingLegPaymentIndexSchedule = vanillaSwap.get_floatingLegPaymentIndexSchedule();
@@ -12,7 +12,7 @@ void VanillaSwapPricer::precalculate(const LMM::VanillaSwap& vanillaSwap) const
 	for(size_t itr = 0; itr<deltaTFloatingLeg_.size(); ++itr)
 	{
 		size_t index = floatingLegPaymentIndexSchedule[itr];
-		deltaTFloatingLeg_[itr] = lmmTenorStructure_.get_deltaT(index-1); // T[index] - T[index-1]
+		deltaTFloatingLeg_[itr] = lmmTenorStructure_->get_deltaT(index-1); // T[index] - T[index-1]
 
 	}	
 
@@ -23,8 +23,8 @@ void VanillaSwapPricer::precalculate(const LMM::VanillaSwap& vanillaSwap) const
 	for(size_t itr = 0; itr<deltaTFixedLeg_.size(); ++itr)
 	{
 		size_t index = fixedLegPaymentIndexSchedule[itr];
-		double t2 = lmmTenorStructure_.get_tenorDate(index);
-		double t1 = lmmTenorStructure_.get_tenorDate(index-fixedLegTenorLmmTenorRatio_);
+		double t2 = lmmTenorStructure_->get_tenorDate(index);
+		double t1 = lmmTenorStructure_->get_tenorDate(index-fixedLegTenorLmmTenorRatio_);
 		deltaTFixedLeg_[itr] = t2-t1;
 	}
 }
@@ -36,7 +36,7 @@ double VanillaSwapPricer::annuity( Name::indexInLMMTenorStructure indexValuation
 								   const std::vector<double>& numeraire) const
 {
 	assert(indexValuationDate <= vanillaSwap.get_indexStart()); //YY TODO: this test too slow, esp: within MC simulation
-	assert(lmmTenorStructure_.get_horizon() >= vanillaSwap.get_indexEnd());  // if not cannot price this swap;
+	assert(lmmTenorStructure_->get_horizon() >= vanillaSwap.get_indexEnd());  // if not cannot price this swap;
 
 	double price = 0.0;
 	const std::vector<Name::indexInLMMTenorStructure>& fixedLegPaymentIndexSchedule  = vanillaSwap.get_fixedLegPaymentIndexSchedule();
@@ -55,7 +55,7 @@ double VanillaSwapPricer::pvFixedLeg(Name::indexInLMMTenorStructure indexValuati
 									 const std::vector<double>& numeraire)  const
 {
 	assert(indexValuationDate <= vanillaSwap.get_indexStart()); //YY TODO: this test too slow, esp: within MC simulation
-	assert(lmmTenorStructure_.get_horizon() >= vanillaSwap.get_indexEnd());  // if not cannot price this swap;
+	assert(lmmTenorStructure_->get_horizon() >= vanillaSwap.get_indexEnd());  // if not cannot price this swap;
 
 	return vanillaSwap.get_strike()*annuity(indexValuationDate,vanillaSwap,numeraire);
 }
@@ -63,9 +63,9 @@ double VanillaSwapPricer::pvFixedLeg(Name::indexInLMMTenorStructure indexValuati
 
 double VanillaSwapPricer::swapNPV_Analytical_1(const LMM::VanillaSwap& vanillaSwap, const std::vector<double>& liborsInitValue)  const // initLibor[i] = L_i[T_0]
 {
-	assert(lmmTenorStructure_.get_horizon()+1 == liborsInitValue.size());
-	assert(lmmTenorStructure_.get_horizon() >= vanillaSwap.get_indexEnd());  // if not cannot price this swap;
-	size_t horizon = lmmTenorStructure_.get_horizon();
+	assert(lmmTenorStructure_->get_horizon()+1 == liborsInitValue.size());
+	assert(lmmTenorStructure_->get_horizon() >= vanillaSwap.get_indexEnd());  // if not cannot price this swap;
+	size_t horizon = lmmTenorStructure_->get_horizon();
 
 
 	double floatingLegdelta_T = vanillaSwap.get_floatingLegTenorType().convertToYear();
@@ -114,9 +114,9 @@ double VanillaSwapPricer::swapNPV_Analytical_1(const LMM::VanillaSwap& vanillaSw
 
 double VanillaSwapPricer::swapNPV_Analytical_2(const LMM::VanillaSwap& vanillaSwap, const std::vector<double>& liborsInitValue)  const // initLibor[i] = L_i[T_0]
 {
-	assert(lmmTenorStructure_.get_horizon()+1 == liborsInitValue.size());
-	assert(lmmTenorStructure_.get_horizon() >= vanillaSwap.get_indexEnd());  // if not cannot price this swap;
-	size_t horizon = lmmTenorStructure_.get_horizon();
+	assert(lmmTenorStructure_->get_horizon()+1 == liborsInitValue.size());
+	assert(lmmTenorStructure_->get_horizon() >= vanillaSwap.get_indexEnd());  // if not cannot price this swap;
+	size_t horizon = lmmTenorStructure_->get_horizon();
 
 
 	double floatingLegdelta_T = vanillaSwap.get_floatingLegTenorType().convertToYear();
@@ -166,9 +166,9 @@ double VanillaSwapPricer::swapNPV_Analytical_2(const LMM::VanillaSwap& vanillaSw
 double VanillaSwapPricer::swapRate_Analytical(const LMM::VanillaSwap& vanillaSwap,
 											  const std::vector<double>& liborsInitValue)  const
 {
-	assert(lmmTenorStructure_.get_horizon()+1 == liborsInitValue.size());
-	assert(lmmTenorStructure_.get_horizon() >= vanillaSwap.get_indexEnd());  // if not cannot price this swap;
-	size_t horizon = lmmTenorStructure_.get_horizon();
+	assert(lmmTenorStructure_->get_horizon()+1 == liborsInitValue.size());
+	assert(lmmTenorStructure_->get_horizon() >= vanillaSwap.get_indexEnd());  // if not cannot price this swap;
+	size_t horizon = lmmTenorStructure_->get_horizon();
 
 
 	double floatingLegdelta_T = vanillaSwap.get_floatingLegTenorType().convertToYear();

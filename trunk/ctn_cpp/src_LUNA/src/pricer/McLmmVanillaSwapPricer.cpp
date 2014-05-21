@@ -82,7 +82,7 @@ double MCLmmVanillaSwapPricer::pvFloatingLeg(Name::indexInLMMTenorStructure inde
 									         const matrix& liborMatrix) const
 {
 	assert(indexValuationDate <= vanillaSwap.get_indexStart()); //YY TODO: this test too slow, esp: within MC simulation
-	assert(lmmTenorStructure_.get_horizon() >= vanillaSwap.get_indexEnd());  // if not cannot price this swap;
+	assert(lmmTenorStructure_->get_horizon() >= vanillaSwap.get_indexEnd());  // if not cannot price this swap;
 
 	double price = 0.0;
 	const std::vector<Name::indexInLMMTenorStructure>& floatingLegPaymentIndexSchedule = vanillaSwap.get_floatingLegPaymentIndexSchedule();

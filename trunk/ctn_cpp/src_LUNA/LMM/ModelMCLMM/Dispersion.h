@@ -23,7 +23,7 @@ class Dispersion
 
 protected:
 	const size_t nbFactor_;                            // comes from correlation_.reducedRank
-	const LMMTenorStructure lmmTenorStructure_;        // comes from volatility .
+	ConstLMMTenorStructure lmmTenorStructure_;        // comes from volatility .
 	Correlation_PTR correlation_;  
 	VolatilityFunction_PTR volatilityFunction_;  
 
@@ -44,8 +44,8 @@ public:
 						size_t indexTime_j,
 						size_t indexLibor) const;
 
-	const LMMTenorStructure& get_lmmTenorStructure() const {return lmmTenorStructure_;}
-	size_t get_horizon() const {return lmmTenorStructure_.get_horizon();}
+	ConstLMMTenorStructure get_lmmTenorStructure() const {return lmmTenorStructure_;}
+	size_t get_horizon() const {return lmmTenorStructure_->get_horizon();}
 
 	// getter
 	size_t getNbFactors() const {return nbFactor_;}

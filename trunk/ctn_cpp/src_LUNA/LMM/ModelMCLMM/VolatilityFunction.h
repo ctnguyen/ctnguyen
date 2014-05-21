@@ -18,7 +18,7 @@ public:
 	//virtual double operator()(double t, size_t index) = 0; 
 	//virtual double operator()(size_t indexLibor, size_t indexTime) = 0.0;
 
-	VolatilityFunction(const LMMTenorStructure& lmmTenorStructure) : lmmTenorStructure_(lmmTenorStructure){}
+	VolatilityFunction(ConstLMMTenorStructure lmmTenorStructure) : lmmTenorStructure_(lmmTenorStructure){}
 
 	virtual double varIntegral( size_t indexTime_i, size_t indexTime_j, size_t indexLibor) const 
 	{
@@ -26,7 +26,7 @@ public:
 	}
 	
 	//! getter
-	const LMMTenorStructure& get_LMMTenorStructure() const {return lmmTenorStructure_;}
+	ConstLMMTenorStructure get_LMMTenorStructure() const {return lmmTenorStructure_;}
 
 	//! \int_{T_i}^{T_j} \sigma_{Li}(u)*\sigma_{Lj}(u) du
 	virtual double covIntegral
@@ -41,7 +41,7 @@ public:
 
 protected:
 
-	const LMMTenorStructure lmmTenorStructure_;
+	ConstLMMTenorStructure lmmTenorStructure_;
 
 };
 
