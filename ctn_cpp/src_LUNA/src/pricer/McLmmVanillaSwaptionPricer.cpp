@@ -6,7 +6,7 @@ double MCLmmVanillaSwaptionPricer::price(const VanillaSwaption& vanillaSwaption,
 {
 	LMM::VanillaSwap vanillaSwap = vanillaSwaption.getUnderlyingSwap();
 	//! YY TODO: need to implement the == operator for enum TenorType
-	//assert(vanillaSwap.get_lmmTenorStructureTenorType() == mcLmm_->get_LMMTenorStructure().get_tenorType());
+	//assert(vanillaSwap.get_lmmTenorStructureTenorType() == mcLmm_->get_LMMTenorStructure->get_tenorType());
 	precalculate(vanillaSwap);
 	double result = 0.0;
 

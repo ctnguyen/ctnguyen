@@ -17,19 +17,19 @@ double HGVolatilityFunction::AbcdPWConstFunction::operator()(size_t indexLibor, 
 	if(indexLibor<indexTime)
 		throw("Error, index relation error!");
 
-	if(indexLibor<1 || indexLibor>lmmTenorStructure_.get_horizon())  // size1 = horizon
+	if(indexLibor<1 || indexLibor>lmmTenorStructure_->get_horizon())  // size1 = horizon
 		throw("Error, invalid indexLibor!");
 
 	if(indexTime <1)  // size1 = horizon
 		throw("Error, invalid indexTime!");
 
 	//! 
-	//const double&  t_begin = lmmTenorStructure_.get_tenorDate(indexTime-1); 
-	//const double&  t_end   = lmmTenorStructure_.get_tenorDate(indexTime); 
+	//const double&  t_begin = lmmTenorStructure_->get_tenorDate(indexTime-1); 
+	//const double&  t_end   = lmmTenorStructure_->get_tenorDate(indexTime); 
 	//double t       = (t_begin + t_end)/2.0; 
-	const double&  t       = lmmTenorStructure_.get_tenorDate(indexTime); 
+	const double&  t       = lmmTenorStructure_->get_tenorDate(indexTime); 
 
-	const double&  T_i     = lmmTenorStructure_.get_tenorDate(indexLibor);        
+	const double&  T_i     = lmmTenorStructure_->get_tenorDate(indexLibor);        
 	double tau     = T_i-t; 
 
 	return abcdFunction_(tau);
@@ -44,15 +44,15 @@ double HGVolatilityFunction::AbcdPWConstFunction::operator()(size_t indexLibor, 
 //
 // ----------------------------------------------------------------------------------------------------------------
 //! Constructor
-HGVolatilityFunction::HGVolatilityFunction(const        AbcdParams& abcdParams,              // h FunctionParam
-	                                       const LMMTenorStructure& lmmTenorStructure)       // horizon = N, total number of libor: L_k, k = [0,N]
+HGVolatilityFunction::HGVolatilityFunction(const      AbcdParams& abcdParams,              // h FunctionParam
+	                                       ConstLMMTenorStructure lmmTenorStructure)       // horizon = N, total number of libor: L_k, k = [0,N]
 	: VolatilityFunction(lmmTenorStructure)
-	, horizon_(lmmTenorStructure_.get_horizon())
+	, horizon_(lmmTenorStructure_->get_horizon())
 	, abcdPWConstFunction_(abcdParams, lmmTenorStructure)
 	 // YY: A good thing from Adrien, add artificial first row and column (not used!), to make the manipulation of index easier.
 	 // piecewise constant vol for: L_k, K = [1,N]
-	 , hPWConstFunc_(lmmTenorStructure.get_horizon()+1,lmmTenorStructure.get_horizon()+1)   
-	 , gPWConstFunc_(lmmTenorStructure.get_horizon()+1,lmmTenorStructure.get_horizon()+1)
+	 , hPWConstFunc_(lmmTenorStructure->get_horizon()+1,lmmTenorStructure->get_horizon()+1)   
+	 , gPWConstFunc_(lmmTenorStructure->get_horizon()+1,lmmTenorStructure->get_horizon()+1)
 	 //volCumulated_(lmmTenorStructure.get_horizon()+1,lmmTenorStructure.get_horizon()+1, -9.9e10), 
 	 //ifVolisUpToDate_(false)
 {
@@ -96,7 +96,7 @@ void HGVolatilityFunction::construct_gPWConstFunc()
 //		for(size_t indexTime=1; indexTime<=indexLibor; ++indexTime) 
 //		{
 //			double vol_PWConstIntanteneous     = hPWConstFunc_(indexLibor, indexTime)*gPWConstFunc_(indexLibor, indexTime);
-//			double vol_integralCurrentInterval = vol_PWConstIntanteneous * lmmTenorStructure_.get_deltaT(indexTime); //! L_{i+1}'s integral vol in [T_j,T_{j+1}] 
+//			double vol_integralCurrentInterval = vol_PWConstIntanteneous * lmmTenorStructure_->get_deltaT(indexTime); //! L_{i+1}'s integral vol in [T_j,T_{j+1}] 
 //			if(indexTime==1)
 //				volCumulated_(indexLibor,indexTime) = vol_integralCurrentInterval;
 //			else
@@ -132,11 +132,11 @@ double HGVolatilityFunction::operator()(size_t indexLibor, size_t indexTime) con
 size_t HGVolatilityFunction::indexSearch(const double& t) const
 {
 	size_t indexsearch;
-	 if(t<lmmTenorStructure_.get_tenorDate(0) || t>lmmTenorStructure_.get_tenorDate(horizon_))  // check condition: t in [T_0,T_N]
+	 if(t<lmmTenorStructure_->get_tenorDate(0) || t>lmmTenorStructure_->get_tenorDate(horizon_))  // check condition: t in [T_0,T_N]
 		for(size_t i=0; i<horizon_; ++i)
 		{
-			const double&  t1 = lmmTenorStructure_.get_tenorDate(i);
-			const double&  t2 = lmmTenorStructure_.get_tenorDate(i+1);
+			const double&  t1 = lmmTenorStructure_->get_tenorDate(i);
+			const double&  t2 = lmmTenorStructure_->get_tenorDate(i+1);
 			if(t>=t1 && t<t2)
 			{
 				indexsearch = i+1;break;
@@ -160,7 +160,7 @@ double HGVolatilityFunction::covIntegral( size_t indexTime_i,
 	double covIntegralValue = 0.0;
 	for(size_t indexTime=indexTime_begin; indexTime<indexTime_end; ++indexTime)
 	{
-		const double& deltaT = lmmTenorStructure_.get_deltaT(indexTime);
+		const double& deltaT = lmmTenorStructure_->get_deltaT(indexTime);
 		covIntegralValue += this->operator()(indexLibor_i,indexTime+1) * this->operator()(indexLibor_j,indexTime+1) * deltaT;
 	}	
 	return covIntegralValue;
@@ -217,55 +217,3 @@ void HGVolatilityFunction::print(const std::string& filename) const  // OK: test
 	Printer printer(path, elements_print);
 	printer.print();
 }
-
-
-
-////! Covariance for different Libor 
-////! YY: TODO: need to improve the speed of this function, esp: the CHECK unnecessary.
-////            esp when S,T is exactly the grid
-//double hgVolatilityFunction::covIntegral(size_t indexLibor_i,
-//										 size_t indexLibor_j,
-//										 double S, 
-//										 double T)
-//{
-//	if(ifVolisUpToDate_ = false)  // YY: This is needed for calibration! 
-//		throw("Error Vol need to update before the calculation.");
-//
-//	if(S>T)
-//		throw("Error: S should less than T");
-//
-//	if(indexLibor_i>indexLibor_j)  // to make sure: T_i <= T_j
-//	{
-//		std::swap(indexLibor_i,indexLibor_j);
-//	}
-//
-//	const double&  T_i = lmmTenorStructure_.get_tenorDate(indexLibor_i);
-//	const double&  T_j = lmmTenorStructure_.get_tenorDate(indexLibor_j);
-//
-//	//! int_{t1}^{t2} vol_i(u), vol_j(u) du
-//	double min_Tij = std::min(T_i,T_j);
-//	double t1 = std::min(S,min_Tij);
-//	double t2 = std::min(T,min_Tij);
-//	
-//	if(std::abs(t1-t2) < 1.0e-16) // YY need a function to treat the diff together ... 
-//	{
-//		return 0.0;
-//	}
-//	else
-//	{
-//		size_t indexSearchT_i = indexSearch(t1);
-//		size_t indexSearchT_j = indexSearch(t2);
-//
-//		for(size_t i=indexSearchT_i; i<indexSearchT_j-1; ++i)
-//		{
-//
-//		}
-//
-//		double vol_front  = (lmmTenorStructure_.get_tenorDate(indexSearchT_i) - t1);
-//		double vol_back   = (lmmTenorStructure_.get_tenorDate(indexSearchT_j) - t2);
-//		double vol_middle =  (volCumulated_(indexLibor_i,indexSearchT_j) - volCumulated_(indexLibor_i,indexSearchT_i))
-//			                *(volCumulated_(indexLibor_j,indexSearchT_j) - volCumulated_(indexLibor_j,indexSearchT_i))* ;
-//	
-//		return vol_front + vol_back + vol_middle;
-//	}
-//}

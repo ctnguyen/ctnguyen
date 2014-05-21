@@ -78,7 +78,7 @@ public:
 	//! Getter
 	//! information contained in Dispersion
 	size_t get_horizon() const {return dispersion_.get_horizon();}
-	const LMMTenorStructure&   get_LMMTenorStructure () const {return dispersion_.get_lmmTenorStructure();}
+	ConstLMMTenorStructure get_LMMTenorStructure () const {return dispersion_.get_lmmTenorStructure();}
 
 
 	const std::vector<double>& get_shifts()			  const {return shifts_;}

@@ -15,7 +15,7 @@
 class VanillaSwapPricer// : public VanillaSwapPricer
 {
 protected:
-	const LMMTenorStructure lmmTenorStructure_;
+	ConstLMMTenorStructure lmmTenorStructure_;
 	//const std::vector<double>& liborsInitValue_;
 
 	//! work place: initialized in precalculate()
@@ -26,7 +26,7 @@ protected:
 	mutable size_t fixedLegTenorLmmTenorRatio_;
 
 public:
-	VanillaSwapPricer(const LMMTenorStructure& lmmTenorStructure)
+	VanillaSwapPricer(ConstLMMTenorStructure lmmTenorStructure)
 		: lmmTenorStructure_(lmmTenorStructure)
 	{};
 

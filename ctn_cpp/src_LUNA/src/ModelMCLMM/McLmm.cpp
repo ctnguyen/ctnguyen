@@ -42,7 +42,7 @@ McLmm::McLmm(const Dispersion&                  dispersion,
 {
 
 
-	assert(dispersion.get_lmmTenorStructure().get_tenorDate()[0] == 0.0); 
+	assert(dispersion.get_lmmTenorStructure()->get_tenorDate()[0] == 0.0); 
 
 	size_t horizon = dispersion_.get_horizon();
 	assert(shifts.size() == horizon+1);

@@ -10,7 +10,7 @@ Dispersion::Dispersion(Correlation_PTR correlation,
 					    volatilityFunction_(volatilityFunction)
 {
 
-	assert(correlation_->get_fullRank() == lmmTenorStructure_.get_horizon()+1);
+	assert(correlation_->get_fullRank() == lmmTenorStructure_->get_horizon()+1);
 	
 	if(!correlation_->get_flagApproxConstruced()) correlation_->calculate();
 }

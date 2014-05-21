@@ -16,8 +16,8 @@ BOOST_AUTO_TEST_CASE(test_McTerminalLmm)  // OK: Test passed!
 	//! LMMTenorStructure
 	Tenor tenorType = Tenor::_6M;
 	size_t horizonYear = 2;
-	LMMTenorStructure lmmTenorStructure(tenorType, horizonYear);
-	lmmTenorStructure.print("test_McTerminalLmm_Tenor.csv");
+	ConstLMMTenorStructure lmmTenorStructure( new LMMTenorStructure(tenorType, horizonYear));
+	lmmTenorStructure->print("test_McTerminalLmm_Tenor.csv");
 
 	//! volatility function
 	double a = -0.06;
@@ -32,7 +32,7 @@ BOOST_AUTO_TEST_CASE(test_McTerminalLmm)  // OK: Test passed!
 
 	//! Correlation 1
 	size_t nbFactor       = 3; // need to test nbFactor  = 3, and nbFactor = 
-	size_t correlFullRank = lmmTenorStructure.get_horizon()+1;
+	size_t correlFullRank = lmmTenorStructure->get_horizon()+1;
 	size_t correlReducedRank = nbFactor;
 	CorrelationReductionTyype::CorrelationReductionTyype correlReductionType = CorrelationReductionTyype::PCA;
 	double correlAlpha = 0.0;
@@ -55,10 +55,10 @@ BOOST_AUTO_TEST_CASE(test_McTerminalLmm)  // OK: Test passed!
 
 	//McLmm
 	double shiftValue = -0.01;
-	std::vector<double> shifts(lmmTenorStructure.get_horizon()+1, shiftValue);
+	std::vector<double> shifts(lmmTenorStructure->get_horizon()+1, shiftValue);
 
 	double fwdRate = 0.02;
-	std::vector<double> liborsInitValue(lmmTenorStructure.get_horizon()+1, fwdRate);
+	std::vector<double> liborsInitValue(lmmTenorStructure->get_horizon()+1, fwdRate);
 
 	unsigned long seed = 47;
 	RNGenerator_PTR  rnGenerator(new McGenerator(seed));

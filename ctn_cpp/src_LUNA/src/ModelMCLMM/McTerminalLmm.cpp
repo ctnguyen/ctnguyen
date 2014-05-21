@@ -35,7 +35,7 @@ void McTerminalLmm::simulateLMM()
 //! numeraire[0]   = known at today
 void McTerminalLmm::computeNumeraires() 
 {
-	const std::vector<double>& deltaT = dispersion_.get_lmmTenorStructure().get_deltaT();
+	const std::vector<double>& deltaT = dispersion_.get_lmmTenorStructure()->get_deltaT();
 	for (size_t i = 0; i<= horizon_; ++i)
 	{
 		numeraires_[i] = 1.0;
@@ -51,7 +51,7 @@ void McTerminalLmm::TerminalLmmModel_Euler()
 	size_t nbFactors = dispersion_.getNbFactors();
 	std::vector<Real>   gaussian_tmp(nbFactors,0.); 
 
-	const std::vector<double>& deltaT = dispersion_.get_lmmTenorStructure().get_deltaT();
+	const std::vector<double>& deltaT = dispersion_.get_lmmTenorStructure()->get_deltaT();
 
 	std::vector<double> drift_coeff(horizon_+1); // working place: delta_k*libor_k/(1+delta_k*libor_k)
 
@@ -93,7 +93,7 @@ void McTerminalLmm::TerminalLmmModel_Pc()
 	size_t nbFactors = dispersion_.getNbFactors();
 	std::vector<Real>   gaussian_tmp(nbFactors,0.); 
 
-	const std::vector<double>& deltaT = dispersion_.get_lmmTenorStructure().get_deltaT();
+	const std::vector<double>& deltaT = dispersion_.get_lmmTenorStructure()->get_deltaT();
 	std::vector<double> drift_coeff(horizon_+1); // working place: delta_k*libor_k/(1+delta_k*libor_k)
 
 	// Compute each Libor rate's value at every tenor date (except at time 0)
@@ -158,7 +158,7 @@ void McTerminalLmm::TerminalLmmModel_Pc()
 
 //void McTerminalLmm::TerminalLmmModel_Pc()
 //{
-//	const std::vector<double>& deltaT = dispersion_.get_lmmTenorStructure().get_deltaT();
+//	const std::vector<double>& deltaT = dispersion_.get_lmmTenorStructure()->get_deltaT();
 //
 //	std::vector<Real> gaussian_tmp(vol_->getNbFactors(),0.);
 //
@@ -232,7 +232,7 @@ void McTerminalLmm::TerminalLmmModel_Ipc()
 	size_t nbFactors = dispersion_.getNbFactors();
 	std::vector<Real>   gaussian_tmp(nbFactors,0.); 
 
-	const std::vector<double>& deltaT = dispersion_.get_lmmTenorStructure().get_deltaT();
+	const std::vector<double>& deltaT = dispersion_.get_lmmTenorStructure()->get_deltaT();
 
 	std::vector<double> drift_coeff_predictor(horizon_+1); // working place: delta_k*libor_k/(1+delta_k*libor_k)
 	std::vector<double> drift_coeff_corrector(horizon_+1); // working place: delta_k*libor_k/(1+delta_k*libor_k)
@@ -278,7 +278,7 @@ void McTerminalLmm::TerminalLmmModel_Ipc()
 
 //void McTerminalLmm::TerminalLmmModel_Euler()
 //{
-//	const std::vector<double>& deltaT = dispersion_.get_lmmTenorStructure().get_deltaT();
+//	const std::vector<double>& deltaT = dispersion_.get_lmmTenorStructure()->get_deltaT();
 //
 //	size_t nbFactors = dispersion_.getNbFactors();
 //	std::vector<double> drift_temp(horizon_+1,0.);
