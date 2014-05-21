@@ -1,25 +1,20 @@
+#include <LMM/ModelMCLMM/LMMTenorStructure.h>
+
 #include <LMM/generic_path.h>
 #include <LMM/helper/Printer.h>
 #include <LMM/helper/EqualOperator.h>
 
-#include <LMM/ModelMCLMM/LMMTenorStructure.h>
-
 //! constructor
-LMMTenorStructure::LMMTenorStructure(const Tenor&  tenorType, //! User should make sure the coherence.
-									 const size_t horizonYear)
-									 :tenorType_(tenorType)
+LMMTenorStructure::LMMTenorStructure(const Tenor&  tenorType, const size_t horizonYear)
+: tenorType_(tenorType)
 {
 	assert(horizonYear>1);
 
-	if(!tenorType.isValidTenor())
-		throw("Error: is not valid tenorType.");
+	if(!tenorType.isValidTenor()) throw("Error: is not valid tenorType.");
 
 	size_t nbMonthTenorType = tenorType.convertToMonth();
-
-	//if(horizonYear%nbMonthTenorType!=0)
-	//	throw("Error: cannot treat the case.");
-
-	horizon_ = horizonYear*(12/nbMonthTenorType);		
+	
+	horizon_ = horizonYear*(12/nbMonthTenorType);	//ctntodo potential bug when 2 years, 9M	
 
 	double tenorDateStep = tenorType.convertToYear();
 
@@ -36,6 +31,18 @@ LMMTenorStructure::LMMTenorStructure(const Tenor&  tenorType, //! User should ma
 		tenorDeltaT_[i] = tenorDates_[i+1] - tenorDates_[i];
 	}		
 }
+
+
+const Tenor& LMMTenorStructure::get_tenorType() const {return tenorType_;}
+
+Name::indexInLMMTenorStructure LMMTenorStructure::get_horizon() const { return horizon_; }
+
+const double&              LMMTenorStructure::get_deltaT(size_t index) const {return tenorDeltaT_[index];}
+const std::vector<double>& LMMTenorStructure::get_deltaT(            ) const {	return tenorDeltaT_;      }
+
+const double&              LMMTenorStructure::get_tenorDate(size_t index) const { return tenorDates_[index]; }
+const std::vector<double>& LMMTenorStructure::get_tenorDate(            ) const { return tenorDates_;        }
+
 
 //! equal operator: when modify the class, don't forget to adjust == operator
 bool LMMTenorStructure::operator == (const LMMTenorStructure& lmmTenorStructure) const
@@ -55,14 +62,31 @@ bool LMMTenorStructure::operator == (const LMMTenorStructure& lmmTenorStructure)
 	return true;
 }
 
+bool LMMTenorStructure::operator!=(const LMMTenorStructure& lmmTenorStructure) const
+{
+	if(tenorType_ != lmmTenorStructure.tenorType_)
+		return true;
+
+	if(horizon_ != lmmTenorStructure.get_horizon())
+		return true;
+
+	if(vectorEqual(tenorDates_,lmmTenorStructure.get_tenorDate(), 1.0e-16))
+		return true;
+
+	if(vectorEqual(tenorDeltaT_,lmmTenorStructure.get_deltaT(), 1.0e-16))
+		return true;
+
+	return false;
+}
+
+
 
 void LMMTenorStructure::print(const std::string& filename) const
 {
-	//std::string fileName = "LMMTenorStructure.csv";
 	std::string path = LMM::get_output_path() + filename;
 
 	//seems a problem of shared ptr polymorphisms ... 
-	PrintElement_PTR tenorType_print    = PrintElement_PTR(new ScalarPrintElement<std::string>("tenorType", tenorType_.name));
+	PrintElement_PTR tenorType_print    = PrintElement_PTR(new ScalarPrintElement<std::string>( "tenorType", std::string(tenorType_.name) ) );
 	PrintElement_PTR horizon_print      = PrintElement_PTR(new ScalarPrintElement<Name::indexInLMMTenorStructure>("horizon", horizon_));
 	PrintElement_PTR tenorDates_print   = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("tenorDates" ,  tenorDates_ ) );
 	PrintElement_PTR tenorDeltaT_print  = PrintElement_PTR(new VectorPrintElement<std::vector<double> >( "tenorDeltaT" ,  tenorDeltaT_ ) );

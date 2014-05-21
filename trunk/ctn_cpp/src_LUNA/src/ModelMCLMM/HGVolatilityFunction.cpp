@@ -174,7 +174,13 @@ void HGVolatilityFunction::print(const std::string& filename) const  // OK: test
 	std::vector<PrintElement_PTR> elements_print;
 
 	//! Abcd function for h
-	PrintElement_PTR abcdParamVector     = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("abcdParamVector",  abcdPWConstFunction_.get_AbcdParams().toVector() ) );
+	std::vector<double> abcdVect; //push the abcdParams into a std::vector
+	abcdVect.push_back(abcdPWConstFunction_.get_AbcdFunction().a() );
+	abcdVect.push_back(abcdPWConstFunction_.get_AbcdFunction().b() );
+	abcdVect.push_back(abcdPWConstFunction_.get_AbcdFunction().c() );
+	abcdVect.push_back(abcdPWConstFunction_.get_AbcdFunction().d() );
+
+	PrintElement_PTR abcdParamVector     = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("abcdParamVector",  abcdVect ) );
 	PrintElement_PTR abcdFunctionFormula = PrintElement_PTR(new ScalarPrintElement<std::string>("abcdFunctionFormula",  "abcdFunc(tau) = (a+ b*tau)*exp(-c*tau) + d   tau = T_i-t") );
 	elements_print.push_back(abcdParamVector);
 	elements_print.push_back(abcdFunctionFormula);
