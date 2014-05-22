@@ -2,20 +2,14 @@
 #include <LMM/numeric/NumericalMethods.h>
 
 
-double NumericalMethods::d1(double fwd,
-				 double strike,
-				 double vol,
-				 double T)
+double NumericalMethods::d1(const double& fwd, const double& strike, const double& vol, const double& T)
 {
 	double variance = vol*vol*T; 
 	double d1 = (log(fwd/strike) + 0.5*variance)/sqrt(variance);
 	return d1;
 }
 
-double NumericalMethods::d2(double fwd,
-				 double strike,
-				 double vol,
-				 double T)
+double NumericalMethods::d2(const double& fwd, const double& strike, const double& vol, const double& T)
 {
 	double variance = vol*vol*T; 
 
@@ -26,10 +20,7 @@ double NumericalMethods::d2(double fwd,
 
 
 //! without discount factor: r=0
-double NumericalMethods::Black_Price( double fwd,
-									  double strike,
-									  double vol,
-									  double T) 
+double NumericalMethods::Black_Price(const double& fwd, const double& strike, const double& vol, const double& T) 
 {
     assert(vol > 0 && T > 0 && fwd >0 && strike >0);
 
@@ -46,10 +37,7 @@ double NumericalMethods::Black_Price( double fwd,
 }
 
 
-double NumericalMethods::Black_Vega( double fwd,
-									 double strike,
-									 double vol,
-									 double T) 
+double NumericalMethods::Black_Vega(const double& fwd, const double& strike, const double& vol, const double& T)
 {
 	double variance = vol*vol*T; 
 
@@ -60,10 +48,7 @@ double NumericalMethods::Black_Vega( double fwd,
 }
 
 //! TT: not that efficient, but who cares ...
-double NumericalMethods::Black_Volga(double fwd,
-									 double strike,
-									 double vol,
-									 double T) 
+double NumericalMethods::Black_Volga(const double& fwd, const double& strike, const double& vol, const double& T) 
 {
 	
 	double variance = vol*vol*T; 
@@ -121,7 +106,7 @@ public:
 
 
 //-- For now, we assume the first point of set is the T0=0 maturity rate (L(0,T0) or P(0,T0))
-double NumericalMethods::linearInterpolation(double t, 
+double NumericalMethods::linearInterpolation(const double& t, 
 											 const std::vector<double>& maturities,
 	                                         const std::vector<double>& set_of_points)
 {
