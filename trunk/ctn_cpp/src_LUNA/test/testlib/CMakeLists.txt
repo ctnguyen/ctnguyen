@@ -8,7 +8,6 @@
 #   - boost                                     #
 #   - QuantLib                                  #
 #                                               #
-#   14.Mai.2014                                 #
 #################################################
 
 
@@ -16,7 +15,6 @@ add_library(LMM_testlib
 	"${CMAKE_SOURCE_DIR}/test/testlib/CapletTests.h"
 	"${CMAKE_SOURCE_DIR}/test/testlib/LiborSimulationTests.h"
 	"${CMAKE_SOURCE_DIR}/test/testlib/SwaptionPricingTests.h"
-	"${CMAKE_SOURCE_DIR}/test/testlib/TestCostFunction.h"
 	"${CMAKE_SOURCE_DIR}/test/testlib/TestOptimizer.h"
 	"${CMAKE_SOURCE_DIR}/test/testlib/TestPricing.h"
 	"${CMAKE_SOURCE_DIR}/test/testlib/Test_Correlation.h"
@@ -25,7 +23,6 @@ add_library(LMM_testlib
 	"CapletTests.cpp"
 	"LiborSimulationTests.cpp"
 	"SwaptionPricingTests.cpp"
-	"TestCostFunction.cpp"
 	"TestPricing.cpp"
 	"Test_Correlation.cpp"
 	"Test_Instrument.cpp"

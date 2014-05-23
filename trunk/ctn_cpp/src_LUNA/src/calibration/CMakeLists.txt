@@ -8,12 +8,15 @@
 #   - boost                                     #
 #   - QuantLib                                  #
 #                                               #
-#   14.Mai.2014                                 #
 #################################################
 
-add_subdirectory(numeric)
-add_subdirectory(helper)
-add_subdirectory(instrument)
-add_subdirectory(ModelMCLMM)
-add_subdirectory(pricer)
-add_subdirectory(calibration)
+add_library(LMM_calibration
+	"${CMAKE_SOURCE_DIR}/LMM/calibration/Calibration.h"
+	"${CMAKE_SOURCE_DIR}/LMM/calibration/SwaptionCostFunction.h"
+	"${CMAKE_SOURCE_DIR}/LMM/calibration/TestCostFunction.h"
+	"Calibration.cpp"
+	"SwaptionCostFunction.cpp"
+	"TestCostFunction.cpp"
+)
+
+target_link_libraries(LMM_calibration LMM_pricer LMM_ModelMCLMM LMM_instrument LMM_numeric LMM_helper)
