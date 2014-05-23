@@ -16,21 +16,24 @@ std::vector<double> MarketInfoCollector::libors_;
 std::vector<double> MarketInfoCollector::zcMaturities_;
 
 
-void MarketInfoCollector::readMarketInfo(std::ifstream& fin)	                    
+void MarketInfoCollector::readMarketInfo(const std::string& fileIn)	                    
 {
+	std::ifstream instream;
+	instream.open(fileIn);
+
 	matrix_ result;
 	string line;
 	char delimiter = '#';
 	
-	if (fin.is_open())
+	if (instream.is_open())
 	{
 		//-- Ignore the first two lines of xls file
-		getline (fin,line);
-		getline (fin,line);
+		getline (instream,line);
+		getline (instream,line);
 
-		while (fin.good())
+		while (instream.good())
 		{
-			getline (fin,line);
+			getline (instream,line);
 			stringstream ss(line); 
 
 			//-- If current swaption row has char '#', stop reading
@@ -104,6 +107,8 @@ void MarketInfoCollector::readMarketInfo(std::ifstream& fin)
 		swapRates_.push_back(swapRates_tmp);
 	}
 
+
+	instream.close();
 }
 
 
@@ -119,57 +124,3 @@ std::vector<double>& MarketInfoCollector::get_libors(){return libors_;}
 std::vector<double>& MarketInfoCollector::get_zcBonds(){return zeroCouponBonds_;}
 std::vector<double>& MarketInfoCollector::get_zcMaturities(){return zcMaturities_;}
 
-void MarketInfoCollector::test_reader()
-{
-	ifstream inputFile;
-	//inputFile.open("E:\\testFileReader.csv");
-	inputFile.open("E:\\Mkt_info.csv");
-	MarketInfoCollector::readMarketInfo(inputFile);
-	inputFile.close();
-
-	std::vector<double> libors_BB = MarketInfoCollector::get_libors();
-	std::vector<double> zc_BB = MarketInfoCollector::get_zcBonds();
-	matrix_ swaptionMatrix_BB = MarketInfoCollector::get_swaptionVolatilityMatrix();
-	matrix_ swaprates_BB = MarketInfoCollector::get_swapRates();
-
-
-	//-- Put all results in Excel
-	ofstream outputFile;
-	//outputFile.open("E:\\testFileReader_output.csv");
-	outputFile.open("E:\\test_writeMktInfo.csv");
-
-	outputFile << "LIBORS" << endl;
-	for each (double lib_bb in libors_BB)
-		outputFile << lib_bb << ";";
-
-	outputFile << endl << endl;
-
-	outputFile << "ZC BONDS" << endl;
-	for each (double zc_bb in zc_BB)
-		outputFile << zc_bb << ";";
-
-	outputFile << endl << endl;
-
-	outputFile << "ATM SWAPTION VOL MATRIX" << endl;
-	for each (std::vector<double> swpMatRow in swaptionMatrix_BB)
-	{
-		for each (double swpVol in swpMatRow)
-			outputFile << swpVol << ";";
-
-		outputFile << endl;
-	}
-	outputFile << endl;
-
-
-	outputFile << "SWAP RATES" << endl;
-	for each (std::vector<double> swpRateRow in swaprates_BB)
-	{
-		for each (double swpR in swpRateRow)
-			outputFile << swpR << ";";
-
-		outputFile << endl;
-	}
-	outputFile << endl;
-
-	outputFile.close();
-}

@@ -7,7 +7,7 @@
 #include <fstream>
 #include <vector>
 
-typedef std::vector<std::vector<double> > matrix_;
+typedef std::vector< std::vector<double> > matrix_;
 
 class MarketInfoCollector
 {
@@ -20,7 +20,7 @@ private:
 
 public:
 
-	static void readMarketInfo(std::ifstream& fin);
+	static void readMarketInfo(const std::string& fileIn);
 		                
 	//-- Getters --//
 	static matrix_& get_swapRates();
@@ -32,7 +32,6 @@ public:
 	// Convert string to double written with '.'
 	static double toDouble(std::string s);
 
-	static void test_reader();
 };
 
 
