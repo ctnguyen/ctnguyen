@@ -9,16 +9,6 @@
 #   - QuantLib                                  #
 #                                               #
 #################################################
-add_executable(test_TenorTypePrototype "Test_TenorTypePrototype.cpp")
-add_test(test_TenorTypePrototype ${CMAKE_CURRENT_BINARY_DIR}/test_TenorTypePrototype "--log_level=message")
-
-
-add_executable(test_ublasBoostMatrix "Test_ublasBoostMatrix.cpp")
-add_test(test_ublasBoostMatrix ${CMAKE_CURRENT_BINARY_DIR}/test_ublasBoostMatrix "--log_level=message")
-
-add_executable(test_IntegrationMethod "Test_IntegrationMethod.cpp")
-target_link_libraries(test_IntegrationMethod ${QuantLib_LIBRARY})
-add_test(test_IntegrationMethod ${CMAKE_CURRENT_BINARY_DIR}/test_IntegrationMethod "--log_level=message")
 
 add_executable(test_DerivatibleFunction "Test_DerivatibleFunction.cpp")
 target_link_libraries(test_DerivatibleFunction LMM_helper)

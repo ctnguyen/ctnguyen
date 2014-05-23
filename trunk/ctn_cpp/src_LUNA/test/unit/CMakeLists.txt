@@ -9,10 +9,21 @@
 #   - QuantLib                                  #
 #                                               #
 #################################################
-add_executable(test_Interpolation "test_Interpolation.cpp")
-target_link_libraries(test_Interpolation LMM_numeric)
-add_test(test_Interpolation ${CMAKE_CURRENT_BINARY_DIR}/test_Interpolation "--log_level=message")
+add_executable(unitTest_numeric_Interpolation "test_numeric_Interpolation.cpp")
+target_link_libraries(unitTest_numeric_Interpolation LMM_numeric)
+add_test(unitTest_numeric_Interpolation ${CMAKE_CURRENT_BINARY_DIR}/unitTest_numeric_Interpolation "--log_level=message")
 
-add_executable(test_NumericalMethods "test_NumericalMethods.cpp")
-target_link_libraries(test_NumericalMethods LMM_numeric)
-add_test(test_NumericalMethods ${CMAKE_CURRENT_BINARY_DIR}/test_NumericalMethods "--log_level=message")
+add_executable(unitTest_numeric_NumericalMethods "test_numeric_NumericalMethods.cpp")
+target_link_libraries(unitTest_numeric_NumericalMethods LMM_numeric)
+add_test(unitTest_numeric_NumericalMethods ${CMAKE_CURRENT_BINARY_DIR}/unitTest_numeric_NumericalMethods "--log_level=message")
+
+add_executable(unitTest_BoostUblasMatrix "test_BoostUblasMatrix.cpp")
+add_test(unitTest_BoostUblasMatrix ${CMAKE_CURRENT_BINARY_DIR}/unitTest_BoostUblasMatrix "--log_level=message")
+
+add_executable(unitTest_QuantLibIntegrationMethod "test_QuantLibIntegrationMethod.cpp")
+target_link_libraries(unitTest_QuantLibIntegrationMethod ${QuantLib_LIBRARY})
+add_test(unitTest_QuantLibIntegrationMethod ${CMAKE_CURRENT_BINARY_DIR}/unitTest_QuantLibIntegrationMethod "--log_level=message")
+
+add_executable(unitTest_instrument_Tenor "test_Tenor.cpp")
+target_link_libraries(unitTest_instrument_Tenor LMM_instrument)
+add_test(unitTest_instrument_Tenor ${CMAKE_CURRENT_BINARY_DIR}/unitTest_instrument_Tenor "--log_level=message")
