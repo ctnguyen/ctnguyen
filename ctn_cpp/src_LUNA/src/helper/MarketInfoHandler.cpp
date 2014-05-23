@@ -1,6 +1,6 @@
 #include <LMM/helper/MarketInfoHandler.h>
 
-//#include "Interpolation.h"
+#include <LMM/numeric/Interpolation.h>
 
 MarketInfoHandler::MarketInfoHandler(const std::vector<double>& libors_Mkt,
 									 const std::vector<double>& discountFactors_Mkt,
@@ -42,7 +42,7 @@ void MarketInfoHandler::interpolateDiscountFactors()
 	interpolation_dates.push_back(9.5);
 	interpolation_dates.push_back(10.5);
 
-	NumericalTools::Interpolation interpolator;
+	numeric::Interpolation interpolator;
 	std::vector<double> interpolated_zc_values;
 	std::vector<double> tenorDates_cpy = discountMaturities_; //-- Will be modified after every interpolation
 

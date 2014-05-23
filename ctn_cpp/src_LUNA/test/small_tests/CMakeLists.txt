@@ -8,7 +8,6 @@
 #   - boost                                     #
 #   - QuantLib                                  #
 #                                               #
-#   14.Mai.2014                                 #
 #################################################
 add_executable(test_TenorTypePrototype "Test_TenorTypePrototype.cpp")
 add_test(test_TenorTypePrototype ${CMAKE_CURRENT_BINARY_DIR}/test_TenorTypePrototype "--log_level=message")

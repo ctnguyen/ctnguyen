@@ -1,64 +1,9 @@
 #include <cassert>
 #include <LMM/numeric/NumericalMethods.h>
 
-
-double NumericalMethods::d1(const double& fwd, const double& strike, const double& vol, const double& T)
-{
-	double variance = vol*vol*T; 
-	double d1 = (log(fwd/strike) + 0.5*variance)/sqrt(variance);
-	return d1;
-}
-
-double NumericalMethods::d2(const double& fwd, const double& strike, const double& vol, const double& T)
-{
-	double variance = vol*vol*T; 
-
-	double d1 = (log(fwd/strike) + 0.5*variance)/sqrt(variance);
-	double d2 = d1 - sqrt(variance);
-	return d2;
-}
-
-
-//! without discount factor: r=0
-double NumericalMethods::Black_Price(const double& fwd, const double& strike, const double& vol, const double& T) 
-{
-    assert(vol > 0 && T > 0 && fwd >0 && strike >0);
-
-	double variance = vol*vol*T; 
-
-	double d1 = (log(fwd/strike) + 0.5*variance)/sqrt(variance);
-	double d2 = d1 - sqrt(variance);
-
-	boost::math::normal_distribution<> nd(0,1); 
-	double N1 = cdf(nd,d1);
-	double N2 = cdf(nd,d2); 
-
-	return fwd*N1-strike*N2;
-}
-
-
-double NumericalMethods::Black_Vega(const double& fwd, const double& strike, const double& vol, const double& T)
-{
-	double variance = vol*vol*T; 
-
-	double d1 = ( log(fwd/strike) + 0.5*variance) / sqrt(variance);
-
-	QuantLib::NormalDistribution ND;
-	return fwd*ND(d1)*sqrt(T);
-}
-
-//! TT: not that efficient, but who cares ...
-double NumericalMethods::Black_Volga(const double& fwd, const double& strike, const double& vol, const double& T) 
+namespace NumericalMethods
 {
 	
-	double variance = vol*vol*T; 
-	double d1 = ( log(fwd/strike) + 0.5*variance ) / sqrt(variance);
-	double d2 = d1 - sqrt(variance);
-
-	double vega = Black_Vega(fwd,strike,vol,T);
-	return vega*(d1*d2/vol);
-}
-
 struct BS_function_helper
 {
 private:
@@ -81,6 +26,64 @@ public:
 			_f_derivative(x));
 	}
 };
+
+double d1(const double& fwd, const double& strike, const double& vol, const double& T)
+{
+	double variance = vol*vol*T; 
+	double d1 = (log(fwd/strike) + 0.5*variance)/sqrt(variance);
+	return d1;
+}
+
+double d2(const double& fwd, const double& strike, const double& vol, const double& T)
+{
+	double variance = vol*vol*T; 
+
+	double d1 = (log(fwd/strike) + 0.5*variance)/sqrt(variance);
+	double d2 = d1 - sqrt(variance);
+	return d2;
+}
+
+
+//! without discount factor: r=0
+double Black_Price(const double& fwd, const double& strike, const double& vol, const double& T) 
+{
+    assert(vol > 0 && T > 0 && fwd >0 && strike >0);
+
+	double variance = vol*vol*T; 
+
+	double d1 = (log(fwd/strike) + 0.5*variance)/sqrt(variance);
+	double d2 = d1 - sqrt(variance);
+
+	boost::math::normal_distribution<> nd(0,1); 
+	double N1 = cdf(nd,d1);
+	double N2 = cdf(nd,d2); 
+
+	return fwd*N1-strike*N2;
+}
+
+
+double Black_Vega(const double& fwd, const double& strike, const double& vol, const double& T)
+{
+	double variance = vol*vol*T; 
+
+	double d1 = ( log(fwd/strike) + 0.5*variance) / sqrt(variance);
+
+	QuantLib::NormalDistribution ND;
+	return fwd*ND(d1)*sqrt(T);
+}
+
+//! TT: not that efficient, but who cares ...
+double Black_Volga(const double& fwd, const double& strike, const double& vol, const double& T) 
+{
+	
+	double variance = vol*vol*T; 
+	double d1 = ( log(fwd/strike) + 0.5*variance ) / sqrt(variance);
+	double d2 = d1 - sqrt(variance);
+
+	double vega = Black_Vega(fwd,strike,vol,T);
+	return vega*(d1*d2/vol);
+}
+
 
 
 //double NumericalMethods::impliedVolatility(double bs_call_price, 							  
@@ -106,7 +109,7 @@ public:
 
 
 //-- For now, we assume the first point of set is the T0=0 maturity rate (L(0,T0) or P(0,T0))
-double NumericalMethods::linearInterpolation(const double& t, 
+double linearInterpolation(const double& t, 
 											 const std::vector<double>& maturities,
 	                                         const std::vector<double>& set_of_points)
 {
@@ -132,35 +135,4 @@ double NumericalMethods::linearInterpolation(const double& t,
 	return interpolatedValue;
 }
 
-//
-////-----------------------------------------------------------------//
-////                                                                 //
-////                             TESTS                               //
-////                                                                 //
-////-----------------------------------------------------------------//
-//
-//void NumericalMethods::test_interpolator()
-//{
-//	size_t number_of_points = 10;
-//
-//	std::vector<double> maturities(number_of_points);
-//	for (size_t i = 0; i < number_of_points; ++i)
-//		maturities[i] = i*0.5;
-//
-//	std::vector<double> points(number_of_points); 
-//	for (size_t i = 0; i < number_of_points; ++i)
-//		points[i] = i;
-//
-//	double t = 1.25;
-//	double interpolated_point = linearInterpolation(t,maturities,points);
-//	std::cout << "Date before: " << 1 << "-- Point: " << points[2] << std::endl;
-//	std::cout << "Date after: " << 1.5 << "-- Point: " << points[3] << std::endl;
-//	std::cout << "Given date: " << t << " -- Interpolated point: " << interpolated_point << std::endl << std::endl;
-//
-//	t = 2.3;
-//	interpolated_point = linearInterpolation(t,maturities,points);
-//	std::cout << "Date before: " << 2 << "-- Point: " << points[4] << std::endl;
-//	std::cout << "Date after: " << 2.5 << "-- Point: " << points[5] << std::endl;
-//	std::cout << "Given date: " << t << " -- Interpolated point: " << interpolated_point << std::endl << std::endl;
-//}
-//
+}// end NumericalMethods
