@@ -8,13 +8,11 @@
 #   - boost                                     #
 #   - QuantLib                                  #
 #                                               #
-#   14.Mai.2014                                 #
 #################################################
+add_executable(test_Interpolation "test_Interpolation.cpp")
+target_link_libraries(test_Interpolation LMM_numeric)
+add_test(test_Interpolation ${CMAKE_CURRENT_BINARY_DIR}/test_Interpolation "--log_level=message")
 
-add_subdirectory(testlib)
-add_subdirectory(unit)
-add_subdirectory(small_tests)
-
-add_executable(test_testlib "Test_TestLib.cpp")
-target_link_libraries(test_testlib LMM_testlib LMM_ModelMCLMM LMM_instrument LMM_numeric LMM_helper ${QuantLib_LIBRARY})
-#add_test(oldtests ${CMAKE_CURRENT_BINARY_DIR}/test_testlib "--log_level=message")
+add_executable(test_NumericalMethods "test_NumericalMethods.cpp")
+target_link_libraries(test_NumericalMethods LMM_numeric)
+add_test(test_NumericalMethods ${CMAKE_CURRENT_BINARY_DIR}/test_NumericalMethods "--log_level=message")

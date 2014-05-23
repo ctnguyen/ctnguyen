@@ -1,7 +1,7 @@
-#ifndef LMM_NUMERICAL_METHOD_H
-#define LMM_NUMERICAL_METHOD_H
-
+#ifndef LMM_NUMERIC_NUMERICAL_METHOD_H
+#define LMM_NUMERIC_NUMERICAL_METHOD_H
 #pragma once
+
 #include <vector>
 
 #include <boost/math/distributions.hpp>
@@ -12,20 +12,20 @@
 #include <ql/math/distributions/normaldistribution.hpp>
 
 
-class NumericalMethods
+namespace NumericalMethods
 {
-public:
-	
-	static double d1(const double& fwd, const double& strike, const double& vol, const double& T);
 
-	static double d2(const double& fwd, const double& strike, const double& vol, const double& T);
+	
+	double d1(const double& fwd, const double& strike, const double& vol, const double& T);
+
+	double d2(const double& fwd, const double& strike, const double& vol, const double& T);
 
 	// Compute a derivative's price using Black's formula
-	static double Black_Price(const double& fwd, const double& strike, const double& vol, const double& T);
+	double Black_Price(const double& fwd, const double& strike, const double& vol, const double& T);
 
-	static double Black_Vega(const double& fwd, const double& strike, const double& vol, const double& T);
+	double Black_Vega(const double& fwd, const double& strike, const double& vol, const double& T);
 
-	static double Black_Volga(const double& fwd, const double& strike, const double& vol, const double& T);
+	double Black_Volga(const double& fwd, const double& strike, const double& vol, const double& T);
 
 	//double impliedVolatility(const double& bs_call_price, const double& strike, const double& fwd, const double& T);
 
@@ -35,8 +35,7 @@ public:
 		                       const std::vector<double>& set_of_points
 							   );
 
-	//--------- TESTS ----------//
-	//void test_interpolator();
-};
+	
+} // end NumericalMethods
 
-#endif /* LMM_NUMERICAL_METHOD_H */
+#endif /* LMM_NUMERIC_NUMERICAL_METHOD_H */
