@@ -34,3 +34,4 @@ add_library(LMM_helper
 	"TypeConverter.cpp"
 	"StaticReplicationFormula.cpp"
 )
+target_link_libraries(LMM_helper LMM_numeric)
