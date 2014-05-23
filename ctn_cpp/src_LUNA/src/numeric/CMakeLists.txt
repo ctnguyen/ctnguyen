@@ -13,9 +13,11 @@
 
 
 add_library(LMM_numeric
-    "${CMAKE_SOURCE_DIR}/LMM/numeric/IntegraltionMethod.h"
+    "${CMAKE_SOURCE_DIR}/LMM/numeric/BilinearInterpolation.h"
+	"${CMAKE_SOURCE_DIR}/LMM/numeric/Interpolation.h"
     "${CMAKE_SOURCE_DIR}/LMM/numeric/NumericalMethods.h"
-	"IntegraltionMethod.cpp"
+	"BilinearInterpolation.cpp"
+	"Interpolation.cpp"
 	"NumericalMethods.cpp"	
 )
 

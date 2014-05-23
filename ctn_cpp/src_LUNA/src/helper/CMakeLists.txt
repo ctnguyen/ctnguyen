@@ -15,6 +15,8 @@
 add_library(LMM_helper
     "${CMAKE_SOURCE_DIR}/LMM/helper/CombinationOperator.h"
     "${CMAKE_SOURCE_DIR}/LMM/helper/DerivatibleFunction.h"
+	"${CMAKE_SOURCE_DIR}/LMM/helper/MarketInfoCollector.h"
+	"${CMAKE_SOURCE_DIR}/LMM/helper/MarketInfoHandler.h"
 	"${CMAKE_SOURCE_DIR}/LMM/helper/EqualOperator.h"
 	"${CMAKE_SOURCE_DIR}/LMM/helper/McGenerator.h"
 	"${CMAKE_SOURCE_DIR}/LMM/helper/Printer.h"
@@ -24,6 +26,8 @@ add_library(LMM_helper
     "${CMAKE_SOURCE_DIR}/LMM/helper/StaticReplicationFormula.h"
 	"CombinationOperator.cpp"
     "DerivatibleFunction.cpp"
+	"MarketInfoCollector.cpp"
+	"MarketInfoHandler.cpp"
 	"McGenerator.cpp"
 	"Printer.cpp"
 	"QMcGenerator.cpp"
