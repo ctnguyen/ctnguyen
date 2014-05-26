@@ -38,24 +38,24 @@ BOOST_AUTO_TEST_CASE(test_marketinfocollector)
 	std::string path_FileOut = LMM::get_output_path() + "test_MarketInfoCollector.csv";
 	std::cout<< "File Output Path :"<< path_FileOut << std::endl;
 	std::ofstream outputFile;
-	outputFile.open(path_FileOut);
+	outputFile.open(path_FileOut.c_str() );
 
 	outputFile << "LIBORS" << std::endl;
-	for each (double lib_bb in libors_BB)
+	for (auto lib_bb : libors_BB)
 		outputFile << lib_bb << ";";
 
 	outputFile << std::endl << std::endl;
 
 	outputFile << "ZC BONDS" << std::endl;
-	for each (double zc_bb in zc_BB)
+	for (auto zc_bb : zc_BB)
 		outputFile << zc_bb << ";";
 
 	outputFile << std::endl << std::endl;
 
 	outputFile << "ATM SWAPTION VOL MATRIX" << std::endl;
-	for each (std::vector<double> swpMatRow in swaptionMatrix_BB)
+	for (auto swpMatRow : swaptionMatrix_BB)
 	{
-		for each (double swpVol in swpMatRow)
+		for (auto swpVol : swpMatRow)
 			outputFile << swpVol << ";";
 
 		outputFile << std::endl;
@@ -64,9 +64,9 @@ BOOST_AUTO_TEST_CASE(test_marketinfocollector)
 
 
 	outputFile << "SWAP RATES" << std::endl;
-	for each (std::vector<double> swpRateRow in swaprates_BB)
+	for (auto swpRateRow : swaprates_BB)
 	{
-		for each (double swpR in swpRateRow)
+		for (auto swpR : swpRateRow)
 			outputFile << swpR << ";";
 
 		outputFile << std::endl;

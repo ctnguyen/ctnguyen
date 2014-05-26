@@ -15,18 +15,18 @@ MarketInfoHandler::MarketInfoHandler(const std::vector<double>& libors_Mkt,
 
 void MarketInfoHandler::convertBpToPercent()
 {
-	for each (double lib_bb in libors_Mkt_)
+	for (auto lib_bb : libors_Mkt_)
 			lib_bb *= 0.01;
 
-	for each (std::vector<double> swaptionVolRow in swaptionVolMatrix_Mkt_)
+	for (auto swaptionVolRow : swaptionVolMatrix_Mkt_)
 	{
-		for each (double swaptionVol in swaptionVolRow)
+		for (auto swaptionVol : swaptionVolRow)
 			swaptionVol *= 0.01;
 	}
 
-	for each (std::vector<double> swapRateRow in swapRates_Mkt_)
+	for (auto swapRateRow : swapRates_Mkt_)
 	{
-		for each (double swaprate in swapRateRow)
+		for (auto swaprate : swapRateRow)
 			swaprate *= 0.01;
 	}
 }
@@ -46,7 +46,7 @@ void MarketInfoHandler::interpolateDiscountFactors()
 	std::vector<double> interpolated_zc_values;
 	std::vector<double> tenorDates_cpy = discountMaturities_; //-- Will be modified after every interpolation
 
-	for each (double inter_date in interpolation_dates)
+	for (auto inter_date : interpolation_dates)
 		interpolator.linearInterpolation(discountFactors_Mkt_,tenorDates_cpy,inter_date);
 }
 
@@ -119,7 +119,7 @@ matrix_pairOfYears MarketInfoHandler::chooseSwapMaturitiesAndTenors(size_t horiz
 	//-- Select pairs of years until wanted horizon is reached
 	for (size_t i = 1; i <= horizon; ++i) //-- ignore first row
 	{
-		std::vector<std::pair<double,double>> row;
+		std::vector<std::pair<double,double> > row;
 		for (size_t j = 1; j <= horizon-i+1; ++j) //-- ignore first column
 		{
 			row.push_back(matrix_of_years[i][j]);

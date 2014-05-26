@@ -4,8 +4,8 @@
 
 #include <vector>
 
-typedef std::vector<std::vector<double>> matrix_;
-typedef std::vector<std::vector<std::pair<double,double>>> matrix_pairOfYears;
+typedef std::vector<std::vector<double> > matrix_;
+typedef std::vector<std::vector<std::pair<double,double> > > matrix_pairOfYears;
 
 //-- handle data from bloomberg (interpolations,...)
 class MarketInfoHandler
