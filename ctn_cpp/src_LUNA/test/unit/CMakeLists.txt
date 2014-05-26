@@ -32,7 +32,11 @@ add_executable(unitTest_instrument_Tenor "test_Tenor.cpp")
 target_link_libraries(unitTest_instrument_Tenor LMM_instrument)
 add_test(unitTest_instrument_Tenor ${CMAKE_CURRENT_BINARY_DIR}/unitTest_instrument_Tenor "--log_level=message")
 
-add_executable(unittest_SwaptionApproxCostFunction "test_SwaptionApproxCostFunction.cpp")
-target_link_libraries(unittest_SwaptionApproxCostFunction LMM_pricer ${QuantLib_LIBRARY})
-add_test(unittest_SwaptionApproxCostFunction ${CMAKE_CURRENT_BINARY_DIR}/unittest_SwaptionApproxCostFunction "--log_level=message")
+add_executable(unittest_pricer_LmmApproxVanillaSwaptionPricer "test_pricer_LmmApproxVanillaSwaptionPricer.cpp")
+target_link_libraries(unittest_pricer_LmmApproxVanillaSwaptionPricer LMM_pricer ${QuantLib_LIBRARY})
+add_test(unittest_pricer_LmmApproxVanillaSwaptionPricer ${CMAKE_CURRENT_BINARY_DIR}/unittest_pricer_LmmApproxVanillaSwaptionPricer "--log_level=message")
+
+add_executable(unittest_calibration_SwaptionApproxCostFunction "test_calibration_SwaptionApproxCostFunction.cpp")
+target_link_libraries(unittest_calibration_SwaptionApproxCostFunction LMM_calibration ${QuantLib_LIBRARY})
+add_test(unittest_calibration_SwaptionApproxCostFunction ${CMAKE_CURRENT_BINARY_DIR}/unittest_calibration_SwaptionApproxCostFunction "--log_level=message")
 

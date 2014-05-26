@@ -9,7 +9,7 @@
 #include <LMM/pricer/LmmApproxVanillaSwaptionPricer.h>
 
 
-
+/*
 class SwaptoinApproxCostFunction : public QuantLib::CostFunction, public LmmApproxVanillaSwaptionPricer
 {
 public :
@@ -22,7 +22,7 @@ public :
 
 
 }
-
+*/
 
 //
 //#include "Approximation.h"
