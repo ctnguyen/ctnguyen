@@ -31,3 +31,8 @@ add_test(unitTest_helper_MarketInfoCollector ${CMAKE_CURRENT_BINARY_DIR}/unitTes
 add_executable(unitTest_instrument_Tenor "test_Tenor.cpp")
 target_link_libraries(unitTest_instrument_Tenor LMM_instrument)
 add_test(unitTest_instrument_Tenor ${CMAKE_CURRENT_BINARY_DIR}/unitTest_instrument_Tenor "--log_level=message")
+
+add_executable(unittest_SwaptionApproxCostFunction "test_SwaptionApproxCostFunction.cpp")
+target_link_libraries(unittest_SwaptionApproxCostFunction LMM_pricer ${QuantLib_LIBRARY})
+add_test(unittest_SwaptionApproxCostFunction ${CMAKE_CURRENT_BINARY_DIR}/unittest_SwaptionApproxCostFunction "--log_level=message")
+
