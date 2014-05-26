@@ -11,7 +11,6 @@
 #include <LMM/pricer/VanillaSwapPricer.h>
 
 
-
 //-- Class defining approx methods for swaption pricing  
 class LmmApproxVanillaSwaptionPricer : public VanillaSwapPricer // to use the precalculation.
 {
