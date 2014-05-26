@@ -27,6 +27,7 @@ public:
 	template<unsigned int TYPEID> class TenorType
 	{
 	public :
+		TenorType(){};
 		static const char*        NAME     ;
 		static const unsigned int NB_MONTH ;
 	};

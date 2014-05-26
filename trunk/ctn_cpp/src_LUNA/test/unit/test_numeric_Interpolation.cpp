@@ -28,7 +28,7 @@ BOOST_AUTO_TEST_CASE(test_LinearInterpolation)
 
 	numeric::Interpolation interpolator;
 	interpolator.linearInterpolation(someVector,falseTenorDates,maturity_date);
-	for each (double inter_val in someVector)
+	for (auto inter_val : someVector)
 		std::cout << inter_val << " ";
 
 	std::cout << std::endl;

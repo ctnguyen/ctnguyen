@@ -5,7 +5,7 @@
 #include <vector>
 #include <LMM/numeric/Interpolation.h>
 
-typedef std::vector<std::vector<double>> matrix_;
+typedef std::vector<std::vector<double> > matrix_;
 
 namespace numeric 
 {

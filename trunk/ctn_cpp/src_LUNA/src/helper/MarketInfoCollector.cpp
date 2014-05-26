@@ -19,7 +19,7 @@ std::vector<double> MarketInfoCollector::zcMaturities_;
 void MarketInfoCollector::readMarketInfo(const std::string& fileIn)	                    
 {
 	std::ifstream instream;
-	instream.open(fileIn);
+	instream.open(fileIn.c_str());
 
 	matrix_ result;
 	string line;
