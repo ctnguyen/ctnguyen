@@ -12,10 +12,10 @@
 
 add_library(LMM_calibration
 	"${CMAKE_SOURCE_DIR}/LMM/calibration/Calibration.h"
-	"${CMAKE_SOURCE_DIR}/LMM/calibration/SwaptionCostFunction.h"
+	"${CMAKE_SOURCE_DIR}/LMM/calibration/SwaptionApproxCostFunction.h"
 	"${CMAKE_SOURCE_DIR}/LMM/calibration/TestCostFunction.h"
 	"Calibration.cpp"
-	"SwaptionCostFunction.cpp"
+	"SwaptionApproxCostFunction.cpp"
 	"TestCostFunction.cpp"
 )
 

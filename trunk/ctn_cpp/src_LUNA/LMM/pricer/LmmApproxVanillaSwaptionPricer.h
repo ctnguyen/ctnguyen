@@ -1,3 +1,5 @@
+#ifndef LMM_PRICER_APPROXVANILLASWAPTIONPRICER_H
+#define LMM_PRICER_APPROXVANILLASWAPTIONPRICER_H
 #pragma once
 
 #include <cassert>
@@ -97,3 +99,4 @@ private:
 //
 //};
 
+#endif /* LMM_PRICER_APPROXVANILLASWAPTIONPRICER_H */
