@@ -12,7 +12,15 @@
 #include <LMM/ModelMCLMM/Dispersion.h>
 #include <LMM/ModelMCLMM/LMMTenorStructure.h>
 
-
+/*! The tensor is a 3D matrix storing for precomputed value of time integral in each intervall [T_{k-1},T_k]
+ *  Each case stored 
+ *
+ * tensor(k,i,j) = \int_{T_{k-1}}^{T_k}  vol_i(t) * vol_j(t)  * \rho_{ij} dt
+ *
+ * Where
+ * vol_i, vol_j are volatilities for i-th and j-th LIBOR path : L_i,L_j
+ * \rho_{ij} is the reduced approximated correlation matrix (same dimension, but reduced for the nb factor)
+ */
 
 class Tensor
 {

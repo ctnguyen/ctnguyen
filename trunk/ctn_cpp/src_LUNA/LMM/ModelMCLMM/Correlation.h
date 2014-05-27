@@ -63,7 +63,7 @@ public:
 	const CorrelationReductionTyype::CorrelationReductionTyype& get_reductionType() const;
 	const std::string get_reductionTypeString() const;
 	bool  get_flagApproxConstruced()const;
-	double correlApprox(size_t i, size_t j) const ;
+	const double& correlApprox(size_t i, size_t j) const ;
 
 	//print
 	void print(const std::string& filename) const;

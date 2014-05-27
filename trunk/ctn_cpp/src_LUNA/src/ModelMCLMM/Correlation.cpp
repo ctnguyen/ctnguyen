@@ -87,7 +87,7 @@ const std::string Correlation::get_reductionTypeString() const
 	throw("CorrelationReductionTyype is not valid");
 }
 bool  Correlation::get_flagApproxConstruced()const {return flagApproxConstruced_;}
-double Correlation::correlApprox(size_t i, size_t j) const 
+const double& Correlation::correlApprox(size_t i, size_t j) const 
 {
 	assert(flagApproxConstruced_==true);
 	return reducedCorrelMatrixApprox_[i][j];
