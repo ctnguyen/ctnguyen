@@ -34,20 +34,32 @@ protected:
 	//! pre-calculation
 	void precalculate(const LMM::VanillaSwap& vanillaSwap) const;
 
-	//! YY TODO: maybe move it here, as the fixing leg ...
-	//double pvFloatingLeg(Name::indexInLMMTenorStructure indexValuationDate,
-	//					const VanillaSwap& vanillaSwap,
-	//					const std::vector<double>& numeraire, //numeraire[i]: numeraire value at T_i
-	//					const matrix& liborMatrix) const;
-
-
+	/*! see Damiano Brigo 2006 (1.24)(1.25)(1.26) ($6.7)  which is C_{\alpha,\beta}(t) in p.240
+	 *
+	 * C_{\alpha,\beta}(t) = Annuity(t) = \sum \tau_i P(t,T_i) =  \sum \tau_i \frac{P(t,T_i)}{P(t,T_{\alpha})}
+	 */
 	virtual double annuity( Name::indexInLMMTenorStructure indexValuationDate,
+		const LMM::VanillaSwap& vanillaSwap,
+		const std::vector<double>& numeraire) const;
+
+	/*! see Damiano Brigo 2006 (1.24)(1.25)(1.26) ($6.7)  which is S_{\alpha,\beta}(t) in p.238
+	 *
+	 * S_{\alpha,\beta}(t) = \frac{ P(t,T_{\alpha}) - P(t,T_{\beta}) }{  C_{\alpha,\beta}(t)  } 
+	 */
+	virtual double forwardSwapRate( Name::indexInLMMTenorStructure indexValuationDate,
 		const LMM::VanillaSwap& vanillaSwap,
 		const std::vector<double>& numeraire) const;
 
 	virtual double pvFixedLeg(Name::indexInLMMTenorStructure indexValuationDate,
 		const LMM::VanillaSwap& vanillaSwap,
 		const std::vector<double>& numeraire)  const;
+
+	//! YY TODO: maybe move it here, as the fixing leg ...
+	//double pvFloatingLeg(Name::indexInLMMTenorStructure indexValuationDate,
+	//					const VanillaSwap& vanillaSwap,
+	//					const std::vector<double>& numeraire, //numeraire[i]: numeraire value at T_i
+	//					const matrix& liborMatrix) const;
+
 
 public:
 	//! To validate the result

@@ -43,11 +43,38 @@ double VanillaSwapPricer::annuity( Name::indexInLMMTenorStructure indexValuation
 	for(size_t itr = 0; itr < fixedLegPaymentIndexSchedule.size(); ++itr)
 	{
 		size_t fixedLegPaymentIndex = fixedLegPaymentIndexSchedule[itr]; // = i+1
-		double delta_T              = deltaTFixedLeg_[itr];
+		const double& delta_T              = deltaTFixedLeg_[itr];
 		//std::cout << "numeraire[indexValuationDate]/numeraire[fixedLegPaymentIndex] = " << numeraire[indexValuationDate]/numeraire[fixedLegPaymentIndex] << std::endl;
 		price			           += delta_T*numeraire[indexValuationDate]/numeraire[fixedLegPaymentIndex];		
 	}
 	return price;
+}
+
+double VanillaSwapPricer::forwardSwapRate( Name::indexInLMMTenorStructure indexValuationDate,
+		const LMM::VanillaSwap& vanillaSwap,
+		const std::vector<double>& numeraire) const
+{
+	/*
+	// see Damiano Brigo 2006 p238
+	const size_t T_alpha = vanillaSwap.get_indexStart();
+	const size_t T_beta = vanillaSwap.get_indexEnd();
+
+	assert(indexValuationDate <= T_alpha); 
+	assert(lmmTenorStructure_->get_horizon() >= T_beta);  
+		 
+	const std::vector<Name::indexInLMMTenorStructure>& fixedLegPaymentIndexSchedule  = vanillaSwap.get_fixedLegPaymentIndexSchedule();
+
+	const double C_alpha_beta = this->annuity(indexValuationDate,vanillaSwap,numeraire);
+	const size_t alphaIndex = indexValuationDate;
+	const size_t betaIndex = fixedLegPaymentIndexSchedule.back();
+	const double P_t_alpha = 1.0/ numeraire[alphaIndex];
+	const double P_t_beta  = 1.0/ numeraire[betaIndex];
+
+	double S_alpha_beta = (P_t_alpha - P_t_beta) / C_alpha_beta;
+
+	return S_alpha_beta;
+	*/
+	return 0.0;
 }
 
 double VanillaSwapPricer::pvFixedLeg(Name::indexInLMMTenorStructure indexValuationDate,
