@@ -38,7 +38,7 @@ protected:
 	 *
 	 * C_{\alpha,\beta}(t) = Annuity(t) = \sum \tau_i P(t,T_i) =  \sum \tau_i \frac{P(t,T_i)}{P(t,T_{\alpha})}
 	 */
-	virtual double annuity( Name::indexInLMMTenorStructure indexValuationDate,
+	virtual double annuity( LMM::Index indexValuationDate,
 		const LMM::VanillaSwap& vanillaSwap,
 		const std::vector<double>& numeraire) const;
 
@@ -46,16 +46,16 @@ protected:
 	 *
 	 * S_{\alpha,\beta}(t) = \frac{ P(t,T_{\alpha}) - P(t,T_{\beta}) }{  C_{\alpha,\beta}(t)  } 
 	 */
-	virtual double forwardSwapRate( Name::indexInLMMTenorStructure indexValuationDate,
+	virtual double forwardSwapRate( LMM::Index indexValuationDate,
 		const LMM::VanillaSwap& vanillaSwap,
 		const std::vector<double>& numeraire) const;
 
-	virtual double pvFixedLeg(Name::indexInLMMTenorStructure indexValuationDate,
+	virtual double pvFixedLeg(LMM::Index indexValuationDate,
 		const LMM::VanillaSwap& vanillaSwap,
 		const std::vector<double>& numeraire)  const;
 
 	//! YY TODO: maybe move it here, as the fixing leg ...
-	//double pvFloatingLeg(Name::indexInLMMTenorStructure indexValuationDate,
+	//double pvFloatingLeg(LMM::Index indexValuationDate,
 	//					const VanillaSwap& vanillaSwap,
 	//					const std::vector<double>& numeraire, //numeraire[i]: numeraire value at T_i
 	//					const matrix& liborMatrix) const;

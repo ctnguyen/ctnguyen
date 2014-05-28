@@ -23,15 +23,15 @@ BOOST_AUTO_TEST_SUITE(lmm_test_swaption)
 VanillaSwaption get_VanillaSwaption()
 {
 	double strike = 0.04;
-	Name::indexInLMMTenorStructure  indexStart = 12; // 12
-	Name::indexInLMMTenorStructure  indexEnd   = 18; // 28;
+	LMM::Index  indexStart = 12; // 12
+	LMM::Index  indexEnd   = 18; // 28;
 	Tenor	floatingLegTenorType = Tenor::_6M;
 	Tenor	fixedLegTenorType    = Tenor::_1Y;
 	Tenor    lmmTenorStructureTenorType = Tenor::_6M;
 
 	LMM::VanillaSwap vanillaSwap(strike, indexStart, indexEnd, floatingLegTenorType, fixedLegTenorType, lmmTenorStructureTenorType);
 
-	Name::indexInLMMTenorStructure  indexMaturity = indexStart;
+	LMM::Index  indexMaturity = indexStart;
 	VanillaSwaption vanillaSwaption(vanillaSwap,OptionType::CALL,indexMaturity);
 	return vanillaSwaption;
 }

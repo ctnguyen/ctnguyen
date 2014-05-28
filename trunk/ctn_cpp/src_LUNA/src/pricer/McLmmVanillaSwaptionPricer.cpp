@@ -13,8 +13,8 @@ double MCLmmVanillaSwaptionPricer::price(const VanillaSwaption& vanillaSwaption,
 	//!
 	double variance = 0.0;
 
-	Name::indexInLMMTenorStructure indexValuationdate = 0;
-	Name::indexInLMMTenorStructure indexMaturity = vanillaSwaption.get_indexMaturity();
+	LMM::Index indexValuationdate = 0;
+	LMM::Index indexMaturity = vanillaSwaption.get_indexMaturity();
 
 	for(size_t itrSimulation=0; itrSimulation<nbSimulation; ++itrSimulation)
 	{

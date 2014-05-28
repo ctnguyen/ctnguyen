@@ -13,22 +13,18 @@ class VanillaSwaption
 private:
 	LMM::VanillaSwap vanillaSwap_;              // The underlying swap, indexStart is the payement date.
 	OptionType::OptionType vanillaSwaptionType_;
-	Name::indexInLMMTenorStructure indexMaturity_;
+	LMM::Index indexMaturity_;
 public:
 
 	VanillaSwaption(const LMM::VanillaSwap& vanillaSwap,
 					OptionType::OptionType vanillaSwaptionType,
-					Name::indexInLMMTenorStructure  indexMaturity)
-					:vanillaSwap_(vanillaSwap),
-					 vanillaSwaptionType_(vanillaSwaptionType),
-					 indexMaturity_(indexMaturity)
-	{
-		assert(indexMaturity == vanillaSwap_.get_indexStart());
-	}
+					LMM::Index indexMaturity);
 
 	const LMM::VanillaSwap& getUnderlyingSwap() const { return vanillaSwap_;}
-	Name::indexInLMMTenorStructure get_indexMaturity() const {return indexMaturity_;}
-	double payoff(double pvVloatingLeg, double pvFixedLeg) const;
+	
+	LMM::Index get_indexMaturity() const {return indexMaturity_;}
+	
+	double payoff(const double& pvVloatingLeg, const double& pvFixedLeg) const;
 	
 };
 
