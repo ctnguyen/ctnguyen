@@ -2,28 +2,28 @@
 
 #include <LMM/instrument/VanillaSwap.h>
 
-namespace LMM{
+namespace LMM
+{
 
 
 //! Suppose there is a LMM Tenor structure: {T_k}_{k=0}^{N}, and forall k, T_{k+1} - T_k = liborTenor, the unity is in Month. 
 //! a swap begins at: T_i, end at T_j.
 VanillaSwap::VanillaSwap(double strike,
-	                     Name::indexInLMMTenorStructure  indexStart, 
-						 Name::indexInLMMTenorStructure  indexEnd, 
+	                     LMM::Index indexStart, 
+						 LMM::Index indexEnd, 
 						 const Tenor& floatingLegTenorType,
 						 const Tenor& fixedLegTenorType,
 						 const Tenor& simulationTenorType)
 						 : strike_(strike)
-						 ,  indexStart_(indexStart)
-						 ,  indexEnd_(indexEnd)
-						 ,  floatingLegTenorType_(floatingLegTenorType)
-						 ,  fixedLegTenorType_(fixedLegTenorType)
-						 ,  simulationTenorType_(simulationTenorType)
+						 , indexStart_(indexStart)
+						 , indexEnd_(indexEnd)
+						 , floatingLegTenorType_(floatingLegTenorType)
+						 , fixedLegTenorType_(fixedLegTenorType)
+						 , simulationTenorType_(simulationTenorType)
+						 , floatingVsLiborTenorTypeRatio_( floatingLegTenorType_.ratioTo(simulationTenorType_) )
+						 , fixedVsLiborTenorTypeRatio_ ( fixedLegTenorType_.ratioTo( simulationTenorType_) )
 {
-	assert(floatingLegTenorType == simulationTenorType) ;
-
-	floatingVsLiborTenorTypeRatio_ = floatingLegTenorType_.ratioTo(simulationTenorType_); 
-	fixedVsLiborTenorTypeRatio_    = fixedLegTenorType_.ratioTo( simulationTenorType_);    
+	assert(floatingLegTenorType == simulationTenorType) ;  
 	
 	assert( indexEnd > indexStart ); assert( indexStart >=0 );
 	assert( (indexEnd_ - indexStart_)%floatingVsLiborTenorTypeRatio_==0  );
@@ -67,4 +67,9 @@ void VanillaSwap::print_details() const
 	}
 }
 
+void VanillaSwap::write_to_stream(std::ostream& outputstream)const 
+{
+	outputstream << "VanillaSwap" <<std::endl;
 }
+
+} // end namespace LMM
