@@ -4,7 +4,7 @@ void VanillaSwapPricer::precalculate(const LMM::VanillaSwap& vanillaSwap) const
 {
 	assert(lmmTenorStructure_->get_horizon() >= vanillaSwap.get_indexEnd());  // if not cannot price this swap;
 	//! YY TODO: need to implement the == operator for enum TenorType
-	assert(lmmTenorStructure_->get_tenorType() == vanillaSwap.get_lmmTenorStructureTenorType());
+	assert(lmmTenorStructure_->get_tenorType() == vanillaSwap.get_simulationTenorType() );
 
 	//! floatingLeg
 	const std::vector<Name::indexInLMMTenorStructure>& floatingLegPaymentIndexSchedule = vanillaSwap.get_floatingLegPaymentIndexSchedule();

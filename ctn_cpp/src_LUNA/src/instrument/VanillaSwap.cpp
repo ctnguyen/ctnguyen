@@ -4,41 +4,31 @@
 
 namespace LMM{
 
-VanillaSwap::VanillaSwap() 
-	: strike_(0.0),
-	indexStart_(0),
-	indexEnd_(0),
-	floatingLegTenorType_(Tenor::_Non),
-	fixedLegTenorType_(Tenor::_Non),
-	lmmTenorStructureTenorType_(Tenor::_Non)
-{}
 
 //! Suppose there is a LMM Tenor structure: {T_k}_{k=0}^{N}, and forall k, T_{k+1} - T_k = liborTenor, the unity is in Month. 
 //! a swap begins at: T_i, end at T_j.
 VanillaSwap::VanillaSwap(double strike,
 	                     Name::indexInLMMTenorStructure  indexStart, 
 						 Name::indexInLMMTenorStructure  indexEnd, 
-						 Tenor		 floatingLegTenorType,
-						 Tenor		 fixedLegTenorType,
-						 Tenor        lmmTenorStructureTenorType)
-						 : strike_(strike),
-						   indexStart_(indexStart),
-						   indexEnd_(indexEnd),
-						   floatingLegTenorType_(floatingLegTenorType),
-						   fixedLegTenorType_(fixedLegTenorType),
-						   lmmTenorStructureTenorType_(lmmTenorStructureTenorType)
+						 const Tenor& floatingLegTenorType,
+						 const Tenor& fixedLegTenorType,
+						 const Tenor& simulationTenorType)
+						 : strike_(strike)
+						 ,  indexStart_(indexStart)
+						 ,  indexEnd_(indexEnd)
+						 ,  floatingLegTenorType_(floatingLegTenorType)
+						 ,  fixedLegTenorType_(fixedLegTenorType)
+						 ,  simulationTenorType_(simulationTenorType)
 {
-	//ctntodo : uncomment this function initially commented (get_floatingLeg...)
-	floatingVsLiborTenorTypeRatio_ = get_floatingLegTenorLmmTenorRatio(); //TenorType::TenorTypeRatio(floatingLegTenorType_,lmmTenorStructureTenorType_); 
-	fixedVsLiborTenorTypeRatio_    = get_fixedLegTenorLmmTenorRatio();    //TenorType::TenorTypeRatio(fixedLegTenorType_,   lmmTenorStructureTenorType_); 
+	assert(floatingLegTenorType == simulationTenorType) ;
 
-	assert(floatingLegTenorType == lmmTenorStructureTenorType) ;
-
-	assert( indexEnd > indexStart );
-	assert( indexStart >=0 );
+	floatingVsLiborTenorTypeRatio_ = floatingLegTenorType_.ratioTo(simulationTenorType_); 
+	fixedVsLiborTenorTypeRatio_    = fixedLegTenorType_.ratioTo( simulationTenorType_);    
+	
+	assert( indexEnd > indexStart ); assert( indexStart >=0 );
 	assert( (indexEnd_ - indexStart_)%floatingVsLiborTenorTypeRatio_==0  );
 	assert( (indexEnd_ - indexStart_)%fixedVsLiborTenorTypeRatio_   ==0 );
-	assert( floatingLegTenorType_ == lmmTenorStructureTenorType_  );         // floatingTenor == lmmTenor
+	assert( floatingLegTenorType_ == simulationTenorType_  );         // floatingTenor == lmmTenor
 
 	size_t floatingPaymentSize =  (indexEnd_ - indexStart_)/floatingVsLiborTenorTypeRatio_;
 	size_t fixingPaymentSize   =  (indexEnd_ - indexStart_)/fixedVsLiborTenorTypeRatio_;
@@ -77,29 +67,4 @@ void VanillaSwap::print_details() const
 	}
 }
 
-////! Suppose there is a LMM Tenor structure: {T_k}_{k=0}^{N}, and forall k, T_{k+1} - T_k = liborTenor, the unity is in Month. 
-////! a swap begins at: T_i, end at T_j.
-//VanillaSwap::VanillaSwap(Name::indexInLMMTenorStructure indexStart,      // i
-//						 Name::indexInLMMTenorStructure indexEnd,        // j 
-//						 size_t floatingLegfrequency, 
-//						 size_t fixedLegfrequency)
-//	: strike_(0.),
-//	  indexStart_(indexStart),
-//	  indexEnd_(indexEnd),
-//	  floatingLegfrequency_(floatingLegfrequency), 
-//	  fixedLegfrequency_(fixedLegfrequency)
-//{
-//	size_t floatingPaymentSize =  (indexEnd_ - indexStart_)/floatingLegfrequency_;
-//	size_t fixingPaymentSize   =  (indexEnd_ - indexStart_)/fixedLegfrequency_;
-//
-//	for(size_t i=0; i<floatingPaymentSize; ++i)
-//	{
-//		floatingPaymentIndexSchedule.push_back(indexStart_+(i+1)*floatingLegfrequency_);
-//	}
-//
-//	for(size_t i=0; i<fixingPaymentSize; ++i)
-//	{
-//		fixingPaymentIndexSchedule.push_back(indexStart_+(i+1)*fixedLegfrequency_);
-//	}
-//}
 }

@@ -13,4 +13,9 @@ namespace OptionType
 	enum OptionType {CALL, PUT};
 }
 
+namespace LMM
+{
+	typedef size_t Index;
+}
+
 #endif /* LMM_NAME_H */

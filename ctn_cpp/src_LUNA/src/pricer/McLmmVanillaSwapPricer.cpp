@@ -46,7 +46,7 @@ double MCLmmVanillaSwapPricer::swapNPV(const LMM::VanillaSwap& vanillaSwap, size
 //
 //	assert(lmmTenorStructure.get_horizon() >= vanillaSwap.get_indexEnd());  // if not cannot price this swap;
 //	//! YY TODO: need to implement the == operator for enum TenorType
-//	//assert(lmmTenorStructure.get_tenorType() == vanillaSwap.get_lmmTenorStructureTenorType());
+//	//assert(lmmTenorStructure.get_tenorType() == vanillaSwap.get_simulationTenorType());
 //
 //	//! floatingLeg
 //	const std::vector<Name::indexInLMMTenorStructure>& floatingLegPaymentIndexSchedule = vanillaSwap.get_floatingLegPaymentIndexSchedule();
