@@ -15,25 +15,28 @@
 #include <LMM/instrument/TenorType.h>
 
 
-/*! \class LMMTenorStructure 
+/*! \class LMMTenorStructure used as a basis topological, timeline, timestep for simulation
+ *
  *  Implement the structure of LMM model
  *   - number of setlement dates ,T_k, k from 0 to N (horizon)   
  *   - the setlement date set (tenorDates)    (converted to year unit)
  *   - the tenor set (\tau_k)                 (converted to year unit)
+ *
+ *     T[i]    0   1    2    3    ...                     N
+ * timeline    *---*----*----*---*----*----*---*----*----*
+ *  \tau[i]      0    1   2                           N-1  
+ *
+ * tau_i = T_{i+1} - T_i
  */
 class LMMTenorStructure
 {
-
-	//! tau_i = T_{i+1} - T_i
-	const Tenor          tenorType_   ;    // eg: "6M" // never change, to be constant
-	Name::indexInLMMTenorStructure horizon_     ;    // N 
-	std::vector<double>  tenorDates_  ;    // size = N+2, T_0, T_1,  ......... T_{N+1}
-	std::vector<double>  tenorDeltaT_ ;    // size = N+1, \tau_0, \tau_1,...\tau_{N+1}
-
 public:
 
-	//! constructor
-	LMMTenorStructure(const Tenor&  tenorType, const size_t horizonYear);
+	/*! constructor
+	 * - compute from number of years into multiple of tenortyp --> horizon N=nbYear*12/TenorType.nbMonth 
+	 * - compute and store T[i], \tau[i]
+	 */
+	LMMTenorStructure(const Tenor&  tenorType, const size_t nbYear);
 
 	//! getter
 	const Tenor& get_tenorType()                           const ;
@@ -53,6 +56,13 @@ public:
 
 	//! print in Excel
 	void print(const std::string& filename) const;
+
+private:
+
+	const Tenor          tenorType_   ;    // eg: "3M", "6M", "9M" smallest timestep for simulation 
+	LMM::Index           horizon_     ;    // N 
+	std::vector<double>  tenorDates_  ;    // size = N+2, T_0, T_1,  ......... T_{N+1}
+	std::vector<double>  tenorDeltaT_ ;    // size = N+1, \tau_0, \tau_1,...\tau_{N}
 };
 
 typedef boost::shared_ptr<const LMMTenorStructure> ConstLMMTenorStructure;

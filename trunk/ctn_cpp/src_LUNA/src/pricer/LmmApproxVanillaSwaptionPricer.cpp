@@ -30,7 +30,7 @@ double LmmApproxVanillaSwaptionPricer::volBlack(const VanillaSwaption& vanillaSw
 
 	assert(horizon_ >= vanillaSwap.get_indexEnd()); //! if not cannot price it.
 	//! YY TODO: implement the == operator and active this test!
-	//assert(lmm_->get_LMMTenorStructure()->get_tenorType() == vanillaSwaption.getUnderlyingSwap().get_lmmTenorStructureTenorType());
+	//assert(lmm_->get_LMMTenorStructure()->get_tenorType() == vanillaSwaption.getUnderlyingSwap().get_simulationTenorType());
 	precalculate(vanillaSwap);
 	                                                                                  
 	//! Annuity at time 0

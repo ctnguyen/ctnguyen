@@ -96,7 +96,7 @@ class StaticReplicationCMSwapletPricer : public VanillaSwapPricer
 	double SwapAnnuityProjectionOnG(const VanillaSwap& vanillaSwap, double G)
 	{
 		//YY TODO: implement == operator for enum and then active this test!
-		//assert(vanillaSwap.get_lmmTenorStructureTenorType() =  lmmTenorStructure_.get_tenorType());
+		//assert(vanillaSwap.get_simulationTenorType() =  lmmTenorStructure_.get_tenorType());
 
 		size_t indexStartSwap = vanillaSwap.get_indexStart();
 		double t1 = lmmTenorStructure_.get_tenorDate(indexStartSwap);
@@ -116,7 +116,7 @@ class StaticReplicationCMSwapletPricer : public VanillaSwapPricer
 	double SwapRateProjectionOnG(const VanillaSwap& vanillaSwap, double G)
 	{
 		//YY TODO: implement == operator for enum and then active this test!
-		//assert(vanillaSwap.get_lmmTenorStructureTenorType() =  lmmTenorStructure_.get_tenorType());
+		//assert(vanillaSwap.get_simulationTenorType() =  lmmTenorStructure_.get_tenorType());
 
 		size_t indexStartSwap = vanillaSwap.get_indexStart();
 		double t1 = lmmTenorStructure_.get_tenorDate(indexStartSwap);
@@ -141,7 +141,7 @@ class StaticReplicationCMSwapletPricer : public VanillaSwapPricer
 	double SwapRateProjectionOnG_firstDerivative(const VanillaSwap& vanillaSwap, double G)
 	{
 		//YY TODO: implement == operator for enum and then active this test!
-		//assert(vanillaSwap.get_lmmTenorStructureTenorType() =  lmmTenorStructure_.get_tenorType());
+		//assert(vanillaSwap.get_simulationTenorType() =  lmmTenorStructure_.get_tenorType());
 
 		size_t indexStartSwap = vanillaSwap.get_indexStart();
 		double t1 = lmmTenorStructure_.get_tenorDate(indexStartSwap);
@@ -166,7 +166,7 @@ class StaticReplicationCMSwapletPricer : public VanillaSwapPricer
 	double SwapRateProjectionOnG_firstDerivative(const VanillaSwap& vanillaSwap, double G)
 	{
 		//YY TODO: implement == operator for enum and then active this test!
-		//assert(vanillaSwap.get_lmmTenorStructureTenorType() =  lmmTenorStructure_.get_tenorType());
+		//assert(vanillaSwap.get_simulationTenorType() =  lmmTenorStructure_.get_tenorType());
 
 		size_t indexStartSwap = vanillaSwap.get_indexStart();
 		double t1 = lmmTenorStructure_.get_tenorDate(indexStartSwap);
