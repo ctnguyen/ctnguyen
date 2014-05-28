@@ -34,7 +34,7 @@ double LmmApproxVanillaSwaptionPricer::volBlack(const VanillaSwaption& vanillaSw
 	precalculate(vanillaSwap);
 	                                                                                  
 	//! Annuity at time 0
-	Name::indexInLMMTenorStructure indexValuationDate = 0;
+	LMM::Index indexValuationDate = 0;
 	std::vector<double> numeraire(ZC_.size());
 	for(size_t i=0; i<numeraire.size(); ++i)
 	{
@@ -44,7 +44,7 @@ double LmmApproxVanillaSwaptionPricer::volBlack(const VanillaSwaption& vanillaSw
 
 
 	//! Omega Vector
-	const std::vector<Name::indexInLMMTenorStructure>& floatingLegPaymentIndexSchedule = vanillaSwap.get_floatingLegPaymentIndexSchedule();
+	const std::vector<LMM::Index>& floatingLegPaymentIndexSchedule = vanillaSwap.get_floatingLegPaymentIndexSchedule();
 	std::vector<double> omega(floatingLegPaymentIndexSchedule.size());
 	for(size_t itr=0; itr<floatingLegPaymentIndexSchedule.size(); ++itr)
 	{
@@ -57,7 +57,7 @@ double LmmApproxVanillaSwaptionPricer::volBlack(const VanillaSwaption& vanillaSw
 	}
 
 	//! Robonato Formula: YY TODO: can be simplified: use the symmetric ! 
-	Name::indexInLMMTenorStructure swaptionIndexMaturity = vanillaSwaption.get_indexMaturity();
+	LMM::Index swaptionIndexMaturity = vanillaSwaption.get_indexMaturity();
 	double volSquare = 0.0;
 	for(size_t i=0; i<floatingLegPaymentIndexSchedule.size(); ++i)
 	{

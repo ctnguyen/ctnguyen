@@ -20,7 +20,7 @@ double MCLmmVanillaSwapPricer::swapNPV(const LMM::VanillaSwap& vanillaSwap, size
 	//!
 	double variance = 0.0;
 
-	Name::indexInLMMTenorStructure indexValuationDate = 0;
+	LMM::Index indexValuationDate = 0;
 
 	for(size_t itrSimulation=0; itrSimulation<nbSimulation; ++itrSimulation)
 	{
@@ -49,7 +49,7 @@ double MCLmmVanillaSwapPricer::swapNPV(const LMM::VanillaSwap& vanillaSwap, size
 //	//assert(lmmTenorStructure.get_tenorType() == vanillaSwap.get_simulationTenorType());
 //
 //	//! floatingLeg
-//	const std::vector<Name::indexInLMMTenorStructure>& floatingLegPaymentIndexSchedule = vanillaSwap.get_floatingLegPaymentIndexSchedule();
+//	const std::vector<LMM::Index>& floatingLegPaymentIndexSchedule = vanillaSwap.get_floatingLegPaymentIndexSchedule();
 //	floatingLegTenorLmmTenorRatio_ = vanillaSwap.get_floatingLegTenorLmmTenorRatio();
 //	deltaTFloatingLeg_ = std::vector<double>(floatingLegPaymentIndexSchedule.size());
 //	for(size_t itr = 0; itr<deltaTFloatingLeg_.size(); ++itr)
@@ -61,7 +61,7 @@ double MCLmmVanillaSwapPricer::swapNPV(const LMM::VanillaSwap& vanillaSwap, size
 //	}	
 //	
 //	//! fixedLeg
-//	const std::vector<Name::indexInLMMTenorStructure>& fixedLegPaymentIndexSchedule    = vanillaSwap.get_fixedLegPaymentIndexSchedule();
+//	const std::vector<LMM::Index>& fixedLegPaymentIndexSchedule    = vanillaSwap.get_fixedLegPaymentIndexSchedule();
 //	fixedLegTenorLmmTenorRatio_    = vanillaSwap.get_fixedLegTenorLmmTenorRatio();  
 //	deltaTFixedLeg_    = std::vector<double>(fixedLegPaymentIndexSchedule.size());
 //	for(size_t itr = 0; itr<deltaTFixedLeg_.size(); ++itr)
@@ -76,7 +76,7 @@ double MCLmmVanillaSwapPricer::swapNPV(const LMM::VanillaSwap& vanillaSwap, size
 
 
 //! for one simulation: suppose LMMTenorStructure.data[0] = 0.0
-double MCLmmVanillaSwapPricer::pvFloatingLeg(Name::indexInLMMTenorStructure indexValuationDate,
+double MCLmmVanillaSwapPricer::pvFloatingLeg(LMM::Index indexValuationDate,
 											 const LMM::VanillaSwap& vanillaSwap,
 										     const std::vector<double>& numeraire, //numeraire[i]: numeraire value at T_i
 									         const matrix& liborMatrix) const
@@ -85,8 +85,8 @@ double MCLmmVanillaSwapPricer::pvFloatingLeg(Name::indexInLMMTenorStructure inde
 	assert(lmmTenorStructure_->get_horizon() >= vanillaSwap.get_indexEnd());  // if not cannot price this swap;
 
 	double price = 0.0;
-	const std::vector<Name::indexInLMMTenorStructure>& floatingLegPaymentIndexSchedule = vanillaSwap.get_floatingLegPaymentIndexSchedule();
-	//std::vector<Name::indexInLMMTenorStructure>& fixedLegPaymentIndexSchedule    = vanillaSwap.get_fixedLegPaymentIndexSchedule();
+	const std::vector<LMM::Index>& floatingLegPaymentIndexSchedule = vanillaSwap.get_floatingLegPaymentIndexSchedule();
+	//std::vector<LMM::Index>& fixedLegPaymentIndexSchedule    = vanillaSwap.get_fixedLegPaymentIndexSchedule();
 	for(size_t itr = 0; itr < floatingLegPaymentIndexSchedule.size(); ++itr)
 	{
 		//! At time T_{i+1}, pay: L_i(T_i)
@@ -102,7 +102,7 @@ double MCLmmVanillaSwapPricer::pvFloatingLeg(Name::indexInLMMTenorStructure inde
 }
 
 
-//double MCLmmVanillaSwapPricer::annuity( Name::indexInLMMTenorStructure indexValuationDate,
+//double MCLmmVanillaSwapPricer::annuity( LMM::Index indexValuationDate,
 //										const VanillaSwap& vanillaSwap,
 //									    const std::vector<double>& numeraire) const
 //{
@@ -110,7 +110,7 @@ double MCLmmVanillaSwapPricer::pvFloatingLeg(Name::indexInLMMTenorStructure inde
 //	assert(lmmTenorStructure_.get_horizon() >= vanillaSwap.get_indexEnd());  // if not cannot price this swap;
 //
 //	double price = 0.0;
-//	const std::vector<Name::indexInLMMTenorStructure>& fixedLegPaymentIndexSchedule  = vanillaSwap.get_fixedLegPaymentIndexSchedule();
+//	const std::vector<LMM::Index>& fixedLegPaymentIndexSchedule  = vanillaSwap.get_fixedLegPaymentIndexSchedule();
 //	for(size_t itr = 0; itr < fixedLegPaymentIndexSchedule.size(); ++itr)
 //	{
 //		size_t fixedLegPaymentIndex = fixedLegPaymentIndexSchedule[itr]; // = i+1
@@ -121,7 +121,7 @@ double MCLmmVanillaSwapPricer::pvFloatingLeg(Name::indexInLMMTenorStructure inde
 //	return price;
 //}
 //
-//double MCLmmVanillaSwapPricer::pvFixedLeg(Name::indexInLMMTenorStructure indexValuationDate,
+//double MCLmmVanillaSwapPricer::pvFixedLeg(LMM::Index indexValuationDate,
 //	                                      const VanillaSwap& vanillaSwap,
 //									      const std::vector<double>& numeraire)  const
 //{

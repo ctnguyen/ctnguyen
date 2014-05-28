@@ -2,11 +2,12 @@
 #define LMM_NAME_H
 #pragma once
 
+/*
 namespace Name
 {
 	typedef size_t NumberOfMonth;
 	typedef size_t indexInLMMTenorStructure;
-}
+}*/
 
 namespace OptionType
 {

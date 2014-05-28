@@ -10,15 +10,15 @@ class Caplet
 private:
 	double strike_;
 
-	Name::indexInLMMTenorStructure indexFixing_;      
-	Name::indexInLMMTenorStructure indexPayement_;   
+	LMM::Index indexFixing_;      
+	LMM::Index indexPayement_;   
 	Tenor   underlyingLiborTenorType_;
 	Tenor   lmmTenorStructureTenorType_; // used to check pricer's tenor type
 
 public:
 	Caplet(double strike,
-		Name::indexInLMMTenorStructure  indexFixing, 
-		Name::indexInLMMTenorStructure  indexPayement, 
+		LMM::Index  indexFixing, 
+		LMM::Index  indexPayement, 
 		Tenor    underlyingLiborTenorType,
 		Tenor    lmmTenorStructureTenorType)
 		:indexFixing_(indexFixing), 

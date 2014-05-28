@@ -203,7 +203,7 @@ void HGVolatilityFunction::print(const std::string& filename) const  // OK: test
 
 	//seems a problem of shared ptr polymorphisms ... 
 	//PrintElement_PTR tenorType_print    = PrintElement_PTR(new ScalarPrintElement<std::string>("tenorType", tenorType_));
-	//PrintElement_PTR horizon_print      = PrintElement_PTR(new ScalarPrintElement<Name::indexInLMMTenorStructure>("horizon", horizon_));
+	//PrintElement_PTR horizon_print      = PrintElement_PTR(new ScalarPrintElement<LMM::Index>("horizon", horizon_));
 	PrintElement_PTR hMatrix_print   = PrintElement_PTR(new MatrixPrintElement<matrix>("hMatrix",  hMatrix));
 	PrintElement_PTR gMatrix_print   = PrintElement_PTR(new MatrixPrintElement<matrix>("gMatrix",  gMatrix));
 	PrintElement_PTR hgMatrix_print  = PrintElement_PTR(new MatrixPrintElement<matrix>("hgMatrix", hgMatrix));

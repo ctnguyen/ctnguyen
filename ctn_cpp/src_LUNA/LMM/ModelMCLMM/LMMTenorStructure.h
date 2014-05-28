@@ -41,7 +41,7 @@ public:
 	//! getter
 	const Tenor& get_tenorType()                           const ;
 
-	Name::indexInLMMTenorStructure get_horizon()           const ;
+	LMM::Index get_horizon()           const ;
 	
 	const double&              get_deltaT(size_t index)    const ;
 	const std::vector<double>& get_deltaT(            )    const ;

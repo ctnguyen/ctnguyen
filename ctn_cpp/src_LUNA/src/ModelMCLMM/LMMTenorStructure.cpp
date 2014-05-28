@@ -35,7 +35,7 @@ LMMTenorStructure::LMMTenorStructure(const Tenor&  tenorType, const size_t horiz
 
 const Tenor& LMMTenorStructure::get_tenorType() const {return tenorType_;}
 
-Name::indexInLMMTenorStructure LMMTenorStructure::get_horizon() const { return horizon_; }
+LMM::Index LMMTenorStructure::get_horizon() const { return horizon_; }
 
 const double&              LMMTenorStructure::get_deltaT(size_t index) const {return tenorDeltaT_[index];}
 const std::vector<double>& LMMTenorStructure::get_deltaT(            ) const {	return tenorDeltaT_;      }
@@ -87,7 +87,7 @@ void LMMTenorStructure::print(const std::string& filename) const
 
 	//seems a problem of shared ptr polymorphisms ... 
 	PrintElement_PTR tenorType_print    = PrintElement_PTR(new ScalarPrintElement<std::string>( "tenorType", std::string(tenorType_.name) ) );
-	PrintElement_PTR horizon_print      = PrintElement_PTR(new ScalarPrintElement<Name::indexInLMMTenorStructure>("horizon", horizon_));
+	PrintElement_PTR horizon_print      = PrintElement_PTR(new ScalarPrintElement<LMM::Index>("horizon", horizon_));
 	PrintElement_PTR tenorDates_print   = PrintElement_PTR(new VectorPrintElement<std::vector<double> >("tenorDates" ,  tenorDates_ ) );
 	PrintElement_PTR tenorDeltaT_print  = PrintElement_PTR(new VectorPrintElement<std::vector<double> >( "tenorDeltaT" ,  tenorDeltaT_ ) );
 

@@ -25,8 +25,8 @@ BOOST_AUTO_TEST_SUITE(lmm_test_swap)
 LMM::VanillaSwap get_VanillaSwap()
 {
 	double strike = 0.04;
-	Name::indexInLMMTenorStructure  indexStart = 12; // 12
-	Name::indexInLMMTenorStructure  indexEnd   = 18; // 28;
+	LMM::Index  indexStart = 12; // 12
+	LMM::Index  indexEnd   = 18; // 28;
 	Tenor	floatingLegTenorType = Tenor::_6M;
 	Tenor	fixedLegTenorType    = Tenor::_1Y;
 	Tenor    lmmTenorStructureTenorType = Tenor::_6M;

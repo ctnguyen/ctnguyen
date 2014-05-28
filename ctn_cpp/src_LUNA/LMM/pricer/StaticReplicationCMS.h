@@ -102,7 +102,7 @@ class StaticReplicationCMSwapletPricer : public VanillaSwapPricer
 		double t1 = lmmTenorStructure_.get_tenorDate(indexStartSwap);
 
 		double annuity = 0.0;
-		const std::vector<Name::indexInLMMTenorStructure> fixedLegPaymentIndexSchedule = vanillaSwap.get_fixedLegPaymentIndexSchedule();
+		const std::vector<LMM::Index> fixedLegPaymentIndexSchedule = vanillaSwap.get_fixedLegPaymentIndexSchedule();
 		for(size_t indexItr = 0; indexItr < fixedLegPaymentIndexSchedule.size(); ++indexItr)
 		{
 			double t2 = fixedLegPaymentIndexSchedule[indexItr];
@@ -127,7 +127,7 @@ class StaticReplicationCMSwapletPricer : public VanillaSwapPricer
 		double pvFloatingLeg = 1 - ZCProjectionOnG(t1,t2,G);
 
 		double pvFixedLeg = 0.0;
-		const std::vector<Name::indexInLMMTenorStructure> fixedLegPaymentIndexSchedule = vanillaSwap.get_fixedLegPaymentIndexSchedule();
+		const std::vector<LMM::Index> fixedLegPaymentIndexSchedule = vanillaSwap.get_fixedLegPaymentIndexSchedule();
 		for(size_t indexItr = 0; indexItr < fixedLegPaymentIndexSchedule.size(); ++indexItr)
 		{
 			t2 = fixedLegPaymentIndexSchedule[indexItr];
@@ -152,7 +152,7 @@ class StaticReplicationCMSwapletPricer : public VanillaSwapPricer
 		double pvFloatingLeg = 1 - ZCProjectionOnG(t1,t2,G);
 
 		double pvFixedLeg = 0.0;
-		const std::vector<Name::indexInLMMTenorStructure> fixedLegPaymentIndexSchedule = vanillaSwap.get_fixedLegPaymentIndexSchedule();
+		const std::vector<LMM::Index> fixedLegPaymentIndexSchedule = vanillaSwap.get_fixedLegPaymentIndexSchedule();
 		for(size_t indexItr = 0; indexItr < fixedLegPaymentIndexSchedule.size(); ++indexItr)
 		{
 			t2 = fixedLegPaymentIndexSchedule[indexItr];
@@ -177,7 +177,7 @@ class StaticReplicationCMSwapletPricer : public VanillaSwapPricer
 		double pvFloatingLeg = 1 - ZCProjectionOnG(t1,t2,G);
 
 		double pvFixedLeg = 0.0;
-		const std::vector<Name::indexInLMMTenorStructure> fixedLegPaymentIndexSchedule = vanillaSwap.get_fixedLegPaymentIndexSchedule();
+		const std::vector<LMM::Index> fixedLegPaymentIndexSchedule = vanillaSwap.get_fixedLegPaymentIndexSchedule();
 		for(size_t indexItr = 0; indexItr < fixedLegPaymentIndexSchedule.size(); ++indexItr)
 		{
 			t2 = fixedLegPaymentIndexSchedule[indexItr];

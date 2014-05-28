@@ -30,16 +30,16 @@ protected:
 	//void precalculate(const LMM::VanillaSwap& LMM::VanillaSwap) const;
 
 	//! one simulation
-	double pvFloatingLeg(Name::indexInLMMTenorStructure indexValuationDate,
+	double pvFloatingLeg(LMM::Index indexValuationDate,
 						 const LMM::VanillaSwap& vanillaSwap,
 						 const std::vector<double>& numeraire, 
 						 const matrix& libors) const ;
 
-	//double annuity(Name::indexInLMMTenorStructure indexValuationDate,
+	//double annuity(LMM::Index indexValuationDate,
 	//			   const LMM::VanillaSwap& LMM::VanillaSwap,
 	//			   const std::vector<double>& numeraire) const;
 
-	//double pvFixedLeg(Name::indexInLMMTenorStructure indexValuationDate,
+	//double pvFixedLeg(LMM::Index indexValuationDate,
 	//				  const LMM::VanillaSwap& LMM::VanillaSwap,
 	//				  const std::vector<double>& numeraire) const;
 

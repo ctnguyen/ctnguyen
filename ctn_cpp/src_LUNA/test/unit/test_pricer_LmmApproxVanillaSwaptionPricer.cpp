@@ -25,10 +25,10 @@ BOOST_AUTO_TEST_SUITE(lmm_test_pricer_LmmApproxVanillaSwaptionPricer)
 BOOST_AUTO_TEST_CASE(test_constructors)
 {
 	//! LMMTenorStructure
-	Tenor tenorType = Tenor::_6M;
-	size_t horizonYear = 18;
-	ConstLMMTenorStructure lmmTenorStructure(new LMMTenorStructure(tenorType, horizonYear));
-	lmmTenorStructure->print("test_pricer_LMMApproxVanillaSwaptionPricer_Tenor.csv");
+	Tenor simuTenor = Tenor::_6M;
+	size_t nbYear = 15;
+	ConstLMMTenorStructure lmmTenorStructure(new LMMTenorStructure(simuTenor, nbYear));
+	lmmTenorStructure->print("test_pricer_LMMApproxVanillaSwaptionPricer_SimuTenor.csv");
 
 	//! volatility function
 	double a = -0.06;
@@ -66,19 +66,19 @@ BOOST_AUTO_TEST_CASE(test_constructors)
 	
 	// create Vanilla Swap
 	double strike = 0.04;
-	Name::indexInLMMTenorStructure  indexStart = 12; // 12
-	Name::indexInLMMTenorStructure  indexEnd   = 18; // 28;
+	LMM::Index indexStart = 12; // 12
+	LMM::Index indexEnd   = 18; // 28;
 	Tenor floatingLegTenorType = Tenor::_6M;
-	Tenor fixedLegTenorType    = Tenor::_1Y;
-	Tenor lmmTenorStructureTenorType = Tenor::_6M;
+	Tenor fixedLegTenorType    = Tenor::_1Y;	
 	
-	LMM::VanillaSwap vanillaSwap(strike, indexStart, indexEnd, floatingLegTenorType, fixedLegTenorType, lmmTenorStructureTenorType);
+	LMM::VanillaSwap vanillaSwap(strike, indexStart, indexEnd, floatingLegTenorType, fixedLegTenorType, simuTenor);
+	std::cout<< vanillaSwap <<std::endl;
 
 	LmmApproxVanillaSwaptionPricer approxSwaptionPricer(lmm);
 
 
 	// create Swaption
-	Name::indexInLMMTenorStructure  indexMaturity = indexStart;
+	LMM::Index indexMaturity = indexStart;
 	VanillaSwaption vanillaSwaption(vanillaSwap,OptionType::CALL,indexMaturity);
 
 	double swapRate = approxSwaptionPricer.swapRate_Analytical(vanillaSwap, liborsInitValue); // swapRate at time 0
