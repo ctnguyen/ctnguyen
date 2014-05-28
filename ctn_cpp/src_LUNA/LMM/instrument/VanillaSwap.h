@@ -2,6 +2,7 @@
 #define LMM_INSTRUMENT_VANILLA_SWAP_H
 #pragma once
 
+#include <iostream>
 #include <vector>
 #include <string>
 
@@ -27,8 +28,8 @@ namespace LMM
 class VanillaSwap
 {
 private:
-	Name::indexInLMMTenorStructure indexStart_;       // i 
-	Name::indexInLMMTenorStructure indexEnd_;         // j 
+	LMM::Index indexStart_;       // i 
+	LMM::Index indexEnd_;         // j 
 	
 	double strike_;
 	
@@ -44,23 +45,22 @@ private:
 
 	//size_t floatingLegfrequency_; //!  floatingLeg pays at: indexStart_ + (k+1)*floatingVsLiborTenorTypeRatio_,     k=0,1,2, ...
 	//size_t fixedLegfrequency_;    //!  fixedLeg    pays at: indexStart_ + (k+1)*fixedVsLiborTenorTypeRatio_, k=0,1,2, ...
-	std::vector<Name::indexInLMMTenorStructure> floatingLegPaymentIndexSchedule_; // give index in LMMTenorStructure 
-	std::vector<Name::indexInLMMTenorStructure> floatingLegLiborIndex_;           // liborIndex correspond to the paymentdate: if MCLMM use the same lmmTenorStrucutre to do simulation
-	std::vector<Name::indexInLMMTenorStructure> fixedLegPaymentIndexSchedule_;    
+	std::vector<LMM::Index> floatingLegPaymentIndexSchedule_; // give index in LMMTenorStructure 
+	std::vector<LMM::Index> floatingLegLiborIndex_;           // liborIndex correspond to the paymentdate: if MCLMM use the same lmmTenorStrucutre to do simulation
+	std::vector<LMM::Index> fixedLegPaymentIndexSchedule_;    
 
 public:
 	
 	VanillaSwap(double strike,
-		Name::indexInLMMTenorStructure  indexStart, 
-		Name::indexInLMMTenorStructure  indexEnd, 
-		const Tenor& floatingLegTenorType,
+		LMM::Index  indexStart, 
+		LMM::Index  indexEnd, 
+		const Tenor& floatingLegTenorType,		
 		const Tenor& fixedLegTenorType,
 		const Tenor& lmmTenorStructureTenorType);
 
 	void  set_strike(const double& strike) {strike_ = strike;}
 	const double& get_strike() const {return strike_;}
 	
-
 	const Tenor& get_fixedLegTenorType()	const { return fixedLegTenorType_     ; }
 	const Tenor& get_floatingLegTenorType()	const { return floatingLegTenorType_  ; }	
 	const Tenor& get_simulationTenorType()  const { return simulationTenorType_   ; }
@@ -70,22 +70,23 @@ public:
 	size_t get_floatingLegTenorLmmTenorRatio() const { return floatingVsLiborTenorTypeRatio_ ; }		
 	
 
+	const std::vector<LMM::Index>& get_floatingLegPaymentIndexSchedule() const { return floatingLegPaymentIndexSchedule_; }
+	const std::vector<LMM::Index>& get_fixedLegPaymentIndexSchedule()    const { return fixedLegPaymentIndexSchedule_   ; }
 
-	const std::vector<Name::indexInLMMTenorStructure>& get_floatingLegPaymentIndexSchedule() const { return floatingLegPaymentIndexSchedule_; }
-	const std::vector<Name::indexInLMMTenorStructure>& get_fixedLegPaymentIndexSchedule()    const { return fixedLegPaymentIndexSchedule_   ; }
-
-	Name::indexInLMMTenorStructure get_indexStart() const {return indexStart_;}
-	Name::indexInLMMTenorStructure get_indexEnd()   const {return indexEnd_  ;}
+	LMM::Index get_indexStart() const {return indexStart_;}
+	LMM::Index get_indexEnd()   const {return indexEnd_  ;}
 
 
 public:
-	void print() const;
-	void print_details() const;
+	void print() const;         //ctntodo delete 
+	void print_details() const; //ctntodo delete
+	virtual void write_to_stream(std::ostream& outputstream)const ;
 };
 typedef boost::shared_ptr<VanillaSwap> VanillaSwap_PTR;
 
 
-}
+} //end namespace LMM
 
+inline std::ostream& operator<<(std::ostream& os, const LMM::VanillaSwap& swap){ swap.write_to_stream(os) ; return os; }
 
 #endif /* LMM_INSTRUMENT_VANILLA_SWAP_H */
