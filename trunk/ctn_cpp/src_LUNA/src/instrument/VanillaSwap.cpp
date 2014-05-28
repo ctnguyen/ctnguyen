@@ -27,49 +27,49 @@ VanillaSwap::VanillaSwap(double strike,
 	
 	assert( indexEnd > indexStart ); assert( indexStart >=0 );
 	assert( (indexEnd_ - indexStart_)%floatingVsLiborTenorTypeRatio_==0  );
-	assert( (indexEnd_ - indexStart_)%fixedVsLiborTenorTypeRatio_   ==0 );
+	assert( (indexEnd_ - indexStart_)%fixedVsLiborTenorTypeRatio_   ==0  );
 	assert( floatingLegTenorType_ == simulationTenorType_  );         // floatingTenor == lmmTenor
 
-	size_t floatingPaymentSize =  (indexEnd_ - indexStart_)/floatingVsLiborTenorTypeRatio_;
-	size_t fixingPaymentSize   =  (indexEnd_ - indexStart_)/fixedVsLiborTenorTypeRatio_;
-
-	for(size_t i=0; i<floatingPaymentSize; ++i)
+	size_t nbFloatLeg =  (indexEnd_ - indexStart_)/floatingVsLiborTenorTypeRatio_;
+	
+	for(size_t i=0; i<nbFloatLeg ; ++i)
 	{
-		floatingLegPaymentIndexSchedule_.push_back(indexStart_+i+1);
+		floatingLegPaymentIndexSchedule_.push_back(indexStart_+(i+1)*floatingVsLiborTenorTypeRatio_);
 	}
 
-	for(size_t i=0; i<fixingPaymentSize; ++i)
+	size_t nbFixedLeg = (indexEnd_ - indexStart_)/fixedVsLiborTenorTypeRatio_;
+	for(size_t i=0; i< nbFixedLeg ; ++i)
 	{
 		fixedLegPaymentIndexSchedule_.push_back(indexStart_+(i+1)*fixedVsLiborTenorTypeRatio_);
 	}
 }
 
-void VanillaSwap::print() const
-{
-
-}
-
-void VanillaSwap::print_details() const
-{
-	std::cout << "indexStart_ = " << indexStart_ << std::endl;
-	std::cout << "indexEnd_ = " << indexEnd_ << std::endl;
-
-	std::cout << "floatingPaymentIndexSchedule: " << std::endl;
-	for(size_t i=0; i<floatingLegPaymentIndexSchedule_.size(); ++i)
-	{
-		std::cout << floatingLegPaymentIndexSchedule_[i] << std::endl;
-	}
-
-	std::cout << "fixingPaymentIndexSchedule: " << std::endl;
-	for(size_t i=0; i<fixedLegPaymentIndexSchedule_.size(); ++i)
-	{
-		std::cout << fixedLegPaymentIndexSchedule_[i] << std::endl;
-	}
-}
-
 void VanillaSwap::write_to_stream(std::ostream& outputstream)const 
 {
-	outputstream << "VanillaSwap" <<std::endl;
+	outputstream <<std::endl << "VanillaSwap" <<std::endl;
+
+	outputstream << "strike_="   << strike_ << std::endl;
+	outputstream << "indexStart_=" << indexStart_ << std::endl;
+	outputstream << "indexEnd_="   << indexEnd_ << std::endl;
+
+	outputstream << "floatingLegTenorType_="  << floatingLegTenorType_ << std::endl;
+	outputstream << "fixedLegTenorType_="     << fixedLegTenorType_    << std::endl;
+	outputstream << "simulationTenorType_="   << simulationTenorType_  << std::endl;
+
+	outputstream << "floatingPaymentIndexSchedule_{"<<floatingLegPaymentIndexSchedule_[0];
+	for(size_t i=1; i<floatingLegPaymentIndexSchedule_.size(); ++i)
+	{
+		outputstream <<"," << floatingLegPaymentIndexSchedule_[i];
+	}outputstream <<"}"<<std::endl;
+
+	outputstream << "fixedLegPaymentIndexSchedule_{"<<fixedLegPaymentIndexSchedule_[0];
+	for(size_t i=1; i<fixedLegPaymentIndexSchedule_.size(); ++i)
+	{
+		outputstream <<","<<fixedLegPaymentIndexSchedule_[i];
+	}outputstream <<"}"<<std::endl<<std::endl;
 }
 
+
 } // end namespace LMM
+
+std::ostream& operator<<(std::ostream& os, const LMM::VanillaSwap& swap){ swap.write_to_stream(os) ; return os; }

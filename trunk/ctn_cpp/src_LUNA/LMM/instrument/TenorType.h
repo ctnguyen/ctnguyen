@@ -71,4 +71,6 @@ public:
 	const unsigned int& nbMonth;
 };
 
+std::ostream& operator<<(std::ostream& os, const Tenor& tenor);
+
 #endif /* LMM_INSTRUMENT_TENOR_TYPE_H */

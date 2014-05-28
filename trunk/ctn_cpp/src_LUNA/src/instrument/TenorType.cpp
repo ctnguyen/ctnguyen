@@ -15,3 +15,8 @@ const Tenor::TYPE_3 Tenor::_6M;// initialization static variable
 const Tenor::TYPE_4 Tenor::_9M;// initialization static variable
 const Tenor::TYPE_5 Tenor::_12M;// initialization static variable
 const Tenor::TYPE_6 Tenor::_1Y;// initialization static variable
+
+std::ostream& operator<<(std::ostream& os, const Tenor& tenor)
+{
+	os<<"Tenor" << tenor.name;	return os; 
+}

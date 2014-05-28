@@ -139,7 +139,8 @@ void test_McLmm( bool TerminalOrSpotProb,
 BOOST_AUTO_TEST_CASE(test_VanillaSwap)
 {
 	LMM::VanillaSwap vanillaSwap = get_VanillaSwap();
-	vanillaSwap.print_details();
+	
+	std::cout<<vanillaSwap<<std::endl;
 
 	BOOST_CHECK(true);
 }

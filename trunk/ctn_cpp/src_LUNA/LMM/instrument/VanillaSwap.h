@@ -13,41 +13,44 @@
 #include <LMM/Name.h>
 #include <LMM/instrument/TenorType.h>
 
-//YY  Now suppose we use the LMM model Tenor, to change it latter. 
-// 1. suppose knowing the LMM's Tenor structure. 
-// 2. Suppose fixing / floating leg start and end at the same date;  ---- checked
-// 3. Suppose floatingTenor = LMM discretization tenor.              ---- not checked.
-
-
-//! Suppose there is a LMM Tenor structure: {T_k}_{k=0}^{N}, and forall k, T_{k+1} - T_k = liborTenor, the unity is in Month. 
-//! a swap begins at: T_i, end at T_j.
 
 namespace LMM
 {
 
+/*! \class VanillaSwap manage leg's INDICES in the simulation structures see <LMM\ModelMCLMM\LMMTenorStructure.h>
+ * Each simulation index correspond to a simulated Libor
+ *
+ * Float Leg's indices                 S      fixedTenor        |       fixedTenor    | 
+ * Simulation indices    0--st--1--st--2--st--3--st---4---st---*--st---*--st--*--st--*---st---N+1     // st is the SimulationTenor
+ * Fixed Leg's indices                 S  floatTenor   |   floatTenor   | floatTenor  | 
+ *
+ * S and E are start Index and end Index in the simulation base
+ * 
+ * (endIndex-startIndex)  has to be multiple of (fixedTenor%st) and (floatTenor%st)
+ *
+ * !!! For instance, floatTenor=simulationTenor
+ */
 class VanillaSwap
 {
 private:
-	LMM::Index indexStart_;       // i 
-	LMM::Index indexEnd_;         // j 
-	
+
 	double strike_;
-	
-	/*! The TenorType of LmmTenorStruture (used for simulation) has to be a common divisor
+
+	LMM::Index indexStart_; // S      
+	LMM::Index indexEnd_  ; // E       
+		
+	/*! The TenorType of Simulation (LMMTenorStructure) has to be a common divisor
 	 *  of TenorType for floatingLeg and fixedLeg
 	 */
 	Tenor floatingLegTenorType_ ; // floatingLeg payment frequency = Libor's tenorType
 	Tenor fixedLegTenorType_    ; // fixedLeg payment frequency: each "1M", "3M", "6M", "1Y"
-	Tenor simulationTenorType_  ; // simulation time step frequency: each "1M", "3M", "6M", "1Y"
+	Tenor simulationTenorType_  ; // simulation tenor step : exmple "1M", "3M", "6M", "1Y"
 
-	size_t floatingVsLiborTenorTypeRatio_;
-	size_t fixedVsLiborTenorTypeRatio_;
+	size_t floatingVsLiborTenorTypeRatio_; // = floatingLegTenorType_ % simulationTenorType_
+	size_t fixedVsLiborTenorTypeRatio_;    // = fixedLegTenorType_    % simulationTenorType_
 
-	//size_t floatingLegfrequency_; //!  floatingLeg pays at: indexStart_ + (k+1)*floatingVsLiborTenorTypeRatio_,     k=0,1,2, ...
-	//size_t fixedLegfrequency_;    //!  fixedLeg    pays at: indexStart_ + (k+1)*fixedVsLiborTenorTypeRatio_, k=0,1,2, ...
 	std::vector<LMM::Index> floatingLegPaymentIndexSchedule_; // give index in LMMTenorStructure 
-	std::vector<LMM::Index> floatingLegLiborIndex_;           // liborIndex correspond to the paymentdate: if MCLMM use the same lmmTenorStrucutre to do simulation
-	std::vector<LMM::Index> fixedLegPaymentIndexSchedule_;    
+	std::vector<LMM::Index> fixedLegPaymentIndexSchedule_   ;    
 
 public:
 	
@@ -78,8 +81,7 @@ public:
 
 
 public:
-	void print() const;         //ctntodo delete 
-	void print_details() const; //ctntodo delete
+
 	virtual void write_to_stream(std::ostream& outputstream)const ;
 };
 typedef boost::shared_ptr<VanillaSwap> VanillaSwap_PTR;
@@ -87,6 +89,6 @@ typedef boost::shared_ptr<VanillaSwap> VanillaSwap_PTR;
 
 } //end namespace LMM
 
-inline std::ostream& operator<<(std::ostream& os, const LMM::VanillaSwap& swap){ swap.write_to_stream(os) ; return os; }
+std::ostream& operator<<(std::ostream& os, const LMM::VanillaSwap& swap);
 
 #endif /* LMM_INSTRUMENT_VANILLA_SWAP_H */
