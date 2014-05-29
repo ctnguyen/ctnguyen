@@ -18,7 +18,6 @@ add_library(LMM_testlib
 	"${CMAKE_SOURCE_DIR}/test/testlib/TestOptimizer.h"
 	"${CMAKE_SOURCE_DIR}/test/testlib/TestPricing.h"
 	"${CMAKE_SOURCE_DIR}/test/testlib/Test_Correlation.h"
-	"${CMAKE_SOURCE_DIR}/test/testlib/Test_PCA.h"
 	"${CMAKE_SOURCE_DIR}/test/testlib/VolatilityTests.h"
 	"CapletTests.cpp"
 	"LiborSimulationTests.cpp"
@@ -26,7 +25,6 @@ add_library(LMM_testlib
 	"TestPricing.cpp"
 	"Test_Correlation.cpp"
 	"Test_Instrument.cpp"
-	"Test_PCA.cpp"
 	"VolatilityTests.cpp"
 )
 

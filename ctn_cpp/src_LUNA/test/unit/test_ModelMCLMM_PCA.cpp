@@ -1,3 +1,6 @@
+#define BOOST_TEST_MODULE LMM_unit_test_model_PCA
+#include <boost/test/included/unit_test.hpp>
+
 #include <iostream>
 
 #include <ql/math/matrixutilities/symmetricschurdecomposition.hpp>
@@ -6,9 +9,11 @@
 
 using namespace QuantLib; // for Matrix
 
-void test_SymmetricSchurDecomposition()
+BOOST_AUTO_TEST_SUITE(lmm_test_model_PCA)
+
+BOOST_AUTO_TEST_CASE(test_SymmetricSchurDecomposition)
 {
-	std::cout << "---- ---- test_SymmetricSchurDecomposition ---- ---- "  << std::endl;
+	
 	size_t size = 3;
 
 	Matrix m(size,size);
@@ -76,12 +81,13 @@ void test_SymmetricSchurDecomposition()
 		}
 		std::cout << std::endl;
 	}
+
+	BOOST_CHECK(true);
 }
 
-void testPCA()
+BOOST_AUTO_TEST_CASE(test_PCA)
 {
-	std::cout << "---- ---- testPCA ---- ---- "  << std::endl;
-
+	
 	size_t fullRank = 3;
 	size_t reducedRank = 2;
 
@@ -151,4 +157,8 @@ void testPCA()
 		}
 		std::cout << std::endl;
 	}
+
+	BOOST_CHECK(true);
 }
+
+BOOST_AUTO_TEST_SUITE_END()
