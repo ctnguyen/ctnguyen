@@ -1,11 +1,16 @@
+#ifndef LMM_PRICER_STATICREPLICATIONCMS_H
+#define LMM_PRICER_STATICREPLICATIONCMS_H
 #pragma once
-#include "StaticReplicationFormula.h"
-#include "LMMTenorStructure.h"
-#include "VanillaSwap.h"
-#include "VanillaSwapPricer.h"
+
 #include <cmath>
 #include <cassert>
-#include "DerivatibleFunction.h"
+
+#include <LMM/helper/DerivatibleFunction.h>
+#include <LMM/helper/StaticReplicationFormula.h>
+#include <LMM/instrument/VanillaSwap.h>
+#include <LMM/ModelMCLMM/LMMTenorStructure.h>
+#include <LMM/pricer/VanillaSwapPricer.h>
+
 
 class StaticReplicationCMSPricer
 {
@@ -187,3 +192,5 @@ class StaticReplicationCMSwapletPricer : public VanillaSwapPricer
 		return pvFixedLeg/pvFloatingLeg;
 	}
 };
+
+#endif /* LMM_PRICER_STATICREPLICATIONCMS_H */

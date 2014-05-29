@@ -58,54 +58,16 @@ public:
 	bool checkAngle(const QuantLib::Array& angles) const;
 
 	//! all angles in [0,pi] expect esp angles \in [0,2*pi]
-	static bool isSpecialAnlge(size_t index_i, size_t rank)
-	{
-		if(rank<2)
-			throw("rank too small, not permitted");
-		if(index_i ==0) 
-			return false;
-		size_t r = rank-1; 
-
-        if((index_i+1)%r==0)
-			return true;
-		else
-			return false;
-	}
+	static bool isSpecialAnlge(size_t index_i, size_t rank);
 
 
 	//! nearest Matrix to originalCorrelMatrix
 	void solveTheNearestCorrelProblem(const QuantLib::Matrix& target); // given: correlMatrix_ -> try to find its nearest approximation by RobonatoAngle
 
-
-	void print_details(std::string& fileName) const;
-
-
 	// YY Duplicate: RobonatoAngle::calculateBMatrixFromAngle(const Array& angles)
 	static QuantLib::Disposable<QuantLib::Matrix> triangularAnglesParametrizationYY( const QuantLib::Array& angles,
 															   size_t matrixSize,
-															   size_t rank)
-	{
-		// what if rank == 1?
-		//QL_REQUIRE((rank-1) * (matrixSize ) == angles.size(),
-		//			"rank-1) * (matrixSize ) == angles.size()");
-
-		assert((rank-1) * (matrixSize ) == angles.size());
-
-		QuantLib::Matrix BMatrix(matrixSize, rank);
-
-		size_t k = 0; //angles index
-		for (size_t i=0; i<matrixSize; ++i) {
-			double sinProduct = 1.0;
-			for (size_t j=0; j<rank-1; ++j) {
-				BMatrix[i][j] = std::cos(angles[k]);
-				BMatrix[i][j] *= sinProduct;
-				sinProduct *= std::sin(angles[k]);
-				++k;
-			}
-			BMatrix[i][rank-1] = sinProduct;
-		}
-		return BMatrix;
-	}
+															   size_t rank);
 
 
 	
@@ -131,11 +93,5 @@ public:
         size_t rank_;
     };
 
+	void print_details(std::string& fileName) const;
 };
-
-
-
-//! function of test
-void testSpecialAngles();
-
-void testRobonatoAngle();

@@ -20,12 +20,11 @@ public:
 					OptionType::OptionType vanillaSwaptionType,
 					LMM::Index indexMaturity);
 
-	const LMM::VanillaSwap& getUnderlyingSwap() const { return vanillaSwap_;}
+	LMM::Index              get_indexMaturity() const ; //{return indexMaturity_;}
 	
-	LMM::Index get_indexMaturity() const {return indexMaturity_;}
-	
-	double payoff(const double& pvVloatingLeg, const double& pvFixedLeg) const;
-	
+	const LMM::VanillaSwap& getUnderlyingSwap() const ; //{ return vanillaSwap_;}
+		
+	double payoff(const double& pvVloatingLeg, const double& pvFixedLeg) const;	
 };
 
 typedef boost::shared_ptr<VanillaSwaption> VanillaSwaption_PTR;

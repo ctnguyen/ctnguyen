@@ -15,6 +15,11 @@ VanillaSwaption::VanillaSwaption(const LMM::VanillaSwap& vanillaSwap,
 }
 
 
+const LMM::VanillaSwap& VanillaSwaption::getUnderlyingSwap() const { return vanillaSwap_;}
+
+LMM::Index VanillaSwaption::get_indexMaturity() const {return indexMaturity_;}
+
+
 double VanillaSwaption::payoff(const double& pvVloatingLeg, const double& pvFixedLeg) const
 {
 	if(vanillaSwaptionType_ == OptionType::CALL)
