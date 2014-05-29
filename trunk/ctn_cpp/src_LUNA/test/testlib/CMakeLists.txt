@@ -17,13 +17,11 @@ add_library(LMM_testlib
 	"${CMAKE_SOURCE_DIR}/test/testlib/SwaptionPricingTests.h"
 	"${CMAKE_SOURCE_DIR}/test/testlib/TestOptimizer.h"
 	"${CMAKE_SOURCE_DIR}/test/testlib/TestPricing.h"
-	"${CMAKE_SOURCE_DIR}/test/testlib/Test_Correlation.h"
 	"${CMAKE_SOURCE_DIR}/test/testlib/VolatilityTests.h"
 	"CapletTests.cpp"
 	"LiborSimulationTests.cpp"
 	"SwaptionPricingTests.cpp"
 	"TestPricing.cpp"
-	"Test_Correlation.cpp"
 	"Test_Instrument.cpp"
 	"VolatilityTests.cpp"
 )
