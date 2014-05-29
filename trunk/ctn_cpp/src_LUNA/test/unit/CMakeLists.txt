@@ -36,6 +36,10 @@ add_executable(unitTest_instrument_VanillaSwap "test_instrument_VanillaSwap.cpp"
 target_link_libraries(unitTest_instrument_VanillaSwap LMM_instrument)
 add_test(unitTest_instrument_VanillaSwap ${CMAKE_CURRENT_BINARY_DIR}/unitTest_instrument_VanillaSwap "--log_level=message")
 
+add_executable(unitTest_test_ModelMCLMM_PCA "test_ModelMCLMM_PCA.cpp")
+target_link_libraries(unitTest_test_ModelMCLMM_PCA LMM_ModelMCLMM ${QuantLib_LIBRARY})
+add_test(unitTest_test_ModelMCLMM_PCA ${CMAKE_CURRENT_BINARY_DIR}/unitTest_test_ModelMCLMM_PCA "--log_level=message")
+
 add_executable(unittest_pricer_LmmApproxVanillaSwaptionPricer "test_pricer_LmmApproxVanillaSwaptionPricer.cpp")
 target_link_libraries(unittest_pricer_LmmApproxVanillaSwaptionPricer LMM_pricer ${QuantLib_LIBRARY})
 add_test(unittest_pricer_LmmApproxVanillaSwaptionPricer ${CMAKE_CURRENT_BINARY_DIR}/unittest_pricer_LmmApproxVanillaSwaptionPricer "--log_level=message")
