@@ -81,9 +81,10 @@ BOOST_AUTO_TEST_CASE(test_constructors)
 	LMM::Index indexMaturity = indexStart;
 	VanillaSwaption vanillaSwaption(vanillaSwap,OptionType::CALL,indexMaturity);
 
-	double swapRate = approxSwaptionPricer.swapRate_Analytical(vanillaSwap, liborsInitValue); // swapRate at time 0
 	double approxVolBlack = approxSwaptionPricer.volBlack(vanillaSwaption,liborsInitValue);
 	
+	double swapRate = approxSwaptionPricer.swapRate_Analytical(vanillaSwap, liborsInitValue); // swapRate at time 0
+
 	std::cout<<"Test LMM Approx Vanilla Swaption Pricer "<<std::endl
 		     <<" Vol Black : "<<approxVolBlack<<std::endl
 			 <<" Analitical Swap_rate : "<<swapRate<<std::endl;
