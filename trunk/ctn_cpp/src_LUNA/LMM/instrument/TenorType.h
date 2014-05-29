@@ -45,25 +45,20 @@ public:
 	template<unsigned int NBMONTH>
 	Tenor(const TenorType<NBMONTH>&):name(TenorType<NBMONTH>::NAME),nbMonth(TenorType<NBMONTH>::NB_MONTH){}
 
-	//! check if two tenor is equal
-	bool operator==(const Tenor& other) const { return (nbMonth == other.nbMonth); }
-	bool operator!=(const Tenor& other) const { return (nbMonth != other.nbMonth); }
+	//! check if two tenor is equal or not
+	bool operator==(const Tenor& other) const;
+	bool operator!=(const Tenor& other) const;
 
-	bool isValidTenor()     const { return nbMonth>0;    }
+	bool isValidTenor()     const ;
 
-	double convertToYear()  const { assert( this->isValidTenor() ); return nbMonth/12.0;}
-	size_t convertToMonth() const { assert( this->isValidTenor() ); return nbMonth;}
+	//! convert a tenor to Year unit
+	double convertToYear()  const ;
+	
+	//! convert a tenor to Month unit
+	size_t convertToMonth() const ;
 
-	size_t ratioTo(const Tenor& other) const
-	{
-		assert( this->isValidTenor() );assert( other.isValidTenor() );
-
-		size_t nb_month1 = this->convertToMonth();
- 		size_t nb_month2 = other.convertToMonth();
-
- 		assert(nb_month1>=nb_month2); // to compute the ratio only when tenor1>=tenor2
- 		return (nb_month1/nb_month2);
-	}
+	// compute the euclidean quotient of this Tenor to other Tenor 
+	size_t ratioTo(const Tenor& other) const;
 
 public:
 	// A tenor is never to change after being instanciated

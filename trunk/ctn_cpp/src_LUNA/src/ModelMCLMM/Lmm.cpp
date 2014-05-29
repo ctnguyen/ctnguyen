@@ -1,5 +1,60 @@
 #include <LMM/ModelMCLMM/Lmm.h>
 #include <cassert>
+
+
+//----------  TENSOR  --------------
+
+Tensor::Tensor(size_t size1, size_t size2, size_t size3) : tensor_(size1, matrix(size2, size3)){}
+
+double & Tensor::operator()(size_t index_T, size_t indexLibor_i, size_t indexLibor_j) 
+{
+	//! YY Attention: This is a special condition for My LMM implementation, not general tensor condition.
+	//! YY TODO: remove this check when the code is stable.
+	assert(index_T >=1 && indexLibor_i>=index_T && indexLibor_j >= index_T);
+	return tensor_[index_T](indexLibor_i, indexLibor_j);
+}
+
+const double & Tensor::operator()(size_t index_T, size_t indexLibor_i, size_t indexLibor_j) const
+{
+	//! YY Attention: This is a special condition for My LMM implementation, not general tensor condition.
+	//! YY TODO: remove this check when the code is stable.
+	assert(index_T >=1 && indexLibor_i>=index_T && indexLibor_j >= index_T);
+	return tensor_[index_T](indexLibor_i, indexLibor_j);
+}
+
+
+const std::vector<matrix>& Tensor::get_tensor() const { return tensor_; }
+
+void Tensor::set_tensor(std::vector<matrix> val) { tensor_ = val;}
+
+const matrix& Tensor::operator[](size_t indexT) const
+{ 
+	assert(indexT >=1);
+	return tensor_[indexT];
+}
+
+//----------  TENSOR  --------------
+
+
+
+
+
+Lmm::Lmm(const Dispersion&                  dispersion,
+		 const std::vector<double>&         shifts,           // size = N+1
+		 const std::vector<double>&         liborsInitValue)
+		 : dispersion_(dispersion)
+		 , shifts_(shifts)
+		 , covarianceTensor_         (dispersion_.get_horizon()+1, dispersion_.get_horizon()+1,dispersion_.get_horizon()+1)
+		 , cumulatedCovarianceTensor_(dispersion_.get_horizon()+1, dispersion_.get_horizon()+1,dispersion_.get_horizon()+1)
+		 , liborsInitValue_(liborsInitValue)
+{
+	initCovarianceTensor();
+	initCumulatedCovarianceTensor();
+}
+
+
+
+
 void Lmm::initCovarianceTensor()
 {
 	//! YY TODO: make the not initialized value to #IND
@@ -26,13 +81,6 @@ void Lmm::initCovarianceTensor()
 	}
 }
 
-double Lmm::get_covarianceTensor(size_t indexTime, size_t indexLibor_i, size_t indexLibor_j)  
-{
-	assert(indexTime <= indexLibor_i && indexTime <= indexLibor_j);
-	return covarianceTensor_(indexTime, indexLibor_i, indexLibor_j);
-}
-
-
 void Lmm::initCumulatedCovarianceTensor()
 {
 	// tensor_:  k,i,j
@@ -58,7 +106,23 @@ void Lmm::initCumulatedCovarianceTensor()
 
 }
 
-double Lmm::get_cumulatedcovarianceTensor(size_t indexTime, size_t indexLibor_i, size_t indexLibor_j)  
+
+size_t Lmm::get_horizon() const {return dispersion_.get_horizon();}
+
+ConstLMMTenorStructure Lmm::get_LMMTenorStructure () const {return dispersion_.get_lmmTenorStructure();}
+
+const std::vector<double>& Lmm::get_shifts()			  const {return shifts_;}
+
+const std::vector<double>& Lmm::get_liborsInitValue()  const {return liborsInitValue_;}
+
+
+const double& Lmm::get_covarianceTensor(size_t indexTime, size_t indexLibor_i, size_t indexLibor_j) const
+{
+	assert(indexTime <= indexLibor_i && indexTime <= indexLibor_j);
+	return covarianceTensor_(indexTime, indexLibor_i, indexLibor_j);
+}
+
+const double& Lmm::get_cumulatedcovarianceTensor(size_t indexTime, size_t indexLibor_i, size_t indexLibor_j) const
 {
 	assert(indexTime <= indexLibor_i && indexTime <= indexLibor_j);
 	return cumulatedCovarianceTensor_(indexTime, indexLibor_i, indexLibor_j);

@@ -16,6 +16,29 @@ const Tenor::TYPE_4 Tenor::_9M;// initialization static variable
 const Tenor::TYPE_5 Tenor::_12M;// initialization static variable
 const Tenor::TYPE_6 Tenor::_1Y;// initialization static variable
 
+
+bool Tenor::operator==(const Tenor& other) const { return (nbMonth == other.nbMonth); }
+
+bool Tenor::operator!=(const Tenor& other) const { return (nbMonth != other.nbMonth); }
+
+bool Tenor::isValidTenor()     const { return nbMonth>0;    }
+
+double Tenor::convertToYear()  const { assert( this->isValidTenor() ); return nbMonth/12.0;}
+
+size_t Tenor::convertToMonth() const { assert( this->isValidTenor() ); return nbMonth;}
+
+size_t Tenor::ratioTo(const Tenor& other) const
+{
+	assert( this->isValidTenor() );assert( other.isValidTenor() );
+
+	size_t nb_month1 = this->convertToMonth();
+	size_t nb_month2 = other.convertToMonth();
+
+	assert(nb_month1>=nb_month2); // to compute the ratio only when tenor1>=tenor2
+	return (nb_month1/nb_month2);
+}
+
+
 std::ostream& operator<<(std::ostream& os, const Tenor& tenor)
 {
 	os<<"Tenor" << tenor.name;	return os; 

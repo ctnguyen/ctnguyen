@@ -61,23 +61,22 @@ public:
 		const Tenor& fixedLegTenorType,
 		const Tenor& lmmTenorStructureTenorType);
 
-	void  set_strike(const double& strike) {strike_ = strike;}
-	const double& get_strike() const {return strike_;}
+	void  set_strike(const double& strike) ;
+	const double& get_strike() const       ;
 	
-	const Tenor& get_fixedLegTenorType()	const { return fixedLegTenorType_     ; }
-	const Tenor& get_floatingLegTenorType()	const { return floatingLegTenorType_  ; }	
-	const Tenor& get_simulationTenorType()  const { return simulationTenorType_   ; }
+	const Tenor& get_fixedLegTenorType()	const;// { return fixedLegTenorType_     ; }
+	const Tenor& get_floatingLegTenorType()	const;// { return floatingLegTenorType_  ; }	
+	const Tenor& get_simulationTenorType()  const;// { return simulationTenorType_   ; }
 
 	//! get the euclidean quotien of legs's TenorType to simulation's TenorType
-	size_t    get_fixedLegTenorLmmTenorRatio() const { return    fixedVsLiborTenorTypeRatio_ ; }
-	size_t get_floatingLegTenorLmmTenorRatio() const { return floatingVsLiborTenorTypeRatio_ ; }		
+	size_t    get_fixedLegTenorLmmTenorRatio() const;// { return    fixedVsLiborTenorTypeRatio_ ; }
+	size_t get_floatingLegTenorLmmTenorRatio() const;// { return floatingVsLiborTenorTypeRatio_ ; }		
 	
+	const std::vector<LMM::Index>& get_floatingLegPaymentIndexSchedule() const;// { return floatingLegPaymentIndexSchedule_; }
+	const std::vector<LMM::Index>& get_fixedLegPaymentIndexSchedule()    const;// { return fixedLegPaymentIndexSchedule_   ; }
 
-	const std::vector<LMM::Index>& get_floatingLegPaymentIndexSchedule() const { return floatingLegPaymentIndexSchedule_; }
-	const std::vector<LMM::Index>& get_fixedLegPaymentIndexSchedule()    const { return fixedLegPaymentIndexSchedule_   ; }
-
-	LMM::Index get_indexStart() const {return indexStart_;}
-	LMM::Index get_indexEnd()   const {return indexEnd_  ;}
+	LMM::Index get_indexStart() const ;// {return indexStart_;}
+	LMM::Index get_indexEnd()   const ;// {return indexEnd_  ;}
 
 
 public:

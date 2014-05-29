@@ -28,7 +28,7 @@ const double PI = boost::math::constants::pi<double>();
 
 //! construct the matrix from Robonato Angle
 RobonatoAngle::RobonatoAngle(size_t matrixSize, size_t rank, const Array& angles) // Angle -> BMatrix, correlMatrix
-	:matrixSize_(matrixSize), rank_(rank), angles_(angles), BMatrix_(matrixSize, rank)
+	: matrixSize_(matrixSize), rank_(rank), angles_(angles), BMatrix_(matrixSize, rank)
 {
 	if(!checkAngle(angles))
 		throw("Angles are not all in [0,PI]");
@@ -39,7 +39,7 @@ RobonatoAngle::RobonatoAngle(size_t matrixSize, size_t rank, const Array& angles
 
 //! construct the matrix from Robonato Angle
 RobonatoAngle::RobonatoAngle(const Matrix& BMatrix) // BMatrix -> Angle, correlMatrix
-	:matrixSize_(BMatrix.rows()), rank_(BMatrix.columns()), angles_((rank_-1) * matrixSize_, 0.0), BMatrix_(BMatrix)
+	: matrixSize_(BMatrix.rows()), rank_(BMatrix.columns()), angles_((rank_-1) * matrixSize_, 0.0), BMatrix_(BMatrix)
 {
 	if(matrixSize_< rank_ || rank_ <2)
 		throw ("Error matrix size not permitted.");
@@ -53,42 +53,42 @@ RobonatoAngle::RobonatoAngle(const Matrix& BMatrix) // BMatrix -> Angle, correlM
 
 //! given the originalCorrelMatrix then find the nearest approximation RobonatoAngle
 RobonatoAngle::RobonatoAngle(const Matrix& originalCorrelMatrix, size_t reducedRank)
-	:matrixSize_(originalCorrelMatrix.rows()),
-	 rank_(reducedRank), 
-	 angles_((rank_-1) * matrixSize_, 0.0), 
-	 correlMatrix_(originalCorrelMatrix) // need to change it latter to the approximated correlMatrix.
+	: matrixSize_(originalCorrelMatrix.rows())
+	, rank_(reducedRank)
+	, angles_((rank_-1) * matrixSize_, 0.0)
+	, correlMatrix_(originalCorrelMatrix) // need to change it latter to the approximated correlMatrix.
 {
-     //! PCA to find the BMatrix_
-	 bool normalizeDiagonal = true;
-	 BMatrix_ = PCA::doPCA(originalCorrelMatrix, reducedRank, normalizeDiagonal);
+	//! PCA to find the BMatrix_
+	bool normalizeDiagonal = true;
+	BMatrix_ = PCA::doPCA(originalCorrelMatrix, reducedRank, normalizeDiagonal);
 
-	 std::string f1 = "E://1.csv";
-	 std::string f2 = "E://2.csv";
-	 std::string f3 = "E://3.csv";
-	 print_details(f1);
-	 //! using PCA result -> starting point of RobonatoAngle.
-	 calculateAngleFromBMatrix(BMatrix_);
-	 print_details(f2);
+	std::string f1 = "E://1.csv";
+	std::string f2 = "E://2.csv";
+	std::string f3 = "E://3.csv";
+	print_details(f1);
+	//! using PCA result -> starting point of RobonatoAngle.
+	calculateAngleFromBMatrix(BMatrix_);
+	print_details(f2);
 
-	 //! Optimization: iterate the RobonatoAngle
-	 solveTheNearestCorrelProblem(originalCorrelMatrix);
+	//! Optimization: iterate the RobonatoAngle
+	solveTheNearestCorrelProblem(originalCorrelMatrix);
 
-	 //! update BMatrix_ & construct correlMatrix_ (!= originalCorrelMatrix)
-     calculateBMatrixFromAngle(angles_);
-	 print_details(f3);
-	 correlMatrix_ = BMatrix_*transpose(BMatrix_);
+	//! update BMatrix_ & construct correlMatrix_ (!= originalCorrelMatrix)
+	calculateBMatrixFromAngle(angles_);
+	print_details(f3);
+	correlMatrix_ = BMatrix_*transpose(BMatrix_);
 }
 
 void RobonatoAngle::solveTheNearestCorrelProblem(const Matrix& target)
 {
-	 //! test the dim of target matrix
+	//! test the dim of target matrix
 	if(target.rows()!=matrixSize_ || target.columns()!=matrixSize_ )
 		throw("target does not have proper dim.");
 
-	 //! correlMatrix_: correl matrix to approximater
-	 //! angles_: first guess
+	//! correlMatrix_: correl matrix to approximater
+	//! angles_: first guess
 
-	 //! To creat the optimization problem and then to solve it ... 
+	//! To creat the optimization problem and then to solve it ... 
 	Size maxIterations = 1000;
 	Size minStatIterations = 500;
 	Real rootEpsilon =1e-8;
@@ -96,16 +96,16 @@ void RobonatoAngle::solveTheNearestCorrelProblem(const Matrix& target)
 	Real gradientNormEpsilon =1e-5;
 
 	EndCriteria myEndCrit ( maxIterations ,
-							minStatIterations ,
-							rootEpsilon ,
-							functionEpsilon ,
-							gradientNormEpsilon );
+		minStatIterations ,
+		rootEpsilon ,
+		functionEpsilon ,
+		gradientNormEpsilon );
 	boost::function<Disposable<Matrix>(const Array&, size_t, size_t)> f = QuantLib::triangularAnglesParametrization;
 	RobonatoAngle::FrobeniusCostFunctionYY myFunc(target,
-												  RobonatoAngle::triangularAnglesParametrizationYY,// QuantLib::triangularAnglesParametrization,
-												  matrixSize_,
-												  rank_);
-		                         
+		RobonatoAngle::triangularAnglesParametrizationYY,// QuantLib::triangularAnglesParametrization,
+		matrixSize_,
+		rank_);
+
 	NoConstraint constraint ;
 	Problem myProb ( myFunc , constraint , angles_);
 	//ConjugateGradient solver ; // give L2 norm, optimization result will be quite similar to PCA!
@@ -139,24 +139,24 @@ void RobonatoAngle::solveTheNearestCorrelProblem(const Matrix& target)
 
 void RobonatoAngle::calculateBMatrixFromAngle(const Array& angles)
 {
-    // what if rank == 1?
-    //QL_REQUIRE((rank_-1) * (matrixSize_ ) == angles.size(),
-    //            "rank-1) * (matrixSize ) == angles.size()");
+	// what if rank == 1?
+	//QL_REQUIRE((rank_-1) * (matrixSize_ ) == angles.size(),
+	//            "rank-1) * (matrixSize ) == angles.size()");
 
 	assert((rank_-1) * (matrixSize_ ) == angles.size());
 
-    size_t k = 0; //angles index
-    for (size_t i=0; i<matrixSize_; ++i) {
-        Real sinProduct = 1.0;
-        for (size_t j=0; j<rank_-1; ++j) {
-            BMatrix_[i][j] = std::cos(angles[k]);
-            BMatrix_[i][j] *= sinProduct;
-            sinProduct *= std::sin(angles[k]);
-            ++k;
-        }
-        BMatrix_[i][rank_-1] = sinProduct;
-    }
- }
+	size_t k = 0; //angles index
+	for (size_t i=0; i<matrixSize_; ++i) {
+		Real sinProduct = 1.0;
+		for (size_t j=0; j<rank_-1; ++j) {
+			BMatrix_[i][j] = std::cos(angles[k]);
+			BMatrix_[i][j] *= sinProduct;
+			sinProduct *= std::sin(angles[k]);
+			++k;
+		}
+		BMatrix_[i][rank_-1] = sinProduct;
+	}
+}
 
 void RobonatoAngle::calculateAngleFromBMatrix(const Matrix& BMatrix)
 {
@@ -209,6 +209,19 @@ bool RobonatoAngle::checkAngle(const Array& angles) const
 	return true;
 }
 
+bool RobonatoAngle::isSpecialAnlge(size_t index_i, size_t rank)
+{
+	if(rank<2)
+		throw("rank too small, not permitted");
+	if(index_i ==0) 
+		return false;
+	size_t r = rank-1; 
+
+	if((index_i+1)%r==0)
+		return true;
+	else
+		return false;
+}
 
 
 
@@ -243,6 +256,89 @@ bool RobonatoAngle::checkAngle(const Array& angles) const
 //			return false;
 //	}
 //}
+
+QuantLib::Disposable<QuantLib::Matrix> RobonatoAngle::triangularAnglesParametrizationYY( const QuantLib::Array& angles,
+																						size_t matrixSize,
+																						size_t rank)
+{
+	// what if rank == 1?
+	//QL_REQUIRE((rank-1) * (matrixSize ) == angles.size(),
+	//			"rank-1) * (matrixSize ) == angles.size()");
+
+	assert((rank-1) * (matrixSize ) == angles.size());
+
+	QuantLib::Matrix BMatrix(matrixSize, rank);
+
+	size_t k = 0; //angles index
+	for (size_t i=0; i<matrixSize; ++i) {
+		double sinProduct = 1.0;
+		for (size_t j=0; j<rank-1; ++j) {
+			BMatrix[i][j] = std::cos(angles[k]);
+			BMatrix[i][j] *= sinProduct;
+			sinProduct *= std::sin(angles[k]);
+			++k;
+		}
+		BMatrix[i][rank-1] = sinProduct;
+	}
+	return BMatrix;
+}
+
+
+//Real RobonatoAngle::FrobeniusCostFunctionYY::value(const Array& x) const {
+//    Array temp = values(x);
+//    return DotProduct(temp, temp);
+//}
+//
+//
+//Disposable<Array> RobonatoAngle::FrobeniusCostFunctionYY::values(const Array& x) const {
+//    Array result((target_.rows()*(target_.columns()-1))/2);
+//    Matrix pseudoRoot = f_(x, matrixSize_, rank_);
+//    Matrix differences = pseudoRoot * transpose(pseudoRoot) - target_;
+//    Size k = 0;
+//    // then we store the elementwise differences in a vector.
+//    for (Size i=0; i<target_.rows(); ++i) {
+//        for (Size j=0; j<i; ++j){
+//            result[k] = differences[i][j];
+//            ++k;
+//        }
+//    }
+//    return result;
+//}
+
+
+//! used by Conjugate gradiant
+Real RobonatoAngle::FrobeniusCostFunctionYY::value(const Array& x) const {
+	Array temp = values(x);
+	double error = DotProduct(temp, temp);
+	std::cout << error << std::endl;
+	return error;
+}
+
+//! used by Levenberg Marquart
+Disposable<Array> RobonatoAngle::FrobeniusCostFunctionYY::values(const Array& x) const 
+{
+	//! because the matrix is symetric, only need to do half of them :) 
+	Array result((target_.rows()*(target_.columns()-1))/2);
+	Matrix pseudoRoot = f_(x, matrixSize_, rank_);
+	Matrix correl = pseudoRoot * transpose(pseudoRoot);
+	Matrix differences = correl - target_;
+	Size k = 0;
+	// then we store the elementwise differences in a vector.
+	for (Size i=0; i<target_.rows(); ++i) {
+		for (Size j=0; j<i; ++j)
+		{			
+			//double weight = (std::abs((double)i-(double)j)+1);
+			//if(i-j<20 || j-i<20)
+			//	weight = 0;
+			result[k] = std::abs(differences[i][j])/correl[i][j];//*weight*weight;
+			++k;
+		}
+	}
+	return result;
+}
+
+
+
 
 void RobonatoAngle::print_details(std::string& fileName) const
 {
@@ -279,190 +375,4 @@ void RobonatoAngle::print_details(std::string& fileName) const
 		myfile << std::endl;
 	}
 	myfile << std::endl << std::endl; 
-}
-
-
-
-//Real RobonatoAngle::FrobeniusCostFunctionYY::value(const Array& x) const {
-//    Array temp = values(x);
-//    return DotProduct(temp, temp);
-//}
-//
-//
-//Disposable<Array> RobonatoAngle::FrobeniusCostFunctionYY::values(const Array& x) const {
-//    Array result((target_.rows()*(target_.columns()-1))/2);
-//    Matrix pseudoRoot = f_(x, matrixSize_, rank_);
-//    Matrix differences = pseudoRoot * transpose(pseudoRoot) - target_;
-//    Size k = 0;
-//    // then we store the elementwise differences in a vector.
-//    for (Size i=0; i<target_.rows(); ++i) {
-//        for (Size j=0; j<i; ++j){
-//            result[k] = differences[i][j];
-//            ++k;
-//        }
-//    }
-//    return result;
-//}
-
-
-//! used by Conjugate gradiant
-Real RobonatoAngle::FrobeniusCostFunctionYY::value(const Array& x) const {
-        Array temp = values(x);
-		double error = DotProduct(temp, temp);
-		std::cout << error << std::endl;
-        return error;
-}
-
-//! used by Levenberg Marquart
-Disposable<Array> RobonatoAngle::FrobeniusCostFunctionYY::values(const Array& x) const 
-{
-	//! because the matrix is symetric, only need to do half of them :) 
-	Array result((target_.rows()*(target_.columns()-1))/2);
-    Matrix pseudoRoot = f_(x, matrixSize_, rank_);
-	Matrix correl = pseudoRoot * transpose(pseudoRoot);
-    Matrix differences = correl - target_;
-    Size k = 0;
-    // then we store the elementwise differences in a vector.
-    for (Size i=0; i<target_.rows(); ++i) {
-        for (Size j=0; j<i; ++j)
-		{			
-			//double weight = (std::abs((double)i-(double)j)+1);
-			//if(i-j<20 || j-i<20)
-			//	weight = 0;
-            result[k] = std::abs(differences[i][j])/correl[i][j];//*weight*weight;
-            ++k;
-        }
-    }
-    return result;
-}
-
-
-
-
-
-
-
-//--------------------------------------------------------------
-//
-//                          Test
-//
-//--------------------------------------------------------------
-
-void testSpecialAngles()
-{
-	size_t matrixSize = 40;
-	size_t rank = 3;
-	size_t angleSize = (rank-1) * matrixSize;
-	Array angles(angleSize,0.25);
-    RobonatoAngle ra(matrixSize, rank, angles);
-	
-	for(size_t i=0; i<angleSize; ++i)
-	{
-	    std::cout << "index [" << i << "] is special ? " << ra.isSpecialAnlge(i) << std::endl;
-	}
-}
-
-
-void test4RandRA()
-{
-	Matrix B(4,2);
-
-
-	//B[0][0] = 1.0;
-	//B[0][1] = 0.125777;
-	//B[0][2] = 0.0445788;
-	//B[0][3] = 0.0158;
-
-	//B[1][0] = 0.125777;
-	//B[1][1] = 1.0;
-	//B[1][2] = 0.354429;
-	//B[1][3] = 0.12562;
-
-	//B[2][0] = 0.0445788;
-	//B[2][1] = 0.354429;
-	//B[2][2] = 1.0;
-	//B[2][3] = 0.354429;
-
-	//B[3][0] = 0.0158;
-	//B[3][1] = 0.12562;
-	//B[3][2] = 0.354429;
-	//B[3][3] = 1.0;
-
-		//1	0.125777	0.0445788	0.0158
-	//0.125777	1	0.354429	0.12562
-	//0.0445788	0.354429	1	0.354429
-	//0.0158	0.12562	0.354429	1
-	
-	B[0][0] = 1.0;
-	B[0][1] = 0;
-
-	B[1][0] = 0.930984;
-	B[1][1] = 0.36506;
-
-	B[2][0] = 0.981581;
-	B[2][1] = -0.191045;
-
-	B[3][0] = 0.85686;
-	B[3][1] = -0.51555;
-
-
-
-	//1	0
-	//0.930984	0.36506
-	//0.981581	-0.191045
-	//0.85686	-0.51555
-
-
-	
-	RobonatoAngle rbAngle1(B);
-	std::string fileName1 = "E:\\4Rank_RobonatoAngle_1.csv";
-	rbAngle1.print_details(fileName1);
-
-	
-	RobonatoAngle rbAngle2(4, 2, rbAngle1.get_angles());
-	std::string fileName2 = "E:\\4Rank_RobonatoAngle_2.csv";
-	rbAngle2.print_details(fileName2);
-
-}
-
-void testRobonatoAngle()
-{
-	//testSpecialAngles();
-
-	test4RandRA();
-
-	//! angles -> BMatrix, correlMatrix
-	size_t matrixSize = 40;
-	size_t rank = 3;
-	size_t angleSize = (rank-1) * matrixSize;
-
-	Array angles(angleSize);
-	boost::variate_generator<boost::mt19937, boost::random::uniform_real_distribution<> >
-		generator(boost::mt19937(0.5),boost::random::uniform_real_distribution<>()); // uniform generator [0, 1]
-
-
-	double PI = boost::math::constants::pi<double>();
-
-	for(size_t i=0; i<angleSize; ++i)
-	{
-		if(RobonatoAngle::isSpecialAnlge(i,rank))
-			angles[i] = generator()*2*PI; // [0,2*PI]
-		else
-			angles[i] = generator()*PI;   // [0,PI]
-	}
-
-	RobonatoAngle rbAngle1(matrixSize, rank, angles);
-	std::string fileName1 = "E:\\Random_RobonatoAngle1.csv";
-	rbAngle1.print_details(fileName1);
-
-
-	//! BMAtrix -> angles, correlMatrix  // Test is passed when the input and output angle are the same.
-	RobonatoAngle rbAngle2(rbAngle1.get_BMatrix());
-	std::string fileName2 = "E:\\Random_RobonatoAngle2.csv";
-	rbAngle2.print_details(fileName2);
-
-	//! BMAtrix -> angles, correlMatrix  // Test is passed when the input and output angle are the same.
-	RobonatoAngle rbAngle3(matrixSize, rank, rbAngle2.get_angles());
-	std::string fileName3 = "E:\\Random_RobonatoAngle3.csv";
-	rbAngle3.print_details(fileName3);
 }

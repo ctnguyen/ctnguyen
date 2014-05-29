@@ -17,7 +17,8 @@ struct AbcdParams
 {
 	//abcdFunc(tau) = (a+ b*tau)*exp(-c*tau) + d;
 	const double& a_; const double& b_; const double& c_; const double& d_;			
-	AbcdParams(const double& a, const double& b, const double& c, const double& d):a_(a), b_(b), c_(c), d_(d){}			
+	
+	AbcdParams(const double& a, const double& b, const double& c, const double& d);
 };
 
 
@@ -37,13 +38,10 @@ public:
 	class AbcdPWConstFunction  // regroup the QuantLib defined abcdFunction.
 	{
 	public:
-		AbcdPWConstFunction(const AbcdParams& abcdParams, ConstLMMTenorStructure lmmTenorStructure)
-			: lmmTenorStructure_(lmmTenorStructure)
-			, abcdFunction_(abcdParams.a_,abcdParams.b_,abcdParams.c_,abcdParams.d_)			
-		{};
+		AbcdPWConstFunction(const AbcdParams& abcdParams, ConstLMMTenorStructure lmmTenorStructure);
 
 		//! getter
-		const QuantLib::AbcdFunction& get_AbcdFunction() const {return abcdFunction_;}
+		const QuantLib::AbcdFunction& get_AbcdFunction() const ;
 
 		//! return piecewise constant vol of   L_indexLibor in time interval: [T_{indexTime-1}, T_indexTime]
 		double operator()(size_t indexLibor, size_t indexTime) const; // operator(i,j) --return vol--> hij, i>=j			

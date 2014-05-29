@@ -4,8 +4,15 @@
 #include <LMM/helper/Printer.h>
 #include <LMM/ModelMCLMM/HGVolatilityFunction.h>
 
+AbcdParams::AbcdParams(const double& a, const double& b, const double& c, const double& d):a_(a), b_(b), c_(c), d_(d){}			
 
 
+HGVolatilityFunction::AbcdPWConstFunction::AbcdPWConstFunction(const AbcdParams& abcdParams, ConstLMMTenorStructure lmmTenorStructure)
+: lmmTenorStructure_(lmmTenorStructure)
+, abcdFunction_(abcdParams.a_,abcdParams.b_,abcdParams.c_,abcdParams.d_)			
+{}
+
+const QuantLib::AbcdFunction& HGVolatilityFunction::AbcdPWConstFunction::get_AbcdFunction() const {return abcdFunction_;}
 
 //! Inner class: h vol
 //! Attention: a very slow function.
@@ -45,16 +52,16 @@ double HGVolatilityFunction::AbcdPWConstFunction::operator()(size_t indexLibor, 
 // ----------------------------------------------------------------------------------------------------------------
 //! Constructor
 HGVolatilityFunction::HGVolatilityFunction(const      AbcdParams& abcdParams,              // h FunctionParam
-	                                       ConstLMMTenorStructure lmmTenorStructure)       // horizon = N, total number of libor: L_k, k = [0,N]
-	: VolatilityFunction(lmmTenorStructure)
-	, horizon_(lmmTenorStructure_->get_horizon())
-	, abcdPWConstFunction_(abcdParams, lmmTenorStructure)
-	 // YY: A good thing from Adrien, add artificial first row and column (not used!), to make the manipulation of index easier.
-	 // piecewise constant vol for: L_k, K = [1,N]
-	 , hPWConstFunc_(lmmTenorStructure->get_horizon()+1,lmmTenorStructure->get_horizon()+1)   
-	 , gPWConstFunc_(lmmTenorStructure->get_horizon()+1,lmmTenorStructure->get_horizon()+1)
-	 //volCumulated_(lmmTenorStructure.get_horizon()+1,lmmTenorStructure.get_horizon()+1, -9.9e10), 
-	 //ifVolisUpToDate_(false)
+										   ConstLMMTenorStructure lmmTenorStructure)       // horizon = N, total number of libor: L_k, k = [0,N]
+										   : VolatilityFunction(lmmTenorStructure)
+										   , horizon_(lmmTenorStructure_->get_horizon())
+										   , abcdPWConstFunction_(abcdParams, lmmTenorStructure)
+										   // YY: A good thing from Adrien, add artificial first row and column (not used!), to make the manipulation of index easier.
+										   // piecewise constant vol for: L_k, K = [1,N]
+										   , hPWConstFunc_(lmmTenorStructure->get_horizon()+1,lmmTenorStructure->get_horizon()+1)   
+										   , gPWConstFunc_(lmmTenorStructure->get_horizon()+1,lmmTenorStructure->get_horizon()+1)
+										   //volCumulated_(lmmTenorStructure.get_horizon()+1,lmmTenorStructure.get_horizon()+1, -9.9e10), 
+										   //ifVolisUpToDate_(false)
 {
 	construct_hPWConstFunc();
 	construct_gPWConstFunc();
@@ -132,7 +139,7 @@ double HGVolatilityFunction::operator()(size_t indexLibor, size_t indexTime) con
 size_t HGVolatilityFunction::indexSearch(const double& t) const
 {
 	size_t indexsearch;
-	 if(t<lmmTenorStructure_->get_tenorDate(0) || t>lmmTenorStructure_->get_tenorDate(horizon_))  // check condition: t in [T_0,T_N]
+	if(t<lmmTenorStructure_->get_tenorDate(0) || t>lmmTenorStructure_->get_tenorDate(horizon_))  // check condition: t in [T_0,T_N]
 		for(size_t i=0; i<horizon_; ++i)
 		{
 			const double&  t1 = lmmTenorStructure_->get_tenorDate(i);
@@ -142,14 +149,14 @@ size_t HGVolatilityFunction::indexSearch(const double& t) const
 				indexsearch = i+1;break;
 			}
 		}
-	 return indexsearch;
+		return indexsearch;
 }
 
 
 double HGVolatilityFunction::covIntegral( size_t indexTime_i,
-										  size_t indexTime_j,
-										  size_t indexLibor_i,
-										  size_t indexLibor_j) const
+										 size_t indexTime_j,
+										 size_t indexLibor_i,
+										 size_t indexLibor_j) const
 {
 	assert(indexLibor_i <= indexLibor_j);
 
@@ -170,7 +177,7 @@ void HGVolatilityFunction::print(const std::string& filename) const  // OK: test
 {
 	//std::string fileName = "HGVolatilityFunction.csv";
 	std::string path = LMM::get_output_path() + filename;
-	
+
 	std::vector<PrintElement_PTR> elements_print;
 
 	//! Abcd function for h
