@@ -25,51 +25,13 @@ void QMcGenerator::generate(std::vector<double>& out_randomSequence)
 	}
 }
 	
+void QMcGenerator::resetGeneratorToinitSeed()
+{
+	std::cout<< "LMM WARNING QMcGenerator::resetGeneratorToinitSeed() is not yet implemented"<<std::endl;
+}
+
 //double QMcGenerator::getSeed() {return qmcSeed_;}
 size_t QMcGenerator::getSequenceSize() {return sequence_size_;}
 
 //void QMcGenerator::setSeed(unsigned long seed) {qmcSeed_ = seed;}
 void QMcGenerator::setSequenceSize(size_t size) {sequence_size_ = size;}
-
-
-
-//----------------------------------------------------------------------------//
-//                                                                            //
-//                                    TESTS                                   //
-//                                                                            //
-//----------------------------------------------------------------------------//
-//
-//void testSobolLsdGeneration()
-//{
-//	std::vector<double> random_sequence;
-//	generate(random_sequence);
-//
-//	std::cout << "-- Sobol LDS generation --" << std::endl;
-//	for each (double rand_num in random_sequence)
-//		std::cout << rand_num << " ";
-//	
-//	std::cout << std::endl;
-//}
-//
-//void test2()
-//{
-//	SobolRsg sobol(20,1); //-- Create a 20 dim sobol sequence generator
-//	sobol.skipTo(4096); //-- Skip the first sequences as they are badly distributed...
-//	std::vector<double> point = sobol.nextSequence().value;
-//	std::cout << "Sobol sequence dimension: " << point.size() << std::endl;
-//	std::cout << "Sobol sequence: " << std::endl;
-//	for each (double num in point)
-//		std::cout << num << " ";
-//
-//	std::cout << std::endl << std::endl;
-//
-//	//-- Fill a vector with a normally distributed sequence, obtained from sobol generator
-//	std::vector<double> rand_seq;
-//	InverseCumulativeRsg<SobolRsg,InverseCumulativeNormal> generator(sobol);
-//	rand_seq = generator.nextSequence().value;
-//	std::cout << "Normally distributed sequence: " << std::endl;
-//	for each (double num in rand_seq)
-//		std::cout << num << " ";
-//
-//	std::cout << std::endl << std::endl;
-//}

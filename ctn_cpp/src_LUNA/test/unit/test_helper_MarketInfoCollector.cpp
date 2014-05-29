@@ -1,13 +1,6 @@
 #define BOOST_TEST_MODULE LMM_unit_test_helper_MarketInfoCollector
 #include <boost/test/included/unit_test.hpp>
 
-/*
-#include <fstream>
-#include <iostream>
-#include <sstream>
-
-*/
-
 #include <string>
 
 #include <LMM/generic_path.h>
