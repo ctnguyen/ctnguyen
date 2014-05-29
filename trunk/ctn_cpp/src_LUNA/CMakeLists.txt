@@ -19,7 +19,10 @@ project(LunaLMM)
 include(CTest)
 #enable_testing()
 
-
+## disable unecessary warnings
+if(MSVC)
+	add_definitions( "/W3 /D_CRT_SECURE_NO_WARNINGS /wd4005 /wd4996 /wd4535 /nologo" )
+endif()
 ## Boost Finding Library
 ## You have to rightly specify your BOOST_ROOT environment variable
 #find_package(Boost 1.55.0 COMPONENTS filesystem regex)

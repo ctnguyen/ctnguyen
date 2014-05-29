@@ -23,7 +23,7 @@ void test_Simpsonintegral()
 	func = xCubicFunc;
 
 	double absoluteAccuracy = 1e-4;
-	size_t maxEvaluations   = 1e3;
+	size_t maxEvaluations   = 1000;
 
 	QuantLib::SimpsonIntegral numInt(absoluteAccuracy, maxEvaluations);
 
