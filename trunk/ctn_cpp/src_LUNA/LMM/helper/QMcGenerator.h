@@ -23,12 +23,11 @@ private:
 	
 public:
 	QMcGenerator(unsigned long qmcSeed, size_t sequence_size, size_t skipRank);
-	void generate(std::vector<double>& out_randomSequence);
+
+	virtual void generate(std::vector<double>& out_randomSequence);
 	
+	virtual void resetGeneratorToinitSeed();
+
 	size_t getSequenceSize();
 	void setSequenceSize(size_t size);
 };
-
-//-- Test functions
-//void testSobolLsdGeneration();
-//void test2();
