@@ -71,7 +71,7 @@ BOOST_AUTO_TEST_CASE(test_constructors)
 	Tenor floatingLegTenorType = Tenor::_6M;
 	Tenor fixedLegTenorType    = Tenor::_1Y;	
 	
-	LMM::VanillaSwap vanillaSwap(strike, indexStart, indexEnd, floatingLegTenorType, fixedLegTenorType, simuTenor);
+	LMM::VanillaSwap vanillaSwap(strike, indexStart, indexEnd, floatingLegTenorType, fixedLegTenorType, lmmTenorStructure);
 	std::cout<< vanillaSwap <<std::endl;
 
 	LmmApproxVanillaSwaptionPricer approxSwaptionPricer(lmm);

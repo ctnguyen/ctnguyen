@@ -27,9 +27,9 @@ VanillaSwaption get_VanillaSwaption()
 	LMM::Index  indexEnd   = 18; // 28;
 	Tenor	floatingLegTenorType = Tenor::_6M;
 	Tenor	fixedLegTenorType    = Tenor::_1Y;
-	Tenor    lmmTenorStructureTenorType = Tenor::_6M;
+	ConstLMMTenorStructure simulationStructure(new LMMTenorStructure(Tenor::_6M , 15) );
 
-	LMM::VanillaSwap vanillaSwap(strike, indexStart, indexEnd, floatingLegTenorType, fixedLegTenorType, lmmTenorStructureTenorType);
+	LMM::VanillaSwap vanillaSwap(strike, indexStart, indexEnd, floatingLegTenorType, fixedLegTenorType, simulationStructure);
 
 	LMM::Index  indexMaturity = indexStart;
 	VanillaSwaption vanillaSwaption(vanillaSwap,OptionType::CALL,indexMaturity);

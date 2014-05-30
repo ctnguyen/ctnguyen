@@ -8,6 +8,7 @@
 #include <LMM/Name.h>
 #include <LMM/generic_path.h>
 #include <LMM/helper/TenorType.h>
+#include <LMM/helper/LMMTenorStructure.h>
 
 #include <LMM/instrument/VanillaSwap.h>
 
@@ -22,9 +23,9 @@ BOOST_AUTO_TEST_CASE(test_VanillaSwap_constructor)
 
 	Tenor FixedTenor = Tenor::_9M;
 	Tenor FloatTenor = Tenor::_3M;
-	Tenor LMMTenor   = Tenor::_3M;
+	ConstLMMTenorStructure simulationStructure(new LMMTenorStructure(Tenor::_3M , 10) );
 
-	LMM::VanillaSwap swap(strike, startIndex, endIndex, FloatTenor, FixedTenor, LMMTenor);
+	LMM::VanillaSwap swap(strike, startIndex, endIndex, FloatTenor, FixedTenor, simulationStructure);
 
 	std::string path_OutPut = LMM::get_output_path() + "unitTest_instrument_VanillaSwap.txt";
 	std::ofstream swapoutput;

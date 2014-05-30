@@ -8,6 +8,8 @@
 #include <LMM/generic_path.h>
 #include <LMM/helper/Printer.h>
 #include <LMM/helper/McGenerator.h>
+#include <LMM/helper/TenorType.h>
+#include <LMM/helper/LMMTenorStructure.h>
 #include <LMM/instrument/VanillaSwap.h>
 #include <LMM/ModelMCLMM/Correlation.h>
 #include <LMM/ModelMCLMM/HGVolatilityFunction.h>
@@ -29,9 +31,9 @@ LMM::VanillaSwap get_VanillaSwap()
 	LMM::Index  indexEnd   = 18; // 28;
 	Tenor	floatingLegTenorType = Tenor::_6M;
 	Tenor	fixedLegTenorType    = Tenor::_1Y;
-	Tenor    lmmTenorStructureTenorType = Tenor::_6M;
+	ConstLMMTenorStructure simulationStructure(new LMMTenorStructure(Tenor::_6M , 15) );
 
-	LMM::VanillaSwap vanillaSwap(strike, indexStart, indexEnd, floatingLegTenorType, fixedLegTenorType, lmmTenorStructureTenorType);
+	LMM::VanillaSwap vanillaSwap(strike, indexStart, indexEnd, floatingLegTenorType, fixedLegTenorType, simulationStructure);
 	return vanillaSwap;
 }
 
