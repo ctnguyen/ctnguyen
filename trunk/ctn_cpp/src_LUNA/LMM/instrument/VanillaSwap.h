@@ -11,7 +11,7 @@
 #include <boost/shared_ptr.hpp>
 
 #include <LMM/Name.h>
-#include <LMM/instrument/TenorType.h>
+#include <LMM/helper/TenorType.h>
 
 
 namespace LMM

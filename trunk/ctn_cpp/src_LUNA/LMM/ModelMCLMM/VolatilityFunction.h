@@ -3,7 +3,7 @@
 #pragma once
 
 #include <boost/shared_ptr.hpp>
-#include <LMM/ModelMCLMM/LMMTenorStructure.h>
+#include <LMM/helper/LMMTenorStructure.h>
 
 
 /*! \class VolatilityFunction

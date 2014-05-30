@@ -1,4 +1,5 @@
-#include <LMM/ModelMCLMM/LMMTenorStructure.h>
+//#include <LMM/ModelMCLMM/LMMTenorStructure.h>
+#include <LMM/helper/LMMTenorStructure.h>
 
 #include <LMM/generic_path.h>
 #include <LMM/helper/Printer.h>

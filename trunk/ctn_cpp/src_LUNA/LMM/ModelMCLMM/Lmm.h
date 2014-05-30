@@ -10,7 +10,7 @@
 #include <LMM/Name.h>
 #include <LMM/helper/RNGenerator.h>
 #include <LMM/ModelMCLMM/Dispersion.h>
-#include <LMM/ModelMCLMM/LMMTenorStructure.h>
+#include <LMM/helper/LMMTenorStructure.h>
 
 
 typedef boost::numeric::ublas::matrix<double> matrix;

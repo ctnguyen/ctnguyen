@@ -12,7 +12,7 @@
 #include <boost/shared_array.hpp>
 
 #include <LMM/Name.h>
-#include <LMM/instrument/TenorType.h>
+#include <LMM/helper/TenorType.h>
 
 
 /*! \class LMMTenorStructure used as a basis topological, timeline, timestep for simulation
