@@ -8,27 +8,27 @@ namespace LMM
 
 	//! Suppose there is a LMM Tenor structure: {T_k}_{k=0}^{N}, and forall k, T_{k+1} - T_k = liborTenor, the unity is in Month. 
 	//! a swap begins at: T_i, end at T_j.
-	VanillaSwap::VanillaSwap(double strike,
+	VanillaSwap::VanillaSwap(const double& strike,
 		LMM::Index indexStart, 
 		LMM::Index indexEnd, 
 		const Tenor& floatingLegTenorType,
 		const Tenor& fixedLegTenorType,
-		const Tenor& simulationTenorType)
+		ConstLMMTenorStructure simulationStructure)
 		: strike_(strike)
 		, indexStart_(indexStart)
 		, indexEnd_(indexEnd)
 		, floatingLegTenorType_(floatingLegTenorType)
 		, fixedLegTenorType_(fixedLegTenorType)
-		, simulationTenorType_(simulationTenorType)
-		, floatingVsLiborTenorTypeRatio_( floatingLegTenorType_.ratioTo(simulationTenorType_) )
-		, fixedVsLiborTenorTypeRatio_ ( fixedLegTenorType_.ratioTo( simulationTenorType_) )
+		, simulationStructure_(simulationStructure)
+		, floatingVsLiborTenorTypeRatio_( floatingLegTenorType_.ratioTo(simulationStructure_->get_tenorType() ) )
+		, fixedVsLiborTenorTypeRatio_ ( fixedLegTenorType_.ratioTo( simulationStructure_->get_tenorType() ) )
 	{
-		assert(floatingLegTenorType == simulationTenorType) ;  
+		assert(floatingLegTenorType == simulationStructure_->get_tenorType() ) ;  
 
 		assert( indexEnd > indexStart ); assert( indexStart >=0 );
 		assert( (indexEnd_ - indexStart_)%floatingVsLiborTenorTypeRatio_==0  );
 		assert( (indexEnd_ - indexStart_)%fixedVsLiborTenorTypeRatio_   ==0  );
-		assert( floatingLegTenorType_ == simulationTenorType_  );         // floatingTenor == lmmTenor
+		assert( floatingLegTenorType_ == simulationStructure_->get_tenorType() );         // floatingTenor == lmmTenor
 
 		size_t nbFloatLeg =  (indexEnd_ - indexStart_)/floatingVsLiborTenorTypeRatio_;
 
@@ -53,7 +53,9 @@ namespace LMM
 	
 	const Tenor& VanillaSwap::get_floatingLegTenorType()	const { return floatingLegTenorType_  ; }	
 	
-	const Tenor& VanillaSwap::get_simulationTenorType()  const { return simulationTenorType_   ; }
+	const Tenor& VanillaSwap::get_simulationTenorType()  const { return simulationStructure_->get_tenorType() ; }
+
+	ConstLMMTenorStructure VanillaSwap::get_LMMTenorStructure()  const { return simulationStructure_; }
 
 	size_t VanillaSwap::get_fixedLegTenorLmmTenorRatio() const { return    fixedVsLiborTenorTypeRatio_ ; }
 	
@@ -79,7 +81,7 @@ namespace LMM
 
 		outputstream << "floatingLegTenorType_="  << floatingLegTenorType_ << std::endl;
 		outputstream << "fixedLegTenorType_="     << fixedLegTenorType_    << std::endl;
-		outputstream << "simulationTenorType_="   << simulationTenorType_  << std::endl;
+		outputstream << "simulationTenorType_="   << simulationStructure_->get_tenorType()  << std::endl;
 
 		outputstream << "floatingPaymentIndexSchedule_{"<<floatingLegPaymentIndexSchedule_[0];
 		for(size_t i=1; i<floatingLegPaymentIndexSchedule_.size(); ++i)

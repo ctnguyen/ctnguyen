@@ -28,7 +28,7 @@
  *
  * tau_i = T_{i+1} - T_i
  */
-class LMMTenorStructure
+class LMMTenorStructure //ctntodo this class has to be singleton
 {
 public:
 

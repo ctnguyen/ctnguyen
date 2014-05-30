@@ -12,7 +12,7 @@
 
 #include <LMM/Name.h>
 #include <LMM/helper/TenorType.h>
-
+#include <LMM/helper/LMMTenorStructure.h>
 
 namespace LMM
 {
@@ -44,7 +44,7 @@ private:
 	 */
 	Tenor floatingLegTenorType_ ; // floatingLeg payment frequency = Libor's tenorType
 	Tenor fixedLegTenorType_    ; // fixedLeg payment frequency: each "1M", "3M", "6M", "1Y"
-	Tenor simulationTenorType_  ; // simulation tenor step : exmple "1M", "3M", "6M", "1Y"
+	ConstLMMTenorStructure simulationStructure_  ; // simulation informations stored in LMMTenorStructure
 
 	size_t floatingVsLiborTenorTypeRatio_; // = floatingLegTenorType_ % simulationTenorType_
 	size_t fixedVsLiborTenorTypeRatio_;    // = fixedLegTenorType_    % simulationTenorType_
@@ -54,19 +54,20 @@ private:
 
 public:
 	
-	VanillaSwap(double strike,
+	VanillaSwap(const double& strike,
 		LMM::Index  indexStart, 
 		LMM::Index  indexEnd, 
 		const Tenor& floatingLegTenorType,		
 		const Tenor& fixedLegTenorType,
-		const Tenor& lmmTenorStructureTenorType);
+		ConstLMMTenorStructure simulationStructure);
 
 	void  set_strike(const double& strike) ;
 	const double& get_strike() const       ;
 	
-	const Tenor& get_fixedLegTenorType()	const;// { return fixedLegTenorType_     ; }
-	const Tenor& get_floatingLegTenorType()	const;// { return floatingLegTenorType_  ; }	
-	const Tenor& get_simulationTenorType()  const;// { return simulationTenorType_   ; }
+	const Tenor& get_fixedLegTenorType()	       const ; // { return fixedLegTenorType_     ; }
+	const Tenor& get_floatingLegTenorType()	       const ; // { return floatingLegTenorType_  ; }	
+	const Tenor& get_simulationTenorType()         const ; // { return simulationStructure_->get_tenorType() ; }
+	ConstLMMTenorStructure get_LMMTenorStructure() const ; // { return simulationStructure_; }
 
 	//! get the euclidean quotien of legs's TenorType to simulation's TenorType
 	size_t    get_fixedLegTenorLmmTenorRatio() const;// { return    fixedVsLiborTenorTypeRatio_ ; }
