@@ -8,7 +8,7 @@
 #include <LMM/helper/DerivatibleFunction.h>
 #include <LMM/helper/StaticReplicationFormula.h>
 #include <LMM/instrument/VanillaSwap.h>
-#include <LMM/ModelMCLMM/LMMTenorStructure.h>
+#include <LMM/helper/LMMTenorStructure.h>
 #include <LMM/pricer/VanillaSwapPricer.h>
 
 

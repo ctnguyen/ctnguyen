@@ -7,7 +7,7 @@
 
 #include <LMM/Name.h>
 #include <LMM/generic_path.h>
-#include <LMM/instrument/TenorType.h>
+#include <LMM/helper/TenorType.h>
 
 #include <LMM/instrument/VanillaSwap.h>
 

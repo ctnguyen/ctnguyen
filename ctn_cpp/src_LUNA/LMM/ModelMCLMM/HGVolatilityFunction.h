@@ -8,7 +8,7 @@
 #include <ql/quantlib.hpp>
 #include <ql/termstructures/volatility/abcd.hpp>
 
-#include <LMM/ModelMCLMM/LMMTenorStructure.h>
+#include <LMM/helper/LMMTenorStructure.h>
 #include <LMM/ModelMCLMM/VolatilityFunction.h>
 
 

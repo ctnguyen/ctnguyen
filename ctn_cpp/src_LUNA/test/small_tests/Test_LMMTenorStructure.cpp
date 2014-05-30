@@ -1,7 +1,7 @@
 #define BOOST_TEST_MODULE LMM_unit_test_model
 #include <boost/test/included/unit_test.hpp>
 
-#include <LMM/ModelMCLMM/LMMTenorStructure.h>
+#include <LMM/helper/LMMTenorStructure.h>
 
 namespace LMM_unittest
 {

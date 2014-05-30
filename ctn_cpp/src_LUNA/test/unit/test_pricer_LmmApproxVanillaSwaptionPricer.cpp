@@ -10,7 +10,7 @@
 #include <LMM/helper/Printer.h>
 #include <LMM/helper/McGenerator.h>
 
-#include <LMM/instrument/TenorType.h>
+#include <LMM/helper/TenorType.h>
 #include <LMM/instrument/VanillaSwaption.h>
 #include <LMM/ModelMCLMM/Lmm.h>
 #include <LMM/ModelMCLMM/Correlation.h>

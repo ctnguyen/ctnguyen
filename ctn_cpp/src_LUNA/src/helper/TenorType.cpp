@@ -1,4 +1,5 @@
-#include <LMM/instrument/TenorType.h>
+//#include <LMM/instrument/TenorType.h>
+#include <LMM/helper/TenorType.h>
 
 template<> const char* Tenor::TYPE_0::NAME = "_Non";template<> const unsigned int Tenor::TYPE_0::NB_MONTH =  0;
 template<> const char* Tenor::TYPE_1::NAME =  "_1M";template<> const unsigned int Tenor::TYPE_1::NB_MONTH =  1;

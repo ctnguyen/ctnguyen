@@ -8,7 +8,7 @@
 
 #include <LMM/instrument/VanillaSwap.h>  // Instrument
 #include <LMM/ModelMCLMM/McLmm.h>        // Model
-#include <LMM/ModelMCLMM/LMMTenorStructure.h>
+#include <LMM/helper/LMMTenorStructure.h>
 
 
 

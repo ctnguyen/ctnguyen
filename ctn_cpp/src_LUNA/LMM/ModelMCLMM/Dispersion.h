@@ -7,7 +7,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/function.hpp>
 
-#include <LMM/ModelMCLMM/LMMTenorStructure.h>
+#include <LMM/helper/LMMTenorStructure.h>
 #include <LMM/ModelMCLMM/Correlation.h>
 #include <LMM/ModelMCLMM/VolatilityFunction.h>
 

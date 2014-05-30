@@ -3,7 +3,7 @@
 #include <cassert>
 
 #include <LMM/Name.h>
-#include <LMM/instrument/TenorType.h>
+#include <LMM/helper/TenorType.h>
 
 class Caplet
 {
