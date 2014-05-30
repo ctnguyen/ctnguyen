@@ -51,6 +51,10 @@ private:
 
 	std::vector<LMM::Index> floatingLegPaymentIndexSchedule_; // give index in LMMTenorStructure 
 	std::vector<LMM::Index> fixedLegPaymentIndexSchedule_   ;    
+	
+	// ctntodo if Yuan Li is agreed, move these membre from VanillaSwapPricer to this class
+	std::vector<double> deltaTFloatingLeg_;
+	std::vector<double> deltaTFixedLeg_   ;	
 
 public:
 	
