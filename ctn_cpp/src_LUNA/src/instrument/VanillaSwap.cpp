@@ -42,31 +42,56 @@ namespace LMM
 		{
 			fixedLegPaymentIndexSchedule_.push_back(indexStart_+(i+1)*fixedVsLiborTenorTypeRatio_);
 		}
+
+		//precalculate deltaT for fixed and float legs, moved from VanillaSwapPricer (30.05.2014)
+		assert( simulationStructure_->get_horizon()   >= this->get_indexEnd()            );  // if not cannot price this swap;
+		assert( simulationStructure_->get_tenorType() == this->get_simulationTenorType() );
+
+		//! floatingLeg
+		const std::vector<LMM::Index>& floatingLegPaymentIndexSchedule = this->get_floatingLegPaymentIndexSchedule();
+		deltaTFloatingLeg_.resize( floatingLegPaymentIndexSchedule.size() );
+		for(size_t itr = 0; itr<deltaTFloatingLeg_.size(); ++itr)
+		{
+			size_t index = floatingLegPaymentIndexSchedule[itr];
+			deltaTFloatingLeg_[itr] = simulationStructure_->get_deltaT(index-1); // T[index] - T[index-1]
+
+		}	
+
+		//! fixedLeg
+		const std::vector<LMM::Index>& fixedLegPaymentIndexSchedule    = this->get_fixedLegPaymentIndexSchedule();
+		deltaTFixedLeg_.resize(fixedLegPaymentIndexSchedule.size());
+		for(size_t itr = 0; itr<deltaTFixedLeg_.size(); ++itr)
+		{
+			size_t index = fixedLegPaymentIndexSchedule[itr];
+			double t2 = simulationStructure_->get_tenorDate(index);
+			double t1 = simulationStructure_->get_tenorDate(index - this->get_fixedLegTenorLmmTenorRatio() );
+			deltaTFixedLeg_[itr] = t2-t1;
+		}
 	}
 
 
 	void  VanillaSwap::set_strike(const double& strike) {strike_ = strike;}
-	
+
 	const double& VanillaSwap::get_strike() const {return strike_;}
 
 	const Tenor& VanillaSwap::get_fixedLegTenorType()	const { return fixedLegTenorType_     ; }
-	
+
 	const Tenor& VanillaSwap::get_floatingLegTenorType()	const { return floatingLegTenorType_  ; }	
-	
+
 	const Tenor& VanillaSwap::get_simulationTenorType()  const { return simulationStructure_->get_tenorType() ; }
 
 	ConstLMMTenorStructure VanillaSwap::get_LMMTenorStructure()  const { return simulationStructure_; }
 
 	size_t VanillaSwap::get_fixedLegTenorLmmTenorRatio() const { return    fixedVsLiborTenorTypeRatio_ ; }
-	
+
 	size_t VanillaSwap::get_floatingLegTenorLmmTenorRatio() const { return floatingVsLiborTenorTypeRatio_ ; }		
-	
+
 	const std::vector<LMM::Index>& VanillaSwap::get_floatingLegPaymentIndexSchedule() const { return floatingLegPaymentIndexSchedule_; }
-	
+
 	const std::vector<LMM::Index>& VanillaSwap::get_fixedLegPaymentIndexSchedule()    const { return fixedLegPaymentIndexSchedule_   ; }
 
 	LMM::Index VanillaSwap::get_indexStart() const {return indexStart_;}
-	
+
 	LMM::Index VanillaSwap::get_indexEnd()   const {return indexEnd_  ;}
 
 
