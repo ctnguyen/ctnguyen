@@ -42,5 +42,5 @@ size_t Tenor::ratioTo(const Tenor& other) const
 
 std::ostream& operator<<(std::ostream& os, const Tenor& tenor)
 {
-	os<<"Tenor" << tenor.name;	return os; 
+	os<<std::string("Tenor") << std::string(tenor.name);	return os;
 }
