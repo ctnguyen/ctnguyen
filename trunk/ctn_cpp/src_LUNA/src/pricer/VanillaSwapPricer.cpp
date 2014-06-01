@@ -83,8 +83,8 @@ double VanillaSwapPricer::pvFixedLeg(LMM::Index indexValuationDate,
 {
 	assert(indexValuationDate <= vanillaSwap.get_indexStart()); //YY TODO: this test too slow, esp: within MC simulation
 	assert(lmmTenorStructure_->get_horizon() >= vanillaSwap.get_indexEnd());  // if not cannot price this swap;
-
-	return vanillaSwap.get_strike()*annuity(indexValuationDate,vanillaSwap,numeraire);
+	const double calculatedAnuity = this->annuity(indexValuationDate,vanillaSwap,numeraire);
+	return vanillaSwap.get_strike()*calculatedAnuity;
 }
 
 
@@ -158,8 +158,8 @@ double VanillaSwapPricer::swapNPV_Analytical_2(const LMM::VanillaSwap& vanillaSw
 	}
 
 	//! numeraire
-	std::vector<double> numeraire(horizon+2); // determinisitc IR
-	for(size_t i=1; i<ZC.size(); ++i)
+	std::vector<double> numeraire(ZC.size() ); // determinisitc IR
+	for(size_t i=0; i<ZC.size(); ++i)
 	{
 		numeraire[i] = 1.0/ZC[i];
 	}
@@ -197,6 +197,8 @@ double VanillaSwapPricer::swapRate_Analytical(const LMM::VanillaSwap& vanillaSwa
 	assert(lmmTenorStructure_->get_horizon() >= vanillaSwap.get_indexEnd());  // if not cannot price this swap;
 	size_t horizon = lmmTenorStructure_->get_horizon();
 	
+	precalculate(vanillaSwap);
+
 	const double fixedLegdelta_T = vanillaSwap.get_fixedLegTenorType().convertToYear();
 	const double floatingLegdelta_T = vanillaSwap.get_floatingLegTenorType().convertToYear();
 	
@@ -209,8 +211,8 @@ double VanillaSwapPricer::swapRate_Analytical(const LMM::VanillaSwap& vanillaSwa
 	}
 
 	//! numeraire
-	std::vector<double> numeraire(horizon+2); // determinisitc IR
-	for(size_t i=1; i<ZC.size(); ++i)
+	std::vector<double> numeraire( ZC.size() ); // determinisitc IR
+	for(size_t i=0; i<ZC.size(); ++i)
 	{
 		numeraire[i] = 1.0/ZC[i];
 	}
