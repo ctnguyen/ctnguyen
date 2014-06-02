@@ -33,6 +33,31 @@ const matrix& Tensor::operator[](size_t indexT) const
 	return tensor_[indexT];
 }
 
+void Tensor::write_to_stream(std::ostream& outputstream)const
+{
+	const unsigned int nbMatrix = tensor_.size();
+	for(unsigned int iM=0;iM<nbMatrix;++iM)
+	{
+		const unsigned int nbLine = tensor_[iM].size1();
+		const unsigned int nbCol  = tensor_[iM].size2();
+		outputstream <<"Tensor("<<iM<<"): [";
+		for(unsigned int i=0;i<nbLine;++i)
+		{
+			outputstream<<tensor_[iM](i,0) ;
+			for(unsigned int j=1;j<nbCol;++j)
+			{
+				outputstream<<";"<<tensor_[iM](i,j);
+			}
+			outputstream<<"] [";		
+		}	
+		outputstream<<std::endl;
+	}
+}
+
+std::ostream& operator<<(std::ostream& os, const Tensor& m_tensor)
+{
+	m_tensor.write_to_stream(os); return os;
+}
 //----------  TENSOR  --------------
 
 
@@ -126,4 +151,17 @@ const double& Lmm::get_cumulatedcovarianceTensor(size_t indexTime, size_t indexL
 {
 	assert(indexTime <= indexLibor_i && indexTime <= indexLibor_j);
 	return cumulatedCovarianceTensor_(indexTime, indexLibor_i, indexLibor_j);
+}
+
+
+void Lmm::write_to_stream(std::ostream& outputstream)const
+{
+	outputstream<<"cumulatedCovarianceTensor_"<<std::endl;
+	cumulatedCovarianceTensor_.write_to_stream(outputstream);
+
+}
+
+std::ostream& operator<<(std::ostream& os, const Lmm& lmm)
+{
+	lmm.write_to_stream(os); return os;
 }

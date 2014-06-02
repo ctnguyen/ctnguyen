@@ -26,7 +26,7 @@ BOOST_AUTO_TEST_CASE(test_constructors)
 {
 	//! LMMTenorStructure
 	Tenor simuTenor = Tenor::_6M;
-	size_t nbYear = 15;
+	size_t nbYear = 10;
 	ConstLMMTenorStructure lmmTenorStructure(new LMMTenorStructure(simuTenor, nbYear));
 	lmmTenorStructure->print("test_pricer_LMMApproxVanillaSwaptionPricer_SimuTenor.csv");
 
@@ -42,7 +42,7 @@ BOOST_AUTO_TEST_CASE(test_constructors)
 	hgVolatilityFunction->print("test_pricer_LMMApproxVanillaSwaptionPricer_Volatility.csv");
 
 	//! Correlation 
-	size_t nbFactor       = 3; // need to test nbFactor  = 3, and nbFactor = 
+	size_t nbFactor       = 15; // need to test nbFactor  = 3, and nbFactor = 
 	size_t correlFullRank = lmmTenorStructure->get_horizon()+1;
 	size_t correlReducedRank = nbFactor;
 	CorrelationReductionTyype::CorrelationReductionTyype correlReductionType = CorrelationReductionTyype::PCA;
@@ -63,6 +63,7 @@ BOOST_AUTO_TEST_CASE(test_constructors)
 	std::vector<double> liborsInitValue(lmmTenorStructure->get_horizon()+1, fwdRate);
 
 	Lmm_PTR lmm(new Lmm(dispersion, shifts, liborsInitValue) );
+	//std::cout<<*lmm<<std::endl<<std::endl<<std::endl;
 	
 	// create Vanilla Swap
 	double strike = 0.04;
