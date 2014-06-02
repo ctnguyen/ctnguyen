@@ -5,7 +5,6 @@
 #include <boost/numeric/ublas/triangular.hpp>  // Triangular matrix
 #include <boost/numeric/ublas/io.hpp>
 
-#include <ql/quantlib.hpp>
 #include <ql/termstructures/volatility/abcd.hpp>
 
 #include <LMM/helper/LMMTenorStructure.h>

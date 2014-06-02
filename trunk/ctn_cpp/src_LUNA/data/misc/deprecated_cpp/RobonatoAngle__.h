@@ -1,7 +1,6 @@
 //#pragma once
 //
 ////! YY shit should not include so much file in .h, should not use namespace QuantLib in .h !!!! 
-//#include <ql/quantlib.hpp>
 //#include <ql/math/matrixutilities/tapcorrelations.hpp>
 //#include <boost/random/uniform_real_distribution.hpp>
 //#include <ql/math/matrixutilities/pseudosqrt.hpp>
