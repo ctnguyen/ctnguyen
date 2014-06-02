@@ -2,6 +2,7 @@
 #define LMM_HELPER_MARKETINFOHANDLER_H
 #pragma once
 
+#include <stdlib.h>
 #include <vector>
 
 typedef std::vector<std::vector<double> > matrix_;

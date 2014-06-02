@@ -15,7 +15,7 @@
 #include <LMM/ModelMCLMM/HGVolatilityFunction.h>
 #include <LMM/ModelMCLMM/McTerminalLmm.h>
 #include <LMM/ModelMCLMM/McSpotLmm.h>
-#include <LMM/pricer/MCLmmVanillaSwapPricer.h>
+#include <LMM/pricer/McLmmVanillaSwapPricer.h>
 
 
 BOOST_AUTO_TEST_SUITE(lmm_test_swap)

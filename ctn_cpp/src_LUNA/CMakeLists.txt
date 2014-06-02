@@ -23,6 +23,11 @@ include(CTest)
 if(MSVC)
 	add_definitions( "/W3 /D_CRT_SECURE_NO_WARNINGS /wd4996 /wd4535 /nologo" )
 endif()
+
+## force using of C++11X on Unix machine
+if(UNIX)
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11") 
+endif()
 ## Boost Finding Library
 ## You have to rightly specify your BOOST_ROOT environment variable
 #find_package(Boost 1.55.0 COMPONENTS filesystem regex)

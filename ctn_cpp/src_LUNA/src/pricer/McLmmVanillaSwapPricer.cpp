@@ -2,7 +2,7 @@
 #include <iostream>
 #include <cmath>
 
-#include <LMM/pricer/MCLmmVanillaSwapPricer.h>
+#include <LMM/pricer/McLmmVanillaSwapPricer.h>
 #include <LMM/helper/LMMTenorStructure.h>
 
 double MCLmmVanillaSwapPricer::swapRate(const LMM::VanillaSwap& vanillaSwap, size_t nbSimulation) const
