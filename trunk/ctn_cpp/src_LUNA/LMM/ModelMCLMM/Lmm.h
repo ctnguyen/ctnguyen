@@ -40,9 +40,14 @@ public:
 	
 	const matrix& operator[](size_t indexT) const ;		
 
+	void write_to_stream(std::ostream& outputstream)const ;
+
 private:
     std::vector<matrix> tensor_; // tensor_(k,i,j): L_i, L_j 's integral of vol in [T_{k-1},T_k], k=[1,...,N], i,j=[k,...,N]
 };
+std::ostream& operator<<(std::ostream& os, const Tensor& swap);
+
+
 
 class Lmm 
 {
@@ -70,6 +75,8 @@ public:
 	const double& get_covarianceTensor(size_t indexTime, size_t indexLibor_i, size_t indexLibor_j)          const ; 
 	const double& get_cumulatedcovarianceTensor(size_t indexTime, size_t indexLibor_i, size_t indexLibor_j) const ;
 
+	virtual void write_to_stream(std::ostream& outputstream)const ;
+
 protected:
 	Dispersion			dispersion_               ;
 	std::vector<double> shifts_                   ;                 
@@ -79,3 +86,5 @@ protected:
 };
 
 typedef boost::shared_ptr<Lmm> Lmm_PTR;
+
+std::ostream& operator<<(std::ostream& os, const Lmm& lmm);

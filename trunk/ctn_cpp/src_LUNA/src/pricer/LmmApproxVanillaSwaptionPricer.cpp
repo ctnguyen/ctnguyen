@@ -52,7 +52,7 @@ double LmmApproxVanillaSwaptionPricer::volBlack(const VanillaSwaption& vanillaSw
 		size_t floatingLegPaymentIndex = floatingLegPaymentIndexSchedule[itr]; // = i+1
 		//size_t indexLibor = floatingLegPaymentIndex-1; // =i, because : floatingTenor = lmmTenor  
 		//size_t indexT     = indexLibor;                                        // = i
-		double delta_T    = deltaTFloatingLeg_[itr];  // lmmTenorStructure.get_deltaT()[indexLibor]
+		const double& delta_T    = deltaTFloatingLeg_[itr];  // lmmTenorStructure.get_deltaT()[indexLibor]
 		omega[itr] = delta_T*ZC_[floatingLegPaymentIndex] / annuityValue;
 	}
 
@@ -66,14 +66,14 @@ double LmmApproxVanillaSwaptionPricer::volBlack(const VanillaSwaption& vanillaSw
 		//size_t indexT_i = indexLibor_i;
 		for(size_t j=0; j<floatingLegPaymentIndexSchedule.size(); ++j)
 		{
-			size_t floatingLegPaymentIndex_j = floatingLegPaymentIndexSchedule[j]; // = i+1
+			size_t floatingLegPaymentIndex_j = floatingLegPaymentIndexSchedule[j]; // = j+1
 			size_t indexLibor_j = floatingLegPaymentIndex_j - 1;
 			//size_t indexT_j     = indexLibor_j;
 
 			// tensor_(k,i,j): L_i, L_j 's integral of vol in [T_{k-1},T_k]
 
-			volSquare += omega[i]*omega[j]*liborsInitValue[indexLibor_i]*liborsInitValue[indexLibor_j]
-			             *lmm_->get_cumulatedcovarianceTensor(swaptionIndexMaturity, indexLibor_i, indexLibor_j);
+			const double& cumulated_covariance_tensor = lmm_->get_cumulatedcovarianceTensor(swaptionIndexMaturity, indexLibor_i, indexLibor_j);
+			volSquare += omega[i]*omega[j]*liborsInitValue[indexLibor_i]*liborsInitValue[indexLibor_j]*cumulated_covariance_tensor;
 		}
 	}
 
