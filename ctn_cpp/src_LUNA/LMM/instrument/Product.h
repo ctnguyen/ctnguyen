@@ -2,9 +2,8 @@
 
 //#include <boost/numeric/ublas/vector.hpp>
 //#include <boost/numeric/ublas/matrix.hpp>
-//#include <ql/quantlib.hpp>
+
 //#include <ql/types.hpp>
-//#include <ql/quantlib.hpp>
 //
 //using namespace boost;
 //using namespace boost::numeric::ublas;

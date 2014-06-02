@@ -7,7 +7,6 @@
 
 #include <boost/numeric/ublas/matrix_proxy.hpp>
 
-#include <ql/quantlib.hpp>
 #include <ql/termstructures/volatility/abcd.hpp>
 
 #include <LMM/helper/TypeConverter.h>

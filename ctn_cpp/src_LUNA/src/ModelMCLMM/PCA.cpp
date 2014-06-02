@@ -3,7 +3,6 @@
 
 #include <ql/math/matrixutilities/symmetricschurdecomposition.hpp>
 #include <ql/math/array.hpp>
-//#include <ql/quantlib.hpp>
 
 #include <LMM/ModelMCLMM/PCA.h>
 

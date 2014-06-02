@@ -2,10 +2,7 @@
 
 //YY sadly this is already implemented in: <ql/math/matrixutilities/pseudosqrt.hpp>
 
-#include <ql/quantlib.hpp>
 #include <ql/math/matrix.hpp>
-//#include <ql/auto_link.hpp> // ?? why need this one ?
-
 
 using namespace QuantLib;
 

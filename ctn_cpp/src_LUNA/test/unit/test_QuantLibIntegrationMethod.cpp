@@ -6,7 +6,6 @@
 
 #include <boost/function.hpp>
 
-#include <ql/quantlib.hpp>
 #include <ql/math/integrals/simpsonintegral.hpp>
 
 BOOST_AUTO_TEST_SUITE(lmm_test_integration)

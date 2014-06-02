@@ -14,7 +14,6 @@
 
 #include <boost/function.hpp>
 
-#include <ql/quantlib.hpp>
 #include <ql/math/optimization/costfunction.hpp>
 #include <ql/math/array.hpp>
 #include <ql/math/matrix.hpp>

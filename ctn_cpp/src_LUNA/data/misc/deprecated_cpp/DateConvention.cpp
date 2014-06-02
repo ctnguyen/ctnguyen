@@ -1,5 +1,4 @@
-#include <ql/quantlib.hpp>
-//#include <ql/auto_link.hpp>
+
 #include <iostream>
 
 using namespace QuantLib;
