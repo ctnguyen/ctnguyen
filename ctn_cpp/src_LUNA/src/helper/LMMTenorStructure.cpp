@@ -38,8 +38,8 @@ const Tenor& LMMTenorStructure::get_tenorType() const {return tenorType_;}
 
 LMM::Index LMMTenorStructure::get_horizon() const { return horizon_; }
 
-const double&              LMMTenorStructure::get_deltaT(size_t index) const {return tenorDeltaT_[index];}
-const std::vector<double>& LMMTenorStructure::get_deltaT(            ) const {	return tenorDeltaT_;      }
+const double&              LMMTenorStructure::get_deltaT(size_t index) const { return tenorDeltaT_[index];}
+const std::vector<double>& LMMTenorStructure::get_deltaT(            ) const {return tenorDeltaT_;        }
 
 const double&              LMMTenorStructure::get_tenorDate(size_t index) const { return tenorDates_[index]; }
 const std::vector<double>& LMMTenorStructure::get_tenorDate(            ) const { return tenorDates_;        }
@@ -48,34 +48,26 @@ const std::vector<double>& LMMTenorStructure::get_tenorDate(            ) const 
 //! equal operator: when modify the class, don't forget to adjust == operator
 bool LMMTenorStructure::operator == (const LMMTenorStructure& lmmTenorStructure) const
 {
-	if(tenorType_ != lmmTenorStructure.tenorType_)
-		return false;
+	if(horizon_ != lmmTenorStructure.get_horizon())	return false;
 
-	if(horizon_ != lmmTenorStructure.get_horizon())
-		return false;
+	if(tenorType_ != lmmTenorStructure.tenorType_) return false;
 
-	if(vectorEqual(tenorDates_,lmmTenorStructure.get_tenorDate(), 1.0e-16))
-		return false;
+	if(!vectorEqual(tenorDates_,lmmTenorStructure.get_tenorDate(), 1.0e-16)) return false;
 
-	if(vectorEqual(tenorDeltaT_,lmmTenorStructure.get_deltaT(), 1.0e-16))
-		return false;
+	if(!vectorEqual(tenorDeltaT_,lmmTenorStructure.get_deltaT(), 1.0e-16)) return false;
 
 	return true;
 }
 
 bool LMMTenorStructure::operator!=(const LMMTenorStructure& lmmTenorStructure) const
 {
-	if(tenorType_ != lmmTenorStructure.tenorType_)
-		return true;
+	if(horizon_ != lmmTenorStructure.get_horizon())	return true;
 
-	if(horizon_ != lmmTenorStructure.get_horizon())
-		return true;
+	if(tenorType_ != lmmTenorStructure.tenorType_) return true;
 
-	if(vectorEqual(tenorDates_,lmmTenorStructure.get_tenorDate(), 1.0e-16))
-		return true;
+	if(!vectorEqual(tenorDates_,lmmTenorStructure.get_tenorDate(), 1.0e-16)) return true;
 
-	if(vectorEqual(tenorDeltaT_,lmmTenorStructure.get_deltaT(), 1.0e-16))
-		return true;
+	if(!vectorEqual(tenorDeltaT_,lmmTenorStructure.get_deltaT(), 1.0e-16)) return true;
 
 	return false;
 }

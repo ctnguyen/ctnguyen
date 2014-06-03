@@ -184,7 +184,7 @@ void SwaptionApproxCostFunction::getMarketInfo(string fileName)
 	matrix_ result;
 
 	ifstream inputFile;
-	inputFile.open(fileName);
+	inputFile.open(fileName.c_str() );
 
 	inputFile.close();
 }
