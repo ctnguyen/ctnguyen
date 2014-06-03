@@ -26,38 +26,14 @@ namespace LMM
  *
  * S and E are start Index and end Index in the simulation base
  * 
- * (endIndex-startIndex)  has to be multiple of (fixedTenor%st) and (floatTenor%st)
+ * (endIndex-startIndex)  has to be multiple of (fixedTenor%st) and (floatTenor%st) where st is the s_imulation t_enor
  *
  * !!! For instance, floatTenor=simulationTenor
  */
 class VanillaSwap
 {
-private:
-
-	double strike_;
-
-	LMM::Index indexStart_; // S      
-	LMM::Index indexEnd_  ; // E       
-		
-	/*! The TenorType of Simulation (LMMTenorStructure) has to be a common divisor
-	 *  of TenorType for floatingLeg and fixedLeg
-	 */
-	Tenor floatingLegTenorType_ ; // floatingLeg payment frequency = Libor's tenorType
-	Tenor fixedLegTenorType_    ; // fixedLeg payment frequency: each "1M", "3M", "6M", "1Y"
-	ConstLMMTenorStructure simulationStructure_  ; // simulation informations stored in LMMTenorStructure
-
-	size_t floatingVsLiborTenorTypeRatio_; // = floatingLegTenorType_ % simulationTenorType_
-	size_t fixedVsLiborTenorTypeRatio_;    // = fixedLegTenorType_    % simulationTenorType_
-
-	std::vector<LMM::Index> floatingLegPaymentIndexSchedule_; // give index in LMMTenorStructure 
-	std::vector<LMM::Index> fixedLegPaymentIndexSchedule_   ;    
-	
-	// ctntodo if Yuan Li is agreed, move these membre from VanillaSwapPricer to this class
-	std::vector<double> deltaTFloatingLeg_;
-	std::vector<double> deltaTFixedLeg_   ;	
-
 public:
-	
+
 	VanillaSwap(const double& strike,
 		LMM::Index  indexStart, 
 		LMM::Index  indexEnd, 
@@ -80,12 +56,36 @@ public:
 	const std::vector<LMM::Index>& get_floatingLegPaymentIndexSchedule() const;// { return floatingLegPaymentIndexSchedule_; }
 	const std::vector<LMM::Index>& get_fixedLegPaymentIndexSchedule()    const;// { return fixedLegPaymentIndexSchedule_   ; }
 
+	const std::vector<double>& get_DeltaTFloatLeg() const ;//{ return deltaTFloatingLeg_ ; }
+	const std::vector<double>& get_DeltaTFixedLeg() const ;//{ return deltaTFixedLeg_    ; }
+
 	LMM::Index get_indexStart() const ;// {return indexStart_;}
 	LMM::Index get_indexEnd()   const ;// {return indexEnd_  ;}
 
+private:
+
+	double strike_;
+
+	LMM::Index indexStart_; // S      
+	LMM::Index indexEnd_  ; // E       
+		
+	/*! The TenorType of Simulation (LMMTenorStructure) has to be a common divisor
+	 *  of TenorType for floatingLeg and fixedLeg
+	 */
+	Tenor floatingLegTenorType_ ; // floatingLeg payment frequency = Libor's tenorType
+	Tenor fixedLegTenorType_    ; // fixedLeg payment frequency: each "1M", "3M", "6M", "1Y"
+	ConstLMMTenorStructure simulationStructure_  ; // simulation informations stored in LMMTenorStructure
+
+	size_t floatingVsLiborTenorTypeRatio_; // = floatingLegTenorType_ % simulationTenorType_
+	size_t fixedVsLiborTenorTypeRatio_;    // = fixedLegTenorType_    % simulationTenorType_
+
+	std::vector<LMM::Index> floatingLegPaymentIndexSchedule_; // give index in LMMTenorStructure 
+	std::vector<LMM::Index> fixedLegPaymentIndexSchedule_   ;    
+	
+	std::vector<double> deltaTFloatingLeg_;
+	std::vector<double> deltaTFixedLeg_   ;	
 
 public:
-
 	virtual void write_to_stream(std::ostream& outputstream)const ;
 };
 typedef boost::shared_ptr<VanillaSwap> VanillaSwap_PTR;
