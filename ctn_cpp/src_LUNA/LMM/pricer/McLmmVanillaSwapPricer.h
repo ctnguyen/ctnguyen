@@ -26,8 +26,6 @@ public:
 	void resetGeneratorToinitSeed(){mcLmm_->get_RNGenerator()->resetGeneratorToinitSeed();}
 
 protected: 
-	//! pre-calculation
-	//void precalculate(const LMM::VanillaSwap& LMM::VanillaSwap) const;
 
 	//! one simulation
 	double pvFloatingLeg(LMM::Index indexValuationDate,
