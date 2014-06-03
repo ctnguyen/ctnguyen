@@ -7,15 +7,27 @@
 
 #include <LMM/pricer/LmmApproxVanillaSwaptionPricer.h>
 
-void LmmApproxVanillaSwaptionPricer::calculateZC()
+LmmApproxVanillaSwaptionPricer::LmmApproxVanillaSwaptionPricer(const Lmm_PTR& lmmModel)
+: VanillaSwapPricer(lmmModel->get_LMMTenorStructure() )
+, lmm_(lmmModel)
+, ZC_(lmm_->get_horizon()+2)
+, numeraire_(lmm_->get_horizon()+2)
+{
+	assert(lmm_->get_LMMTenorStructure()->get_tenorDate()[0] == 0.0);
+	calculateNumeraireAndZC();
+}
+
+
+void LmmApproxVanillaSwaptionPricer::calculateNumeraireAndZC()
 {
 	const std::vector<double>& deltaT = lmm_->get_LMMTenorStructure()->get_deltaT();
 	const std::vector<double>& liborsInitValue = lmm_->get_liborsInitValue();
-	ZC_[0] = 1.0;
+	ZC_[0] = 1.0;numeraire_[0]=1.0;
 	for(size_t i=1; i<ZC_.size(); ++i)
 	{
 		size_t indexLibor = i-1;
 		ZC_[i] = ZC_[i-1]/(1+deltaT[indexLibor]*liborsInitValue[indexLibor]);
+		numeraire_[i] = 1/ZC_[i];
 	}
 }
 
@@ -28,18 +40,14 @@ double LmmApproxVanillaSwaptionPricer::volBlack(const VanillaSwaption& vanillaSw
 {
 	const LMM::VanillaSwap& vanillaSwap = vanillaSwaption.getUnderlyingSwap();
 
-	assert(horizon_ >= vanillaSwap.get_indexEnd()); //! if not cannot price it.
+	assert(lmm_->get_horizon() >= vanillaSwap.get_indexEnd()); //! if not cannot price it.
 	//! YY TODO: implement the == operator and active this test!
 	//assert(lmm_->get_LMMTenorStructure()->get_tenorType() == vanillaSwaption.getUnderlyingSwap().get_simulationTenorType());
-		                                                                                  
+
 	//! Annuity at time 0
 	LMM::Index indexValuationDate = 0;
-	std::vector<double> numeraire(ZC_.size());
-	for(size_t i=0; i<numeraire.size(); ++i)
-	{
-		numeraire[i] = 1.0/ZC_[i];
-	}
-	double annuityValue = annuity(indexValuationDate, vanillaSwap, numeraire);
+	
+	double annuityValue = annuity(indexValuationDate, vanillaSwap, numeraire_);
 
 
 	//! Omega Vector
