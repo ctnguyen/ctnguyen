@@ -18,25 +18,20 @@ private:
     Lmm_PTR lmm_;
 
 	//! Working place: pre-calculation: calculate much more things but who cares :) 
-	size_t horizon_;
-	std::vector<double> ZC_;      // ZC_[i] = P(T_0, T_i), so ZC_[0] = 1.0
+	std::vector<double> ZC_;             // ZC_[i] = P(T_0, T_i), so ZC_[0] = 1.0
+	std::vector<double> numeraire_;      // numeraire_[i] = 1/ZC_[i]
+
 	//std::vector<double> omega0_;  // omega_[i] = deltaT_floating[i] P(T_0,T_{i+1}) / annuity
 
 public:
 	//! constructor  
-	LmmApproxVanillaSwaptionPricer(const Lmm_PTR& lmmModel)
-		:VanillaSwapPricer(lmmModel->get_LMMTenorStructure()),
-		 lmm_(lmmModel),
-		 horizon_(lmm_->get_horizon()),
-		 ZC_(horizon_+2)
-	{
-		assert(lmm_->get_LMMTenorStructure()->get_tenorDate()[0] == 0.0);
-		calculateZC();
-	}
+	LmmApproxVanillaSwaptionPricer(const Lmm_PTR& lmmModel);
 
 	double volBlack(const VanillaSwaption& vanillaSwaption, const std::vector<double>& liborsInitValue) const;
 private:
-	void   calculateZC();
+	
+	void   calculateNumeraireAndZC();
+	
 	double calculateOmega(const VanillaSwaption& vanillaSwaption);
 	
 	//double annuity0(const VanillaSwap& vanillaSwap)const;
