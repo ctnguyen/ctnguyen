@@ -4,20 +4,17 @@
 #include <LMM/instrument/VanillaSwaption.h>
 
 
-VanillaSwaption::VanillaSwaption(const LMM::VanillaSwap& vanillaSwap,
-								 OptionType::OptionType vanillaSwaptionType,
-								 LMM::Index indexMaturity)
-								 : vanillaSwap_(vanillaSwap)
-								 , vanillaSwaptionType_(vanillaSwaptionType)
-								 , indexMaturity_(indexMaturity)
+VanillaSwaption::VanillaSwaption(const LMM::VanillaSwap& vanillaSwap, OptionType::OptionType vanillaSwaptionType)
+: vanillaSwap_(vanillaSwap)
+, vanillaSwaptionType_(vanillaSwaptionType)
 {
-	assert(indexMaturity == vanillaSwap_.get_indexStart());
+	
 }
 
 
 const LMM::VanillaSwap& VanillaSwaption::getUnderlyingSwap() const { return vanillaSwap_;}
 
-LMM::Index VanillaSwaption::get_indexMaturity() const {return indexMaturity_;}
+LMM::Index VanillaSwaption::get_indexMaturity() const {return vanillaSwap_.get_indexStart();}
 
 
 double VanillaSwaption::payoff(const double& pvVloatingLeg, const double& pvFixedLeg) const

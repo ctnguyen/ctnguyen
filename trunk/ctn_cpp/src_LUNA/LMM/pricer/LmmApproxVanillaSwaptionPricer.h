@@ -4,6 +4,8 @@
 
 #include <cassert>
 
+#include <boost/shared_ptr.hpp>
+
 #include <LMM/numeric/NumericalMethods.h>
 #include <LMM/instrument/VanillaSwaption.h>
 #include <LMM/ModelMCLMM/Lmm.h>
@@ -16,6 +18,7 @@ class LmmApproxVanillaSwaptionPricer : public VanillaSwapPricer // to use the pr
 {
 private:
     Lmm_PTR lmm_;
+	VanillaSwaption_PTR vanillaswaption_;
 
 	//! Working place: pre-calculation: calculate much more things but who cares :) 
 	std::vector<double> ZC_;             // ZC_[i] = P(T_0, T_i), so ZC_[0] = 1.0
@@ -25,9 +28,10 @@ private:
 
 public:
 	//! constructor  
-	LmmApproxVanillaSwaptionPricer(const Lmm_PTR& lmmModel);
+	LmmApproxVanillaSwaptionPricer(const Lmm_PTR& lmmModel, const VanillaSwaption_PTR& swaption);
 
-	double volBlack(const VanillaSwaption& vanillaSwaption, const std::vector<double>& liborsInitValue) const;
+	double volBlack() const;
+
 private:
 	
 	void   calculateNumeraireAndZC();

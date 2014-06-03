@@ -7,9 +7,10 @@
 
 #include <LMM/pricer/LmmApproxVanillaSwaptionPricer.h>
 
-LmmApproxVanillaSwaptionPricer::LmmApproxVanillaSwaptionPricer(const Lmm_PTR& lmmModel)
+LmmApproxVanillaSwaptionPricer::LmmApproxVanillaSwaptionPricer(const Lmm_PTR& lmmModel, const VanillaSwaption_PTR& swaption)
 : VanillaSwapPricer(lmmModel->get_LMMTenorStructure() )
 , lmm_(lmmModel)
+, vanillaswaption_(swaption)
 , ZC_(lmm_->get_horizon()+2)
 , numeraire_(lmm_->get_horizon()+2)
 {
@@ -35,10 +36,9 @@ void LmmApproxVanillaSwaptionPricer::calculateNumeraireAndZC()
 
 
 
-double LmmApproxVanillaSwaptionPricer::volBlack(const VanillaSwaption& vanillaSwaption,
-												const std::vector<double>& liborsInitValue) const
+double LmmApproxVanillaSwaptionPricer::volBlack() const
 {
-	const LMM::VanillaSwap& vanillaSwap = vanillaSwaption.getUnderlyingSwap();
+	const LMM::VanillaSwap& vanillaSwap = vanillaswaption_->getUnderlyingSwap();
 
 	assert(lmm_->get_horizon() >= vanillaSwap.get_indexEnd()); //! if not cannot price it.
 	//! YY TODO: implement the == operator and active this test!
@@ -48,8 +48,7 @@ double LmmApproxVanillaSwaptionPricer::volBlack(const VanillaSwaption& vanillaSw
 	LMM::Index indexValuationDate = 0;
 	
 	double annuityValue = annuity(indexValuationDate, vanillaSwap, numeraire_);
-
-
+	
 	//! Omega Vector
 	const std::vector<LMM::Index>& floatingLegPaymentIndexSchedule = vanillaSwap.get_floatingLegPaymentIndexSchedule();
 	std::vector<double> omega(floatingLegPaymentIndexSchedule.size());
@@ -65,7 +64,8 @@ double LmmApproxVanillaSwaptionPricer::volBlack(const VanillaSwaption& vanillaSw
 	}
 
 	//! Robonato Formula: YY TODO: can be simplified: use the symmetric ! 
-	LMM::Index swaptionIndexMaturity = vanillaSwaption.get_indexMaturity();
+	LMM::Index swaptionIndexMaturity = vanillaswaption_->get_indexMaturity();
+	const std::vector<double>& liborsInitValue = lmm_->get_liborsInitValue();
 	double volSquare = 0.0;
 	for(size_t i=0; i<floatingLegPaymentIndexSchedule.size(); ++i)
 	{

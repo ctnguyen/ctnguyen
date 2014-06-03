@@ -32,7 +32,7 @@ VanillaSwaption get_VanillaSwaption()
 	LMM::VanillaSwap vanillaSwap(strike, indexStart, indexEnd, floatingLegTenorType, fixedLegTenorType, simulationStructure);
 
 	LMM::Index  indexMaturity = indexStart;
-	VanillaSwaption vanillaSwaption(vanillaSwap,OptionType::CALL,indexMaturity);
+	VanillaSwaption vanillaSwaption(vanillaSwap,OptionType::CALL);
 	return vanillaSwaption;
 }
 //

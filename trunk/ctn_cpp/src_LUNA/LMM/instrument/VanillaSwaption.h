@@ -7,20 +7,20 @@
 #include <LMM/Name.h>
 #include <LMM/instrument/VanillaSwap.h>
 
-
+/*! ctn todo VanillaSwaption should be an inherited of VanillaSwap
+ *
+ **/
 class VanillaSwaption
 {
 private:
 	LMM::VanillaSwap vanillaSwap_;              // The underlying swap, indexStart is the payement date.
 	OptionType::OptionType vanillaSwaptionType_;
-	LMM::Index indexMaturity_;
+	
 public:
 
-	VanillaSwaption(const LMM::VanillaSwap& vanillaSwap,
-					OptionType::OptionType vanillaSwaptionType,
-					LMM::Index indexMaturity);
+	VanillaSwaption(const LMM::VanillaSwap& vanillaSwap , OptionType::OptionType vanillaSwaptionType);
 
-	LMM::Index              get_indexMaturity() const ; //{return indexMaturity_;}
+	LMM::Index              get_indexMaturity() const ; //{return vanillaSwap_.get_indexStart();}
 	
 	const LMM::VanillaSwap& getUnderlyingSwap() const ; //{ return vanillaSwap_;}
 		
