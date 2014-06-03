@@ -14,7 +14,7 @@
 Calibration::Calibration()
 {}
 
-Array Calibration::Calibrate(ofstream& outputFile, SwaptionCostFunction& func, const Array& startValues)
+Array Calibration::Calibrate(ofstream& outputFile, SwaptionApproxCostFunction& func, const Array& startValues)
 {
 
 	std::cout << "Start calibration............" << std::endl << std::endl;

@@ -1,7 +1,7 @@
 #include <LMM/calibration/SwaptionApproxCostFunction.h>
 #include <LMM/numeric/NumericalMethods.h>
 
-SwaptionCostFunction::SwaptionCostFunction(const matrix_& swaptionMatrix,
+SwaptionApproxCostFunction::SwaptionApproxCostFunction(const matrix_& swaptionMatrix,
 										   const matrix_& swaptionStrikes,
 										   const indexMatrix& floatingIndexMatrix,
 										   matrix_ swapRates,
@@ -15,11 +15,20 @@ SwaptionCostFunction::SwaptionCostFunction(const matrix_& swaptionMatrix,
 										   matrix_ weights_tenor,
 										   matrix_ weights_maturity_2,
 										   matrix_ weights_tenor_2)
-: swaptionMatrix_Mkt_(swaptionMatrix),swaptionStrikes_(swaptionStrikes),floatingIndexMatrix_(floatingIndexMatrix)
-, swapRates_(swapRates),annuities_(annuities),bonds_0_(bonds_0),libors_0_(libors_0),libor_shifts_(libor_shifts)
+: swaptionMatrix_Mkt_(swaptionMatrix)
+, swaptionStrikes_(swaptionStrikes)
+, floatingIndexMatrix_(floatingIndexMatrix)
+, swapRates_(swapRates)
+, annuities_(annuities)
+, bonds_0_(bonds_0)
+, libors_0_(libors_0)
+, libor_shifts_(libor_shifts)
 , approximation_(approximation)
-, weights_(weights),weights_maturity_(weights_maturity),weights_tenor_(weights_tenor)
-, weights_maturity_2_(weights_maturity_2),weights_tenor_2_(weights_tenor_2)
+, weights_(weights)
+, weights_maturity_(weights_maturity)
+, weights_tenor_(weights_tenor)
+, weights_maturity_2_(weights_maturity_2)
+, weights_tenor_2_(weights_tenor_2)
 {
 	//-- Shift swap rates and strikes
 	for (size_t i = 0; i < swapRates.size(); ++i)
@@ -30,9 +39,9 @@ SwaptionCostFunction::SwaptionCostFunction(const matrix_& swaptionMatrix,
 	}
 }
 
-SwaptionCostFunction::~SwaptionCostFunction(){}
+SwaptionApproxCostFunction::~SwaptionApproxCostFunction(){}
 
-Real SwaptionCostFunction::value(const Array& x) const 
+Real SwaptionApproxCostFunction::value(const Array& x) const 
 {
 	size_t nbRows = swaptionMatrix_Mkt_.size();
 	size_t nbCols = swaptionMatrix_Mkt_[0].size();
@@ -50,9 +59,9 @@ Real SwaptionCostFunction::value(const Array& x) const
 	res = sqrt(res);
 
 	Real sum_of_weights = 0.;
-	for each( std::vector<double> vec in weights_)
+	for ( auto vec : weights_)
 	{
-		for each (double weight in vec)
+		for (auto weight : vec)
 			sum_of_weights += weight;
 	}
 
@@ -64,7 +73,7 @@ Real SwaptionCostFunction::value(const Array& x) const
 
 
 //-- Array x is obtained by mapping the vol matrix
-Disposable<Array> SwaptionCostFunction::values(const Array& x) const
+Disposable<Array> SwaptionApproxCostFunction::values(const Array& x) const
 {
 	
 	size_t nbRows = swaptionMatrix_Mkt_.size();
@@ -97,7 +106,7 @@ Disposable<Array> SwaptionCostFunction::values(const Array& x) const
 	return values;
 }
 
-Real SwaptionCostFunction::regularisation(const Array& x, Real c1, Real c2, Real c3, Real c4) const
+Real SwaptionApproxCostFunction::regularisation(const Array& x, Real c1, Real c2, Real c3, Real c4) const
 {
 	//-- Map array x to matrix;
 	matrix_ H = map_ArrayToMatrix(x);
@@ -148,7 +157,7 @@ Real SwaptionCostFunction::regularisation(const Array& x, Real c1, Real c2, Real
 }
 
 
-Real SwaptionCostFunction::sum_all_weights_regularisation(const matrix_& weights) const 
+Real SwaptionApproxCostFunction::sum_all_weights_regularisation(const matrix_& weights) const 
 {
 	Real sum = 0.;
 	for (size_t i = 0; i < weights.size(); ++i)
@@ -159,7 +168,7 @@ Real SwaptionCostFunction::sum_all_weights_regularisation(const matrix_& weights
 	return sum;
 }
 
-//Real SwaptionCostFunction::sum_all_derivatives_regularisation(const matrix_& weights, const matrix_& derivatives)
+//Real SwaptionApproxCostFunction::sum_all_derivatives_regularisation(const matrix_& weights, const matrix_& derivatives)
 //{
 //	Real sum = 0.;
 //	for (size_t i = 0; i < weights.size(); ++i)
@@ -170,7 +179,7 @@ Real SwaptionCostFunction::sum_all_weights_regularisation(const matrix_& weights
 //	return sum;
 //}
 
-void SwaptionCostFunction::getMarketInfo(string fileName)
+void SwaptionApproxCostFunction::getMarketInfo(string fileName)
 {
 	matrix_ result;
 
@@ -180,7 +189,7 @@ void SwaptionCostFunction::getMarketInfo(string fileName)
 	inputFile.close();
 }
 
-SwaptionCostFunction::matrix_ SwaptionCostFunction::map_ArrayToMatrix(const Array& x) const
+SwaptionApproxCostFunction::matrix_ SwaptionApproxCostFunction::map_ArrayToMatrix(const Array& x) const
 {
 	matrix_ H;
 	size_t x_size = x.size();
@@ -209,7 +218,7 @@ SwaptionCostFunction::matrix_ SwaptionCostFunction::map_ArrayToMatrix(const Arra
 	return H;
 }
 
-Array SwaptionCostFunction::map_MatrixtoArray(const matrix_& mat) const
+Array SwaptionApproxCostFunction::map_MatrixtoArray(const matrix_& mat) const
 {
 	std::vector<double> tmpRes;
 
@@ -232,4 +241,4 @@ Array SwaptionCostFunction::map_MatrixtoArray(const matrix_& mat) const
 	return res;
 }
 
-size_t SwaptionCostFunction::get_swaptionMatrixRows() {return swaptionMatrix_Mkt_.size();}
+size_t SwaptionApproxCostFunction::get_swaptionMatrixRows() {return swaptionMatrix_Mkt_.size();}

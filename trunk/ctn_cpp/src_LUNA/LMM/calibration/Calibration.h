@@ -18,7 +18,7 @@ public:
 	
 	Calibration();
 	
-	Array Calibrate(ofstream& outputFile, SwaptionCostFunction& func, const Array& startValues);
+	Array Calibrate(ofstream& outputFile, SwaptionApproxCostFunction& func, const Array& startValues);
 
 	void saveCalibrationResults(ofstream& outputFile, const Array& calibrationResults);
 

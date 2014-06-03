@@ -11,14 +11,14 @@
 
 
 
-class SwaptionCostFunction: public CostFunction
+class SwaptionApproxCostFunction: public CostFunction
 {
 public:
 
 	typedef std::vector<std::vector<double> > matrix_;
 	typedef std::vector<std::vector<std::vector<size_t> > > indexMatrix;
 
-	SwaptionCostFunction(const matrix_& swaptionMatrix,
+	SwaptionApproxCostFunction(const matrix_& swaptionMatrix,
 		                 const matrix_& swaptionStrikes,			
 						 const indexMatrix& floatingIndexMatrix,
 						 matrix_ swapRates,
@@ -33,7 +33,7 @@ public:
 						 matrix_ weights_maturity_2,
 						 matrix_ weights_tenor_2);
 
-	~SwaptionCostFunction();
+	~SwaptionApproxCostFunction();
 
 	Real value(const Array & x) const; 
 	Disposable<Array> values(const Array& x) const; 
