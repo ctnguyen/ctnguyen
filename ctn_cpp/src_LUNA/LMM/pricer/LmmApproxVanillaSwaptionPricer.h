@@ -36,6 +36,24 @@ public:
 
 	double volBlack() const;
 
+	void accumulateShiftedSwapRateAndStrike(
+		double& out_shifted_swapRate_T0 ,
+        double& out_shifted_strike      ,
+		const std::vector<double> & bonds_T0        ,
+		const std::vector<double> & libor_shifts    ,
+		const std::vector<size_t> & floatingIndices ,
+		const double              & annuity_T0) const;
+
+	double computeRebonatoVolatility(
+		const Array& x,
+		size_t swapStartDateIndex, 		                             
+	    const double & shifted_swapRate_T0,
+	    const double & annuity_T0   , 
+	    const std::vector<size_t> & floatingIndices,
+		const std::vector<double> & bonds_T0       ,
+		const std::vector<double> & libors_T0      ,
+		const std::vector<double> & libor_shifts) const;
+
 private:
 	
 	void preCalculateNumeraireAndZC();
@@ -59,21 +77,7 @@ private:
 	//							     const std::vector<double>& libors_T0,
 	//							     const std::vector<double>& libor_shifts);
 
-	//double computeRebonatoVolatility(const Array& x,
-	//	                             size_t swapStartDateIndex, 		                             
-	//                                 double shifted_swapRate_T0,
-	//                                 double annuity_T0, 
-	//                                 const std::vector<size_t>& floatingIndices,
-	//	                             const std::vector<double>& bonds_T0,
-	//							     const std::vector<double>& libors_T0,
-	//							     const std::vector<double>& libor_shifts);
 
-	//void accumulateShiftedSwapRateAndStrike(double& out_shifted_swapRate_T0,
-	//	                                 double& out_shifted_strike,
-	//									 const std::vector<double>& bonds_T0,
-	//									 const std::vector<double>& libor_shifts,
-	//									 const std::vector<size_t>& floatingIndices,
-	//									 double annuity_T0);
 
 	//double RebonatoApprox(size_t swapStartDateIndex,
 	//	                  double strike,
