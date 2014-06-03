@@ -68,7 +68,7 @@ private:
 	//							     const std::vector<double>& libors_T0,
 	//							     const std::vector<double>& libor_shifts);
 
-	//void computeShiftedSwapRateAndStrike(double& out_shifted_swapRate_T0,
+	//void accumulateShiftedSwapRateAndStrike(double& out_shifted_swapRate_T0,
 	//	                                 double& out_shifted_strike,
 	//									 const std::vector<double>& bonds_T0,
 	//									 const std::vector<double>& libor_shifts,

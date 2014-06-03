@@ -73,7 +73,7 @@
 //			//-- Shift swap rate and strike
 //			double shifted_swapRate0 = swapRate0;
 //			double shifted_K = K; // ??? Not necessary?
-//			approximation.computeShiftedSwapRateAndStrike(shifted_swapRate0,shifted_K,bonds_0,libors_shifts,floatingLegIndices,annuity0);
+//			approximation.accumulateShiftedSwapRateAndStrike(shifted_swapRate0,shifted_K,bonds_0,libors_shifts,floatingLegIndices,annuity0);
 //
 //			swaptionMatrix[i][j] = approximation.computeRebonatoVolatility(indexStart,shifted_swapRate0,annuity0,floatingLegIndices,bonds_0,libors_init,libors_shifts);
 //			swaptionMatrix[i][j] = sqrt(swaptionMatrix[i][j]);
