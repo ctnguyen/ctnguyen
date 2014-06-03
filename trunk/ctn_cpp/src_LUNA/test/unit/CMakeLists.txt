@@ -36,6 +36,10 @@ add_executable(unitTest_helper_Tenor "test_Tenor.cpp")
 target_link_libraries(unitTest_helper_Tenor LMM_helper)
 add_test(unitTest_helper_Tenor ${CMAKE_CURRENT_BINARY_DIR}/unitTest_helper_Tenor "--log_level=message")
 
+add_executable(unitTest_helper_LMMTenorStructure "test_helper_LMMTenorStructure.cpp")
+target_link_libraries(unitTest_helper_LMMTenorStructure LMM_helper)
+add_test(unitTest_helper_LMMTenorStructure ${CMAKE_CURRENT_BINARY_DIR}/unitTest_helper_LMMTenorStructure "--log_level=message")
+
 add_executable(unitTest_instrument_VanillaSwap "test_instrument_VanillaSwap.cpp")
 target_link_libraries(unitTest_instrument_VanillaSwap LMM_instrument)
 add_test(unitTest_instrument_VanillaSwap ${CMAKE_CURRENT_BINARY_DIR}/unitTest_instrument_VanillaSwap "--log_level=message")

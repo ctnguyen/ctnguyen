@@ -18,10 +18,6 @@ add_executable(test_BlackGreek "Test_BlackGreek.cpp")
 target_link_libraries(test_BlackGreek LMM_helper LMM_numeric)
 add_test(test_BlackGreek ${CMAKE_CURRENT_BINARY_DIR}/test_BlackGreek "--log_level=message")
 
-add_executable(test_LMMTenorStructure "Test_LMMTenorStructure.cpp")
-target_link_libraries(test_LMMTenorStructure LMM_ModelMCLMM)
-add_test(test_LMMTenorStructure ${CMAKE_CURRENT_BINARY_DIR}/test_LMMTenorStructure "--log_level=message")
-
 add_executable(test_VolatilityFunction "Test_VolatilityFunction.cpp")
 target_link_libraries(test_VolatilityFunction LMM_ModelMCLMM)
 add_test(test_VolatilityFunction ${CMAKE_CURRENT_BINARY_DIR}/test_VolatilityFunction "--log_level=message")
@@ -37,3 +33,7 @@ add_test(test_VanillaSwapPricer ${CMAKE_CURRENT_BINARY_DIR}/test_VanillaSwapPric
 add_executable(test_VanillaSwaptionPricer "Test_VanillaSwaptionPricer.cpp")
 target_link_libraries(test_VanillaSwaptionPricer LMM_pricer LMM_ModelMCLMM LMM_helper)
 add_test(test_VanillaSwaptionPricer ${CMAKE_CURRENT_BINARY_DIR}/test_VanillaSwaptionPricer "--log_level=message")
+
+add_executable(test_Calibration "Test_Calibration.cpp")
+target_link_libraries(test_Calibration LMM_calibration)
+add_test(test_Calibration ${CMAKE_CURRENT_BINARY_DIR}/test_Calibration "--log_level=message")
