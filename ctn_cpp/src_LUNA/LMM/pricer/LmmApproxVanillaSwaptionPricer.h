@@ -21,10 +21,14 @@ private:
 	VanillaSwaption_PTR vanillaswaption_;
 
 	//! Working place: pre-calculation: calculate much more things but who cares :) 
-	std::vector<double> ZC_;             // ZC_[i] = P(T_0, T_i), so ZC_[0] = 1.0
-	std::vector<double> numeraire_;      // numeraire_[i] = 1/ZC_[i]
+	std::vector<double> ZC_;         // ZC_[i] = P(T_0, T_i), so ZC_[0] = 1.0
+	std::vector<double> numeraire_;  // numeraire_[i] = 1/ZC_[i]
 
-	//std::vector<double> omega0_;  // omega_[i] = deltaT_floating[i] P(T_0,T_{i+1}) / annuity
+	/*!see Brigo 2006, p.239 (6.34) or Adrien THAI p.31
+	 * ATTENTION Omega vector only store \omega from indexStart to indexEnd of Swap for calculating the approximation of SwapRate
+	 * there are a shifted indices in relation to Libor indices
+	 */
+	std::vector<double> omega0_;     // omega_[i] = deltaT_floating[i] P(T_0,T_{i+1}) / annuity 
 
 public:
 	//! constructor  
@@ -34,9 +38,9 @@ public:
 
 private:
 	
-	void   calculateNumeraireAndZC();
+	void preCalculateNumeraireAndZC();
 	
-	double calculateOmega(const VanillaSwaption& vanillaSwaption);
+	void preCalculateOmega();
 	
 	//double annuity0(const VanillaSwap& vanillaSwap)const;
 	//double omega0(size_t i) const;
