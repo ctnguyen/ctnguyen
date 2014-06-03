@@ -8,13 +8,11 @@
 double MCLmmVanillaSwapPricer::swapRate(const LMM::VanillaSwap& vanillaSwap, size_t nbSimulation) const
 {
 	throw("Error: not implemented");
-	precalculate(vanillaSwap);
 	return 0.0;
 }
 
 double MCLmmVanillaSwapPricer::swapNPV(const LMM::VanillaSwap& vanillaSwap, size_t nbSimulation)  const
 {
-	precalculate(vanillaSwap);
 	double result = 0.0;
 
 	//!
@@ -40,41 +38,6 @@ double MCLmmVanillaSwapPricer::swapNPV(const LMM::VanillaSwap& vanillaSwap, size
 }
 
 
-//void MCLmmVanillaSwapPricer::precalculate(const VanillaSwap& vanillaSwap) const
-//{
-//	const LMMTenorStructure& lmmTenorStructure = mcLmm_->get_LMMTenorStructure();
-//
-//	assert(lmmTenorStructure.get_horizon() >= vanillaSwap.get_indexEnd());  // if not cannot price this swap;
-//	//! YY TODO: need to implement the == operator for enum TenorType
-//	//assert(lmmTenorStructure.get_tenorType() == vanillaSwap.get_simulationTenorType());
-//
-//	//! floatingLeg
-//	const std::vector<LMM::Index>& floatingLegPaymentIndexSchedule = vanillaSwap.get_floatingLegPaymentIndexSchedule();
-//	floatingLegTenorLmmTenorRatio_ = vanillaSwap.get_floatingLegTenorLmmTenorRatio();
-//	deltaTFloatingLeg_ = std::vector<double>(floatingLegPaymentIndexSchedule.size());
-//	for(size_t itr = 0; itr<deltaTFloatingLeg_.size(); ++itr)
-//	{
-//		size_t index = floatingLegPaymentIndexSchedule[itr];
-//		double t2 = lmmTenorStructure.get_tenorDate(index);
-//		double t1 = lmmTenorStructure.get_tenorDate(index/floatingLegTenorLmmTenorRatio_-1);
-//		deltaTFloatingLeg_[itr] = t2-t1;
-//	}	
-//	
-//	//! fixedLeg
-//	const std::vector<LMM::Index>& fixedLegPaymentIndexSchedule    = vanillaSwap.get_fixedLegPaymentIndexSchedule();
-//	fixedLegTenorLmmTenorRatio_    = vanillaSwap.get_fixedLegTenorLmmTenorRatio();  
-//	deltaTFixedLeg_    = std::vector<double>(fixedLegPaymentIndexSchedule.size());
-//	for(size_t itr = 0; itr<deltaTFixedLeg_.size(); ++itr)
-//	{
-//		size_t index = fixedLegPaymentIndexSchedule[itr];
-//		double t2 = lmmTenorStructure.get_tenorDate(index);
-//		double t1 = lmmTenorStructure.get_tenorDate(index-fixedLegTenorLmmTenorRatio_);
-//		deltaTFixedLeg_[itr] = t2-t1;
-//	}
-//
-//}
-
-
 //! for one simulation: suppose LMMTenorStructure.data[0] = 0.0
 double MCLmmVanillaSwapPricer::pvFloatingLeg(LMM::Index indexValuationDate,
 											 const LMM::VanillaSwap& vanillaSwap,
@@ -95,6 +58,7 @@ double MCLmmVanillaSwapPricer::pvFloatingLeg(LMM::Index indexValuationDate,
 		size_t indexLibor = floatingLegPaymentIndex-1; // eg: = i, when floatingTenor = lmmTenor
 		size_t indexT     = indexLibor;                                        // = i
 		double libor      = liborMatrix(indexLibor, indexT);
+		const std::vector<double>& deltaTFloatingLeg_ = vanillaSwap.get_DeltaTFloatLeg();
 		double delta_T    = deltaTFloatingLeg_[itr];
 		price			 += delta_T*libor*numeraire[indexValuationDate]/numeraire[floatingLegPaymentIndex];		
 	}

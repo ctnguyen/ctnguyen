@@ -31,8 +31,7 @@ double LmmApproxVanillaSwaptionPricer::volBlack(const VanillaSwaption& vanillaSw
 	assert(horizon_ >= vanillaSwap.get_indexEnd()); //! if not cannot price it.
 	//! YY TODO: implement the == operator and active this test!
 	//assert(lmm_->get_LMMTenorStructure()->get_tenorType() == vanillaSwaption.getUnderlyingSwap().get_simulationTenorType());
-	precalculate(vanillaSwap);
-	                                                                                  
+		                                                                                  
 	//! Annuity at time 0
 	LMM::Index indexValuationDate = 0;
 	std::vector<double> numeraire(ZC_.size());
@@ -52,6 +51,7 @@ double LmmApproxVanillaSwaptionPricer::volBlack(const VanillaSwaption& vanillaSw
 		size_t floatingLegPaymentIndex = floatingLegPaymentIndexSchedule[itr]; // = i+1
 		//size_t indexLibor = floatingLegPaymentIndex-1; // =i, because : floatingTenor = lmmTenor  
 		//size_t indexT     = indexLibor;                                        // = i
+		const std::vector<double>& deltaTFloatingLeg_ = vanillaSwap.get_DeltaTFloatLeg();
 		const double& delta_T    = deltaTFloatingLeg_[itr];  // lmmTenorStructure.get_deltaT()[indexLibor]
 		omega[itr] = delta_T*ZC_[floatingLegPaymentIndex] / annuityValue;
 	}

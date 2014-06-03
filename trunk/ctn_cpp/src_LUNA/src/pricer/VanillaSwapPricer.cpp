@@ -1,92 +1,7 @@
 #include <LMM/pricer/VanillaSwapPricer.h>
 
-void VanillaSwapPricer::precalculate(const LMM::VanillaSwap& vanillaSwap) const
-{
-	assert(lmmTenorStructure_->get_horizon() >= vanillaSwap.get_indexEnd());  // if not cannot price this swap;
-	//! YY TODO: need to implement the == operator for enum TenorType
-	assert(lmmTenorStructure_->get_tenorType() == vanillaSwap.get_simulationTenorType() );
 
-	//! floatingLeg
-	const std::vector<LMM::Index>& floatingLegPaymentIndexSchedule = vanillaSwap.get_floatingLegPaymentIndexSchedule();
-	deltaTFloatingLeg_ = std::vector<double>(floatingLegPaymentIndexSchedule.size());
-	for(size_t itr = 0; itr<deltaTFloatingLeg_.size(); ++itr)
-	{
-		size_t index = floatingLegPaymentIndexSchedule[itr];
-		deltaTFloatingLeg_[itr] = lmmTenorStructure_->get_deltaT(index-1); // T[index] - T[index-1]
-
-	}	
-
-	//! fixedLeg
-	const std::vector<LMM::Index>& fixedLegPaymentIndexSchedule    = vanillaSwap.get_fixedLegPaymentIndexSchedule();
-	fixedLegTenorLmmTenorRatio_    = vanillaSwap.get_fixedLegTenorLmmTenorRatio();  
-	deltaTFixedLeg_    = std::vector<double>(fixedLegPaymentIndexSchedule.size());
-	for(size_t itr = 0; itr<deltaTFixedLeg_.size(); ++itr)
-	{
-		size_t index = fixedLegPaymentIndexSchedule[itr];
-		double t2 = lmmTenorStructure_->get_tenorDate(index);
-		double t1 = lmmTenorStructure_->get_tenorDate(index-fixedLegTenorLmmTenorRatio_);
-		deltaTFixedLeg_[itr] = t2-t1;
-	}
-}
-
-
-
-double VanillaSwapPricer::annuity( LMM::Index indexValuationDate,
-								   const LMM::VanillaSwap& vanillaSwap,
-								   const std::vector<double>& numeraire) const
-{
-	assert(indexValuationDate <= vanillaSwap.get_indexStart()); //YY TODO: this test too slow, esp: within MC simulation
-	assert(lmmTenorStructure_->get_horizon() >= vanillaSwap.get_indexEnd());  // if not cannot price this swap;
-
-	double price = 0.0;
-	const std::vector<LMM::Index>& fixedLegPaymentIndexSchedule  = vanillaSwap.get_fixedLegPaymentIndexSchedule();
-	for(size_t itr = 0; itr < fixedLegPaymentIndexSchedule.size(); ++itr)
-	{
-		size_t fixedLegPaymentIndex = fixedLegPaymentIndexSchedule[itr]; // = i+1
-		const double& delta_T              = deltaTFixedLeg_[itr];
-		//std::cout << "numeraire[indexValuationDate]/numeraire[fixedLegPaymentIndex] = " << numeraire[indexValuationDate]/numeraire[fixedLegPaymentIndex] << std::endl;
-		price			           += delta_T*numeraire[indexValuationDate]/numeraire[fixedLegPaymentIndex];		
-	}
-	return price;
-}
-
-double VanillaSwapPricer::forwardSwapRate( LMM::Index indexValuationDate,
-		const LMM::VanillaSwap& vanillaSwap,
-		const std::vector<double>& numeraire) const
-{
-	/*
-	// see Damiano Brigo 2006 p238
-	const size_t T_alpha = vanillaSwap.get_indexStart();
-	const size_t T_beta = vanillaSwap.get_indexEnd();
-
-	assert(indexValuationDate <= T_alpha); 
-	assert(lmmTenorStructure_->get_horizon() >= T_beta);  
-		 
-	const std::vector<LMM::Index>& fixedLegPaymentIndexSchedule  = vanillaSwap.get_fixedLegPaymentIndexSchedule();
-
-	const double C_alpha_beta = this->annuity(indexValuationDate,vanillaSwap,numeraire);
-	const size_t alphaIndex = indexValuationDate;
-	const size_t betaIndex = fixedLegPaymentIndexSchedule.back();
-	const double P_t_alpha = 1.0/ numeraire[alphaIndex];
-	const double P_t_beta  = 1.0/ numeraire[betaIndex];
-
-	double S_alpha_beta = (P_t_alpha - P_t_beta) / C_alpha_beta;
-
-	return S_alpha_beta;
-	*/
-	return 0.0;
-}
-
-double VanillaSwapPricer::pvFixedLeg(LMM::Index indexValuationDate,
-								     const LMM::VanillaSwap& vanillaSwap,
-									 const std::vector<double>& numeraire)  const
-{
-	assert(indexValuationDate <= vanillaSwap.get_indexStart()); //YY TODO: this test too slow, esp: within MC simulation
-	assert(lmmTenorStructure_->get_horizon() >= vanillaSwap.get_indexEnd());  // if not cannot price this swap;
-	const double calculatedAnuity = this->annuity(indexValuationDate,vanillaSwap,numeraire);
-	return vanillaSwap.get_strike()*calculatedAnuity;
-}
-
+VanillaSwapPricer::VanillaSwapPricer(ConstLMMTenorStructure lmmTenorStructure)	: lmmTenorStructure_(lmmTenorStructure){};
 
 double VanillaSwapPricer::swapNPV_Analytical_1(const LMM::VanillaSwap& vanillaSwap, const std::vector<double>& liborsInitValue)  const // initLibor[i] = L_i[T_0]
 {
@@ -197,8 +112,6 @@ double VanillaSwapPricer::swapRate_Analytical(const LMM::VanillaSwap& vanillaSwa
 	assert(lmmTenorStructure_->get_horizon() >= vanillaSwap.get_indexEnd());  // if not cannot price this swap;
 	size_t horizon = lmmTenorStructure_->get_horizon();
 	
-	precalculate(vanillaSwap);
-
 	const double fixedLegdelta_T = vanillaSwap.get_fixedLegTenorType().convertToYear();
 	const double floatingLegdelta_T = vanillaSwap.get_floatingLegTenorType().convertToYear();
 	
@@ -228,4 +141,66 @@ double VanillaSwapPricer::swapRate_Analytical(const LMM::VanillaSwap& vanillaSwa
 	LMM::Index indexValuationDate = 0;
 	double pvFixedLegValue = pvFixedLeg(indexValuationDate,vanillaSwap,numeraire);
 	return pvFloatingLegValue / pvFixedLegValue;
+}
+
+
+
+double VanillaSwapPricer::annuity( 
+	const LMM::Index            indexValuationDate,
+	const LMM::VanillaSwap    & vanillaSwap,
+	const std::vector<double> & numeraire) const
+{
+	assert(indexValuationDate <= vanillaSwap.get_indexStart()); //YY TODO: this test too slow, esp: within MC simulation
+	assert(lmmTenorStructure_->get_horizon() >= vanillaSwap.get_indexEnd());  // if not cannot price this swap;
+
+	double price = 0.0;
+	const std::vector<LMM::Index>& fixedLegPaymentIndexSchedule  = vanillaSwap.get_fixedLegPaymentIndexSchedule();
+	for(size_t itr = 0; itr < fixedLegPaymentIndexSchedule.size(); ++itr)
+	{
+		size_t fixedLegPaymentIndex = fixedLegPaymentIndexSchedule[itr]; // = i+1
+		const std::vector<double>& deltaTFixedLeg_ = vanillaSwap.get_DeltaTFixedLeg();
+		const double& delta_T              = deltaTFixedLeg_[itr];
+		//std::cout << "numeraire[indexValuationDate]/numeraire[fixedLegPaymentIndex] = " << numeraire[indexValuationDate]/numeraire[fixedLegPaymentIndex] << std::endl;
+		price			           += delta_T*numeraire[indexValuationDate]/numeraire[fixedLegPaymentIndex];		
+	}
+	return price;
+}
+
+double VanillaSwapPricer::forwardSwapRate( 
+	const LMM::Index            indexValuationDate,
+	const LMM::VanillaSwap    & vanillaSwap,
+	const std::vector<double> & numeraire) const
+{
+	/*
+	// see Damiano Brigo 2006 p238
+	const size_t T_alpha = vanillaSwap.get_indexStart();
+	const size_t T_beta = vanillaSwap.get_indexEnd();
+
+	assert(indexValuationDate <= T_alpha); 
+	assert(lmmTenorStructure_->get_horizon() >= T_beta);  
+		 
+	const std::vector<LMM::Index>& fixedLegPaymentIndexSchedule  = vanillaSwap.get_fixedLegPaymentIndexSchedule();
+
+	const double C_alpha_beta = this->annuity(indexValuationDate,vanillaSwap,numeraire);
+	const size_t alphaIndex = indexValuationDate;
+	const size_t betaIndex = fixedLegPaymentIndexSchedule.back();
+	const double P_t_alpha = 1.0/ numeraire[alphaIndex];
+	const double P_t_beta  = 1.0/ numeraire[betaIndex];
+
+	double S_alpha_beta = (P_t_alpha - P_t_beta) / C_alpha_beta;
+
+	return S_alpha_beta;
+	*/
+	return 0.0;
+}
+
+double VanillaSwapPricer::pvFixedLeg(
+	const LMM::Index            indexValuationDate,
+	const LMM::VanillaSwap    & vanillaSwap,
+	const std::vector<double> & numeraire)  const
+{
+	assert(indexValuationDate <= vanillaSwap.get_indexStart()); //YY TODO: this test too slow, esp: within MC simulation
+	assert(lmmTenorStructure_->get_horizon() >= vanillaSwap.get_indexEnd());  // if not cannot price this swap;
+	const double calculatedAnuity = this->annuity(indexValuationDate,vanillaSwap,numeraire);
+	return vanillaSwap.get_strike()*calculatedAnuity;
 }

@@ -54,20 +54,20 @@ BOOST_AUTO_TEST_CASE(test_VanillaSwap_configure)
 	BOOST_CHECK(indiceFixedLeg.size() == deltaTFixedLeg.size() );
 
 	BOOST_CHECK(indiceFloatLeg[0] == 2);
-	BOOST_CHECK(indiceFloatLeg[0] == 3);
-	BOOST_CHECK(indiceFloatLeg[0] == 4);
-	BOOST_CHECK(indiceFloatLeg[0] == 5);
+	BOOST_CHECK(indiceFloatLeg[1] == 3);
+	BOOST_CHECK(indiceFloatLeg[2] == 4);
+	BOOST_CHECK(indiceFloatLeg[3] == 5);
 
 	BOOST_CHECK(indiceFixedLeg[0] == 3);
-	BOOST_CHECK(indiceFixedLeg[0] == 5);
+	BOOST_CHECK(indiceFixedLeg[1] == 5);
 
 	BOOST_CHECK(deltaTFloatLeg[0] == 0.25);
-	BOOST_CHECK(deltaTFloatLeg[0] == 0.25);
-	BOOST_CHECK(deltaTFloatLeg[0] == 0.25);
-	BOOST_CHECK(deltaTFloatLeg[0] == 0.25);
+	BOOST_CHECK(deltaTFloatLeg[1] == 0.25);
+	BOOST_CHECK(deltaTFloatLeg[2] == 0.25);
+	BOOST_CHECK(deltaTFloatLeg[3] == 0.25);
 
 	BOOST_CHECK(deltaTFixedLeg[0] == 0.5);
-	BOOST_CHECK(deltaTFixedLeg[0] == 0.5);
+	BOOST_CHECK(deltaTFixedLeg[1] == 0.5);
 
 	//std::cout<<swap<<std::endl;
 
