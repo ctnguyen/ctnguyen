@@ -20,16 +20,17 @@ Array Calibration::Calibrate(ofstream& outputFile, SwaptionCostFunction& func, c
 	std::cout << "Start calibration............" << std::endl << std::endl;
 
 	//-- Set end criteria 
-	Size maxIterations =10000;
-	Size minStatIterations =100;
-	Real rootEpsilon =1e-12;//=1e-8;
-	Real functionEpsilon =1e-12;//=1e-9;
-	Real gradientNormEpsilon =1e-12;//=1e-5;
+	Size minStatIterations = 100   ;
+	Size maxIterations     = 10000 ;
 
-	EndCriteria myEndCrit (maxIterations,minStatIterations,
-		rootEpsilon,functionEpsilon,gradientNormEpsilon);
+	Real rootEpsilon         = 1e-12 ;//=1e-8;
+	Real functionEpsilon     = 1e-12 ;//=1e-9;
+	Real gradientNormEpsilon = 1e-12 ;//=1e-5;
+
+	EndCriteria myEndCrit (maxIterations, minStatIterations,	rootEpsilon,functionEpsilon,gradientNormEpsilon);
 
 	NoConstraint constraint;
+	
 	Problem myProb(func,constraint,startValues);
 
 	std::cout << "Begin solving............ " << std::endl << std::endl;
