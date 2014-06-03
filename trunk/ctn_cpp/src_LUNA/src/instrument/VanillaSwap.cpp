@@ -90,6 +90,10 @@ namespace LMM
 
 	const std::vector<LMM::Index>& VanillaSwap::get_fixedLegPaymentIndexSchedule()    const { return fixedLegPaymentIndexSchedule_   ; }
 
+	const std::vector<double>& VanillaSwap::get_DeltaTFloatLeg() const { return deltaTFloatingLeg_ ; }
+	const std::vector<double>& VanillaSwap::get_DeltaTFixedLeg() const { return deltaTFixedLeg_    ; }
+
+
 	LMM::Index VanillaSwap::get_indexStart() const {return indexStart_;}
 
 	LMM::Index VanillaSwap::get_indexEnd()   const {return indexEnd_  ;}
@@ -119,7 +123,22 @@ namespace LMM
 		{
 			outputstream <<","<<fixedLegPaymentIndexSchedule_[i];
 		}outputstream <<"}"<<std::endl<<std::endl;
+
+
+		outputstream << "deltaTFloatingLeg_{"<<deltaTFloatingLeg_[0];
+		for(size_t i=1; i<deltaTFloatingLeg_.size(); ++i)
+		{
+			outputstream <<"," << deltaTFloatingLeg_[i];
+		}outputstream <<"}"<<std::endl;
+
+		outputstream << "deltaTFixedLeg_{"<<deltaTFixedLeg_[0];
+		for(size_t i=1; i<deltaTFixedLeg_.size(); ++i)
+		{
+			outputstream <<","<<deltaTFixedLeg_[i];
+		}outputstream <<"}"<<std::endl<<std::endl;
 	}
+
+
 
 
 } // end namespace LMM
