@@ -469,7 +469,7 @@ int main()
 //		//NumericalMethods NM;
 //		
 //		//-- Create cost function 
-//		SwaptionCostFunction mycostfunction(swaptionMatrix2,
+//		SwaptionApproxCostFunction mycostfunction(swaptionMatrix2,
 //			                                strikes,											
 //											floatingIndexMatrix,
 //										    swapRates,
