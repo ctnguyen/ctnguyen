@@ -356,7 +356,7 @@ int main()
 //		
 //		double shifted_swapRate = swapRate;
 //		double shifted_strike = strike;
-//		approx.computeShiftedSwapRateAndStrike(shifted_swapRate,shifted_strike,bonds_0,liborShifts,floatingIndices,annuity);
+//		approx.accumulateShiftedSwapRateAndStrike(shifted_swapRate,shifted_strike,bonds_0,liborShifts,floatingIndices,annuity);
 //		double impliedVol = nm.impliedVolatility(rebonatoPrice,shifted_strike,shifted_swapRate,annuity);
 //		cout << "Implied Vol : " << impliedVol << endl;
 //

@@ -34,7 +34,7 @@
 //	for (size_t i = 0; i < swapRates.size(); ++i)
 //	{
 //		for (size_t j = 0; j < swapRates[i].size(); ++j)
-//			approximation_.computeShiftedSwapRateAndStrike(swapRates_[i][j],swaptionStrikes_[i][j],bonds_0_,libor_shifts_,floatingIndexMatrix_[i][j],annuities_[i][j]);
+//			approximation_.accumulateShiftedSwapRateAndStrike(swapRates_[i][j],swaptionStrikes_[i][j],bonds_0_,libor_shifts_,floatingIndexMatrix_[i][j],annuities_[i][j]);
 //		
 //	}
 //}
