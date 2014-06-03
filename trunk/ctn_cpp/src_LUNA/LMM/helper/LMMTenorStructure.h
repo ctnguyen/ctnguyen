@@ -22,9 +22,9 @@
  *   - the setlement date set (tenorDates)    (converted to year unit)
  *   - the tenor set (\tau_k)                 (converted to year unit)
  *
- *     T[i]    0   1    2    3    ...                     N
+ *     T[i]    0   1    2    3    ...                    N+1
  * timeline    *---*----*----*---*----*----*---*----*----*
- *  \tau[i]      0    1   2                           N-1  
+ *  \tau[i]      0    1   2                           N
  *
  * tau_i = T_{i+1} - T_i
  */
