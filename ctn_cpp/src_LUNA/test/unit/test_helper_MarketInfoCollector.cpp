@@ -14,12 +14,9 @@ BOOST_AUTO_TEST_CASE(test_marketinfocollector)
 	
 	std::string path_FileIn = LMM::get_runtime_datapath() + "Mkt_info_1.csv";
 	std::cout<< "File Input Paht :"<< path_FileIn << std::endl;
-
-
-	//std::ifstream inputFile;
-	//inputFile.open(path_FileIn);
+	
 	MarketInfoCollector::readMarketInfo( path_FileIn );
-	//inputFile.close();
+
 
 	std::vector<double> libors_BB = MarketInfoCollector::get_libors();
 	std::vector<double> zc_BB = MarketInfoCollector::get_zcBonds();
