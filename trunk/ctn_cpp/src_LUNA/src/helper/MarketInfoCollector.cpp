@@ -36,6 +36,8 @@ std::vector<double>& MarketInfoCollector::get_zcMaturities(){return zcMaturities
 
 void MarketInfoCollector::readMarketInfo(const std::string& fileIn)	                    
 {
+	clear_all();
+
 	std::ifstream instream;
 	instream.open(fileIn.c_str());
 
@@ -56,8 +58,8 @@ void MarketInfoCollector::readMarketInfo(const std::string& fileIn)
 			getline (instream,line);
 			stringstream ss(line); 
 
-			//-- If current swaption row has char '#', stop reading
-			if (line.at(0) == ';' && line.at(6) ==  delimiter) break;
+			//-- first column and 3th column are empty and the 6th column is ########, then that say terminated
+			if (line.at(0) == ';' && line.at(3) == ';' && line.at(6) ==  delimiter) break;
 
 			string s;
 			vector<double> res;
@@ -126,33 +128,50 @@ double MarketInfoCollector::numerical_value(std::string s)
 
 	if ( isTenor(s) )
 	{
+		// calculate for tenors in Year unit "YR", "Y"
 		size_t foundYR = s.find("YR");
 		if(foundYR != std::string::npos ) 
 		{
 			s.erase(foundYR, 2);          // if found "YR", remove two characters
 			return std::atof(s.c_str());  // the string left is tenor in year unit
 		}
+		size_t foundY = s.find("Y");
+		if(foundY != std::string::npos ) 
+		{
+			s.erase(foundY, 1);           // if found "Y", remove 1 character
+			return std::atof(s.c_str());  // the string left is tenor in year unit
+		}
 
+		// calculate for tenors in Month unit "MO", "M"
 		size_t foundMO = s.find("MO");
 		if(foundMO != std::string::npos ) 
 		{
 			s.erase(foundMO, 2);             // if found "MO", remove two characters
 			return std::atof(s.c_str())/12.; // the string left is tenor in month unit
 		}
+		size_t foundM = s.find("M");
+		if(foundM != std::string::npos ) 
+		{
+			s.erase(foundM, 1);              // if found "M", remove 1 characters
+			return std::atof(s.c_str())/12.; // the string left is tenor in month unit
+		}
 
-		//size_t foundD = s.find("W");
-		//if(foundD != std::string::npos ) 
-		//{
-		//	s.erase(foundD, 1);              // if found "W", remove 1 characters
-		//	return std::atof(s.c_str())/72.; // the string left is tenor in week unit
-		//}
 
-		//size_t foundD = s.find("D");
-		//if(foundD != std::string::npos ) 
-		//{
-		//	s.erase(foundD, 1);               // if found "D", remove 1 characters
-		//	return std::atof(s.c_str())/360.; // the string left is tenor in day unit
-		//}
+		// calculate for tenors in Week unit
+		size_t foundW = s.find("W");
+		if(foundW != std::string::npos ) 
+		{
+			s.erase(foundW, 1);              // if found "W", remove 1 characters
+			return std::atof(s.c_str())/72.; // the string left is tenor in week unit
+		}
+
+		// calculate for tenors in Day unit
+		size_t foundD = s.find("D");
+		if(foundD != std::string::npos ) 
+		{
+			s.erase(foundD, 1);               // if found "D", remove 1 characters
+			return std::atof(s.c_str())/360.; // the string left is tenor in day unit
+		}
 	}
 
 	std::replace(s.begin(), s.end(), ',', '.');
@@ -162,7 +181,7 @@ double MarketInfoCollector::numerical_value(std::string s)
 bool MarketInfoCollector::isTenor(const std::string& s)
 {
 	// if text contain 'Y' or 'M' , that is a tenor 
-	return (s.find('Y') != std::string::npos || s.find('M') != std::string::npos ) ;
+	return (s.find('Y') != std::string::npos || s.find('M') != std::string::npos || s.find('W') != std::string::npos || s.find('D') != std::string::npos ) ;
 }
 
 bool MarketInfoCollector::isNotUsefulCase(const std::string& s)
@@ -185,7 +204,21 @@ void MarketInfoCollector::parseTermsLine(const std::string& firstLine)
 	}
 }
 
+void MarketInfoCollector::clear_all()
+{
 
+	libors_.clear();
+	zeroCouponBonds_.clear();
+	zcMaturities_.clear();
+	swpnTerms_.clear();
+	swpnMaturities_.clear();
+		
+	for (auto swpMatRow : swaptionVolatilityMatrix_){	swpMatRow.clear(); }
+	swaptionVolatilityMatrix_.clear();
+
+	for (auto swpRateRow : swapRates_){	swpRateRow.clear();	}
+	swapRates_.clear();
+}
 
 
 void MarketInfoCollector::print(const std::string& filename)
