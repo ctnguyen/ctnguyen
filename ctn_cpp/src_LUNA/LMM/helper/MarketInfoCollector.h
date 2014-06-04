@@ -59,6 +59,8 @@ private:
 
 	// The second line of Excel file containe information about Swaption Terms
 	static void parseTermsLine(const std::string& firstLine);
+
+	static void clear_all();
 };
 
 
