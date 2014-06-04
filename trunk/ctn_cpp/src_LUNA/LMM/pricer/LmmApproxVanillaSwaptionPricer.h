@@ -44,6 +44,7 @@ public:
 		const std::vector<size_t> & floatingIndices ,
 		const double              & annuity_T0) const;
 
+	//! Andrien THAI 2013 7.3.3, exactly formula is (7.17) p.32
 	double computeRebonatoVolatility(
 		const Array& x,
 		size_t swapStartDateIndex, 		                             
@@ -59,15 +60,14 @@ private:
 	void preCalculateNumeraireAndZC();
 	
 	void preCalculateOmega();
-	
+
+	double omega0(size_t i, const double& annuity_T0, const std::vector<double>& bonds_T0) const;
+
 	//double annuity0(const VanillaSwap& vanillaSwap)const;
 	//double omega0(size_t i) const;
 };
 
 
-	//double omega0(size_t i, 
-	//	          double annuity_T0, 
-	//			  const std::vector<double>& bonds_T0);
 
 	//double computeRebonatoVolatility(size_t swapStartDateIndex, 
 	//								 double shifted_swapRate_T0,

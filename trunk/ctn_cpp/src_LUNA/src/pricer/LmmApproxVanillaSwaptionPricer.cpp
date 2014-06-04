@@ -105,7 +105,7 @@ void LmmApproxVanillaSwaptionPricer::accumulateShiftedSwapRateAndStrike(
 	const double              & annuity_T0)const
 {
 	std::cout<<"  LmmApproxVanillaSwaptionPricer::accumulateShiftedSwapRateAndStrike   is to be defined"<<std::endl;
-	/* ctntodo to uncomment this function
+	// ctntodo to uncomment this function
 	//-- Compute shifted swap rate and shifted strike 
 	double swap_shift = 0.0;
 
@@ -113,8 +113,7 @@ void LmmApproxVanillaSwaptionPricer::accumulateShiftedSwapRateAndStrike(
 	swap_shift +=  omega0(i-1,annuity_T0,bonds_T0)*libor_shifts[i-1]; //-- Check the index
 
 	out_shifted_swapRate_T0 += swap_shift;
-	out_shifted_strike += swap_shift;
-	*/
+	out_shifted_strike += swap_shift;	
 }
 
 
@@ -134,11 +133,12 @@ double LmmApproxVanillaSwaptionPricer::computeRebonatoVolatility(
 	//-- Compute vol under swap measure
 	double vol_squared = 0.;
 		
-	/* ctntodo uncomment this part of function
-	for each (size_t i in floatingIndices) 
+	// ctntodo uncomment this part of function
+	/*
+	for (auto i : floatingIndices) 
 	{
 		double Ti = tenorDates_[i-1];
-		for each (size_t j in floatingIndices)
+		for (auto j : floatingIndices)
 		{
 			double Tj = tenorDates_[j-1];
 			double volTmp = vol_->covIntegral(x,i-1,j-1,Ti,Tj,0,T_maturity);
@@ -147,10 +147,19 @@ double LmmApproxVanillaSwaptionPricer::computeRebonatoVolatility(
 	}
 
 	vol_squared /= (shifted_swapRate_T0*shifted_swapRate_T0);
+	
 	*/
-
 	return vol_squared;
 }
+
+double LmmApproxVanillaSwaptionPricer::omega0(size_t i, const double& annuity_T0, const std::vector<double>& bonds_T0) const
+{
+	//double per = (tenorDates_[i+1] - tenorDates_[i]);
+	const double& per = lmm_->get_LMMTenorStructure()->get_deltaT(i);
+	double res = per * bonds_T0[i+1];
+	return res/annuity_T0;
+}
+
 
 //LmmApproxSwaptionPricer::SwaptionApproximation(const SwaptionApproximation& approximation)
 //{
@@ -161,12 +170,7 @@ double LmmApproxVanillaSwaptionPricer::computeRebonatoVolatility(
 //	//tenorDates_ = approximation.tenorDates_;
 //}
 //
-//double Approximation::omega0(size_t i, double annuity_T0, const std::vector<double>& bonds_T0) 
-//{
-//	double per = (tenorDates_[i+1] - tenorDates_[i]);
-//	double res = per * bonds_T0[i+1];
-//	return res/annuity_T0;
-//}
+
 
 //
 ////! suppose: T_0 = 0, ZC[i] = P(T_0,T_i) = P(0,T_i), so ZC[0] = 1.0
