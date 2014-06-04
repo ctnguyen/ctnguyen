@@ -71,7 +71,7 @@ BOOST_AUTO_TEST_CASE(test_VanillaSwap_configure)
 
 	//std::cout<<swap<<std::endl;
 
-	std::string path_OutPut = LMM::get_output_path() + "unitTest_instrument_VanillaSwap_configure.txt";
+	std::string path_OutPut = LMM::get_output_path() + "unitTest_instrument_VanillaSwap_configure.csv";
 	std::ofstream swapoutput;
 	swapoutput.open(path_OutPut.c_str());
 	swapoutput<<swap<<std::endl;

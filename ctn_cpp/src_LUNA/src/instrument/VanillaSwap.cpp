@@ -102,45 +102,43 @@ namespace LMM
 
 	void VanillaSwap::write_to_stream(std::ostream& outputstream)const 
 	{
-		outputstream <<std::endl << "VanillaSwap" <<std::endl;
+		outputstream  << "VanillaSwap" <<std::endl<<std::endl;
 
-		outputstream << "strike_="   << strike_ << std::endl;
-		outputstream << "indexStart_=" << indexStart_ << std::endl;
-		outputstream << "indexEnd_="   << indexEnd_ << std::endl;
+		outputstream << strike_     << ";strike_ ; "     << std::endl;
+		outputstream << indexStart_ << ";indexStart_ ; " << std::endl;
+		outputstream << indexEnd_   << ";indexEnd_ ; "   << std::endl;
 
-		outputstream << "floatingLegTenorType_="  << floatingLegTenorType_ << std::endl;
-		outputstream << "fixedLegTenorType_="     << fixedLegTenorType_    << std::endl;
-		outputstream << "simulationTenorType_="   << simulationStructure_->get_tenorType()  << std::endl;
+		outputstream << floatingLegTenorType_                 << ";floatingLegTenorType_ ;" << std::endl;
+		outputstream << fixedLegTenorType_                    << ";fixedLegTenorType_ ; "   << std::endl;
+		outputstream << simulationStructure_->get_tenorType() << ";simulationTenorType_ ; " << std::endl<< std::endl<< std::endl;
 
-		outputstream << "floatingPaymentIndexSchedule_{"<<floatingLegPaymentIndexSchedule_[0];
-		for(size_t i=1; i<floatingLegPaymentIndexSchedule_.size(); ++i)
+		outputstream << ";;;"<<std::endl;
+		for(size_t i=0; i<floatingLegPaymentIndexSchedule_.size(); ++i)
 		{
-			outputstream <<"," << floatingLegPaymentIndexSchedule_[i];
-		}outputstream <<"}"<<std::endl;
+			outputstream << floatingLegPaymentIndexSchedule_[i] <<";" ;
+		}outputstream << ";floatingPaymentIndexSchedule_ ; "<<std::endl;
 
-		outputstream << "fixedLegPaymentIndexSchedule_{"<<fixedLegPaymentIndexSchedule_[0];
-		for(size_t i=1; i<fixedLegPaymentIndexSchedule_.size(); ++i)
+		
+		outputstream << ";;;"<<std::endl;
+		for(size_t i=0; i<fixedLegPaymentIndexSchedule_.size(); ++i)
 		{
-			outputstream <<","<<fixedLegPaymentIndexSchedule_[i];
-		}outputstream <<"}"<<std::endl<<std::endl;
-
-
-		outputstream << "deltaTFloatingLeg_{"<<deltaTFloatingLeg_[0];
-		for(size_t i=1; i<deltaTFloatingLeg_.size(); ++i)
+			outputstream <<fixedLegPaymentIndexSchedule_[i]<<";";
+		}outputstream << ";fixedLegPaymentIndexSchedule_ ; "<<std::endl;
+		
+		
+		outputstream << ";;;"<<std::endl;
+		for(size_t i=0; i<deltaTFloatingLeg_.size(); ++i)
 		{
-			outputstream <<"," << deltaTFloatingLeg_[i];
-		}outputstream <<"}"<<std::endl;
+			outputstream << deltaTFloatingLeg_[i]<<";" ;
+		}outputstream << ";deltaTFloatingLeg_ ;"<<std::endl;
 
-		outputstream << "deltaTFixedLeg_{"<<deltaTFixedLeg_[0];
-		for(size_t i=1; i<deltaTFixedLeg_.size(); ++i)
+		
+		outputstream << ";;;"<<std::endl;
+		for(size_t i=0; i<deltaTFixedLeg_.size(); ++i)
 		{
-			outputstream <<","<<deltaTFixedLeg_[i];
-		}outputstream <<"}"<<std::endl<<std::endl;
+			outputstream <<deltaTFixedLeg_[i]<<";";
+		}outputstream << ";deltaTFixedLeg_ ;"<<std::endl;
 	}
-
-
-
-
 } // end namespace LMM
 
 std::ostream& operator<<(std::ostream& os, const LMM::VanillaSwap& swap){ swap.write_to_stream(os) ; return os; }
