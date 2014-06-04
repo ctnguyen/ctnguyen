@@ -104,8 +104,6 @@ void LmmApproxVanillaSwaptionPricer::accumulateShiftedSwapRateAndStrike(
 	const std::vector<size_t> & floatingIndices ,
 	const double              & annuity_T0)const
 {
-	std::cout<<"  LmmApproxVanillaSwaptionPricer::accumulateShiftedSwapRateAndStrike   is to be defined"<<std::endl;
-	// ctntodo to uncomment this function
 	//-- Compute shifted swap rate and shifted strike 
 	double swap_shift = 0.0;
 

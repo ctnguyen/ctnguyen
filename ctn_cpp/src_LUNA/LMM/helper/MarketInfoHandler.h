@@ -8,7 +8,8 @@
 typedef std::vector<std::vector<double> > matrix_;
 typedef std::vector<std::vector<std::pair<double,double> > > matrix_pairOfYears;
 
-//ctntodo rename this class to ATMSwaptionMarketData because its structure is specificly for ATM Swaption Data
+// ctntodo rename this class to ATMSwaptionMarketData because its structure is specificly for ATM Swaption Data
+// ctntodo fusion this class with the MarketInfoCollector into a unique class ATMSwaptionMarketData
 
 //-- handle data from bloomberg (interpolations,...)
 class MarketInfoHandler
