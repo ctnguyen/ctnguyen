@@ -28,9 +28,9 @@ add_executable(unitTest_helper_MarketInfoCollector "test_helper_MarketInfoCollec
 target_link_libraries(unitTest_helper_MarketInfoCollector LMM_helper)
 add_test(unitTest_helper_MarketInfoCollector ${CMAKE_CURRENT_BINARY_DIR}/unitTest_helper_MarketInfoCollector "--log_level=message")
 
-add_executable(unitTest_helper_QMcGenerator "test_helper_QMcGenerator.cpp")
-target_link_libraries(unitTest_helper_QMcGenerator LMM_helper)
-add_test(unitTest_helper_QMcGenerator ${CMAKE_CURRENT_BINARY_DIR}/unitTest_helper_QMcGenerator "--log_level=message")
+#add_executable(unitTest_helper_QMcGenerator "test_helper_QMcGenerator.cpp")
+#target_link_libraries(unitTest_helper_QMcGenerator LMM_helper)
+#add_test(unitTest_helper_QMcGenerator ${CMAKE_CURRENT_BINARY_DIR}/unitTest_helper_QMcGenerator "--log_level=message")
 
 add_executable(unitTest_helper_Tenor "test_Tenor.cpp")
 target_link_libraries(unitTest_helper_Tenor LMM_helper)
@@ -44,9 +44,9 @@ add_executable(unitTest_instrument_VanillaSwap "test_instrument_VanillaSwap.cpp"
 target_link_libraries(unitTest_instrument_VanillaSwap LMM_instrument)
 add_test(unitTest_instrument_VanillaSwap ${CMAKE_CURRENT_BINARY_DIR}/unitTest_instrument_VanillaSwap "--log_level=message")
 
-add_executable(unitTest_ModelMCLMM_PCA "test_ModelMCLMM_PCA.cpp")
-target_link_libraries(unitTest_ModelMCLMM_PCA LMM_ModelMCLMM ${QuantLib_LIBRARY})
-add_test(unitTest_ModelMCLMM_PCA ${CMAKE_CURRENT_BINARY_DIR}/unitTest_ModelMCLMM_PCA "--log_level=message")
+#add_executable(unitTest_ModelMCLMM_PCA "test_ModelMCLMM_PCA.cpp")
+#target_link_libraries(unitTest_ModelMCLMM_PCA LMM_ModelMCLMM ${QuantLib_LIBRARY})
+#add_test(unitTest_ModelMCLMM_PCA ${CMAKE_CURRENT_BINARY_DIR}/unitTest_ModelMCLMM_PCA "--log_level=message")
 
 add_executable(unitTest_ModelMCLMM_RobonatoAngle "test_ModelMCLMM_RobonatoAngle.cpp")
 target_link_libraries(unitTest_ModelMCLMM_RobonatoAngle LMM_ModelMCLMM ${QuantLib_LIBRARY})
