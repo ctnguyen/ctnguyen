@@ -11,6 +11,8 @@ namespace numeric
 	{
 	public:
 		//-- Interpolation on y - find value corresponding to given maturity date
+		// Insert a point in the appropriated position in x vector
+		// Compute the coherent point in vector y, and insert it into the appropriated position 
 		void linearInterpolation
 			(
 			std::vector<double>& y,

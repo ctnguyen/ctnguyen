@@ -81,8 +81,8 @@ int main()
 		MarketInfoHandler mktInfoHandler(libors_BB,zc_BB,zcMaturities_BB,swaptionMatrix_BB,swaprates_BB);
 		mktInfoHandler.convertBpToPercent();
 		//ctntodo to uncomment this two lines
-		//mktInfoHandler.interpolateDiscountFactors();
-		//std::vector<double> zcVector_BB = mktInfoHandler.createDiscountFactorArray();
+		mktInfoHandler.interpolateDiscountFactors();
+		std::vector<double> zcVector_BB = mktInfoHandler.createDiscountFactorArray();
 //		
 //	#pragma endregion
 //

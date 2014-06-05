@@ -28,8 +28,12 @@ BOOST_AUTO_TEST_CASE(test_LinearInterpolation)
 
 	numeric::Interpolation interpolator;
 	interpolator.linearInterpolation(someVector,falseTenorDates,maturity_date);
-	for (auto inter_val : someVector)
-		std::cout << inter_val << " ";
+	
+	std::cout<<"someVector : ";
+	for (auto inter_val : someVector) std::cout << inter_val << " "; std::cout<<std::endl;
+
+	std::cout<<"falseTenorDates : ";
+	for (auto inter_val : falseTenorDates) std::cout << inter_val << " ";  std::cout<<std::endl ;
 
 	std::cout << std::endl;
 	std::cout << "Expected result : " << expectedResult << std::endl;

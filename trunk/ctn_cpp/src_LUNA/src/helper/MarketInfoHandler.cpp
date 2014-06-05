@@ -7,11 +7,14 @@ MarketInfoHandler::MarketInfoHandler(const std::vector<double>& libors_Mkt,
 									 const std::vector<double>& discountMaturities,
 									 const matrix_& swaptionVolMatrix_Mkt,
 									 const matrix_& swapRates_Mkt)
+: libors_Mkt_(libors_Mkt)
+, discountFactors_Mkt_(discountFactors_Mkt)
+, discountMaturities_(discountMaturities)
+, swaptionVolMatrix_Mkt_(swaptionVolMatrix_Mkt)
+, swapRates_Mkt_(swapRates_Mkt)
+{
 
-									 : libors_Mkt_(libors_Mkt), discountFactors_Mkt_(discountFactors_Mkt), 
-									   discountMaturities_(discountMaturities),swaptionVolMatrix_Mkt_(swaptionVolMatrix_Mkt), 
-									   swapRates_Mkt_(swapRates_Mkt)
-{}
+}
 
 void MarketInfoHandler::convertBpToPercent()
 {
@@ -43,7 +46,7 @@ void MarketInfoHandler::interpolateDiscountFactors()
 	interpolation_dates.push_back(10.5);
 
 	numeric::Interpolation interpolator;
-	std::vector<double> interpolated_zc_values;
+
 	std::vector<double> tenorDates_cpy = discountMaturities_; //-- Will be modified after every interpolation
 
 	for (auto inter_date : interpolation_dates)
