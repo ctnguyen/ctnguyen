@@ -27,7 +27,7 @@ McLmm::McLmm(const Dispersion&                  dispersion,
 			 const std::vector<double>&         liborsInitValue,
 			 RNGenerator_PTR                    rnGenerator,
 			 MCSchemeType::MCSchemeType			mcSchemeType)
-: Lmm(dispersion,shifts,liborsInitValue)
+: Lmm(dispersion,shifts)
 , nbFactor_(dispersion.getNbFactors())
 , horizon_(dispersion.get_horizon())
 , B_(dispersion.get_CorrelationPtr()->get_reducedCorrelMatrixB())

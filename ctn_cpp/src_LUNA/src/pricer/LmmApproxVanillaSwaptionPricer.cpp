@@ -86,7 +86,6 @@ double LmmApproxVanillaSwaptionPricer::volBlack(const VanillaSwaption& vanillasw
 
 	//! Robonato Formula: YY TODO: can be simplified: use the symmetric ! 
 	LMM::Index swaptionIndexMaturity = vanillaswaption.get_indexMaturity();
-	//const std::vector<double>& liborsInitValue = lmm_->get_liborsInitValue(); // ctntodo delete here and delete liborsInitValue_ in Lmm
 	const std::vector<LMM::Index>& floatingLegPaymentIndexSchedule = vanillaSwap.get_floatingLegPaymentIndexSchedule();
 
 	double volSquare = 0.0;
@@ -104,7 +103,7 @@ double LmmApproxVanillaSwaptionPricer::volBlack(const VanillaSwaption& vanillasw
 			// tensor_(k,i,j): L_i, L_j 's integral of vol in [T_{k-1},T_k]
 
 			const double& cumulated_covariance_tensor = lmm_->get_cumulatedcovarianceTensor(swaptionIndexMaturity, indexLibor_i, indexLibor_j);
-			volSquare += buffer_omega[i]*buffer_omega[j]*liborsInitValue[indexLibor_i]*liborsInitValue[indexLibor_j]*cumulated_covariance_tensor;
+			volSquare += buffer_omega[i]*buffer_omega[j]*liborsInitValue[indexLibor_i]*liborsInitValue[indexLibor_j]*cumulated_covariance_tensor; //ctntodo bug here i=1, j=2
 		}
 	}
 

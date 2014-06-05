@@ -38,14 +38,15 @@ public:
 						size_t indexLibor) const;
 
 	// getter
-	size_t getNbFactors() const { return nbFactor_ ; }
-	size_t get_horizon()  const { return lmmTenorStructure_->get_horizon() ; }
+	LMM::Index getNbFactors() const { return nbFactor_ ; }
+
+	LMM::Index get_horizon()  const { return lmmTenorStructure_->get_horizon() ; }
+	LMM::Index get_nbLIBOR()  const { return lmmTenorStructure_->get_nbLIBOR() ; }
 
 	const        Correlation_PTR& get_CorrelationPtr()        const { return correlation_        ; }
 	const  LMMTenorStructure_PTR& get_lmmTenorStructure()     const { return lmmTenorStructure_  ; }
 	const VolatilityFunction_PTR& get_VolatilityFunctionPtr() const { return volatilityFunction_ ; }
-
-
+	
 protected:
 
 	const size_t nbFactor_;                            // comes from correlation_.reducedRank

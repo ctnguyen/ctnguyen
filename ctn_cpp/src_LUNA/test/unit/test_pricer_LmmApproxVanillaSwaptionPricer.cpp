@@ -62,7 +62,7 @@ BOOST_AUTO_TEST_CASE(test_constructors)
 	double fwdRate = 0.4;
 	std::vector<double> liborsInitValue(lmmTenorStructure->get_horizon()+1, fwdRate);
 
-	Lmm_PTR lmm(new Lmm(dispersion, shifts, liborsInitValue) );
+	Lmm_PTR lmm(new Lmm(dispersion, shifts) );
 	//std::cout<<*lmm<<std::endl<<std::endl<<std::endl;
 	
 	// create Vanilla Swap
