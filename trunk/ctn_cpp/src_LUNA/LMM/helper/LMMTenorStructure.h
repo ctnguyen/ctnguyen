@@ -18,15 +18,20 @@
 /*! \class LMMTenorStructure used as a basis topological, timeline, timestep for simulation
  *
  *  Implement the structure of LMM model
- *   - number of setlement dates ,T_k, k from 0 to N (horizon)   
+ *   - number of setlement dates ,T_k, k from 0 to N+1 (horizon)   
  *   - the setlement date set (tenorDates)    (converted to year unit)
  *   - the tenor set (\tau_k)                 (converted to year unit)
  *
  *     T[i]    0   1    2    3    ...                    N+1
- * timeline    *---*----*----*---*----*----*---*----*----*
- *  \tau[i]      0    1   2                           N
+ * timeline    *---*----*----*---*----*----*---*----*----*   \\ horizon_ = N
+ *  \tau[i]      0   1    2                            N
+ * use  L_i      0   1    2                            N
  *
- * tau_i = T_{i+1} - T_i
+ * T_{i+1}-T_i = \tau_i   <-- use of -->   L_i = L(t,T_i,T_{i+1})
+ *
+ * /!\ The reason there are N+1 date because in our code, N is a number of LIBORs
+ *     Our convention  : L_i is the forward LIBOR L(t,T_i,T_{i+1}), i-LiborIndex run from 1 to N
+ *     Hence for having N LIBORs, we create N+2 dates nodes
  */
 class LMMTenorStructure //ctntodo this class has to be singleton
 {
@@ -48,7 +53,6 @@ public:
 	
 	const double&              get_tenorDate(size_t index) const ;
 	const std::vector<double>& get_tenorDate(            ) const ;
-
 	
 	//! equal operator: 
     bool operator == (const LMMTenorStructure& LMMTenorStructure) const;

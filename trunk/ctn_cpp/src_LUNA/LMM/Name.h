@@ -2,6 +2,10 @@
 #define LMM_NAME_H
 #pragma once
 
+#include <vector>
+#include <utility> // std::pair, std::make_pair
+
+
 /*
 namespace Name
 {
@@ -19,7 +23,11 @@ namespace LMM
 	typedef size_t Index;
 
 	// Store a couple of years
-	typedef std::vector<std::vector<std::pair<double,double> > > Matrix_PairOfYears;
+	typedef std::vector<std::vector<std::pair<double,double> > > Matrix_PairOfYears   ;
+
+	typedef std::vector<std::vector<std::pair<size_t,size_t> > > Matrix_PairOfMonths  ;
+
+	typedef std::vector<std::vector<std::pair<size_t,size_t> > > Matrix_PairOfIndices ;
 }
 
 #endif /* LMM_NAME_H */

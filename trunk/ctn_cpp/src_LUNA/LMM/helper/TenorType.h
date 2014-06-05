@@ -24,8 +24,10 @@ public:
 	 * - NB_MONTH number of month of tenor type
 	 * by specializing this template
 	 */
-	template<unsigned int TYPEID> class TenorType
+	template<unsigned int TYPEID> class TenorType 
 	{
+		//ctntodo change this class to TenorTypeItem, and Tenor to TenorType
+		//        add static const double YEAR_FRACTION;
 	public :
 		TenorType(){};
 		static const char*        NAME     ;
