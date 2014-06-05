@@ -380,6 +380,8 @@ int main()
 	//
 	//#pragma region Calibration
 
+
+/*
 	//-- Create all matrices (swap rates, vol, ...) needed for calibration
 	//matrix_ swaptionMatrix;
 	matrix_ strikes;
@@ -392,12 +394,14 @@ int main()
 	size_t fixingTenor_calibration = 12;
 	size_t fix_float_ratio = fixingTenor_calibration/floatingTenor_calibration;
 
-
+	//matrix_of_years here seems to be a matrix of simulation's dates //use only here
 	LMM::Matrix_PairOfYears matrix_of_years = DateCreator::createSwaptionMatrixDates_Years(N+2,floatingTenor_calibration/12.);
+	
+	//matrix_of_months here seems to be a matrix of simulation's month //use only here
 	matrix_pairOfMonths matrix_of_months = DateCreator::convertSwaptionDates_YearsToMonths(matrix_of_years);
 	matrix_pairOfIndices matrix_of_indices = DateCreator::convertSwaptionDates_MonthsToIndices(floatingTenor_calibration/12.,matrix_of_months);
 
-	LMM::Matrix_PairOfYears truncatedMatYears = mktInfoHandler.chooseSwapMaturitiesAndTenors(10,matrix_of_years);
+	//LMM::Matrix_PairOfYears truncatedMatYears = mktInfoHandler.chooseSwapMaturitiesAndTenors(10,matrix_of_years);
 
 	Approximation approx2(vol,tenorDates);
 
@@ -595,6 +599,10 @@ int main()
 	outputFile << endl;
 
 	outputFile.close();
+
+	*/
+
+
 
 	//#pragma endregion 
 	/* End Calibration */

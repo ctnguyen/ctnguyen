@@ -21,14 +21,14 @@ namespace LMM
  * Each simulation index correspond to a simulated Libor
  *
  * Float Leg's indices                 S      fixedTenor        |       fixedTenor    | 
- * Simulation indices    0--st--1--st--2--st--3--st---4---st---*--st---*--st--*--st--*---st---N+1     // st is the SimulationTenor
+ * Simulation indices    0-----T1-----T2-----T3------T4--------*-------*------*------*--------T_{N+1}     // Simulation TimeLine
  * Fixed Leg's indices                 S  floatTenor   |   floatTenor   | floatTenor  | 
  *
  * S and E are start Index and end Index in the simulation base
- * 
- * (endIndex-startIndex)  has to be multiple of (fixedTenor%st) and (floatTenor%st) where st is the s_imulation t_enor
+ * Simulation Tenor st =  T_{i+1} - T_i  for all i
+ * (endIndex-startIndex)  has to be multiple of (fixedTenor%st) AND (floatTenor%st) 
  *
- * !!! For instance, floatTenor=simulationTenor
+ * !!! For instance, floatTenor=simulationTenor = T_{i+1} - T_i for a swap
  */
 class VanillaSwap
 {
