@@ -13,18 +13,21 @@
 #include <LMM/pricer/VanillaSwapPricer.h>
 
 
-//-- Class defining approx methods for swaption pricing  
-class LmmApproxVanillaSwaptionPricer : public VanillaSwapPricer // to use the precalculation.
+/*! \class LmmApproxVanillaSwaptionPricer
+ *  Defining approx methods for swaption pricing
+ *  to use the precalculation.
+ */
+class LmmApproxVanillaSwaptionPricer : public VanillaSwapPricer
 {
 
 public:
 	//! constructor  
-	LmmApproxVanillaSwaptionPricer(const Lmm_PTR& lmmModel, const VanillaSwaption_PTR& swaption);
+	LmmApproxVanillaSwaptionPricer(const Lmm_PTR& lmmModel, const VanillaSwaption& swaption);
 
 	//! destructor
 	virtual ~LmmApproxVanillaSwaptionPricer();
 
-	double volBlack() const;
+	double volBlack(const VanillaSwaption& vanillaSwaption, const std::vector<double>& liborsInitValue) const;
 
 	void accumulateShiftedSwapRateAndStrike(
 		double& out_shifted_swapRate_T0 ,
@@ -46,24 +49,31 @@ public:
 		const std::vector<double> & libor_shifts) const;
 
 private:
+
     Lmm_PTR lmm_;
-	VanillaSwaption_PTR vanillaswaption_;
 
-	//! Working place: pre-calculation: calculate much more things but who cares :)
-	std::vector<double> ZC_;         // ZC_[i] = P(T_0, T_i), so ZC_[0] = 1.0
-	std::vector<double> numeraire_;  // numeraire_[i] = 1/ZC_[i]
-
-	/*!see Brigo 2006, p.239 (6.34) or Adrien THAI p.31
+	/*! Each time giving a Libor vector at date zero L_i(0), we can compute the correspondant values as
+	 *
+	 *       Zero Coupon, Numeraire, Omega_i(0), Anuity_i(0)
+	 *
+	 * For the calcul of \omega_i(0) see Brigo 2006, p.239 (6.34) or Adrien THAI p.31
+	 *
 	 * ATTENTION Omega vector only store \omega from indexStart to indexEnd of Swap for calculating the approximation of SwapRate
 	 * there are a shifted indices in relation to Libor indices
 	 */
-	std::vector<double> omega0_;     // omega_[i] = deltaT_floating[i] P(T_0,T_{i+1}) / annuity
+	mutable std::vector<double> buffer_ZC        ;  // buffer_ZC[i] = P(T_0, T_i), so buffer_ZC[0] = 1.0
+	mutable std::vector<double> buffer_numeraire ;  // buffer_numeraire[i] = 1/buffer_ZC[i]
+	mutable std::vector<double> buffer_omega     ;  // omega_[i] = deltaT_floating[i] P(T_0,T_{i+1}) / annuity
+	mutable double              buffer_anuity    ;
 
 private:
 	
-	void preCalculateNumeraireAndZC();
-	
-	void preCalculateOmega();
+	//! precalculated has to do in this order : ZeroCoupon --> Numeraires --> Anuities --> Omegas
+
+	void preCalculateNumeraireAndZC(const std::vector<double> & liborsInitValue) const ;
+	void preCalculateAnuity        (const std::vector<double> & liborsInitValue, const VanillaSwaption& vanillaswaption ) const ;
+	void preCalculateOmega         (const std::vector<double> & liborsInitValue, const VanillaSwaption& vanillaswaption ) const ;
+	void preCalculateALL           (const std::vector<double> & liborsInitValue, const VanillaSwaption& vanillaswaption ) const ; //ctntodo this method tobe public
 
 	double omega0(size_t i, const double& annuity_T0, const std::vector<double>& bonds_T0) const;
 

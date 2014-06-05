@@ -21,15 +21,13 @@
  *   - number of setlement dates ,T_k, k from 0 to N+1 (horizon)   
  *   - the setlement date set (tenorDates)    (converted to year unit)
  *   - the tenor set (\tau_k)                 (converted to year unit)
- *   - the LIBORS set L_i. Theses libors can be the simulated ones or interpolated of market's data
- *     /!\  Its storage here ensure the coherence of Libors and the LMM structures
  *
  *     T[i]    0   1    2    3    ...                    N+1
  * timeline    *---*----*----*---*----*----*---*----*----*   \\ horizon_ = N
  *  \tau[i]      0   1    2                            N
- * use  L_i      0   1    2                            N
+ *   L_i(t)      0   1    2                            N
  *
- * T_{i+1}-T_i = \tau_i   <-- use of -->   L_i = L(t,T_i,T_{i+1})
+ * T_{i+1}-T_i = \tau_i   <-- use of -->   L_i(t) = L(t,T_i,T_{i+1})
  *
  * /!\ The reason there are N+1 date because in our code, N is a number of LIBORs
  *     Our convention  : L_i is the forward LIBOR L(t,T_i,T_{i+1}), i-LiborIndex run from 1 to N
@@ -46,22 +44,13 @@ public:
 	 */
 	LMMTenorStructure(const Tenor&  tenorType, const size_t nbYear);
 
-	/* reset LIBORS values
-	 * That should be LIBOR simulated or interpolated import from Market
-	 */
-	void reset_LIBORS(const std::vector<double>& libors) ; 
-
 	//! getter
-	const Tenor& get_tenorType()                           const ;
+	LMM::Index   get_horizon()   const ;
+	LMM::Index   get_nbLIBOR()   const ;
+	const Tenor& get_tenorType() const ;
 
-	LMM::Index get_horizon() const ;
-	LMM::Index get_nbLIBOR() const ;
-	
 	const double&              get_deltaT(size_t index)    const ;
 	const std::vector<double>& get_deltaT(            )    const ;
-
-	const double&              get_LIBORS(size_t index)    const ;
-	const std::vector<double>& get_LIBORS(            )    const ;
 	
 	const double&              get_tenorDate(size_t index) const ;
 	const std::vector<double>& get_tenorDate(            ) const ;
@@ -80,8 +69,6 @@ private:
 
 	std::vector<double>  tenorDates_  ;    // size = N+2, T_0, T_1,        ..........     T_{N+1}
 	std::vector<double>  tenorDeltaT_ ;    // size = N+1, \tau_0, \tau_1,  ..... \tau_{N}
-	
-	std::vector<double>  liborValues_ ;    // size = N+1, L_0, L_1,   ....          ,L_N 
 };
 
 typedef boost::shared_ptr<LMMTenorStructure> LMMTenorStructure_PTR;

@@ -10,24 +10,24 @@ BOOST_AUTO_TEST_SUITE(lmm_test_LMMTenorStructure)
 BOOST_AUTO_TEST_CASE(test_LMMTenorStrucure_constructor)
 {
 	Tenor tenorType = Tenor::_3M;
-	size_t horizonYear = 10;
+	size_t nbYear = 10;
 
-	LMMTenorStructure lmmTenorStructure(tenorType, horizonYear);
+	LMMTenorStructure lmmTenorStructure(tenorType, nbYear);
 
 	BOOST_CHECK(true);
 }
 
 BOOST_AUTO_TEST_CASE(test_LMMTenorStrucure_comparator)
 {
-	Tenor tenor1 = Tenor::_3M ; size_t horizonYear1 = 2;
-	Tenor tenor2 = Tenor::_3M ; size_t horizonYear2 = 2;
-	Tenor tenor3 = Tenor::_6M ; size_t horizonYear3 = 2;
-	Tenor tenor4 = Tenor::_3M ; size_t horizonYear4 = 4;
+	Tenor tenor1 = Tenor::_3M ; size_t nbYear1 = 2;
+	Tenor tenor2 = Tenor::_3M ; size_t nbYear2 = 2;
+	Tenor tenor3 = Tenor::_6M ; size_t nbYear3 = 2;
+	Tenor tenor4 = Tenor::_3M ; size_t nbYear4 = 4;
 
-	LMMTenorStructure lmmTenorStructure1(tenor1, horizonYear1);
-	LMMTenorStructure lmmTenorStructure2(tenor2, horizonYear2);
-	LMMTenorStructure lmmTenorStructure3(tenor3, horizonYear3);
-	LMMTenorStructure lmmTenorStructure4(tenor4, horizonYear4);
+	LMMTenorStructure lmmTenorStructure1(tenor1, nbYear1);
+	LMMTenorStructure lmmTenorStructure2(tenor2, nbYear2);
+	LMMTenorStructure lmmTenorStructure3(tenor3, nbYear3);
+	LMMTenorStructure lmmTenorStructure4(tenor4, nbYear4);
 
 	BOOST_CHECK(lmmTenorStructure1 == lmmTenorStructure2);
 	BOOST_CHECK(lmmTenorStructure1 != lmmTenorStructure3);
@@ -37,10 +37,10 @@ BOOST_AUTO_TEST_CASE(test_LMMTenorStrucure_comparator)
 BOOST_AUTO_TEST_CASE(test_LMMTenorStrucure_dates)
 {
 	Tenor tenor = Tenor::_6M ; size_t tenorInMonth = tenor.convertToMonth();
-	size_t horizonYear = 2;
-	size_t horizonsize = horizonYear * (12 / tenorInMonth);
+	size_t nbYear = 2;
+	size_t horizonsize = nbYear * (12 / tenorInMonth);
 
-	LMMTenorStructure lmmTenorStructure(tenor, horizonYear);
+	LMMTenorStructure lmmTenorStructure(tenor, nbYear);
 
 	BOOST_CHECK(lmmTenorStructure.get_horizon() == horizonsize   ) ;
 	BOOST_CHECK(lmmTenorStructure.get_nbLIBOR() == horizonsize+1 ) ;
@@ -64,30 +64,7 @@ BOOST_AUTO_TEST_CASE(test_LMMTenorStrucure_dates)
 	BOOST_CHECK(dates[4] == 2.0 );
 	BOOST_CHECK(dates[5] == 2.5 );
 
-	lmmTenorStructure.print("test_LMMTenorStructure.csv");
-}
-
-
-BOOST_AUTO_TEST_CASE(test_LMMTenorStrucure_libors)
-{
-	Tenor tenor = Tenor::_6M ; size_t tenorInMonth = tenor.convertToMonth();
-	size_t horizonYear = 2;
-	size_t horizonsize = horizonYear * (12 / tenorInMonth);
-
-	LMMTenorStructure lmmTenorStructure(tenor, horizonYear);
-
-	const std::vector<double>& libors = lmmTenorStructure.get_LIBORS();
-
-	BOOST_CHECK( lmmTenorStructure.get_nbLIBOR() == libors.size() ) ;
-	
-	// before a reset, all libors in this structure are initialized to negative values
-	BOOST_CHECK( libors[0] < 0.) ; 
-
-	std::vector<double> newlibors(lmmTenorStructure.get_nbLIBOR(),1.);
-	
-	lmmTenorStructure.reset_LIBORS(newlibors);
-	
-	BOOST_CHECK( lmmTenorStructure.get_LIBORS(0) == 1. ) ; 
+	lmmTenorStructure.print("unitTest_LMMTenorStructure.csv");
 }
 
 BOOST_AUTO_TEST_SUITE_END()
