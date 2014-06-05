@@ -21,6 +21,11 @@ LmmApproxVanillaSwaptionPricer::LmmApproxVanillaSwaptionPricer(const Lmm_PTR& lm
 	this->preCalculateOmega();
 }
 
+LmmApproxVanillaSwaptionPricer::~LmmApproxVanillaSwaptionPricer()
+{
+
+}
+
 
 void LmmApproxVanillaSwaptionPricer::preCalculateNumeraireAndZC()
 {
