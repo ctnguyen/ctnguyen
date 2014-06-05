@@ -12,11 +12,12 @@ class VanillaSwapPricer
 {
 
 public:
-
+	//! constructor
 	VanillaSwapPricer(LMMTenorStructure_PTR lmmTenorStructure);
+	//! destructor
+	virtual ~VanillaSwapPricer();
 
 	//! To validate the result
-
 	// initLibor[i] = L_i[T_0]
 	double swapNPV_Analytical_1(const LMM::VanillaSwap& vanillaSwap, const std::vector<double>& liborsInitValue)  const;
 

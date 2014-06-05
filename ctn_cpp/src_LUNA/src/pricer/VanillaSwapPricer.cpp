@@ -3,6 +3,9 @@
 
 VanillaSwapPricer::VanillaSwapPricer(LMMTenorStructure_PTR lmmTenorStructure)	: lmmTenorStructure_(lmmTenorStructure){};
 
+VanillaSwapPricer::~VanillaSwapPricer()
+{}
+
 double VanillaSwapPricer::swapNPV_Analytical_1(const LMM::VanillaSwap& vanillaSwap, const std::vector<double>& liborsInitValue)  const // initLibor[i] = L_i[T_0]
 {
 	assert(lmmTenorStructure_->get_horizon()+1 == liborsInitValue.size());
