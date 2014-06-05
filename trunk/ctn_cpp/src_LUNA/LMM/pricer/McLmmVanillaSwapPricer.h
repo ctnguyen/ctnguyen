@@ -14,8 +14,8 @@ protected:
 	MCLmm_PTR mcLmm_; // model
 public:
 	MCLmmVanillaSwapPricer(const MCLmm_PTR& mcLmm)
-		: VanillaSwapPricer(mcLmm->get_LMMTenorStructure()),
-		  mcLmm_(mcLmm)
+	: VanillaSwapPricer(mcLmm->get_LMMTenorStructure() )
+	, mcLmm_(mcLmm)
 	{};
 
 	//! Pricing at time T0=0

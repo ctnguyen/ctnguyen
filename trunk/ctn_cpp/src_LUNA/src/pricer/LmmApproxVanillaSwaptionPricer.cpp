@@ -7,18 +7,15 @@
 
 #include <LMM/pricer/LmmApproxVanillaSwaptionPricer.h>
 
-LmmApproxVanillaSwaptionPricer::LmmApproxVanillaSwaptionPricer(const Lmm_PTR& lmmModel, const VanillaSwaption_PTR& swaption)
+LmmApproxVanillaSwaptionPricer::LmmApproxVanillaSwaptionPricer(const Lmm_PTR& lmmModel, const VanillaSwaption& swaption)
 	: VanillaSwapPricer(lmmModel->get_LMMTenorStructure() )
 	, lmm_(lmmModel)
-	, vanillaswaption_(swaption)
-	, ZC_(lmm_->get_horizon()+2)
-	, numeraire_(lmm_->get_horizon()+2)
-	, omega0_(vanillaswaption_->getUnderlyingSwap().get_floatingLegPaymentIndexSchedule().size() )
+	, buffer_ZC(lmm_->get_horizon()+2)
+	, buffer_numeraire(lmm_->get_horizon()+2)
+	, buffer_omega(swaption.getUnderlyingSwap().get_floatingLegPaymentIndexSchedule().size() )
+	, buffer_anuity()
 {
 	assert(lmm_->get_LMMTenorStructure()->get_tenorDate()[0] == 0.0);
-
-	this->preCalculateNumeraireAndZC();
-	this->preCalculateOmega();
 }
 
 LmmApproxVanillaSwaptionPricer::~LmmApproxVanillaSwaptionPricer()
@@ -27,26 +24,34 @@ LmmApproxVanillaSwaptionPricer::~LmmApproxVanillaSwaptionPricer()
 }
 
 
-void LmmApproxVanillaSwaptionPricer::preCalculateNumeraireAndZC()
+void LmmApproxVanillaSwaptionPricer::preCalculateNumeraireAndZC(const std::vector<double> & liborsInitValue) const
 {
+	assert(liborsInitValue.size() == buffer_ZC.size() );
+
 	const std::vector<double>& deltaT = lmm_->get_LMMTenorStructure()->get_deltaT();
-	const std::vector<double>& liborsInitValue = lmm_->get_liborsInitValue();
-	ZC_[0] = 1.0;numeraire_[0]=1.0;
-	for(size_t i=1; i<ZC_.size(); ++i)
+
+	buffer_ZC[0] = 1.0;buffer_numeraire[0]=1.0;
+	for(size_t i=1; i<buffer_ZC.size(); ++i)
 	{
 		size_t indexLibor = i-1;
-		ZC_[i] = ZC_[i-1]/(1+deltaT[indexLibor]*liborsInitValue[indexLibor]);
-		numeraire_[i] = 1/ZC_[i];
+		buffer_ZC[i] = buffer_ZC[i-1]/(1+deltaT[indexLibor]*liborsInitValue[indexLibor]);
+		buffer_numeraire[i] = 1/buffer_ZC[i];
 	}
 }
 
-
-void LmmApproxVanillaSwaptionPricer::preCalculateOmega()
+void LmmApproxVanillaSwaptionPricer::preCalculateAnuity(const std::vector<double> & liborsInitValue, const VanillaSwaption& vanillaswaption) const
 {
-	LMM::Index indexValuationDate = 0; // computed omega vector valuated at time t=0
+	const LMM::VanillaSwap& vanillaSwap = vanillaswaption.getUnderlyingSwap();
 
-	const LMM::VanillaSwap& vanillaSwap = vanillaswaption_->getUnderlyingSwap();
-	const double annuityValue = annuity(indexValuationDate, vanillaSwap, numeraire_);
+	buffer_anuity = annuity( 0, vanillaSwap, buffer_numeraire);
+}
+
+
+void LmmApproxVanillaSwaptionPricer::preCalculateOmega(const std::vector<double> & liborsInitValue, const VanillaSwaption& vanillaswaption) const
+{
+	assert(liborsInitValue.size() == buffer_ZC.size() );
+
+	const LMM::VanillaSwap& vanillaSwap = vanillaswaption.getUnderlyingSwap();
 
 	const std::vector<LMM::Index>& floatingLegPaymentIndexSchedule = vanillaSwap.get_floatingLegPaymentIndexSchedule();
 
@@ -58,21 +63,30 @@ void LmmApproxVanillaSwaptionPricer::preCalculateOmega()
 		//size_t indexT     = indexLibor;                                        // = i
 		const std::vector<double>& deltaTFloatingLeg_ = vanillaSwap.get_DeltaTFloatLeg();
 		const double& delta_T    = deltaTFloatingLeg_[itr];  
-		omega0_[itr] = delta_T*ZC_[floatingLegPaymentIndex] / annuityValue;
+		buffer_omega[itr] = delta_T*buffer_ZC[floatingLegPaymentIndex] / buffer_anuity;
 	}
 }
 
-
-double LmmApproxVanillaSwaptionPricer::volBlack() const
+void LmmApproxVanillaSwaptionPricer::preCalculateALL (const std::vector<double> & liborsInitValue, const VanillaSwaption& vanillaswaption) const
 {
-	const LMM::VanillaSwap& vanillaSwap = vanillaswaption_->getUnderlyingSwap();
+	this->preCalculateNumeraireAndZC(liborsInitValue) ;
+	this->preCalculateAnuity        (liborsInitValue, vanillaswaption) ;
+	this->preCalculateOmega         (liborsInitValue, vanillaswaption) ;
+}
+
+
+double LmmApproxVanillaSwaptionPricer::volBlack(const VanillaSwaption& vanillaswaption, const std::vector<double>& liborsInitValue) const
+{
+	this->preCalculateALL(liborsInitValue  ,vanillaswaption);
+
+	const LMM::VanillaSwap& vanillaSwap = vanillaswaption.getUnderlyingSwap();
 
 	assert(lmm_->get_horizon() >= vanillaSwap.get_indexEnd()); //! if not cannot price it.
 	assert(lmm_->get_LMMTenorStructure()->get_tenorType() == vanillaSwap.get_simulationTenorType() );
 
 	//! Robonato Formula: YY TODO: can be simplified: use the symmetric ! 
-	LMM::Index swaptionIndexMaturity = vanillaswaption_->get_indexMaturity();
-	const std::vector<double>& liborsInitValue = lmm_->get_liborsInitValue();
+	LMM::Index swaptionIndexMaturity = vanillaswaption.get_indexMaturity();
+	//const std::vector<double>& liborsInitValue = lmm_->get_liborsInitValue(); // ctntodo delete here and delete liborsInitValue_ in Lmm
 	const std::vector<LMM::Index>& floatingLegPaymentIndexSchedule = vanillaSwap.get_floatingLegPaymentIndexSchedule();
 
 	double volSquare = 0.0;
@@ -90,7 +104,7 @@ double LmmApproxVanillaSwaptionPricer::volBlack() const
 			// tensor_(k,i,j): L_i, L_j 's integral of vol in [T_{k-1},T_k]
 
 			const double& cumulated_covariance_tensor = lmm_->get_cumulatedcovarianceTensor(swaptionIndexMaturity, indexLibor_i, indexLibor_j);
-			volSquare += omega0_[i]*omega0_[j]*liborsInitValue[indexLibor_i]*liborsInitValue[indexLibor_j]*cumulated_covariance_tensor;
+			volSquare += buffer_omega[i]*buffer_omega[j]*liborsInitValue[indexLibor_i]*liborsInitValue[indexLibor_j]*cumulated_covariance_tensor;
 		}
 	}
 

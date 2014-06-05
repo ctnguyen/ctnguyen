@@ -6,16 +6,16 @@
 #include <LMM/helper/EqualOperator.h>
 
 //! constructor
-LMMTenorStructure::LMMTenorStructure(const Tenor&  tenorType, const size_t horizonYear)
+LMMTenorStructure::LMMTenorStructure(const Tenor&  tenorType, const size_t nbYear)
 : tenorType_(tenorType)
 {
-	assert(horizonYear>1);
+	assert(nbYear>1);
 
 	if(!tenorType.isValidTenor()) throw("Error: is not valid tenorType.");
 
 	size_t nbMonthTenorType = tenorType.convertToMonth();
 	
-	horizon_ = horizonYear*(12/nbMonthTenorType);	//ctntodo potential bug when 2 years, 9M	
+	horizon_ = nbYear*(12/nbMonthTenorType);	//ctntodo potential bug when 2 years, 9M
 
 	double tenorDateStep = tenorType.convertToYear();
 
@@ -31,21 +31,6 @@ LMMTenorStructure::LMMTenorStructure(const Tenor&  tenorType, const size_t horiz
 	{
 		tenorDeltaT_[i] = tenorDates_[i+1] - tenorDates_[i];
 	}		
-
-	//! initialize libors at negative values in order to tel user need to reset_LIBORS before using them
-	liborValues_ = std::vector<double>(horizon_+1,-1000.);
-}
-
-void LMMTenorStructure::reset_LIBORS(const std::vector<double>& libors) 
-{
-	size_t lenght = libors.size();
-	
-	assert(libors.size() == liborValues_.size());
-	
-	for(size_t i=0;i<lenght;++i)
-	{
-		liborValues_[i] = libors[i]; 
-	}
 }
 
 const Tenor& LMMTenorStructure::get_tenorType() const {return tenorType_;}
@@ -55,10 +40,6 @@ LMM::Index LMMTenorStructure::get_nbLIBOR() const { return horizon_+1 ; }
 
 const double&              LMMTenorStructure::get_deltaT(size_t index) const { return tenorDeltaT_[index]; }
 const std::vector<double>& LMMTenorStructure::get_deltaT(            ) const { return tenorDeltaT_;        }
-
-const double&              LMMTenorStructure::get_LIBORS(size_t index) const { return liborValues_ [index];}
-const std::vector<double>& LMMTenorStructure::get_LIBORS(            ) const { return liborValues_ ;       }
-
 
 const double&              LMMTenorStructure::get_tenorDate(size_t index) const { return tenorDates_[index]; }
 const std::vector<double>& LMMTenorStructure::get_tenorDate(            ) const { return tenorDates_;        }
