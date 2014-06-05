@@ -32,6 +32,10 @@ add_test(unitTest_helper_MarketInfoCollector ${CMAKE_CURRENT_BINARY_DIR}/unitTes
 #target_link_libraries(unitTest_helper_QMcGenerator LMM_helper)
 #add_test(unitTest_helper_QMcGenerator ${CMAKE_CURRENT_BINARY_DIR}/unitTest_helper_QMcGenerator "--log_level=message")
 
+add_executable(unitTest_helper_Tensor "test_helper_Tensor.cpp")
+target_link_libraries(unitTest_helper_Tensor LMM_helper)
+add_test(unitTest_helper_Tensor ${CMAKE_CURRENT_BINARY_DIR}/unitTest_helper_Tensor "--log_level=message")
+
 add_executable(unitTest_helper_Tenor "test_Tenor.cpp")
 target_link_libraries(unitTest_helper_Tenor LMM_helper)
 add_test(unitTest_helper_Tenor ${CMAKE_CURRENT_BINARY_DIR}/unitTest_helper_Tenor "--log_level=message")

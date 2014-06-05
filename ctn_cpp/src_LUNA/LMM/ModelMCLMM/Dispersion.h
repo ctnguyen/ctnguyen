@@ -21,16 +21,9 @@
 class Dispersion 
 {
 
-protected:
-	const size_t nbFactor_;                            // comes from correlation_.reducedRank
-	LMMTenorStructure_PTR lmmTenorStructure_;        // comes from volatility .
-	Correlation_PTR correlation_;  
-	VolatilityFunction_PTR volatilityFunction_;  
-
 public:
 
-	Dispersion(Correlation_PTR correlation_,
-			   VolatilityFunction_PTR volatilityFunction);
+	Dispersion(Correlation_PTR correlation_, VolatilityFunction_PTR volatilityFunction);
 
 	virtual ~Dispersion(){}
 
@@ -44,15 +37,22 @@ public:
 						size_t indexTime_j,
 						size_t indexLibor) const;
 
-	LMMTenorStructure_PTR get_lmmTenorStructure() const {return lmmTenorStructure_;}
-	size_t get_horizon() const {return lmmTenorStructure_->get_horizon();}
-
 	// getter
-	size_t getNbFactors() const {return nbFactor_;}
-	const VolatilityFunction_PTR& get_VolatilityFunctionPtr() const{return volatilityFunction_;}
-	const Correlation_PTR&  get_CorrelationPtr() const {return correlation_;}
-};
+	size_t getNbFactors() const { return nbFactor_ ; }
+	size_t get_horizon()  const { return lmmTenorStructure_->get_horizon() ; }
 
+	const        Correlation_PTR& get_CorrelationPtr()        const { return correlation_        ; }
+	const  LMMTenorStructure_PTR& get_lmmTenorStructure()     const { return lmmTenorStructure_  ; }
+	const VolatilityFunction_PTR& get_VolatilityFunctionPtr() const { return volatilityFunction_ ; }
+
+
+protected:
+
+	const size_t nbFactor_;                            // comes from correlation_.reducedRank
+	LMMTenorStructure_PTR lmmTenorStructure_;        // comes from volatility .
+	Correlation_PTR correlation_;  
+	VolatilityFunction_PTR volatilityFunction_;  
+};
 
 typedef  boost::shared_ptr<Dispersion>  Dispersion_PTR;
 
