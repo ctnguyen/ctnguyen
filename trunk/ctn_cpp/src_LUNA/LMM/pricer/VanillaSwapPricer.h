@@ -13,7 +13,7 @@ class VanillaSwapPricer
 
 public:
 
-	VanillaSwapPricer(ConstLMMTenorStructure lmmTenorStructure);
+	VanillaSwapPricer(LMMTenorStructure_PTR lmmTenorStructure);
 
 	//! To validate the result
 
@@ -61,7 +61,7 @@ protected:
 
 protected:
 
-	ConstLMMTenorStructure lmmTenorStructure_;	
+	LMMTenorStructure_PTR lmmTenorStructure_;	
 };
 
 #endif /* LMM_PRICER_VANILLASWAPPRIER_H */

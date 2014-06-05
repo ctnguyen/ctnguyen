@@ -1,7 +1,7 @@
 #include <LMM/pricer/VanillaSwapPricer.h>
 
 
-VanillaSwapPricer::VanillaSwapPricer(ConstLMMTenorStructure lmmTenorStructure)	: lmmTenorStructure_(lmmTenorStructure){};
+VanillaSwapPricer::VanillaSwapPricer(LMMTenorStructure_PTR lmmTenorStructure)	: lmmTenorStructure_(lmmTenorStructure){};
 
 double VanillaSwapPricer::swapNPV_Analytical_1(const LMM::VanillaSwap& vanillaSwap, const std::vector<double>& liborsInitValue)  const // initLibor[i] = L_i[T_0]
 {

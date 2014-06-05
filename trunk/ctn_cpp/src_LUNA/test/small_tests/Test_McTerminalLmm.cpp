@@ -16,7 +16,7 @@ BOOST_AUTO_TEST_CASE(test_McTerminalLmm)  // OK: Test passed!
 	//! LMMTenorStructure
 	Tenor tenorType = Tenor::_6M;
 	size_t horizonYear = 2;
-	ConstLMMTenorStructure lmmTenorStructure( new LMMTenorStructure(tenorType, horizonYear));
+	LMMTenorStructure_PTR lmmTenorStructure( new LMMTenorStructure(tenorType, horizonYear));
 	lmmTenorStructure->print("test_McTerminalLmm_Tenor.csv");
 
 	//! volatility function

@@ -67,7 +67,7 @@ public:
 	//! Getter
 	//! information contained in Dispersion
 	size_t                             get_horizon() const ; //{return dispersion_.get_horizon();}
-	ConstLMMTenorStructure  get_LMMTenorStructure () const ; //{return dispersion_.get_lmmTenorStructure();}
+	LMMTenorStructure_PTR  get_LMMTenorStructure () const ; //{return dispersion_.get_lmmTenorStructure();}
 	
 	const std::vector<double>&          get_shifts() const ; //{return shifts_;}
 	const std::vector<double>& get_liborsInitValue() const ; //{return liborsInitValue_;}

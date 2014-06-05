@@ -31,7 +31,7 @@ LMM::VanillaSwap get_VanillaSwap()
 	LMM::Index  indexEnd   = 18; // 28;
 	Tenor	floatingLegTenorType = Tenor::_6M;
 	Tenor	fixedLegTenorType    = Tenor::_1Y;
-	ConstLMMTenorStructure simulationStructure(new LMMTenorStructure(Tenor::_6M , 15) );
+	LMMTenorStructure_PTR simulationStructure(new LMMTenorStructure(Tenor::_6M , 15) );
 
 	LMM::VanillaSwap vanillaSwap(strike, indexStart, indexEnd, floatingLegTenorType, fixedLegTenorType, simulationStructure);
 	return vanillaSwap;
@@ -50,7 +50,7 @@ MCLmm_PTR get_McLmm(bool TerminalOrSpotProb, MCSchemeType::MCSchemeType mcScheme
 	//! LMMTenorStructure
 	Tenor tenorType = Tenor::_6M;
 	size_t horizonYear = 15;
-	ConstLMMTenorStructure lmmTenorStructure(new LMMTenorStructure(tenorType, horizonYear));
+	LMMTenorStructure_PTR lmmTenorStructure(new LMMTenorStructure(tenorType, horizonYear));
 	lmmTenorStructure->print("test_VanillaSwapPricer_Tenor.csv");
 
 	//! volatility function

@@ -23,7 +23,7 @@ BOOST_AUTO_TEST_CASE(test_VanillaSwap_constructor)
 
 	Tenor FixedTenor = Tenor::_9M;
 	Tenor FloatTenor = Tenor::_3M;
-	ConstLMMTenorStructure simulationStructure(new LMMTenorStructure(Tenor::_3M , 10) );
+	LMMTenorStructure_PTR simulationStructure(new LMMTenorStructure(Tenor::_3M , 10) );
 
 	LMM::VanillaSwap swap(strike, startIndex, endIndex, FloatTenor, FixedTenor, simulationStructure);
 
@@ -40,7 +40,7 @@ BOOST_AUTO_TEST_CASE(test_VanillaSwap_configure)
 	LMM::Index endIndex   = 5;
 
 	Tenor FixedTenor = Tenor::_6M ; Tenor FloatTenor = Tenor::_3M;
-	ConstLMMTenorStructure simulationStructure(new LMMTenorStructure(Tenor::_3M , 2) );
+	LMMTenorStructure_PTR simulationStructure(new LMMTenorStructure(Tenor::_3M , 2) );
 
 	LMM::VanillaSwap swap(strike, startIndex, endIndex, FloatTenor, FixedTenor, simulationStructure);
 
