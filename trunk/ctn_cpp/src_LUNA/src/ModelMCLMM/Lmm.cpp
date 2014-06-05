@@ -1,14 +1,11 @@
 #include <LMM/ModelMCLMM/Lmm.h>
 #include <cassert>
 
-Lmm::Lmm(const Dispersion&                  dispersion,
-		 const std::vector<double>&         shifts,           // size = N+1
-		 const std::vector<double>&         liborsInitValue)
+Lmm::Lmm(const Dispersion& dispersion, const std::vector<double>& shifts) // size = N+1
 		 : dispersion_(dispersion)
 		 , shifts_(shifts)
 		 , covarianceTensor_         (dispersion_.get_horizon()+1, dispersion_.get_horizon()+1,dispersion_.get_horizon()+1)
 		 , cumulatedCovarianceTensor_(dispersion_.get_horizon()+1, dispersion_.get_horizon()+1,dispersion_.get_horizon()+1)
-		 , liborsInitValue_(liborsInitValue)
 {
 	initCovarianceTensor();
 	initCumulatedCovarianceTensor();
@@ -69,14 +66,12 @@ void Lmm::initCumulatedCovarianceTensor()
 }
 
 
-size_t Lmm::get_horizon() const {return dispersion_.get_horizon();}
+LMM::Index Lmm::get_horizon() const { return dispersion_.get_horizon() ; }
+LMM::Index Lmm::get_nbLIBOR() const { return dispersion_.get_nbLIBOR() ; }
 
 LMMTenorStructure_PTR Lmm::get_LMMTenorStructure () const {return dispersion_.get_lmmTenorStructure();}
 
 const std::vector<double>& Lmm::get_shifts()			  const {return shifts_;}
-
-const std::vector<double>& Lmm::get_liborsInitValue()  const {return liborsInitValue_;}
-
 
 const double& Lmm::get_covarianceTensor(size_t indexTime, size_t indexLibor_i, size_t indexLibor_j) const
 {
