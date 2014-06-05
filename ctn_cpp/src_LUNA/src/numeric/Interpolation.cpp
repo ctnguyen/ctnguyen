@@ -15,12 +15,13 @@ void Interpolation::linearInterpolation
 			const double&        x_interp
 			)
 {
-	
+	// the inserted point has to be in xmax and xmin
 	if (x_interp < x[0] || x_interp > x[x.size()-1])
 	{
 		throw("Interpolation.cpp ----> Error: invalid absciss input");
 	}
-	//-- Search the libor maturities bounding maturity_date
+
+	// find the index after the add point
 	size_t index_interp = 0;
 	for (size_t i = 0; i < x.size(); ++i) 
 	{
@@ -29,12 +30,12 @@ void Interpolation::linearInterpolation
 	}
 
 	//-- Set the dates before and after maturity_date
-	double date_prev = x[index_interp-1];
-	double date_next = x[index_interp];
+	const double& date_prev = x[index_interp-1];
+	const double& date_next = x[index_interp];
 
 	//-- Search in the libor matrix for libors corresponding to the previous dates
-	double libor_prev =  y[index_interp-1];
-	double libor_next = y[index_interp];
+	const double& libor_prev =  y[index_interp-1];
+	const double& libor_next = y[index_interp];
 
 	double coeff_1 = (date_next - x_interp)/(date_next - date_prev);
 	double coeff_2 = (x_interp - date_prev)/(date_next - date_prev);
