@@ -16,10 +16,10 @@
 //}
 //
 ////-- Size = horizon + 1
-//matrix_pairOfYears DateCreator::createSwaptionMatrixDates_Years(size_t size, double tenor)
+//Matrix_PairOfYears DateCreator::createSwaptionMatrixDates_Years(size_t size, double tenor)
 //{
 //	//size_t size = (size_t)(lastYear/tenor)+1;
-//	matrix_pairOfYears res(size,std::vector<std::pair<double,double>>(size));
+//	Matrix_PairOfYears res(size,std::vector<std::pair<double,double>>(size));
 //
 //	for(size_t j = 0; j < size; ++j)
 //	{
@@ -35,7 +35,7 @@
 //	return res;
 //}
 //
-//matrix_pairOfMonths DateCreator::convertSwaptionDates_YearsToMonths(const matrix_pairOfYears& matrixYears)
+//matrix_pairOfMonths DateCreator::convertSwaptionDates_YearsToMonths(const Matrix_PairOfYears& matrixYears)
 //{
 //	size_t size = matrixYears.size();
 //	matrix_pairOfMonths res(size,std::vector<std::pair<size_t,size_t>>(size));
@@ -76,7 +76,7 @@
 //}
 //
 //
-//void DateCreator::printMatrixOfYears(std::ofstream& outputFile, const matrix_pairOfYears& mat) 
+//void DateCreator::printMatrixOfYears(std::ofstream& outputFile, const Matrix_PairOfYears& mat) 
 //{
 //	for (size_t i = 0; i < mat.size(); ++i)
 //	{
@@ -122,7 +122,7 @@
 //{
 //	double lastYear = 6.5;
 //	double tenor = 0.5;
-//	matrix_pairOfYears   dateMatrix   = createSwaptionMatrixDates_Years(lastYear,tenor);  // YY shit: bug 
+//	Matrix_PairOfYears   dateMatrix   = createSwaptionMatrixDates_Years(lastYear,tenor);  // YY shit: bug 
 //	matrix_pairOfMonths  dateMatrix_M = convertSwaptionDates_YearsToMonths(dateMatrix);
 //	matrix_pairOfIndices dateMatrix_I = convertSwaptionDates_MonthsToIndices(tenor,dateMatrix_M);
 //
