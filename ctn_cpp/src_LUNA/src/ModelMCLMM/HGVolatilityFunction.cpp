@@ -7,7 +7,7 @@
 AbcdParams::AbcdParams(const double& a, const double& b, const double& c, const double& d):a_(a), b_(b), c_(c), d_(d){}			
 
 
-HGVolatilityFunction::AbcdPWConstFunction::AbcdPWConstFunction(const AbcdParams& abcdParams, ConstLMMTenorStructure lmmTenorStructure)
+HGVolatilityFunction::AbcdPWConstFunction::AbcdPWConstFunction(const AbcdParams& abcdParams, LMMTenorStructure_PTR lmmTenorStructure)
 : lmmTenorStructure_(lmmTenorStructure)
 , abcdFunction_(abcdParams.a_,abcdParams.b_,abcdParams.c_,abcdParams.d_)			
 {}
@@ -52,7 +52,7 @@ double HGVolatilityFunction::AbcdPWConstFunction::operator()(size_t indexLibor, 
 // ----------------------------------------------------------------------------------------------------------------
 //! Constructor
 HGVolatilityFunction::HGVolatilityFunction(const      AbcdParams& abcdParams,              // h FunctionParam
-										   ConstLMMTenorStructure lmmTenorStructure)       // horizon = N, total number of libor: L_k, k = [0,N]
+										   LMMTenorStructure_PTR lmmTenorStructure)       // horizon = N, total number of libor: L_k, k = [0,N]
 										   : VolatilityFunction(lmmTenorStructure)
 										   , horizon_(lmmTenorStructure_->get_horizon())
 										   , abcdPWConstFunction_(abcdParams, lmmTenorStructure)

@@ -134,7 +134,7 @@ void Lmm::initCumulatedCovarianceTensor()
 
 size_t Lmm::get_horizon() const {return dispersion_.get_horizon();}
 
-ConstLMMTenorStructure Lmm::get_LMMTenorStructure () const {return dispersion_.get_lmmTenorStructure();}
+LMMTenorStructure_PTR Lmm::get_LMMTenorStructure () const {return dispersion_.get_lmmTenorStructure();}
 
 const std::vector<double>& Lmm::get_shifts()			  const {return shifts_;}
 

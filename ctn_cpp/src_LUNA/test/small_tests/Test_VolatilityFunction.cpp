@@ -13,7 +13,7 @@ HGVolatilityFunction get_VolatilityFunction_example()
 	Tenor tenorType = Tenor::_3M;
 	size_t horizonYear = 10;
 
-	ConstLMMTenorStructure lmmTenorStructure(new LMMTenorStructure(tenorType, horizonYear));
+	LMMTenorStructure_PTR lmmTenorStructure(new LMMTenorStructure(tenorType, horizonYear));
 
 	double a = -0.06;
 	double b = 0.17;

@@ -27,7 +27,7 @@ BOOST_AUTO_TEST_CASE(test_constructors)
 	//! LMMTenorStructure
 	Tenor simuTenor = Tenor::_6M;
 	size_t nbYear = 10;
-	ConstLMMTenorStructure lmmTenorStructure(new LMMTenorStructure(simuTenor, nbYear));
+	LMMTenorStructure_PTR lmmTenorStructure(new LMMTenorStructure(simuTenor, nbYear));
 	lmmTenorStructure->print("test_pricer_LMMApproxVanillaSwaptionPricer_SimuTenor.csv");
 
 	//! volatility function

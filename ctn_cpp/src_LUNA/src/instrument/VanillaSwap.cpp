@@ -13,7 +13,7 @@ namespace LMM
 		LMM::Index indexEnd, 
 		const Tenor& floatingLegTenorType,
 		const Tenor& fixedLegTenorType,
-		ConstLMMTenorStructure simulationStructure)
+		LMMTenorStructure_PTR simulationStructure)
 		: strike_(strike)
 		, indexStart_(indexStart)
 		, indexEnd_(indexEnd)
@@ -80,7 +80,7 @@ namespace LMM
 
 	const Tenor& VanillaSwap::get_simulationTenorType()  const { return simulationStructure_->get_tenorType() ; }
 
-	ConstLMMTenorStructure VanillaSwap::get_LMMTenorStructure()  const { return simulationStructure_; }
+	LMMTenorStructure_PTR VanillaSwap::get_LMMTenorStructure()  const { return simulationStructure_; }
 
 	size_t VanillaSwap::get_fixedLegTenorLmmTenorRatio() const { return    fixedVsLiborTenorTypeRatio_ ; }
 

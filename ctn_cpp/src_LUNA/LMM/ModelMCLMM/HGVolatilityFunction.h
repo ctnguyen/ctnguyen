@@ -37,7 +37,7 @@ public:
 	class AbcdPWConstFunction  // regroup the QuantLib defined abcdFunction.
 	{
 	public:
-		AbcdPWConstFunction(const AbcdParams& abcdParams, ConstLMMTenorStructure lmmTenorStructure);
+		AbcdPWConstFunction(const AbcdParams& abcdParams, LMMTenorStructure_PTR lmmTenorStructure);
 
 		//! getter
 		const QuantLib::AbcdFunction& get_AbcdFunction() const ;
@@ -46,13 +46,13 @@ public:
 		double operator()(size_t indexLibor, size_t indexTime) const; // operator(i,j) --return vol--> hij, i>=j			
 	
 	private:
-		ConstLMMTenorStructure lmmTenorStructure_;
+		LMMTenorStructure_PTR lmmTenorStructure_;
 		QuantLib::AbcdFunction  abcdFunction_     ;    // homogeneous part, decide the hump shape. 
 	};
 
 
 	//! Constructor
-	HGVolatilityFunction(const AbcdParams& abcdParams, ConstLMMTenorStructure lmmTenorStructure);        // horizon = N, total number of Libor: L_k, k = [0,N]
+	HGVolatilityFunction(const AbcdParams& abcdParams, LMMTenorStructure_PTR lmmTenorStructure);        // horizon = N, total number of Libor: L_k, k = [0,N]
 
 	
 	//! int_{T_indexTime_i}^{T_indexTime_j} vol_{indexLibor_i}(u)*vol_{indexLibor_j}(u) du, 
