@@ -26,7 +26,7 @@ LmmApproxVanillaSwaptionPricer::~LmmApproxVanillaSwaptionPricer()
 
 void LmmApproxVanillaSwaptionPricer::preCalculateNumeraireAndZC(const std::vector<double> & liborsInitValue) const
 {
-	assert(liborsInitValue.size() == buffer_ZC.size() );
+	assert(liborsInitValue.size() + 1 == buffer_ZC.size() );
 
 	const std::vector<double>& deltaT = lmm_->get_LMMTenorStructure()->get_deltaT();
 
@@ -49,7 +49,7 @@ void LmmApproxVanillaSwaptionPricer::preCalculateAnuity(const std::vector<double
 
 void LmmApproxVanillaSwaptionPricer::preCalculateOmega(const std::vector<double> & liborsInitValue, const VanillaSwaption& vanillaswaption) const
 {
-	assert(liborsInitValue.size() == buffer_ZC.size() );
+	assert(liborsInitValue.size() + 1 == buffer_ZC.size() );
 
 	const LMM::VanillaSwap& vanillaSwap = vanillaswaption.getUnderlyingSwap();
 
