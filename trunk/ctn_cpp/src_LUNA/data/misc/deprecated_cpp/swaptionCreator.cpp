@@ -117,7 +117,7 @@
 //	//-- Create a matrix of pairs (indexStart;indexEnd) for swaptions
 //	double lmmTenor = 1.0;
 //	double lastYear = 3; // T_{N+1} = 10 => N+1 = 20
-//	matrix_pairOfYears matrix_of_years     = DateCreator::createSwaptionMatrixDates_Years(lastYear,lmmTenor);
+//	Matrix_PairOfYears matrix_of_years     = DateCreator::createSwaptionMatrixDates_Years(lastYear,lmmTenor);
 //	matrix_pairOfMonths matrix_of_months   = DateCreator::convertSwaptionDates_YearsToMonths(matrix_of_years);
 //	matrix_pairOfIndices matrix_of_indices = DateCreator::convertSwaptionDates_MonthsToIndices(lmmTenor,matrix_of_months);
 //

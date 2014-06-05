@@ -17,6 +17,9 @@ namespace OptionType
 namespace LMM
 {
 	typedef size_t Index;
+
+	// Store a couple of years
+	typedef std::vector<std::vector<std::pair<double,double> > > Matrix_PairOfYears;
 }
 
 #endif /* LMM_NAME_H */

@@ -2,6 +2,7 @@
 
 #include <LMM/numeric/Interpolation.h>
 
+
 MarketInfoHandler::MarketInfoHandler(const std::vector<double>& libors_Mkt,
 									 const std::vector<double>& discountFactors_Mkt,
 									 const std::vector<double>& discountMaturities,
@@ -34,29 +35,20 @@ void MarketInfoHandler::convertBpToPercent()
 	}
 }
 
-void MarketInfoHandler::interpolateDiscountFactors()
+void MarketInfoHandler::interpolateDiscountFactors(const std::vector<double>& interpolation_dates)
 {
-	std::vector<double> interpolation_dates;
-	interpolation_dates.push_back(4.5);
-	interpolation_dates.push_back(5.5);
-	interpolation_dates.push_back(6.5);
-	interpolation_dates.push_back(7.5);
-	interpolation_dates.push_back(8.5);
-	interpolation_dates.push_back(9.5);
-	interpolation_dates.push_back(10.5);
-
 	numeric::Interpolation interpolator;
 
-	std::vector<double> tenorDates_cpy = discountMaturities_; //-- Will be modified after every interpolation
-
 	for (auto inter_date : interpolation_dates)
-		interpolator.linearInterpolation(discountFactors_Mkt_,tenorDates_cpy,inter_date);
+		interpolator.linearInterpolation(discountFactors_Mkt_,discountMaturities_,inter_date);
 }
 
 std::vector<double> MarketInfoHandler::createDiscountFactorArray()
 {
-	std::vector<double> zcVector_BB; //-- the zc bond vector to use
+	 //-- the zc bond vector to use
+	std::vector<double> zcVector_BB = discountFactors_Mkt_;//ctntodo for instant use the same as discountFactors imported from data
 
+	/* BAD
 	//-- Choose mkt discount factors with maturities = 6M, 1Y, 18M, 2Y,...
 	zcVector_BB.push_back(1.);
 	zcVector_BB.push_back(discountFactors_Mkt_[9]);
@@ -71,17 +63,17 @@ std::vector<double> MarketInfoHandler::createDiscountFactorArray()
 	//-- Add interpolated discount factors 
 	for (size_t i = 28; i < discountFactors_Mkt_.size(); ++i)
 		zcVector_BB.push_back(discountFactors_Mkt_[i]);
-
+		*/
 	return zcVector_BB;
 }
 
-matrix_ MarketInfoHandler::chooseSwaptionMatrix(size_t horizon)
+MarketInfoHandler::matrix_ MarketInfoHandler::chooseSwaptionMatrix(size_t horizon)
 {
 	matrix_ selectedSwaptionMatrix;
 
 	// Start at maturity = 1Y
 	size_t cpt = 0;
-	for (size_t i = 4; i < horizon+4; ++i)
+	for (size_t i = 4; i < horizon+4; ++i)// ctntodo why choose 4 here
 	{
 		std::vector<double> swaptionMatRow;
 		for (size_t j = 0; j < horizon-cpt; ++j)
@@ -95,13 +87,13 @@ matrix_ MarketInfoHandler::chooseSwaptionMatrix(size_t horizon)
 	return selectedSwaptionMatrix;
 }
 
-matrix_ MarketInfoHandler::chooseSwapRates(size_t horizon)
+MarketInfoHandler::matrix_ MarketInfoHandler::chooseSwapRates(size_t horizon)
 {
 	matrix_ selectedSwapRateMatrix;
 
 	// Start at maturity = 1Y
 	size_t cpt = 0;
-	for (size_t i = 4; i < horizon+4; ++i)
+	for (size_t i = 4; i < horizon+4; ++i)// ctntodo why choose 4 here
 	{
 		std::vector<double> swaprateMatRow;
 		for (size_t j = 0; j < horizon-cpt; ++j)
@@ -115,9 +107,9 @@ matrix_ MarketInfoHandler::chooseSwapRates(size_t horizon)
 	return selectedSwapRateMatrix;
 }
 
-matrix_pairOfYears MarketInfoHandler::chooseSwapMaturitiesAndTenors(size_t horizon, const matrix_pairOfYears& matrix_of_years)
+LMM::Matrix_PairOfYears MarketInfoHandler::chooseSwapMaturitiesAndTenors(size_t horizon, const LMM::Matrix_PairOfYears& matrix_of_years)
 {
-	matrix_pairOfYears res;
+	LMM::Matrix_PairOfYears res;
 
 	//-- Select pairs of years until wanted horizon is reached
 	for (size_t i = 1; i <= horizon; ++i) //-- ignore first row

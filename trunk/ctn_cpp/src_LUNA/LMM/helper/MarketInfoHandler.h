@@ -5,8 +5,7 @@
 #include <stdlib.h>
 #include <vector>
 
-typedef std::vector<std::vector<double> > matrix_;
-typedef std::vector<std::vector<std::pair<double,double> > > matrix_pairOfYears;
+#include <LMM/Name.h>
 
 // ctntodo rename this class to ATMSwaptionMarketData because its structure is specificly for ATM Swaption Data
 // ctntodo fusion this class with the MarketInfoCollector into a unique class ATMSwaptionMarketData
@@ -14,27 +13,36 @@ typedef std::vector<std::vector<std::pair<double,double> > > matrix_pairOfYears;
 //-- handle data from bloomberg (interpolations,...)
 class MarketInfoHandler
 {
-private:
-	std::vector<double> libors_Mkt_;
-	std::vector<double> discountFactors_Mkt_;
-	std::vector<double> discountMaturities_;
-	matrix_ swaptionVolMatrix_Mkt_;
-	matrix_ swapRates_Mkt_;
-
 public:
+	
+	typedef std::vector<std::vector<double> > matrix_;
+	
 	MarketInfoHandler(const std::vector<double>& libors_Mkt,
 		              const std::vector<double>& discountFactors_Mkt,
 					  const std::vector<double>& discountMaturities,
 					  const matrix_& swaptionVolMatrix_Mkt,
 					  const matrix_& swapRates_Mkt);
 
+	
 	void convertBpToPercent();
-	void interpolateDiscountFactors();
-	std::vector<double> createDiscountFactorArray();
+	
+	// insert additional date in discountMaturities, and interpolate theses points 
+	// for having the appropriated inserted values in discountFactors_Mkt
+	void interpolateDiscountFactors(const std::vector<double>& interpolation_dates);//ctntodo
+
+	std::vector<double> createDiscountFactorArray();;//ctntodo
 	matrix_ chooseSwaptionMatrix(size_t horizon); 
 	matrix_ chooseSwapRates(size_t horizon);
-	matrix_pairOfYears chooseSwapMaturitiesAndTenors(size_t horizon, const matrix_pairOfYears& matrix_of_years);
-	
+	LMM::Matrix_PairOfYears chooseSwapMaturitiesAndTenors(size_t horizon, const LMM::Matrix_PairOfYears& matrix_of_years);
+
+private:
+
+	std::vector<double> libors_Mkt_;
+	std::vector<double> discountFactors_Mkt_;
+	std::vector<double> discountMaturities_;
+	matrix_ swaptionVolMatrix_Mkt_;
+	matrix_ swapRates_Mkt_;
+
 };
 
 #endif /* LMM_HELPER_MARKETINFOHANDLER_H */
