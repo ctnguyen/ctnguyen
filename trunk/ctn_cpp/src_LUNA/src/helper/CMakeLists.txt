@@ -25,6 +25,7 @@ add_library(LMM_helper
 	"${CMAKE_SOURCE_DIR}/LMM/helper/RNGenerator.h"
 	"${CMAKE_SOURCE_DIR}/LMM/helper/StaticReplicationFormula.h"
 	"${CMAKE_SOURCE_DIR}/LMM/helper/TenorType.h"
+	"${CMAKE_SOURCE_DIR}/LMM/helper/Tensor.h"
 	"${CMAKE_SOURCE_DIR}/LMM/helper/TypeConverter.h"	
 	"CombinationOperator.cpp"
     "DerivatibleFunction.cpp"
@@ -36,6 +37,7 @@ add_library(LMM_helper
 	"QMcGenerator.cpp"
 	"StaticReplicationFormula.cpp"
 	"TenorType.cpp"
+	"Tensor.cpp"
 	"TypeConverter.cpp"	
 )
 target_link_libraries(LMM_helper LMM_numeric)

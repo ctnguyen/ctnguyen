@@ -1,69 +1,6 @@
 #include <LMM/ModelMCLMM/Lmm.h>
 #include <cassert>
 
-
-//----------  TENSOR  --------------
-
-Tensor::Tensor(size_t size1, size_t size2, size_t size3) : tensor_(size1, matrix(size2, size3)){}
-
-double & Tensor::operator()(size_t index_T, size_t indexLibor_i, size_t indexLibor_j) 
-{
-	//! YY Attention: This is a special condition for My LMM implementation, not general tensor condition.
-	//! YY TODO: remove this check when the code is stable.
-	assert(index_T >=1 && indexLibor_i>=index_T && indexLibor_j >= index_T);
-	return tensor_[index_T](indexLibor_i, indexLibor_j);
-}
-
-const double & Tensor::operator()(size_t index_T, size_t indexLibor_i, size_t indexLibor_j) const
-{
-	//! YY Attention: This is a special condition for My LMM implementation, not general tensor condition.
-	//! YY TODO: remove this check when the code is stable.
-	assert(index_T >=1 && indexLibor_i>=index_T && indexLibor_j >= index_T);
-	return tensor_[index_T](indexLibor_i, indexLibor_j);
-}
-
-
-const std::vector<matrix>& Tensor::get_tensor() const { return tensor_; }
-
-void Tensor::set_tensor(std::vector<matrix> val) { tensor_ = val;}
-
-const matrix& Tensor::operator[](size_t indexT) const
-{ 
-	assert(indexT >=1);
-	return tensor_[indexT];
-}
-
-void Tensor::write_to_stream(std::ostream& outputstream)const
-{
-	const unsigned int nbMatrix = tensor_.size();
-	for(unsigned int iM=0;iM<nbMatrix;++iM)
-	{
-		const unsigned int nbLine = tensor_[iM].size1();
-		const unsigned int nbCol  = tensor_[iM].size2();
-		outputstream <<"Tensor("<<iM<<"): [";
-		for(unsigned int i=0;i<nbLine;++i)
-		{
-			outputstream<<tensor_[iM](i,0) ;
-			for(unsigned int j=1;j<nbCol;++j)
-			{
-				outputstream<<";"<<tensor_[iM](i,j);
-			}
-			outputstream<<"] [";		
-		}	
-		outputstream<<std::endl;
-	}
-}
-
-std::ostream& operator<<(std::ostream& os, const Tensor& m_tensor)
-{
-	m_tensor.write_to_stream(os); return os;
-}
-//----------  TENSOR  --------------
-
-
-
-
-
 Lmm::Lmm(const Dispersion&                  dispersion,
 		 const std::vector<double>&         shifts,           // size = N+1
 		 const std::vector<double>&         liborsInitValue)

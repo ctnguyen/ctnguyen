@@ -27,56 +27,23 @@ McLmm::McLmm(const Dispersion&                  dispersion,
 			 const std::vector<double>&         liborsInitValue,
 			 RNGenerator_PTR                    rnGenerator,
 			 MCSchemeType::MCSchemeType			mcSchemeType)
-			 : 
-			  Lmm(dispersion,shifts,liborsInitValue),
-			  nbFactor_(dispersion.getNbFactors()),
-			  horizon_(dispersion.get_horizon()),
-			  B_(dispersion.get_CorrelationPtr()->get_reducedCorrelMatrixB()),
-			  //dispersion_(dispersion),
-			  //shifts_(shifts),
-			  numeraires_              (horizon_+1, 0.0),
-			  liborMatrix_             (horizon_+1, horizon_+1),
-			  //covarianceTensor_        (horizon_+1, horizon_+1,horizon_+1),
-			  rnGenerator_(rnGenerator),
-			  mcSchemeType_(mcSchemeType)
+: Lmm(dispersion,shifts,liborsInitValue)
+, nbFactor_(dispersion.getNbFactors())
+, horizon_(dispersion.get_horizon())
+, B_(dispersion.get_CorrelationPtr()->get_reducedCorrelMatrixB())
+, numeraires_ (horizon_+1, 0.0)
+, liborMatrix_(horizon_+1, horizon_+1)
+, rnGenerator_(rnGenerator)
+, mcSchemeType_(mcSchemeType)
 {
-
-
 	assert(dispersion.get_lmmTenorStructure()->get_tenorDate()[0] == 0.0); 
 
 	size_t horizon = dispersion_.get_horizon();
 	assert(shifts.size() == horizon+1);
 	assert(liborsInitValue.size() == horizon+1);
 	
-	initLiborMatrix(liborsInitValue);  // Libor at time 0		
-	initCovarianceTensor();
+	initLiborMatrix(liborsInitValue);  // Libor at time 0			
 }
-//
-//void McLmm::initCovarianceTensor()
-//{
-//	// tensor_:  k,i,j
-//	// L_i, L_j 's integral of vol in [T_{k-1},T_k]: i,j >= k
-//	for(size_t indexTime = 1; indexTime <= horizon_; ++indexTime)
-//	{
-//		for(size_t indexLibor_i = indexTime; indexLibor_i <= horizon_; ++indexLibor_i)
-//		{
-//			for(size_t indexLibor_j = indexLibor_i; indexLibor_j <= horizon_; ++indexLibor_j)
-//			{
-//				covarianceTensor_(indexTime, indexLibor_i, indexLibor_j) = dispersion_.covIntegral(indexTime-1,
-//																								   indexTime,
-//																								   indexLibor_i,
-//																								   indexLibor_j);
-//
-//				//! because of the symetric of the tensor
-//				covarianceTensor_(indexTime, indexLibor_j, indexLibor_i) = covarianceTensor_(indexTime, indexLibor_i, indexLibor_j);
-//
-//			}
-//		}
-//	}
-//}
-//
-
-
 
 //! \int_{T_{k-1}}^{T_k} sigma_i(t)  dW_t,   indexTime = k
 //! we suppose the correlation is constant: \int_{T_{k-1}}^{T_k} ||sigma_i(t)||^2 dt * <B,G>, where  G is nbFactor indepedent Gaussian.
