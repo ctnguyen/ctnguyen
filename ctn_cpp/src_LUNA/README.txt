@@ -32,8 +32,9 @@ cmake ..\src_Luna -G "YOUR_APPROPRIATED_CMAKE_GENERATOR"
 
 For Visual Studio Express 2012, use the generator "Visual Studio 11" (for other version, google cmake generators)
 cmake ..\src_Luna -G "Visual Studio 11"
-Msbuild LunaLMM.sln /maxcpucount:8 && ctest
 
+then
+Msbuild LunaLMM.sln /maxcpucount:8 && ctest
 Or open build_Luna folder and the project is LunaLMM.sln
 
 After that, for windows user, need just to right-click on the procLMM and "set as startup Project"
