@@ -24,6 +24,10 @@ add_executable(unitTest_numeric_NumericalMethods "test_numeric_NumericalMethods.
 target_link_libraries(unitTest_numeric_NumericalMethods LMM_numeric)
 add_test(unitTest_numeric_NumericalMethods ${CMAKE_CURRENT_BINARY_DIR}/unitTest_numeric_NumericalMethods "--log_level=message")
 
+add_executable(unitTest_helper_ATMSwaptionMarketData "test_helper_ATMSwaptionMarketData.cpp")
+target_link_libraries(unitTest_helper_ATMSwaptionMarketData LMM_helper)
+add_test(unitTest_helper_ATMSwaptionMarketData ${CMAKE_CURRENT_BINARY_DIR}/unitTest_helper_ATMSwaptionMarketData "--log_level=message")
+
 add_executable(unitTest_helper_MarketInfoCollector "test_helper_MarketInfoCollector.cpp")
 target_link_libraries(unitTest_helper_MarketInfoCollector LMM_helper)
 add_test(unitTest_helper_MarketInfoCollector ${CMAKE_CURRENT_BINARY_DIR}/unitTest_helper_MarketInfoCollector "--log_level=message")
