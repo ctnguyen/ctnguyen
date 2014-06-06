@@ -13,6 +13,7 @@
 
 
 add_library(LMM_helper
+	"${CMAKE_SOURCE_DIR}/LMM/helper/ATMSwaptionMarketData.h"
     "${CMAKE_SOURCE_DIR}/LMM/helper/CombinationOperator.h"
     "${CMAKE_SOURCE_DIR}/LMM/helper/DerivatibleFunction.h"
 	"${CMAKE_SOURCE_DIR}/LMM/helper/LMMTenorStructure.h"
@@ -27,6 +28,7 @@ add_library(LMM_helper
 	"${CMAKE_SOURCE_DIR}/LMM/helper/TenorType.h"
 	"${CMAKE_SOURCE_DIR}/LMM/helper/Tensor.h"
 	"${CMAKE_SOURCE_DIR}/LMM/helper/TypeConverter.h"	
+	"ATMSwaptionMarketData.cpp"
 	"CombinationOperator.cpp"
     "DerivatibleFunction.cpp"
 	"LMMTenorStructure.cpp"
