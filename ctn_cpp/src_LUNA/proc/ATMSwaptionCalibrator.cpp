@@ -14,8 +14,7 @@
 #include <LMM/numeric/Interpolation.h>
 #include <LMM/numeric/NumericalMethods.h>
 #include <LMM/helper/QMcGenerator.h>
-#include <LMM/helper/MarketInfoCollector.h>
-#include <LMM/helper/MarketInfoHandler.h>
+#include <LMM/helper/ATMSwaptionMarketData.h>
 #include <LMM/pricer/McPricer.h>
 #include <LMM/pricer/LmmSwaptionPricer.h>
 #include <LMM/calibration/Calibration.h>
@@ -68,21 +67,21 @@ int main()
 	//
 
 	std::string market_data_file = LMM::get_runtime_datapath() + "Mkt_info_1.csv";
-	MarketInfoCollector::readMarketInfo(market_data_file);
+
+	ATMSwaptionMarketData atmSwaptionData;
+
+	atmSwaptionData.readDataFromFile( market_data_file);
 
 	//-- libor tenor = 6M 
-	std::vector<double> libors_BB = MarketInfoCollector::get_libors();
-	std::vector<double> zc_BB = MarketInfoCollector::get_zcBonds();
-	std::vector<double> zcMaturities_BB = MarketInfoCollector::get_zcMaturities();
-	MarketInfoHandler::matrix_ swaptionMatrix_BB = MarketInfoCollector::get_swaptionVolatilityMatrix();
-	MarketInfoHandler::matrix_ swaprates_BB = MarketInfoCollector::get_swapRates();
-
-
-	MarketInfoHandler mktInfoHandler(libors_BB,zc_BB,zcMaturities_BB,swaptionMatrix_BB,swaprates_BB);
-	mktInfoHandler.convertBpToPercent();
+	std::vector<double> libors_BB = atmSwaptionData.get_LIBOR();
+	std::vector<double> zc_BB = atmSwaptionData.get_ZC_BOND();
+	std::vector<double> zcMaturities_BB = atmSwaptionData.get_ZC_MATURITIES();
+	ATMSwaptionMarketData::RealMatrix swaptionMatrix_BB = atmSwaptionData.get_VOLATILITY_MATRIX();
+	ATMSwaptionMarketData::RealMatrix swaprates_BB = atmSwaptionData.get_SWAPRATE_MATRIX();
+		
 	//ctntodo to uncomment this two lines
-	//mktInfoHandler.interpolateDiscountFactors();
-	std::vector<double> zcVector_BB = mktInfoHandler.createDiscountFactorArray();
+	//atmSwaptionData.interpolateDiscountFactors();
+	std::vector<double> zcVector_BB = atmSwaptionData.createDiscountFactorArray();
 	//		
 	//	#pragma endregion
 	//
