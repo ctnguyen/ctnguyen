@@ -349,6 +349,7 @@ r_t C_t =0
 \text{ divident : } dQ_t = S_t q_t dt 
 \]
 \subsection{Exotic Options}
+This section is resumed from the book of ~\cite{MAREK} ch.6
 \paragraph{Packages options} is a combination of standard options, cash and underlying asset ~\footnote{in this paragraph, $F$ is the $T$-forward price at time zero of the underlying asset $F = F_{S}(0,T)= e^{rT} S_0$.}
 \begin{description}
  \item[Collars : ] 
@@ -356,9 +357,9 @@ r_t C_t =0
 \begin{array}{rl}
 \textbf{CL}_T &= \text{min}\{ \text{max}(S_T,K_1),K_2\} \\
               &= K_1 +(S_T-K_1)^+ - (S_T - K_2)^+       \\
-\textbf{CL}_t &= K_1e^{-r(T-t)} + C(S_t,T-t,K_1)- C(S_t,T-t,K_1)
+\textbf{CL}_t &= K_1e^{-r(T-t)} + C(S_t,T-t,K_1)- C(S_t,T-t,K_2)
 \end{array} 
-\hspace{2cm} K_2>K_1>0
+\hspace{2cm} 0 < K_1 < K_2 
 \]
  \item[Break Forward : ] 
 \[
@@ -368,6 +369,7 @@ r_t C_t =0
  \textbf{BF}_t &= C(S_t,T-t,F) + e^{-r(T-t)}(F-K) 
 \end{array} 
 \]
+The \textit{fair} strike value is $K^0 = e^{rT}( S_0 + C(S_0,T, e^{rT}S_0) ) = e^{rT}S_0 (1 + N(d_1) - N(d_2) ) $
 \item[Range Forward : ] 
 \[
 \begin{array}{rl}
@@ -393,12 +395,17 @@ r_t C_t =0
 \begin{array}{rl}
 \textbf{CH}_{T_1} &=  \text{max}\left\{ C( S_{T_1} ,T_2 - T_1, K ) \hbox{ , }  P( S_{T_1} ,T_2 - T_1, K ) \right\}  \\
                   &=  C( S_{T_1} ,T_2 - T_1, K ) + (e^{-r(T_2-T_1)}K - S_{T_1} )^+     \\
-\textbf{CH}_{t}   &=  C(S_t, T-t, K) + P(S_t, T_1 -t, e^{-r(T_2-T_1)}K)
+\textbf{CH}_{t}   &=  C(S_t, T_2-t, K) + P(S_t, T_1 -t, e^{-r(T_2-T_1)}K)              \\
+\textbf{CH}_{0}   &=  S_0( N(d_1) - N(-\bar{d}_1) )  + e^{rT}K( N(-\bar{d}_2) - N(d_2) )
 \end{array}
 \hspace{2cm}
 0<K,0<T_1<T_2
 \]
-\paragraph{Compound options - TODO}
+\paragraph{Compound options}
+\[
+\textbf{CH}_{T_1} = ( C(S_{T_1},T_2-T_1,K_2) - K_1 )^+
+\]
+This is a Call where the underlying is itself a Call
 \paragraph{Digital options}
 \[
 \begin{array}{rll}
@@ -411,10 +418,32 @@ r_t C_t =0
 \textbf{SS}_T &=\frac{S_T}{K_1} \mathbf{1}_{\left\{K_1<S_T<K_2\right\}} & \text{Super Share option}   
 \end{array}
 \]
-\paragraph{Barrier options} pricable
-\paragraph{Loopback options} pricable
-\paragraph{Asian options} pricable
-\paragraph{Basket options} pricable
+\paragraph{Barrier options}
+\[
+C^1_T = ( Q_T - K)^{+} \mathbf{1}_{ \{ \displaystyle\min_{t\in [0,T]}  Q_t \geq H \} }
+\]
+
+\paragraph{Lookback options}
+\[
+\begin{array}{ll}
+\textbf{LC}_T &= (S_T - m_T)^+ = S_T - m_T  \\
+\textbf{LP}_T &= (M_T - S_T)^+ = M_T - S_T
+\end{array}
+\hspace{2cm}
+m_T = \displaystyle\min_{t\in [0,T]} S_t  
+\hspace{1cm}
+M_T = \displaystyle\max_{t\in [0,T]} S_t 
+\]
+\paragraph{Asian options} 
+\[
+C^A_T = ( \frac{1}{T-T_0} \int_{T_0}^T S_udu  - K  )^+
+\hspace{3cm}
+0<T_0<T 
+\]
+\paragraph{Basket options}
+\[
+C_T^B = ( \sum^{N}_{i=1}  w_i S^i_T -  K)^+
+\]
 \paragraph{other}
 
 \section{Greek letters}
