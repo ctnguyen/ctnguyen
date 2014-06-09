@@ -31,10 +31,16 @@ BOOST_AUTO_TEST_CASE(test_constructors)
 	lmmTenorStructure->print("test_pricer_LMMApproxVanillaSwaptionPricer_SimuTenor.csv");
 
 	//! volatility function
-	double a = -0.06;
-	double b = 0.17;
-	double c = 0.54;
-	double d = 0.17;
+	//double a = -0.06;
+	//double b = 0.17;
+	//double c = 0.54;
+	//double d = 0.17;
+
+	double a = 0.0;
+	double b = 0.0;
+	double c = 0.0;
+	double d = 0.2;
+
 	AbcdParams abcdParams(a,b,c,d);
 	AbcdPWConstFunction abcdPWConstFunction(abcdParams, lmmTenorStructure);
 
@@ -59,7 +65,7 @@ BOOST_AUTO_TEST_CASE(test_constructors)
 	double shiftValue = 0.0; // -0.01;
 	std::vector<double> shifts(lmmTenorStructure->get_horizon()+1, shiftValue);
 
-	double fwdRate = 0.4;
+	double fwdRate = 0.04;
 	std::vector<double> liborsInitValue(lmmTenorStructure->get_horizon()+1, fwdRate);
 
 	Lmm_PTR lmm(new Lmm(dispersion, shifts) );

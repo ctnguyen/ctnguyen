@@ -140,10 +140,10 @@ double VanillaSwapPricer::swapRate_Analytical(const LMM::VanillaSwap& vanillaSwa
 	LMM::Index indexFloatingLegEnd   = floatingLegPaymentIndexSchedule.back();
 	double pvFloatingLegValue =  ZC[indexFloatingLegStart-1] - ZC[indexFloatingLegEnd];
 
-	//! pvFixingLeg
+	//! pvAnnuity
 	LMM::Index indexValuationDate = 0;
-	double pvFixedLegValue = pvFixedLeg(indexValuationDate,vanillaSwap,numeraire);
-	return pvFloatingLegValue / pvFixedLegValue;
+	double pvAnnuity = annuity(indexValuationDate,vanillaSwap,numeraire);
+	return pvFloatingLegValue / pvAnnuity;
 }
 
 
