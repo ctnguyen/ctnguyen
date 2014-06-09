@@ -258,7 +258,7 @@ Then Delta-Vega hedging strategy is
 \Delta   =\frac{\partial V}{\partial S} - \Delta_1 \frac{\partial V_1}{\partial S} 
 \]
 
-\section{Black Scholes Model}
+\section{Black Scholes Framework}
 There are two approach leads to the Black-Scholes tools
 \begin{itemize}
  \item Black-Scholes formula : Starting from the self-financing porfolio, based on the probabiliste approach (martingale theory), one can build the closed formula of price for every attainable contingent claim. 
@@ -290,7 +290,7 @@ W^*_t = W_t + \int_0^t \theta_s ds
 \begin{tabular}{l|l}
  Under $\mathbb{P}$ & Under $\mathbb{P}^*$                                                      \\[6pt]
  $ dS^1_t = S^1_t( \mu dt + \sigma_t d W_t) $       &  $ dS^1_t = S^1_t( r_t dt + \sigma_t d W^*_t) $ \\[3pt]
- $ dV_t = H^0_t dS^0_t + H^1_t dS^1_t     $       &  $ dV_t = r_t V_t dt + \sigma_t H^1_t dW^*_t  $ \\[3pt]
+ $ dV_t = H^0_t dS^0_t + H^1_t dS^1_t     $         &  $ dV_t = r_t V_t dt + \sigma_t H^1_t S^1_t sdW^*_t  $ \\[3pt]
  $ d\widetilde{S}^1_t = \widetilde{S}^1_t( (\mu-r_t)dt + \sigma_t dW_t ) $ & $d\widetilde{S}^1_t = \widetilde{S}^1_t \sigma_t dW^*_t  $ \\[3pt]
  $ d\widetilde{V}_t = H^1_t d\widetilde{S}^1_t $ & $d\widetilde{V}_t = H^1_t d\widetilde{S}^1_t =  \sigma_t H^1_t \widetilde{S}^1_t dW^*_t $
 \end{tabular}
@@ -348,6 +348,65 @@ r_t C_t =0
 \hspace{2cm}
 \text{ divident : } dQ_t = S_t q_t dt 
 \]
+
+\subsection{Cross curency market model}
+This section expose the Black-Scholes framwork using in the cross curency market, where there exist domestic money and forein money. Initial equations are ~\footnote{The brownian motion and volatility in this framwork is multidimensional} 
+\[
+\frac{dB^d_t}{B^d_t} =  r^d_t dt
+\hspace{1cm}
+\frac{dB^f_t}{B^f_t} =  r^f_t dt
+\hspace{1cm}
+\frac{dQ_t}{Q_t} = \mu_{Q}dt + \sigma_{Q} \cdot dW_t
+\hspace{1cm}
+R_t = \frac{1}{Q_t}
+\]
+where $B^d$, $B^f$ represent domestic and foreign money market, $Q_t$ represents the domestic price at time $t$ of one unit of the foreign curency. Note that there are two importants \textit{discounted} processes 
+\[
+\tilde{Q}_t = \frac{B^f_t}{B^d_t} Q_t = e^{(r^f -r^d)t} Q_t
+\hspace{2cm}
+\tilde{R}_t = \frac{B^d_t}{B^f_t} R_t = e^{(r^d -r^f)t} Q_t
+\]
+that under \textit{domestic martingale measure} (resp. \textit{foreign martingale measure}), the process $\tilde{Q}_t$ (resp. $\tilde{R}_t$) is a martingale. This can be done by using Girsanov translate of Brownian motion
+\begin{center}
+\begin{tabular}{l|l}
+ Under $\mathbb{P}^d$                                               & Under $\mathbb{P}^f$                                 \\[6pt]
+ $ dQ_t=Q_t((r^d-r^f)dt+\sigma_{Q}\cdot dW^d_t)  $                  &                                                       \\[3pt]
+ $ dR_t=R_t((r^f-r^d)dt    -\sigma_{Q}\cdot(dW^d_t-\sigma_{Q}dt))$  & $ dR_t=R_t((r^f-r^d)dt-\sigma_{Q}\cdot dW^f_t)  $     \\[3pt]
+ $ d\tilde{R}_t=-\tilde{R}_t\sigma_{Q}\cdot(dW^d_t-\sigma_{Q}dt))$  & $ d\tilde{R}_t= -\tilde{R}_t \sigma_{Q}\cdot dW^f_t$  \\[3pt]    
+ $ d\tilde{Q}_t=\tilde{Q}_t \sigma_{Q}\cdot dW^d_t$                 &   
+\end{tabular}
+\end{center}
+From these equations, there are two cross currency price formulas
+\[
+\pi^d_t(Y^f_T) = e^{-r^d(T-t)}\mathbb{E}^d(Q_T Y^f_T|\mathcal{F}_t)
+\hspace{2cm}
+\pi^f_t(X^d_T) = e^{-r^f(T-t)}\mathbb{E}^f(R_T X^d_T|\mathcal{F}_t)
+\]
+They are related by
+\[
+\frac{d\mathbb{P}^f}{d\mathbb{P}^d}=\textbf{exp}\{\sigma_{Q}W^d_t - \frac{1}{2} |\sigma_{Q}|^2 t \}
+\]
+\[
+\mathbb{E}^f[X|\mathcal{F}_t] = \mathbb{E}^d[X\textbf{exp}\{ \sigma_{Q}\cdot(W^d_T - W^d_t) -\frac{1}{2} |\sigma_{Q}|^2(T-t) \} |\mathcal{F}_t]
+\]
+\paragraph{Forward Exchange Rate}
+\[
+F_{Q}(t,T) = \frac{B_f(t,T)}{B_d(t,T)}Q_t = e^{(r^d - r^f)(T-t)}Q_t
+\hspace{2cm}
+\frac{d F_{Q}(t,T)}{F_{Q}(t,T)}= \sigma_{Q}\cdot W^d_t
+\hspace{0.5cm}\textit{martingale}
+\]
+\paragraph{Foreign stock in domestic money}
+\[
+\frac{dS^f_t}{S^f_t} = r^f dt + \sigma_{S^f}\cdot W^f_t = (r^f - \sigma_{Q}\cdot\sigma_{S^f})dt + \sigma_{S^f}\cdot W^d_t
+\]
+Then
+\[
+S^d_t = Q_t S^f_t
+\hspace{2cm}
+\frac{dS^d_t}{S^d_t} = r^d dt + (\sigma_{S^f} + \sigma_{Q})\cdot W^d_t 
+\]
+\paragraph{Domestic stock in foreign money - todo}
 \subsection{Exotic Options}
 This section is resumed from the book of ~\cite{MAREK} ch.6
 \paragraph{Packages options} is a combination of standard options, cash and underlying asset ~\footnote{in this paragraph, $F$ is the $T$-forward price at time zero of the underlying asset $F = F_{S}(0,T)= e^{rT} S_0$.}
