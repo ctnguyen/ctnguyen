@@ -33,7 +33,7 @@ void Lmm::initCovarianceTensor()
 					indexLibor_j);
 
 				//! because of the symmetric of the tensor
-				covarianceTensor_(indexTime, indexLibor_i, indexLibor_j) = covarianceTensor_(indexTime, indexLibor_i, indexLibor_j);
+				covarianceTensor_(indexTime, indexLibor_j, indexLibor_i) = covarianceTensor_(indexTime, indexLibor_i, indexLibor_j);
 
 			}
 		}
@@ -57,9 +57,14 @@ void Lmm::initCumulatedCovarianceTensor()
 				}
 				else
 				{
-					cumulatedCovarianceTensor_(indexTime, indexLibor_i, indexLibor_j) =  cumulatedCovarianceTensor_(indexTime-1, indexLibor_i, indexLibor_j) + covarianceTensor_(indexTime, indexLibor_i, indexLibor_j);
+					cumulatedCovarianceTensor_(indexTime, indexLibor_i, indexLibor_j) =   cumulatedCovarianceTensor_(indexTime-1, indexLibor_i, indexLibor_j) 
+																					    + covarianceTensor_(indexTime, indexLibor_i, indexLibor_j);
 				}
+
+				//! because of the symmetric of the tensor
+				cumulatedCovarianceTensor_(indexTime, indexLibor_j, indexLibor_i) = cumulatedCovarianceTensor_(indexTime, indexLibor_i, indexLibor_j);
 			}
+
 		}
 	}
 
