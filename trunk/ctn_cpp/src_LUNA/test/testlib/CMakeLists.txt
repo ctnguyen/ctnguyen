@@ -27,3 +27,4 @@ add_library(LMM_testlib
 )
 
 target_link_libraries(LMM_testlib LMM_pricer LMM_ModelMCLMM LMM_instrument LMM_numeric LMM_helper)
+set_target_properties(LMM_testlib PROPERTIES FOLDER SmallTests)

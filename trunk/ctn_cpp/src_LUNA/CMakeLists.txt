@@ -19,6 +19,10 @@ project(LunaLMM)
 include(CTest)
 #enable_testing()
 
+## activate the Use Folder setting for Visual Studio
+## http://www.cmake.org/pipermail/cmake/2010-December/041375.html
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
 ## disable unecessary warnings
 if(MSVC)
 	add_definitions( "/W3 /D_CRT_SECURE_NO_WARNINGS /wd4996 /wd4535 /nologo" )
