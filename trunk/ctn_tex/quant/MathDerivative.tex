@@ -290,7 +290,7 @@ W^*_t = W_t + \int_0^t \theta_s ds
 \begin{tabular}{l|l}
  Under $\mathbb{P}$ & Under $\mathbb{P}^*$                                                      \\[6pt]
  $ dS^1_t = S^1_t( \mu dt + \sigma_t d W_t) $       &  $ dS^1_t = S^1_t( r_t dt + \sigma_t d W^*_t) $ \\[3pt]
- $ dV_t = H^0_t dS^0_t + H^1_t dS^1_t     $         &  $ dV_t = r_t V_t dt + \sigma_t H^1_t S^1_t sdW^*_t  $ \\[3pt]
+ $ dV_t = H^0_t dS^0_t + H^1_t dS^1_t     $         &  $ dV_t = r_t V_t dt + \sigma_t H^1_t S^1_t dW^*_t  $ \\[3pt]
  $ d\widetilde{S}^1_t = \widetilde{S}^1_t( (\mu-r_t)dt + \sigma_t dW_t ) $ & $d\widetilde{S}^1_t = \widetilde{S}^1_t \sigma_t dW^*_t  $ \\[3pt]
  $ d\widetilde{V}_t = H^1_t d\widetilde{S}^1_t $ & $d\widetilde{V}_t = H^1_t d\widetilde{S}^1_t =  \sigma_t H^1_t \widetilde{S}^1_t dW^*_t $
 \end{tabular}
@@ -362,9 +362,9 @@ R_t = \frac{1}{Q_t}
 \]
 where $B^d$, $B^f$ represent domestic and foreign money market, $Q_t$ represents the domestic price at time $t$ of one unit of the foreign curency. Note that there are two importants \textit{discounted} processes 
 \[
-\tilde{Q}_t = \frac{B^f_t}{B^d_t} Q_t = e^{(r^f -r^d)t} Q_t
+\tilde{Q}_t = \frac{B^f_t}{B^d_t} Q_t = e^{-(r^d -r^f)t} Q_t
 \hspace{2cm}
-\tilde{R}_t = \frac{B^d_t}{B^f_t} R_t = e^{(r^d -r^f)t} Q_t
+\tilde{R}_t = \frac{B^d_t}{B^f_t} R_t = e^{-(r^f -r^d)t} R_t
 \]
 that under \textit{domestic martingale measure} (resp. \textit{foreign martingale measure}), the process $\tilde{Q}_t$ (resp. $\tilde{R}_t$) is a martingale. This can be done by using Girsanov translate of Brownian motion
 \begin{center}
