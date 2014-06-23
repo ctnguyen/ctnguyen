@@ -30,7 +30,7 @@
 \newcommand{\RtT}{R(t,T)}
 \newcommand{\PtT}{P(t,T)}
 \newcommand{\PtS}{P(t,S)}
-\newcommand{\LtT}{L(t,T)}
+\newcommand{\LtT}{l(t,T)}
 \newcommand{\YtT}{Y(t,T)}
 \newcommand{\ftT}{f(t,T)}
 \newcommand{\tautT}{\tau(t,T)}
@@ -39,6 +39,17 @@
 \newcommand{\FuncExp}{\text{exp}}
 \newcommand{\FuncLn}{\text{ln}}
 \newcommand{\Discount}[2]{e^{-\int_{#1}^{#2}r_u du} }
+
+
+\newcommand{\li}{l(\Ti,\Tii)}
+\newcommand{\Ti}{T_{i}}
+\newcommand{\Tii}{T_{i+1}}
+\newcommand{\Pti}{P(t,T_{i})}
+\newcommand{\Ptii}{P(t,T_{i+1})}
+\newcommand{\ZCi}{ZC_{i}}
+\newcommand{\ZCii}{ZC_{i+1}}
+\newcommand{\Numi}{Num_{i}}
+\newcommand{\Numii}{Num_{i+1}}
 
 \newcommand{\todo}[1]{\begin{center}\color{red} TODO : #1\end{center}}
 
@@ -115,6 +126,64 @@ Bloomberg supp.   & Giulio D'Ambrosio            & gdambrosio3@bloomberg.net    
 
 \section{The Model lastly implemented at Lunalogic}
 We explain here how are implemented the last model, calibration, test..., some critical views from the older work, what is done, what is to to, see \cite{THAI2013}.
+\begin{itemize}
+ \item horizon  = N
+ \item Timeline $T_i$ , i = 0,1, .... N+1. Timeline size = N+2
+ \item Time Fractions $\tau_i = \Tii-\Ti$, i=0,1,... N. 
+ \item The Libor : $L_i = L(t,T_i,T_{i+1})$, i=0,1,... N. Number of LIBORs = N+1
+\end{itemize}
+
+\subsection{Libor Model}
+The Spot LIBOR 
+\[
+\LtT=\frac{1-\PtT}{\tautT \PtT}
+\hspace{1cm}
+l_i = \li  = \frac{1}{\tau_i}\left( \frac{1}{P(\Ti,\Tii)} - 1 \right)
+\hspace{1cm}
+\tau_i \li = 
+\]
+The forward Libor 
+\[
+L_i(t) = L(t,\Ti,\Tii) = \frac{1}{\tau_i} \left[ \frac{\Pti}{\Ptii} - 1  \right]
+\]
+For the initial forward LIBOR ( which is different than the spot LIBOR )
+\[
+L_i(0) = L_i = \frac{1}{\tau_i} \left[ \frac{\ZCi}{\ZCii} - 1  \right] = \frac{1}{\tau_i} \left[ \frac{\Numii}{\Numi} - 1  \right]
+\]
+Then
+\[
+\left\{
+\begin{array}{l}
+Num_0 = 1 \\
+\Numii = \Numi(\tau_i L_i +1)
+\end{array}
+\right.
+\hspace{2cm}
+\left\{
+\begin{array}{l}
+ZC_0 = 1 \\
+\ZCii = \frac{\ZCi}{\tau_i L_i +1}
+\end{array}
+\right.
+\]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \section{The implemented model}
 \section{Calibration}
