@@ -338,6 +338,31 @@ A proccess $Z_t > 0$ can be considered as a numeraire.
 \]
 Then for every $X_t$ asset price process, $\frac{X_t}{Z_t}$ is a $\mathbb{P}^Z$-martingale, as $\frac{X_t}{S^0_t}$ is a $\mathbb{P}^*$-martingale. 
 \textbf{T-Forward measure } is the measure using the numeaire zero-coupon $B(t,T)$, under which the T-forward price procces is a martingale.
+\paragraph{Numeraraire change Tool kit} see ~\cite{BRIGO}\S 2.3
+Giving the two procces $U_t$ and $S_t$ playing the role of Numeraires. 
+\[
+\text{Under } \mathbb{Q}^{U} 
+\left\{
+\begin{array}{l}
+dS_t = (...)dt + \sigma_t^{S}\rho^{\frac{1}{2}}dW^{U}_t \\[5pt]
+dU_t = (...)dt + \sigma_t^{U}\rho^{\frac{1}{2}}dW^{U}_t \\[5pt]
+dX_t = \mu^{U}(X_t)dt + \sigma(X_t)\rho^{\frac{1}{2}}dW^{U}_t 
+\end{array}
+\right.
+\]
+When changing the numeraire to $S_t$
+\[
+\text{Under } \mathbb{Q}^{S} 
+\left\{
+\begin{array}{l}
+dX_t = \mu^{S}(X_t)dt + \sigma(X_t)dW^{S}_t  \\[5pt]
+\mu^{U}(X_t) = \mu^{S}(X_t) - \sigma(X_t) \rho\left( \frac{\sigma^S_t}{S_t} - \frac{\sigma^U_t}{U_t} \right)   \\[5pt]
+\rho^{\frac{1}{2}}dW^{S}_t = \rho^{\frac{1}{2}}dW^{S}_t - \rho\left( \frac{\sigma^S_t}{S_t} - \frac{\sigma^U_t}{U_t} \right)dt
+\end{array}
+\right.
+\]
+
+
 
 \paragraph{PDE Black-Scholes}
 \[
