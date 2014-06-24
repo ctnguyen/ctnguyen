@@ -43,9 +43,13 @@
 
 \newcommand{\li}{l(\Ti,\Tii)}
 \newcommand{\Ti}{T_{i}}
+\newcommand{\Talpha}{T_{\alpha}}
+\newcommand{\Tbeta}{T_{\beta}}
 \newcommand{\Tii}{T_{i+1}}
 \newcommand{\Pti}{P(t,T_{i})}
 \newcommand{\Ptii}{P(t,T_{i+1})}
+\newcommand{\Lti}{L(t,\Ti,\Tii)}
+\newcommand{\Lit}{L_{i}(t)}
 \newcommand{\ZCi}{ZC_{i}}
 \newcommand{\ZCii}{ZC_{i+1}}
 \newcommand{\Numi}{Num_{i}}
@@ -166,7 +170,12 @@ ZC_0 = 1 \\
 \end{array}
 \right.
 \]
-
+The forward discount factor (useful in Swap configuration) is defined for a $t\leq \Talpha < T_k$
+\[
+\text{FP}(t,\Talpha,T_k)= \frac{P(t,T_k)}{P(t,\Talpha)}
+ = \prod^{k-1}_{i=\alpha} \frac{\Ptii}{\Pti} 
+ = \prod^{k-1}_{i=\alpha} \frac{1}{1+\tau_i \Lti }
+\]
 
 
 
