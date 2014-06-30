@@ -21,6 +21,16 @@ For Visual studio 2012, use the generator by "Visual Studio 11"
 For Eclipse CDT Linux . use the generator by "Eclipse CDT4 - Unix Makefiles"
 For Mac OS Xcode       use the generator by "Xcode"
 
+
+==========Installation Boost 1_55_0 ==========
+see in section invoke b2
+http://www.boost.org/doc/libs/1_55_0/more/getting_started/windows.html
+
+Download and extract boost. Open a terminal and go to this boost folder
+.\bootstrap.bat
+.\b2 --toolset=msvc-11.0 --build-type=complete --stagedir=.
+
+
 ==========Installation QuantLib 1.4 Mac OS ==========
 http://quantlib.org/install/macosx.shtml
 By following the link of QuantLib and adapting for path similar to boost library
