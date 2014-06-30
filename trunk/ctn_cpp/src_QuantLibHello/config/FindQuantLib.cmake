@@ -135,6 +135,10 @@
 
 ############# main package ##########
 
+message(" - Cmake FindQuantLib --------")
+set(QUANTLIB_CMAKE_DEBUG_MSG "    - QuantLib Cmake Msg ")
+
+
 set(QuantLib_LIBRARY)
 set(QuantLib_INCLUDE_DIR)
 set(QuantLib_LIBRARY_DIR)
@@ -220,11 +224,12 @@ if(_ql_DEBUG_ABI_TAG)
     endif()
 endif()
 
+
 set(_QuantLib_RELEASE_NAMES ${_ql_PREFIX}QuantLib${_ql_COMPILER}${_ql_MT}${_ql_RELEASE_ABI_TAG}.${_ql_SUFFIX})
 set(_QuantLib_DEBUG_NAMES ${_ql_PREFIX}QuantLib${_ql_COMPILER}${_ql_MT}${_ql_DEBUG_ABI_TAG}.${_ql_SUFFIX})
 
-message("-- Cmake QuantLib Debug Messages :_QuantLib_RELEASE_NAMES[${_QuantLib_RELEASE_NAMES}]")
-message("-- Cmake QuantLib Debug Messages :_QuantLib_DEBUG_NAMES[${_QuantLib_RELEASE_NAMES}]")
+message("${QUANTLIB_CMAKE_DEBUG_MSG} :_QuantLib_RELEASE_NAMES[${_QuantLib_RELEASE_NAMES}]")
+message("${QUANTLIB_CMAKE_DEBUG_MSG} :_QuantLib_DEBUG_NAMES[${_QuantLib_RELEASE_NAMES}]")
 
 
 
@@ -267,8 +272,8 @@ if(NOT "$ENV{QUANTLIB_ROOT}" STREQUAL "")
 
 	endif()
 
-message("-- Cmake QuantLib Debug Messages :QuantLib_INCLUDE_DIR[${QuantLib_INCLUDE_DIR}]")
-message("-- Cmake QuantLib Debug Messages :QuantLib_LIBRARY_DIR[${QuantLib_LIBRARY_DIR}]")
+message("${QUANTLIB_CMAKE_DEBUG_MSG} :QuantLib_INCLUDE_DIR[${QuantLib_INCLUDE_DIR}]")
+message("${QUANTLIB_CMAKE_DEBUG_MSG} :QuantLib_LIBRARY_DIR[${QuantLib_LIBRARY_DIR}]")
 
     if(QuantLib_INCLUDE_DIR AND QuantLib_LIBRARY_DIR)
     	set(QuantLib_FOUND 1)
@@ -298,20 +303,23 @@ if(QuantLib_FOUND)
 		find_package_handle_standard_args(QuantLib DEFAULT_MSG QuantLib_LIBRARY QuantLib_INCLUDE_DIR)
 		mark_as_advanced(QuantLib_LIBRARY)
 	endif()
-message("-- QuantLib  --------------------------------------------------------")
+    message("${QUANTLIB_CMAKE_DEBUG_MSG}")
 	message(STATUS "Found QuantLib ${QuantLib_VERSION} library:")
-	message("QuantLib_INCLUDE_DIR")
-	message("	[${QuantLib_INCLUDE_DIR}]")
-	message("QuantLib_LIBRARY_DIR")
-	message("	[${QuantLib_LIBRARY_DIR}]")
-	message("QuantLib_LIBRARY:[${QuantLib_LIBRARY}]")
+	message("        QuantLib_INCLUDE_DIR")
+	message("	        [${QuantLib_INCLUDE_DIR}]")
+	message("        QuantLib_LIBRARY_DIR")
+	message("	        [${QuantLib_LIBRARY_DIR}]")
+	message("        QuantLib_LIBRARY")
+	message("                [${QuantLib_LIBRARY}]")
 	
 else()
-message("-- QuantLib  --------------------------------------------------------")
+message("${QUANTLIB_CMAKE_DEBUG_MSG}")
 	message(" ")
 	message("!!!!!! QuantLib can not be found")
 	message("!!!!!! Be sure that you have correctly define your QUANTLIB_ROOT environment variable")
 	message("!!!!!! This variable QUANTLIB_ROOT indicate where is installed your QuantLib library")
 	message(" ")
 endif()
-message("-- QuantLib  --------------------------------------------------------")
+
+message(" - Cmake FindQuantLib  --------")
+message("    ")
