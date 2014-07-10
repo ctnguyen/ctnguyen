@@ -192,41 +192,48 @@ Volatilities in this section are piecewise constant.
 
 \begin{center}
 \begin{pspicture}(-7,-3)(7,3)
-% Reference for Picture
+%% Reference for Picture
 %\psline[linewidth=0.1pt,linecolor=gray](-7,-3)(7,3)
-%\rput(-6.5,-3){\Rnode{c1}{(-5,-3)}}\rput(0,2){\Rnode{c2}{(-1,1)}}
-%\rput(0,-3){\Rnode{c3}{(2,-3)}} \rput(6,2){\Rnode{c4}{(6,1)}}
-%
-% Draw for Swaption matrix
-\psgrid[subgriddiv=1,gridcolor=gray,griddots=10,gridlabels=0](-5,-3)(-1,1)               % set grid for Swaptions matrix
-\rput(-4,1.3){1YR}\rput(-3,1.3){2YR}\rput(-2,1.3){3YR}\rput(-1,1.3){4YR}    % set horizontal label for Swaption matrix
-\rput(-5.5,0){1YR}\rput(-5.5,-1){2YR}\rput(-5.5,-2){3YR}\rput(-5.5,-3){4YR} % set vertibal label for Swaption matrix
+%\rput(-6,-3){(-6,-3)}\rput(-1,2){(-1,2)}
+%\rput(2,-3){(2,-3)}\rput(7,2){(7,2)}\rput(0,0){(0,0)}
+%%
+%% Draw for Swaption matrix
+\psgrid[subgriddiv=1,gridcolor=gray,griddots=10,gridlabels=0](-6,-3)(-1,2)                 % set grid for Swaptions matrix
+\rput(-5,2.3){1YR}\rput(-4,2.3){2YR}\rput(-3,2.3){3YR}\rput(-2,2.3){4YR}\rput(-1,2.3){5YR} % set horizontal label for Swaption matrix
+\rput(-6.5,1){1YR}\rput(-6.5,0){2YR}\rput(-6.5,-1){3YR}\rput(-6.5,-2){4YR}\rput(-6.5,-3){5YR} % set vertibal label for Swaption matrix
 \psset{linecolor=red} % set points for swaption matrix
-\qdisk(-4,0){3pt}\qdisk(-3,0){3pt}\qdisk(-2,0){3pt}
-\qdisk(-4,-1){3pt}\qdisk(-3,-1){3pt}\qdisk(-4,-2){3pt}
+%\qdisk(-5,1){3pt}\qdisk(-4,1){3pt}\qdisk(-3,1){3pt}\qdisk(-2,1){3pt}
+%\qdisk(-5,0){3pt}\qdisk(-4,0){3pt}\qdisk(-3,0){3pt}
+%\qdisk(-5,-1){3pt}\qdisk(-4,-1){3pt}\qdisk(-5,-2){3pt}
+\psdots[dotstyle=*,dotscale=2](-5,1)(-4,1)(-3,1)(-2,1)(-5,0)(-4,0)(-3,0)(-5,-1)(-4,-1)(-5,-2)
+
 \psset{linecolor=black}
 
-% Draw for Vol piece wise matrix
-\psgrid[gridwidth=0.01pt,gridcolor=lightgray,subgriddiv=2,subgridwidth=0.01pt,subgridcolor=lightgray,gridlabels=0](2,-3)(6,1)          % set grid for vol matrix
-\rput(2,1.3){$T_0$}\rput(3,1.3){$T_2$}\rput(4,1.3){$T_4$}\rput(5,1.3){$T_6$}\rput(6,1.3){$T_8$} % set horizon label for vol matrix
-\rput(1.5,0){$s_2(t)$}\rput(1.5,-1){$s_4(t)$}\rput(1.5,-2){$s_6(t)$}\rput(1.5,-3){$s_8(t)$}     % set vertical label for vol matrix
-% draw line for piecewise constant vol points
-\psset{linewidth=1.2pt}
-\qline(2.5,0.5)(2.1,0.5)
-\qline(2.5,0)(2.1,0)\qline(3,0)(2.6,0)
-\qline(2.5,-0.5)(2.1,-0.5)\qline(3,-0.5)(2.6,-0.5)\qline(3.5,-0.5)(3.1,-0.5)
-\qline(2.5,-1)(2.1,-1)\qline(3,-1)(2.6,-1)\qline(3.5,-1)(3.1,-1)\qline(4,-1)(3.6,-1)
-\qline(2.5,-1.5)(2.1,-1.5)\qline(3,-1.5)(2.6,-1.5)\qline(3.5,-1.5)(3.1,-1.5)\qline(4,-1.5)(3.6,-1.5)\qline(4.5,-1.5)(4.1,-1.5)
-\qline(2.5,-2)(2.1,-2)\qline(3,-2)(2.6,-2)\qline(3.5,-2)(3.1,-2)\qline(4,-2)(3.6,-2)\qline(4.5,-2)(4.1,-2)\qline(5,-2)(4.6,-2)
-\qline(2.5,-2.5)(2.1,-2.5)\qline(3,-2.5)(2.6,-2.5)\qline(3.5,-2.5)(3.1,-2.5)\qline(4,-2.5)(3.6,-2.5)\qline(4.5,-2.5)(4.1,-2.5)\qline(5,-2.5)(4.6,-2.5)\qline(5.5,-2.5)(5.1,-2.5)
-\qline(2.5,-3)(2.1,-3)\qline(3,-3)(2.6,-3)\qline(3.5,-3)(3.1,-3)\qline(4,-3)(3.6,-3)\qline(4.5,-3)(4.1,-3)\qline(5,-3)(4.6,-3)\qline(5.5,-3)(5.1,-3)\qline(6,-3)(5.6,-3)
-% draw line for piecewise constant vol points
-%
-% set points for swaption matrix
+%% Draw for Vol piece wise matrix
+\psgrid[gridwidth=0.01pt,gridcolor=lightgray,subgriddiv=2,subgridwidth=0.01pt,subgridcolor=lightgray,gridlabels=0](2,-3)(7,2)          % set grid for vol matrix
+\rput(2,2.3){$T_0$}\rput(3,2.3){$T_2$}\rput(4,2.3){$T_4$}\rput(5,2.3){$T_6$}\rput(6,2.3){$T_8$}\rput(7,2.3){$T_{10}$} % set horizon label for vol matrix
+\rput(1.5,1){$s_2(t)$}\rput(1.5,0){$s_4(t)$}\rput(1.5,-1){$s_6(t)$}\rput(1.5,-2){$s_8(t)$}\rput(1.5,-3){$s_{10}(t)$}     % set vertical label for vol matrix
+%%
+%% set points for calibrating vol
 \psset{linecolor=blue} 
-\qdisk(3,0){2pt}\qdisk(3,-1){2pt}\qdisk(4,-1){2pt}
-\qdisk(3,-2){2pt}\qdisk(4,-2){2pt}\qdisk(5,-2){2pt}
+%\qdisk(3,1){2pt}\qdisk(3,0){2pt}\qdisk(4,0){2pt} %
+%\qdisk(3,-1){2pt}\qdisk(4,-1){2pt}\qdisk(5,-1){2pt} %
+%\qdisk(3,-2){2pt}\qdisk(4,-2){2pt}\qdisk(5,-2){2pt}\qdisk(6,-2){2pt} %
+\psdots[dotstyle=square*,dotscale=1.5](3,1)(3,0)(4,0)(3,-1)(4,-1)(5,-1)(3,-2)(4,-2)(5,-2)(6,-2)
 \psset{linecolor=black}
+%% draw line for piecewise constant vol points
+\psset{linewidth=1.2pt}
+\qline(2.5,1.5)(2.1,1.5) %
+\qline(2.5,1)(2.1,1)\qline(3,1)(2.6,1) %
+\qline(2.5,0.5)(2.1,0.5)\qline(3,0.5)(2.6,0.5)\qline(3.5,0.5)(3.1,0.5) %
+\qline(2.5,0)(2.1,0)\qline(3,0)(2.6,0)\qline(3.5,0)(3.1,0)\qline(4,0)(3.6,0) %
+\qline(2.5,-0.5)(2.1,-0.5)\qline(3,-0.5)(2.6,-0.5)\qline(3.5,-0.5)(3.1,-0.5)\qline(4,-0.5)(3.6,-0.5)\qline(4.5,-0.5)(4.1,-0.5) %
+\qline(2.5,-1)(2.1,-1)\qline(3,-1)(2.6,-1)\qline(3.5,-1)(3.1,-1)\qline(4,-1)(3.6,-1)\qline(4.5,-1)(4.1,-1)\qline(5,-1)(4.6,-1) %
+\qline(2.5,-1.5)(2.1,-1.5)\qline(3,-1.5)(2.6,-1.5)\qline(3.5,-1.5)(3.1,-1.5)\qline(4,-1.5)(3.6,-1.5)\qline(4.5,-1.5)(4.1,-1.5)\qline(5,-1.5)(4.6,-1.5)\qline(5.5,-1.5)(5.1,-1.5) %
+\qline(2.5,-2)(2.1,-2)\qline(3,-2)(2.6,-2)\qline(3.5,-2)(3.1,-2)\qline(4,-2)(3.6,-2)\qline(4.5,-2)(4.1,-2)\qline(5,-2)(4.6,-2)\qline(5.5,-2)(5.1,-2)\qline(6,-2)(5.6,-2) %
+\qline(2.5,-2.5)(2.1,-2.5)\qline(3,-2.5)(2.6,-2.5)\qline(3.5,-2.5)(3.1,-2.5)\qline(4,-2.5)(3.6,-2.5)\qline(4.5,-2.5)(4.1,-2.5)\qline(5,-2.5)(4.6,-2.5)\qline(5.5,-2.5)(5.1,-2.5)\qline(6,-2.5)(5.6,-2.5)\qline(6.5,-2.5)(6.1,-2.5) %
+\qline(2.5,-3)(2.1,-3)\qline(3,-3)(2.6,-3)\qline(3.5,-3)(3.1,-3)\qline(4,-3)(3.6,-3)\qline(4.5,-3)(4.1,-3)\qline(5,-3)(4.6,-3)\qline(5.5,-3)(5.1,-3)\qline(6,-3)(5.6,-3)\qline(6.5,-3)(6.1,-3)\qline(7,-3)(6.6,-3) %
+%% draw line for piecewise constant vol points
 \end{pspicture}
 \end{center}
 
