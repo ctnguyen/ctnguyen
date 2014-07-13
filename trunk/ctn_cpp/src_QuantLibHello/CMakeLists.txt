@@ -33,11 +33,13 @@ if(QuantLib_FOUND)
 	#    link_directories(${QuantLib_LIBRARY_DIR})
 endif()
 
+## force using of C++11X on Unix machine
+if(UNIX)
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11") 
+endif()
 
-add_executable(qlHello main.cpp)
-
-# Works for Mac Install
-target_link_libraries(qlHello ${QuantLib_LIBRARY})
+add_executable(test_RG Test_BoostRandomGenerator.cpp)
+target_link_libraries(test_RG ${QuantLib_LIBRARY})
 
 add_subdirectory(Examples)
 
