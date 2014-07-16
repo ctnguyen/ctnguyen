@@ -178,17 +178,27 @@ The forward discount factor (useful in Swap configuration) is defined for a $t\l
 \]
 
 
-
-
-
-
-
-
-
-
-
 \subsection{Calibration deterministic volatilities}
-Volatilities in this section are piecewise constant.
+Our LMM model firstly implemented use the \textit{HGVolatility} , i.e volatilities for each LIBOR $L_i(t)$ are piecewise constant functions $\sigma_i(t)=g_i(t)h_i(t)$, where $h_i(t)$ and $g_i(t)$ are also piecewiese constant. Since they are piecewise constant, we can store these parameters in two lower triangular matrices ~\footnote{ Because $h_i(t)$ and $g_i(t)$ are volatilities of $L_i(t)=L(t,T_i,T_{i+1}) $, they are 'dead' after time $t \geq T_i$. That's why our volatility matrices are lower triangular}
+\[
+\left\{
+\begin{array}{l}
+g_{ij}= g_i(T_j) \\
+h_{ij}= h_i(T_j)
+\end{array}
+\right.
+\hspace{0.5cm}
+i \geq j
+\hspace{2cm}
+\left\{
+\begin{array}{l}
+g_{0j}=g_{i0}=0 \\
+h_{0j}=h_{i0}=0
+\end{array}
+\right.
+\hspace{0.5cm}
+\forall i,j
+\]
 
 \begin{center}
 \begin{pspicture}(-7,-3)(7,4)
@@ -219,7 +229,7 @@ Volatilities in this section are piecewise constant.
 \rput(6,2.1){$\scriptstyle{T_8}$}\rput(6.5,2.1){$\scriptstyle{T_9}$}
 \rput(7,2.1){$\scriptstyle{T_{10}}$} 
 %% set vertical label for vol matrix
-\rput(1.5,1){$s_2(t)$}\rput(1.5,0){$s_4(t)$}\rput(1.5,-1){$s_6(t)$}\rput(1.5,-2){$s_8(t)$}\rput(1.5,-3){$s_{10}(t)$}     
+\rput(1.5,1){$g_2(t)$}\rput(1.5,0){$g_4(t)$}\rput(1.5,-1){$g_6(t)$}\rput(1.5,-2){$g_8(t)$}\rput(1.5,-3){$g_{10}(t)$}     
 %%
 %% set points for calibrating vol
 \psset{linecolor=blue} 
@@ -244,9 +254,69 @@ Volatilities in this section are piecewise constant.
 \rput(5.5,3){$\scriptstyle\text{nbParam} = \frac{1}{2}(\text{nbLBR}-1)\text{nbLBR}=55 $}
 \end{pspicture}
 \end{center}
+\paragraph{} When calibrating using Implied Swaption Volatilities quoted on the market, a problem arise if swaptions has different configuration of fixed tenor and float tenor. See from the figure example, on an horizon 5 year, with float/fixed tenor are 6M/1YR, we have only 10 swaption's data from the market, while the model has 55 parameters. The excessive number of parameters lead to infinity of solutions. Then we use a special calibration's process to avoid this problem. The idea is to choose sparsely some parameters in the volatility matrix, in the way that there are the same number of parameters to be calibrated than the number of swaption's data. After every calibration step ( minimization iteration ) an interpolation process are launched in order to taking in acount for the whole matrix.
+\paragraph{} The idea of choosen sparse parameters are intuitive. We look in detail for each swaptions, what are dependant Libor, then we deduces the dependant parameters. For example on the horizon of 5YR, with float/fixed tenor 6M/1YR, the swaption 3YRx2YR depend to libors $L_6,L_7,L_8,L_9$. Since the swaption's maturity is 3YR=$T_6$, the swaption depend only to parameters anterior to time $T_6$, i.e $g_{ij, 6\leq i\leq 9,1\leq j\leq6}$. From this full dependant set of parameters, we choose only $g_{62},g_{64},g_{66},g_{82},g_{84},g_{86}$ for calibration. In general, we choose parameters by jumping indices step fixed tenor/float tenor. An explicite example of swaptions 1YR/6M and parameter's dependance for horizon 4YR are described in the table
+\begin{center}
+\begin{tabular}{||c||l|l|l|}
+\hline
+Swaption & Libor Dep.   & Full Vol Dep. & Sparse Vol Dep. \\
+\hline
+1YRx1YR  & $L_2, L_3$   & $g_{ij, 2\leq i\leq 3,1\leq j\leq2}$& $g_{22}$\\
+\hline
+1YRx2YR  & $L_2,...L_5$ & $g_{ij, 2\leq i\leq 5,1\leq j\leq2}$& $g_{22},g_{42}$ \\
+\hline
+1YRx3YR  & $L_2,...L_7$ & $g_{ij, 2\leq i\leq 7,1\leq j\leq2}$& $g_{22},g_{42},g_{62}$ \\
+\hline
+2YRx1YR  & $L_4, L_5$   & $g_{ij, 4\leq i\leq 5,1\leq j\leq4}$& $g_{42},g_{44}$ \\
+\hline
+2YRx2YR  & $L_4,...L_7$ & $g_{ij, 4\leq i\leq 7,1\leq j\leq4}$& $g_{42},g_{44},g_{62},g_{64}$\\
+\hline
+3YRx1YR  & $L_6, L_7$   & $g_{ij, 6\leq i\leq 7,1\leq j\leq6}$& $g_{62},g_{64},g_{66}$ \\
+\hline
+\end{tabular} 
+\end{center}
+\paragraph{Interpolation - Extrapolation volatility matrix}\mbox{}\\
+Assuming we've successed to sparsely choose parameters and calibrated. Then these parameters form a 'triangle' in the volatility matrix. One can interpolate all values in its interior and extrapolate the exterior of this triangle.
+\begin{center}
+\begin{pspicture}(-7,-3)(7,4)
+%% Reference for Picture
+\psline[linewidth=0.1pt,linecolor=gray](-7,-3)(7,4)
+\rput(-6,-3){(-6,-3)}\rput(-1,2){(-1,2)}
+\rput(2,-3){(2,-3)}\rput(7,2){(7,2)}\rput(0,0){(0,0)}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Draw for Global Calibrate and Interpolate
+\psgrid[gridwidth=0.01pt,gridcolor=lightgray,subgriddiv=2,subgridwidth=0.01pt,subgridcolor=lightgray,gridlabels=0](-6,-3)(-1,2)          % set grid for vol matrix
+%% set horizon label for vol matrix
+\rput(-6,2.1){$\scriptstyle{T_0}$}\rput(-5.5,2.1){$\scriptstyle{T_1}$}
+\rput(-5,2.1){$\scriptstyle{T_2}$}\rput(-4.5,2.1){$\scriptstyle{T_3}$}
+\rput(-4,2.1){$\scriptstyle{T_4}$}\rput(-3.5,2.1){$\scriptstyle{T_5}$}
+\rput(-3,2.1){$\scriptstyle{T_6}$}\rput(-2.5,2.1){$\scriptstyle{T_7}$}
+\rput(-2,2.1){$\scriptstyle{T_8}$}\rput(-1.5,2.1){$\scriptstyle{T_9}$}
+\rput(-1,2.1){$\scriptstyle{T_{10}}$} 
+%% set points for calibrating vol
+\psset{linecolor=red} 
+\psdots[dotstyle=square*,dotscale=1.5](-5,1)(-5,0)(-4,0)(-5,-1)(-4,-1)(-3,-1)(-5,-2)(-4,-2)(-3,-2)(-2,-2)
+\psset{linecolor=black}
+%\rput(5.5,3){$\scriptstyle\text{nbParam} = \frac{1}{2}(\text{nbLBR}-1)\text{nbLBR}=55 $}
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Draw for local Calibrate and Interpolate
+\psgrid[gridwidth=0.01pt,gridcolor=lightgray,subgriddiv=2,subgridwidth=0.01pt,subgridcolor=lightgray,gridlabels=0](2,-3)(7,2)          % set grid for vol matrix
+%% set horizon label for vol matrix
+\rput(2,2.1){$\scriptstyle{T_0}$}\rput(2.5,2.1){$\scriptstyle{T_1}$}
+\rput(3,2.1){$\scriptstyle{T_2}$}\rput(3.5,2.1){$\scriptstyle{T_3}$}
+\rput(4,2.1){$\scriptstyle{T_4}$}\rput(4.5,2.1){$\scriptstyle{T_5}$}
+\rput(5,2.1){$\scriptstyle{T_6}$}\rput(5.5,2.1){$\scriptstyle{T_7}$}
+\rput(6,2.1){$\scriptstyle{T_8}$}\rput(6.5,2.1){$\scriptstyle{T_9}$}
+\rput(7,2.1){$\scriptstyle{T_{10}}$} 
+%% set points for calibrating vol
+\psset{linecolor=blue} 
+\psdots[dotstyle=square*,dotscale=1.5](3,1)(3,0)(4,0)(3,-1)(4,-1)(5,-1)(3,-2)(4,-2)(5,-2)(6,-2)
+\psset{linecolor=black}
+%\rput(5.5,3){$\scriptstyle\text{nbParam} = \frac{1}{2}(\text{nbLBR}-1)\text{nbLBR}=55 $}
+\end{pspicture}
+\end{center}
 
 \section{The implemented model}
 \section{Calibration}
