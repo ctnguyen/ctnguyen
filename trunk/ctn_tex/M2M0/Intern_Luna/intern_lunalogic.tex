@@ -43,9 +43,9 @@
 
 \newcommand{\li}{l(\Ti,\Tii)}
 \newcommand{\Ti}{T_{i}}
+\newcommand{\Tii}{T_{i+1}}
 \newcommand{\Talpha}{T_{\alpha}}
 \newcommand{\Tbeta}{T_{\beta}}
-\newcommand{\Tii}{T_{i+1}}
 \newcommand{\Pti}{P(t,T_{i})}
 \newcommand{\Ptii}{P(t,T_{i+1})}
 \newcommand{\Lti}{L(t,\Ti,\Tii)}
@@ -176,7 +176,30 @@ The forward discount factor (useful in Swap configuration) is defined for a $t\l
  = \prod^{k-1}_{i=\alpha} \frac{\Ptii}{\Pti} 
  = \prod^{k-1}_{i=\alpha} \frac{1}{1+\tau_i \Lti }
 \]
-
+\subsection{Translation probability toward Libors dates}
+The aim is to be able to express the $\Tii$-forward measure and its associated Brownian to the $\Ti$-forward measure and its associated measure. From the numeraire change formula, we have
+\[
+\frac{dQ^{\Tii}}{dQ^{\Ti}} = \frac{P(0,\Tii)}{P(0,\Ti)}\frac{\Pti}{\Ptii} = \textbf{c} (\tau_i \Lit + 1 )
+\]
+If we can express the right hand side as an exponential process, then we can apply the Girsanov theorem for getting the Brownian translation relation. In fact
+\[
+\frac{d (\textbf{c} (\tau_i \Lit + 1 )) }{\textbf{c} (\tau_i \Lit + 1 )} 
+= \frac{\tau_i d\Lit }{\tau_i \Lit +1} = \frac{\tau_i \Lit s_i(t) B_i(t) }{\tau_i \Lit +1} dW^{\Tii} = \mu_i(t)dW^{\Tii}
+\]
+Remark that the last equation has a solution as geometric brownian motion :
+\[
+\textbf{c} (\tau_i \Lit + 1 ) = \text{exp} \left\{ \int_0^t \mu_i(s)dW^{\Tii}_s - \frac{1}{2}\int_0^t \mu^2_i(s)ds \right\}
+\]
+Plug into the probability equation, we can now apply the Girsanov theorem
+\[
+\frac{dQ^{\Tii}}{dQ^{\Ti}} = \text{exp} \left\{ \int_0^t \mu_i(s)dW^{\Tii}_s - \frac{1}{2}\int_0^t \mu^2_i(s)ds \right\}
+\hspace{1.5cm}
+dW^{\Ti} = dW^{\Tii} - \mu_i(t)dt
+\]
+Or in a general formula
+\[
+dW^{T_{k}} = dW^{T_{k+1}} - \frac{\tau_k L_k(t)}{\tau_k L_k(t) +1}  s_k(t) B_k(t) dt
+\]
 
 \subsection{Calibration deterministic volatilities}
 Our LMM model firstly implemented use the \textit{HGVolatility} , i.e volatilities for each LIBOR $L_i(t)$ are piecewise constant functions $\sigma_i(t)=g_i(t)h_i(t)$, where $h_i(t)$ and $g_i(t)$ are also piecewiese constant. Since they are piecewise constant, we can store these parameters in two lower triangular matrices ~\footnote{ Because $h_i(t)$ and $g_i(t)$ are volatilities of $L_i(t)=L(t,T_i,T_{i+1}) $, they are 'dead' after time $t \geq T_i$. That's why our volatility matrices are lower triangular}
