@@ -38,8 +38,10 @@ if(UNIX)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11") 
 endif()
 
-add_executable(test_RG Test_BoostRandomGenerator.cpp)
-target_link_libraries(test_RG ${QuantLib_LIBRARY})
+add_executable(test_BoostRandomGenerator Test_BoostRandomGenerator.cpp)
+add_executable(test_TimeCounter Test_TimeCounter.cpp)
+
+target_link_libraries(test_BoostRandomGenerator ${QuantLib_LIBRARY})
 
 add_subdirectory(Examples)
 
