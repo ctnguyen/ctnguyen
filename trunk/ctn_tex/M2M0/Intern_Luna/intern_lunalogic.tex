@@ -115,7 +115,7 @@ In the internship at Lunalogic, we continu the work of ~\cite{THAI2013} and use 
 \tableofcontents
 \newpage
 
-% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \section{About Lunalogic}
 \begin{tabular}{llll}
@@ -201,6 +201,19 @@ Or in a general formula
 dW^{T_{k}} = dW^{T_{k+1}} - \frac{\tau_k L_k(t)}{\tau_k L_k(t) +1}  s_k(t) B_k(t) dt
 \]
 
+\section{The implemented model}
+\section{Calibration}
+
+\subsection{Approximation Swaption Black Vol by Rebonato formula}
+The swap rate is computed by \footnote{The iteration through indices $\hat{i}$ and $i$ is different when the swap settlement dates are different for fixed legs and floatting legs.$\hat{i}$ iterate through fixed legs while $i$ iterate through floatting legs. Their steps can be different depending on Fixed/Float Tenor configuration}
+\[
+S_{\alpha,\beta}(t) 
+= 
+\frac{P(t,T_{\alpha})-P(t,T_{\beta})}{\sum^{\hat{\beta}-}_{\hat{i}=\hat{\alpha}}\tau_{\hat{i}}P(t,T_{\hat{i}++})} 
+=
+\frac{\sum^{\beta-1}_{i=\alpha} \tau_i \Ptii }{A_{\alpha,\beta}(t)} \Lit 
+\]
+Where 
 \subsection{Calibration deterministic volatilities}
 Our LMM model firstly implemented use the \textit{HGVolatility} , i.e volatilities for each LIBOR $L_i(t)$ are piecewise constant functions $\sigma_i(t)=g_i(t)h_i(t)$, where $h_i(t)$ and $g_i(t)$ are also piecewiese constant. Since they are piecewise constant, we can store these parameters in two lower triangular matrices ~\footnote{ Because $h_i(t)$ and $g_i(t)$ are volatilities of $L_i(t)=L(t,T_i,T_{i+1}) $, they are 'dead' after time $t \geq T_i$. That's why our volatility matrices are lower triangular}
 \[
@@ -391,12 +404,11 @@ Assuming we've successed to sparsely choose parameters and calibrated. Then thes
 \end{pspicture}
 \end{center}
 
-\section{The implemented model}
-\section{Calibration}
+
 \section{Tests and validations}
 Back testing, forward testing, validation. critical view points.
 
-% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \section{Appendices}
 \appendix
