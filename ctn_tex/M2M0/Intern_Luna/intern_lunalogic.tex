@@ -137,19 +137,25 @@ We explain here how are implemented the last model, calibration, test..., some c
  \item The Libor : $L_i = L(t,T_i,T_{i+1})$, i=0,1,... N. Number of LIBORs = N+1
 \end{itemize}
 
-\subsection{Libor Model}
-The Spot LIBOR 
-\[
-\LtT=\frac{1-\PtT}{\tautT \PtT}
-\hspace{1cm}
-l_i = \li  = \frac{1}{\tau_i}\left( \frac{1}{P(\Ti,\Tii)} - 1 \right)
-\hspace{1cm}
-\tau_i \li = 
-\]
-The forward Libor 
-\[
+\subsection{Market Information concerning Libor Model}
+The bijective relation between forward Libor and zero coupon
+\begin{equation}
+\label{eq:libor_zc}
 L_i(t) = L(t,\Ti,\Tii) = \frac{1}{\tau_i} \left[ \frac{\Pti}{\Ptii} - 1  \right]
-\]
+\hspace{2cm}
+{\Ptii} = \frac{\Pti}{1+ \tau_i L_i(t)}
+\end{equation}
+After having these informations, i.e zero-coupond prices or all Forward Libor Rate, one can compute the related swap rate starting at date $T_{\alpha}$, ends at date $T_{\beta}$
+\begin{equation}
+\label{eq:swap_rate}
+S_{\alpha,\beta}(t) 
+= 
+\frac{P(t,T_{\alpha})-P(t,T_{\beta})}{\sum^{\hat{\beta}-}_{\hat{i}=\hat{\alpha}}\tau_{\hat{i}}P(t,T_{\hat{i}++})} 
+=
+\frac{\sum^{\beta-1}_{i=\alpha} \tau_i \Ptii }{A_{\alpha,\beta}(t)} \Lit 
+\end{equation}
+
+
 For the initial forward LIBOR ( which is different than the spot LIBOR )
 \[
 L_i(0) = L_i = \frac{1}{\tau_i} \left[ \frac{\ZCi}{\ZCii} - 1  \right] = \frac{1}{\tau_i} \left[ \frac{\Numii}{\Numi} - 1  \right]
@@ -203,6 +209,20 @@ dW^{T_{k}} = dW^{T_{k+1}} - \frac{\tau_k L_k(t)}{\tau_k L_k(t) +1}  s_k(t) B_k(t
 
 \section{The implemented model}
 \section{Calibration}
+\subsection{Bloomberg and Market Data}
+\paragraph{} The first step to do with the calibration is to retreive market information. At Lunalogic RD team, we have a Bloomberg terminal and all of our data comes from this. We explain here how we retreive data with Bloomberg. In a general way, a full yield curve for horizon 50YR does not exist. One has to use quoted instruments and AOA formula, interpolation tools to fully build the interest rate curve. These instruments frequently used are
+\begin{itemize}
+ \item Quotation from EURIBOR, used for short horizon
+ \item FRA, used for midle horizon
+ \item Vanilla Interest rate Swap, used for long horizon
+\end{itemize}
+There exist many method to build interest rate curve, that we will not focus here. We suppose this curve is already built. In reality, Bloomberg propose tools to build this curve, that one can take a look at ~\cite{BL2012} or use the bloomberg tool \textbf{ICVS} (Swap Curve Builder).
+\paragraph{} Note that all of our study are european-based. So when going to Bloomberg, we choose EUR currency, the fixed/float tenor are only choosen by 6M/1YR as standard vanilla european swap configuration. Two main data we need for the calibration are Initial Libor curve and the Black Volatility of ATM Swaption matrix.   
+\paragraph{Initial Libor} is calculated from a zerocoupond set, which is available from Bloomberg (not directly). In Bloomberg terminal, we use 
+\[
+\textbf{ICVS} \longrightarrow \textbf{14)EUR} \longrightarrow \textbf{21) Stripped Curve} \longrightarrow  \textbf{Export to Excel} 
+\]
+That give the discount curve for 50YR 
 
 \subsection{Approximation Swaption Black Vol by Rebonato formula}
 The swap rate is computed by \footnote{The iteration through indices $\hat{i}$ and $i$ is different when the swap settlement dates are different for fixed legs and floatting legs.$\hat{i}$ iterate through fixed legs while $i$ iterate through floatting legs. Their steps can be different depending on Fixed/Float Tenor configuration}
