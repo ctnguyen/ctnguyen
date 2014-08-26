@@ -39,7 +39,7 @@
 \newcommand{\FuncExp}{\text{exp}}
 \newcommand{\FuncLn}{\text{ln}}
 \newcommand{\Discount}[2]{e^{-\int_{#1}^{#2}r_u du} }
-
+\newcommand{\bl}[1]{{\scshape  #1}}
 
 \newcommand{\li}{l(\Ti,\Tii)}
 \newcommand{\Ti}{T_{i}}
@@ -209,20 +209,40 @@ dW^{T_{k}} = dW^{T_{k+1}} - \frac{\tau_k L_k(t)}{\tau_k L_k(t) +1}  s_k(t) B_k(t
 
 \section{The implemented model}
 \section{Calibration}
+This section explain how process the calibration algorithm in our LMM Model, what are input data, what are ouputs, how to test and say that our calibration is good. Firstly, we will explain what market data we need and how to retreive them. We then explain the market data issu and how to resolv this by our algorighm with a set of numerical techniques (interpolation, solver ...). At the end, we explain how we test our algorithm before using real market data, and how is tested with the real market data.   
 \subsection{Bloomberg and Market Data}
 \paragraph{} The first step to do with the calibration is to retreive market information. At Lunalogic RD team, we have a Bloomberg terminal and all of our data comes from this. We explain here how we retreive data with Bloomberg. In a general way, a full yield curve for horizon 50YR does not exist. One has to use quoted instruments and AOA formula, interpolation tools to fully build the interest rate curve. These instruments frequently used are
 \begin{itemize}
- \item Quotation from EURIBOR, used for short horizon
- \item FRA, used for midle horizon
+ \item Quotation from \bl{euribor}, used for short horizon
+ \item \bl{fra}, used for midle horizon
  \item Vanilla Interest rate Swap, used for long horizon
 \end{itemize}
-There exist many method to build interest rate curve, that we will not focus here. We suppose this curve is already built. In reality, Bloomberg propose tools to build this curve, that one can take a look at ~\cite{BL2012} or use the bloomberg tool \textbf{ICVS} (Swap Curve Builder).
-\paragraph{} Note that all of our study are european-based. So when going to Bloomberg, we choose EUR currency, the fixed/float tenor are only choosen by 6M/1YR as standard vanilla european swap configuration. Two main data we need for the calibration are Initial Libor curve and the Black Volatility of ATM Swaption matrix.   
+There exist many method to build interest rate curve, that we will not focus here. We suppose this curve is already built. In reality, Bloomberg propose tools to build this curve, that one can take a look at ~\cite{BL2012} or use the bloomberg tool \bl{icvs} (Swap Curve Builder).
+\paragraph{} Note that all of our study are european-based. So when going to Bloomberg, we choose \bl{eur} currency, the fixed/float tenor are only choosen by 6M/1YR as standard vanilla european swap configuration. Two main data we need for the calibration are Initial Libor curve and the Black Volatility of ATM Swaption matrix.   
 \paragraph{Initial Libor} is calculated from a zerocoupond set, which is available from Bloomberg (not directly). In Bloomberg terminal, we use 
+\begin{center}
+\bl{icvs} $\longrightarrow$ \bl{14) eur} $\longrightarrow$ \bl{21) Stripped Curve} $\longrightarrow$  \bl{Export to Excel} 
+\end{center}
+That give the discount curve for 50YR horizon. After getting this curve, we interpolate linearly at dates multiple of 6MO, and eliminate all elements that are not at date multiple of 6MO. Values from this curve are used as discount factors, in equations \ref{eq:libor_zc}, they are $P(0,T_{i})$, and we can have every $\L(0,T_{i},T_{i+1})$ from this. 
+\paragraph{Swaption ATM Black's Vol and skew} is available from Bloomberg by ticker \bl{vcub}. After going into this page, user have to choose the right currency, the right tenor type (6M for european swaps), then refresh information. One can get Black's Vol quote for ATM swaptions, OTM or ITM swaptions and the correspondant strikes matrix by giving the moneyness information. We get the derivative skew matrix by finite difference method
 \[
-\textbf{ICVS} \longrightarrow \textbf{14)EUR} \longrightarrow \textbf{21) Stripped Curve} \longrightarrow  \textbf{Export to Excel} 
+\textbf{derivative}(skew) = \frac{quote (\textbf{ATM+5bp}) - quote(\textbf{ATM-5bp}) }{\textbf{10bp}}
 \]
-That give the discount curve for 50YR 
+The post treatment is similar as Libor quotes, we eliminate all experities that are not multiple of 1YR. Note the difference is that for swaptions quote, we only use dates multiple of 1YR. 
+\paragraph{Data check}
+Before using the data, we always check if the data is coherent, i.e Libor quotes is coherent with swaptions. Thanks to analytical swap rate formula \ref{eq:swap_rate} and the Libor quotes, we recompute our swap rate matrix, and compare with the ATM swaptions strike quote. The ideal case has to match exactly the same values. But in reality, there are a difference about 1\%-2\%, that is negligible and we accept this difference since we didn't send time to rigorously build our yield curve.    
+\subsection{Calibration algorithm}
+\paragraph{Generality on volatility data structure}
+explain here the issues of missing data, the choice of swaptions instead of caplet. HG vol, nodes feature on gMatrix, interpolation. How abcd can be calibrated, how gMatrix is calibrated after. How virtual test is build.
+\paragraph{Global}
+\paragraph{Local}
+\paragraph{Regularized global}
+
+\subsection{Exact virtual test}
+\subsection{Regularized virtual test}
+\subsection{Calibration with real data - results}
+Calibrating abcd before (hMatrix). Then calibrating g. Result benchmark analyse : Time computing in relation to horizon. Results stability with many different dates
+\paragraph{Exact calibration}
 
 \subsection{Approximation Swaption Black Vol by Rebonato formula}
 The swap rate is computed by \footnote{The iteration through indices $\hat{i}$ and $i$ is different when the swap settlement dates are different for fixed legs and floatting legs.$\hat{i}$ iterate through fixed legs while $i$ iterate through floatting legs. Their steps can be different depending on Fixed/Float Tenor configuration}
