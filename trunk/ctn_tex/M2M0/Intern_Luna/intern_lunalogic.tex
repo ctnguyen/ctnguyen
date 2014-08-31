@@ -43,9 +43,9 @@
 
 \newcommand{\li}{l(\Ti,\Tii)}
 \newcommand{\Ti}{T_{i}}
+\newcommand{\Ta}{T_{\alpha}}
+\newcommand{\Tb}{T_{\beta}}
 \newcommand{\Tii}{T_{i+1}}
-\newcommand{\Talpha}{T_{\alpha}}
-\newcommand{\Tbeta}{T_{\beta}}
 \newcommand{\Pti}{P(t,T_{i})}
 \newcommand{\Ptii}{P(t,T_{i+1})}
 \newcommand{\Lti}{L(t,\Ti,\Tii)}
@@ -54,6 +54,10 @@
 \newcommand{\ZCii}{ZC_{i+1}}
 \newcommand{\Numi}{Num_{i}}
 \newcommand{\Numii}{Num_{i+1}}
+
+\newcommand{\Sab}{S_{\alpha,\beta}}
+\newcommand{\Cab}{C_{\alpha,\beta}}
+\newcommand{\Eab}{\mathbb{E}^{\alpha,\beta}}
 
 \newcommand{\todo}[1]{\begin{center}\color{red} TODO : #1\end{center}}
 
@@ -90,8 +94,7 @@ Tutors                                                                  &       
 \vspace{2cm}
 
 \begin{center}
-%\resizebox{14cm}{0.7cm}{High dimensional PDE solver for multi-asset pricing option}
-\resizebox{14cm}{0.8cm}{Variant of Libor Market Model}
+\resizebox{14cm}{0.8cm}{Libor Market Model}
 \end{center}
 %%%%%%%%%%%%%%%%%% DOCUMENT TITLE %%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{center}
@@ -127,8 +130,54 @@ Tech. support     & Fastah Rahmani               & fastah.rahmani@gmail.com     
 Bloomberg supp.   & Giulio D'Ambrosio            & gdambrosio3@bloomberg.net      &+442070733101  \\
 \end{tabular}
 
+\newpage
+\section{The Market Model}
+The aim of market model is to give a model that well price a set of basic instruments. In the LMM case study, the aim is to give a good pricing tool for plain vanilla products, such as Caps, Floors and Swaptions. In this section, firstly show the idea of numeraire change, this idea lies the model and the well-etablished pricing tool for simple instruments. 
+\subsection{Numeraire change}
+The two important numeraire changes that make the market model of this project are inspired from the Caplet and Swaption Black \& Scholes frameworks. 
+\paragraph{ Caplet and forward measure } is an option on interest rate derivative. Caplet is analyzed as a european call option, with maturity time $T_1$ and pay at time $T_2$ for a certain strike $K$. The payment of such an option at time $T_2$ is obsevable at time $T_1$ and worth
+\[
+\text{price}(T_1) = \tau(T_1,T_2)( L(T_1,T_1,T_2) - K )^+ 
+\] 
+where $L(T_1,T_1,T_2)$ is the observed Libor at time $T_1$. This payoff at the present time can be obtainted by discounting 
+\[
+\text{price}(0) = \mathbb{E}^{B}\left[ \frac{B(0)}{B(T_2)} \tau(T_1,T_2)( L(T_1;T_1,T_2) - K )^+  \right]
+\]
+with $B(t)$ the money market account. Since the zerocoupond $P(t,T_2)$ is a tradable instrument, and always have positive values, one can change the numeraire, and the pricing formula becomes
+\[
+\text{price}(0) =\mathbb{E}^{T_2}\left[ \frac{P(0,T_2)}{P(T_2,T_2)} \tau(T_1,T_2)( L(T_1;T_1,T_2) - K )^+  \right]
+\]
+Note that by using $P(t,T_2)$ as numeraire, $\mathbb{E}^{T_2}$ is defined as $T_2$-forward measure, and under such probability, the forward rate follow a martingale, i.e
+\[
+\frac{dL(t;T_1,T_2)}{L(t;T_1,T_2)} = v^{T_2}dW^{T_2}
+\hspace{2cm}
+t\leq T_1 < T_2
+\]
+\paragraph{ Swaption and swap measure } is the option to enter into a interest rate swap. As for swap interest rate, swaption contract is settled on a set of payment dates $\Ta.. T_i.. \Tb$ where $\Ta$ and $\Tb$ are start and end of swap instrument. The swaption's maturity date is the swap's start date $\Ta$. The price value of such an option is caculable at time $\Ta$ by discounting
+\[
+\text{price}(\Ta) = \left[ \Sab(\Ta) - K \right]^+ \Cab(\Ta)
+\hspace{1cm}
+\Cab(t) = \sum^{\beta}_{\alpha+1} \tau_i \Pti 
+\]  
+Where $\Cab(t)$ is the swap's annuity measure at time $t$. This is simply the payment sum of the fix leg on a swap configuration. Note that annuity is indeed a tradable product, as a sum of zerocoupons, always have positive value, so those can be used as numeraire. By the same way as discounting the caplet price, the present value of swaption is
+\[
+\text{price}(0) = \mathbb{E}^{B}\left[ \frac{B(0)}{B(T_2)} (\Sab(\Ta) - K )^+ \Cab(\Ta)  \right]
+\]
+and by change to numeraire $\Cab(t)$, under the associated probability $\Eab$
+\[
+\text{price}(0) = \Cab(0) \Eab \left[ (\Sab(\Ta) - K )^+ \Cab(\Ta)  \right]
+\]
+Since the numeraire change framework ensure the martingale properties, the swap interest rate $\Sab$ under the measure $\Eab$ follows the martingale, in the way that it can be modelled by equation
+\[
+\frac{d\Sab(t)}{\Sab(t)} = v^{\alpha,\beta}dW^{\alpha,\beta}(t)
+\]
+\paragraph{} These two pricing approachs introduce to two different ideas of modelling for differents basic instrument. That also show the incompatibilities issues of these two derivative's familly. The evidence come from the fact that the measure $\mathbb{E}^{T_2}$ associated to the numeraire $P(t,T_2)$ is different to the measure $\Eab$ associated to the numeraire $\Cab(t)$.   
 
-\section{The Model lastly implemented at Lunalogic}
+
+
+
+
+\newpage
 We explain here how are implemented the last model, calibration, test..., some critical views from the older work, what is done, what is to to, see \cite{THAI2013}.
 \begin{itemize}
  \item horizon  = N
@@ -176,9 +225,9 @@ ZC_0 = 1 \\
 \end{array}
 \right.
 \]
-The forward discount factor (useful in Swap configuration) is defined for a $t\leq \Talpha < T_k$
+The forward discount factor (useful in Swap configuration) is defined for a $t\leq \Ta < T_k$
 \[
-\text{FP}(t,\Talpha,T_k)= \frac{P(t,T_k)}{P(t,\Talpha)}
+\text{FP}(t,\Ta,T_k)= \frac{P(t,T_k)}{P(t,\Ta)}
  = \prod^{k-1}_{i=\alpha} \frac{\Ptii}{\Pti} 
  = \prod^{k-1}_{i=\alpha} \frac{1}{1+\tau_i \Lti }
 \]
