@@ -137,7 +137,7 @@ The aim of market model is to give a model that well price a set of basic instru
 The two important numeraire changes that make the market model of this project are inspired from the Caplet and Swaption Black \& Scholes frameworks. 
 \paragraph{ Caplet and forward measure } is an option on interest rate derivative. Caplet is analyzed as a european call option, with maturity time $T_1$ and pay at time $T_2$ for a certain strike $K$. The payment of such an option at time $T_2$ is obsevable at time $T_1$ and worth
 \[
-\text{price}(T_1) = \tau(T_1,T_2)( L(T_1,T_1,T_2) - K )^+ 
+\text{price}(T_1) = \tau(T_1,T_2)( L(T_1;T_1,T_2) - K )^+ 
 \] 
 where $L(T_1,T_1,T_2)$ is the observed Libor at time $T_1$. This payoff at the present time can be obtainted by discounting 
 \[
@@ -145,7 +145,7 @@ where $L(T_1,T_1,T_2)$ is the observed Libor at time $T_1$. This payoff at the p
 \]
 with $B(t)$ the money market account. Since the zerocoupond $P(t,T_2)$ is a tradable instrument, and always have positive values, one can change the numeraire, and the pricing formula becomes
 \[
-\text{price}(0) =\mathbb{E}^{T_2}\left[ \frac{P(0,T_2)}{P(T_2,T_2)} \tau(T_1,T_2)( L(T_1;T_1,T_2) - K )^+  \right]
+\text{price}(0) = \tau(T_1,T_2)P(0,T_2) \mathbb{E}^{T_2}\left[ ( L(T_1;T_1,T_2) - K )^+  \right]
 \]
 Note that by using $P(t,T_2)$ as numeraire, $\mathbb{E}^{T_2}$ is defined as $T_2$-forward measure, and under such probability, the forward rate follow a martingale, i.e
 \[
@@ -165,7 +165,7 @@ Where $\Cab(t)$ is the swap's annuity measure at time $t$. This is simply the pa
 \]
 and by change to numeraire $\Cab(t)$, under the associated probability $\Eab$
 \[
-\text{price}(0) = \Cab(0) \Eab \left[ (\Sab(\Ta) - K )^+ \Cab(\Ta)  \right]
+\text{price}(0) = \Cab(0) \Eab \left[ (\Sab(\Ta) - K )^+  \right]
 \]
 Since the numeraire change framework ensure the martingale properties, the swap interest rate $\Sab$ under the measure $\Eab$ follows the martingale, in the way that it can be modelled by equation
 \[
