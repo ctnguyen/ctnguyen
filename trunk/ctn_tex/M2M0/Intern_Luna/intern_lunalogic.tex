@@ -57,6 +57,9 @@
 
 \newcommand{\Sab}{S_{\alpha,\beta}}
 \newcommand{\Cab}{C_{\alpha,\beta}}
+\newcommand{\Wab}{W_{\alpha,\beta}}
+\newcommand{\sigmaab}{\sigma_{\alpha,\beta}}
+\newcommand{\rhoij}{\rho_{ij}}
 \newcommand{\Eab}{\mathbb{E}^{\alpha,\beta}}
 
 \newcommand{\todo}[1]{\begin{center}\color{red} TODO : #1\end{center}}
@@ -157,7 +160,7 @@ t\leq T_1 < T_2
 \[
 \text{price}(\Ta) = \left[ \Sab(\Ta) - K \right]^+ \Cab(\Ta)
 \hspace{1cm}
-\Cab(t) = \sum^{\beta}_{\alpha+1} \tau_i \Pti 
+\Cab(t) = \sum^{\beta-1}_{\alpha} \tau_i \Ptii 
 \]  
 Where $\Cab(t)$ is the swap's annuity measure at time $t$. This is simply the payment sum of the fix leg on a swap configuration. Note that annuity is indeed a tradable product, as a sum of zerocoupons, always have positive value, so those can be used as numeraire. By the same way as discounting the caplet price, the present value of swaption is
 \[
@@ -169,13 +172,43 @@ and by change to numeraire $\Cab(t)$, under the associated probability $\Eab$
 \]
 Since the numeraire change framework ensure the martingale properties, the swap interest rate $\Sab$ under the measure $\Eab$ follows the martingale, in the way that it can be modelled by equation
 \[
-\frac{d\Sab(t)}{\Sab(t)} = v^{\alpha,\beta}dW^{\alpha,\beta}(t)
+\frac{d\Sab(t)}{\Sab(t)} = \sigmaab(t) d\Wab(t)
 \]
 \paragraph{} These two pricing approachs introduce to two different ideas of modelling for differents basic instrument. That also show the incompatibilities issues of these two derivative's familly. The evidence come from the fact that the measure $\mathbb{E}^{T_2}$ associated to the numeraire $P(t,T_2)$ is different to the measure $\Eab$ associated to the numeraire $\Cab(t)$.   
 
-
-
-
+\subsection{Approximation Rebonato's formula}
+As we have seen the issue from incompatibility of forward swap model and the forward rate model. In ~\cite{JACKEL2003}, authors explain a link between these two model, through an approximative formula relying the caplet's implied volatility and the swaption's implied volatility. The idea start from the forward swap rate model, under the swap measure, the forward swap rate follows a martingale
+\[
+\frac{d\Sab(t)}{\Sab(t)} = \sigmaab(t)d\Wab(t)
+\] 
+in the way that 
+\[
+[\sigmaab(t)]^2 = \frac{ d<\Sab,\Sab>_t }{[\Sab(t)]^2 }
+\]
+Since from the swap rate equation \ref{eq:swap_rate}, the volatility dynamic becomes
+\[
+[\sigmaab(t)]^2 = \frac{1}{[\Sab(t)]^2 } \sum_{i,j=\alpha}^{\beta-1} w_i(t)w_j(t) d<L_i,L_j>_t
+\hspace{1cm}
+w_k(t) = \frac{\sum^{\beta-1}_{k=\alpha} \tau_k P(t,T_{k+1}) }{\Cab(t)}
+\]
+or more detailed
+\[
+[\sigmaab(t)]^2 = \frac{1}{[\Sab(t)]^2 } \sum_{i,j=\alpha}^{\beta-1} w_i(t)w_j(t) L_i(t)L_j(t) \rho_{L_{ij}}(t) \sigma_{L_i}(t) \sigma_{L_j}(t) dt
+\]
+P.Jackel and R.Rebonato studied the quantity
+\[
+\zeta_{ij}(t) = \frac{1}{[\Sab(t)]^2 } \sum_{i,j=\alpha}^{\beta-1} w_i(t)w_j(t) L_i(0)L_j(0)
+\]
+and constate that its variations through time are negligible, thus one can approximated those by values at time zero. The swaption's volatility dynamic become
+\[
+[\sigmaab(t)]^2 \approx \frac{1}{[\Sab(0)]^2 } \sum_{i,j=\alpha}^{\beta-1} w_i(0)w_j(0)L_i(0)L_j(0) \rho_{L_{ij}}(t) \sigma_{L_i}(t) \sigma_{L_j}(t) dt
+\]
+The swaption's implied volatility is now calculable by the approximation formula
+\begin{equation}
+\label{eq:rebonato}
+\Ta[\sigma^{BLACK}_{\alpha,\beta}]^2 \approx \frac{1}{[\Sab(0)]^2 } \sum_{i,j=\alpha}^{\beta-1} w_i(0)w_j(0)L_i(0)L_j(0) 
+\int_{0}^{\Ta} \rho_{L_{ij}}(t) \sigma_{L_i}(t) \sigma_{L_j}(t) dt
+\end{equation}
 
 \newpage
 We explain here how are implemented the last model, calibration, test..., some critical views from the older work, what is done, what is to to, see \cite{THAI2013}.
@@ -201,7 +234,7 @@ S_{\alpha,\beta}(t)
 = 
 \frac{P(t,T_{\alpha})-P(t,T_{\beta})}{\sum^{\hat{\beta}-}_{\hat{i}=\hat{\alpha}}\tau_{\hat{i}}P(t,T_{\hat{i}++})} 
 =
-\frac{\sum^{\beta-1}_{i=\alpha} \tau_i \Ptii }{A_{\alpha,\beta}(t)} \Lit 
+\frac{\sum^{\beta-1}_{i=\alpha} \tau_i \Ptii }{\Cab(t)} \Lit
 \end{equation}
 
 
