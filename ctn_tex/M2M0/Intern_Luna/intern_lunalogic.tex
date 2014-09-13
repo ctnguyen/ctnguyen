@@ -41,8 +41,9 @@
 \newcommand{\Discount}[2]{e^{-\int_{#1}^{#2}r_u du} }
 \newcommand{\bl}[1]{{\scshape  #1}}
 
-\newcommand{\li}{l(\Ti,\Tii)}
+
 \newcommand{\Ti}{T_{i}}
+\newcommand{\Tj}{T_{j}}
 \newcommand{\Ta}{T_{\alpha}}
 \newcommand{\Tb}{T_{\beta}}
 \newcommand{\Tii}{T_{i+1}}
@@ -50,6 +51,8 @@
 \newcommand{\Ptii}{P(t,T_{i+1})}
 \newcommand{\Lti}{L(t,\Ti,\Tii)}
 \newcommand{\Lit}{L_{i}(t)}
+\newcommand{\Ltj}{L(t,\Tj,\Tj)}
+\newcommand{\Ljt}{L_{j}(t)}
 \newcommand{\ZCi}{ZC_{i}}
 \newcommand{\ZCii}{ZC_{i+1}}
 \newcommand{\Numi}{Num_{i}}
@@ -136,7 +139,7 @@ Bloomberg supp.   & Giulio D'Ambrosio            & gdambrosio3@bloomberg.net    
 \newpage
 \section{The Market Model}
 The aim of market model is to give a model that well price a set of basic instruments. In the LMM case study, the aim is to give a good pricing tool for plain vanilla products, such as Caps, Floors and Swaptions. In this section, firstly show the idea of numeraire change, this idea lies the model and the well-etablished pricing tool for simple instruments. 
-\subsection{Numeraire change}
+\subsection{Numeraire change and market models}
 The two important numeraire changes that make the market model of this project are inspired from the Caplet and Swaption Black \& Scholes frameworks. 
 \paragraph{ Caplet and forward measure } is an option on interest rate derivative. Caplet is analyzed as a european call option, with maturity time $T_1$ and pay at time $T_2$ for a certain strike $K$. The payment of such an option at time $T_2$ is obsevable at time $T_1$ and worth
 \[
@@ -176,6 +179,58 @@ Since the numeraire change framework ensure the martingale properties, the swap 
 \]
 \paragraph{} These two pricing approachs introduce to two different ideas of modelling for differents basic instrument. That also show the incompatibilities issues of these two derivative's familly. The evidence come from the fact that the measure $\mathbb{E}^{T_2}$ associated to the numeraire $P(t,T_2)$ is different to the measure $\Eab$ associated to the numeraire $\Cab(t)$.   
 
+\subsection{Lognormal Forward Libor model}
+As its name, the Lognormal Forward Libor Model ( or simply Libor Market Model), is the model that describ the dynamic of forward rate. The idea is if one know all values of forward rate, one can calculate easily the price of many related fixed income derivative as caps, floors, swaptions ... {\color{red} some more blah blah for model :}
+\paragraph{Model configuration} is firstly defined by a timeline setting. Although the mathenatical definition of forward rate is a continuous functions, its implementation can only be done through a discrete configuration. There are different choice for time discretizetion, more or less dense, but we choose the simplest one : the dates coincide with the settlement date of Libor. In the US market, that is every 3MO, in the European market, that is every 6MO. By giving a maximum horizon, we discretize our times to a set of date $\xi=\left\{T_0, .. T_i, ..T_N \right\}$ \footnote{In the Bloomberg terminal one can get a yield curve for 50YR Max. There are no sens to define a timeline longer than 50YR}. After defining the timeline, we give some conventions for related values.
+\begin{itemize}
+ \item horizon  = N
+ \item Timeline $T_i$ , i = 0,1, .... N+1, $T_0 = 0$, Timeline size = N+2
+ \item Time Fractions $\tau_i = \Tii-\Ti$, i=0,1,... N. 
+ \item The i-th Libor value at time $t$ : $\Lit = \Lti$, Number of LIBORs = N+1
+\end{itemize}
+This timeline discretization at the first part facilite the whole implementation. Henceforth, every calculated values can be stored in a container, and every calculation loop iterate through time indices instead of time value.   
+\begin{center}
+\begin{pspicture}(-7,-3)(7,4)
+%% Reference for Picture
+%\psline[linewidth=0.1pt,linecolor=gray](-7,-3)(7,4)
+%\rput(-2,-2){(-2,-2)}\rput(3,3){(3,3)}\rput(0,0){(0,0)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Draw libor matrix
+\psgrid[gridwidth=0.01pt,gridcolor=lightgray,subgriddiv=2,subgridwidth=0.1pt,subgridcolor=lightgray,gridlabels=0](-2,-2)(3,3)          % set grid for vol matrix
+%% set horizon label for vol matrix
+\rput(-2,3.1){$\scriptstyle{T_0}$}
+\rput(-1.5,3.1){$\scriptstyle{T_1}$}
+\rput(0,3.1){$\scriptstyle{\Tj}$}
+\rput(3,3.1){$\scriptstyle{T_{N}}$} 
+%% set vertical label for vol matrix
+\rput(-2.5,2.5){$L_{1}(.)$}
+\rput(-2.5,2){$L_{2}(.)$}
+\rput(-2.5,0){$L_i(.)$}
+\rput(-2.5,-2){$L_{N}(.)$}     
+\rput(0,0){$\bullet$}\rput(0.5,0.2){$L_{i}(\Tj)$}
+%%
+%%%%%% draw the lower triangular part of libor matrix
+{
+\pspolygon[fillstyle=crosshatch,hatchcolor=gray,hatchwidth=0.1pt,hatchsep=1pt,linestyle=none](-2,3)(-2,-2)(3,-2)
+}
+\end{pspicture}
+\end{center}
+\begin{itemize}
+ \item A LIBOR is a process that is identified by its maturity time $T_i$, its values is calculated at every time $T_j\leq T_i$. Thus libors values can be stored in a lower triangular matrix $(N+1)\times(N+1)$, where $(i,j)$ indices get the $i$-th Libor at time $T_j$
+ \item A Vanilla Swaption is an instrument firstly defined by a pair of indices $(\alpha,\beta)$, meaning the expiry time $\Ta$ and tenor $\Tb-\Ta$. Note that $\Tb$ is the end date of the swaption and $\Ta<\Tb$ has to be ensured
+ \item The deterministic volatility is defined in our implementation as piecewise volatilities. It is defined by three lower triangular matrix $h,g$ and shift matrix, all of same size as Libor matrix. Note that the first row and first column of volatility matrices are not used since at time zero, all libor are know by extracting data from the quoted market.
+ \item correlation model is a little more complicated, but we can say that the correlation between two libor $\Lit$,$\Ljt$ is modelled by a correlation value $\rhoij$. Roughly speaking, it is also a symetric matrix of size $(N+1)\times(N+1)$.   
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
 \subsection{Approximation Rebonato's formula}
 As we have seen the issue from incompatibility of forward swap model and the forward rate model. In ~\cite{JACKEL2003}, authors explain a link between these two model, through an approximative formula relying the caplet's implied volatility and the swaption's implied volatility. The idea start from the forward swap rate model, under the swap measure, the forward swap rate follows a martingale
 \[
@@ -211,13 +266,7 @@ The swaption's implied volatility is now calculable by the approximation formula
 \end{equation}
 
 \newpage
-We explain here how are implemented the last model, calibration, test..., some critical views from the older work, what is done, what is to to, see \cite{THAI2013}.
-\begin{itemize}
- \item horizon  = N
- \item Timeline $T_i$ , i = 0,1, .... N+1. Timeline size = N+2
- \item Time Fractions $\tau_i = \Tii-\Ti$, i=0,1,... N. 
- \item The Libor : $L_i = L(t,T_i,T_{i+1})$, i=0,1,... N. Number of LIBORs = N+1
-\end{itemize}
+
 
 \subsection{Market Information concerning Libor Model}
 The bijective relation between forward Libor and zero coupon
