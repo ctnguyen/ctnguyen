@@ -51,8 +51,13 @@
 \newcommand{\Ptii}{P(t,T_{i+1})}
 \newcommand{\Lti}{L(t,\Ti,\Tii)}
 \newcommand{\Lit}{L_{i}(t)}
+\newcommand{\muit}{\mu_i(t)}
+\newcommand{\sigmait}{\sigma_i(t)}
+\newcommand{\Wit}{W^{\Tii}(t)}
+\newcommand{\Wnt}{W^{T_{N+1}}(t)}
 \newcommand{\Ltj}{L(t,\Tj,\Tj)}
 \newcommand{\Ljt}{L_{j}(t)}
+\newcommand{\sigmajt}{\sigma_j(t)}
 \newcommand{\ZCi}{ZC_{i}}
 \newcommand{\ZCii}{ZC_{i+1}}
 \newcommand{\Numi}{Num_{i}}
@@ -189,6 +194,8 @@ As its name, the Lognormal Forward Libor Model ( or simply Libor Market Model), 
  \item The i-th Libor value at time $t$ : $\Lit = \Lti$, Number of LIBORs = N+1
 \end{itemize}
 This timeline discretization at the first part facilite the whole implementation. Henceforth, every calculated values can be stored in a container, and every calculation loop iterate through time indices instead of time value.   
+\begin{figure}[h]
+\caption{\label{libor_matrix} Lower triangular matrix used for storage Libor values}
 \begin{center}
 \begin{pspicture}(-7,-3)(7,4)
 %% Reference for Picture
@@ -215,14 +222,42 @@ This timeline discretization at the first part facilite the whole implementation
 }
 \end{pspicture}
 \end{center}
+\end{figure}
 \begin{itemize}
  \item A LIBOR is a process that is identified by its maturity time $T_i$, its values is calculated at every time $T_j\leq T_i$. Thus libors values can be stored in a lower triangular matrix $(N+1)\times(N+1)$, where $(i,j)$ indices get the $i$-th Libor at time $T_j$
  \item A Vanilla Swaption is an instrument firstly defined by a pair of indices $(\alpha,\beta)$, meaning the expiry time $\Ta$ and tenor $\Tb-\Ta$. Note that $\Tb$ is the end date of the swaption and $\Ta<\Tb$ has to be ensured
  \item The deterministic volatility is defined in our implementation as piecewise volatilities. It is defined by three lower triangular matrix $h,g$ and shift matrix, all of same size as Libor matrix. Note that the first row and first column of volatility matrices are not used since at time zero, all libor are know by extracting data from the quoted market.
  \item correlation model is a little more complicated, but we can say that the correlation between two libor $\Lit$,$\Ljt$ is modelled by a correlation value $\rhoij$. Roughly speaking, it is also a symetric matrix of size $(N+1)\times(N+1)$.   
 \end{itemize}
-
-
+\paragraph{Forward libor dynamic } is described by lognormal processes. For every settlement date $\Ti$, under the numeraire $\Ptii$, the associated forward libor $\Lti$ follow the dynamic
+\[
+\frac{d\Lit}{\Lit} = \sigmait d\Wit
+\]
+After translating the brownian $N-i$ times, under the numeraire $P(t,T_{N+1})$, for every date $\Ti$, the dynamic of the forward libor remain a lognomal process, but this time with drift under the terminal probability  
+\[
+\frac{d\Lit}{\Lit} = \muit + \sigmait d\Wnt
+\hspace{1cm}
+d\Wnt d\Wnt = \rho dt
+\]
+Since the Brownian is now the unique one under the terminal measure, we can ommit the subscript for simplify the notations. Furthurmore, we introduce other indices used for indicating the multidimentional brownian and its correlation. The forward libor dynamic finally become
+\[
+\frac{d\Lit}{\Lit} = \muit + \sigmait \rho^{\frac{1}{2} } dW(t)
+\]
+\paragraph{Correlation} should be a function of time. But a first implementation can simplify by a function constant in time. ~\cite{BRIGO2006}p.247 mention that the correlation has to satisfy some financial feature
+\begin{itemize}
+\item $0 \leq \rhoij \leq 1 $ for all $i,j$, a symetric matrix
+\item $\rho_{kk} = 1 $ for all $k$ 
+\item When moving away from the prinicipal diagonal, $\rhoij$ decrease 
+\item When moving along a sub-diagonal from top to bottom, $\rhoij$ increase 
+\end{itemize} 
+There are several way of modelling the correlation. The essential use should be a parameterized one
+\[
+\rhoij = e^{- \beta \frac{ |i-j| }{(i+j)^{\alpha}}}
+\]
+\paragraph{Volatility and time homogeneity feature} is proposed in ~\cite{REBONATO2002}. A parameterized volatility model aslo known as "abcd" volatility having a perfect time homogeneuous properties is modelled as below
+\[
+h(T-t) = (a + b(T-t)) e^{-c(T-t)} + d
+\]
 
 
 
