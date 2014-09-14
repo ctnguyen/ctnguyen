@@ -195,7 +195,6 @@ As its name, the Lognormal Forward Libor Model ( or simply Libor Market Model), 
 \end{itemize}
 This timeline discretization at the first part facilite the whole implementation. Henceforth, every calculated values can be stored in a container, and every calculation loop iterate through time indices instead of time value.   
 \begin{figure}[h]
-\caption{\label{libor_matrix} Lower triangular matrix used for storage Libor values}
 \begin{center}
 \begin{pspicture}(-7,-3)(7,4)
 %% Reference for Picture
@@ -222,7 +221,9 @@ This timeline discretization at the first part facilite the whole implementation
 }
 \end{pspicture}
 \end{center}
+\caption{\label{libor_matrix} Lower triangular matrix used for storage Libor values}
 \end{figure}
+
 \begin{itemize}
  \item A LIBOR is a process that is identified by its maturity time $T_i$, its values is calculated at every time $T_j\leq T_i$. Thus libors values can be stored in a lower triangular matrix $(N+1)\times(N+1)$, where $(i,j)$ indices get the $i$-th Libor at time $T_j$
  \item A Vanilla Swaption is an instrument firstly defined by a pair of indices $(\alpha,\beta)$, meaning the expiry time $\Ta$ and tenor $\Tb-\Ta$. Note that $\Tb$ is the end date of the swaption and $\Ta<\Tb$ has to be ensured
@@ -442,10 +443,11 @@ h_{0j}=h_{i0}=0
 \forall i,j
 \]
 
+\begin{figure}[h]
 \begin{center}
 \begin{pspicture}(-7,-3)(7,4)
 %% Reference for Picture
-%\psline[linewidth=0.1pt,linecolor=gray](-7,-3)(7,4)
+\psline[linewidth=0.1pt,linecolor=gray](-7,-3)(7,4)
 %\rput(-6,-3){(-6,-3)}\rput(-1,2){(-1,2)}
 %\rput(2,-3){(2,-3)}\rput(7,2){(7,2)}\rput(0,0){(0,0)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -501,6 +503,8 @@ h_{0j}=h_{i0}=0
 }
 \end{pspicture}
 \end{center}
+\caption{\label{swaption_matrix} Relation between swaption quotes matrix and volatilities matrix}
+\end{figure}
 \paragraph{} When calibrating using Implied Swaption Volatilities quoted on the market, a problem arise if swaptions has different configuration of fixed tenor and float tenor. See from the figure example, on an horizon 5 year, with float/fixed tenor are 6M/1YR, we have only 10 swaption's data from the market, while the model has 55 parameters. The excessive number of parameters lead to infinity of solutions. Then we use a special calibration's process to avoid this problem. The idea is to choose sparsely some parameters in the volatility matrix, in the way that there are the same number of parameters to be calibrated than the number of swaption's data. After every calibration step ( minimization iteration ) an interpolation process are launched in order to taking in acount for the whole matrix.
 \paragraph{} The idea of choosen sparse parameters are intuitive. We look in detail for each swaptions, what are dependant Libor, then we deduces the dependant parameters. For example on the horizon of 5YR, with float/fixed tenor 6M/1YR, the swaption 3YRx2YR depend to libors $L_6,L_7,L_8,L_9$. Since the swaption's maturity is 3YR=$T_6$, the swaption depend only to parameters anterior to time $T_6$, i.e $g_{ij, 6\leq i\leq 9,1\leq j\leq6}$. From this full dependant set of parameters, we choose only $g_{62},g_{64},g_{66},g_{82},g_{84},g_{86}$ for calibration. In general, we choose parameters by jumping indices step fixed tenor/float tenor. An explicite example of swaptions 1YR/6M and parameter's dependance for horizon 4YR are described in the table
 \begin{center}
@@ -524,8 +528,10 @@ Swaption & Libor Dep.   & Full Vol Dep. & Sparse Vol Dep. \\
 \end{center}
 \paragraph{Interpolation - Extrapolation volatility matrix}\mbox{}\\
 Assuming we've successed to sparsely choose parameters and calibrated. Then these parameters form a 'triangle' in the volatility matrix. One can interpolate all values in its interior and extrapolate the exterior of this triangle.
+
+\begin{figure}[h]
 \begin{center}
-\begin{pspicture}(-7,-3)(7,4)
+\begin{pspicture}(-7,-3)(7,3)
 %% Reference for Picture
 %\psline[linewidth=0.1pt,linecolor=gray](-7,-3)(7,4)
 \rput(-6,-3){(-6,-3)}\rput(-1,2){(-1,2)}
@@ -559,15 +565,27 @@ Assuming we've successed to sparsely choose parameters and calibrated. Then thes
 \pspolygon[fillstyle=crosshatch,hatchcolor=gray,hatchwidth=0.01pt,hatchsep=1pt,linestyle=none](-5,0.5)(-5,-2.5)(-2,-2.5)
 %%
 %% set the extrapolate zone
-\pspolygon[fillstyle=crosshatch,hatchcolor=gray,hatchwidth=0.01pt,hatchsep=4pt,hatchangle=20,linestyle=none](-5.5,1.5)(-5,1)(-5,-2)(-2,-2)(-1,-3)(-5.5,-3)
+\pspolygon[fillstyle=crosshatch,hatchcolor=gray,hatchwidth=0.01pt,hatchsep=4pt,hatchangle=20,linestyle=none](-5.5,1.5)(-1,-3)(-5.5,-3)
 %%
 %% Set extrapolation arrows
 {%%%%
 \psset{linewidth=0.1pt}
-\psline{->}(-5,1)(-5.5,1.5)\psline{->}(-5,1)(-5.5,1)
-\psline{->}(-5,0.5)(-5.5,0.5)\psline{->}(-5,0)(-5.5,0)\psline{->}(-5,-0.5)(-5.5,-0.5)\psline{->}(-5,-1)(-5.5,-1)\psline{->}(-5,-1.5)(-5.5,-1.5)
-\psline{->}(-5,-2)(-5.5,-2)\psline{->}(-5,-2)(-5.5,-2.5)\psline{->}(-5,-2)(-5.5,-3)\psline{->}(-5,-2)(-5,-3)\psline{->}(-5,-2)(-4.5,-3)\psline{->}(-5,-2)(-4,-3)
-\psline{->}(-4.5,-2)(-3.5,-3)\psline{->}(-4,-2)(-3,-3)\psline{->}(-3.5,-2)(-2.5,-3)\psline{->}(-3,-2)(-2,-3)\psline{->}(-2.5,-2)(-1.5,-3)\psline{->}(-2,-2)(-1,-3)
+\psline{->}(-5,0.5)(-5.5,1.5)\psline{->}(-5,0.5)(-5.5,1)\psline{->}(-5,0.5)(-5.5,0.5)\psline{->}(-5,0.5)(-4.5,0.5)
+\psline{->}(-5,0)(-5.5,0)\psline{->}(-4.5,0)(-4,0)
+\psline{->}(-5,-0.5)(-5.5,-0.5)\psline{->}(-4,-0.5)(-3.5,-0.5)
+\psline{->}(-5,-1)(-5.5,-1)\psline{->}(-3.5,-1)(-3,-1)
+\psline{->}(-5,-1.5)(-5.5,-1.5)\psline{->}(-3,-1.5)(-2.5,-1.5)
+\psline{->}(-5,-2)(-5.5,-2)\psline{->}(-2.5,-2)(-2,-2)
+\psline{->}(-5,-2.5)(-5.5,-2.5)\psline{->}(-2,-2.5)(-1.5,-2.5)
+\psline{->}(-5,-2.5)(-5.5,-3)
+\psline{->}(-5,-2.5)(-5,-3)
+\psline{->}(-4.5,-2.5)(-4.5,-3)
+\psline{->}(-4,-2.5)(-4,-3)
+\psline{->}(-3.5,-2.5)(-3.5,-3)
+\psline{->}(-3,-2.5)(-3,-3)
+\psline{->}(-2.5,-2.5)(-2.5,-3)
+\psline{->}(-2,-2.5)(-2,-3)
+\psline{->}(-2,-2.5)(-1,-3)
 }%%%% Set extrapolation arrows
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Draw for local Calibrate and Interpolate
@@ -597,18 +615,18 @@ Assuming we've successed to sparsely choose parameters and calibrated. Then thes
 \pspolygon[fillstyle=crosshatch,hatchcolor=gray,hatchwidth=0.01pt,hatchsep=1pt,linestyle=none](3,0.5)(4,-0.5)(4,-2.5)(3,-2.5)
 %%
 %% set the extrapolate zone
-\pspolygon[fillstyle=crosshatch,hatchcolor=gray,hatchwidth=0.03pt,hatchsep=3pt,hatchangle=30,linestyle=none](2.5,1.5)(3,1)(3,-2)(4,-3)(2.5,-3)
+\pspolygon[fillstyle=crosshatch,hatchcolor=gray,hatchwidth=0.03pt,hatchsep=3pt,hatchangle=30,linestyle=none](2.5,1.5)(4,0)(4,-3)(2.5,-3)
 %%
 %% Set extrapolation arrows
 {%%%%
 \psset{linewidth=0.1pt}
-%\psline{->}(3,1)(2.5,1.5)\psline{->}(3,0.5)(2.5,1)\psline{->}(3,0)(2.5,0.5)
-%\psline{->}(3,-0.5)(2.5,0)\psline{->}(3,-1)(2.5,-0.5)\psline{->}(3,-1.5)(2.5,-1)\psline{->}(3,-2)(2.5,-1.5)
-%\psline{->}(3,-2)(2.5,-2)\psline{->}(3,-2)(2.5,-2.5)\psline{->}(3,-2)(2.5,-3)\psline{->}(3,-2)(3,-3)\psline{->}(3,-2)(3.5,-3)\psline{->}(3,-2)(4,-3)
-\psline{->}(3.5,-2)(4.5,-3)\psline{->}(4,-2)(5,-3)
+\psline{->}(3.5,0)(4,0)
+\psline{->}(3.5,-2.5)(3.5,-3)\psline{->}(4,-2.5)(4,-3)
 }%%%% Set extrapolation arrows
 \end{pspicture}
 \end{center}
+\caption{\label{interpolation_matrix} Interpolation and Extrapolation for volatility matrix}
+\end{figure}
 
 
 \section{Tests and validations}
