@@ -238,23 +238,53 @@ After translating the brownian $N-i$ times, under the numeraire $P(t,T_{N+1})$, 
 \[
 \frac{d\Lit}{\Lit} = \muit + \sigmait d\Wnt
 \hspace{1cm}
-d\Wnt d\Wnt = \rho dt
+d\Wnt d\Wnt = \hat{\rho} dt
 \]
 Since the Brownian is now the unique one under the terminal measure, we can ommit the subscript for simplify the notations. Furthurmore, we introduce other indices used for indicating the multidimentional brownian and its correlation. The forward libor dynamic finally become
-\[
-\frac{d\Lit}{\Lit} = \muit + \sigmait \rho^{\frac{1}{2} } dW(t)
-\]
+\begin{equation}
+\label{eq:libor_dynamic}
+\frac{d\Lit}{\Lit} = \muit + \sigmait \hat{\rho}^{\frac{1}{2} } dW(t)
+\hspace{1cm}
+\muit = \sum_{k=i+1}^{N+1} \frac{\tau_j \Ljt}{1+\tau_j \Ljt} \sigmait \sigmajt \hat{\rho}_{ij}
+\end{equation}
 \paragraph{Correlation} should be a function of time. But a first implementation can simplify by a function constant in time. ~\cite{BRIGO2006}p.247 mention that the correlation has to satisfy some financial feature
 \begin{itemize}
-\item $0 \leq \rhoij \leq 1 $ for all $i,j$, a symetric matrix
-\item $\rho_{kk} = 1 $ for all $k$ 
-\item When moving away from the prinicipal diagonal, $\rhoij$ decrease 
-\item When moving along a sub-diagonal from top to bottom, $\rhoij$ increase 
+\item $0 \leq \hat{\rho}_{ij} \leq 1 $ for all $i,j$, a symetric matrix
+\item $\hat{\rho}_{kk} = 1 $ for all $k$ 
+\item When moving away from the prinicipal diagonal, $\hat{\rho}_{ij}$ decrease 
+\item When moving along a sub-diagonal from top to bottom, $\hat{\rho}_{ij}$ increase 
 \end{itemize} 
 There are several way of modelling the correlation. The essential use should be a parameterized one
 \[
-\rhoij = e^{- \beta \frac{ |i-j| }{(i+j)^{\alpha}}}
+\hat{\rho}_{ij} = e^{- \beta \frac{ |i-j| }{(i+j)^{\alpha}}}
 \]
+\paragraph{Decorrelation}
+An issue in term of computation time araise when model use fully the number of factor. Imagine for a 15YR horizon, in the european market, that say there are 30 Libors to simulate. If the model try to simulate fully 30 random factor, every sampling has to fill a $30\time30$ lower matrix, multiply with the number of sample, that could be very time comsuming. A mechanism of reduction factor is proposed through the correlation matrix. Assuming the correlation matrix $\rho$ is symetric definite positive,by SVD factorization, it can be written as
+\[
+\hat{\rho}_{ij} = PDP^t
+\]
+Where $D$ is the diagonal matrix containing all positive eigenvalues, $P$ is a real unitary matrix ($PP^t =P^tP = I $), containing eigenvectors associated to eigenvalues. Let $A=PD^{\frac{1}{2}}$, 
+\[
+AA^t = \hat{\rho}_{ij}
+\hspace{2cm}
+A^tA = D
+\]
+By removing the smallest entries in the matrix $D^{\frac{1}{2}}$ and the associated column in the matrix $P$ to get $\tilde{D}^{\frac{1}{2}}$ and $\tilde{P}$,  a reduced correlation matrix is given by
+\[
+\rho = \tilde{P}\tilde{D}\tilde{P}^t
+\hspace{2cm}
+\rho^{\frac{1}{2}} =  \tilde{P}\tilde{D}^{\frac{1}{2}}
+\]
+The Libor dynamic becomes
+\begin{equation}
+\label{eq:reduced_libor_dynamic}
+\frac{d\Lit}{\Lit} = \muit + \sigmait \rho^{\frac{1}{2} } dW(t)
+\hspace{1cm}
+\muit = \sum_{k=i+1}^{N+1} \frac{\tau_j \Ljt}{1+\tau_j \Ljt} \sigmait \sigmajt \rhoij
+\end{equation}
+
+
+
 \paragraph{Volatility and time homogeneity feature} is proposed in ~\cite{REBONATO2002}. A parameterized volatility model aslo known as "abcd" volatility having a perfect time homogeneuous properties is modelled as below
 \[
 h(T-t) = (a + b(T-t)) e^{-c(T-t)} + d
@@ -407,6 +437,7 @@ Before using the data, we always check if the data is coherent, i.e Libor quotes
 explain here the issues of missing data, the choice of swaptions instead of caplet. HG vol, nodes feature on gMatrix, interpolation. How abcd can be calibrated, how gMatrix is calibrated after. How virtual test is build.
 \paragraph{Global}
 \paragraph{Local}
+\paragraph{Cascade}
 \paragraph{Regularized global}
 
 \subsection{Exact virtual test}
@@ -631,6 +662,7 @@ Assuming we've successed to sparsely choose parameters and calibrated. Then thes
 \end{center}
 \caption{\label{interpolation_matrix} Interpolation and Extrapolation for volatility matrix}
 \end{figure}
+
 
 
 \section{Tests and validations}
