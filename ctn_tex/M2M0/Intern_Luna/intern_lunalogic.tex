@@ -293,13 +293,10 @@ h(T-t) = (a + b(T-t)) e^{-c(T-t)} + d
 \begin{center}
 \includegraphics[scale=1.0]{gnuplot_abcdFunction}
 \end{center}
+\caption{\label{abcd_curve} Different humped volatility can be modelled by  abcd function}
 \end {figure}
-
-
-
-
-
-
+\paragraph{Piecewise volatility}
+Volatility for LMM model in a general way can be modelled as piecewise functions. In our implementation, we separate each volatility function into two part, call \textit{hgVolatility}. The \textit{h} part reflect the time homognenuous properties, and the \textit{g} part give a more degree of freedom in the model. That facilite the calibration task and allow more flexibility. In this way, $h$ and $g$ are two independant lower triangular matrices (the same structure as libors). The matrix $h$ will be initiate by an appropriated "$abcd$" values, where "$abcd$" can be calibrated or given by traders. The matrix $g$ is the center of the volatility calibration task. The idea is to have $abcd$ values such that $g$ matrix have values approximatively 1.
 
 \subsection{Approximation Rebonato's formula}
 As we have seen the issue from incompatibility of forward swap model and the forward rate model. In ~\cite{JACKEL2003}, authors explain a link between these two model, through an approximative formula relying the caplet's implied volatility and the swaption's implied volatility. The idea start from the forward swap rate model, under the swap measure, the forward swap rate follows a martingale
@@ -408,8 +405,7 @@ Or in a general formula
 dW^{T_{k}} = dW^{T_{k+1}} - \frac{\tau_k L_k(t)}{\tau_k L_k(t) +1}  s_k(t) B_k(t) dt
 \]
 
-\section{The implemented model}
-\section{Calibration}
+\section{Deterministic volatility calibration}
 This section explain how process the calibration algorithm in our LMM Model, what are input data, what are ouputs, how to test and say that our calibration is good. Firstly, we will explain what market data we need and how to retreive them. We then explain the market data issu and how to resolv this by our algorighm with a set of numerical techniques (interpolation, solver ...). At the end, we explain how we test our algorithm before using real market data, and how is tested with the real market data.   
 \subsection{Bloomberg and Market Data}
 \paragraph{} The first step to do with the calibration is to retreive market information. At Lunalogic RD team, we have a Bloomberg terminal and all of our data comes from this. We explain here how we retreive data with Bloomberg. In a general way, a full yield curve for horizon 50YR does not exist. One has to use quoted instruments and AOA formula, interpolation tools to fully build the interest rate curve. These instruments frequently used are
@@ -434,6 +430,13 @@ The post treatment is similar as Libor quotes, we eliminate all experities that 
 Before using the data, we always check if the data is coherent, i.e Libor quotes is coherent with swaptions. Thanks to analytical swap rate formula \ref{eq:swap_rate} and the Libor quotes, we recompute our swap rate matrix, and compare with the ATM swaptions strike quote. The ideal case has to match exactly the same values. But in reality, there are a difference about 1\%-2\%, that is negligible and we accept this difference since we didn't send time to rigorously build our yield curve.    
 \subsection{Calibration algorithm}
 \paragraph{Generality on volatility data structure}
+
+
+
+
+
+
+
 explain here the issues of missing data, the choice of swaptions instead of caplet. HG vol, nodes feature on gMatrix, interpolation. How abcd can be calibrated, how gMatrix is calibrated after. How virtual test is build.
 \paragraph{Global}
 \paragraph{Local}
@@ -666,6 +669,25 @@ Assuming we've successed to sparsely choose parameters and calibrated. Then thes
 
 
 \section{Tests and validations}
+\paragraph{Virtual test}\mbox{}\\
+\begin{figure}[h]
+\begin{center}
+\begin{pspicture}(-6,-2)(6,2)
+%% Reference for Picture
+%\psline[linewidth=0.1pt,linecolor=gray](-6,-2)(6,2)
+\rput(-5,0){\rnode{TP}{\psframebox{True Param} }}
+\rput(-1,2){\rnode{MK}{\psframebox[framearc=0.4]{VIRTUAL MKT DATA} }}
+\rput(1,0){\ovalnode{C}{Calibrator} }
+\rput(2,-2){\rnode{PP}{\psframebox[framearc=0.4]{Perturbed Param} }}
+\nccurve[angleA=90,angleB=180]{->}{TP}{MK}
+\nccurve[angleA=-90,angleB=180]{->}{TP}{PP}
+\nccurve[angleB=10]{->}{MK}{C}
+\nccurve[angleA=90,angleB=-10]{->}{PP}{C}
+\ncline[nodesep=3pt]{->}{C}{TP}
+\end{pspicture}
+\end{center}
+\caption{\label{virtual_test} Virtual Test Scheme}
+\end{figure}
 Back testing, forward testing, validation. critical view points.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
