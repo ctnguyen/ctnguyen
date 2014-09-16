@@ -234,15 +234,19 @@ This timeline discretization at the first part facilite the whole implementation
 {
 \pspolygon[fillstyle=crosshatch,hatchcolor=gray,hatchwidth=0.1pt,hatchsep=1pt,linestyle=none](-2,3)(-2,-2)(3,-2)
 }
+%%%%%% draw the volatility zone
+{
+\pspolygon[linearc=0.2,linecolor=blue](-1.6,2.6)(3.1,2.6)(3.1,-2.1)(-1.6,-2.1)
+}
 \end{pspicture}
 \end{center}
-\caption{\label{libor_matrix} Lower triangular matrix used for storage Libor values}
+\caption{\label{libor_matrix} Lower triangular matrix storing Libor values. Volatilities use the same matrix format, but values used are only in blue zone}
 \end{figure}
 
 \begin{itemize}
  \item A LIBOR is a process that is identified by its maturity time $T_i$, its values is calculated at every time $T_j\leq T_i$. Thus libors values can be stored in a lower triangular matrix $(N+1)\times(N+1)$, where $(i,j)$ indices get the $i$-th Libor at time $T_j$
  \item A Vanilla Swaption is an instrument firstly defined by a pair of indices $(\alpha,\beta)$, meaning the expiry time $\Ta$ and tenor $\Tb-\Ta$. Note that $\Tb$ is the end date of the swaption and $\Ta<\Tb$ has to be ensured
- \item The deterministic volatility is defined in our implementation as piecewise volatilities. It is defined by three lower triangular matrix $h,g$ and shift matrix, all of same size as Libor matrix. Note that the first row and first column of volatility matrices are not used since at time zero, all libor are know by extracting data from the quoted market.
+ \item The deterministic volatility is defined in our implementation as piecewise volatilities. It is defined by three lower triangular matrix $h,g$ and shift matrix, all of same format as matrix used for Libor values. Note that the first row and first column of volatility matrices are not used since at time zero, all libor are know by extracting data from the quoted market.
  \item correlation model is a little more complicated, but we can say that the correlation between two libor $\Lit$,$\Ljt$ is modelled by a correlation value $\rhoij$. Roughly speaking, it is also a symetric matrix of size $(N+1)\times(N+1)$.   
 \end{itemize}
 \paragraph{Forward libor dynamic } is described by lognormal processes. For every settlement date $\Ti$, under the numeraire $\Ptii$, the associated forward libor $\Lti$ follow the dynamic
@@ -298,20 +302,43 @@ The Libor dynamic becomes
 \muit = \sum_{k=i+1}^{N+1} \frac{\tau_j \Ljt}{1+\tau_j \Ljt} \sigmait \sigmajt \rhoij
 \end{equation}
 
+\paragraph{Volatility and time homogeneity feature}\mbox{} \\
+Rebonato in ~\cite{REBONATO2002} explain that volatility in a normal market condition have a humped shaped. Furthermore for a reason of stability through times, volatility should be modelled as a function of time to maturity. This property is indeed time homogeneuous. A parameterized volatility model aslo known as "abcd" volatility having a perfect time homogeneuous properties and can match many type of volatility shape
+\begin{equation}
+\Phi(T-t) = (a + b(T-t)) e^{-c(T-t)} + d
+\label{eq:abcd}
+\end{equation}
 
-
-\paragraph{Volatility and time homogeneity feature} is proposed in ~\cite{REBONATO2002}. A parameterized volatility model aslo known as "abcd" volatility having a perfect time homogeneuous properties is modelled as below
-\[
-h(T-t) = (a + b(T-t)) e^{-c(T-t)} + d
-\]
 \begin {figure}[h]
 \begin{center}
 \includegraphics[scale=1.0]{gnuplot_abcdFunction}
 \end{center}
 \caption{\label{abcd_curve} Different humped volatility can be modelled by  abcd function}
 \end {figure}
-\paragraph{Piecewise volatility}
-Volatility for LMM model in a general way can be modelled as piecewise functions. In our implementation, we separate each volatility function into two part, call \textit{hgVolatility}. The \textit{h} part reflect the time homognenuous properties, and the \textit{g} part give a more degree of freedom in the model. That facilite the calibration task and allow more flexibility. In this way, $h$ and $g$ are two independant lower triangular matrices (the same structure as libors). The matrix $h$ will be initiate by an appropriated "$abcd$" values, where "$abcd$" can be calibrated or given by traders. The matrix $g$ is the center of the volatility calibration task. The idea is to have $abcd$ values such that $g$ matrix have values approximatively 1.
+\paragraph{Piecewise volatility}\mbox{} \\
+The simple parameterized functional form \cite{eq:abcd} however is too simple for volatility in LMM model. Firstly, the true volatility should not have such the perfect shape. Secondly, the fewness of parameters make model a small number of degree of freedom, thus difficult to calibrate. Rebonano has proposed several ways for sophistifying the volalility model. In our implementation, we choose a simple but enoughly general approach, called \textit{hgVolatility}. The idea is to separate general  volatility function into two part $h$ and $g$ . The $h$ part reflect the time homognenuous properties, and the $g$ part give  more degree of freedom to the model. That facilite the calibration task and allow model to be more flexible. In this way, $h$ and $g$ are two independant lower triangular matrices (the same structure as libors). The matrix $h$ will be initiate by an appropriated "$abcd$" values, where "$abcd$" can be calibrated or given by traders. The matrix $g$ is the center of the volatility calibration task. The good result is to have $abcd$ values such that $g$ matrix have values approximatively 1.
+\[
+\sigma_{ij} = h_{ij}g_{ij}
+\hspace{1cm}
+\left\{
+\begin{array}{l}
+g_{ij}= g_i(T_j) \\
+h_{ij}= h_i(T_j)
+\end{array}
+\right.
+\hspace{0.3cm}
+j \leq i
+\hspace{1.2cm}
+\left\{
+\begin{array}{l}
+g_{0j}=g_{i0}=0 \\
+h_{0j}=h_{i0}=0
+\end{array}
+\right.
+\hspace{0.3cm}
+\forall i,j
+\]
+
 
 \subsection{Approximation Rebonato's formula}
 As we have seen the issue from incompatibility of forward swap model and the forward rate model. In ~\cite{JACKEL2003}, authors explain a link between these two model, through an approximative formula relying the caplet's implied volatility and the swaption's implied volatility. The idea start from the forward swap rate model, under the swap measure, the forward swap rate follows a martingale
@@ -440,67 +467,18 @@ That give the discount curve for 50YR horizon. After getting this curve, we inte
 \[
 \textbf{derivative}(skew) = \frac{quote (\textbf{ATM+5bp}) - quote(\textbf{ATM-5bp}) }{\textbf{10bp}}
 \]
-The post treatment is similar as Libor quotes, we eliminate all experities that are not multiple of 1YR. Note the difference is that for swaptions quote, we only use dates multiple of 1YR. 
+The post treatment is similar as Libor quotes, we eliminate all experities that are not multiple of 1YR. The difference is that for swaptions quote, we only use dates multiple of 1YR. Note that since our LMM model has fixed a horizon as a maximum of date, then only swaptions having the end date smaller then this horizon can be choosen. Thus only the upper anti triangular part of swaption quote matrix will be used for the calibration.
 \paragraph{Data check}
-Before using the data, we always check if the data is coherent, i.e Libor quotes is coherent with swaptions. Thanks to analytical swap rate formula \ref{eq:swap_rate} and the Libor quotes, we recompute our swap rate matrix, and compare with the ATM swaptions strike quote. The ideal case has to match exactly the same values. But in reality, there are a difference about 1\%-2\%, that is negligible and we accept this difference since we didn't send time to rigorously build our yield curve.    
+Before using the data, we always check if the data is coherent, i.e Libor quotes is coherent with swaptions. Thanks to analytical swap rate formula \ref{eq:swap_rate} and the Libor quotes, we recompute our swap rate matrix, and compare with the ATM swaptions strike quote. The ideal case has to match exactly the same values. But in reality, there are a difference about 1\%-5\%, that is negligible and we accept this difference since we didn't send time to rigorously build our yield curve.    
 \subsection{Calibration algorithm}
-\paragraph{Generality on volatility data structure}
-
-
-
-
-
-
-
-explain here the issues of missing data, the choice of swaptions instead of caplet. HG vol, nodes feature on gMatrix, interpolation. How abcd can be calibrated, how gMatrix is calibrated after. How virtual test is build.
-\paragraph{Global}
-\paragraph{Local}
-\paragraph{Cascade}
-\paragraph{Regularized global}
-
-\subsection{Exact virtual test}
-\subsection{Regularized virtual test}
-\subsection{Calibration with real data - results}
-Calibrating abcd before (hMatrix). Then calibrating g. Result benchmark analyse : Time computing in relation to horizon. Results stability with many different dates
-\paragraph{Exact calibration}
-
-\subsection{Approximation Swaption Black Vol by Rebonato formula}
-The swap rate is computed by \footnote{The iteration through indices $\hat{i}$ and $i$ is different when the swap settlement dates are different for fixed legs and floatting legs.$\hat{i}$ iterate through fixed legs while $i$ iterate through floatting legs. Their steps can be different depending on Fixed/Float Tenor configuration}
-\[
-S_{\alpha,\beta}(t) 
-= 
-\frac{P(t,T_{\alpha})-P(t,T_{\beta})}{\sum^{\hat{\beta}-}_{\hat{i}=\hat{\alpha}}\tau_{\hat{i}}P(t,T_{\hat{i}++})} 
-=
-\frac{\sum^{\beta-1}_{i=\alpha} \tau_i \Ptii }{A_{\alpha,\beta}(t)} \Lit 
-\]
-Where 
-\subsection{Calibration deterministic volatilities}
-Our LMM model firstly implemented use the \textit{HGVolatility} , i.e volatilities for each LIBOR $L_i(t)$ are piecewise constant functions $\sigma_i(t)=g_i(t)h_i(t)$, where $h_i(t)$ and $g_i(t)$ are also piecewiese constant. Since they are piecewise constant, we can store these parameters in two lower triangular matrices ~\footnote{ Because $h_i(t)$ and $g_i(t)$ are volatilities of $L_i(t)=L(t,T_i,T_{i+1}) $, they are 'dead' after time $t \geq T_i$. That's why our volatility matrices are lower triangular}
-\[
-\left\{
-\begin{array}{l}
-g_{ij}= g_i(T_j) \\
-h_{ij}= h_i(T_j)
-\end{array}
-\right.
-\hspace{0.5cm}
-i \geq j
-\hspace{2cm}
-\left\{
-\begin{array}{l}
-g_{0j}=g_{i0}=0 \\
-h_{0j}=h_{i0}=0
-\end{array}
-\right.
-\hspace{0.5cm}
-\forall i,j
-\]
-
+The main task of our calibration is to calibrate the $g$ matrix. In this section, we introduce the analysis of volatilities into market data quotation. Based on this analysis, three calibration algorithms are implemented : cascade, local, global. The last one allow a regularized solution when market data do not allow a solution. At the end, we also explain a quick implementation for calibrating $h$ matrix, or indeed the $abcd$ parameters.
+\paragraph{Market data and volatilities dependency}\mbox{}\\
+Although many technical note talk about calibration LMM model with Cap/Caplet quotes from market, we choose to use Swaption quotes from market. The reason is Swaption informations are richer than Cap/Caplet market. Swaption market have more quotes, and allow also calibrate correlation. In this paragraph, we reexplain the P.Jackel and R.Rebonato's analysis in \cite{JACKEL2003}. 
 \begin{figure}[h]
 \begin{center}
 \begin{pspicture}(-7,-3)(7,4)
 %% Reference for Picture
-\psline[linewidth=0.1pt,linecolor=gray](-7,-3)(7,4)
+%\psline[linewidth=0.1pt,linecolor=gray](-7,-3)(7,4)
 %\rput(-6,-3){(-6,-3)}\rput(-1,2){(-1,2)}
 %\rput(2,-3){(2,-3)}\rput(7,2){(7,2)}\rput(0,0){(0,0)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -556,31 +534,33 @@ h_{0j}=h_{i0}=0
 }
 \end{pspicture}
 \end{center}
-\caption{\label{swaption_matrix} Relation between swaption quotes matrix and volatilities matrix}
+\caption{\label{swaption_matrix} Dependency of swaption quotes and volatilities parameters}
 \end{figure}
-\paragraph{} When calibrating using Implied Swaption Volatilities quoted on the market, a problem arise if swaptions has different configuration of fixed tenor and float tenor. See from the figure example, on an horizon 5 year, with float/fixed tenor are 6M/1YR, we have only 10 swaption's data from the market, while the model has 55 parameters. The excessive number of parameters lead to infinity of solutions. Then we use a special calibration's process to avoid this problem. The idea is to choose sparsely some parameters in the volatility matrix, in the way that there are the same number of parameters to be calibrated than the number of swaption's data. After every calibration step ( minimization iteration ) an interpolation process are launched in order to taking in acount for the whole matrix.
-\paragraph{} The idea of choosen sparse parameters are intuitive. We look in detail for each swaptions, what are dependant Libor, then we deduces the dependant parameters. For example on the horizon of 5YR, with float/fixed tenor 6M/1YR, the swaption 3YRx2YR depend to libors $L_6,L_7,L_8,L_9$. Since the swaption's maturity is 3YR=$T_6$, the swaption depend only to parameters anterior to time $T_6$, i.e $g_{ij, 6\leq i\leq 9,1\leq j\leq6}$. From this full dependant set of parameters, we choose only $g_{62},g_{64},g_{66},g_{82},g_{84},g_{86}$ for calibration. In general, we choose parameters by jumping indices step fixed tenor/float tenor. An explicite example of swaptions 1YR/6M and parameter's dependance for horizon 4YR are described in the table
+\paragraph{} 
+When calibrating using Implied Swaption Volatilities quoted on the market, a problem arise if swaptions has different configuration of fixed tenor and float tenor. See from the figure example, on an horizon 5 year, with float/fixed tenor are 6M/1YR, we have only 10 swaption's data from the market, while the model has 55 parameters (elements of $g$ matrix). The excessive number of parameters lead to infinity of solutions. Then we use a special calibration's process to avoid this problem. The idea is to choose parsimoniously a set of appropriated parameters in the $g$ matrix, in the way that there are the same number of parameters to be calibrated than the number of swaption's quotation. After every calibration step ( minimization iteration ) an interpolation process are launched in order to taking in acount for the whole matrix.
+\paragraph{} Let's take a look in detail into each swaptions. Since a swaption depend to a set of determined Libors (see \ref{eq:swap_rate}), each Libor is modelled by a set of parameters, we can deduces the dependant parameters. For example on a setting of 5YR horizon, with float/fixed tenor 6M/1YR, the swaption 3YRx2YR depend to Libors $L_6,L_7,L_8,L_9$. Since the swaption's maturity is 3YR=$T_6$, the swaption depend only to parameters anterior to time $T_6$, i.e $g_{ij, 6\leq i\leq 9,1\leq j\leq6}$. From Rebonato approximation formula \ref{eq:rebonato}, only $g_{ij, 6\leq i\leq 9,1\leq j\leq6}$ has impact to the Implied Vol of swaption 3YRx2YR. In general, we choose parsimoniously parameters by jumping indices step fixed tenor/float tenor. In our implementation, we choose $g_{72},g_{74},g_{76},g_{92},g_{94},g_{96}$ as principale dependant parameters, the others will be deduced by interpolation-extrapolation. An explicite example of swaptions 1YR/6M and parameter's dependance for horizon 4YR are described in the table
 \begin{center}
 \begin{tabular}{||c||l|l|l|}
 \hline
 Swaption & Libor Dep.   & Full Vol Dep. & Sparse Vol Dep. \\
 \hline
-1YRx1YR  & $L_2, L_3$   & $g_{ij, 2\leq i\leq 3,1\leq j\leq2}$& $g_{22}$\\
+1YRx1YR  & $L_2, L_3$   & $g_{ij, 2\leq i\leq 3,1\leq j\leq2}$& $g_{32}$\\
 \hline
-1YRx2YR  & $L_2,...L_5$ & $g_{ij, 2\leq i\leq 5,1\leq j\leq2}$& $g_{22},g_{42}$ \\
+1YRx2YR  & $L_2,...L_5$ & $g_{ij, 2\leq i\leq 5,1\leq j\leq2}$& $g_{32},g_{52}$ \\
 \hline
-1YRx3YR  & $L_2,...L_7$ & $g_{ij, 2\leq i\leq 7,1\leq j\leq2}$& $g_{22},g_{42},g_{62}$ \\
+1YRx3YR  & $L_2,...L_7$ & $g_{ij, 2\leq i\leq 7,1\leq j\leq2}$& $g_{32},g_{52},g_{72}$ \\
 \hline
-2YRx1YR  & $L_4, L_5$   & $g_{ij, 4\leq i\leq 5,1\leq j\leq4}$& $g_{42},g_{44}$ \\
+2YRx1YR  & $L_4, L_5$   & $g_{ij, 4\leq i\leq 5,1\leq j\leq4}$& $g_{52},g_{54}$ \\
 \hline
-2YRx2YR  & $L_4,...L_7$ & $g_{ij, 4\leq i\leq 7,1\leq j\leq4}$& $g_{42},g_{44},g_{62},g_{64}$\\
+2YRx2YR  & $L_4,...L_7$ & $g_{ij, 4\leq i\leq 7,1\leq j\leq4}$& $g_{52},g_{54},g_{72},g_{74}$\\
 \hline
-3YRx1YR  & $L_6, L_7$   & $g_{ij, 6\leq i\leq 7,1\leq j\leq6}$& $g_{62},g_{64},g_{66}$ \\
+3YRx1YR  & $L_6, L_7$   & $g_{ij, 6\leq i\leq 7,1\leq j\leq6}$& $g_{72},g_{74},g_{76}$ \\
 \hline
 \end{tabular} 
 \end{center}
+These choice of parameters make the number of unknow parameters equal to the number of equation, thus the calibration system become solvable.
 \paragraph{Interpolation - Extrapolation volatility matrix}\mbox{}\\
-Assuming we've successed to sparsely choose parameters and calibrated. Then these parameters form a 'triangle' in the volatility matrix. One can interpolate all values in its interior and extrapolate the exterior of this triangle.
+From the dependency analysis, the calibration problem is now reduced into finding nodes elements in $g$ matrix instead of finding the whole $g$ matrix. Element out of nodes are found by interpolattion, extrapolation. Thanks to the dependency analysis, we can calibrate by using a "stripping" algorithm, i.e by moving in the swaption quote matrix left-to-right and top-to-bottom, we move parrallelly in the $g$ matrix top-to-bottom then left-to-right (see \cite{JACKEL2003}). Our interpolation-extrapolation has to ensure this strictly dependance, i.e a newly found node in $g$ matrix is related to a swaption node, and these interpolation-extrapolation have to not modify values that found precedently. For example the node $g_{74}$ in the stripping algorithm correspond to the swaption 2YRx2YR, the change if this node has to modify only and only $g_{73},g_{63}$ and $g_{64}$.
 
 \begin{figure}[h]
 \begin{center}
@@ -680,6 +660,47 @@ Assuming we've successed to sparsely choose parameters and calibrated. Then thes
 \end{center}
 \caption{\label{interpolation_matrix} Interpolation and Extrapolation for volatility matrix}
 \end{figure}
+
+
+
+
+
+
+
+
+
+
+\paragraph{Generality on volatility data structure}
+
+
+
+
+
+
+
+explain here the issues of missing data, the choice of swaptions instead of caplet. HG vol, nodes feature on gMatrix, interpolation. How abcd can be calibrated, how gMatrix is calibrated after. How virtual test is build.
+\paragraph{Global}
+\paragraph{Local}
+\paragraph{Cascade}
+\paragraph{Regularized global}
+
+\subsection{Exact virtual test}
+\subsection{Regularized virtual test}
+\subsection{Calibration with real data - results}
+Calibrating abcd before (hMatrix). Then calibrating g. Result benchmark analyse : Time computing in relation to horizon. Results stability with many different dates
+\paragraph{Exact calibration}
+
+\subsection{Approximation Swaption Black Vol by Rebonato formula}
+The swap rate is computed by \footnote{The iteration through indices $\hat{i}$ and $i$ is different when the swap settlement dates are different for fixed legs and floatting legs.$\hat{i}$ iterate through fixed legs while $i$ iterate through floatting legs. Their steps can be different depending on Fixed/Float Tenor configuration}
+\[
+S_{\alpha,\beta}(t) 
+= 
+\frac{P(t,T_{\alpha})-P(t,T_{\beta})}{\sum^{\hat{\beta}-}_{\hat{i}=\hat{\alpha}}\tau_{\hat{i}}P(t,T_{\hat{i}++})} 
+=
+\frac{\sum^{\beta-1}_{i=\alpha} \tau_i \Ptii }{A_{\alpha,\beta}(t)} \Lit 
+\]
+Where 
+
 
 
 
