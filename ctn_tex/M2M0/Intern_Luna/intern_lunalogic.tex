@@ -4,6 +4,7 @@
 \documentclass[a4paper,10pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
+\usepackage{subcaption}
 
 \usepackage{lmodern}
 \usepackage[a4paper]{geometry}
@@ -470,7 +471,7 @@ That give the discount curve for 50YR horizon. After getting this curve, we inte
 The post treatment is similar as Libor quotes, we eliminate all experities that are not multiple of 1YR. The difference is that for swaptions quote, we only use dates multiple of 1YR. Note that since our LMM model has fixed a horizon as a maximum of date, then only swaptions having the end date smaller then this horizon can be choosen. Thus only the upper anti triangular part of swaption quote matrix will be used for the calibration.
 \paragraph{Data check}
 Before using the data, we always check if the data is coherent, i.e Libor quotes is coherent with swaptions. Thanks to analytical swap rate formula \ref{eq:swap_rate} and the Libor quotes, we recompute our swap rate matrix, and compare with the ATM swaptions strike quote. The ideal case has to match exactly the same values. But in reality, there are a difference about 1\%-5\%, that is negligible and we accept this difference since we didn't send time to rigorously build our yield curve.    
-\subsection{Calibration algorithm}
+\subsection{Algorithm description}
 The main task of our calibration is to calibrate the $g$ matrix. In this section, we introduce the analysis of volatilities into market data quotation. Based on this analysis, three calibration algorithms are implemented : cascade, local, global. The last one allow a regularized solution when market data do not allow a solution. At the end, we also explain a quick implementation for calibrating $h$ matrix, or indeed the $abcd$ parameters.
 \paragraph{Market data and volatilities dependency}\mbox{}\\
 Although many technical note talk about calibration LMM model with Cap/Caplet quotes from market, we choose to use Swaption quotes from market. The reason is Swaption informations are richer than Cap/Caplet market. Swaption market have more quotes, and allow also calibrate correlation. In this paragraph, we reexplain the P.Jackel and R.Rebonato's analysis in \cite{JACKEL2003}. 
@@ -670,7 +671,7 @@ From the dependency analysis, the calibration problem is now reduced into findin
 \caption{\label{fig:matrix_mapping} Matrix Mapping}
 \end{figure}
 \paragraph{Matrix Mapping}\mbox{} \\
-Due to the different natural matrices direction (swaption quote matrix versus $g$ matrix), we implement a structure of "matrix mapping" helping to manage all these desorder indices. The gDelegate matrix is a upper anti-triangular matrix, store all nodes values of gMatrix. Note that this matrix has the exact same direction as the swaption quote matrix when processing the stripping algorithm. gDelegate matrix fetch value into nodes of gTransformed matrix. This latter always have the same "natural" direction, but have more values, and all interpolation, extrapolation will be done in this matrix. After interpolation, extrapolation, values in gTransfomred matrix are transformed into $g$ matrix, which is the volatility matrix of the LMM model (see \ref{fig:matrix_mapping}). This representation allow to define a consensual data structure faciliting the calibration algorithm. Now, parameters of the calibration problems are all stored in the gDelegate matrix, and the whole general calibration algorithm is described as in the scheme \ref{fig:calibration_algorithm}
+Due to the different natural matrices direction (swaption quote matrix versus $g$ matrix), we implement a structure of "matrix mapping" helping to manage all these desorder indices. The gDelegate matrix is a upper anti-triangular matrix, store all nodes values of gMatrix. Note that this matrix has the exact same direction as the swaption quote matrix when processing the stripping algorithm. gDelegate matrix fetch value into nodes of gTransformed matrix. This latter always have the same "natural" direction, but have more values, and all interpolation, extrapolation will be done in this matrix. After interpolation, extrapolation, values in gTransfomred matrix are transformed into $g$ matrix, which is the volatility matrix of the LMM model (see \ref{fig:matrix_mapping}). This representation allow to define a consensual data structure faciliting the calibration algorithm. Now, parameters of the calibration problems are all stored in the gDelegate matrix, and the whole general calibration algorithm is described as in the pipeline \ref{fig:calibration_pipeline}.
 \begin{figure}[h]
 \begin{center}
 \begin{pspicture}(-6,-2)(6,2)
@@ -688,20 +689,71 @@ Due to the different natural matrices direction (swaption quote matrix versus $g
 \nccurve[angleB=180]{->}{g}{MDL}\rput(0.8,0.2){\small Rebonato Approx}
 \nccurve[angleA=-90]{->}{MDL}{diff}
 \nccurve[angleA=90]{->}{MKT}{diff}
-\nccurve[angleA=200,angleB=-90]{->}{diff}{gD}\rput(-2,-1.2){\small Minimizer}
+\nccurve[angleA=200,angleB=-90]{->}{diff}{gD}\rput(-2.5,-2.){\tiny Minimizer $||\text{\tiny Rebonato(gDelegate)} - \text{\tiny MKT Quotes}||^2$ }
 \end{pspicture}
 \end{center}
-\caption{\label{fig:calibration_algorithm} General calibration algorithm : minimize  $||\text{\tiny Rebonato(gDelegate)} - \text{\tiny MKT Quotes}||^2$ }
+\caption{\label{fig:calibration_pipeline} Calibration pipeline}
 \end{figure}
 
-\paragraph{} From all above analysis and defined elementary tools, we are able to implement three calibration algorithm
+\paragraph{} From theses above analysis and defined elementary tools, we are able to implement three calibration algorithm with the same routime as in \ref{fig:calibration_pipeline}. The only different is how much data we  take for each minimization loop.
 \begin{itemize}
- \item Global
- \item Local
- \item Cascade
+ \item Global : The whole swaption quote matrix and the whole gDelegate matrix is put entirely into the solver.
+ \item Local : The whole calibration is divided into line stripping algorithm. Each time one line of the swaption matrix quote and one line of the gDelegate matrix are put into the solver, in the top-to-bottom direction.
+ \item Cascade : The calibration is divided into emement stripping algorithm. Each time only one element of the swaption matrix quote and one element of the gDelegate matrix are put into the solver, in the direction left-to-right and top-to-bottom.
 \end{itemize}
-\paragraph{Regularized global calibration}\mbox{} \\
-Regularized calibration has two penalties setting.
+\subsection{Regularization}\mbox{} \\
+As we can see, the separation of volatility function $\sigma$ into $h$ and $g$ has the advantage that is more flexible. $h$ matrix reflect perfectly the time homogeneuous property, while $g$ matrix allow to add more degree of freedom to the volatility model. The downside of this separation is that if elements in $g$ matrix varies two much, the product $\sigma_{ij}=h_{ij}g_{ij}$ also varies and the existence of $h$ loose its sens. Furthermore in a Caplet quote analysis in \cite{REBONATO2002}, Rebonato show that for the existing of solution, the variance of Black volatility has to be an increasing function in maturity. 
+\[
+\text{Variance}(T_i) = T_i \sigma^2_{\text{BLACK}}(T_i)
+\]
+It is not exactly the same condition for swaption matrix, but when analyse the VCUB quotation, we've checked that the calibration behave badly when variance do not have a good shape. For resolving all theses issues, we put two penalties in our calibrator. User have the choice to active or unactive theses regularizator independant to the goodness of market data. Regularization can be added to the calibrator in the general form by adding the penalties term
+\[
+	\textbf{Cost Function} = (\textbf{MDL Quote} - \textbf{MKT Quote}) + \text{Pel}_{T} + \text{Pel}_{M}
+\]
+that we will explain how to compute the penalties term as below.  
+\paragraph{Time homogeneity penalty}\mbox{}\\
+This penaly regularize the parameters in the sens that force the time homogeneuous property. In the ideal case
+\[
+g(t,T) = \Phi(T-t) = \Phi(\tau)   \hspace{2cm} \forall 0 \leq t \leq T \hspace{0.5cm} \tau = T-t
+\] 
+In order to have this property, we force the derivative of $g$ in relation to $\tau=T-t$ to be small
+\[
+ |\frac{\partial g}{\partial \tau}(t,T) | < \text{Const} \hspace{2cm} \tau = T-t
+\]
+This constraint translate into the minimun variation on the diagonals of $g$ matrix. Since elements nodes on a diagonal in $g$ matrix correspond to a column in gDelegate matrix, we compute the Time homogeneuous penalty by finite difference method
+\[
+\text{Pel}_{T} = \textbf{c}_{T}(\sum_j \sum_i \text{gDelegate}_{(i+1,j)} - \text{gDelegate}_{(i,j)} )
+\]
+where $\textbf{c}_{T}$ is a constant regrouping penalty ratio, normalization coefficient, and the denominator part of the finite difference formula. Normally the finite difference denominator and the nomalization coefficient are not to be changed, user change only penalty coefficient, which is equivalently to change $\textbf{c}_{T}$.  
+\begin{figure}[h]
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[scale=0.6]{PenaltyTwo}
+  \caption{\textbf{c}$_T$=1,\textbf{c}$_M$=0.1}
+  \label{fig:penalty_two}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[scale=0.6]{PenaltyOne}
+  \caption{\textbf{c}$_T$=1,\textbf{c}$_M$=0}
+  \label{fig:penalty_one}
+\end{subfigure}
+\caption{Penalties Setting on a virtual calibration test of 10YR : a) Smoothness on maturity b) Without smoothness on maturity }
+\label{fig:penalty}
+\end{figure}
+\paragraph{Smoothness on maturities}\mbox{}\\
+The second penalty is to force the smoothness to $g$ function in relation to the maturity. 
+\[
+ |\frac{\partial^2 g}{\partial T^2}(t,T) | < \text{Const}
+\]
+This constraint translate into forcing the smooth variation on a columns of $g$ matrix. Since elements nodes on a column in $g$ matrix correspond to a row in gDelegate matrix, we compute the Maturity smoothness penalty again by finite difference method
+\[
+\text{Pel}_{M} = \textbf{c}_{M} (\sum_i \sum_j \text{gDelegate}_{(i,j-1)} + \text{gDelegate}_{(i,j+1)} - 2 \text{gDelegate}_{(i,j)} )
+\]
+As the case for Time homogeneuous penalty, if the coefficient set to zero, the penalty will not be setted.
+\paragraph{} Note that while the first penalty is added to have the good financial feature, the second penalty is added in order to have the correctness of the solution. If only time homogeneuous penalty is added, the calibrator do everything to satisfy the constant diagonal property of the matrix $g$. An undesirable behavior comes out that calibrator increase one diagonal, and decrease the others. This solution can match the quoted price, but as we see in figure \ref{fig:penalty_one}, that is a very irregular solution. When adding a second penalty, we have a smooth solution as shown ins figure \ref{fig:penalty_two} 
+
+
 
 \subsection{Exact virtual test}
 \subsection{Regularized virtual test}
