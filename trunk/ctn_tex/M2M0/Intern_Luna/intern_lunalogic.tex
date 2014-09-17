@@ -240,7 +240,7 @@ This timeline discretization at the first part facilite the whole implementation
 }
 \end{pspicture}
 \end{center}
-\caption{\label{libor_matrix} Lower triangular matrix storing Libor values. Volatilities use the same matrix format, but values used are only in blue zone}
+\caption{\label{fig:libor_matrix} Lower triangular matrix storing Libor values. Volatilities use the same matrix format, but values used are only in blue zone}
 \end{figure}
 
 \begin{itemize}
@@ -538,7 +538,7 @@ Although many technical note talk about calibration LMM model with Cap/Caplet qu
 \end{figure}
 \paragraph{} 
 When calibrating using Implied Swaption Volatilities quoted on the market, a problem arise if swaptions has different configuration of fixed tenor and float tenor. See from the figure example, on an horizon 5 year, with float/fixed tenor are 6M/1YR, we have only 10 swaption's data from the market, while the model has 55 parameters (elements of $g$ matrix). The excessive number of parameters lead to infinity of solutions. Then we use a special calibration's process to avoid this problem. The idea is to choose parsimoniously a set of appropriated parameters in the $g$ matrix, in the way that there are the same number of parameters to be calibrated than the number of swaption's quotation. After every calibration step ( minimization iteration ) an interpolation process are launched in order to taking in acount for the whole matrix.
-\paragraph{} Let's take a look in detail into each swaptions. Since a swaption depend to a set of determined Libors (see \ref{eq:swap_rate}), each Libor is modelled by a set of parameters, we can deduces the dependant parameters. For example on a setting of 5YR horizon, with float/fixed tenor 6M/1YR, the swaption 3YRx2YR depend to Libors $L_6,L_7,L_8,L_9$. Since the swaption's maturity is 3YR=$T_6$, the swaption depend only to parameters anterior to time $T_6$, i.e $g_{ij, 6\leq i\leq 9,1\leq j\leq6}$. From Rebonato approximation formula \ref{eq:rebonato}, only $g_{ij, 6\leq i\leq 9,1\leq j\leq6}$ has impact to the Implied Vol of swaption 3YRx2YR. In general, we choose parsimoniously parameters by jumping indices step fixed tenor/float tenor. In our implementation, we choose $g_{72},g_{74},g_{76},g_{92},g_{94},g_{96}$ as principale dependant parameters, the others will be deduced by interpolation-extrapolation. An explicite example of swaptions 1YR/6M and parameter's dependance for horizon 4YR are described in the table
+\begin{table}[h]
 \begin{center}
 \begin{tabular}{||c||l|l|l|}
 \hline
@@ -558,17 +558,15 @@ Swaption & Libor Dep.   & Full Vol Dep. & Sparse Vol Dep. \\
 \hline
 \end{tabular} 
 \end{center}
-These choice of parameters make the number of unknow parameters equal to the number of equation, thus the calibration system become solvable.
-\paragraph{Interpolation - Extrapolation volatility matrix}\mbox{}\\
-From the dependency analysis, the calibration problem is now reduced into finding nodes elements in $g$ matrix instead of finding the whole $g$ matrix. Element out of nodes are found by interpolattion, extrapolation. Thanks to the dependency analysis, we can calibrate by using a "stripping" algorithm, i.e by moving in the swaption quote matrix left-to-right and top-to-bottom, we move parrallelly in the $g$ matrix top-to-bottom then left-to-right (see \cite{JACKEL2003}). Our interpolation-extrapolation has to ensure this strictly dependance, i.e a newly found node in $g$ matrix is related to a swaption node, and these interpolation-extrapolation have to not modify values that found precedently. For example the node $g_{74}$ in the stripping algorithm correspond to the swaption 2YRx2YR, the change if this node has to modify only and only $g_{73},g_{63}$ and $g_{64}$.
-
+\caption{\label{tab:gNode} Dependency of Swaption and Nodes in $g$ matrix}
+\end{table}
+\paragraph{} Let's take a look in detail into each swaptions. Since a swaption depend to a set of determined Libors (see \ref{eq:swap_rate}), each Libor is modelled by a set of parameters, we can deduces the dependant parameters. For example on a setting of 5YR horizon, with float/fixed tenor 6M/1YR, the swaption 3YRx2YR depend to Libors $L_6,L_7,L_8,L_9$. Since the swaption's maturity is 3YR=$T_6$, the swaption depend only to parameters anterior to time $T_6$, i.e $g_{ij, 6\leq i\leq 9,1\leq j\leq6}$. From Rebonato approximation formula \ref{eq:rebonato}, only $g_{ij, 6\leq i\leq 9,1\leq j\leq6}$ has impact to the Implied Vol of swaption 3YRx2YR. In general, we choose parsimoniously parameters by jumping indices step fixed tenor/float tenor. In our implementation, we choose $g_{72},g_{74},g_{76},g_{92},g_{94},g_{96}$ as principale dependant parameters, the others will be deduced by interpolation-extrapolation. An explicite example of swaptions 1YR/6M and parameter's dependance for horizon 4YR are described in the table \ref{tab:gNode}. These choice of parameters make the number of unknow parameters equal to the number of equation, thus the calibration system become solvable.
 \begin{figure}[h]
 \begin{center}
 \begin{pspicture}(-7,-3)(7,3)
 %% Reference for Picture
-%\psline[linewidth=0.1pt,linecolor=gray](-7,-3)(7,4)
-\rput(-6,-3){(-6,-3)}\rput(-1,2){(-1,2)}
-\rput(2,-3){(2,-3)}\rput(7,2){(7,2)}\rput(0,0){(0,0)}
+%\psline[linewidth=0.1pt,linecolor=gray](-7,-3)(7,3)
+%\rput(-6,-3){(-6,-3)}\rput(-1,2){(-1,2)}\rput(2,-3){(2,-3)}\rput(7,2){(7,2)}\rput(0,0){(0,0)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Draw for Global Calibrate and Interpolate
 \psgrid[gridwidth=0.01pt,gridcolor=lightgray,subgriddiv=2,subgridwidth=0.01pt,subgridcolor=lightgray,gridlabels=0](-6,-3)(-1,2)          % set grid for vol matrix
@@ -658,31 +656,52 @@ From the dependency analysis, the calibration problem is now reduced into findin
 }%%%% Set extrapolation arrows
 \end{pspicture}
 \end{center}
-\caption{\label{interpolation_matrix} Interpolation and Extrapolation for volatility matrix}
+\caption{\label{fig:interpolation_matrix} Interpolation and Extrapolation for volatility matrix}
 \end{figure}
 
+\paragraph{Interpolation - Extrapolation volatility matrix}\mbox{}\\
+From the dependency analysis, the calibration problem is now reduced into finding nodes elements in $g$ matrix instead of finding the whole $g$ matrix. Element out of nodes are found by interpolattion, extrapolation. Thanks to the dependency analysis, we can calibrate by using a "stripping" algorithm, i.e by moving in the swaption quote matrix left-to-right and top-to-bottom, we move parrallelly in the $g$ matrix top-to-bottom then left-to-right (see \cite{JACKEL2003}). Our interpolation-extrapolation has to ensure this strictly dependance, i.e a newly found node in $g$ matrix is related to a swaption node, and these interpolation-extrapolation have to not modify values that found precedently. For example in figure \ref{fig:interpolation_matrix} the node $g_{74}$ in the stripping algorithm correspond to the swaption 2YRx2YR, the change if this node has to modify only and only $g_{73},g_{63}$ and $g_{64}$.
 
+ 
+\begin{figure}[h]
+\begin{center}
+\includegraphics[scale=0.3]{matrix_mapping}
+\end{center}
+\caption{\label{fig:matrix_mapping} Matrix Mapping}
+\end{figure}
+\paragraph{Matrix Mapping}\mbox{} \\
+Due to the different natural matrices direction (swaption quote matrix versus $g$ matrix), we implement a structure of "matrix mapping" helping to manage all these desorder indices. The gDelegate matrix is a upper anti-triangular matrix, store all nodes values of gMatrix. Note that this matrix has the exact same direction as the swaption quote matrix when processing the stripping algorithm. gDelegate matrix fetch value into nodes of gTransformed matrix. This latter always have the same "natural" direction, but have more values, and all interpolation, extrapolation will be done in this matrix. After interpolation, extrapolation, values in gTransfomred matrix are transformed into $g$ matrix, which is the volatility matrix of the LMM model (see \ref{fig:matrix_mapping}). This representation allow to define a consensual data structure faciliting the calibration algorithm. Now, parameters of the calibration problems are all stored in the gDelegate matrix, and the whole general calibration algorithm is described as in the scheme \ref{fig:calibration_algorithm}
+\begin{figure}[h]
+\begin{center}
+\begin{pspicture}(-6,-2)(6,2)
+%% Reference for Picture
+%\psline[linewidth=0.1pt,linecolor=gray](-6,-2)(6,2) \rput(-6,-2){(-6,-2)}\rput(0,0){(0,0)}\rput(6,2){(6,2)}
+%%%%%%
+\rput(-5,0){\rnode{gD}{\psframebox{gDelegate} }}
+\rput(-3,2){\rnode{gT}{\psframebox{gTransfomed} }}
+\rput(-2,0){\rnode{g}{\psframebox{gMatrix} }}
+\rput(3.5,0){\rnode{MDL}{\psframebox{MDL Quote} }}
+\rput(3.5,-1.5){\rnode{MKT}{\psframebox{MKT Quote} }}
+\rput(1.5,-0.8){\rnode{diff}{\psframebox{Diff} }}
+\nccurve[angleA=60,angleB=-110]{->}{gD}{gT}
+\nccurve[angleA=-70,angleB=110]{->}{gT}{g}
+\nccurve[angleB=180]{->}{g}{MDL}\rput(0.8,0.2){\small Rebonato Approx}
+\nccurve[angleA=-90]{->}{MDL}{diff}
+\nccurve[angleA=90]{->}{MKT}{diff}
+\nccurve[angleA=200,angleB=-90]{->}{diff}{gD}\rput(-2,-1.2){\small Minimizer}
+\end{pspicture}
+\end{center}
+\caption{\label{fig:calibration_algorithm} General calibration algorithm : minimize  $||\text{\tiny Rebonato(gDelegate)} - \text{\tiny MKT Quotes}||^2$ }
+\end{figure}
 
-
-
-
-
-
-
-
-\paragraph{Generality on volatility data structure}
-
-
-
-
-
-
-
-explain here the issues of missing data, the choice of swaptions instead of caplet. HG vol, nodes feature on gMatrix, interpolation. How abcd can be calibrated, how gMatrix is calibrated after. How virtual test is build.
-\paragraph{Global}
-\paragraph{Local}
-\paragraph{Cascade}
-\paragraph{Regularized global}
+\paragraph{} From all above analysis and defined elementary tools, we are able to implement three calibration algorithm
+\begin{itemize}
+ \item Global
+ \item Local
+ \item Cascade
+\end{itemize}
+\paragraph{Regularized global calibration}\mbox{} \\
+Regularized calibration has two penalties setting.
 
 \subsection{Exact virtual test}
 \subsection{Regularized virtual test}
@@ -722,7 +741,7 @@ Where
 \ncline[nodesep=3pt]{->}{C}{TP}
 \end{pspicture}
 \end{center}
-\caption{\label{virtual_test} Virtual Test Scheme}
+\caption{\label{fig:virtual_test} Virtual Test Scheme}
 \end{figure}
 Back testing, forward testing, validation. critical view points.
 
