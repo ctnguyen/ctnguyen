@@ -314,7 +314,7 @@ Rebonato in ~\cite{REBONATO2002} explain that volatility in a normal market cond
 \begin{center}
 \includegraphics[scale=1.0]{gnuplot_abcdFunction}
 \end{center}
-\caption{\label{abcd_curve} Different humped volatility can be modelled by  abcd function}
+\caption{\label{fig:abcd_curve} Different humped volatility can be modelled by  abcd function}
 \end {figure}
 \paragraph{Piecewise volatility}\mbox{} \\
 The simple parameterized functional form \cite{eq:abcd} however is too simple for volatility in LMM model. Firstly, the true volatility should not have such the perfect shape. Secondly, the fewness of parameters make model a small number of degree of freedom, thus difficult to calibrate. Rebonano has proposed several ways for sophistifying the volalility model. In our implementation, we choose a simple but enoughly general approach, called \textit{hgVolatility}. The idea is to separate general  volatility function into two part $h$ and $g$ . The $h$ part reflect the time homognenuous properties, and the $g$ part give  more degree of freedom to the model. That facilite the calibration task and allow model to be more flexible. In this way, $h$ and $g$ are two independant lower triangular matrices (the same structure as libors). The matrix $h$ will be initiate by an appropriated "$abcd$" values, where "$abcd$" can be calibrated or given by traders. The matrix $g$ is the center of the volatility calibration task. The good result is to have $abcd$ values such that $g$ matrix have values approximatively 1.
@@ -422,6 +422,14 @@ The forward discount factor (useful in Swap configuration) is defined for a $t\l
 \text{FP}(t,\Ta,T_k)= \frac{P(t,T_k)}{P(t,\Ta)}
  = \prod^{k-1}_{i=\alpha} \frac{\Ptii}{\Pti} 
  = \prod^{k-1}_{i=\alpha} \frac{1}{1+\tau_i \Lti }
+\]
+The swap rate is computed by \footnote{The iteration through indices $\hat{i}$ and $i$ is different when the swap settlement dates are different for fixed legs and floatting legs.$\hat{i}$ iterate through fixed legs while $i$ iterate through floatting legs. Their steps can be different depending on Fixed/Float Tenor configuration}
+\[
+S_{\alpha,\beta}(t) 
+= 
+\frac{P(t,T_{\alpha})-P(t,T_{\beta})}{\sum^{\hat{\beta}-}_{\hat{i}=\hat{\alpha}}\tau_{\hat{i}}P(t,T_{\hat{i}++})} 
+=
+\frac{\sum^{\beta-1}_{i=\alpha} \tau_i \Ptii }{A_{\alpha,\beta}(t)} \Lit 
 \]
 \subsection{Translation probability toward Libors dates}
 The aim is to be able to express the $\Tii$-forward measure and its associated Brownian to the $\Ti$-forward measure and its associated measure. From the numeraire change formula, we have
@@ -753,30 +761,10 @@ This constraint translate into forcing the smooth variation on a columns of $g$ 
 As the case for Time homogeneuous penalty, if the coefficient set to zero, the penalty will not be setted.
 \paragraph{} Note that while the first penalty is added to have the good financial feature, the second penalty is added in order to have the correctness of the solution. If only time homogeneuous penalty is added, the calibrator do everything to satisfy the constant diagonal property of the matrix $g$. An undesirable behavior comes out that calibrator increase one diagonal, and decrease the others. This solution can match the quoted price, but as we see in figure \ref{fig:penalty_one}, that is a very irregular solution. When adding a second penalty, we have a smooth solution as shown ins figure \ref{fig:penalty_two} 
 
-
-
-\subsection{Exact virtual test}
-\subsection{Regularized virtual test}
-\subsection{Calibration with real data - results}
-Calibrating abcd before (hMatrix). Then calibrating g. Result benchmark analyse : Time computing in relation to horizon. Results stability with many different dates
-\paragraph{Exact calibration}
-
-\subsection{Approximation Swaption Black Vol by Rebonato formula}
-The swap rate is computed by \footnote{The iteration through indices $\hat{i}$ and $i$ is different when the swap settlement dates are different for fixed legs and floatting legs.$\hat{i}$ iterate through fixed legs while $i$ iterate through floatting legs. Their steps can be different depending on Fixed/Float Tenor configuration}
-\[
-S_{\alpha,\beta}(t) 
-= 
-\frac{P(t,T_{\alpha})-P(t,T_{\beta})}{\sum^{\hat{\beta}-}_{\hat{i}=\hat{\alpha}}\tau_{\hat{i}}P(t,T_{\hat{i}++})} 
-=
-\frac{\sum^{\beta-1}_{i=\alpha} \tau_i \Ptii }{A_{\alpha,\beta}(t)} \Lit 
-\]
-Where 
-
-
-
-
-\section{Tests and validations}
-\paragraph{Virtual test}\mbox{}\\
+\subsection{Tests and numerical results}
+Before performing a calibration on real market data, we built a set of virtual test, and analyse the quality of our calibrators. A good calibrator has to ensure the accuracy and the stability of the result in relation to the data.
+\paragraph{General virtual test}\mbox{}\\
+As shown in figure \ref{fig:virtual_test}, our virtual test is explained as below. Everything will firstly be tested in a virtual context. We initially have a gMatrix, supposed to be a \textit{true parameters}. Using this \textit{true parameters} and our model, we generate the virtual market data by our pricer. Then we perturbe our true parameters into a false parameters set, with a certain noises, to hide the \textit{true parameters}. Virtual market data then is put into the calibrator as a input. The calibrator in an exact calibration ( without regularization ) has to find out the initial \textit{true parameters}. Each time whem we do a perturbation, we use the pseudo random generator implemented in Boost library, and we retain the seed of this generator. Doing so allow us to reproduce exactly the behavior.
 \begin{figure}[h]
 \begin{center}
 \begin{pspicture}(-6,-2)(6,2)
@@ -791,14 +779,58 @@ Where
 \nccurve[angleB=10]{->}{MK}{C}
 \nccurve[angleA=90,angleB=-10]{->}{PP}{C}
 \ncline[nodesep=3pt]{->}{C}{TP}
+\rput(-4.6,-0.5){\tiny seed}
 \end{pspicture}
 \end{center}
-\caption{\label{fig:virtual_test} Virtual Test Scheme}
+\caption{\label{fig:virtual_test} Virtual Test Pipeline}
 \end{figure}
-Back testing, forward testing, validation. critical view points.
+\paragraph{Virtual test exact calibration}\mbox{}\\
+As described above, we initiate our \textit{true parameters}, which is the $g$ matrix, with elements non all constants. We set a variation of 20\% around 1. We generate the virtual market data then perturb this \textit{true parameters} to a factor of 50\% different. Put all those into our three calibrator, the result is satisfied.We have turned our tests many times, with different seed ( in order to have different randomness of the perturbation).  All three calibrators always exactly find the initial \textit{true parameters} (error is about 1e-12\%). We also analyse the time consuming of three calibrator in a particular case : horizon 10YR.  
+\begin {figure}[h]
+\begin{center}
+\includegraphics[scale=1.0]{CalibratorTime}
+\end{center}
+\caption{\label{fig:calibrator_time} Calibrator time consuming comparison}
+\end {figure}
+As shown in the figure \ref{fig:calibrator_time}, we see the evolution of calibration for the three calibrator. Even our calibration was not optimally implemented, but we see qualitatively the good evolution of the curve. Approximatively the time comsuming of the Global calibrator is $\circ(n^2)$. The Local calibrator, run more quicker than the Global calibrator. It is difficult to compare time computing of Cascade calibrator with Local calibrator, because each time we increase the horizon, we add a diagonal to the price matrix.
+\paragraph{Virtual test regularized calibration}\mbox{}\\
+Tests for regularized calibration are setted exactly with the same pipeline with exact calibration, except the calibrator is setted to have two penalies coefficients, and only Global calibrator can set the penalties. We've run different test, with variuous penalties coefficients and different seeds. Note that in the regularized test, we can never find exactly the initial \textit{true parameters} because penalties are put in. When setting the penalties, calibrator intruduce error to the solution, but this later is ensured to be smooth. There are two extremun cases for the regularized  calibrator. When the two penalty coefficients are setted to zero, that become the exact calibrator. When the two penalty coefficients are setted to high values, the calibrator give a highly inaccureate solution, but perfectly constant in diagonal and perfectly linear in column direction (see figure \ref{fig:extrem_regularization}). By varying the penalty coefficients, we see how behave the errors and then can choose the best ones for the real calibration. Each regularized calibration result have of course diagonal varying less than the initial \textit{true parameter}, and the regularized diagonals has to be enter in the midle of the \textit{true parameter} diagonal ( see figure \ref{fig:diag_compare}).
+\begin{figure}[h]
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[scale=0.4]{diag_compare}
+  \caption{Regularized diagonal result}
+  \label{fig:diag_compare}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[scale=0.6]{extrem_regularization}
+  \caption{Highly regularized result}
+  \label{fig:extrem_regularization}
+\end{subfigure}
+\caption{Example of regularized calibration result}
+\label{fig:regularized_calibration}
+\end{figure}
+In figure \ref{fig:regularization_analysis} we se the variation error of parameters and error of quotations in relation to penalty coefficients setting.
+\begin{figure}[h]
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[scale=0.5]{penalty_analysis_gVirtual_error}
+  \caption{Error of param}
+  \label{fig:regularized_param}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[scale=0.5]{penalty_analysis_quoteVirtual_error}
+  \caption{Error of Quotation}
+  \label{fig:regularized_quotation}
+\end{subfigure}
+\caption{Regularization analysis}
+\label{fig:regularization_analysis}
+\end{figure}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Appendices}
 \appendix
 Some apprendices are to be added by lecture of the book ~\cite{BRIGO2006}
