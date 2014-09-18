@@ -237,7 +237,7 @@ This timeline discretization at the first part facilite the whole implementation
 }
 %%%%%% draw the volatility zone
 {
-\pspolygon[linearc=0.2,linecolor=blue](-1.6,2.6)(3.1,2.6)(3.1,-2.1)(-1.6,-2.1)
+\pspolygon[linearc=0.1,linecolor=blue](-1.6,2.8)(3.3,-2.1)(-1.6,-2.1)
 }
 \end{pspicture}
 \end{center}
@@ -252,7 +252,9 @@ This timeline discretization at the first part facilite the whole implementation
 \end{itemize}
 \paragraph{Forward libor dynamic } is described by lognormal processes. For every settlement date $\Ti$, under the numeraire $\Ptii$, the associated forward libor $\Lti$ follow the dynamic
 \[
-\frac{d\Lit}{\Lit} = \sigmait d\Wit
+\frac{d\Lit}{\Lit} = \sigmait d\Wit 
+\hspace{1cm}
+d\Wit d\Wit = \hat{\rho} dt
 \]
 After translating the brownian $N-i$ times, under the numeraire $P(t,T_{N+1})$, for every date $\Ti$, the dynamic of the forward libor remain a lognomal process, but this time with drift under the terminal probability  
 \[
