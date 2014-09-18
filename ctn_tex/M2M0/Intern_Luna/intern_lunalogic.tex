@@ -764,7 +764,7 @@ As the case for Time homogeneuous penalty, if the coefficient set to zero, the p
 \subsection{Tests and numerical results}
 Before performing a calibration on real market data, we built a set of virtual test, and analyse the quality of our calibrators. A good calibrator has to ensure the accuracy and the stability of the result in relation to the data.
 \paragraph{General virtual test}\mbox{}\\
-As shown in figure \ref{fig:virtual_test}, our virtual test is explained as below. Everything will firstly be tested in a virtual context. We initially have a gMatrix, supposed to be a \textit{true parameters}. Using this \textit{true parameters} and our model, we generate the virtual market data by our pricer. Then we perturbe our true parameters into a false parameters set, with a certain noises, to hide the \textit{true parameters}. Virtual market data then is put into the calibrator as a input. The calibrator in an exact calibration ( without regularization ) has to find out the initial \textit{true parameters}. Each time whem we do a perturbation, we use the pseudo random generator implemented in Boost library, and we retain the seed of this generator. Doing so allow us to reproduce exactly the behavior.
+As shown in figure \ref{fig:virtual_test}, our virtual test is explained as below. Everything will firstly be tested in a virtual context. We initially have a gMatrix, supposed to be a \textit{true parameters}. Using this \textit{true parameters} and our model, we generate the virtual market data by our pricer. Then we perturbe our true parameters into a false parameters set, with a certain noises, to hide the \textit{true parameters}. Virtual market data then is put into the calibrator as a input. The calibrator in an exact calibration ( without regularization ) has to find out the initial \textit{true parameters}. Each time whem we do a perturbation, we use the pseudo random generator implemented in Boost library, and we retain the seed of this generator. Doing so allow us to reproduce exactly the behavior. In virtual test, as we known the \textit{true parameters}, we can calculated two error types after calibration, the error of parameters (difference between calibrated and \textit{true parameters}), and the error of quotation ( difference between market quotations and model quotations).
 \begin{figure}[h]
 \begin{center}
 \begin{pspicture}(-6,-2)(6,2)
@@ -794,7 +794,7 @@ As described above, we initiate our \textit{true parameters}, which is the $g$ m
 \end {figure}
 As shown in the figure \ref{fig:calibrator_time}, we see the evolution of calibration for the three calibrator. Even our calibration was not optimally implemented, but we see qualitatively the good evolution of the curve. Approximatively the time comsuming of the Global calibrator is $\circ(n^2)$. The Local calibrator, run more quicker than the Global calibrator. It is difficult to compare time computing of Cascade calibrator with Local calibrator, because each time we increase the horizon, we add a diagonal to the price matrix.
 \paragraph{Virtual test regularized calibration}\mbox{}\\
-Tests for regularized calibration are setted exactly with the same pipeline with exact calibration, except the calibrator is setted to have two penalies coefficients, and only Global calibrator can set the penalties. We've run different test, with variuous penalties coefficients and different seeds. Note that in the regularized test, we can never find exactly the initial \textit{true parameters} because penalties are put in. When setting the penalties, calibrator intruduce error to the solution, but this later is ensured to be smooth. There are two extremun cases for the regularized  calibrator. When the two penalty coefficients are setted to zero, that become the exact calibrator. When the two penalty coefficients are setted to high values, the calibrator give a highly inaccureate solution, but perfectly constant in diagonal and perfectly linear in column direction (see figure \ref{fig:extrem_regularization}). By varying the penalty coefficients, we see how behave the errors and then can choose the best ones for the real calibration. Each regularized calibration result have of course diagonal varying less than the initial \textit{true parameter}, and the regularized diagonals has to be enter in the midle of the \textit{true parameter} diagonal ( see figure \ref{fig:diag_compare}).
+Tests for regularized calibration are setted exactly with the same pipeline with exact calibration, except the calibrator is setted to have two penalies coefficients, and only Global calibrator can set the penalties. We've run different test, with variuous penalties coefficients and different seeds. Note that in the regularized test, we can never find exactly the initial \textit{true parameters} because penalties are put in. When setting the penalties, calibrator intruduce error to the solution, but this later is ensured to be smooth. There are two extremun cases for the regularized  calibrator. When the two penalty coefficients are setted to zero, that become the exact calibrator. When the two penalty coefficients are setted to high values, the calibrator give a highly inaccureate solution, but perfectly constant in diagonal and perfectly linear in column direction (see figure \ref{fig:extrem_regularization}). Each regularized calibration result have of course diagonal varying less than the initial \textit{true parameter}, and the regularized diagonals has to be enter in the midle of the \textit{true parameter} diagonal ( see figure \ref{fig:diag_compare}).
 \begin{figure}[h]
 \begin{subfigure}{.5\textwidth}
   \centering
@@ -811,7 +811,8 @@ Tests for regularized calibration are setted exactly with the same pipeline with
 \caption{Example of regularized calibration result}
 \label{fig:regularized_calibration}
 \end{figure}
-In figure \ref{fig:regularization_analysis} we se the variation error of parameters and error of quotations in relation to penalty coefficients setting.
+
+By varying the penalty coefficients, we see how behave the errors and then can choose the best ones for the real calibration. Figure \ref{fig:regularization_analysis} we se the error variation with differents penalty coefficients setting, from zero to one. On figure \ref{fig:regularized_quotation}, we se the quotation error varies in the natural sens, i.e monotonically in both penalty coefficients. Increasing time homogeneuous or maturity penalty both increase quotation error. Figure \ref{fig:regularized_quotation} show the interesting variation of parameters's error in relation to penalties choices. Notice that parameters's error do not varies in the natural sens. For low time homogeneuous penalty and high maturity smoothness penalty, parameters's error magnitude is significant. This behavior can by understood as the logic of our implementation. The time homogeneuous penalty allow to have the good financial feature, but generate calibration error. The maturity smoothness help to control the error generated by time homogeneuous penalty. That is seen at the line when time homogeneous penalty equal to 1, the error line decrease in function of maturity smoothness penalty. When time homogeneous is small, error increase strongly with maturity penalty. That show the maturity smoothness penalty dominate the time homogeneity penalty. This analyis tell us to always set two penalty together, with time homogeneous higher than maturity smoothness penalty.
 \begin{figure}[h]
 \begin{subfigure}{.5\textwidth}
   \centering
@@ -827,6 +828,25 @@ In figure \ref{fig:regularization_analysis} we se the variation error of paramet
 \end{subfigure}
 \caption{Regularization analysis}
 \label{fig:regularization_analysis}
+\end{figure}
+
+\paragraph{Numerical result}\mbox{}\\
+We turn our calibration with real market data which is the VCUB extracted from bloomberg at date 01-Aug-2014. Unfortunately with real market data, exact calibrator do not work. This can happen that there is no solution for exact calibration, since the Rebonato Black Vol approximation is an accumulate formula with all positive values. If the VCUB values does not grow in a convenable way, thus exact calibratioin can give a negative solution. As show in figure \ref{fig:cascade_calibration_mkt}, we use the cascase calibrator \footnote{ When using cascade calibrator as analysis tool, we remove its positive constraint to see what parameters reach the border (negative value)} as an analyse tool to see what is the precise value in VCUB that break the calibrator. We see that at the swaption 7YRx1YR, the found parameters is negative. This bad market data make the solution out of its defined space (every volatility parameters have to be strictly positive). We then apply the regularization with \textbf{c}$_T=0.01$ and \textbf{c}$_M=10^{-4}$, the solution do not have negative parameters, and the maximum quotation error is 8\%.
+\begin{figure}[h]
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[scale=0.5]{Cascade_calibrated_Vol_01_aug_2014}
+  \caption{Cascade Calibration}
+  \label{fig:cascade_calibration_mkt}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[scale=0.5]{Regularized_calibrated_Vol_01_aug_2014}
+  \caption{Regularized Calibration}
+  \label{fig:regularized_calibration_mkt}
+\end{subfigure}
+\caption{Calibration with market data 01-aug-2014}
+\label{fig:calibration_mkt}
 \end{figure}
 
 \newpage
