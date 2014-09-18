@@ -26,9 +26,174 @@
 \section{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{Presentation Lunalogic and M2MO}
-Lunalogic and M2MO
+\frametitle{LMM Model brief idea}
+Simple fixed income instruments 
+\begin{itemize}
+	\item  Bond, FRA, Swap rate
+	\item Yield Curve, discount rate curve
+\end{itemize}
+Derivative
+\begin{itemize}
+	\item Caplet, Flooret, Caps/Floors
+	\item Swaption
+	\item Implied Volatility and Black formula
+\end{itemize}
+Calibration LMM volatility
+\begin{itemize}
+	\item calibration with caplet quotes, swaption quotes, VCUB
+	\item Link LMM Vol , Swaption Vol, Rebonato formula
+	\item Calibration Algorithm, test and result
+\end{itemize}
 \end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Bond, Forward Rate, Swap rate}
+Link Bond and Forward
+
+Swap Rate
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Numeraire change and Black Formula}
+Forward Measure and Caplet Price
+
+Swap Measure and Swaption Price
+Incompatibility
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{LMM Model and Components}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Libor Model Setting}
+Lognormal Forward rate model, 
+timeline setting, 
+matrix formats
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Libor dynamic}
+Martingale process under zerocoupond measure (correlation)
+Measure translation
+Libor dynamic under Spot measure
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Decorrelation}
+Singular Value Decomposition
+Approximation Correlation, reduced factors
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Time homogeneity and abcd Function}
+Time homogeneity in financial motivation
+abcd volatility shape, perfect time homogeneity property
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Piecewise volatility}
+Downside of parameterization abcd
+hgVolatility setting : role of h, role of g 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Link Swaption and Caplet}
+Rebonato approximation formula
+Reference citation and analysis
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Calibration}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Bloomberg Data}
+ATM Vol
+Skew
+Data consistency check
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{VCUB and volatility parameters dependency}
+Cascade calibration idea
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Interpolation-Extrapolation gMatrix}
+General Interpolation-Extrapolation Image
+Matrix Mapping Image and calibration pipeline 
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Regularization}
+Caplet Variance analysis of Rebonato, increasing property
+Regularization general formula
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Calibration Penalties}
+Time homogeneuous penalty
+Maturity smoothness penalty
+Image 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Virtual Test and numerical results}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Virtual test pipeline}
+Image
+Seed , reproduce test
+Noises
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Results of Exact Virtual Calibration test}
+Noise perturb
+Noise g
+Exact result
+Image Time Consuming of 3 calibrators
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Results of Regularized Virtual Calibration test}
+Specification of validable regularization
+Highly regularized calibration
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Analysis error variation in penalties}
+image and analysis of two error type
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Real Data calibration}
+cascade calibrator and Probleme of negative parameters 
+Regularized calibration
+\end{frame}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}

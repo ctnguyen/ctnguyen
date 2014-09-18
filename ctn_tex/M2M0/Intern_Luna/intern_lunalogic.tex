@@ -671,18 +671,17 @@ Swaption & Libor Dep.   & Full Vol Dep. & Sparse Vol Dep. \\
 \paragraph{Interpolation - Extrapolation volatility matrix}\mbox{}\\
 From the dependency analysis, the calibration problem is now reduced into finding nodes elements in $g$ matrix instead of finding the whole $g$ matrix. Element out of nodes are found by interpolattion, extrapolation. Thanks to the dependency analysis, we can calibrate by using a "stripping" algorithm, i.e by moving in the swaption quote matrix left-to-right and top-to-bottom, we move parrallelly in the $g$ matrix top-to-bottom then left-to-right (see \cite{JACKEL2003}). Our interpolation-extrapolation has to ensure this strictly dependance, i.e a newly found node in $g$ matrix is related to a swaption node, and these interpolation-extrapolation have to not modify values that found precedently. For example in figure \ref{fig:interpolation_matrix} the node $g_{74}$ in the stripping algorithm correspond to the swaption 2YRx2YR, the change if this node has to modify only and only $g_{73},g_{63}$ and $g_{64}$.
 
- 
 \begin{figure}[h]
-\begin{center}
-\includegraphics[scale=0.3]{matrix_mapping}
-\end{center}
-\caption{\label{fig:matrix_mapping} Matrix Mapping}
-\end{figure}
-\paragraph{Matrix Mapping}\mbox{} \\
-Due to the different natural matrices direction (swaption quote matrix versus $g$ matrix), we implement a structure of "matrix mapping" helping to manage all these desorder indices. The gDelegate matrix is a upper anti-triangular matrix, store all nodes values of gMatrix. Note that this matrix has the exact same direction as the swaption quote matrix when processing the stripping algorithm. gDelegate matrix fetch value into nodes of gTransformed matrix. This latter always have the same "natural" direction, but have more values, and all interpolation, extrapolation will be done in this matrix. After interpolation, extrapolation, values in gTransfomred matrix are transformed into $g$ matrix, which is the volatility matrix of the LMM model (see \ref{fig:matrix_mapping}). This representation allow to define a consensual data structure faciliting the calibration algorithm. Now, parameters of the calibration problems are all stored in the gDelegate matrix, and the whole general calibration algorithm is described as in the pipeline \ref{fig:calibration_pipeline}.
-\begin{figure}[h]
+\begin{subfigure}{.35\textwidth}
+  \centering
+  \includegraphics[scale=0.18]{matrix_mapping}
+  \caption{\label{fig:matrix_mapping} Matrix Mapping}
+\end{subfigure}
+\begin{subfigure}{.65\textwidth}
 \begin{center}
 \begin{pspicture}(-6,-2)(6,2)
+\psset{unit=0.65cm}
+\tiny
 %% Reference for Picture
 %\psline[linewidth=0.1pt,linecolor=gray](-6,-2)(6,2) \rput(-6,-2){(-6,-2)}\rput(0,0){(0,0)}\rput(6,2){(6,2)}
 %%%%%%
@@ -694,14 +693,20 @@ Due to the different natural matrices direction (swaption quote matrix versus $g
 \rput(1.5,-0.8){\rnode{diff}{\psframebox{Diff} }}
 \nccurve[angleA=60,angleB=-110]{->}{gD}{gT}
 \nccurve[angleA=-70,angleB=110]{->}{gT}{g}
-\nccurve[angleB=180]{->}{g}{MDL}\rput(0.8,0.2){\small Rebonato Approx}
+\nccurve[angleB=180]{->}{g}{MDL}\rput(0.8,0.2){Rebonato Approx}
 \nccurve[angleA=-90]{->}{MDL}{diff}
 \nccurve[angleA=90]{->}{MKT}{diff}
 \nccurve[angleA=200,angleB=-90]{->}{diff}{gD}\rput(-2.5,-2.){\tiny Minimizer $||\text{\tiny Rebonato(gDelegate)} - \text{\tiny MKT Quotes}||^2$ }
 \end{pspicture}
 \end{center}
 \caption{\label{fig:calibration_pipeline} Calibration pipeline}
+\end{subfigure}
+\caption{G Matrix Mapping}
+\label{fig:g_matrix_mapping}
 \end{figure}
+
+\paragraph{Matrix Mapping}\mbox{} \\
+Due to the different natural matrices direction (swaption quote matrix versus $g$ matrix), we implement a structure of "matrix mapping" helping to manage all these desorder indices. The gDelegate matrix is a upper anti-triangular matrix, store all nodes values of gMatrix. Note that this matrix has the exact same direction as the swaption quote matrix when processing the stripping algorithm. gDelegate matrix fetch value into nodes of gTransformed matrix. This latter always have the same "natural" direction, but have more values, and all interpolation, extrapolation will be done in this matrix. After interpolation, extrapolation, values in gTransfomred matrix are transformed into $g$ matrix, which is the volatility matrix of the LMM model (see \ref{fig:matrix_mapping}). This representation allow to define a consensual data structure faciliting the calibration algorithm. Now, parameters of the calibration problems are all stored in the gDelegate matrix, and the whole general calibration algorithm is described as in the pipeline \ref{fig:calibration_pipeline}.
 
 \paragraph{} From theses above analysis and defined elementary tools, we are able to implement three calibration algorithm with the same routime as in \ref{fig:calibration_pipeline}. The only different is how much data we  take for each minimization loop.
 \begin{itemize}
