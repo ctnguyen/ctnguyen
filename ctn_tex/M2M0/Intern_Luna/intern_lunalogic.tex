@@ -258,14 +258,14 @@ d\Wit d\Wit = \hat{\rho} dt
 \]
 After translating the brownian $N-i$ times, under the numeraire $P(t,T_{N+1})$, for every date $\Ti$, the dynamic of the forward libor remain a lognomal process, but this time with drift under the terminal probability  
 \[
-\frac{d\Lit}{\Lit} = \muit + \sigmait d\Wnt
+\frac{d\Lit}{\Lit} = \muit dt + \sigmait d\Wnt
 \hspace{1cm}
 d\Wnt d\Wnt = \hat{\rho} dt
 \]
 Since the Brownian is now the unique one under the terminal measure, we can ommit the subscript for simplify the notations. Furthurmore, we introduce other indices used for indicating the multidimentional brownian and its correlation. The forward libor dynamic finally become
 \begin{equation}
 \label{eq:libor_dynamic}
-\frac{d\Lit}{\Lit} = \muit + \sigmait \hat{\rho}^{\frac{1}{2} } dW(t)
+\frac{d\Lit}{\Lit} = \muit dt + \sigmait \hat{\rho}^{\frac{1}{2} } dW(t)
 \hspace{1cm}
 \muit = \sum_{k=i+1}^{N+1} \frac{\tau_j \Ljt}{1+\tau_j \Ljt} \sigmait \sigmajt \hat{\rho}_{ij}
 \end{equation}
@@ -276,9 +276,9 @@ Since the Brownian is now the unique one under the terminal measure, we can ommi
 \item When moving away from the prinicipal diagonal, $\hat{\rho}_{ij}$ decrease 
 \item When moving along a sub-diagonal from top to bottom, $\hat{\rho}_{ij}$ increase 
 \end{itemize} 
-There are several way of modelling the correlation. The essential use should be a parameterized one
+There are several way of modelling the correlation. The essential use should be a parameterized one proposed in \cite{REBONATO2009}
 \[
-\hat{\rho}_{ij} = e^{- \beta \frac{ |i-j| }{(i+j)^{\alpha}}}
+\hat{\rho}_{ij} = e^{- \beta |T_i-T_j|}
 \]
 \paragraph{Decorrelation}
 An issue in term of computation time araise when model use fully the number of factor. Imagine for a 15YR horizon, in the european market, that say there are 30 Libors to simulate. If the model try to simulate fully 30 random factor, every sampling has to fill a $30\time30$ lower matrix, multiply with the number of sample, that could be very time comsuming. A mechanism of reduction factor is proposed through the correlation matrix. Assuming the correlation matrix $\rho$ is symetric definite positive,by SVD factorization, it can be written as
@@ -300,7 +300,7 @@ By removing the smallest entries in the matrix $D^{\frac{1}{2}}$ and the associa
 The Libor dynamic becomes
 \begin{equation}
 \label{eq:reduced_libor_dynamic}
-\frac{d\Lit}{\Lit} = \muit + \sigmait \rho^{\frac{1}{2} } dW(t)
+\frac{d\Lit}{\Lit} = \muit dt + \sigmait \rho^{\frac{1}{2} } dW(t)
 \hspace{1cm}
 \muit = \sum_{k=i+1}^{N+1} \frac{\tau_j \Ljt}{1+\tau_j \Ljt} \sigmait \sigmajt \rhoij
 \end{equation}
@@ -436,7 +436,7 @@ S_{\alpha,\beta}(t)
 \subsection{Translation probability toward Libors dates}
 The aim is to be able to express the $\Tii$-forward measure and its associated Brownian to the $\Ti$-forward measure and its associated measure. From the numeraire change formula, we have
 \[
-\frac{dQ^{\Tii}}{dQ^{\Ti}} = \frac{P(0,\Tii)}{P(0,\Ti)}\frac{\Pti}{\Ptii} = \textbf{c} (\tau_i \Lit + 1 )
+\frac{dQ^{\Tii}}{dQ^{\Ti}}|_{\mathcal{F}_t} = \frac{P(0,\Tii)}{P(0,\Ti)}\frac{\Pti}{\Ptii} = \textbf{c} (\tau_i \Lit + 1 )
 \]
 If we can express the right hand side as an exponential process, then we can apply the Girsanov theorem for getting the Brownian translation relation. In fact
 \[
@@ -451,7 +451,7 @@ Plug into the probability equation, we can now apply the Girsanov theorem
 \[
 \frac{dQ^{\Tii}}{dQ^{\Ti}} = \text{exp} \left\{ \int_0^t \mu_i(s)dW^{\Tii}_s - \frac{1}{2}\int_0^t \mu^2_i(s)ds \right\}
 \hspace{1.5cm}
-dW^{\Ti} = dW^{\Tii} - \mu_i(t)dt
+dW^{\Ti} = dW^{\Tii} - \tilde{\mu}(t)dt
 \]
 Or in a general formula
 \[
