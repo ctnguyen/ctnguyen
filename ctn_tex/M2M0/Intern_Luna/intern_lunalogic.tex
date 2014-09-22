@@ -838,21 +838,21 @@ By varying the penalty coefficients, we see how behave the errors and then can c
 \end{figure}
 
 \paragraph{Numerical result}\mbox{}\\
-We turn our calibration with real market data which is the VCUB extracted from bloomberg at date 01-Aug-2014. Unfortunately with real market data, exact calibrator do not work. This can happen that there is no solution for exact calibration, since the Rebonato Black Vol approximation is an accumulate formula with all positive values. If the VCUB values does not grow in a convenable way, thus exact calibratioin can give a negative solution. As show in figure \ref{fig:cascade_calibration_mkt}, we use the cascase calibrator \footnote{ When using cascade calibrator as analysis tool, we remove its positive constraint to see what parameters reach the border (negative value)} as an analyse tool to see what is the precise value in VCUB that break the calibrator. We see that at the swaption 7YRx1YR, the found parameters is negative. This bad market data make the solution out of its defined space (every volatility parameters have to be strictly positive). We then apply the regularization with \textbf{c}$_T=0.01$ and \textbf{c}$_M=10^{-4}$, the solution do not have negative parameters, and the maximum quotation error is 0.8\%.
+We turn our calibration with real market data which is the VCUB extracted from bloomberg at date 01-Aug-2014. Unfortunately with real market data, exact calibrator do not work. This can happen that there is no solution for exact calibration, since the Rebonato Black Vol approximation is an accumulate formula with all positive values. If the VCUB values does not grow in a convenable speed, thus exact calibratioin can give a negative solution. As show in figure \ref{fig:cascade_calibration_mkt}, we use the cascase calibrator \footnote{ When using cascade calibrator as analysis tool, we remove its positive constraint to see what parameters reach the border (negative value)} as an analyse tool to see what is the precise value in VCUB that break the calibrator. We see that at swaptions 7YRx1YR, 13YRx1YR, 13YRx3YR, 14YRx1YR, the found parameters is negative. This bad market data make the solution out of its defined space (every volatility parameters have to be strictly positive). We then apply the regularization with \textbf{c}$_T=0.01$ and \textbf{c}$_M=10^{-4}$, the solution do not have negative parameters, and the maximum quotation error is around 8\%.
 \begin{figure}[h]
 \begin{subfigure}{.5\textwidth}
   \centering
   \includegraphics[scale=0.5]{Cascade_calibrated_Vol_01_aug_2014}
-  \caption{Cascade Calibration}
+  \caption{Cascade Calibration, negative values found at swaptions (7,1),(13,1),(13,3),(14,1)}
   \label{fig:cascade_calibration_mkt}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
   \centering
   \includegraphics[scale=0.5]{Regularized_calibrated_Vol_01_aug_2014}
-  \caption{Regularized Calibration}
+  \caption{Regularized Calibration \textbf{c}$_T=0.01$, \textbf{c}$_M=10^{-4}$ , no negative values in gMatrix}
   \label{fig:regularized_calibration_mkt}
 \end{subfigure}
-\caption{Calibration with market data 01-aug-2014}
+\caption{Calibration 15YR with market data 01-aug-2014}
 \label{fig:calibration_mkt}
 \end{figure}
 
