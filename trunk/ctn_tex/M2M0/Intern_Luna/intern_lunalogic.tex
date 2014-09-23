@@ -319,7 +319,7 @@ Rebonato in ~\cite{REBONATO2002} explain that volatility in a normal market cond
 \caption{\label{fig:abcd_curve} Different humped volatility can be modelled by  abcd function}
 \end {figure}
 \paragraph{Piecewise volatility}\mbox{} \\
-The simple parameterized functional form \cite{eq:abcd} however is too simple for volatility in LMM model. Firstly, the true volatility should not have such the perfect shape. Secondly, the fewness of parameters make model a small number of degree of freedom, thus difficult to calibrate. Rebonano has proposed several ways for sophistifying the volalility model. In our implementation, we choose a simple but enoughly general approach, called \textit{hgVolatility}. The idea is to separate general  volatility function into two part $h$ and $g$ . The $h$ part reflect the time homognenuous properties, and the $g$ part give  more degree of freedom to the model. That facilite the calibration task and allow model to be more flexible. In this way, $h$ and $g$ are two independant lower triangular matrices (the same structure as libors). The matrix $h$ will be initiate by an appropriated "$abcd$" values, where "$abcd$" can be calibrated or given by traders. The matrix $g$ is the center of the volatility calibration task. The good result is to have $abcd$ values such that $g$ matrix have values approximatively 1.
+The simple parameterized functional form \ref{eq:abcd} however is too simple for volatility in LMM model. Firstly, the true volatility should not have such the perfect shape. Secondly, the fewness of parameters make model a small number of degree of freedom, thus difficult to calibrate. Rebonano has proposed several ways for sophistifying the volalility model. In our implementation, we choose a simple but enoughly general approach, called \textit{hgVolatility}. The idea is to separate general  volatility function into two part $h$ and $g$ . The $h$ part reflect the time homognenuous properties, and the $g$ part give  more degree of freedom to the model. That facilite the calibration task and allow model to be more flexible. In this way, $h$ and $g$ are two independant lower triangular matrices (the same structure as libors). The matrix $h$ will be initiate by an appropriated "$abcd$" values, where "$abcd$" can be calibrated or given by traders. The matrix $g$ is the center of the volatility calibration task. The good result is to have $abcd$ values such that $g$ matrix have values approximatively 1.
 \[
 \sigma_{ij} = h_{ij}g_{ij}
 \hspace{1cm}
@@ -473,7 +473,7 @@ There exist many method to build interest rate curve, that we will not focus her
 \begin{center}
 \bl{icvs} $\longrightarrow$ \bl{14) eur} $\longrightarrow$ \bl{21) Stripped Curve} $\longrightarrow$  \bl{Export to Excel} 
 \end{center}
-That give the discount curve for 50YR horizon. After getting this curve, we interpolate linearly at dates multiple of 6MO, and eliminate all elements that are not at date multiple of 6MO. Values from this curve are used as discount factors, in equations \ref{eq:libor_zc}, they are $P(0,T_{i})$, and we can have every $\L(0,T_{i},T_{i+1})$ from this. 
+That give the discount curve for 50YR horizon. After getting this curve, we interpolate linearly at dates multiple of 6MO, and eliminate all elements that are not at date multiple of 6MO. Values from this curve are used as discount factors, in equations \ref{eq:libor_zc}, they are $P(0,T_{i})$, and we can have every $L(0,T_{i},T_{i+1})$ from this. 
 \paragraph{Swaption ATM Black's Vol and skew} is available from Bloomberg by ticker \bl{vcub}. After going into this page, user have to choose the right currency, the right tenor type (6M for european swaps), then refresh information. One can get Black's Vol quote for ATM swaptions, OTM or ITM swaptions and the correspondant strikes matrix by giving the moneyness information. We get the derivative skew matrix by finite difference method
 \[
 \textbf{derivative}(skew) = \frac{quote (\textbf{ATM+5bp}) - quote(\textbf{ATM-5bp}) }{\textbf{10bp}}
@@ -838,23 +838,27 @@ By varying the penalty coefficients, we see how behave the errors and then can c
 \end{figure}
 
 \paragraph{Numerical result}\mbox{}\\
-We turn our calibration with real market data which is the VCUB extracted from bloomberg at date 01-Aug-2014. Unfortunately with real market data, exact calibrator do not work. This can happen that there is no solution for exact calibration, since the Rebonato Black Vol approximation is an accumulate formula with all positive values. If the VCUB values does not grow in a convenable speed, thus exact calibratioin can give a negative solution. As show in figure \ref{fig:cascade_calibration_mkt}, we use the cascase calibrator \footnote{ When using cascade calibrator as analysis tool, we remove its positive constraint to see what parameters reach the border (negative value)} as an analyse tool to see what is the precise value in VCUB that break the calibrator. We see that at swaptions 7YRx1YR, 13YRx1YR, 13YRx3YR, 14YRx1YR, the found parameters is negative. This bad market data make the solution out of its defined space (every volatility parameters have to be strictly positive). We then apply the regularization with \textbf{c}$_T=0.01$ and \textbf{c}$_M=10^{-4}$, the solution do not have negative parameters, and the maximum quotation error is around 8\%.
+We turn our calibration with real market data which is the VCUB extracted from bloomberg at date 01-Aug-2014. Unfortunately with real market data, exact calibrator do not work. This can happen that there is no solution for exact calibration, since the Rebonato Black Vol approximation is an accumulate formula with all positive values. If the VCUB values does not grow in a convenable speed, thus exact calibratioin can give a negative solution. As show in figure \ref{fig:cascade_calibration_mkt}, we use the cascase calibrator \footnote{ When using cascade calibrator as analysis tool, we remove its positive constraint to see what parameters reach the border (negative value)} as an analyse tool to see what is the precise value in VCUB that break the calibrator. We see that at swaptions 7YRx1YR, 12YRx1YR, the found parameters is negative. This bad market data make the solution out of its defined space (every volatility parameters have to be strictly positive). After the proposed of ~\cite{BRIGO2005}, Brigo say that this unsovability is due to the linear interpolation of the quotation. Thus we need just use the truely quoted values, instead of fully use the VCUB quotation. We remove the 6YR, 8YR, 9YR, 11YR lines in the VCUB and doing the exogeneous interpolation as proposed. The result in figure \ref{fig:exogeneous_cascade_calibration_mkt} show no negative values in the calibrated parameters.
 \begin{figure}[h]
 \begin{subfigure}{.5\textwidth}
   \centering
   \includegraphics[scale=0.5]{Cascade_calibrated_Vol_01_aug_2014}
-  \caption{Cascade Calibration, negative values found at swaptions (7,1),(13,1),(13,3),(14,1)}
+  \caption{Cascade Calibration, negative values found at swaptions (7,1),(12,1)}
   \label{fig:cascade_calibration_mkt}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
   \centering
-  \includegraphics[scale=0.5]{Regularized_calibrated_Vol_01_aug_2014}
-  \caption{Regularized Calibration \textbf{c}$_T=0.01$, \textbf{c}$_M=10^{-4}$ , no negative values in gMatrix}
-  \label{fig:regularized_calibration_mkt}
+  \includegraphics[scale=0.5]{CascadeTruncation_calibrated_Vol_01_aug_2014.eps}
+  \caption{Exogeneous Calibration for horizon 12YR, no negative values in gMatrix}
+  \label{fig:exogeneous_cascade_calibration_mkt}
 \end{subfigure}
-\caption{Calibration 15YR with market data 01-aug-2014}
+\caption{Calibration 12YR with market data 01-aug-2014}
 \label{fig:calibration_mkt}
 \end{figure}
+
+
+
+
 
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
