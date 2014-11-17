@@ -863,6 +863,23 @@ We compare our three calibrators for two cases :
 \item accept the negatives parameters
 \item constraint positives parameters
 \end{itemize} 
+\begin{figure}[h]
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[scale=0.5]{Comparison_gNegative}
+  \caption{Without positive constraint}
+  \label{fig:comparison_negative}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[scale=0.5]{Comparison_gPositive}
+  \caption{With positive constraint}
+  \label{fig:comparison_positive}
+\end{subfigure}
+\caption{Calibrator's comparison}
+\label{fig:calibrator_comparison}
+\end{figure}
+As shown in \ref{fig:comparison_negative}, without positive constraint, the global calibrator has the best result as error, the cascade calibrator is slightly better than the local one. However, in case of setting the positive constraint, the cascade and local calibrator goes better, but the global calibrator degrade.
 
 
 \begin{figure}[h]
