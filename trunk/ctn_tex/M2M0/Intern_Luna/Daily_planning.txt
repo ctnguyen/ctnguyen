@@ -1,2 +1,0 @@
-add examples of QuantLib into QuantLibHello Project
-modify FindQuantLib.cmake for further x64 system (particulary Windows)
