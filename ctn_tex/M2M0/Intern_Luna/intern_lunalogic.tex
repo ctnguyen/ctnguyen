@@ -837,8 +837,34 @@ By varying the penalty coefficients, we see how behave the errors and then can c
 \label{fig:regularization_analysis}
 \end{figure}
 
-\paragraph{Numerical result}\mbox{}\\
-We turn our calibration with real market data which is the VCUB extracted from bloomberg at date 01-Aug-2014. Unfortunately with real market data, exact calibrator do not work. This can happen that there is no solution for exact calibration, since the Rebonato Black Vol approximation is an accumulate formula with all positive values. If the VCUB values does not grow in a convenable speed, thus exact calibratioin can give a negative solution. As show in figure \ref{fig:cascade_calibration_mkt}, we use the cascase calibrator \footnote{ When using cascade calibrator as analysis tool, we remove its positive constraint to see what parameters reach the border (negative value)} as an analyse tool to see what is the precise value in VCUB that break the calibrator. We see that at swaptions 7YRx1YR, 12YRx1YR, the found parameters is negative. This bad market data make the solution out of its defined space (every volatility parameters have to be strictly positive). After the proposed of ~\cite{BRIGO2005}, Brigo say that this unsovability is due to the linear interpolation of the quotation. Thus we need just use the truely quoted values, instead of fully use the VCUB quotation. We remove the 6YR, 8YR, 9YR, 11YR lines in the VCUB and doing the exogeneous interpolation as proposed. The result in figure \ref{fig:exogeneous_cascade_calibration_mkt} show no negative values in the calibrated parameters.
+\subsection{Numerical result}
+We try to test our calibrators with many data files, over 5 years (since 2008), extracted every 3 months. The objective is to be able to process the calibration with error lower than 10bp for the pratical results. However, in pratice, real data make that there aren't exist a solution for the calibration problem. We can show the the non existence of the solution, and then compare the errors performance of our three calibrators. At the end, we will show how to choose the best penalties for a regularized calibration.
+\paragraph{Cascade Calibrator as analysis tools} \mbox{} \\
+Theoretically, if the real solution existe, the cascade calibrator will be able to quickly find the exact solution of the calibration problem. But when testing with the data extracted from market, even if we accept the negative volatilities parameters, we can fall in the case there are not existe a real solution. We show that by taking the VCUB of 2014.July.02, then run our cascade calibrator. We see that the first swaption that have difficulty to calibrate is the 8YRx1YR one. We stop the cascade calibrator before this swaption, and create a grid of values of volatility parameter, going from -2 to 2, and we check the variation of the cost function.
+\begin{figure}[h]
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[scale=0.5]{CascadeNonSolution}
+  \caption{Non exact solution}
+  \label{fig:nonsolution}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[scale=0.5]{CascadeNegativeSolution}
+  \caption{Negative solution}
+  \label{fig:negativesolution}
+\end{subfigure}
+\caption{Cascade Calibration Analysis}
+\end{figure}
+As shown in figure \ref{fig:nonsolution}, the cost function of our calibration problem is a quadratic variation in relation to volatility parameter. The fact this curve do not reach zero show that the model's Black Vol can not reach the market's Black Vol. In \ref{fig:negativesolution}, the minimization problem admits negatives solutions, so the cascade calibrator find the greater negative one. In these two cases, the cascade calibrator is not useful for pratical results, but it can be used as an analysis tool for seeing when, and where the solution does not go well. 
+\paragraph{Comparison calibrators} \mbox{} \\
+We compare our three calibrators for two cases : 
+\begin{itemize}
+\item accept the negatives parameters
+\item constraint positives parameters
+\end{itemize} 
+
+
 \begin{figure}[h]
 \begin{subfigure}{.5\textwidth}
   \centering
