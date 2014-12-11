@@ -309,15 +309,15 @@ Swap measure and ito
 \hspace{1cm}
 [\sigmaab(t)]^2 = \frac{ d<\Sab,\Sab>_t }{[\Sab(t)]^2 }
 \]
-By considering swap rate as weighted sum of libors
+By constantly approximating $w_{i}(t)\approxeq w_{i}(0)$ , swap is like weighted sum of libors
 \[
-[\sigmaab(t)]^2 = \frac{1}{[\Sab(t)]^2 } \sum_{i,j=\alpha}^{\beta-1} w_i(t)w_j(t) d<L_i,L_j>_t
+[\sigmaab(t)]^2 \approx \frac{1}{[\Sab(t)]^2 } \sum_{i,j=\alpha}^{\beta-1} w_i(0)w_j(0) d<L_i,L_j>_t
 \hspace{1cm}
 w_k(t) = \frac{\sum^{\beta-1}_{k=\alpha} \tau_k P(t,T_{k+1}) }{\Cab(t)}
 \]
 By replacing dynamic of Libors
 \[
-[\sigmaab(t)]^2 = \frac{1}{[\Sab(t)]^2 } \sum_{i,j=\alpha}^{\beta-1} w_i(t)w_j(t) L_i(t)L_j(t) \rho_{L_{ij}}(t) \sigma_{L_i}(t) \sigma_{L_j}(t) dt
+[\sigmaab(t)]^2 \approx \frac{1}{[\Sab(t)]^2 } \sum_{i,j=\alpha}^{\beta-1} w_i(0)w_j(0) L_i(t)L_j(t) \rho_{L_{ij}}(t) \sigma_{L_i}(t) \sigma_{L_j}(t) dt
 \]
 Rebonato approximation formula
 \[
