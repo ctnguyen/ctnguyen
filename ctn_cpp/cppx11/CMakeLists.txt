@@ -1,10 +1,12 @@
 ######## CMakeList.txt test for boost mpi  #######
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 2.8.12)
 
-project(cppx11)
+#set(CMAKE_CXX_FLAGS "-std=c++11 -stdlib=libc++")
+
+project(cppx11 C CXX)
 
 find_package(Boost)
-
+set (CMAKE_CXX_FLAGS "-Wl,--no-as-needed")
 ### Setting for c++11x
 #
 # http://stackoverflow.com/questions/18358389/eclipse-indexer-proper-c11-syntax-highlighting-when-generating-projects-with-c
@@ -22,4 +24,7 @@ include_directories(${Boost_INCLUDE_DIRS})
 add_executable(cppx11 main.cpp)
 target_link_libraries(cppx11 ${Boost_LIBRARIES})  
 
+#find_package( Threads )
 add_executable(multi_thread multi_thread/multi_thread.cpp)
+add_executable(race_condition_ex multi_thread/race_condition_ex.cpp)
+#target_link_libraries(race_condition_ex ${CMAKE_THREAD_LIBS_INIT})
