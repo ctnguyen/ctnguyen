@@ -28,6 +28,7 @@ add_executable(cppx11 main.cpp)
 target_link_libraries(cppx11 ${Boost_LIBRARIES})  
 
 add_executable(move_example move_example.cpp)
+add_executable(smart_ptr_example smart_ptr_example.cpp)
 
 add_executable(multi_thread multi_thread/multi_thread.cpp)
 add_executable(race_condition_ex multi_thread/race_condition_ex.cpp)
