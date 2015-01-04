@@ -16,6 +16,10 @@
 \usepackage{pst-node}
 
 \usepackage{booktabs}
+
+\newcommand{\eTt}{e^{-r(T-t)}}
+
+
 \begin{document}
 %%%%%%%%%%%%%%%%%% DOCUMENT TITLE %%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{center}\resizebox{9cm}{0.6cm}{Quant's interview 1 - Math Derivatives}\end{center}
@@ -23,6 +27,12 @@
 \section{Some trivial probabilities}
 
 \subsection{Common}
+\paragraph{Jensen inequality} \mbox{} \\
+\[
+\varphi(\mathbb{E}[X]) \leq \mathbb{E}[\varphi(X)]
+\hspace{1cm} \varphi \text{ convexe funciton}
+\]
+
 
 \subsection{Binomial, multinomial, random warks}
 Further remaining the formulas, one has to reformulate the urn models and understand the signification of variables
@@ -208,10 +218,10 @@ where $\theta,\mu,\sigma >0$
 
 \section{Basis financial Option}
 In this section\footnote{ All relations in this section are model-free. That mean they can be demonstrated without assumption of a model, only by the non arbitrage theory} $B_{(t,T)}$ and $F_{(t,T)}$ are zero-coupon price and T-Forward price of the stock $S_t$ in question, see  ~\cite{HULL} 
-\subsection{European Option}
+\subsection{Universal inequality}
 \paragraph{Call-Put parity} 
 \[
-C_t - P_t = S_t - B(t,T).K
+C_t - P_t = S_t - \eTt K
 \]
 \paragraph{Bound for European options}
 \[
