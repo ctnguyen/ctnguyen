@@ -341,6 +341,21 @@ d\pm =  \frac{1}{\overline{\sigma}_{t,T}} \text{ln}(\frac{S^1_t}{e^{- \int^T_t r
 \hspace{2cm}
 d_- = d_+  - \overline{\sigma}_{t,T}
 \]
+\paragraph{The prices with continuous dividend payment stock}
+Assuming the Stock pay instantanuously dividend $dQ_t = q S_t dt$, by working on the process $\tilde{S}_t=e{qt}S_t$
+\begin{center}
+\begin{tabular}{l}
+$C_t = e^{-q(T-t)}( S^1_t \Phi(\hat{d}_+) - e^{-r(T-t)} K \Phi(\hat{d}_-))  $ \\[6pt]
+$P_t = e^{-q(T-t)}(e^{-r(T-t)} K \Phi(-\hat{d}_-) - S^1_t \Phi(-\hat{d}_+))$
+\end{tabular}
+\end{center}
+Where
+\[
+\hat{d}\pm = \frac{ \text{ln}(\frac{S^1_t}{K}) + (T-t)( (r-q) \pm \frac{\sigma^2}{2})  }{\sigma \sqrt{T-t}} 
+\hspace{2cm}
+\hat{d}_- = \hat{d}_+  - \sigma \sqrt{T-t}
+\]
+
 \paragraph{Numeraraire change }
 A proccess $Z_t > 0$ can be considered as a numeraire. 
 \[
