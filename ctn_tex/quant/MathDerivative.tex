@@ -27,12 +27,23 @@
 \section{Some trivial probabilities}
 
 \subsection{Common}
-\paragraph{Jensen inequality} \mbox{} \\
+\paragraph{Jensen inequality}
 \[
 \varphi(\mathbb{E}[X]) \leq \mathbb{E}[\varphi(X)]
 \hspace{1cm} \varphi \text{ convexe funciton}
 \]
-
+\paragraph{Conditional Probability}\mbox{} \\
+If $X$ is $\mathcal{G}$-measurable, $Y$ independent of $\mathcal{G}$
+\[
+\mathbb{E}[\varphi(X,Y)|\mathcal{G}] = \int \varphi(X(\omega),Y(\omega '))d\mathbb{P}(\omega ')
+\]
+\paragraph{Transfer measure for conditional expectation}
+\[
+\mathbb{E}_{\mathbb{Q}}[Y|\mathcal{G}] = 
+\frac{\mathbb{E}_{\mathbb{P}}[YZ|\mathcal{G}]}{\mathbb{E}_{\mathbb{P}}[Z|\mathcal{G}]}
+\hspace{2cm}
+d\mathbb{Q} = Z d\mathbb{P}
+\]
 
 \subsection{Binomial, multinomial, random warks}
 Further remaining the formulas, one has to reformulate the urn models and understand the signification of variables
@@ -219,6 +230,7 @@ where $\theta,\mu,\sigma >0$
 \section{Basis financial Option}
 In this section\footnote{ All relations in this section are model-free. That mean they can be demonstrated without assumption of a model, only by the non arbitrage theory} $B_{(t,T)}$ and $F_{(t,T)}$ are zero-coupon price and T-Forward price of the stock $S_t$ in question, see  ~\cite{HULL} 
 \subsection{Universal inequality}
+Todo : convexity of option price in $K$, Call-Put parity (inequality) for american options.
 \paragraph{Call-Put parity} 
 \[
 C_t - P_t = S_t - \eTt K
@@ -275,11 +287,11 @@ There are two approach leads to the Black-Scholes tools
  \item Black-Scholes PDE : Starting from the riskless porfolio (delta neutral) idea, give the Black-Scholes PDE.
 \end{itemize}
 Lecturer can see detail formulations from ~\cite{ELLIOT}.ch7 , ~\cite{MAREK}.ch3 or ~\cite{rouah}.  
-\paragraph{The Model} Black-Scholes define the dynamic of risky and riskless assets \footnote{In this section, the interest rate and volatility subscripted $t$ mean $r_t$ and $\sigma_t$ is a deterministic function in time} :
+\paragraph{The Model} \footnote{In this section, the interest rate and volatility subscripted $t$ mean $r_t$ and $\sigma_t$ is a deterministic function in time} :
 \[
 \frac{dS^1_t}{S^1_t} = \mu dt + \sigma_t d W_t   \hspace{2cm} \frac{dS^0_t}{S^0_t} = r_t dt
 \]
-\paragraph{The Self-financing porfolio} or self-financing porfolio $\phi = (H^0,H^1)$ is defined by
+\paragraph{The Self-financing porfolio} 
 \[
 V_t(\phi) = H^0_t S^0_t + H^1_t S^1_t   
 \hspace{1.5cm} 
@@ -295,7 +307,7 @@ d\widetilde{V}_t = H^1_t d\widetilde{S}^1_t
 \hspace{1cm} 
 W^*_t = W_t + \int_0^t \theta_s ds
 \]
-\paragraph{Comparing processes's dynamic in two probabilities}
+\paragraph{Comparing processes's dynamic in two probabilities} \footnote{An useful stricky is $d(e^{-rt}S_t) = e^{-rt}[dS_t - rS_tdt ]$}
 \begin{center}
 \begin{tabular}{l|l}
  Under $\mathbb{P}$ & Under $\mathbb{P}^*$                                                      \\[6pt]
@@ -341,8 +353,8 @@ d\pm =  \frac{1}{\overline{\sigma}_{t,T}} \text{ln}(\frac{S^1_t}{e^{- \int^T_t r
 \hspace{2cm}
 d_- = d_+  - \overline{\sigma}_{t,T}
 \]
-\paragraph{The prices with continuous dividend payment stock}
-Assuming the Stock pay instantanuously dividend $dQ_t = q S_t dt$, by working on the process $\tilde{S}_t=e{qt}S_t$
+\paragraph{The prices with stock paying continuous dividend} \mbox{} \\
+Assuming the Stock pay instantanuously dividend $dQ_t = q S_t dt$, by working on the process $\tilde{S}_t=e^{qt}S_t$ 
 \begin{center}
 \begin{tabular}{l}
 $C_t = e^{-q(T-t)}( S^1_t \Phi(\hat{d}_+) - e^{-r(T-t)} K \Phi(\hat{d}_-))  $ \\[6pt]
@@ -355,6 +367,41 @@ Where
 \hspace{2cm}
 \hat{d}_- = \hat{d}_+  - \sigma \sqrt{T-t}
 \]
+And the Black-Scholes pde become
+\[
+\frac{\partial C}{\partial t} +
+(r - q)S_t \frac{\partial C}{\partial S} + 
+\frac{1}{2}\sigma^2_tS^2_t \frac{\partial^2 C}{\partial S^2} -
+r_t C_t =0
+\]
+\paragraph{The prices with stock paying discrete dividends} \mbox{} \\
+There are two approachs of separating the capital gain process $G_t$ into stock price $S_t$ and dividends $q_i$ paying at dates $T_i<T$ for $i=1,2...m$ (see ~\cite{MAREK})
+\[\def\arraystretch{1.8}
+\begin{array}{lll}
+G^+_t         = S_t + \sum^m_{i=1} \mathbf{1}_{[T_i,T]}(t) q_i e^{r(t-T_i)} & & Q^+_t =  \sum^m_{i=1} \mathbf{1}_{[T_i,T]}(t)  q_i e^{r(t-T_i)} \\
+G^-_t = S_t - \sum^m_{i=1} \mathbf{1}_{[0,T_i]}(t) q_i e^{-r(T_i-t)}& & Q^-_t = \sum^m_{i=1} \mathbf{1}_{[0,T_i]}(t)  q_i e^{-r(T_i-t)} \\
+G^+_t \text{ , } G^-_t \text{ follow lognormal } & & I_t = \sum^m_{i=1} \mathbf{1}_{[0,T_i]}(t)  q_i e^{r(T-T_i)} 
+\end{array}
+\]
+Note that $Q^+_t$, $I_t$ are dividend compounded to $t$, and $T$, while $Q^-_t$ is dividend discounted to $t$. The main different of these two approach is $G^+_t$ works for dividend paid at maturity time, $G^-_t$ works for dividend paid immediately at ex-dividend date ( see review in ~\cite{CarlosVeiga2008}). 
+\begin{itemize}
+ \item For dividend payment at the end
+\[
+C^+_t = S_t \mathcal{N}(d_+) - e^{-r(T-t)} (K+I_t)\mathcal{N}(d_-)
+\hspace{1cm}
+d\pm = \frac{\text{ln}(\frac{S_t}{K+I_t}) + (r\pm \frac{\sigma^2}{2})(T-t) }{\sigma\sqrt{T-t}}
+\]
+ \item For dividend payment at ex-dividend date
+\[
+C^-_t = (S_t-Q^-_t) \mathcal{N}(d_+) - e^{-r(T-t)} K \mathcal{N}(d_-)
+\hspace{1cm}
+d\pm = \frac{\text{ln}(\frac{S_t-Q^-_t}{K}) + (r\pm \frac{\sigma^2}{2})(T-t) }{\sigma\sqrt{T-t}}
+\] 
+\end{itemize}
+
+
+
+
 
 \paragraph{Numeraraire change }
 A proccess $Z_t > 0$ can be considered as a numeraire. 
@@ -363,7 +410,7 @@ A proccess $Z_t > 0$ can be considered as a numeraire.
 \]
 Then for every $X_t$ asset price process, $\frac{X_t}{Z_t}$ is a $\mathbb{P}^Z$-martingale, as $\frac{X_t}{S^0_t}$ is a $\mathbb{P}^*$-martingale. 
 \textbf{T-Forward measure } is the measure using the numeaire zero-coupon $B(t,T)$, under which the T-forward price procces is a martingale.
-\paragraph{Numeraraire change Tool kit} see ~\cite{BRIGO}\S 2.3
+\paragraph{Numeraraire change Tool kit} see ~\cite{BRIGO2006}\S 2.3
 Giving the two procces $U_t$ and $S_t$ playing the role of Numeraires. 
 \[
 \text{Under } \mathbb{Q}^{U} 
@@ -627,7 +674,7 @@ C_T^B = ( \sum^{N}_{i=1}  w_i S^i_T -  K)^+
 \paragraph{other}
 
 \section{Greek letters}
-Greek are coefficients studying the sensitivities of \textit{Standard European Option} in relation to other variables (see~\cite{MAREK} s3.1.11)
+Greek are coefficients studying the sensitivities of \textit{Standard European Option} in relation to other variables (see ~\cite{Claudio2013}, ~\cite{MAREK} s3.1.11)
 \paragraph{Delta} $\partial_{S}$
 \[
 \Delta_C(t) = \Phi(d_+(t))>0
