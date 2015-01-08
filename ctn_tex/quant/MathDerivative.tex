@@ -399,7 +399,73 @@ d\pm = \frac{\text{ln}(\frac{S_t-Q^-_t}{K}) + (r\pm \frac{\sigma^2}{2})(T-t) }{\
 \] 
 \end{itemize}
 
+\section{Greek letters}
+Greek are coefficients studying the sensitivities of \textit{Standard European Option} in relation to other variables (see ~\cite{Claudio2013}, ~\cite{MAREK} s3.1.11)
 
+\paragraph{Todo}
+\begin{itemize}
+ \item[-] Every greek and its graphics
+ \item[-] Greeks analysis by financial intuition and by mathematical tools ( to search for lecture )
+ \item[-] Hedging strategies against greeks risk
+ \item[-] Relation between greeks
+\end{itemize}
+
+\paragraph{Delta} $\partial_{S}$
+\[
+\Delta_C(t) = \Phi(d_+(t))>0
+\hspace{1cm}
+\Delta_P(t) = -\Phi(-d_+(t))<0
+\hspace{1cm}
+\Delta_C(t) - \Delta_P(t) = 1
+\]
+\paragraph{Gamma} $\partial^2_{SS}$
+\[
+\Gamma_C(t) = \Gamma_P(t) = \frac{\phi(d_+(t)) }{S_t \sigma \sqrt{T-t}} >0
+\]
+\paragraph{Theta} $\partial_{(T-t)}$
+\[\def\arraystretch{1.8}
+\left\| 
+\begin{array}{l}
+\Theta_C = \frac{\sigma S_t \phi(d_+(t)) }{2\sqrt{T-t}} + rKe^{-r(T-t)} \Phi(d_-(t)) >0 \\
+\Theta_P = \frac{\sigma S_t \phi(d_+(t)) }{2\sqrt{T-t}} + rKe^{-r(T-t)} (\Phi(d_-(t))-1) 
+\end{array}\right. 
+\hspace{2cm}
+\left\{ 
+\begin{array}{l}
+\phi \text{ normal density} \\
+\Theta_P - \Theta_C = rKe^{-r(T-t)}
+\end{array}\right. 
+\]
+\paragraph{Delta - Theta - Gamma of delta-neutral porfolio $\Pi$}
+\[
+d\Pi = \Theta dt + \frac{1}{2} \Gamma dS^2
+\hspace{2cm}
+\Theta + \frac{1}{2}\sigma^2 S^2 \Gamma = r\Pi
+\]
+\paragraph{Vega}$\partial_{\sigma}$
+\[
+\mathcal{V}_C = \mathcal{V}_P = S_t \sqrt{T-t} \phi(d_+(t))>0
+\]
+\paragraph{Rho} $\partial_{r}$
+\[\def\arraystretch{1.8}
+\left\| 
+\begin{array}{l}
+\rho_C = (T-t)Ke^{-r(T-t)}\Phi(d_-(t))    > 0 \\
+\rho_P = (T-t)Ke^{-r(T-t)}(\Phi(d_-(t))-1)  < 0
+\end{array}\right. 
+\]
+\paragraph{others}
+\[
+\partial_{K}C = -e^{-r(T-t)} \Phi(d_-(t)) <0
+\hspace{2cm}
+\partial_{K}P = e^{-r(T-t)} (1-\Phi(d_-(t))) >0
+\]
+\paragraph{elasticity}
+\[
+\eta^C_t = \Delta_C(t) \frac{S_t}{C_t} = \Phi(d_+(t))\frac{S_t}{C_t}  > 1
+\hspace{2cm}
+\eta^P_t = \Delta_P(t) \frac{S_t}{P_t} = -\Phi(-d_+(t))\frac{S_t}{P_t} < 1
+\]
 
 
 
@@ -673,62 +739,8 @@ C_T^B = ( \sum^{N}_{i=1}  w_i S^i_T -  K)^+
 \]
 \paragraph{other}
 
-\section{Greek letters}
-Greek are coefficients studying the sensitivities of \textit{Standard European Option} in relation to other variables (see ~\cite{Claudio2013}, ~\cite{MAREK} s3.1.11)
-\paragraph{Delta} $\partial_{S}$
-\[
-\Delta_C(t) = \Phi(d_+(t))>0
-\hspace{1cm}
-\Delta_P(t) = -\Phi(-d_+(t))<0
-\hspace{1cm}
-\Delta_C(t) - \Delta_P(t) = 1
-\]
-\paragraph{Gamma} $\partial^2_{SS}$
-\[
-\Gamma_C(t) = \Gamma_P(t) = \frac{\phi(d_+(t)) }{S_t \sigma \sqrt{T-t}} >0
-\]
-\paragraph{Theta} $\partial_{T}$
-\[
-\left\| 
-\begin{array}{l}
-\Theta_C = \frac{-S_t \phi(d_+(t)) \sigma}{2\sqrt{T-t}} - rKe^{-r(T-t)} \Phi(d_-(t))  <0 \\
-\Theta_P = \frac{-S_t \phi(d_+(t)) \sigma}{2\sqrt{T-t}} + rKe^{-r(T-t)} \Phi(-d_-(t)) 
-\end{array}\right. 
-\hspace{2cm}
-\left\{ 
-\begin{array}{l}
-\phi \text{ normal density} \\
-\Theta_P - \Theta_C = rKe^{-r(T-t)}
-\end{array}\right. 
-\]
-\paragraph{Delta - Theta - Gamma of delta-neutral porfolio $\Pi$}
-\[
-d\Pi = \Theta dt + \frac{1}{2} \Gamma dS^2
-\hspace{2cm}
-\Theta + \frac{1}{2}\sigma^2 S^2 \Gamma = r\Pi
-\]
-\paragraph{Vega}$\partial_{\sigma}$
-\[
-\mathcal{V}_C = \mathcal{V}_P = S_t \sqrt{T-t} \phi(d_+(t))>0
-\]
-\paragraph{Rho} $\partial_{r}$
-\[
-\left\| 
-\begin{array}{l}
-\rho_C = (T-t)Ke^{-r(T-t)}\Phi(d_-(t))    > 0 \\
-\rho_P = -(T-t)Ke^{-r(T-t)}\Phi(-d_-(t))  < 0
-\end{array}\right. 
-\]
-\paragraph{others}
-\[
-\partial_{K}C = -e^{-r(T-t)} \Phi(d_-(t)) <0
-\hspace{2cm}
-\partial_{K}P = e^{-r(T-t)} (1-\Phi(d_-(t))) >0
-\]
 
-- every greek and its graphics
-- relation between greeks
-- greek letter in black-scholes formula
+
 
 \section{Differential Equations and numerical methods}
 \paragraph{Linear 1st-order differential equations} (see~\cite{STEWART}9.5)
