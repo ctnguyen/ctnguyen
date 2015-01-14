@@ -171,11 +171,11 @@ M_t = \mathbb{E}[M_0] + \int_0^t g(s,w)dB_s
 \text{Let }\hspace{1cm}
 \textbf{h}\in \mathbb{L}_{\text{loc}}^2([0,T],\Omega)
 \hspace{2cm}
-\xi_h(t) = \text{exp}\{ \int_0^t \textbf{h}_s d\textbf{B}_s - \frac{1}{2} \int_0^t |\textbf{h}|_s^2 ds \}
+\xi_h(t) = \text{exp}\left\{ -\int_0^t \frac{ |\textbf{h}|_s^2 }{2} ds + \int_0^t \textbf{h}_s d\textbf{B}_s \right\}
 \]
 Under the Novikov\footnote{$\mathbb{E}\text{exp}(\frac{1}{2}\int_0^T \textbf{h}^2_sdt) < \infty $} condition, then $\xi_h(t)$ is a $\mathbb{P}$-martingale with $\mathbb{E}[\xi_h(t)]=1$ and
 \[
-\textbf{W}_t = \textbf{B}_t - \int_0^t \textbf{h}_sds \text{ is a Brownien Motion under }d\mathbb{Q} =\xi_h(T) d\mathbb{P}
+\textbf{B}^{\mathbb{Q}}_t = \textbf{B}^{\mathbb{P}}_t - \int_0^t \textbf{h}_sds \text{ is a Brownien Motion under }d\mathbb{Q} =\xi_h(T) d\mathbb{P}
 \]
 \paragraph{Girsanov transform for correlated Brownian} is the way to translate the correlated Brownian. When having a correlated Brownian, how to translate it through the Girsanov theorem?
 \begin{center}
