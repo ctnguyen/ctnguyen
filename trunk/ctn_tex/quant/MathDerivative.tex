@@ -303,9 +303,9 @@ d\widetilde{V}_t = H^1_t d\widetilde{S}^1_t
 \[
 \theta_t = \frac{\mu - r_t}{\sigma_t} 
 \hspace{1cm} 
-\frac{d\mathbb{P}^*}{d\mathbb{P}}|_{\mathcal{F}_t} = \text{exp}\{ -\int_0^t \theta_s dW_s - \frac{1}{2} \int_0^t \theta^2_s ds \}
+\frac{d\mathbb{P}^*}{d\mathbb{P}}|_{\mathcal{F}_t} = \text{exp}\left\{-\frac{1}{2} \int_0^t \theta^2_s ds + \int_0^t \theta_s dW_s \right\}
 \hspace{1cm} 
-W^*_t = W_t + \int_0^t \theta_s ds
+W^*_t = W_t - \int_0^t \theta_s ds
 \]
 \paragraph{Comparing processes's dynamic in two probabilities} \footnote{An useful stricky is $d(e^{-rt}S_t) = e^{-rt}[dS_t - rS_tdt ]$}
 \begin{center}
@@ -529,7 +529,7 @@ where $B^d$, $B^f$ represent domestic and foreign money market, $Q_t$ represents
 \hspace{2cm}
 \tilde{R}_t = \frac{B^d_t}{B^f_t} R_t = e^{-(r^f -r^d)t} R_t
 \]
-that under \textit{domestic martingale measure} (resp. \textit{foreign martingale measure}), the process $\tilde{Q}_t$ (resp. $\tilde{R}_t$) is a martingale. This can be done by using Girsanov translate of Brownian motion
+that under \textit{domestic martingale measure} $\mathbb{P}^d$ (resp. \textit{foreign martingale measure} $\mathbb{P}^f$), the process $\tilde{Q}_t$ (resp. $\tilde{R}_t$) is a martingale. This can be done by using Girsanov translate of Brownian motion
 \begin{center}
 \begin{tabular}{l|l}
  Under $\mathbb{P}^d$                                               & Under $\mathbb{P}^f$                                 \\[6pt]
@@ -552,7 +552,7 @@ They are related by
 dW^f_t = dW^d_t - \sigma_{Q}dt  
 \]
 \[
-\mathbb{E}^f[X|\mathcal{F}_t] = \mathbb{E}^d[X\textbf{exp}\{ \sigma_{Q}\cdot(W^d_T - W^d_t) -\frac{1}{2} |\sigma_{Q}|^2(T-t) \} |\mathcal{F}_t]
+\mathbb{E}^f[X|\mathcal{F}_t] = \mathbb{E}^d[X\textbf{exp}\left\{ - \frac{|\sigma_{Q}|^2}{2}(T-t) +  \sigma_{Q}\cdot(W^d_T - W^d_t)\right\} |\mathcal{F}_t]
 \]
 \paragraph{Forward Exchange Rate}
 \[
@@ -560,6 +560,18 @@ F_{Q}(t,T) = \frac{B_f(t,T)}{B_d(t,T)}Q_t = e^{(r^d - r^f)(T-t)}Q_t
 \hspace{2cm}
 \frac{d F_{Q}(t,T)}{F_{Q}(t,T)}= \sigma_{Q}\cdot W^d_t
 \hspace{0.5cm}\textit{martingale}
+\]
+\paragraph{Forward price of foreign stock : } \mbox{} \\
+is distinguished in two case, strik in domestic money and strike in foreign money. 
+\begin{center}
+\begin{tabular}{l|l}
+ $V^d_T(K^f) = Q_T(S^f_T - K^f)  $                               &   $F^f_{S^f} (t,T) = e^{r^f(T-t)}S^f_t $    \\[6pt]
+ $V^d_T(K^d) = Q_T(S^f_T - Q_T^{-1}K^d) = ( Q_TS^f_T - K^d)  $   &   $F^d_{S^f} (t,T) = e^{r^d(T-t)}Q_tS^f_t $
+\end{tabular}
+\end{center}
+Note that there are a relation between forward price of a foreign stock and the forward exchange rate
+\[
+F^f_{S^f} (t,T) F_{Q}(t,T) = F^d_{S^f} (t,T)
 \]
 \paragraph{Foreign stock in domestic money}
 \[
@@ -591,17 +603,6 @@ The Call-Put parity for currency option is
 \[
 C^{Q}_t - P^{Q}_t = e^{-r^f(T-t)} Q_t  - e^{-r^d(T-t)} K   
 \]
-\paragraph{Forward price of foreign stock : } is distinguished in two case, strik in domestic money and strike in foreign money. 
-\begin{center}
-\begin{tabular}{l|l}
- $V^d_T(K^f) = Q_T(S^f_T - K^f)  $                               &   $F^f_{S^f} (t,T) = e^{r^f(T-t)}S^f_t $    \\[6pt]
- $V^d_T(K^d) = Q_T(S^f_T - Q_T^{-1}K^d) = ( Q_TS^f_T - K^d)  $   &   $F^d_{S^f} (t,T) = e^{r^d(T-t)}Q_tS^f_t $
-\end{tabular}
-\end{center}
-Note that there are a relation between forward price of a foreign stock and the forward exchange rate
-\[
-F^f_{S^f} (t,T) F_{Q}(t,T) = F^d_{S^f} (t,T)
-\]
 \paragraph{Options struck in foreign currency   } $C_T = Q_T (S^f_T - K^f)^+ $ 
 \begin{center}
 \begin{tabular}{l|l}
@@ -615,7 +616,7 @@ C_t =  Q_t \{ S^f_t N(d_{+}) - K^f e^{-r^f(T-t)}N(d_{-})  \}
 \]
 where
 \[
-d_{\pm} = \frac{ \text{ln}(\frac{S^f_t}{K^f}) + (r^f \pm \frac{1}{2}|\sigma_{S^f}|^2)(T-t) }{\sigma_{S^f}\sqrt{T-t}}
+d_{\pm} = \frac{ \text{ln}(\frac{S^f_t}{K^f}) + (r^f \pm \frac{1}{2}|\sigma_{S^f}|^2)(T-t) }{|\sigma_{S^f}|\sqrt{T-t}}
 \]
 \paragraph{Options struck in domestic currency}$C_T =  (Q_T S^f_T - K^d)^+ $ 
 \[
