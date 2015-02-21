@@ -1,24 +1,18 @@
-/************************************************
-*     Mini Porject helloworld for cmake         *
-*     @authors Chi Thanh NGUYEN                 *
-*     contact chithanhnguyen.math@gmail.com     *
-*************************************************/
 /*!
- *	@file include/hello.h
- *	@date Sept 2013
+ * DataStream.h
  */
 
 
-#ifndef hello_HELLO_H
-#define hello_HELLO_H
+#ifndef DATASTREAM_H
+#define DATASTREAM_H
 
-class Base_Hello
+class DataStream
 {
 public:
 
-	virtual void say_hello() = 0;
+	DataStream();
 
-	virtual ~Base_Hello(){}
+	virtual ~DataStream(){}
 };
 
-#endif /* hello_HELLO_H */
+#endif /* DATASTREAM_H */

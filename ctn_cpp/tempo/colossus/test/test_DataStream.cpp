@@ -1,8 +1,16 @@
-#include <modules/hello_english.hpp>
-#include <iostream>
+#define BOOST_TEST_MODULE LMM_test_lib
+
+#include "../DataStream.h"
+#include <boost/test/included/unit_test.hpp>
 
 
-void hello_english::say_hello()
+BOOST_AUTO_TEST_SUITE(test_DataStream)
+
+BOOST_AUTO_TEST_CASE(test_constructor)
 {
-	std::cout << "hello world" << std::endl;
+	DataStream datastream;
+
+	BOOST_CHECK(true);
 }
+
+BOOST_AUTO_TEST_SUITE_END()
