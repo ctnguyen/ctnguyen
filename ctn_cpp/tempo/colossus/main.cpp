@@ -3,7 +3,7 @@
 
 int main()
 {
-	DataStream data;
+	SampleDataStream data(100);
 
 	return 0;
 }
