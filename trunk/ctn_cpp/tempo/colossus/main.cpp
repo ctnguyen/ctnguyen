@@ -1,8 +1,9 @@
-#include <modules/hello_english.hpp>
-#include <iostream>
+#include "DataStream.h"
 
 
-void hello_english::say_hello()
+int main()
 {
-	std::cout << "hello world" << std::endl;
+	DataStream data;
+
+	return 0;
 }

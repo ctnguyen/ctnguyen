@@ -1,9 +1,5 @@
-#CMAKE INITIALIZATION
-cmake_minimum_required (VERSION 2.8)
 
-project(colossus) 
+add_executable(test_DataStream "test_DataStream.cpp")
+target_link_libraries(test_DataStream ctn_lib)
+add_test(test_DataStream test_DataStream "--log_level=message")
 
-
-
-
-add_subdirectory(test)
