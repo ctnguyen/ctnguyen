@@ -50,12 +50,17 @@ void Selection::updateMemory(const int key)
 	assert(memory_.size() == BUFFER_SIZE_);
 
 	std::list<int>::const_reverse_iterator rit = memory_.rbegin(); 
-	while ((*rit) < key && rit != memory_.rend() )
+	
+	while (key < (*rit)  && rit != memory_.rend())
 	{
-		++rit;
-		if ((*rit) >= key)
-		{
+		const int memory_i = (*rit);//ctn for debug
+		++rit ; if (rit == memory_.rend()) break;
+		const int memory_ii = (*rit);//ctn for debug
+
+		if( key >= (*rit) )
+		{			
 			memory_.insert(rit.base(), key) ; memory_.pop_back() ;
+			rit = memory_.rbegin();// for checking after because the insert erease the rIterator
 			break;
 		}
 	}

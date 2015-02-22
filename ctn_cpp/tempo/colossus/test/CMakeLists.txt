@@ -10,3 +10,8 @@ file(COPY "${CMAKE_SOURCE_DIR}/test/sample.txt" DESTINATION "${CMAKE_BINARY_DIR}
 if(MSVC)
 	file(COPY "${CMAKE_SOURCE_DIR}/test/sample.txt" DESTINATION "${CMAKE_BINARY_DIR}/test/Debug/")
 endif()
+
+file(COPY "${CMAKE_SOURCE_DIR}/test/test_SelectionSample3.txt" DESTINATION "${CMAKE_BINARY_DIR}/test/")
+if(MSVC)
+	file(COPY "${CMAKE_SOURCE_DIR}/test/test_SelectionSample3.txt" DESTINATION "${CMAKE_BINARY_DIR}/test/Debug/")
+endif()
