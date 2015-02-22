@@ -27,12 +27,6 @@ int Median::get_Median() const
 		return minHeap_.top();
 }
 
-std::ostream& operator<<(std::ostream& os, const Median& median)
-{
-	os << "maxHeapRoot." << median.maxHeap_.top() << "	" << "minHeapRoot." << median.minHeap_.top();
-	return os;
-}
-
 void Median::updateMemory(const int key)
 {
 	// http://stackoverflow.com/questions/10657503/find-running-median-from-a-stream-of-integers
@@ -43,7 +37,17 @@ void Median::updateMemory(const int key)
 	}
 	else if (minHeap_.empty())
 	{
-		minHeap_.push(key);
+		const int root_maxHeap = maxHeap_.top();
+		if (root_maxHeap <= key)
+		{
+			minHeap_.push(key);
+		}
+		else
+		{
+			minHeap_.push(root_maxHeap);
+			maxHeap_.pop();
+			maxHeap_.push(key);
+		}
 	}
 	else
 	{
@@ -80,9 +84,24 @@ void Median::updateMemory(const int key)
 		}
 
 		// axiom of data after rebalancing
-		assert(maxHeap_.top() < minHeap_.top());
+		assert(maxHeap_.top() <= minHeap_.top());
 		// abs (sizeMax - sizeMin)
 		assert((std::max(maxHeap_.size(), minHeap_.size()) - std::min(maxHeap_.size(), minHeap_.size())) < 2);
 	}
 
+}
+
+
+std::ostream& operator<<(std::ostream& os, const Median& median)
+{
+	os << "maxHeapRoot.";
+	
+	if (!median.maxHeap_.empty()) 
+		os << median.maxHeap_.top();
+	
+	os << "  |" << median.get_Median() << "|  ";
+	
+	if(!median.minHeap_.empty()) 
+		os<< "minHeapRoot." << median.minHeap_.top();
+	return os;
 }

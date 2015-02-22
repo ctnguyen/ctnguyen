@@ -7,6 +7,7 @@
 #include <vector>
 #include <iostream>
 #include <queue>
+#include <functional>
 
 #include "helper.h"
 
@@ -29,7 +30,7 @@ public:
 private :
 
 	std::priority_queue<int> maxHeap_;
-	std::priority_queue<int, std::vector<int>, helper::Greater > minHeap_;
+	std::priority_queue<int, std::vector<int>, std::greater<int> > minHeap_;
 
 	// add an element to the data memory : max heap or mean heap
 	void updateMemory(const int key);
