@@ -32,7 +32,9 @@ class SampleDataStream : public DataStream
 public:
 	
 	// build offline stream by reading a file
-	// A small bug appear when there are new_line_character at the end of the file --> to fix
+	// A small bug appear on Windows, 
+	// - sample.txt has to be the same folder of .exe if execute in commandline
+	// - sample.txt has to be the ${BINARY_DIR}\test if execute in debuger 
 	SampleDataStream(const char* filename);
 	
 	// build offline stream by randomly generating numbers
