@@ -8,9 +8,11 @@ add_library(ctn_lib
 			helper.h
 			Median.h
 			Selection.h
+			TrialAnalyzer.h
 			DataStream.cpp
 			Median.cpp
-			Selection.cpp)
+			Selection.cpp
+			TrialAnalyzer.cpp)
 
 add_executable(ctn_prog "main.cpp")
 target_link_libraries(ctn_prog ctn_lib)

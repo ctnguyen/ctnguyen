@@ -9,19 +9,25 @@
 #include "Selection.h"
 
 Selection::Selection(unsigned int K)
-: MEMORY_BOUND_(K)
+	: MEMORY_BOUND_(K)
 {
 	if (MEMORY_BOUND_ == 0) throw(" Order Statistics has to be at least 1");
 }
 
 int Selection::get_OrderStatistic(unsigned int k) const
 {
-	assert(k <= MEMORY_BOUND_ && k>0);
-	
-	std::list<int>::const_iterator it = memory_.begin();
-	std::advance(it, k-1);
+	assert(k <= MEMORY_BOUND_ && k > 0);
 
-	return *it;
+	std::list<int>::const_iterator it = memory_.begin();
+	if (k < memory_.size())
+	{
+		std::advance(it, k - 1);
+		return *it;
+	}
+	else
+	{
+		return memory_.back();
+	}
 }
 
 void Selection::updateData(const std::vector<int>& buffer)
@@ -39,7 +45,7 @@ void Selection::updateData(const std::vector<int>& buffer)
 		else
 		{
 			updateMemory(buffer[i]);
-		}		
+		}
 	}
 
 	assert(memory_.size() <= MEMORY_BOUND_);
@@ -50,16 +56,16 @@ void Selection::updateMemory(const int key)
 	assert(memory_.size() == MEMORY_BOUND_);
 
 	std::list<int>::reverse_iterator rit = memory_.rbegin();
-	
-	while (key < (*rit)  && rit != memory_.rend())
+
+	while (key < (*rit) && rit != memory_.rend())
 	{
 		const int memory_i = (*rit);//ctn for debug
-		++rit ; if (rit == memory_.rend()) break;
+		++rit; if (rit == memory_.rend()) break;
 		const int memory_ii = (*rit);//ctn for debug
 
-		if( key >= (*rit) )
-		{			
-			memory_.insert(rit.base(), key) ; memory_.pop_back() ;
+		if (key >= (*rit))
+		{
+			memory_.insert(rit.base(), key); memory_.pop_back();
 			rit = memory_.rbegin();// for checking after because the insert erease the rIterator
 			break;
 		}
@@ -68,7 +74,7 @@ void Selection::updateMemory(const int key)
 	//key smaller than all the memory
 	if (rit == memory_.rend())
 	{
-		memory_.push_front(key) ; memory_.pop_back();
+		memory_.push_front(key); memory_.pop_back();
 	}
 }
 

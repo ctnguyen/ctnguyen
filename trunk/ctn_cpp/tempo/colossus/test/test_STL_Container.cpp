@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <ctime>
+#include <functional>
 
 #include <boost/test/included/unit_test.hpp>
 
@@ -32,7 +33,7 @@ BOOST_FIXTURE_TEST_CASE( sort_vector1, STL_Container )
 
 BOOST_FIXTURE_TEST_CASE( sort_vector2, STL_Container )
 {
-	std::sort(v.begin(), v.end(), helper::greater);
+	std::sort(v.begin(), v.end(), std::greater<int>() );
 	//std::cout<<v<<std::endl;
 }
 
@@ -51,7 +52,7 @@ BOOST_FIXTURE_TEST_CASE( test_maxHeap, STL_Container )
     {
     	heap_vectorized.push_back(maxHeap.top() ) ; maxHeap.pop();
     }
-    std::sort(v.begin(), v.end(),helper::greater);
+	std::sort(v.begin(), v.end(), std::greater<int>() );
 
     BOOST_CHECK( heap_vectorized.size() == v.size() );
 
@@ -67,7 +68,7 @@ BOOST_FIXTURE_TEST_CASE( test_maxHeap, STL_Container )
 BOOST_FIXTURE_TEST_CASE( test_minHeap, STL_Container )
 {
 	//std::priority_queue<int, std::vector<int>, std::greater<int> > minHeap;
-	std::priority_queue<int, std::vector<int>, helper::Greater > minHeap;
+	std::priority_queue<int, std::vector<int>, std::greater<int> > minHeap;
 
 	for(size_t i=0;i<v.size();++i )
 	{
