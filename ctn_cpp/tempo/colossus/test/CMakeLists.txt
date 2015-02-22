@@ -8,6 +8,12 @@ add_executable(test_Selection "test_Selection.cpp")
 target_link_libraries(test_Selection ctn_lib)
 add_test(test_Selection test_Selection "--log_level=message")
 
+add_executable(test_STL_Container "test_STL_Container.cpp")
+target_link_libraries(test_STL_Container ctn_lib)
+add_test(test_STL_Container test_STL_Container "--log_level=message")
+
+
+
 file(COPY "${CMAKE_SOURCE_DIR}/test/sample.txt" DESTINATION "${CMAKE_BINARY_DIR}/test/")
 if(MSVC)
 	file(COPY "${CMAKE_SOURCE_DIR}/test/sample.txt" DESTINATION "${CMAKE_BINARY_DIR}/test/Debug/")
