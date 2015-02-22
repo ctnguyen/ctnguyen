@@ -17,7 +17,7 @@ public:
 	virtual bool isEnd() const = 0;
 
 	// update the stream
-	virtual void update() =0;
+	virtual void fetchData() = 0;
 
 	virtual const std::vector<int>& get_DataBuffer() const = 0;	
 };
@@ -46,7 +46,7 @@ public:
 	virtual bool isEnd() const;
 
 	// update the stream
-	virtual void update();
+	virtual void fetchData();
 
 	// get the fetched data 
 	virtual const std::vector<int>& get_DataBuffer() const;

@@ -81,7 +81,7 @@ bool SampleDataStream::isEnd() const
 	return counter_ == offline_data_.size();
 }
 
-void SampleDataStream::update()
+void SampleDataStream::fetchData()
 {
 	new_data_buffer_[0] = offline_data_[counter_];		
 	++counter_;

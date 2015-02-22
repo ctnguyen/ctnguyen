@@ -63,7 +63,7 @@ BOOST_AUTO_TEST_CASE(test_data_processing)
 
 	while(!datastream.isEnd())
 	{
-		datastream.update();
+		datastream.fetchData();
 		const std::vector<int>& buffer = datastream.get_DataBuffer();
 		container.push_back(buffer[0]);
 	}

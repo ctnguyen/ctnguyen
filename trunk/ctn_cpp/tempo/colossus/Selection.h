@@ -16,7 +16,7 @@ public:
 	// for k-th selection problem
 	Selection(unsigned int K);
 
-	void fetchData(const std::vector<int>& buffer);
+	void updateData(const std::vector<int>& buffer);
 
 	// get the order statistics (smaller or equal K)
 	int get_OrderStatistic(unsigned int k) const;
