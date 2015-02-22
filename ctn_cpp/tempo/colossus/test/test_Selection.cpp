@@ -1,4 +1,4 @@
-#define BOOST_TEST_MODULE colossus_test__Selection
+#define BOOST_TEST_MODULE colossus_test_Selection
 
 #include <iostream>
 #include <fstream>

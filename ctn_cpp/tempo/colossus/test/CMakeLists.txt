@@ -12,6 +12,9 @@ add_executable(test_STL_Container "test_STL_Container.cpp")
 target_link_libraries(test_STL_Container ctn_lib)
 add_test(test_STL_Container test_STL_Container "--log_level=message")
 
+add_executable(test_Median "test_Median.cpp")
+target_link_libraries(test_Median ctn_lib)
+add_test(test_Median test_Median "--log_level=message")
 
 
 file(COPY "${CMAKE_SOURCE_DIR}/test/sample.txt" DESTINATION "${CMAKE_BINARY_DIR}/test/")

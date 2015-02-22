@@ -1,9 +1,6 @@
 #CMAKE INITIALIZATION
 cmake_minimum_required(VERSION 3.0)
 
-# cmake -G"Eclipse CDT4 - Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER_ARG1=-std=c++11 /path/to/source/code
-# cmake -G"Visual Studio 12" -DCMAKE_BUILD_TYPE=Debug /path/to/source/code
-
 project(colossus) 
 
 add_library(ctn_lib 

@@ -1,0 +1,11 @@
+Project can be build by two ways
+- as a all-in-one : use an IDE, include all *.h *.cpp files and build
+- use cmake for generating. Advantage of this way is this ensure cross plateform and automatically build test.
+  Need to ensure to have cmake 3.0 at least, and to have boost library (use the test framework) 
+If use cmake, open the command console and type (depending of the OS)
+For Unix  
+prompt> cmake -G"Eclipse CDT4 - Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER_ARG1=-std=c++11 /path/to/source/code
+For Windows
+prompt> cmake -G"Visual Studio 12" -DCMAKE_BUILD_TYPE=Debug /path/to/source/code
+
+
