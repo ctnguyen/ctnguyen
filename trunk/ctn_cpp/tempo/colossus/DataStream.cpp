@@ -1,7 +1,6 @@
 #include <iostream>
 #include <random>
 #include <fstream>
-#include <iostream>
 #include <sstream>
 
 #include <cassert>
@@ -9,8 +8,9 @@
 #include "DataStream.h"
 
 SampleDataStream::SampleDataStream(const char* filename)
+: counter_(0)
 {
-	std::cout << "File Name [" << filename <<"]"<< std::endl;
+	//std::cout << "File Name [" << filename <<"]"<< std::endl;
 
 	std::ifstream instream;
 	instream.open(filename);
@@ -41,7 +41,10 @@ SampleDataStream::SampleDataStream(const char* filename)
 					offline_data_.push_back(atoi(cell_array[0].c_str()));
 				}
 			}
-			else{ std::cout << line << std::endl; }
+			else
+			{
+				std::cout << line << std::endl; 
+			}
 		}
 	}
 	else
@@ -50,9 +53,12 @@ SampleDataStream::SampleDataStream(const char* filename)
 	}
 
 	instream.close();
+
+	new_data_buffer_.resize(1);
 }
 
 SampleDataStream::SampleDataStream(unsigned int N)
+: counter_(0)
 {
 	const int MAX_DATA = 1000000;
 	const int MIN_DATA = -1000000;
@@ -63,25 +69,27 @@ SampleDataStream::SampleDataStream(unsigned int N)
 	for (unsigned int i = 0; i < N; ++i)
 	{
 		offline_data_.push_back( dist(mt) );
-	}		
+	}
+
+	new_data_buffer_.resize(1);
 }
 
 SampleDataStream::~SampleDataStream(){}
 
 bool SampleDataStream::isEnd() const
 {
-	return counter_ == offline_data_.size() - 1;
+	return counter_ == offline_data_.size();
 }
 
 void SampleDataStream::update()
 {
-
+	new_data_buffer_[0] = offline_data_[counter_];		
 	++counter_;
 }
 
-const std::vector<int>& SampleDataStream::getNewData() const
+const std::vector<int>& SampleDataStream::get_DataBuffer() const
 {
-	return new_data_buffer;
+	return new_data_buffer_;
 }
 
 const std::vector<int>& SampleDataStream::get_OfflineData() const
