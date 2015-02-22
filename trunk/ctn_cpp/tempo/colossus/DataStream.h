@@ -32,6 +32,7 @@ class SampleDataStream : public DataStream
 public:
 	
 	// build offline stream by reading a file
+	// A small bug appear when there are new_line_character at the end of the file --> to fix
 	SampleDataStream(const char* filename);
 	
 	// build offline stream by randomly generating numbers
