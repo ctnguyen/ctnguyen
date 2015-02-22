@@ -20,7 +20,7 @@ BOOST_AUTO_TEST_CASE(test_Selection_Buffer1)
 	const char* samlefilename = "test_SelectionSample3.txt";
 	SampleDataStream datastream(samlefilename);
 		
-	std::cout << datastream << std::endl;
+	//std::cout << datastream << std::endl;
 
 	Selection selection(k);
 	TrialAnalyzer tester;
@@ -42,5 +42,32 @@ BOOST_AUTO_TEST_CASE(test_Selection_Buffer1)
 	}
 }
 
+BOOST_AUTO_TEST_CASE(test_Selection_WithRandomInput)
+{
+	const unsigned int k = 10;  //statistic order
+	const size_t nbData = 1000;  //nb data
+	SampleDataStream datastream(nbData);
+
+	//std::cout << datastream << std::endl;
+
+	Selection selection(k);
+	TrialAnalyzer tester;
+
+	while (!datastream.isEnd())
+	{
+		datastream.fetchData();
+		const std::vector<int>& buffer = datastream.get_DataBuffer();
+
+		selection.updateData(buffer);
+		tester.updateData(buffer);
+
+		//std::cout <<"tester memory " << tester << std::endl;
+		//std::cout <<"Selection " << selection << std::endl;
+
+		const int k_selection = selection.get_OrderStatistic(k);
+		const int k_tested = tester.get_OrderStatistic(k);
+		BOOST_CHECK(k_selection == k_tested);
+	}
+}
 
 BOOST_AUTO_TEST_SUITE_END()
