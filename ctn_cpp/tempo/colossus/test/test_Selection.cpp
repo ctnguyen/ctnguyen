@@ -24,10 +24,10 @@ BOOST_AUTO_TEST_CASE(test_Selection_Buffer1)
 
 	while (!datastream.isEnd())
 	{
-		datastream.update();
+		datastream.fetchData();
 		const std::vector<int>& buffer = datastream.get_DataBuffer();
 		
-		selection.fetchData(buffer);
+		selection.updateData(buffer);
 		std::cout << selection << std::endl;
 	}
 }

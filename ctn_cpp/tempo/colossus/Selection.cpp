@@ -24,7 +24,7 @@ int Selection::get_OrderStatistic(unsigned int k) const
 	return *it;
 }
 
-void Selection::fetchData(const std::vector<int>& buffer)
+void Selection::updateData(const std::vector<int>& buffer)
 {
 	const size_t k = buffer.size();
 	if (k == 0) throw(" Exception fetched buffer is empty ");
