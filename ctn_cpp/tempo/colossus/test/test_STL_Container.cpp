@@ -66,6 +66,7 @@ BOOST_FIXTURE_TEST_CASE( test_maxHeap, STL_Container )
 
 BOOST_FIXTURE_TEST_CASE( test_minHeap, STL_Container )
 {
+	//std::priority_queue<int, std::vector<int>, std::greater<int> > minHeap;
 	std::priority_queue<int, std::vector<int>, helper::Greater > minHeap;
 
 	for(size_t i=0;i<v.size();++i )
