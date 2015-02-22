@@ -19,7 +19,7 @@ public:
 	// update the stream
 	virtual void update() =0;
 
-	virtual const std::vector<int>& getNewData() const = 0;	
+	virtual const std::vector<int>& get_DataBuffer() const = 0;	
 };
 
 
@@ -37,16 +37,17 @@ public:
 	// build offline stream by randomly generating numbers
 	SampleDataStream(unsigned int N);
 
+	virtual ~SampleDataStream();
+
 	// check if the stream is ended
 	virtual bool isEnd() const;
 
 	// update the stream
 	virtual void update();
 
-	virtual const std::vector<int>& getNewData() const;
-
-	virtual ~SampleDataStream();
-
+	// get the fetched data 
+	virtual const std::vector<int>& get_DataBuffer() const;
+	
 	const std::vector<int>& get_OfflineData() const;
 
 	friend std::ostream& operator<<(std::ostream& os, const SampleDataStream& offlinestream);
@@ -56,12 +57,10 @@ private :
 
 	std::vector<int> offline_data_;
 
-	std::vector<int> new_data_buffer;
+	std::vector<int> new_data_buffer_;
 	
 	void write_to_stream(std::ostream& os) const;
 };
-
-//std::ostream& operator<<(std::ostream& os, const SampleDataStream& offlinestream);
 
 
 #endif /* DATASTREAM_H */

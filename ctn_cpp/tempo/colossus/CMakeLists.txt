@@ -6,7 +6,14 @@ cmake_minimum_required(VERSION 3.0)
 
 project(colossus) 
 
-add_library(ctn_lib DataStream.h DataStream.cpp)
+add_library(ctn_lib 
+			DataStream.h
+			helper.h
+			Median.h
+			Selection.h
+			DataStream.cpp
+			Median.cpp
+			Selection.cpp)
 
 add_executable(ctn_prog "main.cpp")
 target_link_libraries(ctn_prog ctn_lib)
