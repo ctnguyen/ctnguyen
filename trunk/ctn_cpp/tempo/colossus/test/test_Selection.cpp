@@ -4,8 +4,8 @@
 #include <fstream>
 #include <ctime>
 
-#include "../DataStream.h"
-#include "../Selection.h"
+#include "DataStream.h"
+#include "Selection.h"
 #include <boost/test/included/unit_test.hpp>
 
 

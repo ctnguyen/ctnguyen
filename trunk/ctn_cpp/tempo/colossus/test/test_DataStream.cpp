@@ -4,7 +4,7 @@
 #include <fstream>
 #include <ctime>
 
-#include "../DataStream.h"
+#include "DataStream.h"
 #include <boost/test/included/unit_test.hpp>
 
 
