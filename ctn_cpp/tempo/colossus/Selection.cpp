@@ -9,14 +9,14 @@
 #include "Selection.h"
 
 Selection::Selection(unsigned int K)
-: BUFFER_SIZE_(K)
+: MEMORY_BOUND_(K)
 {
-	if (BUFFER_SIZE_ == 0) throw(" Order Statistics has to be at least 1");
+	if (MEMORY_BOUND_ == 0) throw(" Order Statistics has to be at least 1");
 }
 
 int Selection::get_OrderStatistic(unsigned int k) const
 {
-	assert(k <= BUFFER_SIZE_ && k>0);
+	assert(k <= MEMORY_BOUND_ && k>0);
 	
 	std::list<int>::const_iterator it = memory_.begin();
 	std::advance(it, k-1);
@@ -31,7 +31,7 @@ void Selection::updateData(const std::vector<int>& buffer)
 
 	for (size_t i = 0; i < k; ++i)
 	{
-		if (memory_.size() < BUFFER_SIZE_)
+		if (memory_.size() < MEMORY_BOUND_)
 		{
 			memory_.push_back(buffer[i]);
 			memory_.sort();
@@ -42,12 +42,12 @@ void Selection::updateData(const std::vector<int>& buffer)
 		}		
 	}
 
-	assert(memory_.size() <= BUFFER_SIZE_);
+	assert(memory_.size() <= MEMORY_BOUND_);
 }
 
 void Selection::updateMemory(const int key)
 {
-	assert(memory_.size() == BUFFER_SIZE_);
+	assert(memory_.size() == MEMORY_BOUND_);
 
 	std::list<int>::reverse_iterator rit = memory_.rbegin();
 	
