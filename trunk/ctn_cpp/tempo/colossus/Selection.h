@@ -23,7 +23,7 @@ public:
 
 	friend std::ostream& operator<<(std::ostream& os, const Selection& selection);
 private :
-	const unsigned int BUFFER_SIZE_;
+	const unsigned int MEMORY_BOUND_;
 
 	std::list<int> memory_;
 
