@@ -1,4 +1,4 @@
-#define BOOST_TEST_MODULE CTN_test_lib
+#define BOOST_TEST_MODULE colossus_test_DataStream
 
 #include <iostream>
 #include <fstream>
