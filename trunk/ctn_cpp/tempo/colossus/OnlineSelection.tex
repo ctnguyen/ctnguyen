@@ -26,7 +26,12 @@
 Colossus's Algorithm Test 
 \end{center}
 
-First look at ~\cite{THOMAS}.
+First look at ~\cite{THOMAS}, there already talked about order statistic and median solution. The best solution can take linear time $\Theta(N)$ for offline data. For online data, the difference is one do not have the whole data at once, but increment when time goes on. The simple application of these algorithms to online data should take $\Theta(N^2)$ if each time one apply them after fetching new data. 
+\section{k-th order statistic}
+Use a memory of constant size $k$ and dynamically scan the data. That works with offline and online data with the same complexity. The downside of this algorithm is if $k$ is big, that could cost a lot for each data update. 
+\section{median}
+Atkinson ~\cite{ATKINSON186} give algorithm using min and max heap. But one has to store the whole data. Each time dynamic data is updated, the container has to push it into the whole history.
+ 
 \bibliographystyle{siam}
 \bibliography{OnlineSelection}
 \end{document}
