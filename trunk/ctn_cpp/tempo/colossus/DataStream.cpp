@@ -23,7 +23,7 @@ SampleDataStream::SampleDataStream(const char* filename)
 			std::string line;
 			getline(instream, line);
 
-			if (line.at(0) != '#') // line start with # is a comment
+			if (!line.empty() && line.at(0) != '#') // line start with # is a comment
 			{
 				//std::cout << line << std::endl;
 

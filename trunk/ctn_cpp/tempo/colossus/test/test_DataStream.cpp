@@ -48,6 +48,8 @@ BOOST_AUTO_TEST_CASE(test_constructor_file_read)
 
 	const std::vector<int>& offlinedata = datastream.get_OfflineData();
 	BOOST_CHECK(offlinedata.size() == N);
+
+	std::cout << datastream << std::endl;
 }
 
 
