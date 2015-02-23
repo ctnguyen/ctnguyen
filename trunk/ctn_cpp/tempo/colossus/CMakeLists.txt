@@ -17,9 +17,6 @@ add_library(ctn_lib
 add_executable(ctn_prog "main.cpp")
 target_link_libraries(ctn_prog ctn_lib)
 
-add_executable(ctn_time_measure "time_measure.cpp")
-target_link_libraries(ctn_time_measure ctn_lib)
-
 # For tests
 find_package(Boost)
 include_directories(${Boost_INCLUDE_DIRS})
