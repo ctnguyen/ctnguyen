@@ -33,8 +33,7 @@ int Selection::get_OrderStatistic(unsigned int k) const
 void Selection::updateData(const std::vector<int>& buffer)
 {
 	const size_t k = buffer.size();
-	if (k == 0) throw(" Exception fetched buffer is empty ");
-
+	
 	for (size_t i = 0; i < k; ++i)
 	{
 		if (memory_.size() < MEMORY_BOUND_)
