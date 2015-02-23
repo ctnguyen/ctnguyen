@@ -52,8 +52,6 @@ int main()
 
 			std::vector<int> offline_data = datastream.get_OfflineData();
 
-
-
 			clock_t start_minimizer = std::clock();
 			std::sort(offline_data.begin(),offline_data.end());
 			clock_t end_minimizer = std::clock();
