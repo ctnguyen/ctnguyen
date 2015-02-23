@@ -3,6 +3,7 @@
 #include <ctime>
 #include <cassert>
 #include <fstream>
+#include <algorithm>
 
 #include "helper.h"
 #include "DataStream.h"
@@ -27,13 +28,14 @@ struct TimeMeasure
 
 	std::vector<double> timeSelectionList;
 	std::vector<double> timeMedianList;
+	std::vector<double> timeStdSortList;
 	std::vector<int> sizeList;
 };
 
 
 int main()
 {
-	const int MAX_N = 50000;
+	const int MAX_N = 10000000;
 	const unsigned int k = 10;
 
 	TimeMeasure output(MAX_N);
@@ -43,6 +45,23 @@ int main()
 	for (size_t i = 0; i < output.sizeList.size(); ++i)
 	{
 		const unsigned int N = output.sizeList[i];
+		std::cout << "- Problem of size N="<<N << std::endl;
+		// run for std::sort vector
+		{
+			SampleDataStream datastream(N);
+
+			std::vector<int> offline_data = datastream.get_OfflineData();
+
+
+
+			clock_t start_minimizer = std::clock();
+			std::sort(offline_data.begin(),offline_data.end());
+			clock_t end_minimizer = std::clock();
+
+			double sort_time = double(end_minimizer - start_minimizer) / CLOCKS_PER_SEC;
+			output.timeStdSortList.push_back(sort_time );
+			std::cout << "		Finished std::sort Time="<<sort_time << std::endl;
+		}
 
 		// run for selection algorithm
 		{
@@ -61,6 +80,7 @@ int main()
 
 			double selection_time = double(end_minimizer - start_minimizer) / CLOCKS_PER_SEC;
 			output.timeSelectionList.push_back(selection_time);
+			std::cout << "		Finished Seleciton Time="<<selection_time << std::endl;
 		}
 
 		// run for median algorithm
@@ -79,7 +99,10 @@ int main()
 
 			double median_time = double(end_minimizer - start_minimizer) / CLOCKS_PER_SEC;
 			output.timeMedianList.push_back(median_time);
+
+			std::cout << "		Finished Median Time="<<median_time << std::endl;
 		}
+
 	}//////// end for loop
 	
 	assert(output.timeSelectionList.size() == output.timeMedianList.size());
@@ -88,11 +111,12 @@ int main()
 	std::ofstream outFile;
 	outFile.open("output_time_measure.csv");
 
-	outFile <<"Size,	"<<"Select,	" <<"Median,	" << std::endl;
+	outFile <<"Size,	"<<"std::sort,	"<<"Select,	" <<"Median,	" << std::endl;
 	for (size_t i = 0; i < output.sizeList.size(); ++i)
 	{
 		outFile << output.sizeList[i]<< ",	" 
-				<< output.timeSelectionList[i] << ",	" 
+				<< output.timeStdSortList[i] << ",	"
+				<< output.timeSelectionList[i] << ",	"
 				<< output.timeMedianList[i]    << ",	" << std::endl;
 	}
 	

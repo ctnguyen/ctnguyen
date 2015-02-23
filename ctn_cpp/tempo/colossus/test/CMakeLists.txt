@@ -35,3 +35,5 @@ if(MSVC)
 	file(COPY "${CMAKE_SOURCE_DIR}/test/sample_data_1000.txt" DESTINATION "${CMAKE_BINARY_DIR}/test/Debug/")
 	file(COPY "${CMAKE_SOURCE_DIR}/test/sample_data_1000.txt" DESTINATION "${CMAKE_BINARY_DIR}/Debug/")
 endif()
+
+file(COPY "${CMAKE_SOURCE_DIR}/test/PlotTimeGraphic.gp" DESTINATION "${CMAKE_BINARY_DIR}/test/")
