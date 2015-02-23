@@ -16,6 +16,8 @@ add_executable(test_Median "test_Median.cpp")
 target_link_libraries(test_Median ctn_lib)
 add_test(test_Median test_Median "--log_level=message")
 
+add_executable(ctn_time_measure "time_measure.cpp")
+target_link_libraries(ctn_time_measure ctn_lib)
 
 file(COPY "${CMAKE_SOURCE_DIR}/test/sample.txt" DESTINATION "${CMAKE_BINARY_DIR}/test/")
 if(MSVC)
