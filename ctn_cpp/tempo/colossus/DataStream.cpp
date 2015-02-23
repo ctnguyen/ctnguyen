@@ -1,14 +1,72 @@
 #include <iostream>
 #include <random>
-#include <fstream>
 #include <sstream>
 
 #include <cassert>
 
 #include "DataStream.h"
 
+
+FileStreamReader::FileStreamReader(const char* filename, const unsigned int buffer_size)
+	: BUFFER_SIZE_(buffer_size)
+	, isEndStream(false)
+{
+	input_stream_.open(filename);
+	if (!input_stream_.is_open())
+		isEndStream = true;
+}
+
+FileStreamReader::~FileStreamReader()
+{
+	if (input_stream_.is_open())
+		input_stream_.close();
+}
+
+bool FileStreamReader::isEnd() const
+{
+	return isEndStream;
+}
+
+void FileStreamReader::fetchData()
+{
+	assert(!isEndStream);
+
+	data_buffer_.clear();
+	unsigned int counter = 0;
+	while (input_stream_.good() && counter < BUFFER_SIZE_)
+	{
+		std::string line;
+		getline(input_stream_, line);
+
+		if (!line.empty() && line.at(0) != '#') // line start with # is a comment
+		{
+			data_buffer_.push_back(atoi(line.c_str()));
+			
+			++counter;
+		}
+		else
+		{
+			std::cout << line << std::endl;
+		}		
+	}
+
+	if (!input_stream_.good())
+	{
+		isEndStream = true;
+	}
+}
+
+const std::vector<int>& FileStreamReader::get_DataBuffer() const
+{
+	return data_buffer_;
+}
+
+
+
+
+
 SampleDataStream::SampleDataStream(const char* filename)
-: counter_(0)
+	: counter_(0)
 {
 	//std::cout << "File Name [" << filename <<"]"<< std::endl;
 
@@ -35,7 +93,7 @@ SampleDataStream::SampleDataStream(const char* filename)
 				{
 					cell_array.push_back(cell);
 				}
-				
+
 				for (size_t i = 0; i < cell_array.size(); ++i)
 				{
 					offline_data_.push_back(atoi(cell_array[0].c_str()));
@@ -43,13 +101,13 @@ SampleDataStream::SampleDataStream(const char* filename)
 			}
 			else
 			{
-				std::cout << line << std::endl; 
+				std::cout << line << std::endl;
 			}
 		}
 	}
 	else
 	{
-		std::cout << filename << " - File not found " << std::endl; 
+		std::cout << filename << " - File not found " << std::endl;
 	}
 
 	instream.close();
@@ -58,7 +116,7 @@ SampleDataStream::SampleDataStream(const char* filename)
 }
 
 SampleDataStream::SampleDataStream(unsigned int N)
-: counter_(0)
+	: counter_(0)
 {
 	const int MAX_DATA = 1000000;
 	const int MIN_DATA = -1000000;
@@ -68,7 +126,7 @@ SampleDataStream::SampleDataStream(unsigned int N)
 
 	for (unsigned int i = 0; i < N; ++i)
 	{
-		offline_data_.push_back( dist(mt) );
+		offline_data_.push_back(dist(mt));
 	}
 
 	new_data_buffer_.resize(1);
@@ -83,7 +141,7 @@ bool SampleDataStream::isEnd() const
 
 void SampleDataStream::fetchData()
 {
-	new_data_buffer_[0] = offline_data_[counter_];		
+	new_data_buffer_[0] = offline_data_[counter_];
 	++counter_;
 }
 

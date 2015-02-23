@@ -4,6 +4,7 @@
 #include <fstream>
 #include <ctime>
 
+#include "helper.h"
 #include "DataStream.h"
 #include <boost/test/included/unit_test.hpp>
 
@@ -12,6 +13,7 @@ BOOST_AUTO_TEST_SUITE(test_DataStream)
 
 const unsigned int N = 10;
 const char* samlefilename = "sample.txt";
+
 
 BOOST_AUTO_TEST_CASE(test_constructor_random_generator)
 {
@@ -39,7 +41,6 @@ BOOST_AUTO_TEST_CASE(test_constructor_random_generator)
 	//std::cout << datastream << std::endl;	
 }
 
-
 BOOST_AUTO_TEST_CASE(test_constructor_file_read)
 {
 	// small bug when a line have non number (at the end of file where a new line charactere
@@ -49,9 +50,8 @@ BOOST_AUTO_TEST_CASE(test_constructor_file_read)
 	const std::vector<int>& offlinedata = datastream.get_OfflineData();
 	BOOST_CHECK(offlinedata.size() == N);
 
-	std::cout << datastream << std::endl;
+	//std::cout << datastream << std::endl;
 }
-
 
 BOOST_AUTO_TEST_CASE(test_data_processing)
 {
@@ -79,5 +79,29 @@ BOOST_AUTO_TEST_CASE(test_data_processing)
 	//std::cout << datastream << std::endl;
 }
 
+BOOST_AUTO_TEST_CASE(test_FileStreamReader)
+{
+	SampleDataStream datastream(samlefilename);
+
+	const std::vector<int>& offline_data1 = datastream.get_OfflineData();
+	std::vector<int> offline_data2;
+
+	FileStreamReader file_reader(samlefilename);
+	while (!file_reader.isEnd())
+	{
+		file_reader.fetchData();
+		const std::vector<int>& buffer = file_reader.get_DataBuffer();
+		offline_data2.insert(offline_data2.end(),buffer.begin(), buffer.end());
+	}
+
+	//std::cout << "offline1 " << offline_data1 << std::endl;
+	//std::cout << "offline2 " << offline_data2 << std::endl;
+	
+	BOOST_CHECK(offline_data1.size() == offline_data2.size());
+	for (size_t i = 0; i < offline_data1.size(); ++i)
+	{
+		BOOST_CHECK(offline_data1[i] == offline_data2[i]);
+	}
+}
 
 BOOST_AUTO_TEST_SUITE_END()
