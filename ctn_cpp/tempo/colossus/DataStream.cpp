@@ -83,21 +83,7 @@ SampleDataStream::SampleDataStream(const char* filename)
 
 			if (!line.empty() && line.at(0) != '#') // line start with # is a comment
 			{
-				//std::cout << line << std::endl;
-
-				std::string cell;
-				std::vector<std::string> cell_array;
-				std::stringstream line_stream(line);
-
-				while (getline(line_stream, cell, ' '))
-				{
-					cell_array.push_back(cell);
-				}
-
-				for (size_t i = 0; i < cell_array.size(); ++i)
-				{
-					offline_data_.push_back(atoi(cell_array[0].c_str()));
-				}
+				offline_data_.push_back(atoi(line.c_str()));
 			}
 			else
 			{
