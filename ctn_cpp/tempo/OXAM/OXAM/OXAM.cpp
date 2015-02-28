@@ -93,6 +93,13 @@ class OrderBook
 {
 public:
 	
+	OrderBook()
+		: time_average_buffer(std::numeric_limits<double>::quiet_NaN())
+		, highest_price_buffer(std::numeric_limits<double>::quiet_NaN())
+	{
+	
+	}
+
 	double highestPrice()const;
 		
 	double time_weighted_average() const;
@@ -109,9 +116,6 @@ private:
 	double highest_price_buffer;
 	double total_time_buffer;
 };
-
-
-
 
 int main(int argc, char ** argv)
 {
@@ -151,18 +155,12 @@ int main(int argc, char ** argv)
 
 double OrderBook::highestPrice()const
 {
-	if (m_order_book_.empty())
-		return std::numeric_limits<double>::quiet_NaN();
-	else
-		return highest_price_buffer;
+	return highest_price_buffer;
 }
 
 double OrderBook::time_weighted_average() const
 {
-	if (m_order_book_.empty())
-		return std::numeric_limits<double>::quiet_NaN();
-	else
-		return time_average_buffer;
+	return time_average_buffer;
 }
 
 void OrderBook::erase(unsigned long erased_time, unsigned int orderID)
@@ -178,12 +176,13 @@ void OrderBook::erase(unsigned long erased_time, unsigned int orderID)
 	const double& old_total_time = total_time_buffer;
 	
 	// update time average price for all order
+	if (std::isnan(time_average_buffer)) time_average_buffer = 0;
 	time_average_buffer *= old_total_time;
 	time_average_buffer += order_duration*order_price;
 
 	//update total time
 	total_time_buffer += order_duration;
-	time_average_buffer /= time_average_buffer;
+	time_average_buffer /= total_time_buffer;
 
 }
 void OrderBook::insert(unsigned long inserted_time, unsigned int orderID, const double& price)
@@ -191,6 +190,7 @@ void OrderBook::insert(unsigned long inserted_time, unsigned int orderID, const 
 	InsertOrder new_inserted_order(inserted_time, orderID, price);
 	m_order_book_[orderID] = new_inserted_order;
 
+	if (std::isnan(highest_price_buffer)) highest_price_buffer = -1000000;
 	if (highest_price_buffer < price) highest_price_buffer = price;
 }
 
