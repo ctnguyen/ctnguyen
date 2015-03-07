@@ -26,6 +26,7 @@ public :
 private :
 	
 	helper::Int32 data_size_;
+	helper::Int32 image_size_;
 	std::vector<helper::Int32> data_;
 };
 

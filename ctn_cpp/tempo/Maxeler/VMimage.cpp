@@ -7,6 +7,7 @@
 
 VMimage::VMimage()
 : data_size_(-10000) // initiate to an absurb value
+, image_size_(-10000)
 {
 
 }
@@ -45,11 +46,14 @@ void VMimage::load(const char* file_path_name)
 		data_.resize(data_size_);
 
 		// ctntodo subtility from exercice TODO OR NOT??
+		/*
 		std::string second_line;
 		if (file_stream.good())
 		{
-			getline(file_stream, second_line);			
-		}
+			getline(file_stream, second_line);		
+			image_size_ = helper::convertHexStringToInt(second_line);
+		}		
+		*/
 
 		size_t line_counter=0;
 		unsigned int nbEmptyLine=0;
@@ -78,7 +82,7 @@ void VMimage::load(const char* file_path_name)
 	}
 	else
 	{
-		std::string msg(file_path_name) ; msg += " is a bad input file -- RUNTIME ERROR";
+		std::string msg(file_path_name) ; msg += "] is a bad input file -- RUNTIME ERROR";
 		throw(msg);
 	}
 
