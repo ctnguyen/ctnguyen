@@ -1,4 +1,6 @@
 #include "VMimage.h"
+#include "Helper.h"
+
 #include <cassert>
 
 VMimage::VMimage()
