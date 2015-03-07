@@ -18,3 +18,5 @@ ALL-IN-ONE folder project used for interviewś tests. There are two way to build
 The program compiled from main.cpp "prog" can be execute in command line. The one argument if exist is the 
 input text file containing all integer number. If no input argument, the default input file will be used.
 
+If test build is wished, the variable ${CTN_BUILD_TEST} in cmake file has to be setted to true
+And an folder named exactly "test_data" has to be created, an put all *.bin and *.asm files into it.
