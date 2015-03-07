@@ -2,11 +2,15 @@
 
 #include <boost/test/included/unit_test.hpp>
 
+#include <sstream>
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <bitset>
+#include <ctime>
+#include <cstdlib>
 
+#include "Helper.h"
 
 BOOST_AUTO_TEST_SUITE(test_BasicInstructions)
 
@@ -20,9 +24,18 @@ BOOST_AUTO_TEST_CASE(test_number_conversion)
 	const size_t bitset32_size = sizeof(std::bitset<32>);
 	BOOST_CHECK(bitset32_size == 4);
 
-	//const size_t hexa_size = sizeof(std::hex);
-	//BOOST_CHECK(hexa_size == 4);
+	srand( static_cast<unsigned int>(time(NULL)) );
+	const int int_number = rand() % 2000 - 1000 ;
+	
+	std::string hexastr = helper::convertIntToHexString(int_number);
+	int converted_number_hex = helper::convertHexStringToInt(hexastr);
+	//std::cout << "x=" << int_number << "	y=" << converted_number_hex << std::endl;
+	BOOST_CHECK(int_number == converted_number_hex);
 
+	helper::Binary32 binar = helper::convertIntToBinary(int_number);
+	int converted_number_bin = helper::convertBinaryToInt(binar);
+	//std::cout << "x=" << int_number << "	y=" << converted_number_bin << std::endl;
+	BOOST_CHECK(int_number == converted_number_bin);
 }
 
 BOOST_AUTO_TEST_CASE(test_open_file_in_test_data_folder)

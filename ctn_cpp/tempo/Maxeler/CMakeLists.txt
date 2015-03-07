@@ -13,6 +13,7 @@ if(WIN32)
 endif()
 
 add_library(VMlib 
+			Helper.h
 			VMimage.h
 			VMinterpreter.h
 			VMimage.cpp
