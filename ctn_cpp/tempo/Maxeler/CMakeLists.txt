@@ -44,4 +44,8 @@ add_executable(unittest_VMimage "unittest_VMimage.cpp")
 target_link_libraries(unittest_VMimage VMlib)
 add_test(unittest_VMimage unittest_VMimage "--log_level=message")
 
+add_executable(unittest_VMinterpreter "unittest_VMinterpreter.cpp")
+target_link_libraries(unittest_VMinterpreter VMlib)
+add_test(unittest_VMinterpreter unittest_VMinterpreter "--log_level=message")
+
 endif()

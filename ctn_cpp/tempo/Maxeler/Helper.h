@@ -11,6 +11,10 @@
 
 namespace helper
 {
+	typedef bool binop;              // 1 bit  binop
+	typedef std::bitset<7>  opt;     // 7 bits operation
+	typedef std::bitset<24> optdata; // 24 bits operational data
+
 	// to change if machine dependance size of int
 	typedef int Int32;
 
