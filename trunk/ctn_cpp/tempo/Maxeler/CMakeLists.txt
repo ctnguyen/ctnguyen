@@ -29,6 +29,8 @@ include_directories(${Boost_INCLUDE_DIRS})
 
 enable_testing()
 
+file(COPY "${CMAKE_SOURCE_DIR}/test_data" DESTINATION "${CMAKE_BINARY_DIR}")
+
 add_executable(unittest_BasicInstruction "unittest_BasicInstruction.cpp")
 target_link_libraries(unittest_BasicInstruction VMlib)
 add_test(unittest_BasicInstruction unittest_BasicInstruction "--log_level=message")
