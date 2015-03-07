@@ -17,7 +17,11 @@ public :
 
 	VMimage();
 
-	void load();
+	helper::Int32 size() const;
+	helper::Int32& operator[](size_t i);
+	const helper::Int32& operator[](size_t i)const;
+
+	void load(const char* file_path_name);
 
 private :
 	

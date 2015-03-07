@@ -19,8 +19,12 @@ add_library(VMlib
 			VMimage.cpp
 			VMinterpreter.cpp)
 
-add_executable(prog "main.cpp")
-target_link_libraries(prog VMlib)
+add_executable(task1 "task1.cpp")
+target_link_libraries(task1 VMlib)
+
+add_executable(task2 "task2.cpp")
+target_link_libraries(task2 VMlib)
+
 
 # Build test 
 if(CTN_BUILD_TEST)

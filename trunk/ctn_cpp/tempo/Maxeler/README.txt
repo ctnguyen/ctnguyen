@@ -15,7 +15,7 @@ ALL-IN-ONE folder project used for interviewś tests. There are two way to build
 	For Windows
 		prompt> cmake -G"Visual Studio 12" -DCMAKE_BUILD_TYPE=Debug /path/to/source/code
 
-The program compiled from main.cpp "prog" can be execute in command line. The one argument if exist is the 
+The program compiled from "task1.cpp" and "task2.cpp" can be execute in command line. The one argument if exist is the 
 input text file containing all integer number. If no input argument, the default input file will be used.
 
 If test build is wished, the variable ${CTN_BUILD_TEST} in cmake file has to be setted to true
