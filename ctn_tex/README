@@ -1,0 +1,6 @@
+All experience's latex documentation
+
+TODO : translate master report 2008-2009 to English
+
+CMD to remove out of repository files // TODO ignore in svn
+rm *.aux *.bbl *.blg *.dvi *.log *.out *.toc
