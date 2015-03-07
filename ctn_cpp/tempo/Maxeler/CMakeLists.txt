@@ -1,0 +1,40 @@
+#CMAKE INITIALIZATION
+cmake_minimum_required(VERSION 3.0)
+
+project(Maxeler) 
+
+set(CTN_BUILD_TEST true)
+
+# Do not use Debug/Release folder on Windows.
+if(WIN32)
+	set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG "" )
+	set( CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG "" )
+	set( CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG "" )
+endif()
+
+add_library(VMlib 
+			VMimage.h
+			VMinterpreter.h
+			VMimage.cpp
+			VMinterpreter.cpp)
+
+add_executable(prog "main.cpp")
+target_link_libraries(prog VMlib)
+
+# Build test 
+if(CTN_BUILD_TEST)
+
+find_package(Boost)
+include_directories(${Boost_INCLUDE_DIRS})
+
+enable_testing()
+
+add_executable(unittest_BasicInstruction "unittest_BasicInstruction.cpp")
+target_link_libraries(unittest_BasicInstruction VMlib)
+add_test(unittest_BasicInstruction unittest_BasicInstruction "--log_level=message")
+
+add_executable(unittest_VMimage "unittest_VMimage.cpp")
+target_link_libraries(unittest_VMimage VMlib)
+add_test(unittest_VMimage unittest_VMimage "--log_level=message")
+
+endif()
