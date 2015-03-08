@@ -19,7 +19,7 @@ BOOST_AUTO_TEST_CASE(test_VMinterpreter_Constructor)
 
 		VMinterpreter interpreter(data);
 
-		std::cout << interpreter << std::endl;
+		interpreter.process();		
 	}
 	catch (std::string mgs)
 	{
