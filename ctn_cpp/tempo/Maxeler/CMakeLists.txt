@@ -3,8 +3,8 @@ cmake_minimum_required(VERSION 3.0)
 
 project(Maxeler) 
 
-#set(CTN_BUILD_TEST true)
-set(CTN_BUILD_TEST false)
+set(CTN_BUILD_TEST true)
+#set(CTN_BUILD_TEST false)
 
 # Do not use Debug/Release folder on Windows.
 if(WIN32)
@@ -57,5 +57,7 @@ add_test(unittest_VMimage unittest_VMimage "--log_level=message")
 add_executable(unittest_VMinterpreter "unittest_VMinterpreter.cpp")
 target_link_libraries(unittest_VMinterpreter VMlib)
 add_test(unittest_VMinterpreter unittest_VMinterpreter "--log_level=message")
+
+file(COPY "${CMAKE_SOURCE_DIR}/test_script.sh" DESTINATION "${CMAKE_BINARY_DIR}")
 
 endif()
