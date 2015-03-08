@@ -280,8 +280,14 @@ bool _False_8::execute(const helper::InstructionData& instruction)
 	helper::Int32 right_int = helper::convertHexStringToInt32("0xff");
 	helper::Int32 and_int = (left_int & right_int);
 	helper::Binary32 bin32 = helper::convertInt32ToBinary32(and_int);
+	
+	std::cout << bin32[0];
 
-	std::cout <<"--			-- special operator (false,8)  [" << bin32[0]<<"]" << std::endl;
+#ifdef CTN_BUILD_TEST	
+	std::cout <<  "				-- special operator (false,8)  [" << "]" << std::endl;
+#else
+	std::cout<< std::endl;
+#endif
 	return false;
 }
 

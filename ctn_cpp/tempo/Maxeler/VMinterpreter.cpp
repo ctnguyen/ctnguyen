@@ -28,7 +28,9 @@ void VMinterpreter::process()
 		is_stop = m_operator->execute(instruction_data);
 		
 		const std::string& op_name = m_operator->name();
+#ifdef CTN_BUILD_TEST
 		std::cout << "	" << op_name << std::endl;// << "		" << *this << std::endl;
+#endif
 	}
 }
 
