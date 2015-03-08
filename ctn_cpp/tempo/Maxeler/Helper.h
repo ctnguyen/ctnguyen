@@ -70,7 +70,7 @@ namespace helper
 		InstructionData instruction;
 		Binary32 binary32 = convertInt32ToBinary32(int32);
 		for (size_t i = 0; i < 24; ++i){ instruction.optdata[i] = binary32[i]; }
-		for (size_t i = 24; i < 31; ++i){ instruction.operation[i] = binary32[i]; }
+		for (size_t i = 24; i < 31; ++i){ instruction.operation[i-24] = binary32[i]; }
 		instruction.binop = binary32[31];
 		return instruction;
 	}
