@@ -1,5 +1,6 @@
 #include "Operator.h"
 
+#include <stdio.h> // getchar()
 #include <cassert>
 
 BaseOperator::BaseOperator(helper::Int32& ip, helper::Int32& sp, VMimage& data)
@@ -280,7 +281,7 @@ bool _False_8::execute(const helper::InstructionData& instruction)
 	helper::Int32 and_int = (left_int & right_int);
 	helper::Binary32 bin32 = helper::convertInt32ToBinary32(and_int);
 
-	std::cout << bin32[0] << std::endl;
+	std::cout <<"--			-- special operator (false,8)  [" << bin32[0]<<"]" << std::endl;
 	return false;
 }
 
@@ -292,7 +293,17 @@ _False_9::_False_9(helper::Int32& ip, helper::Int32& sp, VMimage& data)
 
 bool _False_9::execute(const helper::InstructionData& instruction)
 {
-	throw("execute is not defined for this class");
+	helper::Int32 input_int;
+	input_int = getchar();
+	const helper::Binary32 input_bin32 = helper::convertInt32ToBinary32(input_int);
+	helper::Binary32 bin32; 
+	bin32[0] = input_bin32[0];
+
+	const helper::Int32 x32 = helper::convertBinary32ToInt32(bin32);
+	const helper::Int32 hex_number = helper::convertHexStringToInt32("0xff");
+	helper::Int32 and_int = (x32 & hex_number);
+	f(and_int);
+
 	return false;
 }
 

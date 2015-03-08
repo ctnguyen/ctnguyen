@@ -3,7 +3,8 @@ cmake_minimum_required(VERSION 3.0)
 
 project(Maxeler) 
 
-set(CTN_BUILD_TEST true)
+#set(CTN_BUILD_TEST true)
+set(CTN_BUILD_TEST false)
 
 # Do not use Debug/Release folder on Windows.
 if(WIN32)
@@ -23,10 +24,11 @@ add_library(VMlib
 
 add_executable(task1 "task1.cpp")
 target_link_libraries(task1 VMlib)
+file(COPY "${CMAKE_SOURCE_DIR}/test_data/task1.bin" DESTINATION "${CMAKE_BINARY_DIR}")
 
 add_executable(task2 "task2.cpp")
 target_link_libraries(task2 VMlib)
-
+file(COPY "${CMAKE_SOURCE_DIR}/test_data/task2.bin" DESTINATION "${CMAKE_BINARY_DIR}")
 
 # Build test 
 if(CTN_BUILD_TEST)

@@ -12,6 +12,7 @@
 
 #include "Helper.h"
 
+
 BOOST_AUTO_TEST_SUITE(test_BasicInstructions)
 
 BOOST_AUTO_TEST_CASE(test_number_conversion)
