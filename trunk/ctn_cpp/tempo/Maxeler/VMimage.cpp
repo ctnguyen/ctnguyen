@@ -32,51 +32,59 @@ void VMimage::load(const char* file_path_name)
 {
 	std::ifstream file_stream;
 
-	file_stream.open(file_path_name, std::fstream::in);
+	file_stream.open(file_path_name, std::ios::in);
 	
 	if (file_stream.is_open())
 	{
-		std::string first_line;
-		if (file_stream.good())
+		try
 		{
-			getline(file_stream, first_line);
-			data_size_ = helper::convertHexStringToInt32(first_line);
-		}
-
-		data_.resize(data_size_);
-
-		// ctntodo subtility from exercice TODO OR NOT??
-		std::string second_line;
-		if (file_stream.good())
-		{
-			getline(file_stream, second_line);		
-			image_size_ = helper::convertHexStringToInt32(second_line);
-		}		
-		
-
-		size_t line_counter=0;
-		unsigned int nbEmptyLine=0;
-		while (file_stream.good())
-		{
-			std::string line;
-			getline(file_stream, line);
-
-			if (!line.empty())
+			std::string first_line;
+			if (file_stream.good())
 			{
-				helper::Int32 int_number = helper::convertHexStringToInt32(line);
-				data_[line_counter] = int_number;
-				++line_counter;
+				getline(file_stream, first_line);
+				data_size_ = helper::convertHexStringToInt32(first_line);
 			}
-			else
+
+			data_.resize(data_size_);
+
+			// ctntodo subtility from exercice TODO OR NOT??
+			std::string second_line;
+			if (file_stream.good())
 			{
-				//std::cout << "line[" << nbLine << "]  =========================== bad line (empty) " << std::endl;
-				++nbEmptyLine;
+				getline(file_stream, second_line);
+				image_size_ = helper::convertHexStringToInt32(second_line);
+			}
+
+
+			size_t line_counter = 0;
+			unsigned int nbEmptyLine = 0;
+			while (file_stream.good())
+			{
+				std::string line;
+				getline(file_stream, line);
+
+				if (!line.empty())
+				{
+					helper::Int32 int_number = helper::convertHexStringToInt32(line);
+					data_[line_counter] = int_number;
+					++line_counter;
+				}
+				else
+				{
+					//std::cout << "line[" << nbLine << "]  =========================== bad line (empty) " << std::endl;
+					++nbEmptyLine;
+				}
+			}
+
+			if (nbEmptyLine > 1)
+			{
+				std::cout << " WARNING : File " << file_path_name << " has more than one empty line" << std::endl;
 			}
 		}
-
-		if (nbEmptyLine > 1)
+		catch(...)
 		{
-			std::cout << " WARNING : File " << file_path_name << " has more than one empty line" << std::endl;
+			std::string msg(file_path_name); msg += "] is a bad input file -- RUNTIME ERROR";
+			throw(msg);
 		}
 	}
 	else
