@@ -7,6 +7,11 @@ Info tools :
 - Windows 8.1, Visual Studio Express 2013
 - Ubuntu 14.04, g++4.8.2 
 
+The project can be checked out from google code svn server
+
+svn checkout http://chithanhnguyen.googlecode.com/svn/trunk/ctn_cpp/tempo/Maxeler chithanhnguyen-read-only 
+
+
 ALL-IN-ONE folder project used for interview's tests. There are two ways to compile
 
 1- 	Use an IDE, include all *.h *.cpp files and build. In this case, do not include unittest*.cpp files, 
