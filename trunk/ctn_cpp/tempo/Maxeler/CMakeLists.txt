@@ -13,6 +13,10 @@ if(WIN32)
 	set( CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG "" )
 endif()
 
+if(CTN_BUILD_TEST)
+	add_definitions(-DCTN_BUILD_TEST)
+endif()
+
 add_library(VMlib
 			Operator.h
 			Helper.h
