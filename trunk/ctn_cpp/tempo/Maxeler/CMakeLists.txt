@@ -21,14 +21,20 @@ add_library(VMlib
 			Operator.cpp
 			VMimage.cpp
 			VMinterpreter.cpp)
+if(WIN32)
+	add_executable(task1 "task1.cpp")
+	target_link_libraries(task1 VMlib)
+	add_executable(task2 "task2.cpp")
+	target_link_libraries(task2 VMlib)
+else()
+	add_executable(task1.exe "task1.cpp")
+	target_link_libraries(task1.exe VMlib)
+	add_executable(task2.exe "task2.cpp")
+	target_link_libraries(task2.exe VMlib)
+endif()
 
-add_executable(task1 "task1.cpp")
-target_link_libraries(task1 VMlib)
-file(COPY "${CMAKE_SOURCE_DIR}/test_data/task1.bin" DESTINATION "${CMAKE_BINARY_DIR}")
-
-add_executable(task2 "task2.cpp")
-target_link_libraries(task2 VMlib)
-file(COPY "${CMAKE_SOURCE_DIR}/test_data/task2.bin" DESTINATION "${CMAKE_BINARY_DIR}")
+file(COPY "${CMAKE_SOURCE_DIR}/task1.bin" DESTINATION "${CMAKE_BINARY_DIR}")
+file(COPY "${CMAKE_SOURCE_DIR}/task2.bin" DESTINATION "${CMAKE_BINARY_DIR}")
 
 # Build test 
 if(CTN_BUILD_TEST)

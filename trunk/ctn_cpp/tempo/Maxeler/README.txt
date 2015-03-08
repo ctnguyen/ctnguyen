@@ -5,7 +5,7 @@ chithanhnguyen.math@gmail.com
 Info tools :
 - cmake 3.1.3
 - Windows 8.1, Visual Studio Express 2013
-- Ubuntu, g++ 
+- Ubuntu 14.04, g++4.8.2 
 
 ALL-IN-ONE folder project used for interview's tests. There are two ways to compile
 
@@ -26,5 +26,5 @@ And an folder named exactly "test_data" has to be created, an put all *.bin and 
 
 After building and compiling, there will be two executable programme "task1.exe" and "task2.exe".
 These two program execute in command line, and could take one argument, which is a *.bin file.
-If no argument is given to the command, a default argument will be setted : "task1.exe" take task1.bin",  "task2.exe" take task2.bin" 
+If no argument is given to the command, a default argument will be setted : "task1.exe" take task1.bin",  "task2.exe" take task2.bin"
 
