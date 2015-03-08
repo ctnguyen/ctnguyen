@@ -24,6 +24,7 @@ ALL-IN-ONE folder project used for interview's tests. There are two ways to comp
 If tests are desirable, two things has to be done :
 1-	The variable ${CTN_BUILD_TEST} in cmake file has to be setted to "true"
 2-	An folder named exactly "test_data" has to be created, an put all *.bin and *.asm test files into it.
+If building project with test on Unix, a "test_script.sh" could be used for running test of task2
 
 After building and compiling, there will be two executable programme "task1.exe" and "task2.exe".
 These two program execute in command line, and could take one argument, which is a *.bin file.
