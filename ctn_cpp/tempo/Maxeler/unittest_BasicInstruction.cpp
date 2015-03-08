@@ -27,13 +27,13 @@ BOOST_AUTO_TEST_CASE(test_number_conversion)
 	srand( static_cast<unsigned int>(time(NULL)) );
 	const helper::Int32 int_number = rand() % 2000 - 1000;
 	
-	std::string hexastr = helper::convertIntToHexString(int_number);
-	helper::Int32 converted_number_hex = helper::convertHexStringToInt(hexastr);
+	std::string hexastr = helper::convertInt32ToHexString(int_number);
+	helper::Int32 converted_number_hex = helper::convertHexStringToInt32(hexastr);
 	//std::cout << "x=" << int_number << "	y=" << converted_number_hex << std::endl;
 	BOOST_CHECK(int_number == converted_number_hex);
 
-	helper::Binary32 binar = helper::convertIntToBinary(int_number);
-	helper::Int32 converted_number_bin = helper::convertBinaryToInt(binar);
+	helper::Binary32 binar = helper::convertInt32ToBinary32(int_number);
+	helper::Int32 converted_number_bin = helper::convertBinary32ToInt32(binar);
 	//std::cout << "x=" << int_number << "	y=" << converted_number_bin << std::endl;
 	BOOST_CHECK(int_number == converted_number_bin);
 }

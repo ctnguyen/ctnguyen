@@ -40,7 +40,7 @@ void VMimage::load(const char* file_path_name)
 		if (file_stream.good())
 		{
 			getline(file_stream, first_line);
-			data_size_ = helper::convertHexStringToInt(first_line);
+			data_size_ = helper::convertHexStringToInt32(first_line);
 		}
 
 		data_.resize(data_size_);
@@ -51,7 +51,7 @@ void VMimage::load(const char* file_path_name)
 		if (file_stream.good())
 		{
 			getline(file_stream, second_line);		
-			image_size_ = helper::convertHexStringToInt(second_line);
+			image_size_ = helper::convertHexStringToInt32(second_line);
 		}		
 		*/
 
@@ -64,7 +64,7 @@ void VMimage::load(const char* file_path_name)
 
 			if (!line.empty())
 			{
-				helper::Int32 int_number = helper::convertHexStringToInt(line);
+				helper::Int32 int_number = helper::convertHexStringToInt32(line);
 				data_[line_counter] = int_number;
 				++line_counter;
 			}
