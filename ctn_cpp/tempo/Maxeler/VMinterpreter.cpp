@@ -26,9 +26,9 @@ void VMinterpreter::process()
 
 		std::unique_ptr<BaseOperator> m_operator = operator_factory(instruction_data.binop, operation_item);
 		is_stop = m_operator->execute(instruction_data);
-		const std::string op_name = m_operator->name();
-
-		std::cout <<"	"<< op_name <<"		"<< *this << std::endl;
+		
+		const std::string& op_name = m_operator->name();
+		std::cout << "	" << op_name << std::endl;// << "		" << *this << std::endl;
 	}
 }
 

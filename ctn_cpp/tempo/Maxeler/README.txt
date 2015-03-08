@@ -2,10 +2,16 @@ Test Maxeler Interview
 07/03/2015
 chithanhnguyen.math@gmail.com
 
+Info tools :
+- cmake 3.1.3
+- Windows 8.1, Visual Studio Express 2013
+- Ubuntu, g++ 
 
-ALL-IN-ONE folder project used for interviewś tests. There are two way to build
+ALL-IN-ONE folder project used for interview's tests. There are two ways to compile
 
-1- 	Use an IDE, include all *.h *.cpp files and build
+1- 	Use an IDE, include all *.h *.cpp files and build. In this case, do not include unittest*.cpp files, 
+	compile "task1.cpp" first time, reset the project and compile "task2.cpp" the second time. They contain
+	all "main" function so can not compile together.
 
 2-	Use cmake for generating. Advantage of this way is this ensure cross plateform and automatically build test.
 	Need to ensure to have cmake 3.0 at least, and to have boost library (use the test framework) 
@@ -15,8 +21,10 @@ ALL-IN-ONE folder project used for interviewś tests. There are two way to build
 	For Windows
 		prompt> cmake -G"Visual Studio 12" -DCMAKE_BUILD_TYPE=Debug /path/to/source/code
 
-The program compiled from "task1.cpp" and "task2.cpp" can be execute in command line. The one argument if exist is the 
-input text file containing all integer number. If no input argument, the default input file will be used.
-
-If test build is wished, the variable ${CTN_BUILD_TEST} in cmake file has to be setted to true
+If tests are desirable, the variable ${CTN_BUILD_TEST} in cmake file has to be setted to "true"
 And an folder named exactly "test_data" has to be created, an put all *.bin and *.asm files into it.
+
+After building and compiling, there will be two executable programme "task1.exe" and "task2.exe".
+These two program execute in command line, and could take one argument, which is a *.bin file.
+If no argument is given to the command, a default argument will be setted : "task1.exe" take task1.bin",  "task2.exe" take task2.bin" 
+
