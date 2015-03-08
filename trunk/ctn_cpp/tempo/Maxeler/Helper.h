@@ -15,7 +15,7 @@ namespace helper
 	typedef std::bitset<24> Binary24; // 24 bits operational data
 	typedef std::bitset<32> Binary32; // 32 bits for integers
 
-	struct Instruction
+	struct InstructionData
 	{
 		bool binop;
 		Binary7 operation;
@@ -65,9 +65,9 @@ namespace helper
 		return convertBinary32ToInt32(bin32);
 	}
 	
-	inline Instruction decode(const Int32& int32)
+	inline InstructionData decode(const Int32& int32)
 	{
-		Instruction instruction;
+		InstructionData instruction;
 		Binary32 binary32 = convertInt32ToBinary32(int32);
 		for (size_t i = 0; i < 24; ++i){ instruction.optdata[i] = binary32[i]; }
 		for (size_t i = 24; i < 31; ++i){ instruction.operation[i] = binary32[i]; }

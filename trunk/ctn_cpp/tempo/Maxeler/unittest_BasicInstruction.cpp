@@ -38,6 +38,26 @@ BOOST_AUTO_TEST_CASE(test_number_conversion)
 	BOOST_CHECK(int_number == converted_number_bin);
 }
 
+
+BOOST_AUTO_TEST_CASE(test_bitwise_on_integer)
+{
+	// test bitwise operators on integers
+	const helper::Int32 a = 100;
+	const helper::Int32 b = 200;
+	const helper::Int32 c = 100;
+
+	const helper::Int32 result1 = static_cast<helper::Int32>(a < b);
+	BOOST_CHECK(result1 == 1);
+	const helper::Int32 result2 = static_cast<helper::Int32>(a == c);
+	BOOST_CHECK(result2 == 1);
+	const helper::Int32 result3 = static_cast<helper::Int32>(a < c);
+	BOOST_CHECK(result3 == 0);
+	const helper::Int32 result4 = static_cast<helper::Int32>(a == b);
+	BOOST_CHECK(result4 == 0);
+
+}
+
+
 BOOST_AUTO_TEST_CASE(test_open_bin_file_in_test_data_folder)
 {
 	// check if every *.bin files are good

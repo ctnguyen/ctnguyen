@@ -12,10 +12,12 @@ if(WIN32)
 	set( CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG "" )
 endif()
 
-add_library(VMlib 
+add_library(VMlib
+			Operator.h
 			Helper.h
 			VMimage.h
 			VMinterpreter.h
+			Operator.cpp
 			VMimage.cpp
 			VMinterpreter.cpp)
 
