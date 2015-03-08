@@ -21,8 +21,9 @@ ALL-IN-ONE folder project used for interview's tests. There are two ways to comp
 	For Windows
 		prompt> cmake -G"Visual Studio 12" -DCMAKE_BUILD_TYPE=Debug /path/to/source/code
 
-If tests are desirable, the variable ${CTN_BUILD_TEST} in cmake file has to be setted to "true"
-And an folder named exactly "test_data" has to be created, an put all *.bin and *.asm files into it.
+If tests are desirable, two things has to be done :
+1-	The variable ${CTN_BUILD_TEST} in cmake file has to be setted to "true"
+2-	An folder named exactly "test_data" has to be created, an put all *.bin and *.asm test files into it.
 
 After building and compiling, there will be two executable programme "task1.exe" and "task2.exe".
 These two program execute in command line, and could take one argument, which is a *.bin file.
