@@ -307,31 +307,31 @@ std::unique_ptr<BaseOperator> OperatorFactory::operator()(bool binop, const help
 		assert(0<=opt_item && opt_item < 9);
 		switch (opt_item)
 		{
-		case '0':
+		case 0:
 			operator_ptr.reset(new _True_0(ip_,sp_,data_) );
 			break;
-		case '1':
+		case 1:
 			operator_ptr.reset(new _True_1(ip_, sp_, data_));
 			break;
-		case '2':
+		case 2:
 			operator_ptr.reset(new _True_2(ip_, sp_, data_));
 			break;
-		case '3':
+		case 3:
 			operator_ptr.reset(new _True_3(ip_, sp_, data_));
 			break;
-		case '4':
+		case 4:
 			operator_ptr.reset(new _True_4(ip_, sp_, data_));
 			break;
-		case '5':
+		case 5:
 			operator_ptr.reset(new _True_5(ip_, sp_, data_));
 			break;
-		case '6':
+		case 6:
 			operator_ptr.reset(new _True_6(ip_, sp_, data_));
 			break;
-		case '7':
+		case 7:
 			operator_ptr.reset(new _True_7(ip_, sp_, data_));
 			break;
-		case '8':
+		case 8:
 			operator_ptr.reset(new _True_8(ip_, sp_, data_));
 			break;
 		default:
@@ -343,37 +343,37 @@ std::unique_ptr<BaseOperator> OperatorFactory::operator()(bool binop, const help
 		assert(0 <= opt_item && opt_item < 11);
 		switch (opt_item)
 		{
-		case '0':
+		case 0:
 			operator_ptr.reset(new _False_0(ip_, sp_, data_));
 			break;
-		case '1':
+		case 1:
 			operator_ptr.reset(new _False_1(ip_, sp_, data_));
 			break;
-		case '2':
+		case 2:
 			operator_ptr.reset(new _False_2(ip_, sp_, data_));
 			break;
-		case '3':
+		case 3:
 			operator_ptr.reset(new _False_3(ip_, sp_, data_));
 			break;
-		case '4':
+		case 4:
 			operator_ptr.reset(new _False_4(ip_, sp_, data_));
 			break;
-		case '5':
+		case 5:
 			operator_ptr.reset(new _False_5(ip_, sp_, data_));
 			break;
-		case '6':
+		case 6:
 			operator_ptr.reset(new _False_6(ip_, sp_, data_));
 			break;
-		case '7':
+		case 7:
 			operator_ptr.reset(new _False_7(ip_, sp_, data_));
 			break;
-		case '8':
+		case 8:
 			operator_ptr.reset(new _False_8(ip_, sp_, data_));
 			break;
-		case '9':
+		case 9:
 			operator_ptr.reset(new _False_9(ip_, sp_, data_));
 			break;
-		case '10':
+		case 10:
 			operator_ptr.reset(new _False_10(ip_, sp_, data_));
 			break;
 		default:
