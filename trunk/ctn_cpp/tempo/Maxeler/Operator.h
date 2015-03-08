@@ -19,8 +19,7 @@ class BaseOperator
 {
 public :
 
-	BaseOperator(helper::Int32& ip, helper::Int32& sp, VMimage& data)
-	: ip_(ip), sp_(sp), data_(data){}
+	BaseOperator(helper::Int32& ip, helper::Int32& sp, VMimage& data);
 	
 	const std::string& name() const { return name_; }
 
@@ -34,15 +33,9 @@ protected :
 	VMimage& data_;
 	std::string name_; // ctntodo to remove and use function name() return by value string
 
-	void f(const helper::Int32& v) const
-	{
-		--sp_; data_[sp_] = v;
-	}
+	void f(const helper::Int32& v) const ;
 	
-	helper::Int32 g() const
-	{
-		const helper::Int32 v = data_[sp_]; ++sp_; return v;
-	}
+	helper::Int32 g() const ;
 };
 
 class _True_0 : public BaseOperator
@@ -199,6 +192,11 @@ private:
 	helper::Int32& ip_;
 	helper::Int32& sp_;
 	VMimage& data_;
+	// ctntodo 
+	// refactor do not use new instanciate every time calling operator()
+	// pre-instanciate all operator, and each time calling the operator execute,
+	// the only need to find the appropriate operator and execute
+	// rename the name_ member if name dynamically depend to sp or ip 
 };
 
 #endif /* OPERATOR_H */

@@ -2,6 +2,20 @@
 
 #include <cassert>
 
+BaseOperator::BaseOperator(helper::Int32& ip, helper::Int32& sp, VMimage& data)
+: ip_(ip), sp_(sp), data_(data){}
+
+void BaseOperator::f(const helper::Int32& v) const
+{
+	assert(sp_ > 0); // push iff sp > 0
+	--sp_; data_[sp_] = v;
+}
+
+helper::Int32 BaseOperator::g() const
+{
+	assert( sp_ < data_.size() ); // pop iff sp < data size
+	const helper::Int32 v = data_[sp_]; ++sp_; return v;
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////
