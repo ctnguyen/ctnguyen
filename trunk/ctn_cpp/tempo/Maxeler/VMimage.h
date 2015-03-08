@@ -23,6 +23,8 @@ public :
 
 	void load(const char* file_path_name);
 
+	friend std::ostream& operator<<(std::ostream& os, const VMimage& vnImage);
+
 private :
 	
 	helper::Int32 data_size_;

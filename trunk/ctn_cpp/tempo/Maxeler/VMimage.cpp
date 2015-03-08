@@ -46,14 +46,13 @@ void VMimage::load(const char* file_path_name)
 		data_.resize(data_size_);
 
 		// ctntodo subtility from exercice TODO OR NOT??
-		/*
 		std::string second_line;
 		if (file_stream.good())
 		{
 			getline(file_stream, second_line);		
 			image_size_ = helper::convertHexStringToInt32(second_line);
 		}		
-		*/
+		
 
 		size_t line_counter=0;
 		unsigned int nbEmptyLine=0;
@@ -87,4 +86,18 @@ void VMimage::load(const char* file_path_name)
 	}
 
 	file_stream.close();
+}
+
+std::ostream& operator<<(std::ostream& os, const VMimage& vmImage)
+{
+	assert(vmImage.data_size_ == vmImage.data_.size());
+	
+	os << "### data size " << vmImage.data_size_ << std::endl;
+	
+	for (size_t i = 0; i < vmImage.data_.size(); ++i)
+	{
+		os << vmImage.data_[i] << std::endl;
+	}
+	
+	return os;
 }

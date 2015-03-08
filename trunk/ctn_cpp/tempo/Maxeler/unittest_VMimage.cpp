@@ -16,11 +16,8 @@ BOOST_AUTO_TEST_CASE(test_VMimage_Constructor)
 	try
 	{
 		data.load(file_path_name.c_str());
-
-		for (size_t i = 0; i < (size_t)data.size(); ++i)
-		{
-			std::cout << data[i] << std::endl;
-		}
+		
+		std::cout << data << std::endl;
 	}
 	catch (std::string mgs)
 	{
