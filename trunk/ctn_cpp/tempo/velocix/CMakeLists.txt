@@ -21,8 +21,10 @@ add_library(ctnlib
 	Helper.h
 	NodeWord.h
 	TextProcess.h
+	Word.h
 	NodeWord.cpp
-	TextProcess.cpp)
+	TextProcess.cpp
+	Word.cpp)
 
 if(WIN32)
 	add_executable(prog "main.cpp")
@@ -54,5 +56,10 @@ add_test(unittest_NodeWord unittest_NodeWord "--log_level=message")
 add_executable(unittest_TextProcess "unittest_TextProcess.cpp")
 target_link_libraries(unittest_TextProcess ctnlib)
 add_test(unittest_TextProcess unittest_TextProcess "--log_level=message")
+
+add_executable(unittest_Word "unittest_Word.cpp")
+target_link_libraries(unittest_Word ctnlib)
+add_test(unittest_Word unittest_Word "--log_level=message")
+
 
 endif()

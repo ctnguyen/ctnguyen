@@ -18,10 +18,9 @@ int main(int argc, char ** argv)
 	{
 		std::cout<<"read text file and word processing here"<<std::endl;
 	}
-	catch (std::string& mgs)
+	catch (...)
 	{
 		std::cout << "catch opening file exeption" << std::endl;
-		std::cout << mgs << std::endl;
 	}
 
 	return 0;
