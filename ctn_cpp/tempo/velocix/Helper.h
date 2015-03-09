@@ -8,6 +8,6 @@
 
 namespace helper
 {
-	
+	// pre define here all list of char symbol in order to exclude from text reading
 }
 #endif /* HELPER_H */
