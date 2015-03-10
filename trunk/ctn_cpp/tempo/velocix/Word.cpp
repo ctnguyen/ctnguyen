@@ -2,6 +2,7 @@
 
 #include <cctype>
 #include <cassert>
+#include <cstdio>
 
 #define MAX_WORD_LENGHT 25
 
@@ -27,6 +28,20 @@ const char* Word::get_text() const
 	assert(text_ != NULL);
 	return text_;
 }
+
+bool Word::operator==(const Word& lhs) const
+{
+	assert( !empty() && !lhs.empty() );
+	bool not_equal = (strcmp(text_, lhs.text_));//strcmp return zero if equal, convert to bool is a false
+	return !not_equal;
+}
+bool Word::operator!=(const Word& lhs) const
+{
+	assert(!empty() && !lhs.empty());
+	bool not_equal = (strcmp(text_, lhs.text_));//strcmp return zero if equal, convert to bool is a false
+	return not_equal;
+}
+
 
 bool Word::is_Symbol(const char& c) const
 {
@@ -65,6 +80,9 @@ std::istream& operator>>(std::istream &ifs, Word& word)
 	{
 		char c = ' ';
 		ifs.get(c);
+		// ctntodo
+		// careful with words of pattern '  "John's"
+		// to convert cap letter to min letters ??
 
 		if (word.is_Symbol(c)) break; // todo not only blank break, but all symbol character
 
