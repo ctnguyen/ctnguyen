@@ -10,14 +10,30 @@
 #include "Word.h"
 #include "NodeWord.h"
 
-#define NB_TOP_FREQUENT 20
+#define NB_TOP_FREQUENT 3
 
 // the result hold the top frequent node
-struct Result
+// by time constraint, the implementation of class Result is very bad
+// But the design would allow to modify for the further time
+class Result
 {
-	NodeWord* nodes[NB_TOP_FREQUENT];
+public :
+	
+	Result();
+
+	void scanR_Node_To_Result(NodeWord* node);
 
 	friend std::ostream& operator<<(std::ostream &os, const Result& res);
+
+private:
+
+	NodeWord* nodes[NB_TOP_FREQUENT];
+
+	// shift element from ith item to the left, i-->i+1
+	void shift_left(size_t i); // very bad ctntodo
+	bool isFilled() const;
+	void push_and_sort(NodeWord* node);
+	void exchange_ij(size_t i, size_t j);
 };
 
 
@@ -67,6 +83,9 @@ private:
 
 	// recursively find if a node match the word
 	NodeWord* findR_Word(const Word& word, NodeWord* rightRootNode);
+
+	// recursively scan the container and update the result
+	void scanR_To_Result(Result& res, NodeWord* rightRootNode) const;
 };
 
 #endif /* TEXTPROCESS_H */

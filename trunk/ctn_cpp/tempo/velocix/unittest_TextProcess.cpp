@@ -28,7 +28,13 @@ BOOST_AUTO_TEST_CASE(test_simple_stream_processing)
 		}
 	}
 
-	//std::cout << textprocess << std::endl;
+	Result res;
+	textprocess.get_Result(res);
+
+	std::cout << textprocess << std::endl;
+	std::cout << res << std::endl;
+
+	
 
 	BOOST_CHECK(true);
 }
@@ -60,8 +66,8 @@ BOOST_AUTO_TEST_CASE(test_text_file_processing)
 		clock_t end_reading = std::clock();
 		double reading_time = double(end_reading - start_reading) / CLOCKS_PER_SEC;
 		
-		std::cout << textprocess << std::endl; // ctndebug
-		std::cout << "Number word=" << nbWord << "	time=" << reading_time << std::endl;//ctndebug		
+		//std::cout << textprocess << std::endl; // ctndebug
+		//std::cout << "Number word=" << nbWord << "	time=" << reading_time << std::endl;//ctndebug		
 	}
 
 	file_stream.close();
