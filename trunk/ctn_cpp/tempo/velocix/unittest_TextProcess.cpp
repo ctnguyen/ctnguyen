@@ -39,8 +39,8 @@ BOOST_AUTO_TEST_CASE(test_simple_stream_processing)
 
 BOOST_AUTO_TEST_CASE(test_text_file_processing)
 {
-	//const char* file_path_name = "sample_text.txt"; // 92 words, time very small
-	const char* file_path_name = "referece_text.txt";// 19073 words, reading time 15s
+	const char* file_path_name = "sample_text.txt"; // 92 words, time very small
+	//const char* file_path_name = "referece_text.txt";// 19073 words, reading time 15s
 
 	std::ifstream file_stream;
 	file_stream.open(file_path_name, std::ios::in);
@@ -71,8 +71,8 @@ BOOST_AUTO_TEST_CASE(test_text_file_processing)
 		double res_time = double(end_reading - start_reading) / CLOCKS_PER_SEC;
 
 		//std::cout << textprocess << std::endl;//ctndebug
-		std::cout << res << std::endl;//ctndebug
-		std::cout << "Number word=" << nbWord << "	reading time=" << reading_time <<"	result_time"<<res_time<< std::endl;//ctndebug	
+		//std::cout << res << std::endl;//ctndebug
+		//std::cout << "Number word=" << nbWord << "	reading time=" << reading_time <<"	result_time"<<res_time<< std::endl;//ctndebug	
 	}
 
 	file_stream.close();

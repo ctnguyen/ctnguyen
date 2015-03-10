@@ -30,5 +30,5 @@ If tests are desirable, set the variable ${CTN_BUILD_TEST} in cmake file has to 
 
 After building and compiling, there will be a executable programme "prog.exe".
 The program execute in command line, and could take one argument, which is a *.txt file.
-If no argument is given to the command, a default argument will be setted : "sample_text.txt"
+If no argument is given to the command, a default argument will be setted : "reference_text.txt"
 
