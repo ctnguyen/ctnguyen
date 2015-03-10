@@ -62,8 +62,7 @@ void TextProcess::push_back(const Word& word)
 
 NodeWord* TextProcess::find_Word(const Word& word)
 {
-	//throw("TextProcess::find_Word not implemented") ; 
-	return NULL;
+	return findR_Word(word, begin_);
 }
 
 std::ostream& operator<<(std::ostream &os, const TextProcess& container)
@@ -71,6 +70,7 @@ std::ostream& operator<<(std::ostream &os, const TextProcess& container)
 	if (container.begin_ != NULL)
 	{		
 		container.printR_NodeWord(os, container.begin_);
+		std::cout << std::endl << " ---  Number of NodeWord = " << container.nbNode_ << std::endl;
 	}
 	else
 	{
@@ -102,4 +102,13 @@ void TextProcess::deleteR_NodeWord(NodeWord* rightRootNode)
 	{
 		deleteR_NodeWord(lnode);
 	}
+}
+
+NodeWord* TextProcess::findR_Word(const Word& word, NodeWord* rightRootNode)
+{
+	if (rightRootNode == NULL) return NULL;
+
+	if (rightRootNode->get_word() == word) return rightRootNode;
+
+	findR_Word(word, rightRootNode->lnode_);
 }

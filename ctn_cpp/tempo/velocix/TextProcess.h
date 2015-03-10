@@ -55,6 +55,9 @@ private:
 
 	// recursively delete from root
 	void deleteR_NodeWord(NodeWord* rightRootNode);
+
+	// recursively find if a node match the word
+	NodeWord* findR_Word(const Word& word, NodeWord* rightRootNode);
 };
 
 #endif /* TEXTPROCESS_H */

@@ -14,7 +14,7 @@ BOOST_AUTO_TEST_CASE(test_simple_stream_processing)
 {
 	TextProcess textprocess;
 
-	std::stringstream ss; ss << "hello Velocix, I am a test";
+	std::stringstream ss; ss << "hello Velocix, I am a test hello am hello Velocix";
 
 	unsigned int nbWord=0;
 	Word word;
@@ -28,7 +28,43 @@ BOOST_AUTO_TEST_CASE(test_simple_stream_processing)
 		}
 	}
 
-	std::cout << textprocess << std::endl;
+	//std::cout << textprocess << std::endl;
+
+	BOOST_CHECK(true);
+}
+
+BOOST_AUTO_TEST_CASE(test_text_file_processing)
+{
+	const char* file_path_name = "sample_text.txt"; // 92 words, time very small
+	//const char* file_path_name = "referece_text.txt";// 19073 words, reading time 15s
+
+	std::ifstream file_stream;
+	file_stream.open(file_path_name, std::ios::in);
+
+	if (file_stream.is_open())
+	{
+		Word word;
+		TextProcess textprocess;
+		unsigned int nbWord = 0;
+
+		clock_t start_reading = std::clock();
+		while (file_stream.good())
+		{
+			file_stream >> word;
+			if (!word.empty())
+			{
+				++nbWord; //if (!word.empty()) std::cout << word << std::endl;//ctndebug
+				textprocess.add_Word(word);
+			}
+		}
+		clock_t end_reading = std::clock();
+		double reading_time = double(end_reading - start_reading) / CLOCKS_PER_SEC;
+		
+		std::cout << textprocess << std::endl; // ctndebug
+		std::cout << "Number word=" << nbWord << "	time=" << reading_time << std::endl;//ctndebug		
+	}
+
+	file_stream.close();
 
 	BOOST_CHECK(true);
 }
