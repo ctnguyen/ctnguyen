@@ -13,13 +13,12 @@ NodeWord::NodeWord(const Word& word)
 
 NodeWord::~NodeWord()
 {
+	lnode_ = NULL; rnode_ = NULL;
 }
 
 
 const Word& NodeWord::get_word()       const { return word_;       }
 unsigned int NodeWord::get_frequency() const { return frequency_;  }
-const NodeWord* NodeWord::get_lnode()  const { return lnode_;      }
-const NodeWord* NodeWord::get_rnode()  const { return rnode_;      }
 
 void NodeWord::operator++() 
 {
@@ -29,23 +28,29 @@ void NodeWord::operator++()
 void NodeWord::set_lnode(NodeWord* node) 
 {
 	if (lnode_ != NULL)
+	{
+		std::cout << "ATTENTION : a left node was deleted to be reset" << std::endl;
 		delete lnode_;
+	}
 	lnode_ = node;
 }
 
 void NodeWord::set_rnode(NodeWord* node)
 {
 	if (rnode_ != NULL)
+	{
+		std::cout << "ATTENTION : a right node was deleted to be reset" << std::endl;
 		delete rnode_;
+	}
 	rnode_ = node;
 }
 
 std::ostream& operator<<(std::ostream &os, const NodeWord& node)
 {
 	os << "l";
-	if (node.get_lnode() != NULL)
+	if (node.lnode_ != NULL)
 	{
-		os << node.get_lnode()->get_word();
+		os << node.lnode_->get_word();
 	}
 	else
 	{
@@ -55,9 +60,9 @@ std::ostream& operator<<(std::ostream &os, const NodeWord& node)
 	os << "	[" << node. get_frequency() <<"]" << node.get_word() << "	";
 
 	os << "r";
-	if (node.get_rnode() != NULL)
+	if (node.rnode_ != NULL)
 	{
-		os << node.get_rnode()->get_word();
+		os << node.lnode_->get_word();
 	}
 	else
 	{

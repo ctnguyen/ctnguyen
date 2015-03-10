@@ -30,7 +30,7 @@ BOOST_FIXTURE_TEST_CASE(test_constructor, NodeWordFixture)
 	NodeWord nodeword(cword);
 	BOOST_CHECK(nodeword.get_frequency() == 1);
 	//std::cout << nodeword << std::endl;//ctndebug
-	nodeword++;
+	++nodeword;
 	BOOST_CHECK(nodeword.get_frequency() == 2);
 	//std::cout << nodeword << std::endl;//ctndebug
 
@@ -43,15 +43,15 @@ BOOST_FIXTURE_TEST_CASE(test_set_link, NodeWordFixture)
 	NodeWord* lnode = new NodeWord(lword);
 	NodeWord* rnode = new NodeWord(rword);
 	
-	BOOST_CHECK(cnode.get_lnode() == NULL);
-	BOOST_CHECK(cnode.get_rnode() == NULL);
+	BOOST_CHECK(cnode.lnode_ == NULL);
+	BOOST_CHECK(cnode.rnode_ == NULL);
 	std::cout << cnode << std::endl;//ctndebug
 
 	cnode.set_lnode(lnode);
 	cnode.set_rnode(rnode);
 
-	BOOST_CHECK(cnode.get_lnode() != NULL);
-	BOOST_CHECK(cnode.get_rnode() != NULL);
+	BOOST_CHECK(cnode.lnode_ != NULL);
+	BOOST_CHECK(cnode.rnode_ != NULL);
 	std::cout << cnode << std::endl;//ctndebug
 
 	delete lnode;
