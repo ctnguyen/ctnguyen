@@ -17,6 +17,8 @@ class Word
 public:
 
 	Word();
+	Word(const Word&);
+	Word& operator=(const Word&);
 	~Word();
 
 	// check if word is empty, to use before every use of Word, except the >> operator

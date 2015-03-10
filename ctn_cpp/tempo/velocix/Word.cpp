@@ -7,9 +7,33 @@
 #define MAX_WORD_LENGHT 25
 
 Word::Word()
-	: text_(NULL)
+: text_(NULL)
 {
 }
+
+Word::Word(const Word& lhs)
+: text_(NULL)
+{
+	unsigned int strsize = strlen(lhs.text_)+1; // including \0 character
+	text_ = new char[strsize];
+	for (size_t i = 0; i < strsize; ++i)
+	{
+		text_[i]= lhs.text_[i];
+	}
+}
+Word& Word::operator=(const Word& lhs)
+{
+	if (text_ != NULL) delete[] text_; text_ = NULL;
+	
+	unsigned int strsize = strlen(lhs.text_) + 1; // including \0 character
+	text_ = new char[strsize];
+	for (size_t i = 0; i < strsize; ++i)
+	{
+		text_[i] = lhs.text_[i];
+	}
+	return *this;
+}
+
 
 Word::~Word()
 {
