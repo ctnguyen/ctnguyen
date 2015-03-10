@@ -19,11 +19,15 @@ public:
 	Word();
 	~Word();
 
-	// check if word is empty
+	// check if word is empty, to use before every use of Word, except the >> operator
 	bool empty() const;
 
 	// get the text of the word
 	const char* get_text() const ;
+
+	// comparing two words
+	bool operator==(const Word& lhs) const;
+	bool operator!=(const Word& lhs) const;
 
 	// i\o operator
 	friend std::ostream& operator<<(std::ostream &os, const Word& word);
