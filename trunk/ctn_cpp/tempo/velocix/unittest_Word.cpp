@@ -14,6 +14,7 @@ BOOST_AUTO_TEST_CASE(test_reading_sample_text)
 {
 	
 	const char* file_path_name = "sample_text.txt";
+	//const char* file_path_name = "reference_text.txt";
 
 	std::ifstream file_stream;
 	file_stream.open(file_path_name, std::ios::in);
@@ -38,7 +39,7 @@ BOOST_AUTO_TEST_CASE(test_comparing_word)
 	std::stringstream ss1,ss2,ss3;
 	ss1 << "Hello";
 	ss2 << "Hello";
-	ss3 << "Word";
+	ss3 << "World";
 
 	Word word1, word2, word3;
 	ss1 >> word1;
@@ -49,6 +50,26 @@ BOOST_AUTO_TEST_CASE(test_comparing_word)
 	
 	BOOST_CHECK(word1 == word2);
 	BOOST_CHECK(word1 != word3);
+}
+
+BOOST_AUTO_TEST_CASE(test_copy_word)
+{
+	std::stringstream ss1, ss2;
+	ss1 << "Hello";
+	ss2 << "World";
+	
+	Word word1; ss1 >> word1;
+	
+	Word word2(word1);
+	BOOST_CHECK(word1 == word2);
+	//std::cout << "word1 " << word1 << std::endl << "word2 " << word2 << std::endl;//ctndebug
+
+	Word word3;
+	ss2 >> word1;
+	word3 = word1;
+	//std::cout << "word1 " << word1 << std::endl << "word2 " << word2 << std::endl << "word3 " << word3 << std::endl;//ctndebug
+	BOOST_CHECK(word3 == word1);
+	BOOST_CHECK(word3 != word2);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
