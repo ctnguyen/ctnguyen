@@ -12,6 +12,15 @@
 
 #define NB_TOP_FREQUENT 20
 
+// the result hold the top frequent node
+struct Result
+{
+	NodeWord* nodes[NB_TOP_FREQUENT];
+
+	friend std::ostream& operator<<(std::ostream &os, const Result& res);
+};
+
+
 /*! \class TextProcess
  *  TextProcess add reading word to the container of word and handle
  *  the word's frequency
@@ -25,6 +34,9 @@ public :
 	// throw and exception if not readable
 	void read_TextFile(const char* filename); 
 
+	// scan the container and return result
+	void get_Result(Result& r) const; // ctntodo move semantic
+
 	// if it is a new word, add to the container
 	// if it is a old word, increase the word's frequency
 	void add_Word(const Word& word);
@@ -35,9 +47,6 @@ private:
 
 	double reading_file_time_;
 	unsigned int nbNode_;
-
-	// point to top 20 frequent words
-	NodeWord* topfrequent_;
 
 	// DATA Handle the list of world and its frequency
 	NodeWord* begin_;

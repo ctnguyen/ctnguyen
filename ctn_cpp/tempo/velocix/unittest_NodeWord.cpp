@@ -45,17 +45,32 @@ BOOST_FIXTURE_TEST_CASE(test_set_link, NodeWordFixture)
 	
 	BOOST_CHECK(cnode.lnode_ == NULL);
 	BOOST_CHECK(cnode.rnode_ == NULL);
-	std::cout << cnode << std::endl;//ctndebug
+	//std::cout << cnode << std::endl;//ctndebug
 
 	cnode.set_lnode(lnode);
 	cnode.set_rnode(rnode);
 
 	BOOST_CHECK(cnode.lnode_ != NULL);
 	BOOST_CHECK(cnode.rnode_ != NULL);
-	std::cout << cnode << std::endl;//ctndebug
+	//std::cout << cnode << std::endl;//ctndebug
 
 	delete lnode;
 	delete rnode;
+}
+
+BOOST_FIXTURE_TEST_CASE(test_comparator, NodeWordFixture)
+{
+	NodeWord node1(cword);
+	NodeWord node2(rword);
+	NodeWord node3(lword);
+
+	++node2;
+	++node3; ++node3;
+
+	BOOST_CHECK(node1<node2);
+	BOOST_CHECK(node2<node3);
+	BOOST_CHECK(node3>node1);
+	
 }
 
 
