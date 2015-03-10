@@ -48,7 +48,7 @@ int main(int argc, char ** argv)
 
 			//std::cout << textprocess << std::endl;//ctndebug
 			std::cout << res << std::endl;//ctndebug
-			std::cout << "Number word=" << nbWord << "	reading time=" << reading_time << "	result_time" << res_time << std::endl;//ctndebug	
+			std::cout << "Number word=" << nbWord << "	reading time=" << reading_time << "	result_time=" << res_time << std::endl;//ctndebug
 		}
 
 		file_stream.close();
