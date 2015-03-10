@@ -3,6 +3,7 @@
 #include <cctype>
 #include <cassert>
 #include <cstdio>
+#include <cstring>
 
 #define MAX_WORD_LENGHT 25
 
