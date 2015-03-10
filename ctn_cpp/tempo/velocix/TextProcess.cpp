@@ -167,10 +167,10 @@ void Result::push_and_sort(NodeWord* node)
 	// sort (a bad algorightm)
 	for (size_t i = 0; i < I; ++i)
 	{
-		NodeWord* node_i = nodes[i];
+		NodeWord& node_i = *nodes[i];
 		for (size_t j = i+1; j <= I; ++j)
 		{
-			NodeWord* node_j = nodes[j];
+			NodeWord& node_j = *nodes[j];
 			if (node_j > node_i)
 			{
 				exchange_ij(i, j);

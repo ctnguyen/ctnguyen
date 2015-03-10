@@ -10,7 +10,7 @@
 #include "Word.h"
 #include "NodeWord.h"
 
-#define NB_TOP_FREQUENT 3
+#define NB_TOP_FREQUENT 20
 
 // the result hold the top frequent node
 // by time constraint, the implementation of class Result is very bad
