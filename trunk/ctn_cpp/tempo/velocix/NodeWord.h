@@ -15,12 +15,12 @@
 class NodeWord
 {
 public :
-	// the data of a node is a Word
-	NodeWord(Word* word);
+	// the data of a node is a Word and word's frequency
+	NodeWord(const Word& word);
 	~NodeWord();
 
 	// getters
-	const Word* get_word() const;
+	const Word& get_word() const;
 	unsigned int get_frequency() const;
 	
 	const NodeWord* get_lnode() const;
@@ -34,9 +34,9 @@ public :
 	friend std::ostream& operator<<(std::ostream &os, const NodeWord& node);
 private:
 
+	Word word_;
 	unsigned int frequency_;
-	Word* word_;
-	
+		
 	NodeWord* lnode_;
 	NodeWord* rnode_;
 };
