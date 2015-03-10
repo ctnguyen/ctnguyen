@@ -3,7 +3,103 @@
 #include <cassert>
 
 TextProcess::TextProcess()
+: reading_file_time_(-100000.)// initiate to absurd value
+, nbNode_(0)
+, topfrequent_(NULL)
+, begin_(NULL)
+, end_(NULL)
 {
-	std::cout<<"Hello I am TextProcess"<<std::endl;
+	for (size_t i = 0; i < NB_TOP_FREQUENT; ++i)
+	{
+		//		topfrequent_[i]=NULL; 
+	}
 }
 
+TextProcess::~TextProcess()
+{
+	deleteR_NodeWord(begin_);
+	begin_ = NULL; end_ = NULL; topfrequent_ = NULL;
+}
+
+void TextProcess::read_TextFile(const char* filename)
+{
+	throw("TextProcess::read_TextFile not implemented");
+}
+
+void TextProcess::add_Word(const Word& word)
+{
+	assert( !word.empty() );
+
+	NodeWord* node = find_Word(word);
+	if (node == NULL)
+	{
+		push_back(word);
+	}
+	else
+	{
+		++(*node);
+	}	
+}
+
+void TextProcess::push_back(const Word& word)
+{
+	if (end_ != NULL)	assert(end_->lnode_ == NULL);
+	NodeWord* newNode = new NodeWord(word);
+	
+	if (begin_ != NULL) // if linked list is not empty
+	{
+		newNode->set_rnode(end_);
+		if (end_ != NULL) end_->set_lnode(newNode);
+		end_ = newNode;
+	}
+	else
+	{
+		begin_ = newNode;
+		end_ = newNode;
+	}
+	++nbNode_;
+}
+
+NodeWord* TextProcess::find_Word(const Word& word)
+{
+	//throw("TextProcess::find_Word not implemented") ; 
+	return NULL;
+}
+
+std::ostream& operator<<(std::ostream &os, const TextProcess& container)
+{
+	if (container.begin_ != NULL)
+	{		
+		container.printR_NodeWord(os, container.begin_);
+	}
+	else
+	{
+		os << "TextProcess is empty";
+	}
+
+	return os;
+}
+
+void TextProcess::printR_NodeWord(std::ostream &os, const NodeWord* rightRootNode) const
+{
+	if (rightRootNode!=NULL)
+		os << "[" << rightRootNode->get_frequency()<<"] "<< rightRootNode->get_word() << std::endl;
+
+	if (rightRootNode->lnode_ != NULL)
+		printR_NodeWord(os, rightRootNode->lnode_);
+}
+
+void TextProcess::deleteR_NodeWord(NodeWord* rightRootNode)
+{
+	NodeWord* lnode=NULL;
+	if (rightRootNode != NULL)
+	{
+		lnode = rightRootNode->lnode_;
+		delete rightRootNode; rightRootNode = NULL;
+	}
+
+	if (lnode!=NULL)
+	{
+		deleteR_NodeWord(lnode);
+	}
+}

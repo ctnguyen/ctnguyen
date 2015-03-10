@@ -22,23 +22,21 @@ public :
 	// getters
 	const Word& get_word() const;
 	unsigned int get_frequency() const;
-	
-	const NodeWord* get_lnode() const;
-	const NodeWord* get_rnode() const;
 
 	// setters
 	void operator++();
 	void set_lnode(NodeWord* node);
 	void set_rnode(NodeWord* node);
 
-	friend std::ostream& operator<<(std::ostream &os, const NodeWord& node);
+	friend std::ostream& operator<<(std::ostream &os,const NodeWord& node);
+
+	NodeWord* lnode_;
+	NodeWord* rnode_;
+
 private:
 
 	Word word_;
-	unsigned int frequency_;
-		
-	NodeWord* lnode_;
-	NodeWord* rnode_;
+	unsigned int frequency_;	
 };
 
 #endif /* NODEWORD_H */
