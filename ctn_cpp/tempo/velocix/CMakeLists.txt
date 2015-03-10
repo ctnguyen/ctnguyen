@@ -3,8 +3,8 @@ cmake_minimum_required(VERSION 3.0)
 
 project(velocix) 
 
-set(CTN_BUILD_TEST true)
-#set(CTN_BUILD_TEST false)
+#set(CTN_BUILD_TEST true)
+set(CTN_BUILD_TEST false)
 
 # Do not use Debug/Release folder on Windows.
 if(WIN32)
