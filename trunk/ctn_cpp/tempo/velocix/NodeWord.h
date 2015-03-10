@@ -28,6 +28,10 @@ public :
 	void set_lnode(NodeWord* node);
 	void set_rnode(NodeWord* node);
 
+	// comparing two node frequence, use for sorting
+	bool operator<(const NodeWord& lhs) const;
+	bool operator>(const NodeWord& lhs) const;
+
 	friend std::ostream& operator<<(std::ostream &os,const NodeWord& node);
 
 	NodeWord* lnode_;

@@ -2,28 +2,30 @@
 
 #include <cassert>
 
+
 TextProcess::TextProcess()
 : reading_file_time_(-100000.)// initiate to absurd value
 , nbNode_(0)
-, topfrequent_(NULL)
 , begin_(NULL)
 , end_(NULL)
 {
-	for (size_t i = 0; i < NB_TOP_FREQUENT; ++i)
-	{
-		//		topfrequent_[i]=NULL; 
-	}
 }
 
 TextProcess::~TextProcess()
 {
 	deleteR_NodeWord(begin_);
-	begin_ = NULL; end_ = NULL; topfrequent_ = NULL;
+	begin_ = NULL; end_ = NULL; 
 }
 
 void TextProcess::read_TextFile(const char* filename)
 {
 	throw("TextProcess::read_TextFile not implemented");
+}
+
+void TextProcess::get_Result(Result& r) const
+{
+	
+
 }
 
 void TextProcess::add_Word(const Word& word)
@@ -111,4 +113,14 @@ NodeWord* TextProcess::findR_Word(const Word& word, NodeWord* rightRootNode)
 	if (rightRootNode->get_word() == word) return rightRootNode;
 
 	findR_Word(word, rightRootNode->lnode_);
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+std::ostream& operator<<(std::ostream &os, const Result& res)
+{
+	os << "Hello, I am result";
+	return os;
 }

@@ -45,6 +45,16 @@ void NodeWord::set_rnode(NodeWord* node)
 	rnode_ = node;
 }
 
+bool NodeWord::operator<(const NodeWord& lhs) const
+{
+	return (frequency_ < lhs.frequency_);
+}
+bool NodeWord::operator>(const NodeWord& lhs) const
+{
+	return (frequency_ > lhs.frequency_);
+}
+
+
 std::ostream& operator<<(std::ostream &os, const NodeWord& node)
 {
 	os << "l";
