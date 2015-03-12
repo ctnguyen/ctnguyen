@@ -87,9 +87,9 @@
 %=======================================================================================%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter*{Introduction}
-Dans le cadre des études de Master 2 de mathématique de la modélisation (ANEDP) �  l'université Pierre et Marie Curie, les étudiants suivant le module NM406 (Résolution des EDP par la Méthode des Éléménts Finis) enseigné par \href{http://www.ann.jussieu.fr/~hecht/}{M.Frédéric Hecht} doivent réaliser un projet de calcul scienfique utilisant la FEM développé en C++.Ce projet est basé sur la bibliothèque servant �  développer le logiciel \href{http://www.freefem.org/ff++/}{FreeFem++} par le professeur.  
+Dans le cadre des études de Master 2 de mathématique de la modélisation (ANEDP) à l'université Pierre et Marie Curie, les étudiants suivant le module NM406 (Résolution des EDP par la Méthode des Éléménts Finis) enseigné par \href{http://www.ann.jussieu.fr/~hecht/}{M.Frédéric Hecht} doivent réaliser un projet de calcul scienfique utilisant la FEM développé en C++.Ce projet est basé sur la bibliothèque servant à développer le logiciel \href{http://www.freefem.org/ff++/}{FreeFem++} par le professeur.  
 
-\paragraph{Phénomène physique : }Le projet consiste �  simuler l'écoulement laminaire dans une conduite en résolvant l'équation de Navier-Stokes stationnaire. Un écoulement laminaire est régulier (il ne présente pas trop de variations spatiales ou temporelles), bien souvent stationnaire.  La viscosité stabilise et régularise les écoulements de façon générale. Un fluide présentant une viscosité importante s'écoulera de façon laminaire. Un écoulement est caractérisé par son nombre de Reynolds, qui permet de se faire une idée de sa stabilité : quand ce nombre est petit, l'écoulement est laminaire, quand il est grand, l'écoulement est en générale instable et turbulent. La transition entre les écoulements stables et instable voire turbulents est un sujet d'étude important. Dans une conduite, on considère souvent que la transition peut se produire entre 2000 et 3000.
+\paragraph{Phénomène physique : }Le projet consiste à simuler l'écoulement laminaire dans une conduite en résolvant l'équation de Navier-Stokes stationnaire. Un écoulement laminaire est régulier (il ne présente pas trop de variations spatiales ou temporelles), bien souvent stationnaire.  La viscosité stabilise et régularise les écoulements de façon générale. Un fluide présentant une viscosité importante s'écoulera de façon laminaire. Un écoulement est caractérisé par son nombre de Reynolds, qui permet de se faire une idée de sa stabilité : quand ce nombre est petit, l'écoulement est laminaire, quand il est grand, l'écoulement est en générale instable et turbulent. La transition entre les écoulements stables et instable voire turbulents est un sujet d'étude important. Dans une conduite, on considère souvent que la transition peut se produire entre 2000 et 3000.
 
 \paragraph{Problème mathématique :}Il s'agit en fait d'une solution stable des équations de Navier-Stokes, au sens où si on modifie l'écoulement, il retourne vers la solution laminaire. Le domaine étudié ici est l'un des problème classique : la marche descendante. 
 \begin{center}
@@ -104,7 +104,7 @@ Dans le cadre des études de Master 2 de mathématique de la modélisation (ANED
  %\psline(-7,-1.5)(7,1.5)
  \end{pspicture}
 \end{center}
-La conduite horizontale, la rentrée du fluid �  droite avec le profit parabolique représantant la condition Poiseuille donnant le problème mathématique suivant :
+La conduite horizontale, la rentrée du fluid à droite avec le profit parabolique représantant la condition Poiseuille donnant le problème mathématique suivant :
 \[
 (\wp)\hspace{0.25cm}\left\{
 \begin{array}{rl}
@@ -118,9 +118,9 @@ Ayanat pour but de résoudre ce problème,le projet se compose donc l'étude mat
 %=======================================================================================%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Études mathématiques}
-Cause de la limite du temps l'étude du cadre fonctionnelle ne sera pas toute détaillée dans ce projet. Ce rapport ne présente qu'une partie briève de l'étude fonctionnelle de l'équation Navier-Stokes dans ce cas concret pour arriver �  l'implémentation informatique, qui est l'essentiel de l'exercice. Pour plus de détails sur la méthode de continuation, il est de préférence de consulter \cite[Girault-Raviart p.297-365]{NCT1} 
+Cause de la limite du temps l'étude du cadre fonctionnelle ne sera pas toute détaillée dans ce projet. Ce rapport ne présente qu'une partie briève de l'étude fonctionnelle de l'équation Navier-Stokes dans ce cas concret pour arriver à l'implémentation informatique, qui est l'essentiel de l'exercice. Pour plus de détails sur la méthode de continuation, il est de préférence de consulter \cite[Girault-Raviart p.297-365]{NCT1} 
 \section{Cadre fonctionnelle}
-Ce paragraphe montre brièvement la méthode de continuation servant d'une part �  prouver l'existence et l'unicité de la solution, d'autre amener �  l'implémentation du schéma numérique de type Newton. 
+Ce paragraphe montre brièvement la méthode de continuation servant d'une part à prouver l'existence et l'unicité de la solution, d'autre amener à l'implémentation du schéma numérique de type Newton. 
 \paragraph{Méthode de continuation :} Cette méthode, par la construction d'une fonctionnelle $F$ d'un certain d'espace de départ et d'espace d'arrivé :
 \[
 \begin{array}{rl}
@@ -176,9 +176,9 @@ I \times X &\longmapsto Y \\
  ( \lambda, \left[\begin{array}{ll}v\\q\end{array}\right] ) &\longmapsto -\left[\begin{array}{cc}\lambda(f-(v.\triangledown)v)\\g\end{array}\right]
 \end{array}
 \]
-On peut remarquer encore que l'application partielle $G(\lambda,.)$ est linéaire continue, donc il est facile �  calculer sa différentielle. 
+On peut remarquer encore que l'application partielle $G(\lambda,.)$ est linéaire continue, donc il est facile à calculer sa différentielle. 
 \paragraph{Opérateur de continuation :}
-On s'amène finalement �  définir l'opérateur $F=Id +T \circ G$, c'est �  dire :
+On s'amène finalement à définir l'opérateur $F=Id +T \circ G$, c'est à dire :
 \[F : 
 \begin{array}{rl}
 I \times X &\longmapsto X \\
@@ -188,7 +188,7 @@ I \times X &\longmapsto X \\
  +T\circ G ( \lambda, \left[\begin{array}{ll}u\\p\end{array}\right] ) 
 \end{array}
 \]
-De sorte que comme G, $F(\lambda,.)$ est une application linéaire continue de $X$ �  $Y$, que l'on peut calculer facilement la différentielle de cettet application partielle : 
+De sorte que comme G, $F(\lambda,.)$ est une application linéaire continue de $X$ à $Y$, que l'on peut calculer facilement la différentielle de cettet application partielle : 
 \[F(\lambda,\bullet) : 
 \begin{array}{rl}
  X &\longmapsto X \\
@@ -197,7 +197,7 @@ De sorte que comme G, $F(\lambda,.)$ est une application linéaire continue de $
  +T\circ G ( \lambda, \left[\begin{array}{ll}u\\p\end{array}\right] ) 
 \end{array}
 \]
-Partant de ces principales constructions d'espaces et opérateurs, en utilisant ensuite la théorie des fonctions implicites, on se ramène �  prouver l'équivalent des problème ~\eqref{Pcontinuation} et ~\eqref{Pnavierstokes}. L'étude fonctionnelle prouve que $\left[\begin{array}{ll}u\\p\end{array}\right]$ de $X$ est solution du problème ~\eqref{Pnavierstokes} si et seulement si $\left[\begin{array}{ll}u\\ \frac{p}{\nu}\end{array}\right]$ de $X$ est solution du problème $F(\frac{1}{\nu},\bullet)=0$.
+Partant de ces principales constructions d'espaces et opérateurs, en utilisant ensuite la théorie des fonctions implicites, on se ramène à prouver l'équivalent des problème ~\eqref{Pcontinuation} et ~\eqref{Pnavierstokes}. L'étude fonctionnelle prouve que $\left[\begin{array}{ll}u\\p\end{array}\right]$ de $X$ est solution du problème ~\eqref{Pnavierstokes} si et seulement si $\left[\begin{array}{ll}u\\ \frac{p}{\nu}\end{array}\right]$ de $X$ est solution du problème $F(\frac{1}{\nu},\bullet)=0$.
 \section{Cadre numérique}
 Issu de la conclution de la dernière section, on peut utiliser le schéma de Newton pour résoudre le problème $F(\frac{1}{\nu},\bullet)=0$. Soit $\left[\begin{array}{ll}u\\ \frac{p}{\nu}\end{array}\right]$ solution, par le théorème d'inversion local, on a :
 \[
@@ -221,7 +221,7 @@ En calculant la différentielle de $F$ par les différentielles de $G$ et de $T$
 \textbf{u}^{n+1}_{|\Gamma_D}  &=g
 \end{array}\right.
 \]
-Partant de ce schémas, en affectant que $\textbf{uold}=\textbf{u}^{n}$ est la solution calculée de l'itération précédante, $\textbf{u}=\textbf{u}^{n+1}$ est la solution �  calculer, on récrit pour chaque itération, le problème devient : 
+Partant de ce schémas, en affectant que $\textbf{uold}=\textbf{u}^{n}$ est la solution calculée de l'itération précédante, $\textbf{u}=\textbf{u}^{n+1}$ est la solution à calculer, on récrit pour chaque itération, le problème devient : 
 \[
 (N)\hspace{0.25cm}\left\{
 \begin{array}{rl}
@@ -230,7 +230,7 @@ Partant de ce schémas, en affectant que $\textbf{uold}=\textbf{u}^{n}$ est la s
 \textbf{u}_{|\Gamma_D}  &=g
 \end{array}\right.
 \]
-Soit $\left[\begin{array}{cc} \textbf{v}\\ q\end{array}\right]$ dans le même espace, en multipliant et intégrant, le problème équivalent �  la :
+Soit $\left[\begin{array}{cc} \textbf{v}\\ q\end{array}\right]$ dans le même espace, en multipliant et intégrant, le problème équivalent à la :
 \paragraph{Formulation Variationnelle :}
 \[
 \left\{
@@ -243,7 +243,7 @@ Soit $\left[\begin{array}{cc} \textbf{v}\\ q\end{array}\right]$ dans le même es
 \textbf{u}_{|\Gamma_D}  &=g
 \end{array}\right.
 \]
-En développant terme �  terme de la première égalité, on a :
+En développant terme à terme de la première égalité, on a :
 \[
 \begin{array}{rl}
 
@@ -303,7 +303,7 @@ M_h &= \left\{ q\in C^0(\overline{\Omega});q_{|\kappa}\in \text{P}_1 \hspace{0.5
 \section{Reynold}
 La résolution de l'équation de Navier-Stokes a été toujours difficile pour les nombres de Reynolds très grand, qui représente le rapport entre les forces d'inertie et les forces visqueuses. Si le nombre de Reynolds est très grand, l'équation devient fortement non-linéaire car les phénomènes convectifs dominent. Les non-linéarités produiront des effets instationnaires pour un forçage stationnaire, des brisures de symétries par rapport aux conditions aux limites initiales, en d'autre termmes la turbulence, qui explose le système. 
 
-La méthode adopte donc une stratégie qui résoud l'équation en auguementant le nombre de Reynolds petit �  petit. Soit la solution $\textbf{u}_{REY}$ correspond au nombre de Reynolds=REY, on résoud le système en retrouvant les solutions $\textbf{u}_{rey}$ correspond �  $rey < REY$, et puis on augemente $rey$ pour atteindre $REY$. L'algorithme est :
+La méthode adopte donc une stratégie qui résoud l'équation en auguementant le nombre de Reynolds petit à petit. Soit la solution $\textbf{u}_{REY}$ correspond au nombre de Reynolds=REY, on résoud le système en retrouvant les solutions $\textbf{u}_{rey}$ correspond à $rey < REY$, et puis on augemente $rey$ pour atteindre $REY$. L'algorithme est :
 \[
 \left\{
 \begin{array}{lll}
@@ -347,7 +347,7 @@ Comme présenté, le domaine de calcul est une marche descendante de la forme :
 \end{center}
 %%%%%%%%%%%%%%%%%%%%%%%%%%  image Mesh %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Les degré de liberté setrouvant sur le label1 seront affectées par la condition de Dirichelet qui forme un profil parabolique de fluid entré. Sur le label2 la vitesse sera null. Sur le label3, les termes sont considéré comme l'intérieur du domaine (sont �  calculer).
+Les degré de liberté setrouvant sur le label1 seront affectées par la condition de Dirichelet qui forme un profil parabolique de fluid entré. Sur le label2 la vitesse sera null. Sur le label3, les termes sont considéré comme l'intérieur du domaine (sont à calculer).
 \paragraph{Création de Maillage : }
 La création de maillage se fait par Freefem++, en utilisant le script : CreatMesh.edp. Ce script lit les données dans le fichier MeshCorner.txt contenant les trois coins du maillage et un coeficient indiquant la densité de noeuds pour le maillage. En l'éxécutant, il crée un fichier MyMesh.msh contenant les données de maillage, fait une visualisation de maillage créé. 
 \begin{lstlisting}
@@ -388,7 +388,7 @@ for (int ke=0;ke<Th.nbe;ke++){
   }
 }
 \end{lstlisting}
-Ensuite pour la résolution linéaire générale, on a une méthode de très grande valeur (TGV) servant �  résoudre le système de type Ax=b excepté de quelques points du vecteur x :
+Ensuite pour la résolution linéaire générale, on a une méthode de très grande valeur (TGV) servant à résoudre le système de type Ax=b excepté de quelques points du vecteur x :
 \[
 \begin{array}{cc}
 \left[
@@ -451,7 +451,7 @@ for(int ke=0;ke<Th.nbe;++ke){
 \end{lstlisting}
 %%%%%%%%%%%%%%%%%%%%%%%%%% PASSAGE LOCAL-GLOBALE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Passage Locale-Globale}
-L'idée fondamentale du problème est �  partir de la formulation variationnelle, on doit construire un système linéaire �  résoudre. La question est comment construire ce système linéaire dans le cadre général. Cette question se pose sur un principe basique : le passage local-globale. Soit, l'espace fonctionnel discret $X_h \times M_h$ (FESpace) qui se construit par le maillage (Mesh) et le type d'élément fini (TypeOfFE). Un FESpace se compose aussi des FElement, qui décrit toutes les données dans un élément fini. Une fonction discrète dans FESpace est caractérisée par ses NBOFDF degré de liberté (NBOFDF est le nombre de degrée de liberté globale), localement, elle est caractérisé par ses nbofdf degré de liberté (nbofdf est le nombre de degré de liberté locale). L'algorithme pour toute opération sur les fonctions est dont de parcourir les FElement, effectuer les opérations sur les df locale, rassembler les résultat par le passage ses df au DF (degré de liberté global). En supposant que l'on a construit une matrice locale ML, le passage �  la matrice M globale se fait par :
+L'idée fondamentale du problème est à partir de la formulation variationnelle, on doit construire un système linéaire à résoudre. La question est comment construire ce système linéaire dans le cadre général. Cette question se pose sur un principe basique : le passage local-globale. Soit, l'espace fonctionnel discret $X_h \times M_h$ (FESpace) qui se construit par le maillage (Mesh) et le type d'élément fini (TypeOfFE). Un FESpace se compose aussi des FElement, qui décrit toutes les données dans un élément fini. Une fonction discrète dans FESpace est caractérisée par ses NBOFDF degré de liberté (NBOFDF est le nombre de degrée de liberté globale), localement, elle est caractérisé par ses nbofdf degré de liberté (nbofdf est le nombre de degré de liberté locale). L'algorithme pour toute opération sur les fonctions est dont de parcourir les FElement, effectuer les opérations sur les df locale, rassembler les résultat par le passage ses df au DF (degré de liberté global). En supposant que l'on a construit une matrice locale ML, le passage à la matrice M globale se fait par :
 \begin{lstlisting}
 for(int i=0;i<nbDoF;i++)//Local==>GLOBALE 
   for(int j=0;j<nbDoF;j++) 
@@ -466,7 +466,7 @@ for(int idf=0;idf<nbDoF;idf++)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% PASSAGE GLOBALE LOCALE%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Passage Global-Local}
-Cette étape est necessaire dans le cas où le schéma est itératif, utilise les valeurs de la solution calculé de l'itération précédante pour calculer la solution après. C'est l'étape sachant une fonction $UOLD$ calculée, comment lire ces valeurs locales, afin de les passer dans le matrice A �  doite et le vecteur b �  gauche pour le système A.X=b. Les valeurs necessaires ne sont pas exactement les df de $UOLD$ au points d'interpolation, mais ce sont des valeurs de $UOLD$ aux points d'intégration. Pour chaque FElement, on doit donc parcourir les points d'intégration de la méthode d'intégration choisie, retrouver les valeurs necessaires de $UOLD$ sur ces points (valeurs de $UOLD$ et valeur de la dérivée de $UOLD$). Ces valeurs seront stoquées dans un vecteur local $uold$
+Cette étape est necessaire dans le cas où le schéma est itératif, utilise les valeurs de la solution calculé de l'itération précédante pour calculer la solution après. C'est l'étape sachant une fonction $UOLD$ calculée, comment lire ces valeurs locales, afin de les passer dans le matrice A à doite et le vecteur b à gauche pour le système A.X=b. Les valeurs necessaires ne sont pas exactement les df de $UOLD$ au points d'interpolation, mais ce sont des valeurs de $UOLD$ aux points d'intégration. Pour chaque FElement, on doit donc parcourir les points d'intégration de la méthode d'intégration choisie, retrouver les valeurs necessaires de $UOLD$ sur ces points (valeurs de $UOLD$ et valeur de la dérivée de $UOLD$). Ces valeurs seront stoquées dans un vecteur local $uold$
 \begin{lstlisting}
 for (int ipq=0;ipq<qf.n;ipq++){//qf.n=7
   /*======Les valeurs de UOLD local=====*/
@@ -664,7 +664,7 @@ for(int ic=0;ic<d;ic++){//ic=composante v.
 
 %%%%%%%%%%%%%%%%%%%%%%%% PASSAGE AU MEMBRE DROITE %%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Passage au membre droite}
-Dans les cas des schémas itératif, le passage de la solution calculée au memebre �  droite est aussi important et se fait de façon similaire que la construction de la matrice du système A.x=b. Comme la construction de la matrice du système, ce passage necessite en premier la construction locale des valeurs de la fonctions calculée aux points d'intégrations. La construction locale se fait en premier par parcourir localement les composantes de la fonction, puis parcourir les df locales de cette composante : 
+Dans les cas des schémas itératif, le passage de la solution calculée au memebre à droite est aussi important et se fait de façon similaire que la construction de la matrice du système A.x=b. Comme la construction de la matrice du système, ce passage necessite en premier la construction locale des valeurs de la fonctions calculée aux points d'intégrations. La construction locale se fait en premier par parcourir localement les composantes de la fonction, puis parcourir les df locales de cette composante : 
 \begin{lstlisting}
 for(int ic=0;ic<d;++ic){
 int dfbegin=FK.dfcbegin(ic),dfend=FK.dfcend(ic);
@@ -677,7 +677,7 @@ int dfbegin=FK.dfcbegin(ic),dfend=FK.dfcend(ic);
  }
 }
 \end{lstlisting}
-Après chaque calcul local, il ne reste �  faire l'implément dans le vecteur global :
+Après chaque calcul local, il ne reste à faire l'implément dans le vecteur global :
 \begin{lstlisting}
 ..........
    for(int idf=0;idf<nbDoF;idf++) 
@@ -724,7 +724,7 @@ Voici un tableau décrit les interactions entres les fichiers et les programmes 
 \begin{center}
 \begin{tabular}{|p{3cm}|c|p{3cm}|}
  \hline
-\textbf{Fichier �  lire}&\textbf{Programme} &\textbf{Fichiers sorties} \\  \hline
+\textbf{Fichier à lire}&\textbf{Programme} &\textbf{Fichiers sorties} \\  \hline
 MeshCorner.txt & CreatMesh.edp & MyMesh.msh\\  \hline
 MeshCorner.txt, CoefSchemas.txt, nameMesh.txt & NSstatNCT.edp & NSsFFpp.sol \\  \hline
 MeshCorner.txt, CoefSchemas.txt, nameMesh.txt & StokesNCT.edp & StokesFFpp.sol \\  \hline
@@ -768,7 +768,7 @@ Qt est un framework C++ permettant de développer des applications GUI multiplat
 \begin{itemize}
  \item Introduction : \href{http://www.siteduzero.com/tutoriel-3-11240-introduction-a-qt.html}{http://www.siteduzero.com/tutoriel-3-11240-introduction-a-qt.html}
 \end{itemize}
-qui est une très bonne introduction �  la programmation Qt. Ensuite, on peut consulter les sites officiels pour une pratique et compréhension plus approfondie :
+qui est une très bonne introduction à la programmation Qt. Ensuite, on peut consulter les sites officiels pour une pratique et compréhension plus approfondie :
 \begin{itemize}
  \item Documentation [fr] : \href{http://doc.qtfr.org/}{http://doc.qtfr.org/}
  \item Documentation [en] : \href{http://doc.trolltech.com/}{http://doc.trolltech.com/}
@@ -776,7 +776,7 @@ qui est une très bonne introduction �  la programmation Qt. Ensuite, on peut co
 Pour apprendre Qt, j'ai consulté en premier l'introduction sur le siteduzéro pour comprendre la compilation, l'installation de Qt. Ensuite, je suis parti sur le site officielle pour télécharger les exemples, les compiler et les corriger pour approfondir. Pour une lecture plus structurée, on pourra consulter \cite{NCT7}
 %%%%%%%%%%%%%%%%%%%%%%% PRÉSENTATION GUI_NS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \section{Présentation du GUI\_NS}
-Mon programme GUI\_NS se compose principalement des objets QLineEdit, QPushButton, QProcess. Les QLineEdit permet de saisir un texte, c'est l�  que l'utilisateur fait entrer ses données désirées. QPushButton est simplement un ... bouton. QProcess est comme un processu, fait tourner des programmes extérieurs. Le mécanisme général est �  chaque fois qu'on presse sur un Bouton, il émet un signal, qui fait appel �  \"quelques choses\".Celles-ci peut être d'appel une fonction, démarrer un processu, déclencher le chronomètre, lire les données dans les champs, écrire les données dans les champs, dans les fichiers..ect...Ce mécanisme se réalise grâce �  la méthode statique  QObject::connect(Objet1,SIGNAL(...),Objet2,SLOT(...)). 
+Mon programme GUI\_NS se compose principalement des objets QLineEdit, QPushButton, QProcess. Les QLineEdit permet de saisir un texte, c'est là que l'utilisateur fait entrer ses données désirées. QPushButton est simplement un ... bouton. QProcess est comme un processu, fait tourner des programmes extérieurs. Le mécanisme général est à chaque fois qu'on presse sur un Bouton, il émet un signal, qui fait appel à \"quelques choses\".Celles-ci peut être d'appel une fonction, démarrer un processu, déclencher le chronomètre, lire les données dans les champs, écrire les données dans les champs, dans les fichiers..ect...Ce mécanisme se réalise grâce à la méthode statique  QObject::connect(Objet1,SIGNAL(...),Objet2,SLOT(...)). 
 \paragraph{Fenetre Creat Mesh :} 
 \begin{center}
 \begin{figure}[h]
@@ -861,7 +861,7 @@ QObject::connect(button_Break,SIGNAL(clicked()),
 QObject::connect(button_Break,SIGNAL(clicked()),
                  this,SLOT(ResetTimeSLOT()));
 \end{lstlisting}
-Le bouton \textbf{Load Mesh} recherche le fichier de maillage, modifie le text dans le champs Mesh file. Le bouton \textbf{Run C++} appelle le programme C++, déclanche le chronomètre Cpp. Le bouton \textbf{Run FreeFem++} appelle le programme FF++, déclanche le chronomètre FFpp. Le bouton \textbf{Break} arrête tout programme de façon brutale et remet le chronomètre �  zéro.
+Le bouton \textbf{Load Mesh} recherche le fichier de maillage, modifie le text dans le champs Mesh file. Le bouton \textbf{Run C++} appelle le programme C++, déclanche le chronomètre Cpp. Le bouton \textbf{Run FreeFem++} appelle le programme FF++, déclanche le chronomètre FFpp. Le bouton \textbf{Break} arrête tout programme de façon brutale et remet le chronomètre à zéro.
 \paragraph{Fenetre Visualization :}
 \begin{center}
 \begin{figure}[h]
@@ -869,7 +869,7 @@ Le bouton \textbf{Load Mesh} recherche le fichier de maillage, modifie le text d
  \caption{Fenetre Visualisation} 
 \end{figure}
 \end{center}
-Cette fênetre est aussi simple que la fenetre Coef Schéma, qui lit les fichiers de solution, appelle le programme C++ ./visualisation (qui crée encore un script FreeFem++) pour visualiser les solutions. Le bouton \textbf{Load Sol1} recherche la première solution �  visualiser. Le bouton \textbf{Load Sol2} recherche la deuxième solution �  visualiser. Le bouton \textbf{Visualization} appelle le programme :
+Cette fênetre est aussi simple que la fenetre Coef Schéma, qui lit les fichiers de solution, appelle le programme C++ ./visualisation (qui crée encore un script FreeFem++) pour visualiser les solutions. Le bouton \textbf{Load Sol1} recherche la première solution à visualiser. Le bouton \textbf{Load Sol2} recherche la deuxième solution à visualiser. Le bouton \textbf{Visualization} appelle le programme :
 \begin{lstlisting}
 Prompt$ ./Visualization First.sol Second.sol 
 \end{lstlisting}
