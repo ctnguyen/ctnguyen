@@ -1,19 +1,9 @@
 #!/bin/bash
-# script run on Linux to delete all dirty files generated from latex
+# script run on Linux to delete all generated dirty files
+# ATTENTION : be sure that the repository is clean (no working file in process)
+# 
+# http://stackoverflow.com/questions/4515586/clean-an-svn-checkout-remove-non-svn-files
 #
 
-BIN_EXT=".bin" 
-RES_EXT=".asm"
+svn status --no-ignore | grep '^[?I]' |  sed "s/^[?I] //" | xargs -I{} rm -rf "{}"
 
-BIN_FILE="test_data/test"$1$BIN_EXT
-RES_FILE="test_data/test"$1$RES_EXT
-
-STRING="Hello World"
-#print variable on a screen
-#echo $BIN_FILE
-#echo $RES_FILE
-
-echo
-echo ============
-echo
-cat $RES_FILE
