@@ -10,7 +10,7 @@
 \usepackage{pstricks}
 \usepackage{pst-node}
 \usepackage{wrapfig}
-\usepackage{picins}
+%\usepackage{picins}
 \usepackage{amsmath}
 
 
@@ -753,7 +753,13 @@ En comparant avec le schéma du cas dimension 2 :
 On peut alors résoudre le cas de dimension 3 en itérant plusieurs résolutions du cas de dimension 2, avec des petits changements des coefficients dans l'écriture matricielle de l'quation linéaire ~\eqref{schema2D-matriciel}  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Iso-surface en dimension 3}
-\parpic{\includegraphics[angle=-90, scale=0.40]{iso-surface}}
+\begin{wrapfigure}{r}{0.5\textwidth}
+  \begin{center}
+    %\includegraphics[width=0.48\textwidth]{gull}
+    \includegraphics[angle=-90, scale=0.3]{iso-surface}
+  \end{center}  
+\end{wrapfigure}
+%%ctntodo parpic package
 Pour tracer une iso-surface de la solution en 3D, on se ramène dans le cas d'un un parallèlotope simple, construit sur un triangle et deux couches consécutifs de solution et de maillage. Une valeur donnée est considérée comme un plan qui coupe la fonction $u3D$ en certains points. En regardant la proportion des segments formés par ces points dans chaque côté du parallèlotope de $u$, on peut transformé cette proportion dans le parallèlotope correspondant du maillage. Il reste à associer à chaque iso-surface une couleur spécifique pour avoir enfin une visualisation visible. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Solution trouvée en dimension 3}
