@@ -44,11 +44,18 @@ int main(int argc, char ** argv)
 		break; 
 	}
 	case 3:{
-		std::cout << " Question3" << std::endl;
+		const std::vector<int> price_data = Q3::generate_data();
+		const unsigned int my_profit = Q3::GetMaxProfit(price_data);
+		std::cout << "My Profit =" << my_profit << std::endl;
 		break; 
 	}
 	case 4:{
-		std::cout << " Question4" << std::endl;
+		int sum;
+		std::list<int> res;
+
+		Q4::GetMaxSum(sum, res);
+		std::cout << "Sum=" << sum << std::endl;
+		Q4::printList(res);
 		break; 
 	}
 	default:{
