@@ -22,15 +22,25 @@ int main(int argc, char ** argv)
 	switch (QuestionID)
 	{
 	case 1 : {
+		std::cout << " Question 1" << std::endl;
+		
 		std::list<char> res;
 		Q1::GetMostUsedCharacters("annoying", res);
-		Q1::printList(res);
+		Q1::printList(res); std::cout << std::endl << std::endl;
 		Q1::GetMostUsedCharacters("implementation", res);
 		Q1::printList(res);
+		
 		break;
 	}
 	case 2:{
 		std::cout << " Question2" << std::endl;
+		
+		int m_array[Q2::MAX_NUMBER];
+		Q2::RandomlyInitialize(m_array);
+		const int dropped_value = Q2::RandomlyDropOneElement(m_array);
+		const int found_missing_value = Q2::GetNumberMissing(m_array);
+		std::cout << "Dropped Value="<<dropped_value<<"		found value="<<found_missing_value << std::endl;//ctndebug
+
 		break; 
 	}
 	case 3:{
