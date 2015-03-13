@@ -30,8 +30,8 @@ BOOST_AUTO_TEST_CASE(test_first_test)
 	clock_t end_std_algo = std::clock();
 	double std_algo_time = double(end_std_algo - start_std_algo) / CLOCKS_PER_SEC;
 
-	std::cout << "My Profit =" << my_profit << "  time " << std::setprecision(9)<< my_algo_time << std::endl
-		<< "STD profit=" << std_profit << "  time " << std::setprecision(9)<< my_algo_time << std::endl;//ctndebug
+	//std::cout << "My Profit =" << my_profit << "  time " << std::setprecision(9)<< my_algo_time << std::endl
+	//	<< "STD profit=" << std_profit << "  time " << std::setprecision(9)<< my_algo_time << std::endl;//ctndebug
 	BOOST_CHECK(my_profit == std_profit);
 	BOOST_CHECK(my_algo_time <= std_algo_time);
 }
