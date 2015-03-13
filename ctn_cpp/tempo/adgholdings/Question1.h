@@ -12,36 +12,6 @@
 
 namespace Q1
 {
-	/*! \class Character hold a character and its frequency
-	 *  Holding characters can only be lower character
-	 */
-	class Character //ctntodo class finally not need, to delete
-	{
-	public:
-		Character(const char& c) : m_char_(c), frequency_(1) 
-		{
-			assert(isalpha(c)); 
-			if (isupper(m_char_)) m_char_ = tolower(m_char_);
-		}
-
-		const char        & get_mchar() const { return m_char_   ; }
-		const unsigned int& frequency() const { return frequency_; }
-		
-		void operator++(){ ++frequency_; }
-		bool operator<(const Character& lhs){ return this->get_mchar() < lhs.get_mchar(); }
-		
-		friend std::ostream& operator<<(std::ostream &os, const Character& m_chars)
-		{
-			os << "[" << m_chars.frequency() << "] " << "[" << m_chars.get_mchar() << "]"; return os;
-		}
-
-	private:
-		char m_char_;
-		unsigned int frequency_;		
-	};
-
-	////////////////////////////////////////////////////////////////////////////////////
-	////////////////////////////////////////////////////////////////////////////////////
 	void GetMostUsedCharacters(const std::string& input, std::list<char>& output)
 	{
 		output.clear();
@@ -83,6 +53,9 @@ namespace Q1
 		}
 	};
 
+	// HELPER FUNCTIONS
+	/////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////
 	void printList(const std::list<char>& output)
 	{
 		//ctndebug
