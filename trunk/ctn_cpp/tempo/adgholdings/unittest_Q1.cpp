@@ -8,7 +8,6 @@
 #include "Question1.h"
 BOOST_AUTO_TEST_SUITE(test_Question1)
 
-
 BOOST_AUTO_TEST_CASE(test_first_test)
 {
 	BOOST_CHECK(true);

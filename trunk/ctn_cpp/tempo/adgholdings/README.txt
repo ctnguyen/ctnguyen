@@ -27,4 +27,6 @@ ALL-IN-ONE folder project used for interview's tests. There are two ways to comp
 If tests are desirable, set the variable ${CTN_BUILD_TEST} in cmake file has to be setted to "true"
 
 After building and compiling, there will be a executable programme "prog.exe".
+./prog.exe <id_of_question>
+id_of_question should be 1 to 4
 
