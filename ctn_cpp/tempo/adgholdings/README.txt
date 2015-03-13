@@ -20,11 +20,11 @@ Question 3 :
 - The profit is the difference max-min.
 
 Question 4 :
-- run with odd indices, compute the "odd sum"
-- run with even indices, compute the "even sum"
-- compare the two sum, and choose the appropriate set
-- When running the array, negative numbers will not count. If the 
-  array contain all negative number, the biggest one is choosen for the result
+http://www.geeksforgeeks.org/maximum-sum-such-that-no-two-elements-are-adjacent/
+The idea is to follow the dynamic programming principle
+- Use two tracker max_include and max_exclude to track the max sum
+  of the sub problem. If the problem of size N-1 is solved with max_include and max_exclude
+  then the problem of size N can be solved
   
   
 =========================================
@@ -41,7 +41,8 @@ svn checkout http://chithanhnguyen.googlecode.com/svn/trunk/ctn_cpp/tempo/adghol
 
 ALL-IN-ONE folder project used for interview's tests. There are two ways to compile
 
-1- 	Use an IDE, include all *.h *.cpp files and build. DO NOT include unittest*.cpp files.
+1- 	Use an IDE, include all "Question?.h" and "main.cpp" files and build. 
+	DO NOT include unittest*.cpp files.
 
 2-	Use cmake for generating the project. Advantage of this way is this ensure cross plateform and automatically build test.
 	Need to ensure to have cmake 3.0 at least, and to have boost library (use the test framework) 
