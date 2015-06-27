@@ -1,25 +1,24 @@
 /************************************************
-*     Mini Porject helloworld for cmake         *
+*     Mini Porject for cmake test full feature  *
+*     Use of cmake, cTest, cPack, Dashboard     *
 *     @authors Chi Thanh NGUYEN                 *
 *     contact chithanhnguyen.math@gmail.com     *
 *************************************************/
-/*!
- *	@file include/moduels/hello_french.hpp
- *	@date Sept 2013
+/**
+ *	@file Proj2/Proj2.hpp
+ *	@date June 2015
  */
 
-#ifndef HELLO_FRENCH_H
-#define HELLO_FRENCH_H
+#ifndef PROJ2_HPP
+#define PROJ2_HPP
 
-#include <hello.hpp>
-
-class hello_french : public Base_Hello
+class Proj2
 {
 public:
 
-	void say_hello();
+	Proj2();
 
-	virtual ~hello_french(){}
+	~Proj2();
 };
 
-#endif /* HELLO_FRENCH_H */
+#endif /* PROJ2_HPP */

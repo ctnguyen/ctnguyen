@@ -1,27 +1,15 @@
-/************************************************
-*     Mini Porject helloworld for cmake         *
-*     @authors Chi Thanh NGUYEN                 *
-*     contact chithanhnguyen.math@gmail.com     *
-*************************************************/
-/*!
- *	@file prog/say_hello.cpp
- *	@date Sept 2013
+/**
+ *	@file Proj2/Proj2.hpp
+ *	@date June 2015
  */
+#include <Proj2/Proj2.hpp>
 
-#include <hello.hpp>
-#include <modules/hello_english.hpp>
-#include <modules/hello_french.hpp>
-#include <modules/hello_vietnamese.hpp>
-
-int main()
+Proj2::Proj2()
 {
-	hello_english he;
-	hello_french hf;
-	hello_vietnamese hv;
 
-	he.say_hello();
-	hf.say_hello();
-	hv.say_hello();
+}
 
-	return 0;
+Proj2::~Proj2()
+{
+
 }
