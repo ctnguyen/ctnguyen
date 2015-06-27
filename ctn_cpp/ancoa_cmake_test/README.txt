@@ -13,9 +13,10 @@ with full use of cmake, ctest, cPack :
 
 
 - Project tree in VC++ has the predefined hierarchical. 
-- Libs are generated as dynamics and static
+- Libs are generated both as dynamics and static
 - VC++ solution has to be crossconfig, i.e Debug and Release in the same solution
   In future, might be also cross buildtype, i.e x86 and x64 in the same solution
+- modular doxygen generation, depending on module choosen from a build config.
 
 The projec tree in VC++ should be
 .
