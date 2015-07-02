@@ -5,7 +5,7 @@
 #include <Proj2/Proj2.hpp>
 #include <ProjB/ProjB.hpp>
 #define BOOST_TEST_MODULE testLongTime2B
-#include <boost/test/unit_test.hpp>
+#include <boost/test/included/unit_test.hpp>
 
 BOOST_AUTO_TEST_CASE( constructors )
 {

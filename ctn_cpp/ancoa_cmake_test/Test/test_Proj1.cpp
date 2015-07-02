@@ -4,7 +4,7 @@
  */
 #include <Proj1/Proj1.hpp>
 #define BOOST_TEST_MODULE testProj1
-#include <boost/test/unit_test.hpp>
+#include <boost/test/included/unit_test.hpp>
 
 BOOST_AUTO_TEST_CASE( constructor )
 {

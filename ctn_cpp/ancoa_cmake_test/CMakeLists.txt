@@ -1,5 +1,5 @@
 #CMAKE INITIALIZATION
-cmake_minimum_required (VERSION 3.3)
+cmake_minimum_required (VERSION 3.2)
 
 # For Visual Studio 12 2013, x64 use generator 
 # -G"Visual Studio 12 2013 Win64"
@@ -18,7 +18,7 @@ add_subdirectory(Prog2B)
 
 
 # if found boost test framework, go into the test folder
-find_package(Boost COMPONENTS system filesystem unit_test_framework)
+find_package(Boost COMPONENTS)
 ## Attention to the structure of the boost library that has 
 ## ${BOOST_ROOT}/boost         all include here
 ## ${BOOST_ROOT}/lib           all lib and dll here
