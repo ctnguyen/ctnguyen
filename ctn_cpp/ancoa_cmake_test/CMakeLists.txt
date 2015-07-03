@@ -11,7 +11,6 @@ project(ancoa_cmake_test)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
 include(${PROJECT_SOURCE_DIR}/cmake/SpecificBuildConfig.cmake)
-setBuildFolder()
 
 include_directories(${CMAKE_SOURCE_DIR})
 add_subdirectory(Proj1)

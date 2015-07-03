@@ -8,26 +8,29 @@ function(check64Bit resultHolder)
 
 endfunction()
 
-function(setBuildFolder)
-	
-	check64Bit(is64Bit)
+function(getRootBuildFolder resultPathHolder)
+    
+    set(pathRootBuildFolder "${CMAKE_BINARY_DIR}") # initialize path for build folder to binary directory
 
-	if( is64Bit )
-		message(STATUS"------------------------  This is a 64bit build ${CMAKE_BUILD_TYPE}" )
-		foreach( OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES} )
-			string( TOUPPER ${OUTPUTCONFIG} OUTPUTCONFIG )
-			set( CMAKE_RUNTIME_OUTPUT_DIRECTORY_${OUTPUTCONFIG} "${CMAKE_BINARY_DIR}/x64/${OUTPUTCONFIG}" )
-			set( CMAKE_LIBRARY_OUTPUT_DIRECTORY_${OUTPUTCONFIG} "${CMAKE_BINARY_DIR}/x64/${OUTPUTCONFIG}" )
-			set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${OUTPUTCONFIG} "${CMAKE_BINARY_DIR}/x64/${OUTPUTCONFIG}" )
-		endforeach( OUTPUTCONFIG CMAKE_CONFIGURATION_TYPES )
+    if( CMAKE_SIZEOF_VOID_P EQUAL 8 )
+		set(pathRootBuildFolder "${pathRootBuildFolder}/x64")
 	else()
-		message(STATUS"------------------------  This is a 32bit build ${CMAKE_BUILD_TYPE}" )
-		foreach( OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES} )
-			string( TOUPPER ${OUTPUTCONFIG} OUTPUTCONFIG )
-			set( CMAKE_RUNTIME_OUTPUT_DIRECTORY_${OUTPUTCONFIG} "${CMAKE_BINARY_DIR}/x86/${OUTPUTCONFIG}" )
-			set( CMAKE_LIBRARY_OUTPUT_DIRECTORY_${OUTPUTCONFIG} "${CMAKE_BINARY_DIR}/x86/${OUTPUTCONFIG}" )
-			set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${OUTPUTCONFIG} "${CMAKE_BINARY_DIR}/x86/${OUTPUTCONFIG}" )
-		endforeach( OUTPUTCONFIG CMAKE_CONFIGURATION_TYPES )
+		set(pathRootBuildFolder "${pathRootBuildFolder}/x86")
 	endif()
 
+    set(${resultPathHolder} "${pathRootBuildFolder}" PARENT_SCOPE) 
+endfunction()
+
+
+
+function(ctnSetTargetFolderProperties targetName)
+
+    getRootBuildFolder(pathToRootBuildFolder)
+
+    foreach( OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES} )
+        string( TOUPPER ${OUTPUTCONFIG} OUTPUTCONFIG )
+        set_target_properties( ${targetName} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_${OUTPUTCONFIG} "${pathToRootBuildFolder}/${OUTPUTCONFIG}" )
+        set_target_properties( ${targetName} PROPERTIES LIBRARY_OUTPUT_DIRECTORY_${OUTPUTCONFIG} "${pathToRootBuildFolder}/${OUTPUTCONFIG}" )
+        set_target_properties( ${targetName} PROPERTIES ARCHIVE_OUTPUT_DIRECTORY_${OUTPUTCONFIG} "${pathToRootBuildFolder}/${OUTPUTCONFIG}" )
+    endforeach( OUTPUTCONFIG CMAKE_CONFIGURATION_TYPES )
 endfunction()
