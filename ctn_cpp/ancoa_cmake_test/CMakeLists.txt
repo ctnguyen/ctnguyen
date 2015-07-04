@@ -9,7 +9,6 @@ project(ancoa_cmake_test)
 
 # Set modules directories
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
-
 include(${PROJECT_SOURCE_DIR}/cmake/SpecificBuildConfig.cmake)
 
 include_directories(${CMAKE_SOURCE_DIR})

@@ -1,3 +1,12 @@
-set(CTN_PROJECT_NAME ProjB)
+include(${PROJECT_SOURCE_DIR}/cmake/SpecificBuildConfig.cmake)
 
-add_library(${CTN_PROJECT_NAME} ProjB.hpp ProjB.cpp)
+set(projNAME ProjB)
+
+SET(projHEADERS ProjB.hpp)
+SET(projSOURCES ProjB.cpp)
+#SET(projMOCs mocFilesHere)
+#SET(projRESOURCES resourceFileHere)
+
+add_library(${projNAME} ${projSOURCES} ${projHEADERS})
+
+ctnSetTargetFolderProperties(${projNAME})
