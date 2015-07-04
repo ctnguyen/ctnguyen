@@ -11,6 +11,8 @@ project(ancoa_cmake_test)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 include(${PROJECT_SOURCE_DIR}/cmake/SpecificBuildConfig.cmake)
 
+option(BUILD_SHARED_LIBS "Build All lib in shared" ON)
+
 include_directories(${CMAKE_SOURCE_DIR})
 add_subdirectory(Proj1)
 add_subdirectory(Proj2)

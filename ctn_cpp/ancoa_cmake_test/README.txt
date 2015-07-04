@@ -38,3 +38,22 @@ The projec tree in VC++ should be
 .  Acceptance (folder)
 .    test_LongTime1
 .    test_LongTime2
+
+TODO :
+- Make compile dll and lib, 
+- Make linking a projet with Qt, (focus on config, buildtype dependency and link with the right Qt) x64,x86,Debug,Release
+- Try to install and packaging (need internal and external dependancy, only the neccessaries one)
+- Cpack with different component config (at least two)
+- If have time, separate lib/bin folder (executable should be in the root build directory).
+
+
+- Make ctest works, for unit test, for long test. 
+- Make tests works with DashBoard (Jenkins or CDash)
+
+- Test on cross plateform Linux, Mac OS, MVSC++, Qt Creator, Xcode
+
+- Read about resource file, possibility of use .qrc instead of plateform dependand like .rc only for VC++
+- Run Ancoa build with one processor, and save build log, to see the order of dependency.
+
+
+

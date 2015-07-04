@@ -12,7 +12,9 @@
 #ifndef PROJA_HPP
 #define PROJA_HPP
 
-class ProjA
+#include <ProjA/ProjASharedDefinition.hpp>
+
+class PROJA_LIB_EXPORT ProjA
 {
 public:
 

@@ -12,7 +12,9 @@
 #ifndef PROJ2_HPP
 #define PROJ2_HPP
 
-class Proj2
+#include <Proj2/Proj2SharedDefinition.hpp>
+
+class PROJ2_LIB_EXPORT Proj2
 {
 public:
 

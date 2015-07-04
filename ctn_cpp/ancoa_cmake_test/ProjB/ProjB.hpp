@@ -12,7 +12,9 @@
 #ifndef PROJB_HPP
 #define PROJB_HPP
 
-class ProjB
+#include <ProjB/ProjBSharedDefinition.hpp>
+
+class PROJB_LIB_EXPORT ProjB
 {
 public:
 
