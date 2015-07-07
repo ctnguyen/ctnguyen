@@ -1,9 +1,9 @@
 include(${PROJECT_SOURCE_DIR}/cmake/SpecificBuildConfig.cmake)
 
-set(projNAME Prog1A)
+set(projNAME ProgQt)
 
-add_executable(${projNAME} Prog1A.cpp)
+add_executable(${projNAME} ProgQt.cpp)
 
-target_link_libraries(${projNAME} Proj1	ProjA)
+#target_link_libraries(${projNAME} Proj1	ProjA)
 
 ctnSetTargetFolderProperties(${projNAME})
