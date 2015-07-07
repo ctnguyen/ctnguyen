@@ -24,8 +24,6 @@ add_subdirectory(Prog2B)
 
 ## Find Qt, if found, add this projects
 ##list(APPEND CMAKE_MODULE_PATH "C:/development/frameworks/qt/5.3.1/lib/cmake")
-set(CMAKE_PREFIX_PATH "C:/development/frameworks/qt/5.3.1/lib")
-find_package(Qt5Widgets)
 add_subdirectory(ProjQtTest)
 add_subdirectory(ProgQt)
 
