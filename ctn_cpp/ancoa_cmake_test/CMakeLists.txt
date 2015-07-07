@@ -22,6 +22,9 @@ add_subdirectory(ProjB)
 add_subdirectory(Prog1A)
 add_subdirectory(Prog2B)
 
+## Find Qt, if found, add this projects
+add_subdirectory(ProjQtTest)
+
 
 # if found boost test framework, go into the test folder
 find_package(Boost COMPONENTS)
