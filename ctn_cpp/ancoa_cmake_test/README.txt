@@ -11,12 +11,16 @@ with full use of cmake, ctest, cPack :
 2. - ability of creating package, install with dynamic path handling
 3. - ability of automatic running test, report them to a dashboard (CDash, Jenkins ..)
 
+After all of that, the first important thing todo is to build all dependencies from sources
+So that developer has the total control of how libraries are organized, how to link with them
+in a generic way through different plateform.
 
 - Project tree in VC++ has the predefined hierarchical. 
 - Libs are generated both as dynamics and static
 - VC++ solution has to be crossconfig, i.e Debug and Release in the same solution
   In future, might be also cross buildtype, i.e x86 and x64 in the same solution
 - modular doxygen generation, depending on module choosen from a build config.
+
 
 The projec tree in VC++ should be
 .
