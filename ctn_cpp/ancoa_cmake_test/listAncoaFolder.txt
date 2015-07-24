@@ -1,0 +1,6 @@
+Below the list of sub folder where Visual Studio build in ancoa.sln
+IN THE RIGHT ORDER
+Find by the keyword "PrepareForBuild:" in buildLogFullRelasex64.txt file.
+=====================================================================
+
+MemoryTracker
