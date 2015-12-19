@@ -109,6 +109,34 @@ f_{X}(x) = \frac{1}{\sigma}f_{\mathcal{N}(0,1)}(\frac{x-\mu}{\sigma})
  \hspace{5mm}  \text{    or} \hspace{5mm}  
 \sqrt{n}(\overline{X}_n - \mu) \rightsquigarrow   \mathcal{N}(0,\sigma^{2})
 \]
+
+\paragraph{Multivariate Normal Distribution}
+A random vector $X\in \mathbb{R}^d$ has a multivariate normal distrubution it satisfied one of these conditions
+\begin{enumerate}
+	\item $\forall a \in \mathbb{R}^d, \hspace{3mm} a^{t}.X$ is a Gaussian variable
+	\item There existe $\mu \in \mathbb{R}^d$ and $\Sigma \in \mathbb{R}^{d\times d}$ a \textbf{non-negative definite} matrix such that the characteristic function of $X$ is
+	\[
+	\varphi_{X}(u)     =  \text{exp}(i u^{t} .\mu  - \frac{1}{2} u^{t} .\Sigma. u) \hspace{10mm},\hspace{3mm} u\in\mathbb{R}^d
+	\]
+\end{enumerate}
+The multivariate normal distribution is said to be \textbf{non-degenerate} iif the its covariance matrix $\Sigma$ is \textbf{positive definite}, and it has a density 
+\[
+f_{X}(x) = \frac{1}{ (2\pi)^{\frac{d}{2}} |\text{det}(\Sigma)|^{\frac{1}{2}} } \text{exp}\{ -\frac{1}{2} (x-\mu)^{t} \Sigma^{-1} (x-\mu) \}
+\]
+
+\paragraph{General Linear Transform}
+\[
+\text{if }
+\textbf{Y} = A \textbf{X} + B
+\hspace{1cm}
+\text{ then }
+\hspace{1cm}
+\left\{
+\begin{array}{l}
+\mathbb{E}[\textbf{Y}] = A.\mathbb{E}[\textbf{X}] + B  \\ \\
+\textbf{Cov}[\textbf{Y}] =  A .\textbf{Cov}[\textbf{X}]. A^t  
+\end{array}\right.
+\]
 \subsection{Brownian motion} 
 \paragraph{Definition} Brownian motion is a \textit{continuous} procces $X$ satisfying one of following equivalent properties  (see~\cite{MONIQUE}sec1.4):
 \begin{itemize}
