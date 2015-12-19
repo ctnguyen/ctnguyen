@@ -27,10 +27,38 @@
 \section{Some trivial probabilities}
 
 \subsection{Common}
+\paragraph{Convergences and relations}
+\begin{center}
+	\begin{pspicture}(-7,-2)(7,2)
+	%\psline(-7,-2)(7,2)
+	\rput(-1, 1){\Rnode{as}{\psframebox{$X_n \xrightarrow{a.s} X$}}}
+	\rput(-1,-1){\Rnode{Lp}{\psframebox{$X_n \xrightarrow{\textbf{L}^p} X$}}}
+	\rput(-4,-1){\Rnode{Lq}{\psframebox{$X_n \xrightarrow{\textbf{L}^q} X$}}}
+	\rput( 2, 0){\Rnode{P}{\psframebox{$X_n \xrightarrow{\mathbb{P}} X$}}}
+	\rput( 5, 0){\Rnode{L}{\psframebox{$X_n \rightsquigarrow X$}}}
+	\rput( -5, 0.5){\Rnode{cond}{$ _{0<p<q \leq \infty} \Rightarrow \begin{array}{l}
+			|.|_p \leq |.|_q \\
+			\textbf{L}^q \subset \textbf{L}^p
+			\end{array}$}}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\ncline[linestyle=dashed]{->}{Lq}{Lp}
+	\ncline[linestyle=dashed]{->}{as}{P}
+	\ncline[linestyle=dashed]{->}{Lp}{P}
+	\ncline[linestyle=dashed]{->}{P}{L}
+	\end{pspicture}
+\end{center}
 \paragraph{Jensen inequality}
 \[
 \varphi(\mathbb{E}[X]) \leq \mathbb{E}[\varphi(X)]
 \hspace{1cm} \varphi \text{ convexe funciton}
+\]
+\paragraph{Markov's inequality}
+\[
+\text{for all}\hspace{5mm} \varepsilon > 0, p>0, X\in \textbf{L}^p \hspace{20mm} \mathbb{P}(|X| \geq \varepsilon) \leq \frac{\mathbb{E}[|X|^p]}{\varepsilon ^p}
+\]
+\paragraph{Bienayme-Tchebychev's inequality}
+\[
+\text{for all  } \hspace{5mm} \varepsilon > 0, X\in \textbf{L}^2 \hspace{20mm} \mathbb{P}(|X- \mathbb{E}X| \geq \varepsilon) \leq \frac{\textbf{Var}[X]}{\varepsilon ^2}
 \]
 \paragraph{Conditional Probability}\mbox{} \\
 If $X$ is $\mathcal{G}$-measurable, $Y$ independent of $\mathcal{G}$
