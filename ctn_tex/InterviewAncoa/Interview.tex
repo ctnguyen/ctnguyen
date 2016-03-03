@@ -1,0 +1,652 @@
+%Texlive-full Version 3.141592-1.40.3 (Web2C 7.5.6)
+%TexStudio Version 2.7.0
+
+%\documentclass[answers]{exam}
+\documentclass{exam}
+
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{subcaption}
+
+\usepackage{lmodern}
+\usepackage[a4paper]{geometry}
+
+\usepackage{hyperref}
+\usepackage{enumitem}
+% \usepackage{nomencl}\makenomenclature
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\usepackage{pstricks}
+\usepackage{pst-node}
+\usepackage{color}
+\usepackage[ddmmyyyy]{datetime} 
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Proba}{\mathbb{P}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\Bt}{B_t}
+\newcommand{\DtT}{D(t,T)}
+\newcommand{\RtT}{R(t,T)}
+\newcommand{\PtT}{P(t,T)}
+\newcommand{\PtS}{P(t,S)}
+\newcommand{\LtT}{l(t,T)}
+\newcommand{\YtT}{Y(t,T)}
+\newcommand{\ftT}{f(t,T)}
+\newcommand{\tautT}{\tau(t,T)}
+\newcommand{\inttT}{\int_t^T}
+\newcommand{\intt}{\int_0^t}
+\newcommand{\FuncExp}{\text{exp}}
+\newcommand{\FuncLn}{\text{ln}}
+\newcommand{\Discount}[2]{e^{-\int_{#1}^{#2}r_u du} }
+\newcommand{\bl}[1]{{\scshape  #1}}
+
+\newcommand{\Ti}{T_{i}}
+\newcommand{\Tj}{T_{j}}
+\newcommand{\Ta}{T_{\alpha}}
+\newcommand{\Tb}{T_{\beta}}
+\newcommand{\Tii}{T_{i+1}}
+\newcommand{\Pti}{P(t,T_{i})}
+\newcommand{\Ptii}{P(t,T_{i+1})}
+\newcommand{\Lti}{L(t,\Ti,\Tii)}
+\newcommand{\Lit}{L_{i}(t)}
+\newcommand{\muit}{\mu_i(t)}
+\newcommand{\sigmait}{\sigma_i(t)}
+\newcommand{\Wit}{W^{\Tii}(t)}
+\newcommand{\Wnt}{W^{T_{N+1}}(t)}
+\newcommand{\Ltj}{L(t,\Tj,\Tj)}
+\newcommand{\Ljt}{L_{j}(t)}
+\newcommand{\sigmajt}{\sigma_j(t)}
+\newcommand{\ZCi}{ZC_{i}}
+\newcommand{\ZCii}{ZC_{i+1}}
+\newcommand{\Numi}{Num_{i}}
+\newcommand{\Numii}{Num_{i+1}}
+
+\newcommand{\Sab}{S_{\alpha,\beta}}
+\newcommand{\Cab}{C_{\alpha,\beta}}
+\newcommand{\Wab}{W_{\alpha,\beta}}
+\newcommand{\sigmaab}{\sigma_{\alpha,\beta}}
+\newcommand{\rhoij}{\rho_{ij}}
+\newcommand{\Eab}{\mathbb{E}^{\alpha,\beta}}
+
+\newcommand{\todo}[1]{\begin{center}\color{red} TODO : #1\end{center}}
+
+\usepackage{listings}
+%\lstset{language=C++,basicstyle=\scriptsize \color{green},identifierstyle=\color{orange},keywordstyle=[1]\color{blue},columns=fullflexible}
+\lstset{language=C++,basicstyle=\scriptsize, keywordstyle=\color{blue}, stringstyle=\color{black},	commentstyle=\color{black} }
+
+
+
+\begin{document}
+\begin{titlepage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%  LOGO  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\begin{pspicture}(-7,0)(7,2)
+%\psline(-7,0)(7,2)
+\rput(-3.5,3){\href{http://ancoa.com/}{\includegraphics[scale=0.3]{Ancoa_Logo}}}
+\end{pspicture}
+\end{center}
+
+
+%%%%%%%%%%%%%%%%%% DOCUMENT TITLE %%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{1cm}
+
+\begin{center}
+\resizebox{14cm}{0.8cm}{Interview questions}
+\end{center}
+%%%%%%%%%%%%%%%%%% DOCUMENT TITLE %%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+Version : \today
+\end{center}
+\vspace{2cm}
+\begin{center}
+The aim of the list of questions is not to require the candidate to know everything and give right answers to every questions. Those questions will be picked a few to an interview, will help us to see what area the candidate is comfortable in. We might also give all the list of question and ask the candidate to choose the one he/she is comfortable the most
+\end{center}
+
+%%%%%%%%%%%%%%%%%% ABSTRACT %%%%%%%%%%%%%%%%%%%%%%%%%
+\vfill
+\begin{center}
+Ancoa Software Ltd \copyright \hbox{ }2012-2016.
+\end{center}
+\end{titlepage}
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{C++ programming}
+\begin{questions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is polymorphism? Given three geometry types : Rectangle, Triangle, Circle that all need to calculate their area. How would you write those classes?
+\begin{solution}[.2in]
+\begin{itemize}
+	\item Polymorphism is the ability to call different methods at run-time based on an object’s dynamic type. 
+	\item Candidate is expected to write a BaseGeometry class, and all concrete geometries inherite from this class with a method \lstinline{virtual double calculateArea() const;}.
+\end{itemize}
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is wrong with the following code?
+\begin{lstlisting}
+void printNode(Node* pNode)
+{
+    std::cout << pNode->getValue() << std::endl;
+}
+\end{lstlisting}
+\begin{solution}[.2in]
+Possible null pointer dereference
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is wrong with the following code?
+\begin{lstlisting}
+void SomeClass::setProperties(const std::vector<Property>& 
+rPropertiesVec)
+{
+    if(rPropertiesVec.empty())
+      return;
+
+    mFirstProperty = rProperty.at(0);
+    mSecondProperty = rProperty.at(1);
+}
+\end{lstlisting}
+\begin{solution}[.2in]
+Possible out of bounds container access
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Write a function in C++ to swap the values of two variables of the same type.
+\begin{solution}[.2in]
+\begin{lstlisting}
+template <class T>
+void swap(T& rArg1, T& rArg2)
+{
+	T temp = rArg1;
+	rArg1 = rArg2;
+	rArg2 = temp;
+}
+\end{lstlisting}
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is the difference of vector, list and map. What is the appropriated use for each containter.
+\begin{solution}[.2in]
+Candidate is expected to know vector is for use of dynamic container. List is used when the container need to delete and insert, map is used when search is needed.
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is the difference between \lstinline{class} and \lstinline{struct}.
+\begin{solution}[.2in]
+Candidate is expected to know member of \lstinline{struct} are public by default, member of \lstinline{class} are private by default.
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is the difference of \lstinline{public}, \lstinline{private} and \lstinline{protected}.
+\begin{solution}[.2in]
+Candidate is expected \lstinline{public} allow access from all other classes, \lstinline{protected} allow access from child classes, \lstinline{private} allow access only from declared \lstinline{friend} classes or functions.
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is wrong with the following code?
+\begin{lstlisting}
+double calculateMagicSum(const std::vector<double>& rNumbersVec)
+{
+    double sum = 0.0;
+    for(int i = 0; i < rNumbersVec.size(); ++i)
+    {
+      MagicCalc* pCalc = new MagicCalc;
+      const double magicValue = pCalc->calculate(rNumbersVec.at(i));
+      sum += magicValue;
+    }
+    return sum;
+}
+\end{lstlisting}
+\begin{solution}[.2in]
+The MagicCalc objects are leaked
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is wrong with the following code?
+\begin{lstlisting}
+class Base
+{
+  public:
+	Base();
+	
+	private:
+	virtual void someFunction();
+	
+	int mBaseVar;
+};
+
+class Derived : public Base
+{
+  public:
+	Derived();
+	
+	private:
+	virtual void someFunction();
+	
+	int mDerivedVar;
+};
+\end{lstlisting}
+\begin{solution}[.2in]
+virtual destructor is not declared
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Write the body of the function 'printTree' to traverse a tree and print each node’s value.
+\begin{lstlisting}
+struct TreeNode
+{
+	void print() const;
+	
+	void* mpData;
+	std::vector<TreeNode*> mChildren;
+};
+
+void printTree(TreeNode* pRootNode) const
+{
+	...
+}
+\end{lstlisting}
+\begin{solution}[.2in]
+\begin{lstlisting}
+void printTree(TreeNode* pRootNode) const
+{
+	if(!pRootNode)
+	return;
+	
+	// Print this node
+	pRootNode->print();
+	
+	// Print the child nodes
+	for(std::vector<TreeNode*>::const_iterator citer
+	= children.begin();
+	citer != children.end(); ++citer)
+	{
+		printTree(*citer);
+	}
+}
+\end{lstlisting}
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Suppose you have an array of integers, in which one or more integers are duplicated.
+Write the body of the following function to find all the duplicates.
+\begin{lstlisting}
+void findDuplicatesIndices(const std::vector<int>& rIntsVec, 
+std::vector<int>& rDuplicatesIndicesVec) const
+{
+   //Fill here
+}
+\end{lstlisting}
+\begin{solution}[.2in]
+\begin{lstlisting}
+void findDuplicatesIndices(const std::vector<int>& rIntsVec,
+std::vector<int>& rDuplicatesIndicesVec) const
+{
+	rDuplicatesIndicesVec.clear();
+	
+	std::set<int> seenSoFar;
+	for(int i = 0; i < rIntsVec.size(); ++i)
+	{
+		int val = rIntsVec[i];
+		if(seenSoFar.find(val) != seenSoFar.end())
+		rDuplicatesIndicesVec.push_back(i);
+		seenSoFar.insert(val);
+	}
+}
+\end{lstlisting}
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is wrong with the following code?
+\begin{lstlisting}
+void removeDuplicates(std::vector<int>& rIntVec)
+{
+	std::set<int> values;
+	for(std::vector<int>::iterator iter = std::begin(rIntVec);
+	iter != std::end(rIntVec); ++iter)
+	{
+		if(values.count(*iter))
+			rIntVec.erase(iter);
+		else
+			values.insert(*iter);
+	}
+}
+\end{lstlisting}
+\begin{solution}[.2in]
+Function which deletes objects via an iterator which invalidates the iterator. How should this code be fixed?
+\begin{lstlisting}
+void removeDuplicates(std::vector<int>& rIntVec)
+{
+	std::set<int> values;
+	std::vector<int>::iterator iter;
+	for(iter = std::begin(rIntVec); iter != std::end(rIntVec); ++iter)
+	{
+		if(values.count(*iter))
+			iter = rIntVec.erase(iter) - 1;
+		else
+			values.insert(*iter);
+	}
+}
+\end{lstlisting}
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Write the body of the function 'reverse' to reverse a singly linked list.
+\begin{lstlisting}
+struct ListNode
+{
+	ListNode* mpNext; // null indicates end of list
+	void* mpData;
+};
+
+ListNode* reverse(ListNode* pHeadNode)
+{
+	// Reverse the list defined by pHeadNode
+	// Return the head node of the reversed list
+	...
+}
+\end{lstlisting}
+\begin{solution}[.2in]
+\begin{lstlisting}
+ListNode* reverse(ListNode* pHeadNode)
+{
+	if(!pHeadNode)
+		return 0;
+		
+	ListNode* pCurrentNode = pHeadNode;
+	ListNode* pPrevNode = 0;
+
+	while(pCurrentNode)
+	{
+		// Swap the 'next' pointer
+		ListNode* pNextNode = pCurrentNode->mpNext;
+		pCurrentNode->mpNext = pPrevNode;
+		
+		// Move on to the next node
+		pPrevNode = pCurrentNode;
+		pCurrentNode = pNextNode;
+	}
+	return pPrevNode;
+}
+\end{lstlisting}
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What would be printed to the console when this code is run?
+\begin{lstlisting}
+int main()
+{
+	int a, b, c = 3;
+	a = b = 1;
+	++b += c++ + (a+=3);
+	b *= 3;
+	while(--c) a - 2;
+	a += c *= 2, ++b, b - 4;
+	(c ? a : b) += b ? !!a : !a;
+	std::cout << a << "," << b << "," << c << std::endl;
+}
+\end{lstlisting}
+\begin{solution}[.2in]
+4, 29, 0
+\begin{lstlisting}
+int main()
+{
+	int a, b, c = 3; // After exec: a = ?, b = ?, c = 3.
+	a = b = 1; //  After exec: a = 1, b = 1, c = 3.
+	++b += c++ + (a+=3); // After exec: a = 4, b = 9, c = 4.
+	b *= 3; // After exec: a = 4, b = 27, c = 4.
+	while(--c) a - 2; // After exec: a = 4, b = 27, c = 0.
+	a += c *= 2, ++b, b - 4; //  After exec: a = 4, b = 28, c = 0.
+	(c ? a : b) += b ? !!a : !a; // After exec: a = 4, b = 29, c = 0.
+	std::cout << a << "," << b << "," << c << std::endl;
+}
+\end{lstlisting}
+\end{solution}
+
+\end{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Mathematics}
+\begin{questions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question How to evaluate matrix vector multiplication? How to evaluate bilinear on 2 vectors (example 2 dimension case).
+\begin{solution}[.2in]
+todo
+\end{solution}
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is a positive definite symmetric matrix.
+\begin{solution}[.2in]
+	todo
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question How to calculate the norm of a $N$-dimensional vector. Do you know other norm? Which condition should satisfied for a norm.
+\begin{solution}[.2in]
+	todo
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is a eigenvalues and eigenvectors. Method to find an eigenvalue. Is that easy to find eigenvector?
+\begin{solution}[.2in]
+	todo
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question How to revert a matrix? Small matrix 2x2. Some method to revert very big matrix 1Mx1M
+\begin{solution}[.2in]
+	todo
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question How to calculate the overlap region of two rectangle exactly the same size, but different center. (first, how to check if two rectangle overlaps).
+\begin{solution}[.2in]
+	todo
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Ideas of how to visualize a matrix dimension 1Bx1B?
+\begin{solution}[.2in]
+	todo
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Simple way to parallelise Matrix * Vector
+\begin{solution}[.2in]
+Expected to know multiplication by blocks.
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is an orthogonal projection? given 2 vectors.
+\begin{solution}[.2in]
+	todo
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Draw graphic of functions $y=2x-1$, $y=|x|$, $y=e^x$, $y=ln(x)$, $y=cos(x)$, $y=sin(x)$.
+\begin{solution}[.2in]
+	todo
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Draw graphic of unit bull with difference distance definition L2, L1, LInf.
+\begin{solution}[.2in]
+	todo
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is Newton Raphson method. How to test if the Newton Raphson implementation give correct result
+\begin{solution}[.2in]
+Newton Raphson is a numerical method to find solution of a function $f(x)=a$. One can test the implementation by giving a point $\hat{x}$, calculate $\hat{a}=f(\hat{x})$, and resolve the equation $f(x)=\hat{a}$. If the found solution is close, very closed to $\hat{x}$, the algorithm is well implemented.
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is linear interpolation? Given 2 points, how to calculate the interpolated point? We might need higher degree polynomial to interpolate, why? Given polynomial of n degree, what is the minimum number of points are needed to do a correct interpolation?
+\begin{solution}[.2in]
+	todo
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Given a vector of bool : b1,b2… bn. Write a function to check OR of all, AND of all, negation OR of all, negation AND of all elements.
+\begin{solution}[.2in]
+Candidate is expected to know basic logic formula 
+\begin{itemize}
+	\item $\overline{A\cup B} = \overline{A}\cap \overline{B}$
+    \item $\overline{A\cap B} = \overline{A}\cup \overline{B}$
+\end{itemize}
+\end{solution}
+
+
+\end{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Statistics}
+\begin{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question How to calculate mean, variance, and correlation.
+\begin{solution}[.2in]
+	todo
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What does it mean two variables are highly correlated. Is uncorrelated say independant? Example of variable uncorrelated but dependant
+\begin{solution}[.2in]
+	$y=|x|$
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Property of the covariance matrix. How to get the correlation matrix from covariance matrix? What are properties of covariance matrix and correlation matrix.
+\begin{solution}[.2in]
+	todo
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question How to calculate the running average?
+\begin{solution}[.2in]
+	todo
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is the difference of mean vs median.
+\begin{solution}[.2in]
+	todo
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is the density of a variable? discrete case, continuous case. What condition should satisfy a density?
+\begin{solution}[.2in]
+	todo
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is the cumulative distribution function? What properties it has?
+\begin{solution}[.2in]
+Cumulative distribution is the function describing probability of a rv $f(t) = P(X\leq t)$. Its a increasing function, growing from zero to 1.
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is a Gaussian variable? what are their properties? Example . How the shape of the gaussian density should be?  Draw a Gaussian density shape with big variance vs small variance.
+\begin{solution}[.2in]
+	todo
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is the idea of regression? linear regression? example from a scatter plot, how to draw intuitively a regression? How to test a regression without having real data?
+\begin{solution}[.2in]
+Regression is the estimation of a rv in relation to other rv. Mathematically, that estimate the conditional expectation. Linear regression make hypothesis two variables are linearly linked and estimate this linearity. Regression is indeed a parametric estimation. One should know how to virtually test the regression with simulated data, before applying to real data.
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question If a simulator simulate 1M values of uniform law vs Gaussian law, what should be the layout of values between -1 and 1? How to test if the gaussian simulation is correct?
+\begin{solution}[.2in]
+Uniform simulation will give the set of points uniformly distributed in the segment, Gaussian simulation will give the set of points more dense in the center of the segment. To test if the Gaussian simulation is correct, one should calculate sample mean and sample variance, and compare with the Gaussian parameters.
+\end{solution}
+\end{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Finance}
+\begin{questions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Knowledge of any finance instrument? stock, forward, options, swap, bond …?
+\begin{solution}[.2in]
+\begin{itemize}
+	\item For Stock, candidate is expected to know about dividend, when dividends pay out, stock price drop
+    \item For Forward, candidate is expected to know the fair price formula $F=e^{rT}S$
+    \item For Option, candidate is expected to know the important of volatility (the only value unobservable).
+    \item For Bond, candidate is expected to know how to price a bond given Yield curve.
+\end{itemize}
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is an order book? What is a market order, limit order, stop limit order, stop loss order?
+\begin{solution}[.2in]
+\begin{itemize}
+	\item Market order is an order matching immediately at the best price
+	\item Limit order is an order matching at user specified price
+	\item Stop loss order is an order when price move to a specific level, become a market order.
+	\item Stop limit order is an order, when price move to a specific level, become limit order.
+\end{itemize}
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Knowledge about liquidity? liquidity risk?
+\begin{solution}[.2in]
+Liquidity indicator define how easy participant can trade. Liquidity risk is the risk when investers want to trade, but cannot trade at the desired moment, with the desired volume.
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is the volatility? How to calculate?
+\begin{solution}[.2in]
+Volatility is a measure of variation of price. There are historical volatility and implied volatility. Historical volatility is calculated by statistical methods, implied volatility is calculated by reverting a model's pricer.
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Different of Stock market, Commodity market, Interest Rate market, FX market?
+\begin{solution}[.2in]
+	todo
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is a Yield curve? How to have the Yield curve?
+\begin{solution}[.2in]
+\begin{itemize}
+	\item Yield curve is the curve describing the interest rate at the present moment in function of maturity.
+    \item Yield curve is quoted by data provider, or can be calculated through boostraping method or optimization method, with a bunch of Fixed Income instruments (Bonds, Forward, Swap).
+\end{itemize}
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Knowledge of any kind of market manipulation? If you have the super power that you can move the price of the market, what would you do?
+\begin{solution}[.2in]
+Candidate is expected to say : move down the price, buy the asset, move up the price, sell the asset.
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question If the US interest rate raise, what will be expected the FX of pound price against dollar?
+\begin{solution}[.2in]
+Interest rate increases means the value of the money increase. By comparing to other money, dollar will be stronger, so pound will be cheaper.
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question An invester want to sell a huge amount of a certain security. He split in small chunks and put in the order books at different choice of time to optimize his executions. Why he need to do so? How the price will behave, why?
+\begin{solution}[.2in]
+Following naturally the demand-offer balance, if there are more sellers, the price will move down. Invester should split a huge trade into small chunk to minimize the price impact. 
+\end{solution}
+
+\end{questions}
+%\printnomenclature % % % % % % % % % % %
+%\bibliographystyle{siam}
+%\bibliography{interview.bib}
+\end{document}
