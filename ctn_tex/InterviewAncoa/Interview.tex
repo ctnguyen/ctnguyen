@@ -1,8 +1,8 @@
 %Texlive-full Version 3.141592-1.40.3 (Web2C 7.5.6)
 %TexStudio Version 2.7.0
 
-%\documentclass[answers]{exam}
-\documentclass{exam}
+\documentclass[answers]{exam}
+%\documentclass{exam}
 
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
@@ -72,6 +72,7 @@
 \newcommand{\Eab}{\mathbb{E}^{\alpha,\beta}}
 
 \newcommand{\todo}[1]{\begin{center}\color{red} TODO : #1\end{center}}
+\newcommand{\mathvec}[1]{\textbf{#1}}
 
 \usepackage{listings}
 %\lstset{language=C++,basicstyle=\scriptsize \color{green},identifierstyle=\color{orange},keywordstyle=[1]\color{blue},columns=fullflexible}
@@ -417,32 +418,145 @@ int main()
 \begin{questions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \question How to evaluate matrix vector multiplication? How to evaluate bilinear on 2 vectors (example 2 dimension case).
+\[
+\left[ 
+\begin{array}{cc}
+a_{11} & a_{12}\\
+a_{21} & a_{22}
+\end{array} 
+\right]
+\left[ 
+\begin{array}{c}
+x_{1}\\
+x_{2}
+\end{array} 
+\right]
+=?
+\hspace{1cm}
+\left[ 
+\begin{array}{cc}
+x_{1} & x_{2}
+\end{array} 
+\right]
+\left[ 
+\begin{array}{cc}
+a_{11} & a_{12}\\
+a_{21} & a_{22}
+\end{array} 
+\right]
+\left[ 
+\begin{array}{c}
+x_{1}\\
+x_{2}
+\end{array} 
+\right]
+=?
+\]
 \begin{solution}[.2in]
-todo
+\[
+\left[ 
+\begin{array}{cc}
+a_{11} & a_{12}\\
+a_{21} & a_{22}
+\end{array} 
+\right]
+\left[ 
+\begin{array}{c}
+x_{1}\\
+x_{2}
+\end{array} 
+\right]
+=
+\left[ 
+\begin{array}{c}
+a_{11}x_1 + a_{12}x_2\\
+a_{21}x_1 + a_{22}x_2
+\end{array} 
+\right]
+\]
+And
+\[
+\left[ 
+\begin{array}{cc}
+x_{1} & x_{2}
+\end{array} 
+\right]
+\left[ 
+\begin{array}{cc}
+a_{11} & a_{12}\\
+a_{21} & a_{22}
+\end{array} 
+\right]
+\left[ 
+\begin{array}{c}
+x_{1}\\
+x_{2}
+\end{array} 
+\right]
+=
+a_{11}x^2_1 + (a_{12}+a_{21})x_1x_2 + a_{22}x^2_2
+\]
 \end{solution}
 	
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \question What is a positive definite symmetric matrix.
 \begin{solution}[.2in]
-	todo
+A matrix $A$ is positive definite iff 
+\[
+\mathvec{x}^t A \mathvec{x} = 0 \Longleftrightarrow \mathvec{x}=0
+\]
 \end{solution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \question How to calculate the norm of a $N$-dimensional vector. Do you know other norm? Which condition should satisfied for a norm.
 \begin{solution}[.2in]
-	todo
+Given $\mathvec{x}=[x_1,x_1 ... x_n] \in \mathbb{R}^n$
+\begin{itemize}
+	\item Norm $L^2$ (Euclidian norm) is : $||\textbf{x}||_{2} = \sqrt{\sum x^2_i} $
+	\item Norm $L^1$ is : $||\textbf{x}||_{1} = \sum |x_i|$
+	\item Norm $L^\infty$ is : $||\textbf{x}||_{\infty} = \textbf{max} |x_i|$
+\end{itemize}
 \end{solution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\question What is a eigenvalues and eigenvectors. Method to find an eigenvalue. Is that easy to find eigenvector?
+\question What is a eigenvalues and eigenvectors. Method to find eigenvalues. Is that easy to find eigenvectors?
 \begin{solution}[.2in]
-	todo
+Eigenvalues are associated with eigenvectors, describe spectrum spaces of a squared matrix $\mathvec{A}$ by equations 
+\[
+\lambda\mathvec{x} = \mathvec{A}\mathvec{x}
+\]
+$\lambda$ is the eigenvalue, $\mathvec{x}$ is the associated eigenvector. Indeed eigenvector is in the kernel of the application (matrix) $\mathvec{A}-\lambda\mathvec{I}$, so eigenvalues can be found by resolve the equation
+\[
+\text{det}(\mathvec{A}-\lambda\mathvec{I})=0
+\]
+Eigenvectors or eingenspace can be manually calculated for small matrices. For big matrices, there are a few algorithm to find eigenvectors, implemented in C++.
 \end{solution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\question How to revert a matrix? Small matrix 2x2. Some method to revert very big matrix 1Mx1M
+\question Why and how to invert a matrix? Example invert a 2x2 matrix 
+\[
+\mathvec{A}=
+\left[ 
+\begin{array}{cc}
+a_{11} & a_{12}\\
+a_{21} & a_{22}
+\end{array} 
+\right]
+\]
+Some methods to invert very big matrix 1Mx1M
 \begin{solution}[.2in]
-	todo
+There are two methods to revert a small matrix : or calculate determinant, adjoint matrices, then apply the invert formula an simple way is to write an unknown matrix $\mathvec{X}$ and solve the equation $\mathvec{X}\mathvec{A}=\mathvec{I}_2$. The result has to be :
+\[
+\mathvec{A}^{-1}=
+\frac{1}{a_{11}a_{22}-a_{12}a_{21}}
+\left[ 
+\begin{array}{cc}
+a_{22} & -a_{12}\\
+-a_{21} & a_{11}
+\end{array} 
+\right]
+\]
+Two basical methods to invert matrices are LU, Conjugated Gradient. The first is direct method which require to store the whole matrix in memory, the second is iterative, don't need to store the matrix in memory, but implement the operation $\mathvec{x}+=\mathvec{A}d\mathvec{x}$
 \end{solution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -454,7 +568,7 @@ todo
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \question Ideas of how to visualize a matrix dimension 1Bx1B?
 \begin{solution}[.2in]
-	todo
+The idea could be building a hierarchical bounding volume. At root level, matrix is a single rectangle, with a single color. At second level, the matrix can be split in two, and the half having more non-null element will have a darker color. At third level, the two half matrix are split again, each into two part.... Depending of the zoom of the viewer, one can calculate the detail level and render the image.
 \end{solution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -464,9 +578,13 @@ Expected to know multiplication by blocks.
 \end{solution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\question What is an orthogonal projection? given 2 vectors.
+\question What are two orthogonal vectors? Calculate orthogonal projection of $\mathvec{x}$ into $\mathvec{y}$. Test with a simple example of dimension 2. 
 \begin{solution}[.2in]
-	todo
+Two vectors are orthogonal iff $<\mathvec{x},\mathvec{y}>=0$. Projection of $\mathvec{x}$ on $\mathvec{y}$ is
+\[
+\mathvec{x} - \frac{<\mathvec{x},\mathvec{y}>}{||\mathvec{y}||^2} \mathvec{y}
+\]
+Test in 2D with $\mathvec{x}^t=[1,1]$ and $\mathvec{y}^t=[-1,1]$
 \end{solution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -645,6 +763,21 @@ Interest rate increases means the value of the money increase. By comparing to o
 Following naturally the demand-offer balance, if there are more sellers, the price will move down. Invester should split a huge trade into small chunk to minimize the price impact. 
 \end{solution}
 
+\end{questions}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Optimal Programming}
+\begin{questions}
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\question Todo
+	\begin{solution}[.2in]
+		todo
+	\end{solution}
+	
 \end{questions}
 %\printnomenclature % % % % % % % % % % %
 %\bibliographystyle{siam}
