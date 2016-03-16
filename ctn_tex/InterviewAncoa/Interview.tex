@@ -118,6 +118,31 @@ Ancoa Software Ltd \copyright \hbox{ }2012-2016.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{C++ programming}
 \begin{questions}
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is the difference of vector, list and map. What is the appropriated use for each containter.
+\begin{solution}[.2in]
+	Candidate is expected to know vector is for use of dynamic container. List is used when the container need to delete and insert, map is used when search is needed.
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is the difference between \lstinline{class} and \lstinline{struct}.
+\begin{solution}[.2in]
+	Candidate is expected to know member of \lstinline{struct} are public by default, member of \lstinline{class} are private by default.
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is the difference of \lstinline{public}, \lstinline{private} and \lstinline{protected}.
+\begin{solution}[.2in]
+	Candidate is expected \lstinline{public} allow access from all other classes, \lstinline{protected} allow access from child classes, \lstinline{private} allow access only from declared \lstinline{friend} classes or functions.
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is the difference between pointers and references.
+\begin{solution}[.2in]
+    Candidate is expected to know references is considered as the object itself, cannot be \lstinline{null} like pointers.
+\end{solution}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \question What is polymorphism? Given three geometry types : Rectangle, Triangle, Circle that all need to calculate their area. How would you write those classes?
 \begin{solution}[.2in]
@@ -125,6 +150,30 @@ Ancoa Software Ltd \copyright \hbox{ }2012-2016.
 	\item Polymorphism is the ability to call different methods at run-time based on an object’s dynamic type. 
 	\item Candidate is expected to write a BaseGeometry class, and all concrete geometries inherite from this class with a method \lstinline{virtual double calculateArea() const;}.
 \end{itemize}
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is wrong with the following code?
+\begin{lstlisting}
+class Analytic
+{
+  public:
+    double getSum() const
+    {
+      _bufferSum=0;
+      for(auto const& elem : mTimeSerie)
+        _bufferSum+=elem;
+      return _bufferSum;
+    }
+
+private:
+    std::vector<double> mTimeSerie;
+    double _bufferSum;
+};
+
+\end{lstlisting}
+\begin{solution}[.2in]
+\lstinline{const} member methods cannot modify member variables. Candidate is expected to suggest to set \lstinline{_bufferSum} to \lstinline{mutable}, or use local variable inside the for loop instead of member variable.
 \end{solution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -142,14 +191,13 @@ Possible null pointer dereference
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \question What is wrong with the following code?
 \begin{lstlisting}
-void SomeClass::setProperties(const std::vector<Property>& 
-rPropertiesVec)
+void SomeClass::setProperties(const std::vector<Property>& rPropertiesVec)
 {
     if(rPropertiesVec.empty())
       return;
 
-    mFirstProperty = rProperty.at(0);
-    mSecondProperty = rProperty.at(1);
+    mFirstProperty = rPropertiesVec.at(0);
+    mSecondProperty = rPropertiesVec.at(1);
 }
 \end{lstlisting}
 \begin{solution}[.2in]
@@ -163,29 +211,11 @@ Possible out of bounds container access
 template <class T>
 void swap(T& rArg1, T& rArg2)
 {
-	T temp = rArg1;
-	rArg1 = rArg2;
-	rArg2 = temp;
+    T temp = rArg1;
+    rArg1 = rArg2;
+    rArg2 = temp;
 }
 \end{lstlisting}
-\end{solution}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\question What is the difference of vector, list and map. What is the appropriated use for each containter.
-\begin{solution}[.2in]
-Candidate is expected to know vector is for use of dynamic container. List is used when the container need to delete and insert, map is used when search is needed.
-\end{solution}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\question What is the difference between \lstinline{class} and \lstinline{struct}.
-\begin{solution}[.2in]
-Candidate is expected to know member of \lstinline{struct} are public by default, member of \lstinline{class} are private by default.
-\end{solution}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\question What is the difference of \lstinline{public}, \lstinline{private} and \lstinline{protected}.
-\begin{solution}[.2in]
-Candidate is expected \lstinline{public} allow access from all other classes, \lstinline{protected} allow access from child classes, \lstinline{private} allow access only from declared \lstinline{friend} classes or functions.
 \end{solution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -213,23 +243,23 @@ The MagicCalc objects are leaked
 class Base
 {
   public:
-	Base();
-	
-	private:
-	virtual void someFunction();
-	
-	int mBaseVar;
+    Base();
+
+  private:
+    virtual void someFunction();
+
+    int mBaseVar;
 };
 
 class Derived : public Base
 {
   public:
-	Derived();
-	
-	private:
-	virtual void someFunction();
-	
-	int mDerivedVar;
+    Derived();
+
+  private:
+    virtual void someFunction();
+
+    int mDerivedVar;
 };
 \end{lstlisting}
 \begin{solution}[.2in]
@@ -241,34 +271,33 @@ virtual destructor is not declared
 \begin{lstlisting}
 struct TreeNode
 {
-	void print() const;
-	
-	void* mpData;
-	std::vector<TreeNode*> mChildren;
+    void print() const;
+
+    void* mpData;
+    std::vector<TreeNode*> mChildren;
 };
 
 void printTree(TreeNode* pRootNode) const
 {
-	...
+    ...
 }
 \end{lstlisting}
 \begin{solution}[.2in]
 \begin{lstlisting}
 void printTree(TreeNode* pRootNode) const
 {
-	if(!pRootNode)
-	return;
-	
-	// Print this node
-	pRootNode->print();
-	
-	// Print the child nodes
-	for(std::vector<TreeNode*>::const_iterator citer
-	= children.begin();
-	citer != children.end(); ++citer)
-	{
-		printTree(*citer);
-	}
+    if(!pRootNode)
+      return;
+
+    // Print this node
+    pRootNode->print();
+
+    // Print the child nodes
+    std::vector<TreeNode*>::const_iterator citer;
+    for(citer = children.begin();citer != children.end();++citer)
+    {
+      printTree(*citer);
+    }
 }
 \end{lstlisting}
 \end{solution}
@@ -280,7 +309,7 @@ Write the body of the following function to find all the duplicates.
 void findDuplicatesIndices(const std::vector<int>& rIntsVec, 
 std::vector<int>& rDuplicatesIndicesVec) const
 {
-   //Fill here
+    //Fill here
 }
 \end{lstlisting}
 \begin{solution}[.2in]
@@ -288,16 +317,16 @@ std::vector<int>& rDuplicatesIndicesVec) const
 void findDuplicatesIndices(const std::vector<int>& rIntsVec,
 std::vector<int>& rDuplicatesIndicesVec) const
 {
-	rDuplicatesIndicesVec.clear();
-	
-	std::set<int> seenSoFar;
-	for(int i = 0; i < rIntsVec.size(); ++i)
-	{
-		int val = rIntsVec[i];
-		if(seenSoFar.find(val) != seenSoFar.end())
-		rDuplicatesIndicesVec.push_back(i);
-		seenSoFar.insert(val);
-	}
+    rDuplicatesIndicesVec.clear();
+
+    std::set<int> seenSoFar;
+    for(int i = 0; i < rIntsVec.size(); ++i)
+    {
+      int val = rIntsVec[i];
+      if(seenSoFar.find(val) != seenSoFar.end())
+      rDuplicatesIndicesVec.push_back(i);
+      seenSoFar.insert(val);
+    }
 }
 \end{lstlisting}
 \end{solution}
@@ -307,15 +336,15 @@ std::vector<int>& rDuplicatesIndicesVec) const
 \begin{lstlisting}
 void removeDuplicates(std::vector<int>& rIntVec)
 {
-	std::set<int> values;
-	for(std::vector<int>::iterator iter = std::begin(rIntVec);
-	iter != std::end(rIntVec); ++iter)
-	{
-		if(values.count(*iter))
-			rIntVec.erase(iter);
-		else
-			values.insert(*iter);
-	}
+    std::set<int> values;
+    std::vector<int>::iterator iter;
+    for(iter = std::begin(rIntVec); iter != std::end(rIntVec); ++iter)
+    {
+      if(values.count(*iter))
+        rIntVec.erase(iter);
+      else
+        values.insert(*iter);
+    }
 }
 \end{lstlisting}
 \begin{solution}[.2in]
@@ -323,15 +352,15 @@ Function which deletes objects via an iterator which invalidates the iterator. H
 \begin{lstlisting}
 void removeDuplicates(std::vector<int>& rIntVec)
 {
-	std::set<int> values;
-	std::vector<int>::iterator iter;
-	for(iter = std::begin(rIntVec); iter != std::end(rIntVec); ++iter)
-	{
-		if(values.count(*iter))
-			iter = rIntVec.erase(iter) - 1;
-		else
-			values.insert(*iter);
-	}
+    std::set<int> values;
+    std::vector<int>::iterator iter;
+    for(iter = std::begin(rIntVec); iter != std::end(rIntVec); ++iter)
+    {
+      if(values.count(*iter))
+        iter = rIntVec.erase(iter) - 1;
+      else
+        values.insert(*iter);
+}
 }
 \end{lstlisting}
 \end{solution}
@@ -341,38 +370,38 @@ void removeDuplicates(std::vector<int>& rIntVec)
 \begin{lstlisting}
 struct ListNode
 {
-	ListNode* mpNext; // null indicates end of list
-	void* mpData;
+    ListNode* mpNext; // null indicates end of list
+    void* mpData;
 };
 
 ListNode* reverse(ListNode* pHeadNode)
 {
-	// Reverse the list defined by pHeadNode
-	// Return the head node of the reversed list
-	...
+    // Reverse the list defined by pHeadNode
+    // Return the head node of the reversed list
+    ...
 }
 \end{lstlisting}
 \begin{solution}[.2in]
 \begin{lstlisting}
 ListNode* reverse(ListNode* pHeadNode)
 {
-	if(!pHeadNode)
-		return 0;
-		
-	ListNode* pCurrentNode = pHeadNode;
-	ListNode* pPrevNode = 0;
+    if(!pHeadNode)
+      return 0;
 
-	while(pCurrentNode)
-	{
-		// Swap the 'next' pointer
-		ListNode* pNextNode = pCurrentNode->mpNext;
-		pCurrentNode->mpNext = pPrevNode;
-		
-		// Move on to the next node
-		pPrevNode = pCurrentNode;
-		pCurrentNode = pNextNode;
-	}
-	return pPrevNode;
+    ListNode* pCurrentNode = pHeadNode;
+    ListNode* pPrevNode = 0;
+
+    while(pCurrentNode)
+    {
+       // Swap the 'next' pointer
+       ListNode* pNextNode = pCurrentNode->mpNext;
+       pCurrentNode->mpNext = pPrevNode;
+
+       // Move on to the next node
+       pPrevNode = pCurrentNode;
+       pCurrentNode = pNextNode;
+    }
+    return pPrevNode;
 }
 \end{lstlisting}
 \end{solution}
@@ -382,14 +411,14 @@ ListNode* reverse(ListNode* pHeadNode)
 \begin{lstlisting}
 int main()
 {
-	int a, b, c = 3;
-	a = b = 1;
-	++b += c++ + (a+=3);
-	b *= 3;
-	while(--c) a - 2;
-	a += c *= 2, ++b, b - 4;
-	(c ? a : b) += b ? !!a : !a;
-	std::cout << a << "," << b << "," << c << std::endl;
+    int a, b, c = 3;
+    a = b = 1;
+    ++b += c++ + (a+=3);
+    b *= 3;
+    while(--c) a - 2;
+    a += c *= 2, ++b, b - 4;
+    (c ? a : b) += b ? !!a : !a;
+    std::cout << a << "," << b << "," << c << std::endl;
 }
 \end{lstlisting}
 \begin{solution}[.2in]
@@ -397,14 +426,14 @@ int main()
 \begin{lstlisting}
 int main()
 {
-	int a, b, c = 3; // After exec: a = ?, b = ?, c = 3.
-	a = b = 1; //  After exec: a = 1, b = 1, c = 3.
-	++b += c++ + (a+=3); // After exec: a = 4, b = 9, c = 4.
-	b *= 3; // After exec: a = 4, b = 27, c = 4.
-	while(--c) a - 2; // After exec: a = 4, b = 27, c = 0.
-	a += c *= 2, ++b, b - 4; //  After exec: a = 4, b = 28, c = 0.
-	(c ? a : b) += b ? !!a : !a; // After exec: a = 4, b = 29, c = 0.
-	std::cout << a << "," << b << "," << c << std::endl;
+    int a, b, c = 3; // After exec: a = ?, b = ?, c = 3.
+    a = b = 1; //  After exec: a = 1, b = 1, c = 3.
+    ++b += c++ + (a+=3); // After exec: a = 4, b = 9, c = 4.
+    b *= 3; // After exec: a = 4, b = 27, c = 4.
+    while(--c) a - 2; // After exec: a = 4, b = 27, c = 0.
+    a += c *= 2, ++b, b - 4; //  After exec: a = 4, b = 28, c = 0.
+    (c ? a : b) += b ? !!a : !a; // After exec: a = 4, b = 29, c = 0.
+    std::cout << a << "," << b << "," << c << std::endl;
 }
 \end{lstlisting}
 \end{solution}
@@ -497,7 +526,13 @@ x_{2}
 a_{11}x^2_1 + (a_{12}+a_{21})x_1x_2 + a_{22}x^2_2
 \]
 \end{solution}
-	
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Providing a rectangle in 2D plan with coordinates of 4 corners. How to sample 1 millions points uniformly inside the rectangle.
+\begin{solution}[.2in]
+Todo : Candidate is expected to know to distribute 4 points uniformly inside the rectangle. Then generalize the idea to 1M points. The most common way is to be able to calculate the transformation matrix, transform an arbitrary rectangle to the reference rectangle (unit square). The invert of this matrix transform the unit square to the rectangle. Uniformly distribute points inside the unit square is easy, then transform them by mean of transformation matrix.
+\end{solution}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \question What is a positive definite symmetric matrix.
 \begin{solution}[.2in]
