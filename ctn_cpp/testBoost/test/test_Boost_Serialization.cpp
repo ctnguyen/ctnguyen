@@ -7,10 +7,10 @@
 #include <string>
 
 #include <boost/archive/tmpdir.hpp>
-
+//
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
-
+//
 #include <boost/serialization/base_object.hpp>
 #include <boost/serialization/utility.hpp>
 #include <boost/serialization/list.hpp>
@@ -30,15 +30,19 @@ public:
 
 private:
     friend class boost::serialization::access;
-    //template<class Archive>
-    //void serialize(Archive & ar, const unsigned int version)
-    //{
-    //    ar & mID;
-    //    ar & mLabel;
-    //    ar & mX;
-    //    ar & mY;
-    //}
-    //friend std::ostream & operator<<(std::ostream &os, const TradePoint& crTradePoint){ return os<<crTradePoint;}
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version)
+    {
+        ar & mID;
+        ar & mLabel;
+        ar & mX;
+        ar & mY;
+    }
+    friend std::ostream & operator<<(std::ostream &os, const TradePoint& crTradePoint)
+    { 
+        os<<crTradePoint;
+        return os;
+    }
 
     ///
     unsigned int mID;
@@ -50,7 +54,7 @@ private:
 int main(int argc, char *argv[])
 {
     TradePoint p;
-    //std::cout << p <<std::endl;
+    std::cout << p <<std::endl;
     std::cout << "Hello World"<<std::endl;
 
     return 0;
