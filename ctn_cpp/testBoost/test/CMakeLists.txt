@@ -1,2 +1,3 @@
 
 add_subdirectory(test_Boost_Serialization)
+add_subdirectory(test_Boost_iostreams)
