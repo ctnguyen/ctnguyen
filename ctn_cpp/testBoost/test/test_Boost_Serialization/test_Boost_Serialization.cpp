@@ -33,8 +33,7 @@ private:
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version)
     {
-        ar & mX;
-        ar & mY;
+        ar & mX & mY;
     }
 
     ///
@@ -54,9 +53,7 @@ private:
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version)
     {
-        ar & mX;
-        ar & mY;
-        ar & mZ;
+        ar & mX & mY & mZ;
     }
 
     ///
@@ -184,15 +181,16 @@ void test_char_array_archive()
     for(size_t i=0;i<buffer_size;++i)
         buffer[i]='k';
 
-    //XY p0('a','Z');
-    //XY p1('b','Y');
-    //XYZ p3('L','M','N');
     AZ p0('a','b','c','d','e');
+    XY p1('A','B');
+    //XY p1('b','Y');
+    XYZ p2('C','D','E');
+    
     {
         boost::iostreams::basic_array_sink<char> sr(buffer, buffer_size);
         boost::iostreams::stream< boost::iostreams::basic_array_sink<char> > source(sr);
         boost::archive::binary_oarchive oa(source);
-        oa << p0;// <<p1 <<p3;
+        oa << p0 <<p1 <<p2;
     }
 
 

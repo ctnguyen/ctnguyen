@@ -1,0 +1,2 @@
+add_executable(demo_trivial_archive demo_trivial_archive.cpp)
+target_link_libraries(demo_trivial_archive ${Boost_LIBRARIES})

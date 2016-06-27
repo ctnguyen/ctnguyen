@@ -1,0 +1,2 @@
+add_executable(demo_fast_archive demo_fast_archive.cpp)
+target_link_libraries(demo_fast_archive ${Boost_LIBRARIES})
