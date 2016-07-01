@@ -97,6 +97,14 @@ void test_char_array_archive_nativeCpp()
     const int abc=100;
 }
 
+
+//http://stackoverflow.com/questions/20548983/boost-serialization-version-information
+#include <boost/serialization/level.hpp>
+//BOOST_CLASS_IMPLEMENTATION(std::string, boost::serialization::object_serializable);
+BOOST_CLASS_IMPLEMENTATION(OneChar, boost::serialization::object_serializable);
+BOOST_CLASS_IMPLEMENTATION(OneInt, boost::serialization::object_serializable);
+BOOST_CLASS_IMPLEMENTATION(CharInt, boost::serialization::object_serializable);
+
 void test_char_array_archive_customClasses()
 {
     /// boost serialization is not optimal, there are overhead 
@@ -142,7 +150,8 @@ void test_char_array_archive_customClasses()
         onecharObj1.mA='X';onecharObj2.mA='Y';
         OneInt oneintObj;
         CharInt charintObj;
-        oa <<onecharObj1 <<chartoserialize[0] <<oneintObj << chartoserialize[1]<<onecharObj2;
+        oa <<onecharObj1 << chartoserialize[0];
+        //oa <<onecharObj1 <<chartoserialize[0] <<oneintObj << chartoserialize[1]<<onecharObj2;
     }
 
 
