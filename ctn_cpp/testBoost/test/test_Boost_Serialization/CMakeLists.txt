@@ -14,6 +14,9 @@ include_directories(${Boost_INCLUDE_DIR})
 add_executable(test_Boost_Serialization test_Boost_Serialization.cpp)
 target_link_libraries(test_Boost_Serialization ${Boost_LIBRARIES})
 
+add_executable(test_Boost_BinarySerialization test_Boost_BinarySerialization.cpp)
+target_link_libraries(test_Boost_BinarySerialization ${Boost_LIBRARIES})
+
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 add_subdirectory(demo_trivial_archive)
 #add_subdirectory(demo_fast_archive)
