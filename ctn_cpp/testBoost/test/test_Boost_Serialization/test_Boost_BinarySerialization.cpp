@@ -50,6 +50,86 @@ public:
     int mInt;
 };
 
+struct string1 //Todo reduce the overhead 8byte preprend to be 1byte prepend only
+{
+    bool empty() const  { return value.empty();}
+    size_t size() const { return value.size();}
+    size_t length () const { return value.length();}
+    char& operator[](size_t i){ return value[i];}
+    const char& operator[](size_t i) const { return value[i];}
+    std::string value;
+
+    template<class Archive> 
+    void serialize(Archive & ar, const unsigned int version) 
+    {
+        ar& value;
+    }
+};
+
+void test_char_array_archive_stdstring()
+{
+    /// boost serialization is not optimal, there are overhead in serialized data to stored information
+    /// of the class, that's necessary to deserialize data latter.
+    /// For std::string, there are 8bytes overhead to write before string data. That much of overhead is to handle large string.
+    /// So a customized std::string class would be done to store optimally for different categories of str
+    /// string1 use 1 byte overhead : upto 256 characters
+    /// string2 use 2 byte overhead : upto 65536 characters
+
+    const size_t buffer_size = 1000;
+    char buffer[buffer_size];
+    for(size_t i=0;i<buffer_size;++i)
+        buffer[i]='z';
+
+    boost::archive::archive_flags test_flag = boost::archive::no_header;
+    {
+        boost::iostreams::basic_array_sink<char> sr(buffer, buffer_size);
+        boost::iostreams::stream< boost::iostreams::basic_array_sink<char> > source(sr);
+        boost::archive::binary_oarchive oa(source, test_flag);
+
+        const size_t sizeString = sizeof(std::string);
+        
+        /// first byte serialized for std::string is the number of characters
+        std::string helloWord="helloworlds";
+        oa & helloWord;
+
+        std::string verylongString(129,'a');
+        oa & verylongString;
+    }
+
+    const int abc=100;
+}
+
+void test_char_array_archive_string1()
+{
+    const size_t buffer_size = 1000;
+    char buffer[buffer_size];
+    for(size_t i=0;i<buffer_size;++i)
+        buffer[i]='z';
+
+    boost::archive::archive_flags test_flag = boost::archive::no_header;
+    {
+        boost::iostreams::basic_array_sink<char> sr(buffer, buffer_size);
+        boost::iostreams::stream< boost::iostreams::basic_array_sink<char> > source(sr);
+        boost::archive::binary_oarchive oa(source, test_flag);
+
+        const size_t sizeString = sizeof(std::string);
+        
+        /// first byte serialized for std::string is the number of characters
+        string1 string_wrapper;
+        string_wrapper.value="helloworlds";
+        oa << string_wrapper;
+    }
+
+    {
+        boost::iostreams::basic_array_source<char> sr(buffer, buffer_size);
+        boost::iostreams::stream< boost::iostreams::basic_array_source<char> > source(sr);
+        boost::archive::binary_iarchive oa(source, test_flag);
+        string1 string_wrapper;
+        oa >> string_wrapper;
+    }
+    const int abc=100;
+}
+
 void test_char_array_archive_nativeCpp()
 {
     /// boost serialization is not optimal, there are overhead 
@@ -160,9 +240,10 @@ void test_char_array_archive_customClasses()
 
 int main(int argc, char *argv[])
 {
-
-    test_char_array_archive_nativeCpp();
-    test_char_array_archive_customClasses();
+    //test_char_array_archive_stdstring();
+    test_char_array_archive_string1();
+    //test_char_array_archive_nativeCpp();
+    //test_char_array_archive_customClasses();
 
     const int i=100;
     return 0;
