@@ -7,6 +7,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <sstream>
 
 #include <boost/archive/tmpdir.hpp>
 //
@@ -24,61 +25,135 @@
 #include <boost/iostreams/device/array.hpp>
 #include <boost/iostreams/stream.hpp>
 
-/* todo the tests
+#include <boost/mpl/list.hpp>
 
-bool
-(unsigned,signed) char
-wchar_t
-(unsigned) short
-(unsigned) int
-(unsigned) long
-[(unsigned) long long]
+/// TODO test all STL containers string, vector, list
 
-float
-double
-[long double]
-
-*/
-
-void test_char_array_archive_string1()
+struct BinaryArray
 {
-    //const size_t buffer_size = 50;
-    //char buffer[buffer_size];
-    //for(size_t i=0;i<buffer_size;++i)
-    //    buffer[i]='z';
+    /// init buffer with all 'z' char
+    BinaryArray() 
+    : sr(buffer, buffer_size)
+    , source(sr)
+    , oa(source, test_flag)
+    {   
+        for(size_t i=0;i<buffer_size;++i)
+            buffer[i]='z';
+    }
+    
+    size_t getUsedLength() const
+    {
+        size_t unusedPos=buffer_size-1;
+        while(unusedPos>0 && buffer[unusedPos]=='z')
+            --unusedPos;
+        return ++unusedPos;
+    }
 
-    //boost::archive::archive_flags test_flag = boost::archive::no_header;
-    //{
-    //    boost::iostreams::basic_array_sink<char> sr(buffer, buffer_size);
-    //    boost::iostreams::stream< boost::iostreams::basic_array_sink<char> > source(sr);
-    //    boost::archive::binary_oarchive oa(source, test_flag);
+    ~BinaryArray(){}
 
-    //    const size_t sizeString = sizeof(std::string);
-    //    
-    //    /// first byte serialized for std::string is the number of characters
-    //    string1 string_wrapper;
-    //    string_wrapper.value="helloworlds";
-    //    oa << string_wrapper;
-    //}
+    static const size_t buffer_size =  100;
+    char buffer[buffer_size];
 
-    //{
-    //    boost::iostreams::basic_array_source<char> sr(buffer, buffer_size);
-    //    boost::iostreams::stream< boost::iostreams::basic_array_source<char> > source(sr);
-    //    boost::archive::binary_iarchive oa(source, test_flag);
-    //    string1 string_wrapper;
-    //    oa >> string_wrapper;
-    //}
-    //const int abc=100;
-}
+    const boost::archive::archive_flags test_flag = boost::archive::no_header;
+    boost::iostreams::basic_array_sink<char> sr;
+    boost::iostreams::stream< boost::iostreams::basic_array_sink<char> > source;
+    boost::archive::binary_oarchive oa;
+};
+
 BOOST_AUTO_TEST_SUITE(All_Types)
 
-BOOST_AUTO_TEST_CASE(first_test)
+template <typename Type>
+std::string getTypeInfoMessage(const Type& object)
 {
-    //test_char_array_archive_stdstring();
-    test_char_array_archive_string1();
-    //test_char_array_archive_nativeCpp();
-    //test_char_array_archive_customClasses();
-    BOOST_CHECK(true);
+    const std::string typeInfo( typeid(object).name());
+    const size_t typeSize = sizeof(Type);
+    std::ostringstream msgLogStream;
+    msgLogStream<<"["<<typeInfo << "] size:"<<typeSize;
+    const std::string msgLog = msgLogStream.str();
+    return msgLog;
+}
+
+template <typename Type>
+void test_serialization()
+{
+    BinaryArray testFixture;
+    Type defaultObject;
+
+    const std::string msgLog = getTypeInfoMessage(defaultObject);
+    
+    BOOST_TEST_MESSAGE(msgLog);
+    
+    testFixture.oa<<defaultObject;
+    const size_t nbUsedChar = testFixture.getUsedLength();
+    
+    // TODO : check accuracy, deserialize and check
+
+    BOOST_CHECK(nbUsedChar==sizeof(Type));
+}
+
+BOOST_AUTO_TEST_CASE(test_multi_types)
+{
+    //// http://en.cppreference.com/w/cpp/language/types
+
+    test_serialization<char>();
+    test_serialization<signed char>();
+    test_serialization<unsigned char>();
+    test_serialization<wchar_t>();
+    test_serialization<char16_t>();
+    test_serialization<char32_t>();
+
+    test_serialization<size_t>();
+    test_serialization<short>();
+    test_serialization<short int>();
+    test_serialization<signed short>();
+    test_serialization<signed short int>();
+    test_serialization<unsigned short>();
+    test_serialization<unsigned short int>();
+    
+    test_serialization<int>();
+    test_serialization<signed int>();
+    test_serialization<unsigned int>();
+
+    test_serialization<long int>();
+    test_serialization<signed long int>();
+    test_serialization<unsigned long>();
+    test_serialization<long long int>();
+    test_serialization<signed long long>();
+    test_serialization<unsigned long long>();
+    
+    test_serialization<float>();
+    test_serialization<double>();
+    test_serialization<long double>();
+}
+
+BOOST_FIXTURE_TEST_CASE(test_empty_stdstring, BinaryArray)
+{
+    const std::string text;
+
+    const std::string msgLog = getTypeInfoMessage(text);
+    BOOST_TEST_MESSAGE(msgLog);
+    
+    oa<<text;
+    const size_t nbUsedChar = getUsedLength();
+}
+
+BOOST_FIXTURE_TEST_CASE(test_stdstring, BinaryArray)
+{
+    const std::string text("helloworld");
+    const size_t strSize = text.size();
+
+    const std::string typeInfo(typeid(text).name());
+    std::ostringstream msgLogStream; msgLogStream << "[" << typeInfo << "] size:" << strSize;
+    const std::string msgLog = msgLogStream.str();
+    BOOST_TEST_MESSAGE(msgLog);
+    
+    oa<<strSize;
+    for(size_t i=0;i<strSize;++i)
+    {
+        const char& crCha = text[i];
+        oa<<crCha;
+    }
+    const size_t nbUsedChar = getUsedLength();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -16,6 +16,7 @@ include_directories(${Boost_INCLUDE_DIRS})
 add_executable(test_Boost_SerializationAllNativeType test_Boost_SerializationAllNativeType.cpp)
 target_link_libraries(test_Boost_SerializationAllNativeType ${Boost_LIBRARIES})
 add_test(test_Boost_SerializationAllNativeType test_Boost_SerializationAllNativeType)
+#add_test(NAME test_Boost_SerializationAllNativeType COMMAND "test_Boost_SerializationAllNativeType --log_level=message")
 
 #add_executable(test_Boost_Serialization test_Boost_Serialization.cpp)
 #target_link_libraries(test_Boost_Serialization ${Boost_LIBRARIES})
