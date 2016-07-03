@@ -2,6 +2,7 @@
 cmake_minimum_required (VERSION 3.2)
 
 project(testBoost) 
+enable_testing()
 
 # cmake path/to/source/folder/ -G"Visual Studio 12 2013 Win64"
 # cmake path/to/source/folder/ -G"Eclipse CDT4 - Unix Makefiles"
