@@ -11,8 +11,12 @@ message("                      include boost [${Boost_INCLUDE_DIR}]")
 message("                          lib boost [${Boost_LIBRARIES}]")
 include_directories(${Boost_INCLUDE_DIR})
 
-add_executable(large_file_test large_file_test.cpp)
-target_link_libraries(large_file_test ${Boost_LIBRARIES})
+add_executable(test_Boost_IostreamsPerformance test_Boost_IostreamsPerformance.cpp)
+target_link_libraries(test_Boost_IostreamsPerformance ${Boost_LIBRARIES})
+add_test(test_Boost_IostreamsPerformance test_Boost_IostreamsPerformance)
 
-add_executable(mapped_file_test constants.hpp temp_file.hpp verification.hpp mapped_file_test.cpp)
-target_link_libraries(mapped_file_test ${Boost_LIBRARIES})
+#add_executable(large_file_test large_file_test.cpp)
+#target_link_libraries(large_file_test ${Boost_LIBRARIES})
+
+#add_executable(mapped_file_test constants.hpp temp_file.hpp verification.hpp mapped_file_test.cpp)
+#target_link_libraries(mapped_file_test ${Boost_LIBRARIES})
