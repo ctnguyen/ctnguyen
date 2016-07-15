@@ -1,8 +1,11 @@
 #define BOOST_TEST_MODULE test_Boost_Spirit
 #include <boost/test/unit_test.hpp>
 
+#pragma warning(push) //// Warning disabling wrapper : http://stackoverflow.com/questions/34709284/how-do-i-deal-with-warnings-generated-by-boost-spirit
+#pragma warning(disable : 4348)
 #include <boost/config/warning_disable.hpp>
 #include <boost/spirit/include/qi.hpp>
+#pragma warning(pop)
 
 #include <iostream>
 #include <string>
@@ -27,8 +30,9 @@ namespace client
         bool r = phrase_parse(
             first,                          /*< start iterator >*/
             last,                           /*< end iterator >*/
-            double_ >> *('.' >> double_),   /*< the parser >*/
+            double_ >> *(double_),    /*< the parser >*/
             space                           /*< the skip-parser >*/
+            ,v
         );
         if (first != last) // fail if we did not get a full match
             return false;
