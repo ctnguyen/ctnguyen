@@ -14,6 +14,7 @@ include_directories(${Boost_INCLUDE_DIR})
 add_executable(test_Boost_IostreamsPerformance test_Boost_IostreamsPerformance.cpp)
 target_link_libraries(test_Boost_IostreamsPerformance ${Boost_LIBRARIES})
 add_test(test_Boost_IostreamsPerformance test_Boost_IostreamsPerformance)
+set_property(TARGET test_Boost_IostreamsPerformance PROPERTY FOLDER "test/Boost_Iostreams")
 
 #add_executable(large_file_test large_file_test.cpp)
 #target_link_libraries(large_file_test ${Boost_LIBRARIES})

@@ -8,7 +8,10 @@ include_directories(${Boost_INCLUDE_DIRS})
 add_executable(test_Boost_Spirit test_Boost_Spirit.cpp)
 target_link_libraries(test_Boost_Spirit ${Boost_LIBRARIES})
 add_test(test_Boost_Spirit test_Boost_Spirit)
+set_property(TARGET test_Boost_Spirit PROPERTY FOLDER "test/Boost_Spirit")
+
 
 add_executable(test_Boost_Spirit_examples test_Boost_Spirit_examples.cpp)
 target_link_libraries(test_Boost_Spirit_examples ${Boost_LIBRARIES})
 add_test(test_Boost_Spirit_examples test_Boost_Spirit_examples)
+set_property(TARGET test_Boost_Spirit_examples PROPERTY FOLDER "test/Boost_Spirit")
