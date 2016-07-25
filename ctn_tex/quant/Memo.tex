@@ -1,0 +1,93 @@
+%Texlive-full Version 3.141592-1.40.3 (Web2C 7.5.6)
+%Kile Version 2.0.83
+
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage{graphicx}
+
+\usepackage{lmodern}
+\usepackage[a4paper]{geometry}
+
+\usepackage{hyperref}
+
+\usepackage{amsmath,amssymb}%
+
+\usepackage{pstricks}
+\usepackage{pst-node}
+
+\usepackage{booktabs}
+
+\newcommand{\eTt}{e^{-r(T-t)}}
+
+
+\begin{document}
+%%%%%%%%%%%%%%%%%% DOCUMENT TITLE %%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}\resizebox{9cm}{0.6cm}{Quant's interview 0 - Memo}\end{center}
+%%%%%%%%%%%%%%%%%% DOCUMENT TITLE %%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Basic memo}
+\paragraph{Master theorem}~\cite{CORMEN2009}\mbox{} \\
+Given the reccurence relation :
+\[
+T(n)=aT(\frac{n}{b}) + f(n) \hspace{2cm}  a\geq 1 , b > 1
+\]
+Then $T(n)$ has asymtotic bounds :
+\begin{itemize}
+	\item $f(n)=O(n^{\text{log}_ba-\epsilon})$ for $\epsilon>0$, then $T(n)=\Theta(n^{\text{log}_ba})$
+	\item  $f(n)=\Theta(n^{\text{log}_ba})$ , then $T(n)=\Theta(n^{\text{log}_ba}\text{ln}n)$
+	\item  $f(n)=\Omega(n^{\text{log}_ba+\epsilon})$ for $\epsilon>0$, and $af(n/b)\leq cf(n)$ for $c<1$, then for $n$ sufficiently large, $T(n)=\Theta(f(n))$
+\end{itemize}
+\paragraph{Taylor series}\mbox{} \\
+\[
+e^x=\sum_{n=0}^{\infty} \frac{x^n}{n!}=1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\ldots
+\]
+
+\paragraph{Transfer measure for conditional expectation}\mbox{} \\
+\[
+\mathbb{E}_{\mathbb{Q}}[Y|\mathcal{G}] = 
+\frac{\mathbb{E}_{\mathbb{P}}[YZ|\mathcal{G}]}{\mathbb{E}_{\mathbb{P}}[Z|\mathcal{G}]}
+\hspace{2cm}
+d\mathbb{Q} = Z d\mathbb{P}
+\]
+
+\paragraph{Conditional Probability}\mbox{} \\
+If $X$ is $\mathcal{G}$-measurable, $Y$ independent of $\mathcal{G}$
+\[
+\mathbb{E}[\varphi(X,Y)|\mathcal{G}] = \int \varphi(X(\omega),Y(\omega '))d\mathbb{P}(\omega ')
+\]
+
+\paragraph{Convergences and relations}
+\begin{center}
+	\begin{pspicture}(-7,-2)(7,2)
+	%\psline(-7,-2)(7,2)
+	\rput(-1, 1){\Rnode{as}{\psframebox{$X_n \xrightarrow{a.s} X$}}}
+	\rput(-1,-1){\Rnode{Lp}{\psframebox{$X_n \xrightarrow{\textbf{L}^p} X$}}}
+	\rput(-4,-1){\Rnode{Lq}{\psframebox{$X_n \xrightarrow{\textbf{L}^q} X$}}}
+	\rput( 2, 0){\Rnode{P}{\psframebox{$X_n \xrightarrow{\mathbb{P}} X$}}}
+	\rput( 5, 0){\Rnode{L}{\psframebox{$X_n \rightsquigarrow X$}}}
+	\rput( -5, 0.5){\Rnode{cond}{$ _{0<p<q \leq \infty} \Rightarrow \begin{array}{l}
+			|.|_p \leq |.|_q \\
+			\textbf{L}^q \subset \textbf{L}^p
+			\end{array}$}}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\ncline[linestyle=dashed]{->}{Lq}{Lp}
+	\ncline[linestyle=dashed]{->}{as}{P}
+	\ncline[linestyle=dashed]{->}{Lp}{P}
+	\ncline[linestyle=dashed]{->}{P}{L}
+	\end{pspicture}
+\end{center}
+\paragraph{Jensen inequality}
+\[
+\varphi(\mathbb{E}[X]) \leq \mathbb{E}[\varphi(X)]
+\hspace{1cm} \varphi \text{ convexe funciton}
+\]
+\paragraph{Markov's inequality}
+\[
+\text{for all}\hspace{5mm} \varepsilon > 0, p>0, X\in \textbf{L}^p \hspace{20mm} \mathbb{P}(|X| \geq \varepsilon) \leq \frac{\mathbb{E}[|X|^p]}{\varepsilon ^p}
+\]
+\paragraph{Bienayme-Tchebychev's inequality}
+\[
+\text{for all  } \hspace{5mm} \varepsilon > 0, X\in \textbf{L}^2 \hspace{20mm} \mathbb{P}(|X- \mathbb{E}X| \geq \varepsilon) \leq \frac{\textbf{Var}[X]}{\varepsilon ^2}
+\]
+\bibliographystyle{siam}
+\bibliography{QuantBib}
+\end{document}
