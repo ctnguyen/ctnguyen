@@ -30,7 +30,7 @@ Given the reccurence relation :
 \[
 T(n)=aT(\frac{n}{b}) + f(n) \hspace{2cm}  a\geq 1 , b > 1
 \]
-Then $T(n)$ has asymtotic bounds :
+Then $T(n)$ has assymtotic bounds :
 \begin{itemize}
 	\item $f(n)=O(n^{\text{log}_ba-\epsilon})$ for $\epsilon>0$, then $T(n)=\Theta(n^{\text{log}_ba})$
 	\item  $f(n)=\Theta(n^{\text{log}_ba})$ , then $T(n)=\Theta(n^{\text{log}_ba}\text{ln}n)$
@@ -38,8 +38,16 @@ Then $T(n)$ has asymtotic bounds :
 \end{itemize}
 \paragraph{Taylor series}\mbox{} \\
 \[
-e^x=\sum_{n=0}^{\infty} \frac{x^n}{n!}=1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\ldots
+f(x+h) = \sum_{n=0}^{\infty} \frac{h^n}{n!}f^{(n)}(x)
 \]
+\begin{align}
+e^x &= \sum_{n=0}^{\infty} \frac{x^n}{n!} = 1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\ldots \\
+\text{ln}(1-x) &= -\sum_{n=1}^{\infty} \frac{x^n}{n} = -x -\frac{x^2}{2} - \frac{x^3}{3}-\ldots  \hspace{2cm} |x|<1 \\
+\text{ln}(1+x) &= \sum_{n=1}^{\infty} (-1)^{n+1} \frac{x^n}{n} = x -\frac{x^2}{2} + \frac{x^3}{3}-\ldots \hspace{2cm} |x|<1 \\
+\frac{1}{1-x} &= \sum_{n=0}^{\infty} x^n = 1+x +x^2 + x^3 \ldots \hspace{2cm} |x|<1 \\
+\text{sin}x &= \sum_{n=0}^{\infty} \frac{(-1)^{n}}{(2n+1)!} x^{2n+1} = x-\frac{x^3}{3!}+\frac{x^5}{5!}-\ldots \\
+\text{cos}x &= \sum_{n=0}^{\infty} \frac{(-1)^{n}}{(2n)!} x^{2n} =1-\frac{x^2}{2!}+\frac{x^4}{4!}-\ldots
+\end{align}
 
 \paragraph{Transfer measure for conditional expectation}\mbox{} \\
 \[
