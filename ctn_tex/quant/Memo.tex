@@ -49,9 +49,15 @@ e^x &= \sum_{n=0}^{\infty} \frac{x^n}{n!} = 1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\l
 \text{cos}x &= \sum_{n=0}^{\infty} \frac{(-1)^{n}}{(2n)!} x^{2n} =1-\frac{x^2}{2!}+\frac{x^4}{4!}-\ldots
 \end{align}
 
-\paragraph{Jacobian matrix}\mbox{} \\
+\paragraph{Change of variable}\mbox{} \\
 \[
-(D_{u}\varphi)_{ij} = (\frac{\partial\varphi_i(u)}{\partial u_j})
+\int_{V}f(v)dv = \int_{U}f(\varphi(u)|J_{\varphi}(u)|du)
+\hspace{1cm}
+\left\{
+\begin{array}{l}
+J_{\varphi}(u)=(\frac{\partial\varphi_i(u)}{\partial u_j})\\
+\varphi : U \longmapsto V \hspace{1cm} C^1\text{-diffeomorphism}
+\end{array}\right.
 \]
 
 \paragraph{Transfer measure for conditional expectation}\mbox{} \\
