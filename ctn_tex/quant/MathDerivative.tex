@@ -1162,6 +1162,42 @@ The multivariate normal distribution is said to be \textbf{non-degenerate} iif t
 \[
 f_{X}(x) = \frac{1}{ (2\pi)^{\frac{d}{2}} |\text{det}(\Sigma)|^{\frac{1}{2}} } \text{exp}\{ -\frac{1}{2} (x-\mu)^{t} \Sigma^{-1} (x-\mu) \}
 \]
+The conditional expectation of multivariate normal can be defined by partitioning $\mathbb{R}^d$
+\[
+X=
+\left[
+\begin{array}{c}
+X_1  \\
+X_2
+\end{array}
+\right]
+\sim
+\mathcal{N}(
+\left[
+\begin{array}{c}
+\mu_1  \\
+\mu_2
+\end{array}
+\right]
+,
+\left[
+\begin{array}{cc}
+\Sigma_{11} & \Sigma_{12}  \\
+\Sigma_{22} & \Sigma_{21}
+\end{array}
+\right]
+)
+\]
+Then the conditional expectation follow normal distribution :
+\[
+\mathbb{E}[X_i|X_j=x^{*}_j] \sim \mathcal{N}(\bar{\mu_{i|j}},\bar{\Sigma_{i|j}})
+\text{ with }
+\left\{
+\begin{array}{l}
+\bar{\mu_{i|j}} = \mu_i + \Sigma_{ij}\Sigma^{-1}_{jj}(x^{*}_j - \mu_j)\\ \\
+\bar{\Sigma_{i|j}} = \Sigma_{jj} - \Sigma^t_{ij}\Sigma^{-1}_{ii}\Sigma_{ij}
+\end{array}\right.
+\]
 \paragraph{Cochran's theorem}
 \[
 \text{if }
