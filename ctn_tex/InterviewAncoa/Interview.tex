@@ -141,6 +141,7 @@ Below are a few suggestions without answer :
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \question Point randomly to a few keywords/technologies in the last experiences and ask the candidate to talk about it.
 
+We can also pick some quick question that does not require a draft, that the candidate know or don't know. But remember to note it down, in case we invite the candidate to the face-to-face interview, we don't ask the same question.
 \end{questions}
 \fi
 
@@ -281,7 +282,7 @@ Below are a few creational design patterns :
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \question What is the size of an empty class of lambda?
 \begin{solution}[.2in]
-Todo
+Empty class of lambda is a stateless object that take the minimum size 1.
 \end{solution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -793,13 +794,18 @@ Two basical methods to invert matrices are LU, Conjugated Gradient. The first is
 \end{solution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\question How to calculate the overlap region of two rectangle exactly the same size, but different center. (first, how to check if two rectangle overlaps).
+\question How to check if two rectangles in 2D space overlaps?
 \begin{solution}[.2in]
-	todo
+First, two rectangles are covered by 2 circles. If those two circles are not overlaped, the two rectangles are not. If the two circles are overlaped, then check if a corner of one rectangle is inside other rectangle. To check if a point $M$ is inside the rectangle $ABCD$, check the projection of $M$ to $AB$ and $AD$, which is 
+\[
+\frac{AM \cdot AB}{AB \cdot AB} \leq 1  
+\cap 
+\frac{AM \cdot AD}{AD \cdot AD} \leq 1  
+\]
 \end{solution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\question Ideas of how to visualize a matrix dimension 1Bx1B?
+\question Intuition of how google map work, give the idea of how to visualize a matrix dimension 1Bx1B?
 \begin{solution}[.2in]
 The idea could be building a hierarchical bounding volume. At root level, matrix is a single rectangle, with a single color. At second level, the matrix can be split in two, and the half having more non-null element will have a darker color. At third level, the two half matrix are split again, each into two part.... Depending of the zoom of the viewer, one can calculate the detail level and render the image.
 \end{solution}
@@ -847,10 +853,10 @@ Newton Raphson is a numerical method to find solution of a function $f(x)=a$. On
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \question Given a vector of bool : b1,b2… bn. Write a function to check OR of all, AND of all, negation OR of all, negation AND of all elements.
 \begin{solution}[.2in]
-Candidate is expected to know basic logic formula 
+Iterate through the vector, 
 \begin{itemize}
-	\item $\overline{A\cup B} = \overline{A}\cap \overline{B}$
-    \item $\overline{A\cap B} = \overline{A}\cup \overline{B}$
+	\item the first \lstinline{true} encountered will return \lstinline{true} for the OR function
+	\item the first \lstinline{false} encountered will return \lstinline{false} for the AND function
 \end{itemize}
 \end{solution}
 
@@ -865,9 +871,13 @@ Candidate is expected to know basic logic formula
 \begin{questions}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\question How to calculate mean, variance, and correlation.
+\question How to calculate mean, variance, and correlation ($X,Y$).
 \begin{solution}[.2in]
-	todo
+\begin{description}
+	\item[sample mean] $\bar{x} = \frac{1}{N}\sum x_i$
+	\item[sample variance] $\bar{\sigma}_{x}^2 = \frac{1}{N-1} \sum(x_i - \bar{x})^2$
+	\item[sample covariance] $\bar{\sigma}_{xy}^2 = \frac{1}{N-1} \sum(x_i - \bar{x})(y_j - \bar{y})$
+\end{description}
 \end{solution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -877,27 +887,25 @@ Candidate is expected to know basic logic formula
 \end{solution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\question Property of the covariance matrix. How to get the correlation matrix from covariance matrix? What are properties of covariance matrix and correlation matrix.
+\question Definition of the covariance matrix. How to get the correlation matrix from covariance matrix? What are properties of covariance matrix and correlation matrix.
 \begin{solution}[.2in]
-	todo
-\end{solution}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\question How to calculate the running average?
-\begin{solution}[.2in]
-	todo
+\begin{description}
+	\item[Covariance Matrix] Given a set of random variables $X_i$, covariance matrix is $M_ij$ equal to the covariance of $X_i$ and $X_j$
+	\item[Correlation Matrix] Correlation matrix can get by Cholesky factorization from covariance matrix. 
+	\item[Properties] They're both symetric semi positive definite. Correlation matrix has values bounded by $[-1,1]$
+\end{description}
 \end{solution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \question What is the difference of mean vs median.
 \begin{solution}[.2in]
-	todo
+In an sorted array of real values, mean is the average of all elements, while median is the value of the element in middle of the array. In a skewed array, mean is different than median.
 \end{solution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\question What is the density of a variable? discrete case, continuous case. What condition should satisfy a density?
+\question What is the density of a variable? discrete case, continuous case. What condition a function should satisfy a density?
 \begin{solution}[.2in]
-	todo
+A density function should be positive, integrable and it's integral (sum) equal to 1.
 \end{solution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1012,6 +1020,13 @@ Following naturally the demand-offer balance, if there are more sellers, the pri
 \question What is a binary search tree, what is the general complexity in BST? What is its default
 \begin{solution}[.2in]
 Binary Search Tree is the data structure that sort the data on the left or right child node relevant to the ordering of data. The tree data structure help to improve the complexity to $\text{log}(N)$ instead of $O(N)$. It can be a bad situation if the data put in BST is not well balanced, it can be improved by the Red-Black Tree.
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question How to calculate the running average in a context of real time application? (array append new element continuously)
+\begin{solution}[.2in]
+	To avoid recalculate the mean of the whole array everytime the array appends new element, one should store a buffer of sum and the number of element. When the array append a new element, just update the buffer.
+	\paragraph{} How about running average of a running queue? Use the same approach, do not recalculate the whole queue when the data queue push or pop, just update the sum and the number of element.
 \end{solution}
 
 \end{questions}
