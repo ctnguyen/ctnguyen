@@ -1,8 +1,15 @@
 %Texlive-full Version 3.141592-1.40.3 (Web2C 7.5.6)
 %TexStudio Version 2.7.0
 
-\documentclass[answers]{exam}
-%\documentclass{exam}
+%\documentclass[answers]{exam}
+\documentclass{exam}% choose this one to have questions only
+
+\newcommand*{\ANCOAMOTIVATION}{}% Uncomment to have the motivation session
+\newcommand*{\ANCOACPP}{}% Uncomment to have the C++ session
+\newcommand*{\ANCOAMATH}{}% Uncomment to have the math session
+\newcommand*{\ANCOASTAT}{}% Uncomment to have the stat session
+\newcommand*{\ANCOAFINANCE}{}% Uncomment to have the finance session
+\newcommand*{\ANCOAALGO}{}% Uncomment to have the algo session
 
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
@@ -79,7 +86,6 @@
 \lstset{language=C++,basicstyle=\scriptsize, keywordstyle=\color{blue}, stringstyle=\color{black},	commentstyle=\color{black} }
 
 
-
 \begin{document}
 \begin{titlepage}
 %%%%%%%%%%%%%%%%%%%%%%%%%%  LOGO  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -89,7 +95,6 @@
 \rput(-3.5,3){\href{http://ancoa.com/}{\includegraphics[scale=0.3]{Ancoa_Logo}}}
 \end{pspicture}
 \end{center}
-
 
 %%%%%%%%%%%%%%%%%% DOCUMENT TITLE %%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{1cm}
@@ -116,9 +121,169 @@ Ancoa Software Ltd \copyright \hbox{ }2012-2016.
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifdefined\ANCOAMOTIVATION
+\section{Motivation questions}
+Since we don't have too much time for the phone interview, the main purpose is 
+\begin{itemize}
+  \item Check if everything mentioned in the CV is true, and the candidate is good at what he has done.
+  \item Check the motivation of the candidate.
+  \item Check the suspicious (discontinuous) in the career path.
+\end{itemize}
+Below are a few suggestions without answer :
+
+\begin{questions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question We're interested in your experiences/background. How did you imagine the job in Ancoa, and how do you imagine your background would contribute to Ancoa?
+\begin{solution}[.2in]
+	This question check not only if the candidate interest to the company/business, but also get know the creativity of the candidate. After their answer, we can also talk about how we're interested and how we imagine the candidate can add value to Ancoa.
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Point randomly to a few keywords/technologies in the last experiences and ask the candidate to talk about it.
+
+\end{questions}
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifdefined\ANCOACPP
 \section{C++ programming}
 \begin{questions}
-	
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question How many bits in a byte?
+\begin{solution}[.2in]
+	8
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is inheritance?
+\begin{solution}[.2in]
+	Inheritance is a process of creating new classes from existing classes.	New classes inherit some of the properties and behavior of the existing classes. An existing class that is "parent" of a new class is called a base class. New class that inherits properties of the base class is called a derived class
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question When would you use a virtual destructor?
+\begin{solution}[.2in]
+Virtual destructors are useful when you can delete an instance of a derived class through a pointer to base class. Always make base classes' destructors virtual when they're meant to be manipulated polymorphically. If this is not done deleting the pointer to the base class results in undefined behaviour (most likely ‘slicing’).
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What does the keyword 'override' do?
+\begin{solution}[.2in]
+The override keyword serves two purposes:
+\begin{itemize}
+	\item It shows the reader of the code that "this is a virtual method, that is overriding a virtual method of the base class."
+	\item The compiler also knows that it's an override, so it can "check" that you are not altering/adding new methods that you think are overrides.
+\end{itemize}
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Which functions are defined for you if you do not define them in a class?
+\begin{solution}[.2in]
+In C++03 there are 4:
+\begin{itemize}
+	\item Default constructor: Declared only if no user-defined constructor is declared. Defined when used
+	\item Copy constructor - declared only if the user hasn't declared one. Defined if used	
+	\item Copy-assignment operator same as above	
+	\item Destructor same as above	
+\end{itemize}	
+In C++11 there are 2 more :
+\begin{itemize}
+	\item Move constructor
+	\item Move-assignment operator	
+\end{itemize}	
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is the difference between operator new and malloc?
+\begin{solution}[.2in]
+\begin{center}
+	\begin{tabular}{c|ll}
+		\hline
+		Feature & new, delete & malloc, free \\
+ 		\hline
+		Memory allocated from & Free Store & Heap\\
+ 		\hline
+        Returns & Fully typed pointer & void*\\
+		\hline
+		On failure & Throws (never erturn NULL) & Returns NULL\\
+		\hline
+		Required size & calculated by compiler & Must be specified in bytes\\
+		\hline
+		Handling arrays & Has an explicit version & Requires manual calculations\\
+		\hline
+		Reallocating & Not handled intuitively & Simple (no cpy constructor)\\
+		\hline
+		Call of reverse & Implementation defined & No\\
+		\hline
+		Low memory cases & Can add new memory allocator & Not handled by user code\\
+		\hline
+		Overridable & Yes & No\\
+		\hline
+		Use of con/destructor & Yes & No\\
+		\hline
+	\end{tabular} 
+\end{center}
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Name a container that has random access iterators in C++11 STL?
+\begin{solution}[.2in]
+	vector, array
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is not of not of the number 10. (\lstinline{!!10}).
+\begin{solution}[.2in]
+	\lstinline{true}
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is the difference between overriding and overloading a function?
+\begin{solution}[.2in]
+Overloading: changing the original types for/number of arguments in the signature of a method. Overriding: changing the original definition of a method
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Which STL function can be used to sort a linked list?
+\begin{solution}[.2in]
+	\lstinline{std::list::sort}
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is the difference between the copy constructor and the move constructor?
+\begin{solution}[.2in]
+A copy constructor takes its argument by lvalue reference and a move constructor by rvalue reference.
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Which keyword do you use if you want to update a member variable in a const class?
+\begin{solution}[.2in]
+	\lstinline{mutable}
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Can you given 2 examples of design patterns and when you might use them?
+\begin{solution}[.2in]
+Below are a few creational design patterns :
+\begin{description}
+	\item[Singleton] Ensure that only one instance of a class is created and Provide a global access point to the object.
+	\item[Factory] Creates objects without exposing the instantiation logic to the client and Refers to the newly created object through a common interface.
+	\item[Factory Method] Defines an interface for creating objects, but let subclasses to decide which class to instantiate and Refers to the newly created object through a common interface.
+	\item[Abstract Factory] Offers the interface for creating a family of related objects, without explicitly specifying their classes.
+	\item[Builder] Defines an instance for creating an object but letting subclasses decide which class to instantiate and Allows a finer control over the construction process.
+	\item[Prototype] Specify the kinds of objects to create using a prototypical instance, and create new objects by copying this prototype.
+	\item[Object Pool] Reuses and shares objects that are expensive to create.
+\end{description}
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is the size of an empty class of lambda?
+\begin{solution}[.2in]
+Todo
+\end{solution}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \question What is the difference of vector, list and map. What is the appropriated use for each containter.
 \begin{solution}[.2in]
@@ -128,7 +293,8 @@ Ancoa Software Ltd \copyright \hbox{ }2012-2016.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \question What is the difference between \lstinline{class} and \lstinline{struct}.
 \begin{solution}[.2in]
-	Candidate is expected to know member of \lstinline{struct} are public by default, member of \lstinline{class} are private by default.
+	Member of a class defined with the keyword \lstinline{class} are private by default. Members of a class defined with the keywords \lstinline{struct} or union are public by default.
+	The keyword \lstinline{class} can be used to declare template parameters, while the \lstinline{struct} keyword cannot be so used
 \end{solution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -439,12 +605,44 @@ int main()
 \end{solution}
 
 \end{questions}
-
+\fi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifdefined\ANCOAMATH
 \newpage
 \section{Mathematics}
+
 \begin{questions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question How to calculate the sum from 1 to 20.
+\begin{solution}[.2in]
+	The sum from 1 to $N$ is $\frac{1}{2}N(N+1)$. The sum from 1 to 20 is 210.
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question In a debugging situation : Customer give their data as a time series of prices, and run our analytic tool to calculate the average of prices. The client then look at the trading information on internet and complain the average should be around 270 while the analytic give 243.05 as result. How do you would you answer to the customer? 
+\[
+\left[ 
+\begin{array}{c}
+270.33 \\
+269.87 \\
+270.17 \\
+0.0027 \\
+270.19 \\
+269.97 \\
+270.33 \\
+270.33 \\
+269.42 \\
+269.92
+\end{array}
+\right]
+\hspace{2cm}
+\text{analytics result 243.05327}
+\]
+\begin{solution}[.2in]
+	The exact sum of the vector is 243.05327. The candidate is expected to see first there're nearly a zero in the vector. And know to approximatively calculate the average by $~ \frac{270*9}{10}$
+\end{solution}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \question How to evaluate matrix vector multiplication? How to evaluate bilinear on 2 vectors (example 2 dimension case).
 \[
@@ -658,9 +856,10 @@ Candidate is expected to know basic logic formula
 
 
 \end{questions}
-
+\fi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifdefined\ANCOASTAT
 \newpage
 \section{Statistics}
 \begin{questions}
@@ -725,9 +924,10 @@ Regression is the estimation of a rv in relation to other rv. Mathematically, th
 Uniform simulation will give the set of points uniformly distributed in the segment, Gaussian simulation will give the set of points more dense in the center of the segment. To test if the Gaussian simulation is correct, one should calculate sample mean and sample variance, and compare with the Gaussian parameters.
 \end{solution}
 \end{questions}
-
+\fi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifdefined\ANCOAFINANCE
 \newpage
 \section{Finance}
 \begin{questions}
@@ -799,21 +999,23 @@ Following naturally the demand-offer balance, if there are more sellers, the pri
 \end{solution}
 
 \end{questions}
-
+\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifdefined\ANCOAALGO
 \newpage
-\section{Optimal Programming}
+\section{Algorithms Programming}
 \begin{questions}
-	
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\question Todo
-	\begin{solution}[.2in]
-		todo
-	\end{solution}
-	
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is a binary search tree, what is the general complexity in BST? What is its default
+\begin{solution}[.2in]
+Binary Search Tree is the data structure that sort the data on the left or right child node relevant to the ordering of data. The tree data structure help to improve the complexity to $\text{log}(N)$ instead of $O(N)$. It can be a bad situation if the data put in BST is not well balanced, it can be improved by the Red-Black Tree.
+\end{solution}
+
 \end{questions}
+\fi
 %\printnomenclature % % % % % % % % % % %
 %\bibliographystyle{siam}
 %\bibliography{interview.bib}
