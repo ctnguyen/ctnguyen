@@ -1,10 +1,10 @@
 %Texlive-full Version 3.141592-1.40.3 (Web2C 7.5.6)
 %TexStudio Version 2.7.0
 
-%\documentclass[answers]{exam}
-\documentclass{exam}% choose this one to have questions only
+\documentclass[answers]{exam}
+%\documentclass{exam}% choose this one to have questions only
 
-\newcommand*{\ANCOAMOTIVATION}{}% Uncomment to have the motivation session
+%\newcommand*{\ANCOAMOTIVATION}{}% Uncomment to have the motivation session
 \newcommand*{\ANCOACPP}{}% Uncomment to have the C++ session
 \newcommand*{\ANCOAMATH}{}% Uncomment to have the math session
 \newcommand*{\ANCOASTAT}{}% Uncomment to have the stat session
@@ -1027,6 +1027,45 @@ Binary Search Tree is the data structure that sort the data on the left or right
 \begin{solution}[.2in]
 	To avoid recalculate the mean of the whole array everytime the array appends new element, one should store a buffer of sum and the number of element. When the array append a new element, just update the buffer.
 	\paragraph{} How about running average of a running queue? Use the same approach, do not recalculate the whole queue when the data queue push or pop, just update the sum and the number of element.
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question As a scientific developer, what might upset you in this code 
+\begin{lstlisting}
+class SumCalculator
+{
+public:
+	double calc(std::vector<double> timeseries)
+	{
+		double sum(0.);
+		for(size_t i=0;i<timeseries.size();i++)
+		    sum+=timeseries[i];
+		return sum;
+	}
+};
+\end{lstlisting}
+\begin{solution}[.2in] 
+\begin{lstlisting}
+class SumCalculator
+{
+public:
+	double calc(const std::vector<double>& timeseries) const
+	{
+		double sum(0.);
+		const size_t N = timeseries.size();
+		for(size_t i=0;i<N;++i)
+		   sum+=timeseries[i];
+		return sum;
+	}
+};
+\end{lstlisting}
+\begin{itemize}
+	\item The copy in function argument is critical
+	\item The \lstinline{const} in function member
+	\item Prefix increment operator in the \lstinline{for} loop
+	\item Use of \lstinline{N} instead of calling \lstinline{vector.size()}
+\end{itemize}
+Show a picky developer.
 \end{solution}
 
 \end{questions}
