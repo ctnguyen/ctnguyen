@@ -313,12 +313,22 @@ Empty class of lambda is a stateless object that take the minimum size 1.
 \end{solution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\question What is polymorphism? Given three geometry types : Rectangle, Triangle, Circle that all need to calculate their area. How would you write those classes?
+\question \label{cpp:dynamic_polymorphism}What is polymorphism? Given three geometry types : Rectangle, Triangle, Circle that all need to calculate their area. How would you write those classes? Can you write a virtual constructor? Why?
 \begin{solution}[.2in]
 \begin{itemize}
 	\item Polymorphism is the ability to call different methods at run-time based on an object’s dynamic type. 
 	\item Candidate is expected to write a BaseGeometry class, and all concrete geometries inherite from this class with a method \lstinline{virtual double calculateArea() const;}.
 \end{itemize}
+We cannot have a virtual constructor. The virtual function allow to call the function in the inherited class instead of based class, whereas the constructor should be call sucessively in the inheritance hierarchy. Allowing virtual constructor will break this mechanism and the inheritance hierarchy will not be able to build correctly.
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Do you know about factory design pattern, what is used for, give an pratical example. As mentioned in the  \hyperref[cpp:dynamic_polymorphism]{polymorphism} question, how would you draw a simple factory design for those classes?
+\begin{solution}[.2in]
+The point of factory pattern is during the runtime, objects will be created depending to the action of the user or some evens (random). We don't know a priori what object to be created at compile time, and we need to be able to  create object at runtime. As virtual constructor does not exist, the Factory will help to do the job. The Factory has two principle : register the classes to a internal store (map key to the creational function), and allow to create the objects with the type name.
+\begin{lstlisting}
+class GeometryFactory{} //TODO
+\end{lstlisting}
 \end{solution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -607,6 +617,12 @@ int main()
 \end{lstlisting}
 \end{solution}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Write N examples of a C++ programs (situation) that crash. (N is the number of candidate's experiences in C++ programming)
+\begin{solution}[.2in]
+	Use of null pointers, delete twice a pointer, use out of bound of an array...
+\end{solution}
+
 \end{questions}
 \fi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -874,7 +890,7 @@ Iterate through the vector,
 \begin{questions}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\question How to calculate mean, variance, and correlation ($X,Y$).
+\question \label{stat:sample_stat}How to calculate mean, variance, and correlation ($X,Y$).
 \begin{solution}[.2in]
 \begin{description}
 	\item[sample mean] $\bar{x} = \frac{1}{N}\sum x_i$
@@ -1035,6 +1051,34 @@ Binary Search Tree is the data structure that sort the data on the left or right
 \end{solution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Go back to the  \hyperref[stat:sample_stat]{sample statistics} question how to calculate these sample variance in a real time context.
+\begin{solution}[.2in]
+The way it work is similar to the running average question. One just need to hold the linear sum and squared sum. The idea is 
+\[
+\bar{\sigma}_{N}^2 
+=
+\frac{1}{N-1} \sum(x_i - \bar{x})^2
+=
+\frac{1}{N-1}(\sum x_i^2 - N\bar{x}^2)
+=
+\frac{1}{N-1}(\sum x_i^2 - \frac{1}{N}(\sum x_i)^2)
+\]
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question Go back to the \hyperref[cpp:dynamic_polymorphism]{polymorphism} question, how would you suggest a design using template in C++. Why template, give your comment on the two design. Do you know the CRTP design?
+\begin{solution}[.2in]
+The main purpose of using template is it solve problems/calculations at compile time, whereas the polymorphism (or dynamic polymorphism) solve problems at run time. The dynamic binding (virtual function) has a cost, even if it is very small, in a real time context where a microsecond is precious, we could consider to use the template instead of polymorphism. It also have the advantage which is all error are solved at compile time. The downside of it is it has limited flexibility, difficult to understand, cannot hide the source code. An example of template for the previous design is to remove the base class, and use the template design :
+\begin{lstlisting}
+template<typename TGeometry>
+double GetArea (const TGeometry& gObj)
+{
+	 return gObj.getArea();
+}
+\end{lstlisting}
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \question As a scientific developer, what might upset you in this code 
 \begin{lstlisting}
 class SumCalculator
@@ -1071,6 +1115,12 @@ public:
 	\item Use of \lstinline{N} instead of calling \lstinline{vector.size()}
 \end{itemize}
 Show a picky developer.
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question What is deadlock, write simplest example of code that deadlock.
+\begin{solution}[.2in]
+TODO
 \end{solution}
 
 \end{questions}
