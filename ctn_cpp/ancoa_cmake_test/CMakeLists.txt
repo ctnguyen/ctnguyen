@@ -10,6 +10,7 @@ project(ancoa_cmake_test)
 # Set modules directories
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 include(${PROJECT_SOURCE_DIR}/cmake/SpecificBuildConfig.cmake)
+include(${PROJECT_SOURCE_DIR}/cmake/InvestigateTargetProperties.cmake)
 
 option(BUILD_SHARED_LIBS "Build All lib in shared" ON)
 
@@ -31,6 +32,7 @@ include_directories(${CMAKE_SOURCE_DIR})
 #add_subdirectory(ProjQtTest)
 add_subdirectory(ProgQt)
 
+echo_target(ProgQt)#TARGET information from sub dir can be populated to root
 
 # if found boost test framework, go into the test folder
 #find_package(Boost COMPONENTS)
