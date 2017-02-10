@@ -32,7 +32,7 @@ include_directories(${CMAKE_SOURCE_DIR})
 #add_subdirectory(ProjQtTest)
 add_subdirectory(ProgQt)
 
-echo_target(ProgQt)#TARGET information from sub dir can be populated to root
+#echo_target(ProgQt)#TARGET information from sub dir can be populated to root
 
 # if found boost test framework, go into the test folder
 #find_package(Boost COMPONENTS)

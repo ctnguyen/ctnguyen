@@ -103,6 +103,7 @@ function(echo_target tgt)
         LIBRARY_OUTPUT_NAME_RELEASE
         LINKER_LANGUAGE
         LINK_DEPENDS
+        LINK_LIBRARIES
         LINK_FLAGS
         LINK_FLAGS_DEBUG
         LINK_FLAGS_RELEASE
@@ -172,7 +173,7 @@ function(echo_target tgt)
         echo_target_property("${tgt}" "${p}")
     endforeach()
     message("")
-endfunction()
+endfunction(echo_target)
  
 
 ### Usages 
