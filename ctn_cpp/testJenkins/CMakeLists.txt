@@ -42,3 +42,4 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
 include(${CMAKE_SOURCE_DIR}/cmake/MyFindBoost.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake/MyFindQt5.cmake)
+# TODO add a test that take long time to execute (2 mins) to test jenkins build queue
