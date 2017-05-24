@@ -9,18 +9,18 @@
  *	@date June 2015
  */
 
-#ifndef PROJ1_HPP
-#define PROJ1_HPP
+#ifndef BASELIBB_HPP
+#define BASELIBB_HPP
 
-#include <Proj1/Proj1SharedDefinition.hpp>
+#include <LibB/BaseLibBSymbols.hpp>
 
-class PROJ1_LIB_EXPORT Proj1
+class BaseLibB_API BaseLibB
 {
 public:
 
-	Proj1();
+	BaseLibB();
 
-	~Proj1();
+	~BaseLibB();
 };
 
-#endif /* PROJ1_HPP */
+#endif /* BASELIBB_HPP */

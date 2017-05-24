@@ -5,22 +5,22 @@
 *     contact chithanhnguyen.math@gmail.com     *
 *************************************************/
 /**
- *	@file Proj2/Proj2.hpp
+ *	@file Proj1/Proj1.hpp
  *	@date June 2015
  */
 
-#ifndef PROJ2_HPP
-#define PROJ2_HPP
+#ifndef BASELIBA_HPP
+#define BASELIBA_HPP
 
-#include <Proj2/Proj2SharedDefinition.hpp>
+#include <LibA/BaseLibASymbols.hpp>
 
-class PROJ2_LIB_EXPORT Proj2
+class BaseLibA_API BaseLibA
 {
 public:
 
-	Proj2();
+	BaseLibA();
 
-	~Proj2();
+	~BaseLibA();
 };
 
-#endif /* PROJ2_HPP */
+#endif /* BASELIBA_HPP */

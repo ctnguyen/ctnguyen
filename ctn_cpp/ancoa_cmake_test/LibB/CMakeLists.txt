@@ -1,12 +1,14 @@
 include(${PROJECT_SOURCE_DIR}/cmake/SpecificBuildConfig.cmake)
 
-set(projNAME Proj2)
+SET(projHEADERS BaseLibB.hpp BaseLibBSymbols.hpp)
+SET(projSOURCES BaseLibB.cpp)
 
-SET(projHEADERS Proj2.hpp Proj2SharedDefinition.hpp)
-SET(projSOURCES Proj2.cpp)
-#SET(projMOCs mocFilesHere)
-#SET(projRESOURCES resourceFileHere)
+add_library(BaseLibB SHARED ${projSOURCES} ${projHEADERS})
 
-add_library(${projNAME} ${projSOURCES} ${projHEADERS})
+## Set folder structure in IDE
+set_property(TARGET BaseLibB PROPERTY FOLDER "Core")
 
-ctnSetTargetFolderProperties(${projNAME})
+target_compile_definitions(BaseLibB PRIVATE BaseLibB_EXPORT)
+
+## Set folder for build target
+ctnSetTargetFolderProperties(BaseLibB)
