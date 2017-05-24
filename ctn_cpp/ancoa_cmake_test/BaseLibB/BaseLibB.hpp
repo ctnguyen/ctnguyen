@@ -13,12 +13,15 @@
 #define BASELIBB_HPP
 
 #include <BaseLibB/BaseLibBSymbols.hpp>
+#include <string>
 
 class BaseLibB_API BaseLibB
 {
 public:
 
 	BaseLibB();
+    
+    virtual std::string name() const;
 
 	~BaseLibB();
 };

@@ -9,12 +9,13 @@
  *	@date June 2015
  */
 
-#include <Proj1/Proj1.hpp>
-#include <ProjA/ProjA.hpp>
+#include <BaseLibA/BaseLibA.hpp>
+#include <iostream>
 
 int main()
 {
-	Proj1 proj1;
-	ProjA proja;
+	BaseLibA baseliba;
+    std::cout<<baseliba.name()<<std::endl;
+
 	return 0;
 }

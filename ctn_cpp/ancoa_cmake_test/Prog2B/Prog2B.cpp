@@ -9,12 +9,13 @@
  *	@date June 2015
  */
 
-#include <Proj2/Proj2.hpp>
-#include <ProjB/ProjB.hpp>
+#include <BaseLibB/BaseLibB.hpp>
+#include <iostream>
 
 int main()
 {
-	Proj2 proj2;
-	ProjB projb;
+	BaseLibB baselibb;
+    std::cout<<baselibb.name()<<std::endl;
+
 	return 0;
 }

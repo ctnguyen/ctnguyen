@@ -1,9 +1,8 @@
 include(${PROJECT_SOURCE_DIR}/cmake/SpecificBuildConfig.cmake)
 
-set(projNAME Prog2B)
+add_executable(Prog2B Prog2B.cpp)
+target_link_libraries(Prog2B BaseLibB)
 
-add_executable(${projNAME} Prog2B.cpp)
+set_property(TARGET Prog2B PROPERTY FOLDER "Prog")
 
-target_link_libraries(${projNAME} Proj2	ProjB)
-
-ctnSetTargetFolderProperties(${projNAME})
+ctnSetTargetFolderProperties(Prog2B)

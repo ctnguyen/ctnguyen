@@ -9,6 +9,11 @@ BaseLibB::BaseLibB()
 
 }
 
+std::string BaseLibB::name() const
+{
+    return "BaseLibB";
+}
+
 BaseLibB::~BaseLibB()
 {
 
