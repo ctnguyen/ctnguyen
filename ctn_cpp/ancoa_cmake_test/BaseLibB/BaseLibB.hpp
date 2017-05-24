@@ -12,7 +12,7 @@
 #ifndef BASELIBB_HPP
 #define BASELIBB_HPP
 
-#include <LibB/BaseLibBSymbols.hpp>
+#include <BaseLibB/BaseLibBSymbols.hpp>
 
 class BaseLibB_API BaseLibB
 {

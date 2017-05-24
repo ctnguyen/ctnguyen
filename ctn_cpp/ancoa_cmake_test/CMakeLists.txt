@@ -31,8 +31,8 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)## Could be MSVC only
 set_property(GLOBAL PROPERTY PREDEFINED_TARGETS_FOLDER "_CMakePredefinedTarget" )
 
 include_directories(${CMAKE_SOURCE_DIR})
-add_subdirectory(LibA)
-add_subdirectory(LibB)
+add_subdirectory(BaseLibA)
+add_subdirectory(BaseLibB)
 
 #add_subdirectory(ProjA)
 #add_subdirectory(ProjB)

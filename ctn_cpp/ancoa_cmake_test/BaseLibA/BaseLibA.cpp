@@ -2,7 +2,7 @@
  *	@file BaseLibA/BaseLibA.cpp
  *	@date June 2015
  */
-#include <LibA/BaseLibA.hpp>
+#include <BaseLibA/BaseLibA.hpp>
 
 BaseLibA::BaseLibA()
 {
