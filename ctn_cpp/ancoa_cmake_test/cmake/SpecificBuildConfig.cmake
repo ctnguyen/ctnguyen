@@ -27,12 +27,12 @@ function(ctnSetTargetFolderProperties targetName)
         set_target_properties( ${targetName} PROPERTIES ARCHIVE_OUTPUT_DIRECTORY_${OUTPUTCONFIG} "${pathToRootBuildFolder}/${OUTPUTCONFIG}" )
     endforeach( OUTPUTCONFIG CMAKE_CONFIGURATION_TYPES )
 	
-	if( CMAKE_SIZEOF_VOID_P EQUAL 8 )
-		set(systemPostFix "-x64")
-	else()
-		set(systemPostFix "-x86")
-	endif()
-	
-	set_target_properties( ${targetName} PROPERTIES DEBUG_POSTFIX "${systemPostFix}d" )
+	#if( CMAKE_SIZEOF_VOID_P EQUAL 8 )
+	#	set(systemPostFix "-x64")
+	#else()
+	#	set(systemPostFix "-x86")
+	#endif()
+	#
+	#set_target_properties( ${targetName} PROPERTIES DEBUG_POSTFIX "${systemPostFix}d" )
 	
 endfunction()
