@@ -3,13 +3,13 @@ cmake_minimum_required (VERSION 3.7)
 
 # For Visual Studio 12 2013, x64 use generator 
 # cmake -G"Visual Studio 12 2013 Win64" E:\tempo\ctnguyen\ctn_cpp\ancoa_cmake_test
-# "C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe" Ancoa.sln /P:Configuration=Release /maxcpucount:8
-# "C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe" INSTALL.vcxproj /P:Configuration=Release
-# "C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe" Ancoa.sln /P:Configuration=Debug /maxcpucount:8
-# "C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe" INSTALL.vcxproj /P:Configuration=Debug
-
-# For Visual Studio 12 2013, x64 use generator 
-# -G"Visual Studio 12 2013 Win64"
+# "C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe" ancoa_cmake_test.sln /P:Configuration=Release /maxcpucount:8
+# "C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe" ancoa_cmake_test.sln /P:Configuration=Debug /maxcpucount:8
+# cmake -G"Visual Studio 12 2013 Win64" E:\tempo\ctnguyen\ctn_cpp\ancoa_cmake_test && "C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe" ancoa_cmake_test.sln /P:Configuration=Release /maxcpucount:8 && "C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe" ancoa_cmake_test.sln /P:Configuration=Debug /maxcpucount:8
+#
+# cpack -C Release -G NSIS --config InstallerB-CPackConfig.cmake
+# cpack -C Release -G NSIS --config InstallerA-CPackConfig.cmake
+#
 # Be sure that every libraries (Boost, Qt) are built in x64 version.
 # Make sure to have the QT_ROOT and BOOST_ROOT defined and point to the root library
 project(ancoa_cmake_test) 
@@ -40,11 +40,30 @@ add_subdirectory(BaseLibB)
 add_subdirectory(Prog1A)
 add_subdirectory(Prog2B)
 
+function(generateInstallerConfig install_type)
+    set(CPACK_COMPONENTS_ALL Core)
+    if(${install_type} STREQUAL "A")
+        message("Create packaging configuration for install_type[A]")
+        set(CPACK_COMPONENTS_ALL ${CPACK_COMPONENTS_ALL} Prog1A)
+    elseif(${install_type} STREQUAL "B")
+        message("Create packaging configuration for install_type[B]")
+        set(CPACK_COMPONENTS_ALL ${CPACK_COMPONENTS_ALL} Prog2B)
+    else()
+        message("Cannot create configuration for install_type[${install_type}]")
+    endif()
+    set(CPACK_OUTPUT_CONFIG_FILE "${CMAKE_BINARY_DIR}/Installer${install_type}-CPackConfig.cmake")
+    set(CPACK_SOURCE_OUTPUT_CONFIG_FILE "${CMAKE_BINARY_DIR}/Installer${install_type}-CPackSourceConfig.cmake")
+    set(CPACK_PACKAGE_FILE_NAME "installer${install_type}_CPACK_PACKAGE_FILE_NAME")
+    include(CPack)
+endfunction()
+
+generateInstallerConfig("A")
+generateInstallerConfig("B")
+
 ## Find Qt, if found, add this projects
 ##list(APPEND CMAKE_MODULE_PATH "C:/development/frameworks/qt/5.3.1/lib/cmake")
 #add_subdirectory(ProjQtTest)
 #add_subdirectory(ProgQt)
-
 #echo_target(ProgQt)#TARGET information from sub dir can be populated to root
 
 # if found boost test framework, go into the test folder
