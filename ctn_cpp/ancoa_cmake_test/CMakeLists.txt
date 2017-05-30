@@ -60,6 +60,12 @@ endfunction()
 generateInstallerConfig("A")
 generateInstallerConfig("B")
 
+## Get source files from a target
+get_property(sourcelistBaseLibA TARGET BaseLibA PROPERTY SOURCES)
+get_property(sourcelistProg2B TARGET Prog2B PROPERTY SOURCES)
+message("== List source files of BaseLibA [${sourcelistBaseLibA}]")
+message("== List source files of   Prog2B [${sourcelistProg2B}]")
+
 ## Find Qt, if found, add this projects
 ##list(APPEND CMAKE_MODULE_PATH "C:/development/frameworks/qt/5.3.1/lib/cmake")
 #add_subdirectory(ProjQtTest)
