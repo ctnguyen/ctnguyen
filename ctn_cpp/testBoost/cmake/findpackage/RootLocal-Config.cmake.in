@@ -1,0 +1,13 @@
+############################################################### #
+#  Date             10/02/2017                                  #
+#  Creator          Chi Thanh NGUYEN                            #
+#  Authors          Chi Thanh NGUYEN                            #
+#                                                            
+#################################################################
+
+#################################################################
+##  Define variables here appropriated to your system          ##
+##     DO NOT COMMIT THIS FILE TO THE SOURCE REPOSITORY        ## 
+#################################################################
+
+include(${ANCOA_SOURCE_DIR}/AncoaCMake/Utilities.cmake)

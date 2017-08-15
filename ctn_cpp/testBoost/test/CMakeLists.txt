@@ -1,7 +1,7 @@
 
-add_subdirectory(test_Boost_iostreams)
+add_subdirectory(test_Boost_asio)
 add_subdirectory(test_Boost_fusion)
+add_subdirectory(test_Boost_iostreams)
 add_subdirectory(test_Boost_Serialization)
 add_subdirectory(test_Boost_spirit)
 add_subdirectory(test_Boost_variant)
-add_subdirectory(test_Boost_asio)

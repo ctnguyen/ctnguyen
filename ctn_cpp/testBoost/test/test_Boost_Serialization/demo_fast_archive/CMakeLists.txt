@@ -1,2 +1,3 @@
 add_executable(demo_fast_archive demo_fast_archive.cpp)
-target_link_libraries(demo_fast_archive ${Boost_LIBRARIES})
+target_compile_definitions(demo_fast_archive PUBLIC BOOST_ALL_NO_LIB BOOST_ALL_DYN_LINK)
+target_link_libraries(demo_fast_archive Boost::serialization Boost::iostreams Boost::unit_test_framework)

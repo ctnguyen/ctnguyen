@@ -37,7 +37,7 @@ function(generateInstallerConfig install_type)
         message("Cannot create configuration for install_type[${install_type}]")
     endif()
     set(CPACK_OUTPUT_CONFIG_FILE "${CMAKE_BINARY_DIR}/Installer${install_type}-CPackConfig.cmake")
-    set(CPACK_SOURCE_OUTPUT_CONFIG_FILE "${CMAKE_BINARY_DIR}/Installer${install_type}-CPackSourceConfig.cmake")
+    set(CPACK_SOURCE_OUTPUT_CONFIG_FILE "")
     set(CPACK_PACKAGE_FILE_NAME "installer${install_type}_CPACK_PACKAGE_FILE_NAME")
 
     include(CPack)

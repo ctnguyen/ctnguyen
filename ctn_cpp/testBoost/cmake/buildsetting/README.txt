@@ -1,0 +1,1 @@
+This folder contain all file to configure the compilation.

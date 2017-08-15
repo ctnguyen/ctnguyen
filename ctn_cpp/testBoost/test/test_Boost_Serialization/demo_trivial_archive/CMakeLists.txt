@@ -1,2 +1,3 @@
 add_executable(demo_trivial_archive demo_trivial_archive.cpp)
-target_link_libraries(demo_trivial_archive ${Boost_LIBRARIES})
+target_compile_definitions(demo_trivial_archive PUBLIC BOOST_ALL_NO_LIB BOOST_ALL_DYN_LINK)
+target_link_libraries(demo_trivial_archive Boost::serialization Boost::iostreams Boost::unit_test_framework)
