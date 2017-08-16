@@ -63,7 +63,7 @@ BOOST_AUTO_TEST_CASE(test_parse_complex)
     std::string str = "(1.584, 2.798)";
     const bool successParse = phrase_parse( str.begin()
                                           , str.end()
-                                          , double_ >> *(',' >> double_)
+                                          , '(' >> double_ >> ',' >> double_ >> ')' 
                                           , space);
     BOOST_CHECK(successParse);
 }

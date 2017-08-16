@@ -19,7 +19,7 @@ BOOST_AUTO_TEST_SUITE(All_Types)
 struct FileConfig
 {
     /// Initialize file name, and full path
-    FileConfig(const std::string& crFileName="testFile.d", const size_t page_size=100000000)
+    FileConfig(const std::string& crFileName="testFile.d", const size_t page_size=4000000)
     : mPageSize(page_size)
     , mNbPages(10)
     , mFileName(getFullPath(crFileName))
