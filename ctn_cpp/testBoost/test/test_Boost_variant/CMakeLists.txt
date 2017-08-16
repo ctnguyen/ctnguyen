@@ -1,5 +1,5 @@
 add_executable(test_Boost_Variant test_Boost_Variant.cpp)
 target_compile_definitions(test_Boost_Variant PUBLIC BOOST_ALL_NO_LIB BOOST_ALL_DYN_LINK)
 target_link_libraries(test_Boost_Variant Boost::unit_test_framework)
-add_test(test_Boost_Variant test_Boost_Variant)
+add_test(NAME test_Boost_Variant COMMAND $<TARGET_FILE:test_Boost_Variant>)
 set_property(TARGET test_Boost_Variant PROPERTY FOLDER "test/Boost_Variant")

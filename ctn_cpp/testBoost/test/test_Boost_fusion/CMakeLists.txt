@@ -1,5 +1,5 @@
 add_executable(test_Boost_Fusion test_Boost_Fusion.cpp)
 target_compile_definitions(test_Boost_Fusion PUBLIC BOOST_ALL_NO_LIB BOOST_ALL_DYN_LINK)
 target_link_libraries(test_Boost_Fusion Boost::unit_test_framework)
-add_test(test_Boost_Fusion test_Boost_Fusion)
+add_test(NAME test_Boost_Fusion COMMAND $<TARGET_FILE:test_Boost_Fusion>)
 set_property(TARGET test_Boost_Fusion PROPERTY FOLDER "test/Boost_Fusion")
