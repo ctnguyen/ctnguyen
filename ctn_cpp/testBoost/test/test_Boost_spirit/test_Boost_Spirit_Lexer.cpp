@@ -1,4 +1,4 @@
-#define BOOST_TEST_MODULE test_Boost_Spirit_examples
+#define BOOST_TEST_MODULE test_Boost_Spirit_Lexer
 #include <boost/test/unit_test.hpp>
 
 #pragma warning(push) //// Warning disabling wrapper : http://stackoverflow.com/questions/34709284/how-do-i-deal-with-warnings-generated-by-boost-spirit
@@ -17,91 +17,13 @@
 #include <boost/spirit/include/phoenix_function.hpp>
 #include <iostream>
 #include <string>
-
-/// employee
-#include <boost/spirit/include/qi.hpp>
-#include <boost/spirit/include/phoenix_core.hpp>
-#include <boost/spirit/include/phoenix_operator.hpp>
-#include <boost/spirit/include/phoenix_object.hpp>
-#include <boost/fusion/include/adapt_struct.hpp>
-#include <boost/fusion/include/io.hpp>
-
 #include <iostream>
 #include <string>
 #include <complex>
 
 
-namespace client
-{
-    namespace qi = boost::spirit::qi;
-    namespace ascii = boost::spirit::ascii;
+BOOST_AUTO_TEST_SUITE(lexer_examples)
 
-    ///////////////////////////////////////////////////////////////////////////
-    //  Our employee struct
-    ///////////////////////////////////////////////////////////////////////////
-    //[tutorial_employee_struct
-    struct employee
-    {
-        int age;
-        std::string surname;
-        std::string forename;
-        double salary;
-    };
-    //]
-}
-// We need to tell fusion about our employee struct
-// to make it a first-class fusion citizen. This has to
-// be in global scope.
-
-//[tutorial_employee_adapt_struct
-BOOST_FUSION_ADAPT_STRUCT(
-    client::employee,
-    (int, age)
-    (std::string, surname)
-    (std::string, forename)
-    (double, salary)
-)
-//]
-
-namespace client
-{
-    ///////////////////////////////////////////////////////////////////////////////
-    //  Our employee parser
-    ///////////////////////////////////////////////////////////////////////////////
-    //[tutorial_employee_parser
-    template <typename Iterator>
-    struct employee_parser : qi::grammar<Iterator, employee(), ascii::space_type>
-    {
-        employee_parser() : employee_parser::base_type(start)
-        {
-            using qi::int_;
-            using qi::lit;
-            using qi::double_;
-            using qi::lexeme;
-            using ascii::char_;
-
-            quoted_string %= lexeme['"' >> +(char_ - '"') >> '"'];
-
-            start %=
-                lit("employee")
-                >> '{'
-                >>  int_ >> ','
-                >>  quoted_string >> ','
-                >>  quoted_string >> ','
-                >>  double_
-                >>  '}'
-                ;
-        }
-
-        qi::rule<Iterator, std::string(), ascii::space_type> quoted_string;
-        qi::rule<Iterator, employee(), ascii::space_type> start;
-    };
-    //]
-}
-
-BOOST_AUTO_TEST_SUITE(All_examples)
-
-#pragma region Example 
 /// word_count_functor  ///////////////////////////////////////
 namespace lex = boost::spirit::lex;
 enum token_ids
@@ -173,9 +95,8 @@ BOOST_AUTO_TEST_CASE(word_count_functor)
     char const* last = &first[str.size()];
     bool r = lex::tokenize(first, last, word_count_functor, boost::bind(counter(), _1, boost::ref(c), boost::ref(w), boost::ref(l)));
 }
-#pragma endregion word_count_functor ////////////////////////////////////////////////////////////////////////////
-
-#pragma region Example 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 struct distance_func
 {
@@ -193,9 +114,9 @@ boost::phoenix::function<distance_func> const distance = distance_func();
 
 //[wcl_token_definition
 template <typename Lexer>
-struct word_count_tokens_lexer : lex::lexer < Lexer >
+struct word_count_tokens_action : lex::lexer < Lexer >
 {
-    word_count_tokens_lexer()
+    word_count_tokens_action()
         : c(0), w(0), l(0)
         , word("[^ \t\n]+")     // define tokens
         , eol("\n")
@@ -206,7 +127,9 @@ struct word_count_tokens_lexer : lex::lexer < Lexer >
         using boost::phoenix::ref;
 
         // associate tokens with the lexer
-        this->self = word[++ref(w), ref(c) += distance(_start, _end)] | eol[++ref(c), ++ref(l)] | any[++ref(c)] ;
+        this->self = word[++ref(w), ref(c) += distance(_start, _end)] 
+                   | eol[++ref(c), ++ref(l)] 
+                   | any[++ref(c)] ;
     }
 
     std::size_t c, w, l;
@@ -231,7 +154,7 @@ BOOST_AUTO_TEST_CASE(word_count_lexer)
     typedef lex::lexertl::actor_lexer<token_type> lexer_type;
 
     /*<  Create the lexer object instance needed to invoke the lexical analysis>*/
-    word_count_tokens_lexer<lexer_type> word_count_lexer;
+    word_count_tokens_action<lexer_type> word_count_lexer;
 
     /*<  Read input from the given file, tokenize all the input, while discarding
          all generated tokens
@@ -264,61 +187,5 @@ BOOST_AUTO_TEST_CASE(word_count_lexer)
     }
 }
 
-#pragma endregion word_count_lexer ////////////////////////////////////////////////////////////////////////////
-
-#pragma region Example 
-
-BOOST_AUTO_TEST_CASE(employee)
-{
-    std::cout << "/////////////////////////////////////////////////////////\n\n";
-    std::cout << "\t\tAn employee parser for Spirit...\n\n";
-    std::cout << "/////////////////////////////////////////////////////////\n\n";
-
-    std::cout
-        << "Give me an employee of the form :"
-        << "employee{age, \"surname\", \"forename\", salary } \n";
-    std::cout << "Type [q or Q] to quit\n\n";
-
-    using boost::spirit::ascii::space;
-    typedef std::string::const_iterator iterator_type;
-    typedef client::employee_parser<iterator_type> employee_parser;
-
-    employee_parser g; // Our grammar
-    std::string str = "employee{1,\"mySurname1\", \"myForename1\",1000}\nemployee{2,\"mySurname2\", \"myForename2\",2000}";
-    //while(getline(std::cin, str))
-    //{
-    //if(str.empty() || str[0] == 'q' || str[0] == 'Q')
-    //    break;
-
-    client::employee emp1;
-    client::employee emp2;
-    std::string::const_iterator iter = str.begin();
-    std::string::const_iterator end = str.end();
-    bool r1 = phrase_parse(iter, end, g, space, emp1);
-    bool r2 = phrase_parse(iter, end, g, space, emp2);
-
-    if(r1 && iter == end)
-    {
-        std::cout << boost::fusion::tuple_open('[');
-        std::cout << boost::fusion::tuple_close(']');
-        std::cout << boost::fusion::tuple_delimiter(", ");
-
-        std::cout << "-------------------------\n";
-        std::cout << "Parsing succeeded\n";
-        std::cout << "got: " << boost::fusion::as_vector(emp1) << std::endl;
-        std::cout << "\n-------------------------\n";
-    }
-    else
-    {
-        std::cout << "-------------------------\n";
-        std::cout << "Parsing failed\n";
-        std::cout << "-------------------------\n";
-    }
-    //}
-
-    std::cout << "Bye... :-) \n\n";
-}
-
-#pragma endregion employee ////////////////////////////////////////////////////////////////////////////
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -17,3 +17,9 @@ target_compile_definitions(test_Boost_Spirit_AQL PUBLIC BOOST_ALL_NO_LIB BOOST_A
 target_link_libraries(test_Boost_Spirit_AQL Boost::unit_test_framework)
 add_test(NAME test_Boost_Spirit_AQL COMMAND $<TARGET_FILE:test_Boost_Spirit_AQL>)
 set_property(TARGET test_Boost_Spirit_AQL PROPERTY FOLDER "test/Boost_Spirit")
+
+add_executable(test_Boost_Spirit_Lexer test_Boost_Spirit_Lexer.cpp)
+target_compile_definitions(test_Boost_Spirit_Lexer PUBLIC BOOST_ALL_NO_LIB BOOST_ALL_DYN_LINK)
+target_link_libraries(test_Boost_Spirit_Lexer Boost::unit_test_framework)
+add_test(NAME test_Boost_Spirit_Lexer COMMAND $<TARGET_FILE:test_Boost_Spirit_Lexer>)
+set_property(TARGET test_Boost_Spirit_Lexer PROPERTY FOLDER "test/Boost_Spirit")
