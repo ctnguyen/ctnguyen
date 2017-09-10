@@ -6,5 +6,9 @@ import 'test_LoginWidget.dart';
 
 void main() {
   //runApp(new TestHelloWorldApp());
-  runApp(new LoginWidgetApp());
+  runApp(new MaterialApp(
+      title: 'Flutter Tutorial',
+      home: new InitWidget()
+  ));
+  //runApp(new Center(child: new Text('Hello, world!')));
 }
