@@ -27,6 +27,7 @@ class _LoginState extends State<InitWidget> {
   Widget build(BuildContext context) {
     if(!this.mIsLoggedIn){
       return new Scaffold(
+        appBar: new AppBar(title: new Center(child : new Text("Currency Swap")),),
         body : new Center(
           child: new Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -53,6 +54,7 @@ class _LoginState extends State<InitWidget> {
     }
   else{
       return new Scaffold(
+        appBar: new AppBar(title: new Center(child : new Text("Currency Swap")),),
         body : new Center(
           child: new Column(
             mainAxisAlignment: MainAxisAlignment.center,
