@@ -73,8 +73,8 @@ BOOST_AUTO_TEST_CASE(test_parse_assignment)
                                           , double_[ref(outputNb1)=_1]  >> double_[ref(outputNb2)=_1]
                                           , space);
     BOOST_CHECK(successParse);
-    BOOST_CHECK(outputNb1, 1.23);
-    BOOST_CHECK(outputNb2, 4.56);
+    BOOST_CHECK(outputNb1 == 1.23);
+    BOOST_CHECK(outputNb2 == 4.56);
 }
 
 BOOST_AUTO_TEST_CASE(test_parse_complex)
