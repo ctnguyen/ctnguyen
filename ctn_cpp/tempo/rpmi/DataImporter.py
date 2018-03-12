@@ -29,11 +29,20 @@ class DataRecord:
         self.isBad    = isbad
         self.badReason = badreason
 
+    def dateStr(self):
+        return self.pyDate.strftime('%d/%m/%Y')
+    def dateDouble(self):
+        return float(self.pyDate.toordinal())
+
+    def __str__(self):
+        return 'rowID[{}] compName[{}] pyDate[{}] fVal[{}] fQty[{}] isBad[{}] badReason[{}]'.format(self.rowID,self.compName,self.dateStr(),self.fVal,self.fQty,self.isBad,self.badReason)
+
 class DataImporter:
     def __init__(self,datafilename, useFilter=True):
         self.useFilter=useFilter
         self.table   = []
         self.badRows = []
+        self.mapCompanyCount = {}
 
         if os.path.isfile(datafilename):
             with open('factorextract.csv', 'r') as dataFile:
@@ -68,15 +77,28 @@ class DataImporter:
                     if(isBad):
                         self.badRows.append(rowCounter)
 
+                    if compName in self.mapCompanyCount:
+                        self.mapCompanyCount[compName]+=1
+                    else:
+                        self.mapCompanyCount[compName]=1
+
                     rowCounter += 1
+        sorted(self.mapCompanyCount.items(), key=lambda x: x[1])## sort the map
+
+    def getCompanyInfo(self):
+        csvData = 'companyname,nbDataPoint\n'
+        for compName in self.mapCompanyCount:
+            nbDataPoint=self.mapCompanyCount[compName]
+            csvData+='"{}",{}\n'.format(compName,nbDataPoint)
+        return csvData
 
     def getBadRowsInfo(self):
         dataInfo = 'Nb Of Rows = {}\n'.format(len(self.table))
-        dataInfo = 'Nb Of Bad Rows = {}\n'.format(len(self.badRows))
-        dataInfo = 'companyname,datadate,tradingitemid,Factor_VALUE,Factor_QUALITY\n'
+        dataInfo += 'Nb Of Bad Rows = {}\n'.format(len(self.badRows))
+        dataInfo += 'companyname,datadate,tradingitemid,Factor_VALUE,Factor_QUALITY\n'
         for badRowIndex in self.badRows:
             badRow = self.table[badRowIndex]
-            dataInfo += '[{}][{}] {},{},,{},{}\n'.format(badRowIndex, badRow.badReason , badRow.compName, badRow.pyDate.strftime('%d/%m/%Y'), badRow.fVal, badRow.fQty)
+            dataInfo += '"[{}][{}] {}",{},,{},{}\n'.format(badRowIndex, badRow.badReason , badRow.compName, badRow.pyDate.strftime('%d/%m/%Y'), badRow.fVal, badRow.fQty)
         return dataInfo
 
     def getDataGoodOnlyStr(self):

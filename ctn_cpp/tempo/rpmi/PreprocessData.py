@@ -24,3 +24,7 @@ with open('_badRowsInfo.csv', 'w') as dataFile:
 ## Replicate data with good data only
 with open('_goodData.csv', 'w') as dataFile:
     dataFile.write(dataImporter.getDataGoodOnlyStr())
+
+## Reproduce csv file showing the number of data point by company
+with open('_nbDataByCompany.csv', 'w') as dataFile:
+    dataFile.write(dataImporter.getCompanyInfo())
