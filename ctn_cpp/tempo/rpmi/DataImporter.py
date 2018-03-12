@@ -10,6 +10,7 @@ import os.path
 import time
 import math
 import datetime
+import hashlib
 
 def parseDouble(vStr):
     value=math.nan
@@ -100,6 +101,13 @@ class DataImporter:
             badRow = self.table[badRowIndex]
             dataInfo += '"[{}][{}] {}",{},,{},{}\n'.format(badRowIndex, badRow.badReason , badRow.compName, badRow.pyDate.strftime('%d/%m/%Y'), badRow.fVal, badRow.fQty)
         return dataInfo
+
+    def getAnonymizedDataStr(self):
+        csvData = 'companyname,datadate,tradingitemid,Factor_VALUE,Factor_QUALITY\n'
+        for row in self.table:
+            anonymizedCompName = hashlib.sha1(row.compName.encode()).hexdigest()
+            csvData += '"{}",{},,{},{}\n'.format(anonymizedCompName, row.pyDate.strftime('%d/%m/%Y'), row.fVal, row.fQty)
+        return csvData
 
     def getDataGoodOnlyStr(self):
         csvData = 'companyname,datadate,tradingitemid,Factor_VALUE,Factor_QUALITY\n'

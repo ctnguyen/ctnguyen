@@ -28,3 +28,7 @@ with open('_goodData.csv', 'w') as dataFile:
 ## Reproduce csv file showing the number of data point by company
 with open('_nbDataByCompany.csv', 'w') as dataFile:
     dataFile.write(dataImporter.getCompanyInfo())
+
+## Reproduce csv file showing the number of data point by company
+with open('_anonymizedData.csv', 'w') as dataFile:
+    dataFile.write(dataImporter.getAnonymizedDataStr())
