@@ -45,7 +45,7 @@ class DataImporter:
         self.mapCompanyCount = {}
 
         if os.path.isfile(datafilename):
-            with open('factorextract.csv', 'r') as dataFile:
+            with open(datafilename, 'r') as dataFile:
                 reader = csv.reader(dataFile)
                 next(reader,None)## skip header
                 rowCounter=0
