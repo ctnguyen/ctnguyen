@@ -44,6 +44,7 @@ class DataImporter:
         self.table   = []
         self.badRows = []
         self.mapCompanyCount = {}
+        self.timePoints = set()
 
         if os.path.isfile(datafilename):
             with open(datafilename, 'r') as dataFile:
@@ -57,6 +58,7 @@ class DataImporter:
                     fValStr  = line[3]
                     fQtyStr  = line[4]
                     pyDate = datetime.datetime.strptime(dateStr, '%d/%m/%Y').date()
+                    self.timePoints.add(pyDate)
                     fVal = parseDouble(fValStr)
                     fQty = parseDouble(fQtyStr)
                     isBad=False
@@ -85,6 +87,7 @@ class DataImporter:
 
                     rowCounter += 1
         sorted(self.mapCompanyCount.items(), key=lambda x: x[1])## sort the map
+        sorted(self.timePoints)
 
     def getCompanyInfo(self):
         csvData = 'companyname,nbDataPoint\n'

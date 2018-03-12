@@ -32,3 +32,9 @@ with open('_nbDataByCompany.csv', 'w') as dataFile:
 ## Reproduce csv file showing the number of data point by company
 with open('_anonymizedData.csv', 'w') as dataFile:
     dataFile.write(dataImporter.getAnonymizedDataStr())
+
+## Reproduce csv file of all time points
+with open('_timepoints.csv', 'w') as dataFile:
+    for pydate in dataImporter.timePoints:
+        print(pydate.strftime('%d/%m/%Y'))
+        dataFile.write('{}\n'.format(pydate.strftime('%d/%m/%Y')))
