@@ -28,3 +28,13 @@ class DataViewer:
             if dataRow.compName == companyName:
                 companyData.append(dataRow)
         return companyData
+
+    def getDateData(self, pyDate):
+        dateData=[]
+        if not (pyDate in self.importedData.timePoints):
+            return dateData
+
+        for dataRow in self.importedData.table:
+            if dataRow.pyDate == pyDate:
+                dateData.append(dataRow)
+        return dateData
