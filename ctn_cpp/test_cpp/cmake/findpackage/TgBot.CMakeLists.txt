@@ -1,0 +1,76 @@
+cmake_minimum_required(VERSION 2.8.4)
+project(TgBot)
+
+### CTN setting
+set(CMAKE_DEBUG_POSTFIX d)
+set(Boost_USE_STATIC_LIBS OFF)
+set(Boost_USE_STATIC_RUNTIME OFF)
+set(Boost_USE_MULTITHREADED ON)
+add_definitions(-DBOOST_FILESYSTEM_NO_DEPRECATED) # Recommended by the doc as to better use of Boost::filesystem (2018/02/13 version 3)
+## Setting used to work for unit test, set it here to avoid all missmatch when a certain component conflict with tests when it comes to linking with boost
+add_definitions(-DBOOST_ALL_NO_LIB)
+add_definitions(-DBOOST_ALL_DYN_LINK)
+
+set(CMAKE_CXX_STANDARD 14)#Use C++14 ## TODO : change to C++ 17 when visual studio 17 support C++17
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF) # Do not use extension
+### CTN setting ######################################
+
+## Run 
+## cmake -G"Visual Studio 15 2017 Win64" /path/to_tgbot_source -DCMAKE_INSTALL_PREFIX=/path/to/install
+
+### options
+option(ENABLE_TESTS "Set to ON to enable building of tests" OFF)
+
+### sources
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall")
+include_directories(include)
+set(SRC_LIST
+	src/Api.cpp
+	src/TgTypeParser.cpp
+	src/TgException.cpp
+	src/EventHandler.cpp
+	src/net/Url.cpp
+	src/net/HttpClient.cpp
+	src/net/HttpParser.cpp
+	src/net/TgLongPoll.cpp
+	src/tools/StringTools.cpp
+	src/tools/FileTools.cpp
+	src/types/InlineQueryResult.cpp
+	src/types/InputFile.cpp
+)
+
+### libs
+# threads
+find_package(Threads REQUIRED)
+
+# openssl
+find_package(OpenSSL REQUIRED)
+include_directories(${OPENSSL_INCLUDE_DIR})
+
+# boost
+set(Boost_USE_MULTITHREADED ON)
+if (ENABLE_TESTS)
+	find_package(Boost COMPONENTS system unit_test_framework REQUIRED)
+else()
+	find_package(Boost COMPONENTS system REQUIRED)
+endif()
+
+set(LIB_LIST
+	${CMAKE_THREAD_LIBS_INIT}
+	${OPENSSL_LIBRARIES}
+)
+
+### building project
+add_library(${PROJECT_NAME} ${SRC_LIST})
+target_link_libraries(${PROJECT_NAME} ${LIB_LIST})
+target_link_libraries(${PROJECT_NAME} Boost::system)
+install(TARGETS ${PROJECT_NAME} DESTINATION lib)
+install(DIRECTORY include/ DESTINATION include)
+
+### tests
+if (ENABLE_TESTS)
+	message(STATUS "Building of tests is enabled")
+	enable_testing()
+	add_subdirectory(test)
+endif()

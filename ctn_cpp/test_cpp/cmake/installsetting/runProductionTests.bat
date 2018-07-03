@@ -1,0 +1,1 @@
+for /f %%i in ('dir /b test_*.exe') do %%i
