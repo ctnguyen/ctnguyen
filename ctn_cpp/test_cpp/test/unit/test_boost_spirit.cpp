@@ -67,20 +67,21 @@ namespace client
         using x3::int_;
         using x3::lit;
         using x3::double_;
+        using x3::space;
         using x3::lexeme;
         using ascii::char_;
 
         x3::rule<class employee, ast::employee> const employee = "employee";
 
-        auto const quoted_string = lexeme['"' >> +(char_ - '"') >> '"'];
+        auto const quoted_string = lexeme[('"' >> +(char_ - '"') >> '"') |*space];
 
         auto const employee_def =
             lit("employee")
             >> '{'
-            >>  int_ >> ','
-            >>  quoted_string >> ','
-            >>  quoted_string >> ','
-            >>  double_
+            >>  int_
+            >>  ',' >> quoted_string 
+            >>  ',' >> quoted_string
+            >>  ',' >> double_
             >>  '}'
             ;
 
@@ -90,8 +91,26 @@ namespace client
 
 BOOST_AUTO_TEST_SUITE(all_spirit)
 
-
 BOOST_AUTO_TEST_CASE(empty_test)
+{
+    using boost::spirit::x3::int_;
+    using boost::spirit::x3::char_;
+    using boost::spirit::x3::parse;
+    using client::print_action;
+
+    { // example using function object
+        std::string str = "43, ";
+
+        const bool success = parse(str.begin(), str.end(),
+            (int_[print_action()]) >> ',' | *(char_[print_action()])
+        );
+    }
+
+    BOOST_CHECK(true);
+}
+
+
+BOOST_AUTO_TEST_CASE(base_test)
 {
     using boost::spirit::x3::int_;
     using boost::spirit::x3::parse;
@@ -123,7 +142,7 @@ BOOST_AUTO_TEST_CASE(example_employee)
     typedef std::string::const_iterator iterator_type;
     using client::parser::employee;
 
-    std::string str = "employee{15, \"surname\", \"forename\", 70 } \n"; 
+    std::string str = "employee{15,, \"fore name\", 70 } \n"; 
 
     client::ast::employee emp;
     iterator_type iter = str.begin();
