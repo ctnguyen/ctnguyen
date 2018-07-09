@@ -55,6 +55,10 @@ target_link_libraries(test_boost_random Boost::random)
 linkBoostUnitTest(test_boost_random)
 
 ###############
+add_executable(test_boost_spirit test_boost_spirit.cpp)
+linkBoostUnitTest(test_boost_spirit)
+
+###############
 add_executable(test_cpp_codec test_cpp_codec.cpp)
 target_link_libraries(test_cpp_codec Boost::random)
 linkBoostUnitTest(test_cpp_codec)
