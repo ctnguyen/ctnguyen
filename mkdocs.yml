@@ -1,0 +1,48 @@
+##
+## To build the html doc :
+##     mkdocs build -c -d /path/to/desired_result_dir
+##     python -m http.server -d /path/to/desired_result_dir ## then open browser localhost:8000
+## Or simply
+##     mkdocs build
+##     python -m http.server -d site ## then open browser localhost:8000
+##
+## DO NOT COMMIT anything in <desired_result_dir> or "site" directory to git. Only commit *.md file and mkdocs.yml
+##
+## For short
+##     mkdocs build -c -d /path/to/desired_result_dir && python -m http.server -d /path/to/desired_result_dir
+##
+site_name: Chi Thanh NGUYEN
+
+nav:
+    - Documentation : index.md
+    - Mkdocs Demos : mkdocs_demo.md
+    - Git workflow : git_fork_flow.md
+
+markdown_extensions:
+  - toc:
+  #- markdown_katex: # https://pypi.org/project/markdown-katex/
+  - pymdownx.arithmatex
+  - pymdownx.superfences: #https://facelessuser.github.io/pymdown-extensions/extensions/superfences/
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_div_format
+  - plantuml_markdown:
+
+extra_javascript:
+    # superfence mermaid
+    - https://unpkg.com/mermaid@8.4.8/dist/mermaid.min.js
+    # latex using mathjax
+    - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML
+    # latex using katex
+    #- https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js
+
+
+extra_css:
+#    - 'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css'
+
+theme: 
+    name : readthedocs
+    highlightjs: true
+    hljs_languages:
+        - yaml
